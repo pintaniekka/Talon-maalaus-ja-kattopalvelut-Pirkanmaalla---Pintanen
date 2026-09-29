@@ -7,7 +7,7 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    if: github.repository == 'eerikpitkanen/easy-web-start-62'
+    if: github.repository == 'Pintaniekka/easy-web-start-62'
     steps:
       - name: Hae uusin koodi tästä reposta
         uses: actions/checkout@v4
@@ -17,7 +17,7 @@ jobs:
 
       - name: Puske koodi vanhaan repoon (PR-haaraan)
         run: |
-          git remote add target https://x-access-token:${{ secrets.SYNC_TOKEN }}@github.com/eerikpitkanen/Talon-maalaus-ja-kattopalvelut-Pirkanmaalla---Pintanen.git
+          git remote add target https://x-access-token:${{ secrets.SYNC_TOKEN }}@github.com/Pintaniekka/Talon-maalaus-ja-kattopalvelut-Pirkanmaalla---Pintanen.git
 
           # TÄMÄ MUUTTUI: Nyt emme pakota main-haaraan, vaan viemme päivityshaaraan
           git push target HEAD:refs/heads/paivitys-lovablesta --force

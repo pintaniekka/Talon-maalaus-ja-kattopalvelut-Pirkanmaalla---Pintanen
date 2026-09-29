@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Marketing/lead-gen website for Pintanen Oy, a roof-coating/cleaning and house-painting company in Pirkanmaa, Finland (pintanen.fi). It's a Vite + React + TypeScript SPA, built with shadcn-ui and Tailwind, originally scaffolded and still partly managed via [Lovable](https://lovable.dev) (see `.lovable/plan/*` for past change specs and `lovable-tagger` in the Vite plugins). Content and UI copy are in Finnish.
 
-The site is deployed as a static SPA to GitHub Pages behind the `pintanen.fi` custom domain (see `CNAME`). On every push to `main`, `.github/workflows/sync-to-old.yml` force-pushes the repo to a `paivitys-lovablesta` branch on a second, older repo (`Pintaniekka/Talon-maalaus-ja-kattopalvelut-Pirkanmaalla---Pintanen`) — this only runs when `github.repository == 'Pintaniekka/easy-web-start-62'`.
+The site is deployed as a static SPA to GitHub Pages behind the `pintanen.fi` custom domain (see `CNAME`). On every push to `main`, `.github/workflows/sync-to-old.yml` force-pushes the repo to a `paivitys-lovablesta` branch on a second, older repo (`eerikpitkanen/Talon-maalaus-ja-kattopalvelut-Pirkanmaalla---Pintanen`) — this only runs when `github.repository == 'eerikpitkanen/easy-web-start-62'`.
 
 ## Commands
 

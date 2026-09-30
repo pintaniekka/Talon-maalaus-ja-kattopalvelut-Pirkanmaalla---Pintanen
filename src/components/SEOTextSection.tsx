@@ -16,7 +16,7 @@ const SEOTextSection = () => {
     { bold: "Ei välikäsiä:", text: "Vastaamme itse työn laadusta alusta loppuun." },
     { bold: "Maksuton arviokäynti:", text: "Tulemme paikan päälle kartoittamaan tilanteen veloituksetta." },
     { bold: "Takuutyö:", text: "5 vuoden takuu pinnoituksille ja 2 vuoden takuu maalauksille." },
-    { bold: "Kotitalousvähennys:", text: "Kaikki työmme oikeuttavat verotuksessa tehtävään kotitalousvähennykseen (jopa 35 % työn osuudesta)." },
+    { bold: "Kotitalousvähennys:", text: "Kaikki työmme oikeuttavat verotuksessa tehtävään kotitalousvähennykseen (40 % työn osuudesta)." },
   ];
 
   return (

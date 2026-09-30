@@ -89,3 +89,30 @@ describe("artikkelit", () => {
     expect(buildSitemapXml(dayAfter)).toContain(articlePath(first.slug));
   });
 });
+
+describe("sisäiset linkit", () => {
+  it("lähdekoodin kovakoodatut sisäiset linkit osoittavat olemassa oleviin reitteihin", () => {
+    const known = new Set([...getAllRoutePaths(), "/"]);
+    const srcDir = path.resolve(__dirname, "..");
+    const files: string[] = [];
+    const walk = (dir: string) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          if (entry.name !== "test" && entry.name !== "ui") walk(full);
+        } else if (/\.tsx?$/.test(entry.name)) files.push(full);
+      }
+    };
+    walk(srcDir);
+    const broken: string[] = [];
+    for (const file of files) {
+      const source = fs.readFileSync(file, "utf-8");
+      // to="/polku" ja href="/polku" ilman muuttujia
+      for (const m of source.matchAll(/\b(?:to|href)="(\/[a-z0-9/-]*)"/g)) {
+        const target = m[1].replace(/\/+$/, "") || "/";
+        if (!known.has(target)) broken.push(`${path.relative(srcDir, file)}: ${m[1]}`);
+      }
+    }
+    expect(broken).toEqual([]);
+  });
+});

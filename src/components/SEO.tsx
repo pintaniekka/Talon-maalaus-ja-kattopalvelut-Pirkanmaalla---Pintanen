@@ -18,7 +18,8 @@ const defaultOgImage = "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/obje
 
 const SEO = ({ title, description, preloadImage, ogImage, noindex = false }: SEOProps) => {
   const { pathname } = useLocation();
-  const pageTitle = title ? `${title} | Pintanen` : defaultTitle;
+  // Älä lisää "| Pintanen" kahdesti, jos sivu antaa sen jo itse.
+  const pageTitle = !title ? defaultTitle : /\|\s*Pintanen\s*$/i.test(title) ? title : `${title} | Pintanen`;
   const pageDescription = description || defaultDescription;
   const cleanPath = pathname.replace(/\/+$/, '');
   const canonicalUrl = cleanPath === '' ? 'https://pintanen.fi/' : `https://pintanen.fi${cleanPath}/`;

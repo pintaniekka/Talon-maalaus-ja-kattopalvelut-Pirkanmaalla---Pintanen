@@ -70,3 +70,57 @@ export const ArticleFaq = ({ items, title = "Usein kysyttyä" }: { items: FaqIte
     </>
   );
 };
+
+/** Taulukko hinnoille ja vertailuille. Ensimmäinen sarake on rivin otsikko. */
+export const Table = ({ head, rows, caption }: { head: string[]; rows: string[][]; caption?: string }) => (
+  <div className="article-table-wrap">
+    <table>
+      {caption && <caption>{caption}</caption>}
+      <thead>
+        <tr>
+          {head.map((h) => (
+            <th key={h} scope="col">
+              {h}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr key={row[0]}>
+            {row.map((cell, i) =>
+              i === 0 ? (
+                <th key={i} scope="row">
+                  {cell}
+                </th>
+              ) : (
+                <td key={i}>{cell}</td>
+              ),
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+export interface SourceItem {
+  label: string;
+  url: string;
+}
+
+/** Lähdeluettelo artikkelin loppuun: ulkoiset lähteet, joista yleisfaktat on tarkistettu. */
+export const Sources = ({ items }: { items: SourceItem[] }) => (
+  <>
+    <h2>Lähteet</h2>
+    <ul>
+      {items.map((item) => (
+        <li key={item.url}>
+          <a href={item.url} target="_blank" rel="noopener noreferrer">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </>
+);

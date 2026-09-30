@@ -3,24 +3,24 @@ import { ArticleFaq, Figure, KeyPoints } from "@/components/article/ArticleKit";
 
 const faq = [
   {
-    question: "Kuinka paljon tiilikaton pinnoitus maksaa?",
+    question: "Kuinka usein tiilikatto pitää pinnoittaa?",
     answer:
-      "Hinta riippuu katon pinta-alasta, jyrkkyydestä ja nykykunnosta, mutta se on vain murto-osa uuden katon hinnasta. Tarkka hinta selviää maksuttomalla arviokäynnillä, ja työ on kotitalousvähennyskelpoista.",
+      "Tiilen tehdaspinnoite kestää yleensä 10–15 vuotta. Sen jälkeen katto kannattaa pinnoittaa, kun väri on haalistunut, pinta tuntuu karhealta tai sammal palaa nopeasti.",
   },
   {
-    question: "Kauanko tiilikaton pinnoitus kestää?",
+    question: "Mitä tiilikaton pinnoitus maksaa?",
     answer:
-      "Tyypillinen omakotitalon katto pesusta kahteen kertaan maalattuun pintaan vie 2–4 työpäivää. Työ tehdään ulkona, joten talossa voi asua normaalisti.",
+      "Omakotitalon tiilikaton pinnoitus maksaa meillä 2 850–4 880 euroa katon koon ja jyrkkyyden mukaan. Työn osuudesta saa kotitalousvähennyksen.",
   },
   {
-    question: "Kannattaako katto pestä ja pinnoittaa itse?",
+    question: "Kauanko pinnoitus kestää?",
     answer:
-      "Roskien poisto onnistuu itse, mutta pinnoitusta edeltävä syväpesu vaatii tehokkaan polttomoottoripesurin ja pinnoitteen levitys korkeapaineruiskun. Väärin tehty pesu voi painaa vettä aluskatteen läpi rakenteisiin.",
+      "Tavallisen omakotitalon katto valmistuu 2–4 työpäivässä. Työ tehdään ulkona, joten talossa voi asua normaalisti.",
   },
   {
-    question: "Mihin vuodenaikaan pinnoituksen voi tehdä?",
+    question: "Mihin aikaan vuodesta katon voi pinnoittaa?",
     answer:
-      "Keväästä pitkälle syksyyn. Lämpötilan on oltava plussan puolella, ja katon pinnan on ehdittävä kuivua pesun ja maalauskertojen välissä.",
+      "Keväästä pitkälle syksyyn. Lämpötilan pitää olla plussalla, ja katon on ehdittävä kuivua pesun ja maalauskertojen välissä.",
   },
 ];
 
@@ -28,98 +28,77 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Väri on haalistunut tai epätasainen</li>
-        <li>Sammal palaa nopeasti puhdistuksen jälkeen</li>
+        <li>Väri on haalistunut tai laikukas</li>
+        <li>Sammal palaa pian puhdistuksen jälkeen</li>
         <li>Tiilen pinta tuntuu karhealta</li>
-        <li>Tiilissä näkyy halkeamia tai lohkeamia</li>
+        <li>Tiilissä on halkeamia tai lohkeamia</li>
         <li>Katto on yli 10–15 vuotta vanha eikä sitä ole pinnoitettu</li>
       </ul>
-      <p>Jos tunnistat näistä useamman, pinnoitus kannattaa yleensä tehdä lähiaikoina.</p>
+      <p>Jos tunnistat näistä kaksi tai useamman, pinnoitus kannattaa tehdä lähivuosina.</p>
     </KeyPoints>
 
     <p>
-      Betonitiilikaton kestävyys perustuu sen pintaan. Tehtaalla tehty pinnoite pitää veden tiilen ulkopuolella,
-      ja niin kauan kuin se on ehjä, katto kestää sään kuin sään. Kun pinta kuluu, tiili alkaa imeä vettä, ja
-      siitä eteenpäin rapautuminen nopeutuu vuosi vuodelta. Alla olevat viisi merkkiä kertovat, missä vaiheessa
-      oma kattosi on.
+      Betonitiilen pinnassa on tehtaalla tehty pinnoite, joka pitää veden tiilen ulkopuolella. Aurinko ja pakkanen
+      kuluttavat sitä, ja tavallisesti se on ohut 10–15 vuoden jälkeen. Siitä eteenpäin tiili imee vettä ja
+      rapautuu joka talvi vähän lisää. Näistä viidestä merkistä näet itse, missä vaiheessa oma kattosi on.
     </p>
 
-    <h2>1. Väri on haalistunut tai muuttunut epätasaiseksi</h2>
+    <h2>1. Väri on haalistunut tai laikukas</h2>
     <p>
-      Uusi tiilikatto on väriltään tasainen ja kiinteä. Kun alkuperäinen tehdaspinnoite alkaa kulua, väri
-      haalistuu, usein ensin etelään tai länteen päin olevilla lappeilla, joihin aurinko paistaa eniten.
-    </p>
-    <p>
-      Jos katto näyttää kulahtaneelta tai väri vaihtelee lappeiden välillä, suojapinta on ohentunut. Tiili on
-      alkanut <strong>imeä vettä</strong>, mikä kiihdyttää rapautumista erityisesti pakkasten tullessa.
+      Uuden tiilikaton väri on tasainen. Kun pinnoite kuluu, väri haalistuu ensin etelän ja lännen puoleisilla
+      lappeilla, koska niihin aurinko paistaa eniten. Laikukas tai kulahtanut katto kertoo, että suojapinta on
+      ohentunut ja tiili on alkanut <strong>imeä vettä</strong>.
     </p>
     <Figure
       image="haalistunut-punainen-tiilikatto-ennen-pinnoitusta"
       alt="Haalistunut punainen tiilikatto ennen pinnoitusta"
-      caption="Haalistunut väri kertoo, että tehdaspinnoite on kulunut ohueksi."
+      caption="Haalistunut väri on ensimmäinen merkki kuluneesta pinnoitteesta."
     />
 
-    <h2>2. Sammal kasvaa nopeasti takaisin puhdistuksen jälkeen</h2>
+    <h2>2. Sammal palaa pian puhdistuksen jälkeen</h2>
     <p>
-      Sammal tarvitsee kasvualustakseen huokoisen ja kostean pinnan. Jos katto on puhdistettu muutama vuosi
-      sitten ja sammal on jo palannut, tiilen pinta on niin kulunut, että se pidättää kosteutta ja tarjoaa
-      sammalelle hyvät kasvuolosuhteet.
-    </p>
-    <p>
-      Tässä vaiheessa pelkkä <Link to="/katon-puhdistus-pirkanmaa">katon puhdistus</Link> ei enää riitä pitkäksi
-      aikaa. Tiili tarvitsee uuden suojaavan pinnoitteen, joka tekee pinnasta vettä hylkivän ja vaikeuttaa
-      sammalen kiinnittymistä.
+      Sammal tarttuu vain huokoiseen ja kosteaan pintaan. Jos katto puhdistettiin muutama vuosi sitten ja se on
+      taas vihreä, tiilen pinta pidättää jo kosteutta. Silloin{" "}
+      <Link to="/katon-puhdistus-pirkanmaa">katon puhdistus</Link> auttaa vain hetkeksi. Pysyvämpi ratkaisu on uusi
+      pinnoite, joka tekee pinnasta vettä hylkivän.
     </p>
     <Figure
       image="sammaleinen-tiilikatto-ennen-mekaanista-puhdistusta"
       alt="Sammaloitunut tiilikatto ennen puhdistusta"
-      caption="Nopeasti palaava sammal on merkki huokoiseksi kuluneesta pinnasta."
+      caption="Nopeasti palaava sammal kertoo huokoiseksi kuluneesta tiilestä."
     />
 
-    <h2>3. Tiilien pinta tuntuu karhealta</h2>
+    <h2>3. Tiilen pinta tuntuu karhealta</h2>
     <p>
-      Tämän testin voi tehdä itse: kosketa tiiltä turvallisesti räystäältä tai tikkailta. Hyväkuntoinen tiili
-      tuntuu sileältä ja kovalta. Kulunut tiili tuntuu karhealta, lähes hiekkapaperilta.
-    </p>
-    <p>
-      Karhea pinta tarkoittaa, että suojakerros on murtunut ja tiili on muuttunut huokoiseksi. Huokoinen tiili
-      imee vettä, joka talvella jäätyy tiilen sisällä ja laajenee. Tästä syntyy{" "}
-      <strong>pakkasrapautuminen</strong>, joka halkaisee tiiliä vuosien saatossa.
+      Tämän voit kokeilla itse räystäältä tai tikkailta. Hyväkuntoinen tiili on sileä ja kova. Kulunut tiili tuntuu
+      hiekkapaperilta. Karhea tiili imee vettä, vesi jäätyy talvella tiilen sisällä ja laajenee. Tätä kutsutaan{" "}
+      <strong>pakkasrapautumiseksi</strong>, ja se halkaisee tiiliä vuosien mittaan.
     </p>
 
-    <h2>4. Tiilissä näkyy halkeamia tai lohkeamia</h2>
+    <h2>4. Tiilissä on halkeamia tai lohkeamia</h2>
     <p>
-      Halkeilevat tiilet kertovat, että vesi on jo päässyt tiilen sisärakenteeseen ja jäätymisen ja sulamisen
-      vuorottelu on alkanut tehdä tuhojaan. Tilanne on tällöin kiireellisempi. Yksittäiset rikkinäiset tiilet
-      vaihdetaan uusiin ennen pinnoitusta.
-    </p>
-    <p>
-      Jos halkeamia on paljon, pelkkä pinnoitus ei enää riitä, vaan katto vaatii laajemman kuntoarvion. Siksi
-      katon kunto kannattaa aina tarkistaa paikan päällä ennen kuin työstä sovitaan.
+      Halkeama tarkoittaa, että vesi on jo päässyt tiilen sisään ja jäätynyt siellä. Tilanne on silloin
+      kiireellisempi. Yksittäiset rikkinäiset tiilet vaihdamme uusiin ennen pinnoitusta. Jos halkeamia on paljon,
+      pelkkä pinnoitus ei riitä ja katon kunto pitää arvioida laajemmin.
     </p>
 
     <h2>5. Katto on yli 10–15 vuotta vanha eikä sitä ole pinnoitettu</h2>
     <p>
-      Tehdaspinnoite kestää tyypillisesti 10–15 vuotta. Kestoon vaikuttavat ilmasto, katon suuntaus ja puiden
-      varjostus. Jos katto on tässä iässä eikä sitä ole koskaan huollettu, pinnoituksen aika on todennäköisesti
-      käsillä, vaikka selviä vaurioita ei vielä näkyisi.
-    </p>
-    <p>
-      Ennaltaehkäisevä pinnoitus on aina halvempaa kuin rikkinäisten tiilien vaihto tai pahimmillaan koko katon
-      uusiminen.
+      Tehdaspinnoitteen kesto riippuu ilmastosta, katon suunnasta ja puiden varjosta. Jos katto on tässä iässä
+      eikä sitä ole huollettu, pinnoitus on todennäköisesti ajankohtainen, vaikka vaurioita ei vielä näkyisi.
+      Ajoissa tehty pinnoitus tulee halvemmaksi kuin tiilien vaihto tai koko katon uusiminen.
     </p>
 
-    <h2>Mitä pinnoitus käytännössä tarkoittaa?</h2>
-    <p>Tiilikaton pinnoitus on neljän työvaiheen kokonaisuus:</p>
+    <h2>Mitä tiilikaton pinnoituksessa tehdään?</h2>
     <ol>
-      <li>Katon huolellinen pesu ja huuhtelu.</li>
-      <li>Kasvustonestokäsittely, joka tuhoaa sammalen juuret tiilen huokosista.</li>
-      <li>Rikkinäisten tiilien vaihto uusiin.</li>
-      <li>Kaksi kerrosta pinnoitusmaalia ruiskutettuna.</li>
+      <li>Katto pestään ja sadevesikourut huuhdellaan.</li>
+      <li>Katolle levitetään kasvustonestoaine, joka tuhoaa sammaleen itiöt tiilen huokosista.</li>
+      <li>Rikkinäiset tiilet vaihdetaan uusiin.</li>
+      <li>Katto ruiskumaalataan kahteen kertaan.</li>
     </ol>
     <p>
-      Omakotitalon katolla työ kestää yleensä 2–4 työpäivää. Työvaiheet ja materiaalit on kuvattu tarkemmin
-      sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoitus</Link>.
+      Omakotitalon katolla tähän menee 2–4 työpäivää, ja annamme työlle 5 vuoden kirjallisen takuun. Tarkempi
+      kuvaus on sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
     <Figure
       image="tummanharmaa-tiilikaton-pinnoitus-ja-huolto-jalkeen"

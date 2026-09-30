@@ -9,13 +9,16 @@
  * Kun lisäät reitin App.tsx:ään, lisää se myös tähän.
  */
 import { cities as fullServiceCities, allCities, maalausCities } from "./cityData";
-import { articles, isPublished } from "./articles";
+import { articles, isPublished, getPublishedArticles } from "./articles";
+import { getRouteSeo } from "./seo";
 
 export interface SiteRoute {
   path: string;
   /** Sitemap-prioriteetti 0–1. */
   priority: number;
   changefreq: "weekly" | "monthly" | "yearly";
+  /** Viimeisin muutos YYYY-MM-DD, jos tiedossa (artikkelit). */
+  lastmod?: string;
 }
 
 /** Käsin ylläpidetyt staattiset sivut. */
@@ -54,7 +57,12 @@ export const articlePath = (slug: string) => `/artikkelit/${slug}`;
 export const getArticleRoutes = (now: Date = new Date()): SiteRoute[] =>
   articles
     .filter((a) => isPublished(a, now))
-    .map((a) => ({ path: articlePath(a.slug), priority: 0.6, changefreq: "monthly" as const }));
+    .map((a) => ({
+      path: articlePath(a.slug),
+      priority: 0.6,
+      changefreq: "monthly" as const,
+      lastmod: a.updatedAt ?? a.publishedAt,
+    }));
 
 /** Kaikki kanoniset (indeksoitavat) reitit. */
 export const getCanonicalRoutes = (now: Date = new Date()): SiteRoute[] => [
@@ -97,8 +105,73 @@ export const buildSitemapXml = (now: Date = new Date()): string => {
   const urls = getCanonicalRoutes(now)
     .map((r) => {
       const loc = r.path === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${r.path}/`;
-      return `  <url>\n    <loc>${loc}</loc>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority.toFixed(1)}</priority>\n  </url>`;
+      const lastmod = r.lastmod ? `\n    <lastmod>${r.lastmod}</lastmod>` : "";
+      return `  <url>\n    <loc>${loc}</loc>${lastmod}\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority.toFixed(1)}</priority>\n  </url>`;
     })
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+};
+
+/**
+ * llms.txt: tiivis, koneluettava kuvaus sivustosta tekoälyhakuja varten
+ * (https://llmstxt.org). Sisältää vain tietoja, jotka sivusto jo kertoo.
+ */
+export const buildLlmsTxt = (now: Date = new Date()): string => {
+  const url = (p: string) => (p === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${p}/`);
+  const line = (p: string, label: string) => {
+    const seo = getRouteSeo(p);
+    return `- [${label}](${url(p)})${seo ? `: ${seo.description}` : ""}`;
+  };
+  const published = getPublishedArticles(now);
+
+  return [
+    "# Pintanen Oy",
+    "",
+    "> Pintanen Oy on pirkanmaalainen perheyritys, joka tekee tiilikattojen pinnoituksia, tiilikattojen puhdistuksia ja talojen ulkomaalauksia. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Toiminta-alue on Pirkanmaa ja lähikunnat noin tunnin säteellä Tampereelta.",
+    "",
+    "## Perustiedot",
+    "",
+    "- Y-tunnus: 3525786-9",
+    "- Puhelin: 040 964 0066",
+    "- Sähköposti: myynti@pintanen.fi",
+    "- Takuu: tiilikaton pinnoitus 5 vuotta (kirjallinen), talon maalaus 2 vuotta",
+    "- Arviokäynti on maksuton",
+    "- Työt oikeuttavat kotitalousvähennykseen työn osuudesta",
+    "",
+    "## Suuntaa antavat hinnat",
+    "",
+    "- Tiilikaton pinnoitus: omakotitalo 2 850–4 880 €, 15–25 €/m² katon jyrkkyyden mukaan",
+    "- Tiilikaton puhdistus: omakotitalo noin 800–2 500 €",
+    "- Talon ulkomaalaus: 1-kerroksinen noin 3 500–6 000 €, 1,5-kerroksinen noin 5 000–8 000 €, 2-kerroksinen noin 7 000–11 000 €",
+    "- Tarkka urakkahinta annetaan maksuttoman arviokäynnin jälkeen",
+    "",
+    "## Palvelut",
+    "",
+    line("/tiilikaton-pinnoitus-pirkanmaa", "Tiilikaton pinnoitus Pirkanmaalla"),
+    line("/katon-puhdistus-pirkanmaa", "Tiilikaton puhdistus Pirkanmaalla"),
+    line("/talon-maalaus-pirkanmaa", "Talon maalaus Pirkanmaalla"),
+    "",
+    "## Hinnat ja hintalaskurit",
+    "",
+    line("/maalauspalvelut-hinta-pirkanmaa", "Hinnat ja hintalaskuri"),
+    line("/tiilikaton-pinnoitus-hinta-pirkanmaa", "Tiilikaton pinnoituksen hinta"),
+    line("/katon-puhdistus-hinta-pirkanmaa", "Katon puhdistuksen hinta"),
+    line("/talon-maalaus-hinta-pirkanmaa", "Talon maalauksen hinta"),
+    "",
+    "## Artikkelit",
+    "",
+    ...published.map((a) => `- [${a.title}](${url(articlePath(a.slug))}): ${a.lead}`),
+    "",
+    "## Yritys",
+    "",
+    line("/meista", "Tietoa yrityksestä"),
+    line("/referenssit", "Referenssit"),
+    line("/toiminta-alueet", "Toiminta-alueet"),
+    line("/tietosuoja", "Tietosuojaseloste"),
+    "",
+    "## Toiminta-alueet",
+    "",
+    ...allCities.map((c) => `- [${c.name}](${url(`/maalauspalvelut-${c.slug}`)})`),
+    "",
+  ].join("\n");
 };

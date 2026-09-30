@@ -17,6 +17,8 @@ import FAQSection from "@/components/FAQSection";
 import TeamContactSection from "@/components/TeamContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
+import ServiceSchema from "@/components/ServiceSchema";
+import { maalausCitySeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { getCityBySlug } from "@/data/cityData";
 import { getMaalausCityFAQ } from "@/data/faqData";
@@ -37,10 +39,10 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
   return (
     <div>
       <SEO
-        title={cityData.maalausMetaTitle || `Talon maalaus ${cityName} | Hintalaskuri | Pintanen`}
-        description={cityData.maalausMetaDesc || `Laadukas talon ulkomaalaus ${cityName}. Yrittäjä tekee työn. Laske hinta hintalaskurilla, hyödynnä kotitalousvähennys ja tilaa ilmainen arvio!`}
+        {...maalausCitySeo(cityData)}
         preloadImage={heroImage}
       />
+      <ServiceSchema name="Talon ulkomaalaus" area={cityData.name} description={maalausCitySeo(cityData).description} />
 
       <ServicePageHero
         title=""

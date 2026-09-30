@@ -3,6 +3,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { Droplets, Shield, Paintbrush, Clock, BadgeCheck, Ruler, Mountain, Layers, Building2, Wrench as WrenchIcon, ShieldCheck } from "@/components/icons/BrandIcons";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
@@ -62,8 +63,7 @@ const HinnatTiilikalonPinnoitus = () => {
   return (
     <>
       <SEO
-        title="Tiilikaton pinnoitus hinta – Laske arvio heti"
-        description="Paljonko tiilikaton pinnoitus maksaa? Laske arvio hintalaskurilla ja katso hintaesimerkit. Toimimme Pirkanmaalla ja Kanta-Hämeessä."
+        {...staticSeo["/tiilikaton-pinnoitus-hinta-pirkanmaa"]}
         preloadImage={heroImage}
       />
       <Helmet defer={false}>

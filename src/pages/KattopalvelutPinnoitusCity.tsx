@@ -16,6 +16,8 @@ import FAQSection from "@/components/FAQSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { getPinnoitusCityFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
+import ServiceSchema from "@/components/ServiceSchema";
+import { pinnoitusCitySeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { getCityBySlug } from "@/data/cityData";
 
@@ -33,13 +35,10 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
   return (
     <div>
       <SEO
-        title={cityData.pinnoitusMetaTitle || `Tiilikaton pinnoitus ${cityData.name}`}
-        description={
-          cityData.pinnoitusMetaDesc ||
-          `Tiilikaton maalauspinnoitus ${cityData.name} – pidentää katon ikää jopa 15-20 vuotta. 5 vuoden takuu.`
-        }
+        {...pinnoitusCitySeo(cityData)}
         preloadImage={heroImage}
       />
+      <ServiceSchema name="Tiilikaton pinnoitus" area={cityData.name} description={pinnoitusCitySeo(cityData).description} />
 
       <PinnoitusCityHero cityName={cityData.name} cityIn={cityData.cityIn} backgroundImage={heroImage} />
       <PinnoitusTrustStats cityName={cityData.name} />

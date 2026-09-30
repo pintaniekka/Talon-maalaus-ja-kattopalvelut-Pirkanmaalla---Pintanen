@@ -146,9 +146,10 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
         ogImage={heroUrl}
         preloadImage={heroUrl}
         noindex={preview}
+        ogType="article"
+        breadcrumb={false}
       />
       <Helmet defer={false}>
-        <meta property="og:type" content="article" />
         <meta property="article:published_time" content={meta.publishedAt} />
         {meta.updatedAt && <meta property="article:modified_time" content={meta.updatedAt} />}
         <script type="application/ld+json">{JSON.stringify(articleJsonLd)}</script>

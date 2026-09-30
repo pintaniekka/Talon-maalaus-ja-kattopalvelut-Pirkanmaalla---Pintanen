@@ -122,7 +122,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     "@context": "https://schema.org",
     "@type": "Service",
     name: `Tiilikaton pinnoitus ja talon maalaus ${cityName}`,
-    provider: { "@type": "LocalBusiness", name: "Pintanen Oy", url: "https://pintanen.fi" },
+    provider: { "@id": "https://pintanen.fi/#yritys" },
     areaServed: { "@type": "City", name: cityName },
     description: areaContent.alueMetaDesc,
   };

@@ -1,0 +1,155 @@
+/**
+ * Sivukohtaiset SEO-tiedot (title + meta description) yhdessä paikassa.
+ *
+ * Käyttäjät:
+ *  - sivukomponentit antavat nämä <SEO>-komponentille (react-helmet)
+ *  - vite-plugin-spa-routes kirjoittaa samat tiedot build-aikana jokaisen reitin
+ *    staattiseen HTML:ään, jotta JavaScriptiä ajamattomat lukijat (some-jakojen
+ *    esikatselut, tekoälyhakujen crawlerit) näkevät oikean otsikon ja kuvauksen.
+ *
+ * EI komponentti-importteja: tiedosto luetaan myös Nodessa build-aikana.
+ */
+import { type CityData, cities, allCities, maalausCities } from "./cityData";
+import { getAreaCityContent } from "./areaCityContent";
+import { articles } from "./articles";
+import { getResponsiveSrc } from "../lib/storage";
+
+export interface RouteSeo {
+  title: string;
+  description: string;
+  /** Absoluuttinen og:image, jos eri kuin sivuston oletuskuva. */
+  image?: string;
+  /** og:type, oletus "website". */
+  type?: "website" | "article";
+}
+
+export const SITE_URL = "https://pintanen.fi";
+export const DEFAULT_TITLE = "Tiilikaton pinnoitus ja talon maalaus Pirkanmaa | Pintanen";
+export const DEFAULT_DESCRIPTION =
+  "Tiilikaton pinnoitus, katon puhdistus ja talon maalaus takuutyönä Pirkanmaalla. Yrittäjät mukana jokaisessa työssä. Pyydä maksuton arvio.";
+
+/** Lisää "| Pintanen" otsikon loppuun, jos sitä ei vielä ole. */
+export const withBrand = (title?: string): string =>
+  !title ? DEFAULT_TITLE : /\|\s*Pintanen\s*$/i.test(title) ? title : `${title} | Pintanen`;
+
+/** Kanoninen osoite polulle (loppukauttaviivalla, kuten sitemapissa). */
+export const canonicalUrl = (path: string): string => {
+  const clean = path.replace(/\/+$/, "");
+  return clean === "" ? `${SITE_URL}/` : `${SITE_URL}${clean}/`;
+};
+
+/** Staattisten sivujen title ja description. */
+export const staticSeo: Record<string, RouteSeo> = {
+  "/": { title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION },
+  "/artikkelit": {
+    title: "Artikkelit ja oppaat",
+    description:
+      "Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta.",
+  },
+  "/maalauspalvelut-hinta-pirkanmaa": {
+    title: "Tiilikaton pinnoitus ja talon maalaus hinta – Laske arvio",
+    description:
+      "Paljonko tiilikaton pinnoitus tai talon maalaus maksaa? Laske arvio hintalaskurilla ja katso hintaesimerkit Pirkanmaan alueella.",
+  },
+  "/katon-puhdistus-hinta-pirkanmaa": {
+    title: "Katon puhdistus hinta – Sammaleen poisto ja suojakäsittely",
+    description:
+      "Paljonko katon puhdistus maksaa? Katso hintaesimerkit, mitä puhdistus sisältää ja milloin pelkkä pesu riittää. Toimimme Pirkanmaalla ja Kanta-Hämeessä.",
+  },
+  "/tiilikaton-pinnoitus-hinta-pirkanmaa": {
+    title: "Tiilikaton pinnoitus hinta – Laske arvio heti",
+    description:
+      "Paljonko tiilikaton pinnoitus maksaa? Laske arvio hintalaskurilla ja katso hintaesimerkit. Toimimme Pirkanmaalla ja Kanta-Hämeessä.",
+  },
+  "/talon-maalaus-hinta-pirkanmaa": {
+    title: "Talon maalaus hinta – Laske arvio heti",
+    description:
+      "Paljonko talon maalaus maksaa? Laske suuntaa antava hinta laskurilla ja katso hintaesimerkit. Kotitalousvähennys pienentää kustannuksia.",
+  },
+  "/meista": {
+    title: "Pintanen Oy – Perheyritys katto- ja maalaustöissä",
+    description:
+      "Pintanen on perheyritys, joka on erikoistunut katto- ja seinämaalauksiin. Teemme työt itse ja panostamme huolelliseen lopputulokseen.",
+  },
+  "/tiilikaton-pinnoitus-pirkanmaa": {
+    title: "Tiilikaton pinnoitus Pirkanmaa & Tampere | 5v takuu | Pintanen",
+    description:
+      "Tiilikaton pinnoitus Pirkanmaalla. Säästä jopa 80 % vs. kattoremontti! Hyödynnä kotitalousvähennys ja tilaa ilmainen kuntoarvio. 5 vuoden takuu työlle.",
+  },
+  "/katon-puhdistus-pirkanmaa": {
+    title: "Katon puhdistus Pirkanmaa – Ilmainen arvio",
+    description:
+      "Tiilikaton puhdistus Pirkanmaalla - tehokas suoja katollesi. Sammaleet ja lika poistetaan mekaanisesti.",
+  },
+  "/talon-maalaus-pirkanmaa": {
+    title: "Talon maalaus Pirkanmaa | Hintalaskuri",
+    description:
+      "Laadukas talon ulkomaalaus Pirkanmaalla. Yrittäjä tekee työn. Laske hinta hintalaskurilla, hyödynnä kotitalousvähennys ja tilaa ilmainen arvio!",
+  },
+  "/tietosuoja": {
+    title: "Tietosuojaseloste",
+    description:
+      "Pintanen Oy:n tietosuojaseloste: mitä tietoja keräämme yhteydenotto- ja tarjouspyyntölomakkeilla, mihin niitä käytetään ja mitkä ovat oikeutesi.",
+  },
+  "/referenssit": {
+    title: "Referenssit – Katon pinnoitus ja talon maalaus",
+    description:
+      "Tutustu toteuttamiimme katto- ja maalausprojekteihin Pirkanmaalla. Näe ero ennen maalausta ja maalauksen jälkeen.",
+  },
+  "/toiminta-alueet": {
+    title: "Toiminta-alueet Pirkanmaa ja lähikunnat",
+    description:
+      "Palvelemme koko Pirkanmaan alueella ja lähikunnissa. Katon pinnoitus, puhdistus ja talon maalaus noin tunnin säteellä Tampereelta.",
+  },
+};
+
+export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
+  title: city.pinnoitusMetaTitle || `Tiilikaton pinnoitus ${city.name}`,
+  description:
+    city.pinnoitusMetaDesc ||
+    `Tiilikaton maalauspinnoitus ${city.name} – pidentää katon ikää jopa 15-20 vuotta. 5 vuoden takuu.`,
+});
+
+export const puhdistusCitySeo = (city: CityData): RouteSeo => ({
+  title: city.puhdistusMetaTitle || `Tiilikaton puhdistus ${city.name}`,
+  description:
+    city.puhdistusMetaDesc ||
+    `Tiilikaton mekaaninen puhdistus ja sammaleentorjunta ${city.name}. Alkaen 800 €. Ilmainen kuntotarkastus.`,
+});
+
+export const maalausCitySeo = (city: CityData): RouteSeo => ({
+  title: city.maalausMetaTitle || `Talon maalaus ${city.name} | Hintalaskuri | Pintanen`,
+  description:
+    city.maalausMetaDesc ||
+    `Laadukas talon ulkomaalaus ${city.name}. Yrittäjä tekee työn. Laske hinta hintalaskurilla, hyödynnä kotitalousvähennys ja tilaa ilmainen arvio!`,
+});
+
+/** SEO-tiedot mille tahansa kanoniselle polulle (ilman loppukauttaviivaa). */
+export const getRouteSeo = (path: string): RouteSeo | undefined => {
+  if (staticSeo[path]) return staticSeo[path];
+
+  const article = articles.find((a) => `/artikkelit/${a.slug}` === path);
+  if (article) {
+    return {
+      title: article.seoTitle ?? article.title,
+      description: article.description,
+      image: getResponsiveSrc(article.heroImage),
+      type: "article",
+    };
+  }
+
+  for (const city of allCities) {
+    if (path === `/maalauspalvelut-${city.slug}`) {
+      const area = getAreaCityContent(city.slug);
+      if (area) return { title: area.alueMetaTitle, description: area.alueMetaDesc };
+    }
+  }
+  for (const city of cities) {
+    if (path === `/tiilikaton-pinnoitus-${city.slug}`) return pinnoitusCitySeo(city);
+    if (path === `/katon-puhdistus-${city.slug}`) return puhdistusCitySeo(city);
+  }
+  for (const city of maalausCities) {
+    if (path === `/talon-maalaus-${city.slug}`) return maalausCitySeo(city);
+  }
+  return undefined;
+};

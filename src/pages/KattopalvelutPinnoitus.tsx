@@ -15,6 +15,8 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ResponsiveSupabaseImage from "@/components/ResponsiveSupabaseImage";
 import { pinnoitusFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
+import ServiceSchema from "@/components/ServiceSchema";
+import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 const heroBase = "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen";
@@ -55,9 +57,9 @@ const KattopalvelutPinnoitus = () => {
   return (
     <div>
       <SEO
-        title="Tiilikaton pinnoitus Pirkanmaa & Tampere | 5v takuu | Pintanen"
-        description="Tiilikaton pinnoitus Pirkanmaalla. Säästä jopa 80 % vs. kattoremontti! Hyödynnä kotitalousvähennys ja tilaa ilmainen kuntoarvio. 5 vuoden takuu työlle."
+        {...staticSeo["/tiilikaton-pinnoitus-pirkanmaa"]}
       />
+      <ServiceSchema name="Tiilikaton pinnoitus" area="Pirkanmaa" areaType="AdministrativeArea" description={staticSeo["/tiilikaton-pinnoitus-pirkanmaa"].description} />
 
       {/* ═══ HERO ═══ */}
       <ServicePageHero

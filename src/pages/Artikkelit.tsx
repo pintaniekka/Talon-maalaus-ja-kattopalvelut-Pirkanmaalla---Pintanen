@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { authors } from "@/data/authors";
 import { categoryLabels, formatDateFi, getPublishedArticles } from "@/data/articles";
@@ -11,8 +12,7 @@ const Artikkelit = () => {
   return (
     <div className="bg-card">
       <SEO
-        title="Artikkelit ja oppaat"
-        description="Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta."
+        {...staticSeo["/artikkelit"]}
       />
 
       <div className="pt-28 md:pt-40 pb-16 md:pb-24">

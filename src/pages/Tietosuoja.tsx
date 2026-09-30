@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { staticSeo } from "@/data/seo";
 
 const UPDATED = "30.9.2026";
 
@@ -18,8 +19,7 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 const Tietosuoja = () => (
   <div className="pt-28 md:pt-36 pb-16 md:pb-24 bg-background">
     <SEO
-      title="Tietosuojaseloste"
-      description="Pintanen Oy:n tietosuojaseloste: mitä tietoja keräämme yhteydenotto- ja tarjouspyyntölomakkeilla, mihin niitä käytetään ja mitkä ovat oikeutesi."
+        {...staticSeo["/tietosuoja"]}
     />
     <article className="section-container max-w-3xl mx-auto px-4">
       <p className="text-accent font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm mb-3">

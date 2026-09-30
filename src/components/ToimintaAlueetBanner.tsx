@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
-import { allCities } from '@/data/cityData';
+import { allCities, cities as fullServiceCities } from '@/data/cityData';
 import { getStorageUrl } from '@/lib/storage';
 import { cn } from '@/lib/utils';
 
@@ -35,8 +35,14 @@ const regions = Object.entries(regionSlugs).map(([title, slugs]) => ({
     .filter((c): c is NonNullable<typeof c> => Boolean(c)),
 }));
 
+const pinnoitusSlugs = new Set(fullServiceCities.map((c) => c.slug));
+
+// Pinnoituksen kaupunkisivu on vain osalla paikkakunnista. Muille linkitetään
+// paikkakunnan aluesivulle, ettei linkki vie 404-sivulle.
 const cityHref = (slug: string, service: Service) =>
-  service === 'pinnoitus' ? `/tiilikaton-pinnoitus-${slug}` : `/maalauspalvelut-${slug}`;
+  service === 'pinnoitus' && pinnoitusSlugs.has(slug)
+    ? `/tiilikaton-pinnoitus-${slug}`
+    : `/maalauspalvelut-${slug}`;
 
 const chipBase =
   'px-4 py-2 bg-secondary/60 border border-border rounded-xl text-sm font-semibold transition-colors';

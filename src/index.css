@@ -293,3 +293,101 @@
 .marquee-viewport::-webkit-scrollbar { display: none; }
 .marquee-viewport { scrollbar-width: none; }
 
+
+/* ═══════════════════════════════════════════════════════
+ *  ARTIKKELIPOHJA – tekstivetoinen lukunäkymä
+ *  (src/components/article/ArticleLayout.tsx)
+ * ═══════════════════════════════════════════════════════ */
+@layer components {
+  .article-column {
+    @apply max-w-[44rem] mx-auto px-4 sm:px-6;
+  }
+
+  .article-prose {
+    @apply text-[1.0625rem] md:text-[1.15rem] leading-[1.75] text-foreground/90;
+  }
+  .article-prose > * + * {
+    margin-top: 1.25em;
+  }
+  .article-prose h2 {
+    @apply font-heading font-bold text-2xl md:text-[1.75rem] leading-snug text-foreground;
+    margin-top: 2.2em;
+    scroll-margin-top: 7rem;
+  }
+  .article-prose h3 {
+    @apply font-heading font-bold text-lg md:text-xl leading-snug text-foreground;
+    margin-top: 1.8em;
+  }
+  .article-prose h2 + *,
+  .article-prose h3 + * {
+    margin-top: 0.7em;
+  }
+  .article-prose strong {
+    @apply font-semibold text-foreground;
+  }
+  .article-prose a,
+  .article-closing a {
+    color: #006ead;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .article-prose a:hover,
+  .article-closing a:hover {
+    text-decoration-thickness: 2px;
+  }
+  .article-prose ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+  .article-prose ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  .article-prose li + li {
+    margin-top: 0.4em;
+  }
+  .article-prose blockquote {
+    @apply border-l-4 border-accent pl-5 italic text-foreground;
+  }
+  .article-prose figure {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  .article-prose figcaption {
+    @apply text-sm text-muted-foreground mt-3 text-center;
+  }
+
+  .article-keypoints {
+    @apply rounded-xl border border-border bg-background px-5 py-5 md:px-7 md:py-6;
+  }
+  .article-keypoints > * + * {
+    margin-top: 0.8em;
+  }
+  .article-keypoints-title {
+    @apply text-xs font-heading font-bold uppercase tracking-[0.18em] text-muted-foreground;
+  }
+
+  .article-note {
+    @apply rounded-xl border-l-4 border-accent bg-background px-5 py-4;
+  }
+  .article-note > * + * {
+    margin-top: 0.5em;
+  }
+
+  .article-toc {
+    @apply mb-10 rounded-xl border border-border px-5 py-5 md:px-7 md:py-6;
+  }
+  .article-toc-title {
+    @apply text-xs font-heading font-bold uppercase tracking-[0.18em] text-muted-foreground mb-3;
+  }
+  .article-toc ol {
+    @apply space-y-2 text-base;
+  }
+  .article-toc a {
+    @apply text-foreground/85 underline decoration-border underline-offset-4 hover:decoration-[#006ead] hover:text-[#006ead];
+  }
+
+  .article-closing {
+    @apply mt-12 rounded-xl bg-background px-5 py-5 md:px-7 md:py-6 text-base md:text-[1.0625rem] leading-relaxed text-muted-foreground;
+  }
+}

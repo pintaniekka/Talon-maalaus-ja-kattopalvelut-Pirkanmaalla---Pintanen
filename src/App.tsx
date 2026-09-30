@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
@@ -29,11 +28,8 @@ const Artikkeli = lazyWithRetry(() => import("./pages/Artikkeli"));
 const Tietosuoja = lazyWithRetry(() => import("./pages/Tietosuoja"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
-const queryClient = new QueryClient();
-
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+  <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -105,8 +101,7 @@ const App = () => (
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  </TooltipProvider>
 );
 
 export default App;

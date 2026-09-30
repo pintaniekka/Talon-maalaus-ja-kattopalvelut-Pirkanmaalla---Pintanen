@@ -12,7 +12,7 @@
 import { type CityData, cities, allCities, maalausCities } from "./cityData";
 import { getAreaCityContent } from "./areaCityContent";
 import { articles } from "./articles";
-import { getResponsiveSrc, getResponsiveSrcSet } from "../lib/storage";
+import { getResponsiveSrc } from "../lib/storage";
 
 export interface RouteSeo {
   title: string;
@@ -21,43 +21,7 @@ export interface RouteSeo {
   image?: string;
   /** og:type, oletus "website". */
   type?: "website" | "article";
-  /**
-   * Sivun yläosan pääkuva (LCP). Plugin kirjoittaa sille staattiseen HTML:ään
-   * preload-linkin, jotta selain alkaa ladata kuvaa jo ennen JavaScriptiä.
-   */
-  hero?: { base: string; sizes: string };
 }
-
-/** Koko ruudun hero (ServicePageHero). */
-const fullHero = (base: string) => ({ base, sizes: "100vw" });
-
-const HERO = {
-  pinnoitus: fullHero("kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen"),
-  puhdistus: fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
-  maalaus: fullHero("moderni-tumma-puutalo-julkisivumaalaus-valmis"),
-  alue: fullHero("ammattilainen-maalaa-talon-ulkoverhousta-pensselilla"),
-};
-
-/** Staattisten sivujen pääkuvat (samat kuin sivukomponenttien heroissa). */
-const staticHero: Record<string, RouteSeo["hero"]> = {
-  "/tiilikaton-pinnoitus-pirkanmaa": HERO.pinnoitus,
-  "/katon-puhdistus-pirkanmaa": HERO.puhdistus,
-  "/talon-maalaus-pirkanmaa": HERO.maalaus,
-  "/maalauspalvelut-hinta-pirkanmaa": fullHero("moderni-tumma-puutalo-julkisivumaalaus-valmis"),
-  "/tiilikaton-pinnoitus-hinta-pirkanmaa": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
-  "/katon-puhdistus-hinta-pirkanmaa": fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
-  "/talon-maalaus-hinta-pirkanmaa": fullHero("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen"),
-  "/meista": fullHero("ammattilainen-maalaa-talon-ulkoverhousta-pensselilla"),
-  "/toiminta-alueet": fullHero("keltainen-omakotitalo-julkisivumaalaus-jalkeen"),
-  "/referenssit": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
-};
-
-/** Preload-linkin attribuutit pääkuvalle. */
-export const heroPreload = (hero: NonNullable<RouteSeo["hero"]>) => ({
-  href: getResponsiveSrc(hero.base),
-  imagesrcset: getResponsiveSrcSet(hero.base),
-  imagesizes: hero.sizes,
-});
 
 export const SITE_URL = "https://pintanen.fi";
 export const DEFAULT_TITLE = "Tiilikaton pinnoitus ja talon maalaus Pirkanmaa | Pintanen";
@@ -162,7 +126,7 @@ export const maalausCitySeo = (city: CityData): RouteSeo => ({
 
 /** SEO-tiedot mille tahansa kanoniselle polulle (ilman loppukauttaviivaa). */
 export const getRouteSeo = (path: string): RouteSeo | undefined => {
-  if (staticSeo[path]) return { ...staticSeo[path], hero: staticHero[path] };
+  if (staticSeo[path]) return staticSeo[path];
 
   const article = articles.find((a) => `/artikkelit/${a.slug}` === path);
   if (article) {
@@ -171,22 +135,21 @@ export const getRouteSeo = (path: string): RouteSeo | undefined => {
       description: article.description,
       image: getResponsiveSrc(article.heroImage),
       type: "article",
-      hero: { base: article.heroImage, sizes: "(min-width: 896px) 848px, 100vw" },
     };
   }
 
   for (const city of allCities) {
     if (path === `/maalauspalvelut-${city.slug}`) {
       const area = getAreaCityContent(city.slug);
-      if (area) return { title: area.alueMetaTitle, description: area.alueMetaDesc, hero: HERO.alue };
+      if (area) return { title: area.alueMetaTitle, description: area.alueMetaDesc };
     }
   }
   for (const city of cities) {
-    if (path === `/tiilikaton-pinnoitus-${city.slug}`) return { ...pinnoitusCitySeo(city), hero: HERO.pinnoitus };
-    if (path === `/katon-puhdistus-${city.slug}`) return { ...puhdistusCitySeo(city), hero: HERO.puhdistus };
+    if (path === `/tiilikaton-pinnoitus-${city.slug}`) return pinnoitusCitySeo(city);
+    if (path === `/katon-puhdistus-${city.slug}`) return puhdistusCitySeo(city);
   }
   for (const city of maalausCities) {
-    if (path === `/talon-maalaus-${city.slug}`) return { ...maalausCitySeo(city), hero: HERO.maalaus };
+    if (path === `/talon-maalaus-${city.slug}`) return maalausCitySeo(city);
   }
   return undefined;
 };

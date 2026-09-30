@@ -5,11 +5,12 @@ interface PinnoitusCityHeroProps {
   cityName: string;
   cityIn: string;
   backgroundImage: string;
+  backgroundSrcSet?: string;
 }
 
-const PinnoitusCityHero = ({ cityName, cityIn, backgroundImage }: PinnoitusCityHeroProps) => {
+const PinnoitusCityHero = ({ cityName, cityIn, backgroundImage, backgroundSrcSet }: PinnoitusCityHeroProps) => {
   return (
-    <ServicePageHero title="" subtitle="" backgroundImage={backgroundImage}>
+    <ServicePageHero title="" subtitle="" backgroundImage={backgroundImage} backgroundSrcSet={backgroundSrcSet}>
       {/* Glassmorphism container for H1 + body text */}
       <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto mb-10 md:mb-12">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 md:mb-6 font-heading">

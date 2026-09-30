@@ -40,7 +40,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       />
       <ServiceSchema name="Tiilikaton pinnoitus" area={cityData.name} description={pinnoitusCitySeo(cityData).description} />
 
-      <PinnoitusCityHero cityName={cityData.name} cityIn={cityData.cityIn} backgroundImage={heroImage} />
+      <PinnoitusCityHero cityName={cityData.name} cityIn={cityData.cityIn} backgroundImage={heroImage} backgroundSrcSet={heroSrcSet} />
       <PinnoitusTrustStats cityName={cityData.name} />
 
       {/* Local Hook – kaupunkikohtainen paikallisteksti heti luottamuslaatikon jälkeen */}

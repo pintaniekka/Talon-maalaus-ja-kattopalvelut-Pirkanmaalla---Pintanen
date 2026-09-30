@@ -14,7 +14,7 @@
 import fs from "fs";
 import path from "path";
 import { getAllRoutePaths, buildSitemapXml, buildLlmsTxt } from "./src/data/routes";
-import { getRouteSeo, withBrand, canonicalUrl, type RouteSeo } from "./src/data/seo";
+import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
 
 const HOME_ONLY_TAG = /\s*<link\s[^>]*data-home-only[^>]*>/g;
 
@@ -49,6 +49,14 @@ export const applySeo = (html: string, routePath: string, seo: RouteSeo): string
     out = setMeta(out, "property", "og:image", seo.image);
     out = setMeta(out, "name", "twitter:image", seo.image);
     for (const key of ["og:image:type", "og:image:width", "og:image:height"]) out = removeMeta(out, key);
+  }
+  if (seo.hero) {
+    // Pääkuvan preload: selain löytää LCP-kuvan HTML:stä eikä vasta JavaScriptin jälkeen.
+    const { href, imagesrcset, imagesizes } = heroPreload(seo.hero);
+    out = out.replace(
+      "</title>",
+      `</title>\n    <link rel="preload" as="image" href="${href}" imagesrcset="${imagesrcset}" imagesizes="${imagesizes}" type="image/webp" fetchpriority="high" />`,
+    );
   }
   return out;
 };

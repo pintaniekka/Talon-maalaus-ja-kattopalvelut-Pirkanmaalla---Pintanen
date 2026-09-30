@@ -177,6 +177,8 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                 <img
                   src={logoUrl}
                   alt="Pintanen"
+                  width={160}
+                  height={64}
                   className="h-14 md:h-16 w-auto"
                   loading="lazy"
                   decoding="async"
@@ -195,7 +197,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     className={`${inputClass} pl-10`}
-                    placeholder="Nimi"
+                    placeholder="Nimi" aria-label="Nimi"
                   />
                 </div>
 
@@ -206,7 +208,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                     value={formState.phone}
                     onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                     className={`${inputClass} pl-10`}
-                    placeholder="Puhelinnumero"
+                    placeholder="Puhelinnumero" aria-label="Puhelinnumero"
                   />
                 </div>
 
@@ -217,7 +219,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                     className={`${inputClass} pl-10`}
-                    placeholder="Sähköposti"
+                    placeholder="Sähköposti" aria-label="Sähköposti"
                   />
                 </div>
 
@@ -247,7 +249,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   rows={3}
                   className={`${inputClass} resize-none`}
-                  placeholder="Lisätiedot (vapaaehtoinen)"
+                  placeholder="Lisätiedot (vapaaehtoinen)" aria-label="Lisätiedot"
                 />
 
                 <HoneypotField value={formState.website} onChange={(v) => setFormState({ ...formState, website: v })} />

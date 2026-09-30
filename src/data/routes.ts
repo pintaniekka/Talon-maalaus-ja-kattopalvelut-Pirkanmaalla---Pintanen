@@ -9,6 +9,7 @@
  * Kun lisäät reitin App.tsx:ään, lisää se myös tähän.
  */
 import { cities as fullServiceCities, allCities, maalausCities } from "./cityData";
+import { articles, isPublished } from "./articles";
 
 export interface SiteRoute {
   path: string;
@@ -31,7 +32,6 @@ export const staticRoutes: SiteRoute[] = [
   { path: "/referenssit", priority: 0.8, changefreq: "monthly" },
   { path: "/meista", priority: 0.7, changefreq: "monthly" },
   { path: "/artikkelit", priority: 0.7, changefreq: "weekly" },
-  { path: "/artikkelit/milloin-pinnoittaa-tiilikatto", priority: 0.6, changefreq: "monthly" },
   { path: "/tietosuoja", priority: 0.2, changefreq: "yearly" },
 ];
 
@@ -47,8 +47,21 @@ export const cityRoutes: SiteRoute[] = [
   ...maalausCities.map((c) => ({ path: `/talon-maalaus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
 ];
 
+/** Artikkelin polku slugista. */
+export const articlePath = (slug: string) => `/artikkelit/${slug}`;
+
+/** Julkaistut artikkelit (build-hetkellä). Ajastetut tulevat sitemapiin seuraavassa buildissa julkaisun jälkeen. */
+export const getArticleRoutes = (now: Date = new Date()): SiteRoute[] =>
+  articles
+    .filter((a) => isPublished(a, now))
+    .map((a) => ({ path: articlePath(a.slug), priority: 0.6, changefreq: "monthly" as const }));
+
 /** Kaikki kanoniset (indeksoitavat) reitit. */
-export const canonicalRoutes: SiteRoute[] = [...staticRoutes, ...cityRoutes];
+export const getCanonicalRoutes = (now: Date = new Date()): SiteRoute[] => [
+  ...staticRoutes,
+  ...getArticleRoutes(now),
+  ...cityRoutes,
+];
 
 /**
  * Vanhat osoitteet, joista App.tsx ohjaa uusiin. Näille luodaan index.html,
@@ -70,15 +83,18 @@ export const legacyRoutes: string[] = [
 
 /** Kaikki polut, joille build luo index.html:n (ilman juurta). */
 export const getAllRoutePaths = (): string[] => [
-  ...canonicalRoutes.map((r) => r.path).filter((p) => p !== "/"),
+  ...[...staticRoutes, ...cityRoutes].map((r) => r.path).filter((p) => p !== "/"),
+  // Myös ajastetuille artikkeleille luodaan hakemisto, jotta ne aukeavat
+  // julkaisupäivänä ilman uutta buildia (sivu itse näyttää 404:n siihen asti).
+  ...articles.map((a) => articlePath(a.slug)),
   ...legacyRoutes,
 ];
 
 export const SITE_ORIGIN = "https://pintanen.fi";
 
 /** Sitemap.xml kanonisista reiteistä. Osoitteet päättyvät kauttaviivaan kuten canonical-tagit (SEO.tsx). */
-export const buildSitemapXml = (): string => {
-  const urls = canonicalRoutes
+export const buildSitemapXml = (now: Date = new Date()): string => {
+  const urls = getCanonicalRoutes(now)
     .map((r) => {
       const loc = r.path === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${r.path}/`;
       return `  <url>\n    <loc>${loc}</loc>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority.toFixed(1)}</priority>\n  </url>`;

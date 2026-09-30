@@ -52,3 +52,15 @@ Per-city copy (SEO titles/descriptions, intro text, local "hook" paragraphs) liv
 - `@/*` resolves to `src/*` (configured in both `vite.config.ts` and `vitest.config.ts`).
 - `@typescript-eslint/no-unused-vars` is explicitly turned off in `eslint.config.js`.
 - UI primitives under `src/components/ui/` are shadcn-ui components; domain components live flat under `src/components/`, with `maalaus/` and `pinnoitus/` subfolders for service-specific pieces.
+
+## Articles (`/artikkelit`)
+
+Articles are data-driven and deliberately text-first: no hero, no CTA buttons, no trust stats, no contact form. One shared template renders every article.
+
+- `src/data/articles.ts` — metadata for every article (slug, title, lead, description, category, author, `publishedAt`, `updatedAt`, reading time, hero image). Must stay free of component imports: the Vite plugin reads it in Node at build time.
+- `src/content/articles/<slug>.tsx` — the body, default-exported. Write plain `h2`/`h3`/`p`/`ul`/`ol`/`blockquote` plus the helpers in `src/components/article/ArticleKit.tsx` (`Figure`, `KeyPoints`, `Note`, `ArticleFaq`). Internal links are inline `<Link>`s in the prose. Do not add buttons, stat grids or forms.
+- `src/content/articles/index.ts` — registers the body under its slug (lazy-loaded).
+- `src/components/article/ArticleLayout.tsx` — the template: breadcrumb, category, H1, lead, byline (author, dates, reading time), hero figure, auto-generated table of contents from the body's `h2`s, prose (`.article-prose` styles in `src/index.css`), one quiet closing paragraph per category, author box, "Lue myös". Emits `Article` + `BreadcrumbList` JSON-LD.
+- `src/pages/Artikkeli.tsx` serves `/artikkelit/:slug`; `src/pages/Artikkelit.tsx` lists published articles.
+
+**Scheduling**: an article whose `publishedAt` is in the future is "queued". The build still creates its route directory, but the page renders the 404 and the list hides it until that date (Finnish time), so it goes live on its date without a new deploy. It enters `sitemap.xml` on the first build after its publish date. `src/test/routes.test.ts` checks that every article has a body file, a registry entry and valid metadata.

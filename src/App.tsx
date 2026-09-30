@@ -25,7 +25,7 @@ const HinnatKatonPuhdistus = lazyWithRetry(() => import("./pages/HinnatKatonPuhd
 const HinnatTalonMaalaus = lazyWithRetry(() => import("./pages/HinnatTalonMaalaus"));
 const Meista = lazyWithRetry(() => import("./pages/Meista"));
 const Artikkelit = lazyWithRetry(() => import("./pages/Artikkelit"));
-const ArtikkeliMilloinPinnoittaa = lazyWithRetry(() => import("./pages/ArtikkeliMilloinPinnoittaa"));
+const Artikkeli = lazyWithRetry(() => import("./pages/Artikkeli"));
 const Tietosuoja = lazyWithRetry(() => import("./pages/Tietosuoja"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
@@ -54,7 +54,7 @@ const App = () => (
               <Route path="/referenssit" element={<Referenssit />} />
               <Route path="/meista" element={<Meista />} />
               <Route path="/artikkelit" element={<Artikkelit />} />
-              <Route path="/artikkelit/milloin-pinnoittaa-tiilikatto" element={<ArtikkeliMilloinPinnoittaa />} />
+              <Route path="/artikkelit/:slug" element={<Artikkeli />} />
               <Route path="/tietosuoja" element={<Tietosuoja />} />
 
               {/* ── City service pages (8 full-service cities × 3 services) ── */}

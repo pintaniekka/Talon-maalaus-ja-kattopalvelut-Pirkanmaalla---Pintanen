@@ -13,6 +13,7 @@ import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
 import ServiceSchema from "@/components/ServiceSchema";
 import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
@@ -102,6 +103,7 @@ const TalonMaalaus = () => {
       <MaalausFinancing />
       <MaalausEntrepreneur />
       <FAQSection items={faqItems} />
+      <RelatedArticles categories={["maalaus", "raha"]} />
       <ServiceContactSection variant="maalaus" />
       <ToimintaAlueetBanner />
     </div>

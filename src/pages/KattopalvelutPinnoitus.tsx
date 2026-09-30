@@ -15,6 +15,7 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ResponsiveSupabaseImage from "@/components/ResponsiveSupabaseImage";
 import { pinnoitusFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
 import ServiceSchema from "@/components/ServiceSchema";
 import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
@@ -397,6 +398,7 @@ const KattopalvelutPinnoitus = () => {
       {/* ═══ FAQ ═══ */}
       <FAQSection items={pinnoitusFAQ} />
 
+      <RelatedArticles categories={["katto", "raha"]} />
       {/* ═══ CONTACT ═══ */}
       <ServiceContactSection variant="katto" />
 

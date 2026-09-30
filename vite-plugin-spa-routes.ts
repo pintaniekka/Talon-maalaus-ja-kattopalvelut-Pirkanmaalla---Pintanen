@@ -9,11 +9,11 @@
  *  3. Poistaa alasivujen kopioista etusivun hero-kuvan preloadin (data-home-only).
  *  4. Kirjoittaa dist/404.html:n (noindex), jotta tuntemattomat polut renderöivät
  *     SPA:n oman 404-sivun oikealla 404-statuksella.
- *  5. Generoi dist/sitemap.xml:n ja dist/llms.txt:n samasta reittilistasta.
+ *  5. Generoi dist/sitemap.xml:n, dist/image-sitemap.xml:n ja dist/llms.txt:n samasta reittilistasta.
  */
 import fs from "fs";
 import path from "path";
-import { getAllRoutePaths, buildSitemapXml, buildLlmsTxt } from "./src/data/routes";
+import { getAllRoutePaths, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt } from "./src/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
 
 const HOME_ONLY_TAG = /\s*<link\s[^>]*data-home-only[^>]*>/g;
@@ -91,6 +91,7 @@ export default function spaRoutes() {
         .replace(/<title>[\s\S]*?<\/title>/, `<title>Sivua ei löytynyt | Pintanen</title>\n    <meta name="robots" content="noindex" />`);
       fs.writeFileSync(path.join(distDir, "404.html"), notFoundHtml, "utf-8");
       fs.writeFileSync(path.join(distDir, "sitemap.xml"), buildSitemapXml(), "utf-8");
+      fs.writeFileSync(path.join(distDir, "image-sitemap.xml"), buildImageSitemapXml(), "utf-8");
       fs.writeFileSync(path.join(distDir, "llms.txt"), buildLlmsTxt(), "utf-8");
 
       console.log(

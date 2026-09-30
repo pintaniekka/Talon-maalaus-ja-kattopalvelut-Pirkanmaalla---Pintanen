@@ -123,7 +123,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
       url: "https://pintanen.fi/",
       logo: {
         "@type": "ImageObject",
-        url: "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/logo.webp",
+        url: "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pintanen-logo.png",
       },
     },
   };

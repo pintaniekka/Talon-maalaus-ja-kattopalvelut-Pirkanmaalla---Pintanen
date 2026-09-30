@@ -4,6 +4,7 @@ import { Paintbrush, Ruler, Building2, Layers, Droplets } from "@/components/ico
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import WallPriceCalculator from "@/components/WallPriceCalculator";
@@ -223,6 +224,7 @@ const HinnatTalonMaalaus = () => {
       {/* FAQ */}
       <FAQSection items={faqItems} />
 
+      <RelatedArticles categories={["maalaus", "raha"]} />
       {/* Contact - only Eemil */}
       <ServiceContactSection variant="maalaus" />
     </>

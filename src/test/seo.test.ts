@@ -73,3 +73,14 @@ describe("llms.txt ja sitemap", () => {
     expect(buildSitemapXml()).toMatch(/artikkelit\/milloin-pinnoittaa-tiilikatto\/<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   });
 });
+
+describe("kuvasitemap", () => {
+  it("sisältää etusivun ja jokaisen pääkuvallisen sivun, ei vanhoja osoitteita", async () => {
+    const { buildImageSitemapXml } = await import("@/data/routes");
+    const xml = buildImageSitemapXml();
+    expect(xml).toContain("<loc>https://pintanen.fi/</loc>");
+    expect(xml).toContain("<loc>https://pintanen.fi/tiilikaton-pinnoitus-pirkanmaa/</loc>");
+    expect(xml).not.toContain("/kattopalvelut/");
+    expect(xml).not.toContain("%20");
+  });
+});

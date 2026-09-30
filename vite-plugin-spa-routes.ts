@@ -13,7 +13,8 @@
  */
 import fs from "fs";
 import path from "path";
-import { getAllRoutePaths, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt } from "./src/data/routes";
+import type { ViteDevServer } from "vite";
+import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt } from "./src/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
 
 const HOME_ONLY_TAG = /\s*<link\s[^>]*data-home-only[^>]*>/g;
@@ -61,10 +62,31 @@ export const applySeo = (html: string, routePath: string, seo: RouteSeo): string
   return out;
 };
 
+type Prerender = (url: string) => Promise<{ html: string; headScripts: string }>;
+
+/**
+ * Esirenderöi sivun sisällön #root-elementtiin. Jos esirenderöinti epäonnistuu,
+ * palautetaan HTML muuttumattomana: sivu toimii silloin kuten ennenkin (selainrenderöinti).
+ */
+const injectPrerender = async (html: string, route: string, prerender: Prerender | null, failed: string[]) => {
+  if (!prerender) return html;
+  try {
+    const { html: body, headScripts } = await prerender(route);
+    if (!body.includes("<h1")) throw new Error("ei h1-otsikkoa");
+    return html
+      .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
+      .replace("</head>", `${headScripts ? `    ${headScripts}\n  ` : ""}</head>`);
+  } catch (error) {
+    failed.push(`${route}: ${error instanceof Error ? error.message : String(error)}`);
+    return html;
+  }
+};
+
 export default function spaRoutes() {
   return {
     name: "vite-plugin-spa-routes",
-    closeBundle() {
+    apply: "build" as const,
+    async closeBundle() {
       const distDir = path.resolve("dist");
       const indexPath = path.join(distDir, "index.html");
 
@@ -74,17 +96,60 @@ export default function spaRoutes() {
       const subpageHtml = baseHtml.replace(HOME_ONLY_TAG, "");
       const routes = getAllRoutePaths();
       let withSeo = 0;
+      let prerendered = 0;
+      const failed: string[] = [];
+      // Esirenderöidään vain tällä hetkellä julkiset sivut. Jonossa oleva artikkeli jää
+      // tyhjäksi kuoreksi, jolloin selain ratkaisee julkaisupäivän perusteella, mitä näytetään.
+      const publicPaths = new Set(getCanonicalRoutes().map((r) => r.path));
+
+      // Esirenderöinti: ladataan sovellus Viten SSR-lataajalla ja renderöidään jokainen
+      // kanoninen reitti HTML:ksi. Ei tarvitse selainta. PRERENDER=0 ohittaa vaiheen.
+      let prerender: Prerender | null = null;
+      let ssrServer: ViteDevServer | null = null;
+      // Viten SSR-lataaja kääntää JSX:n kehitysmuotoon (jsxDEV), joten React pitää ladata
+      // kehitystilassa. Tuotettu HTML on sama. NODE_ENV palautetaan lopuksi.
+      const previousNodeEnv = process.env.NODE_ENV;
+      if (process.env.PRERENDER !== "0") {
+        try {
+          process.env.NODE_ENV = "development";
+          // Vite ladataan vasta tässä, jotta pluginin apufunktioita voi testata ilman sitä.
+          const { createServer } = await import("vite");
+          ssrServer = await createServer({
+            mode: "development",
+            configFile: path.resolve("vite.config.ts"),
+            server: { middlewareMode: true, hmr: false, watch: null },
+            appType: "custom",
+            logLevel: "error",
+            optimizeDeps: { noDiscovery: true, include: [] },
+            // CommonJS-paketit, joiden nimetyt exportit eivät aukea Noden ESM-latauksella.
+            ssr: { noExternal: ["react-helmet-async"] },
+          });
+          prerender = (await ssrServer.ssrLoadModule("/src/entry-prerender.tsx")).render as Prerender;
+        } catch (error) {
+          console.warn("[spa-routes] Esirenderöinti ei käynnistynyt, jatketaan ilman:", error);
+        }
+      }
 
       // Etusivu: canonical ja og:url mukaan staattiseen HTML:ään.
       const homeSeo = getRouteSeo("/");
-      if (homeSeo) fs.writeFileSync(indexPath, applySeo(baseHtml, "/", homeSeo), "utf-8");
+      if (homeSeo) {
+        const homeHtml = await injectPrerender(applySeo(baseHtml, "/", homeSeo), "/", prerender, failed);
+        if (!homeHtml.includes('<div id="root"></div>')) prerendered++;
+        fs.writeFileSync(indexPath, homeHtml, "utf-8");
+      }
 
       for (const route of routes) {
         const dir = path.join(distDir, route);
         const seo = getRouteSeo(route);
         fs.mkdirSync(dir, { recursive: true });
-        fs.writeFileSync(path.join(dir, "index.html"), seo ? applySeo(subpageHtml, route, seo) : subpageHtml, "utf-8");
-        if (seo) withSeo++;
+        // Vain kanoniset sivut esirenderöidään; vanhat ohjausreitit jäävät tyhjiksi kuoriksi.
+        let html = seo ? applySeo(subpageHtml, route, seo) : subpageHtml;
+        if (seo) {
+          if (publicPaths.has(route)) html = await injectPrerender(html, route, prerender, failed);
+          if (!html.includes('<div id="root"></div>')) prerendered++;
+          withSeo++;
+        }
+        fs.writeFileSync(path.join(dir, "index.html"), html, "utf-8");
       }
 
       const notFoundHtml = subpageHtml
@@ -94,9 +159,13 @@ export default function spaRoutes() {
       fs.writeFileSync(path.join(distDir, "image-sitemap.xml"), buildImageSitemapXml(), "utf-8");
       fs.writeFileSync(path.join(distDir, "llms.txt"), buildLlmsTxt(), "utf-8");
 
+      await ssrServer?.close();
+      process.env.NODE_ENV = previousNodeEnv;
+
       console.log(
-        `[spa-routes] Generated ${routes.length} route files (${withSeo} with page-specific head), 404.html, sitemap.xml and llms.txt.`,
+        `[spa-routes] Generated ${routes.length} route files (${withSeo} with page-specific head, ${prerendered} prerendered), 404.html, sitemaps and llms.txt.`,
       );
+      if (failed.length) console.warn(`[spa-routes] Esirenderöinti epäonnistui ${failed.length} reitillä:\n  ${failed.join("\n  ")}`);
     },
   };
 }

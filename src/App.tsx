@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,12 +28,16 @@ const Artikkeli = lazyWithRetry(() => import("./pages/Artikkeli"));
 const Tietosuoja = lazyWithRetry(() => import("./pages/Tietosuoja"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
-const App = () => (
+/**
+ * Sovelluksen sisältö ilman reititintä. Selaimessa se kääritään BrowserRouteriin (App),
+ * build-aikaisessa esirenderöinnissä StaticRouteriin (src/entry-prerender.tsx).
+ * `fallback` näytetään, kun laiskasti ladattava sivu on vielä tulossa.
+ */
+export const AppContent = ({ fallback = <div className="min-h-screen" /> }: { fallback?: ReactNode }) => (
   <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Suspense fallback={<div className="min-h-screen" />}>
+        <Suspense fallback={fallback}>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
@@ -100,8 +104,13 @@ const App = () => (
             </Route>
           </Routes>
         </Suspense>
-      </BrowserRouter>
   </TooltipProvider>
+);
+
+const App = ({ fallback }: { fallback?: ReactNode }) => (
+  <BrowserRouter>
+    <AppContent fallback={fallback} />
+  </BrowserRouter>
 );
 
 export default App;

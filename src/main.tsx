@@ -22,8 +22,18 @@ document.head
   )
   .forEach((el) => el.remove());
 
-createRoot(document.getElementById("root")!).render(
+const rootEl = document.getElementById("root")!;
+
+// Esirenderöity sivu: #root sisältää jo valmiin HTML:n (build-aikainen esirenderöinti).
+// React rakentaa saman näkymän uudelleen. Siksi aikaa, kun sivun oma koodipaketti latautuu,
+// näytetään tämä sama HTML, ettei ruutu välähdä tyhjäksi.
+const prerenderedHtml = rootEl.innerHTML.trim();
+const initialFallback = prerenderedHtml ? (
+  <div dangerouslySetInnerHTML={{ __html: prerenderedHtml }} />
+) : undefined;
+
+createRoot(rootEl).render(
   <HelmetProvider>
-    <App />
+    <App fallback={initialFallback} />
   </HelmetProvider>
 );

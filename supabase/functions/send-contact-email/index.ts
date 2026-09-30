@@ -1,11 +1,26 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+// Sallitut lähettäjäoriginit: tuotanto, paikallinen kehitys ja Lovablen esikatselut.
+// Muualta tulevat pyynnöt hylätään, mikä estää suoran spämmin lomake-endpointtiin.
+const ALLOWED_ORIGIN_PATTERNS: RegExp[] = [
+  /^https:\/\/(www\.)?pintanen\.fi$/,
+  /^http:\/\/localhost(:\d+)?$/,
+  /^http:\/\/127\.0\.0\.1(:\d+)?$/,
+  /^https:\/\/[a-z0-9-]+\.lovable\.app$/,
+  /^https:\/\/[a-z0-9-]+\.lovableproject\.com$/,
+];
+
+const isAllowedOrigin = (origin: string | null): origin is string =>
+  !!origin && ALLOWED_ORIGIN_PATTERNS.some((re) => re.test(origin));
+
+const buildCorsHeaders = (origin: string) => ({
+  "Access-Control-Allow-Origin": origin,
+  "Vary": "Origin",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
-};
+});
 
 interface ContactForm {
   name: string;
@@ -15,6 +30,10 @@ interface ContactForm {
   message: string;
   priceEstimate?: string;
   calculatorDetails?: string;
+  address?: string;
+  city?: string;
+  /** Honeypot – oikea käyttäjä ei täytä. */
+  website?: string;
 }
 
 const serviceLabels: Record<string, string> = {
@@ -34,7 +53,13 @@ const crmServiceKeys: Record<string, string> = {
   muu: "muu",
 };
 
-const toCrmServiceKey = (service: string): string => crmServiceKeys[service] ?? "muu";
+// Lomake voi lähettää useita palveluita pilkulla eroteltuna ("tiilikatto, puhdistus").
+// CRM ottaa yhden avaimen: käytetään ensimmäistä tunnistettua.
+const toCrmServiceKey = (service: string): string => {
+  const keys = service.split(",").map((s) => s.trim()).filter(Boolean);
+  const known = keys.find((k) => k in crmServiceKeys);
+  return known ? crmServiceKeys[known] : "muu";
+};
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -55,6 +80,8 @@ const sendToCrm = async (lead: {
   nimi: string;
   puhelin: string;
   sahkoposti: string;
+  osoite: string;
+  kaupunki: string;
   palvelu: string;
   kuvaus: string;
 }) => {
@@ -75,8 +102,8 @@ const sendToCrm = async (lead: {
         nimi: lead.nimi,
         puhelin: lead.puhelin,
         sahkoposti: lead.sahkoposti,
-        osoite: null,
-        kaupunki: null,
+        osoite: lead.osoite || null,
+        kaupunki: lead.kaupunki || null,
         palvelu: lead.palvelu,
         kuvaus: lead.kuvaus,
       }),
@@ -91,8 +118,24 @@ const sendToCrm = async (lead: {
 };
 
 serve(async (req: Request) => {
+  const origin = req.headers.get("origin");
+  if (!isAllowedOrigin(origin)) {
+    return new Response(JSON.stringify({ error: "Forbidden" }), {
+      status: 403,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  const corsHeaders = buildCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  if (req.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
 
   try {
@@ -110,6 +153,18 @@ serve(async (req: Request) => {
     const message = normalize(body.message, 2000);
     const priceEstimate = normalize(body.priceEstimate, 100);
     const calculatorDetails = normalize(body.calculatorDetails, 1000);
+    const address = normalize(body.address, 200);
+    const city = normalize(body.city, 100);
+    const honeypot = normalize(body.website, 200);
+
+    // Botti täytti piilotetun kentän: vastataan kuin onnistui, mutta ei lähetetä mitään.
+    if (honeypot) {
+      console.warn("Honeypot triggered, dropping submission");
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     if (!name) {
       return new Response(JSON.stringify({ error: "Nimi on pakollinen" }), {
@@ -145,6 +200,8 @@ serve(async (req: Request) => {
       nimi: name,
       puhelin: phone,
       sahkoposti: email,
+      osoite: address,
+      kaupunki: city,
       palvelu: toCrmServiceKey(service),
       kuvaus: message,
     });
@@ -161,6 +218,7 @@ serve(async (req: Request) => {
           <tr><td style="padding:8px;font-weight:bold;">Sähköposti</td><td style="padding:8px;">${email ? `<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>` : "–"}</td></tr>
           <tr><td style="padding:8px;font-weight:bold;">Puhelin</td><td style="padding:8px;">${phone ? escapeHtml(phone) : "–"}</td></tr>
           <tr><td style="padding:8px;font-weight:bold;">Palvelu</td><td style="padding:8px;">${escapeHtml(serviceLabel)}</td></tr>
+          ${address || city ? `<tr><td style="padding:8px;font-weight:bold;">Kohde</td><td style="padding:8px;">${escapeHtml([address, city].filter(Boolean).join(", "))}</td></tr>` : ""}
           ${priceEstimate ? `<tr><td style="padding:8px;font-weight:bold;">Hinta-arvio</td><td style="padding:8px;">${escapeHtml(priceEstimate)}</td></tr>` : ""}
           ${calculatorDetails ? `<tr><td style="padding:8px;font-weight:bold;">Laskurin tiedot</td><td style="padding:8px;">${escapeHtml(calculatorDetails)}</td></tr>` : ""}
         </table>

@@ -4,6 +4,7 @@ import { X, Send, Loader2, Check, RotateCcw } from 'lucide-react';
 import { getStorageUrl } from '@/lib/storage';
 import { submitContactForm } from '@/lib/contactForm';
 import { useToast } from '@/hooks/use-toast';
+import FormPrivacyNote from '@/components/FormPrivacyNote';
 
 const eerikImage = getStorageUrl('Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp');
 
@@ -308,7 +309,7 @@ const ChatLeadForm = () => {
               initial={{ opacity: 0, y: 10, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.9 }}
-              className="relative"
+              className="relative hidden lg:block"
             >
               <button
                 onClick={handleOpen}
@@ -329,7 +330,7 @@ const ChatLeadForm = () => {
         {!open && (
           <button
             onClick={handleOpen}
-            className="relative w-14 h-14 rounded-full shadow-lg bg-[#38b6ff] border border-white/60 hover:scale-105 transition-transform"
+            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-[#38b6ff] border border-white/60 hover:scale-105 transition-transform"
             aria-label="Avaa chat"
           >
             <img src={eerikImage} alt="Eerik – Pintanen" className="w-full h-full rounded-full object-cover" />
@@ -485,6 +486,7 @@ const ChatLeadForm = () => {
                         {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                         Lähetä
                       </button>
+                      <FormPrivacyNote variant="light" />
                     </div>
                   )}
                 </div>

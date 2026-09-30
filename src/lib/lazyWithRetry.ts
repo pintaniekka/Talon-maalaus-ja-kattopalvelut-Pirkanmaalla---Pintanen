@@ -1,5 +1,7 @@
 import { lazy, type ComponentType, type LazyExoticComponent } from "react";
 
+// React.lazy itself is typed with ComponentType<any>; mirror it here.
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type ModuleWithDefault<T extends ComponentType<any>> = {
   default: T;
 };

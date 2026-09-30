@@ -26,6 +26,7 @@ const HinnatTalonMaalaus = lazyWithRetry(() => import("./pages/HinnatTalonMaalau
 const Meista = lazyWithRetry(() => import("./pages/Meista"));
 const Artikkelit = lazyWithRetry(() => import("./pages/Artikkelit"));
 const ArtikkeliMilloinPinnoittaa = lazyWithRetry(() => import("./pages/ArtikkeliMilloinPinnoittaa"));
+const Tietosuoja = lazyWithRetry(() => import("./pages/Tietosuoja"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -54,6 +55,7 @@ const App = () => (
               <Route path="/meista" element={<Meista />} />
               <Route path="/artikkelit" element={<Artikkelit />} />
               <Route path="/artikkelit/milloin-pinnoittaa-tiilikatto" element={<ArtikkeliMilloinPinnoittaa />} />
+              <Route path="/tietosuoja" element={<Tietosuoja />} />
 
               {/* ── City service pages (8 full-service cities × 3 services) ── */}
               {fullServiceCities.map(city => (
@@ -95,9 +97,11 @@ const App = () => (
               {allCities.map(city => (
                 <Route key={`ralue-${city.slug}`} path={`/alue/${city.slug}`} element={<Navigate to={`/maalauspalvelut-${city.slug}`} replace />} />
               ))}
+
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE.
+                  Uusi reitti: lisää se myös src/data/routes.ts:ään (spa-routes-plugin + sitemap). */}
+              <Route path="*" element={<NotFound />} />
             </Route>
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

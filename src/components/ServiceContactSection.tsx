@@ -5,6 +5,7 @@ import { Phone, Mail, User } from "@/components/icons/BrandIcons";
 import { toast } from '@/hooks/use-toast';
 import { getStorageUrl } from '@/lib/storage';
 import { submitContactForm } from '@/lib/contactForm';
+import FormPrivacyNote, { HoneypotField } from '@/components/FormPrivacyNote';
 import WhatsAppIcon from './WhatsAppIcon';
 
 type ContactVariant = 'katto' | 'maalaus' | 'general';
@@ -96,6 +97,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
     phone: '',
     services: [] as string[],
     message: '',
+    website: '', // honeypot – oikea käyttäjä ei täytä tätä
   });
 
   const toggleService = (value: string) => {
@@ -117,7 +119,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
       const { services, ...rest } = formState;
       await submitContactForm({ ...rest, service: services.join(', ') });
       setIsSubmitted(true);
-      setFormState({ name: '', email: '', phone: '', services: [], message: '' });
+      setFormState({ name: '', email: '', phone: '', services: [], message: '', website: '' });
       toast({ title: 'Tarjouspyyntö lähetetty!', description: 'Vastaamme mahdollisimman pian.' });
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err: unknown) {
@@ -247,6 +249,9 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                   className={`${inputClass} resize-none`}
                   placeholder="Lisätiedot (vapaaehtoinen)"
                 />
+
+                <HoneypotField value={formState.website} onChange={(v) => setFormState({ ...formState, website: v })} />
+                <FormPrivacyNote variant="light" />
 
                 <button
                   type="submit"

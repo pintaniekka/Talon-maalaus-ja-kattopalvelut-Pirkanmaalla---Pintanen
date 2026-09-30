@@ -66,7 +66,7 @@ const HinnatTiilikalonPinnoitus = () => {
         description="Paljonko tiilikaton pinnoitus maksaa? Laske arvio hintalaskurilla ja katso hintaesimerkit. Toimimme Pirkanmaalla ja Kanta-Hämeessä."
         preloadImage={heroImage}
       />
-      <Helmet>
+      <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 

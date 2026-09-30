@@ -142,6 +142,16 @@ const Footer = () => {
                   Tutustu meihin
                 </Link>
               </li>
+              <li>
+                <Link to="/artikkelit" className="hover:text-primary-foreground transition-colors">
+                  Artikkelit
+                </Link>
+              </li>
+              <li>
+                <Link to="/tietosuoja" className="hover:text-primary-foreground transition-colors">
+                  Tietosuojaseloste
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -162,7 +172,7 @@ const Footer = () => {
 
           {/* Column 4: Kanta-Häme & Lähialueet */}
           <div>
-            <h3 className="font-bold mb-4 text-lg">Kanta-Häme &amp; lähialueet</h3>
+            <h3 className="font-bold mb-4 text-lg">Kanta-Häme &amp; Satakunta</h3>
             <p className="text-sm text-primary-foreground/70 leading-loose">
               {kantaHameCities.map((city, i, arr) => (
                 <span key={city.slug}>
@@ -177,7 +187,12 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/60">
-          <p>© {new Date().getFullYear()} Pintanen Oy. Kaikki oikeudet pidätetään.</p>
+          <p>
+            © {new Date().getFullYear()} Pintanen Oy. Kaikki oikeudet pidätetään.{" "}
+            <Link to="/tietosuoja" className="underline underline-offset-2 hover:text-primary-foreground transition-colors">
+              Tietosuojaseloste
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

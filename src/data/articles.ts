@@ -60,10 +60,10 @@ export const articles: ArticleMeta[] = [
   },
   {
     slug: "kotitalousvahennys-katto-ja-maalaustyot",
-    title: "Kotitalousvähennys katto- ja maalaustöissä 2026: paljonko saat takaisin?",
-    seoTitle: "Kotitalousvähennys 2026 katto- ja maalaustöissä",
+    title: "Kotitalousvähennys katto- ja maalaustöissä 2027: paljonko saat takaisin?",
+    seoTitle: "Kotitalousvähennys 2027 katto- ja maalaustöissä",
     description:
-      "Kotitalousvähennys 2026: 40 % työn osuudesta, enintään 2 100 € henkilöltä. Laskuesimerkit tiilikaton pinnoitukselle ja talon maalaukselle.",
+      "Kotitalousvähennys 2027: 40 % työn osuudesta, enintään 2 100 € henkilöltä. Laskuesimerkit tiilikaton pinnoitukselle ja talon maalaukselle.",
     lead: "Yritykseltä ostetusta katto- tai maalaustyöstä saa vuosina 2026 ja 2027 vähentää 40 % työn osuudesta, enintään 2 100 euroa henkilöltä vuodessa. Omavastuu on 150 euroa.",
     category: "raha",
     author: "eerik",
@@ -74,8 +74,8 @@ export const articles: ArticleMeta[] = [
   },
   {
     slug: "tiilikaton-pinnoituksen-hinta",
-    title: "Tiilikaton pinnoituksen hinta 2026: mistä hinta muodostuu?",
-    seoTitle: "Tiilikaton pinnoituksen hinta 2026",
+    title: "Tiilikaton pinnoituksen hinta 2027: mistä hinta muodostuu?",
+    seoTitle: "Tiilikaton pinnoituksen hinta 2027",
     description:
       "Tiilikaton pinnoitus maksaa omakotitalossa tyypillisesti 2 850–4 880 € eli 15–25 €/m². Katso hinnat katon koon mukaan ja mitä hintaan sisältyy.",
     lead: "Omakotitalon tiilikaton pinnoitus maksaa tyypillisesti 2 850–4 880 euroa. Neliöhinta on 15–25 euroa katon jyrkkyyden mukaan, ja kotitalousvähennys pienentää lopullista kustannusta.",

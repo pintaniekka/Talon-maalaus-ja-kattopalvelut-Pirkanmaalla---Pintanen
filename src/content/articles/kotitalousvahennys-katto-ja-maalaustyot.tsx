@@ -39,11 +39,11 @@ const Body = () => (
     <p>
       Kotitalousvähennys on monelle suurin yksittäinen syy siihen, että kattoremontin tai ulkomaalauksen lopullinen
       hinta jää selvästi tarjouksen summaa pienemmäksi. Säännöt ovat yksinkertaiset, mutta muutama yksityiskohta
-      ratkaisee, paljonko rahaa lopulta palautuu. Tässä artikkelissa käydään läpi vuoden 2026 luvut, laskuesimerkit ja
+      ratkaisee, paljonko rahaa lopulta palautuu. Tässä artikkelissa käydään läpi vuoden 2027 luvut, laskuesimerkit ja
       yleisimmät sudenkuopat.
     </p>
 
-    <h2>Paljonko kotitalousvähennys on vuonna 2026?</h2>
+    <h2>Paljonko kotitalousvähennys on vuonna 2027?</h2>
     <p>
       Yritykseltä ostetusta työstä saa vuosina 2026 ja 2027 vähentää <strong>40 % työn osuudesta</strong>. Vähennys
       lasketaan työn arvonlisäverollisesta hinnasta. Enimmäismäärä on <strong>2 100 euroa henkilöltä vuodessa</strong>,

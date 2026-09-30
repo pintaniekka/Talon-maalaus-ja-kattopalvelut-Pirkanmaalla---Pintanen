@@ -170,7 +170,7 @@ export const cities: CityData[] = [
       "Tiilikaton puhdistus Nokiassa tehokkaasti ja edullisesti. Katto puhtaaksi laadukkailla työmenetelmillä. Kysy tarjous.",
     maalausMetaTitle: "Talon maalaus Nokia | Suoraan paikalliselta yrittäjältä | Pintanen",
     maalausMetaDesc:
-      "Etsitkö luotettavaa talon maalausta Nokialla? Pintasen ulkomaalaukset toteuttaa yrittäjä itse. Hyödynnä kotitalousvähennys 2026 – laske hinta heti!",
+      "Etsitkö luotettavaa talon maalausta Nokialla? Pintasen ulkomaalaukset toteuttaa yrittäjä itse. Hyödynnä kotitalousvähennys 2027 – laske hinta heti!",
     maalausLocalHookTitle: "Nokian kasvavien pientaloalueiden julkisivujen huolto",
     maalausLocalHookText: "Nokialla asuinalueet leviävät <strong>Nokianvirran</strong> varrelta aina <strong>Harjuniityn ja Sammaliston</strong> kaltaisiin uusiin lähiöihin. Olipa kyseessä perinteinen puutalo virran tuntumassa tai moderni uudiskohde, säännöllinen huoltomaalaus on tärkeää puun <strong>kosteusliikkeen</strong> hallitsemiseksi. Huolehdin, että Nokian kohteissa tehdään pohjatyöt ja <strong>mekaaninen kaavinta</strong> kunnolla, jotta uusi maalipinta suojaa kotiasi hyvin Nokianvirran aiheuttamilta kosteusvaikutuksilta.",
     alueIntro:

@@ -54,7 +54,7 @@ const HinnatKatonPuhdistus = () => {
         description="Paljonko katon puhdistus maksaa? Katso hintaesimerkit, mitä puhdistus sisältää ja milloin pelkkä pesu riittää. Toimimme Pirkanmaalla ja Kanta-Hämeessä."
         preloadImage={heroImage}
       />
-      <Helmet>
+      <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 

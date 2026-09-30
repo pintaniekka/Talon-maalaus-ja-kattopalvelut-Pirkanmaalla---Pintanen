@@ -33,7 +33,7 @@ const FAQSection = ({ items, title }: FAQSectionProps) => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
       <section className="py-20 md:py-24" style={{ backgroundColor: 'hsl(var(--faq-bg))' }}>

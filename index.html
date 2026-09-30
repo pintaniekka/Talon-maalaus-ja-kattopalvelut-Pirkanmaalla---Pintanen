@@ -4,20 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Google Fonts: preconnect + non-render-blocking load -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
-    /></noscript>
+    <!-- Fontit (Montserrat, Open Sans) tarjoillaan omalta palvelimelta @fontsource-paketeista (ks. src/main.tsx) -->
 
     <!-- Favicon – SVG primary (Google-supported), PNG fallback -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -35,8 +22,9 @@
       .hero-critical .hero-lead { color: #4b5563; font-size: 1.125rem; }
     </style>
 
-    <!-- Preload Hero Image for LCP -->
+    <!-- Preload Hero Image for LCP – vain etusivulla; vite-plugin-spa-routes poistaa tämän alasivujen kopioista -->
     <link
+      data-home-only
       rel="preload"
       as="image"
       href="https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Eerik-maalaa/Eerik-maalaa-kattoa-1500.avif"
@@ -54,7 +42,6 @@
       name="description"
       content="Tiilikaton pinnoitus, katon puhdistus ja talon maalaus takuutyönä Pirkanmaalla. Yrittäjät mukana jokaisessa työssä. Pyydä maksuton arvio."
     />
-    <meta name="robots" content="index, follow" />
     <meta name="author" content="Pintanen Oy" />
     <meta name="keywords" content="tiilikatto, katon pinnoitus, ulkomaalaus, kattomaalaus, Pirkanmaa, Tampere" />
 
@@ -95,6 +82,12 @@
         "telephone": "+358409640066",
         "email": "myynti@pintanen.fi",
         "taxID": "3525786-9",
+        "priceRange": "€€",
+        "sameAs": [
+          "https://www.facebook.com/profile.php?id=61587740767358",
+          "https://www.instagram.com/pintanenoy/",
+          "https://x.com/PintanenOy"
+        ],
         "areaServed": {
           "@type": "State",
           "name": "Pirkanmaa"

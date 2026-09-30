@@ -129,7 +129,7 @@ const ArtikkeliMilloinPinnoittaa = () => {
         description="Epäiletkö, onko kattosi pinnoituksen aika? Lue 5 selkeää merkkiä, jotka kertovat milloin tiilikaton pinnoitus on välttämätön. Ilmainen arvio Pirkanmaalla."
         ogImage={getResponsiveSrc(heroBase)}
       />
-      <Helmet>
+      <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(articleJsonLd)}</script>
       </Helmet>
 

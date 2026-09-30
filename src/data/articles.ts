@@ -48,7 +48,7 @@ export const articles: ArticleMeta[] = [
     seoTitle: "Milloin tiilikatto pitää pinnoittaa? 5 merkkiä",
     description:
       "Epäiletkö, onko kattosi pinnoituksen aika? Viisi selkeää merkkiä kertoo, milloin tiilikaton pinnoitus kannattaa tehdä ja milloin voi vielä odottaa.",
-    lead: "Tiilikatto kannattaa yleensä pinnoittaa, kun väri haalistuu, pinta muuttuu huokoiseksi tai sammal palaa nopeasti puhdistuksen jälkeen. Useimmiten tämä tapahtuu noin 10–15 vuoden kohdalla.",
+    lead: "Tiilikatto kannattaa pinnoittaa, kun väri on haalistunut, pinta tuntuu karhealta tai sammal palaa pian puhdistuksen jälkeen. Useimmiten näin käy, kun katto on 10–15 vuotta vanha.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-05-24",
@@ -77,8 +77,8 @@ export const articles: ArticleMeta[] = [
     title: "Tiilikaton pinnoituksen hinta 2027: mistä hinta muodostuu?",
     seoTitle: "Tiilikaton pinnoituksen hinta 2027",
     description:
-      "Tiilikaton pinnoitus maksaa omakotitalossa tyypillisesti 2 850–4 880 € eli 15–25 €/m². Katso hinnat katon koon mukaan ja mitä hintaan sisältyy.",
-    lead: "Omakotitalon tiilikaton pinnoitus maksaa tyypillisesti 2 850–4 880 euroa. Neliöhinta on 15–25 euroa katon jyrkkyyden mukaan, ja kotitalousvähennys pienentää lopullista kustannusta.",
+      "Tiilikaton pinnoitus maksaa omakotitalossa 2 850–4 880 € eli 15–25 €/m². Katso Pintasen hinnat Pirkanmaalla katon koon mukaan ja mitä hintaan sisältyy.",
+    lead: "Omakotitalon tiilikaton pinnoitus maksaa 2 850–4 880 euroa eli 15–25 euroa neliöltä katon jyrkkyyden mukaan. Kotitalousvähennyksen jälkeen hinta on alkaen 2 050 euroa.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-09-30",
@@ -91,8 +91,8 @@ export const articles: ArticleMeta[] = [
     title: "Kuinka usein puutalo pitää maalata? 5 merkkiä huoltomaalauksen tarpeesta",
     seoTitle: "Kuinka usein puutalo pitää maalata? 5 merkkiä",
     description:
-      "Puutalon huoltomaalausväli on tyypillisesti 10–15 vuotta. Lue viisi merkkiä, joista tunnistat maalauksen tarpeen, sekä oikea ajankohta ja hintaesimerkit.",
-    lead: "Puutalo maalataan tyypillisesti 10–15 vuoden välein. Hilseily, haalistuminen, liituuntuminen ja homepilkut kertovat, että maalipinta ei enää suojaa puuta.",
+      "Puutalo maalataan tavallisesti 10–15 vuoden välein. Viisi merkkiä kertoo, milloin talo pitää maalata. Lue myös paras ajankohta ja hintaesimerkit.",
+    lead: "Puutalo maalataan tavallisesti 10–15 vuoden välein. Hilseily, haalistuminen, liituuntuminen ja homepilkut kertovat, ettei maali enää suojaa puuta.",
     category: "maalaus",
     author: "eemil",
     publishedAt: "2026-10-06",
@@ -105,7 +105,7 @@ export const articles: ArticleMeta[] = [
     title: "Tiilikaton puhdistus: voiko katon pestä itse?",
     description:
       "Tiilikatto kannattaa puhdistaa 2–5 vuoden välein. Lue, mitä voit tehdä itse, miksi liian kova painepesu vaurioittaa tiiltä ja mitä puhdistus maksaa.",
-    lead: "Kevyen puhdistuksen voi tehdä itse, mutta liian kova vedenpaine kuluttaa tiilen pintaa, ja ilman kasvustontorjuntaa sammal palaa nopeasti. Tyypillinen puhdistusväli on 2–5 vuotta.",
+    lead: "Kevyen puhdistuksen voi tehdä itse, mutta liian kova vedenpaine kuluttaa tiilen pintaa, ja ilman kasvustontorjuntaa sammal palaa nopeasti. Tavallinen puhdistusväli on 2–5 vuotta.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-10-20",
@@ -118,7 +118,7 @@ export const articles: ArticleMeta[] = [
     title: "Tiilikaton pinnoitus vai uusi katto: kumpi kannattaa?",
     description:
       "Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää ja maksaa noin 10–20 % uuden katon hinnasta. Lue, milloin katto pitää uusia.",
-    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, koko katon uusiminen on usein tarpeetonta. Pinnoitus maksaa tyypillisesti noin 10–20 % uuden katon hinnasta ja pidentää käyttöikää 10–15 vuotta.",
+    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa noin 10–20 % uuden katon hinnasta ja pidentää katon käyttöikää 10–15 vuotta.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-10-13",
@@ -145,7 +145,7 @@ export const articles: ArticleMeta[] = [
     title: "Huoltomaalaus vai uusi ulkoverhous: milloin maali riittää?",
     description:
       "Hilseilevä maali ei tarkoita, että laudoitus pitää uusia. Jos puu on kovaa eikä lahoa, huoltomaalaus riittää. Lue, miten tarkistat puun kunnon.",
-    lead: "Jos maalin alla oleva puu on kovaa eikä lahoa, ulkoverhousta ei yleensä tarvitse uusia. Huolelliset pohjatyöt ja uusi maali pelastavat vanhankin paneelin murto-osalla uuden laudoituksen hinnasta.",
+    lead: "Jos puu maalin alla on kovaa eikä lahoa, ulkoverhousta ei yleensä tarvitse uusia. Kunnon pohjatyöt ja uusi maali riittävät, ja hinta on murto-osa uuden laudoituksen hinnasta.",
     category: "maalaus",
     author: "eemil",
     publishedAt: "2026-11-03",

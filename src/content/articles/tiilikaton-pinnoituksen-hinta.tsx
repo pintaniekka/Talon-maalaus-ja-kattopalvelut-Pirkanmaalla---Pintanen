@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints } from "@/components/article/ArticleKit";
+import { ArticleFaq, Figure, KeyPoints, Table } from "@/components/article/ArticleKit";
 
 const faq = [
   {
     question: "Paljonko tiilikaton pinnoitus maksaa neliöltä?",
     answer:
-      "Pintasen hintalaskurissa loiva katto on 15–17 €/m², tavallinen kaltevuus 18–21 €/m² ja jyrkkä katto 22–25 €/m². Pienin urakkahinta on 2 850 euroa.",
+      "Hintalaskurissamme loiva katto maksaa 15–17 €/m², tavallinen kaltevuus 18–21 €/m² ja jyrkkä katto 22–25 €/m². Pienin urakkahinta on 2 850 euroa.",
   },
   {
     question: "Mitä pinnoituksen hintaan sisältyy?",
@@ -14,12 +14,11 @@ const faq = [
   },
   {
     question: "Voiko pinnoituksen maksaa osissa?",
-    answer:
-      "Kyllä. Pintanen tarjoaa maksujärjestelyn, jossa kustannuksen voi jakaa kuukausittain maksettaviin osiin.",
+    answer: "Voi. Tarjoamme maksujärjestelyn, jossa summan voi jakaa kuukausieriin.",
   },
   {
     question: "Kuinka pitkä takuu pinnoituksella on?",
-    answer: "Pintanen antaa tiilikaton pinnoitukselle 5 vuoden kirjallisen takuun.",
+    answer: "Annamme tiilikaton pinnoitukselle 5 vuoden kirjallisen takuun.",
   },
 ];
 
@@ -27,48 +26,46 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Tyypillinen omakotitalon katto maksaa 2 850–4 880 euroa.</li>
+        <li>Omakotitalon tiilikaton pinnoitus maksaa 2 850–4 880 euroa.</li>
         <li>Neliöhinta on 15–25 euroa katon jyrkkyyden mukaan.</li>
-        <li>Hintaan vaikuttavat eniten katon koko, jyrkkyys, muoto ja tiilien kunto.</li>
-        <li>Kotitalousvähennys pienentää lopullista kustannusta usein satoja euroja.</li>
+        <li>Kotitalousvähennyksen jälkeen hinta on alkaen 2 050 euroa.</li>
+        <li>Eniten hintaan vaikuttavat katon koko, jyrkkyys, muoto ja tiilien kunto.</li>
       </ul>
     </KeyPoints>
 
     <p>
-      Tiilikaton pinnoituksen hinta kiinnostaa yleensä ensimmäisenä, ja syystä: tarjousten erot voivat olla suuria,
-      eikä pelkkä loppusumma kerro, mitä sillä saa. Tässä artikkelissa avataan Pintasen omat hinnat, hinnan
-      muodostuminen ja se, mitä tarjouksesta kannattaa tarkistaa.
+      Pinnoitustarjouksissa on isoja eroja, eikä loppusumma yksin kerro, mitä rahalla saa. Tässä ovat meidän
+      hintamme Pirkanmaalla, se mistä ne koostuvat ja mitä tarjouksesta kannattaa katsoa ennen kuin allekirjoittaa.
     </p>
 
-    <h2>Hinta katon koon mukaan</h2>
-    <p>Pintasen pinnoitushinnat Pirkanmaalla ovat seuraavat:</p>
-    <ul>
-      <li>
-        <strong>150–180 m²</strong>, pieni tai keskisuuri koti: 2 850–3 200 €, työaika noin 2 päivää
-      </li>
-      <li>
-        <strong>190–240 m²</strong>, yleisin kattokoko: 3 300–3 700 €, työaika 2–3 päivää
-      </li>
-      <li>
-        <strong>250–300 m²</strong>, suuri omakotitalo: 3 750–4 880 €, työaika 2–4 päivää
-      </li>
-    </ul>
+    <h2>Paljonko tiilikaton pinnoitus maksaa?</h2>
+    <Table
+      head={["Katon koko", "Hinta", "Kotitalousvähennyksen jälkeen", "Työaika"]}
+      rows={[
+        ["150–180 m²", "2 850–3 200 €", "alkaen 2 050 €", "2 päivää"],
+        ["190–240 m²", "3 300–3 700 €", "alkaen 2 380 €", "2–3 päivää"],
+        ["250–300 m²", "3 750–4 880 €", "alkaen 2 700 €", "2–4 päivää"],
+      ]}
+      caption="Pintasen pinnoitushinnat Pirkanmaalla. Yleisin kattokoko on 190–240 m²."
+    />
     <p>
-      Luvut ovat suuntaa antavia. Tarkka urakkahinta annetaan maksuttoman arviokäynnin jälkeen, koska katon kunto
-      selviää vain paikan päällä. Oman kattosi arvion saat{" "}
+      Hinnat ovat suuntaa antavia. Annamme tarkan urakkahinnan maksuttoman arviokäynnin jälkeen, koska katon kunnon
+      näkee vain paikan päällä. Oman kattosi arvion saat{" "}
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">hintalaskurilla</Link>.
     </p>
 
-    <h2>Neliöhinta ja jyrkkyyden vaikutus</h2>
-    <p>Laskurin neliöhinnat riippuvat katon kaltevuudesta:</p>
-    <ul>
-      <li>Loiva katto: 15–17 €/m²</li>
-      <li>Tavallinen kaltevuus: 18–21 €/m²</li>
-      <li>Jyrkkä katto: 22–25 €/m²</li>
-    </ul>
+    <h2>Paljonko pinnoitus maksaa neliöltä?</h2>
+    <Table
+      head={["Katon kaltevuus", "Neliöhinta"]}
+      rows={[
+        ["Loiva", "15–17 €/m²"],
+        ["Tavallinen", "18–21 €/m²"],
+        ["Jyrkkä", "22–25 €/m²"],
+      ]}
+    />
     <p>
-      Jyrkkä katto vaatii enemmän turvavälineitä ja hidastaa työtä, mikä näkyy neliöhinnassa. Laskurin pienin urakkahinta on
-      2 850 euroa katon koosta riippumatta.
+      Jyrkällä katolla tarvitaan enemmän turvavälineitä ja työ etenee hitaammin. Pienin urakkahinta on 2 850 euroa
+      katon koosta riippumatta.
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-ennen-jalkeen"
@@ -77,33 +74,28 @@ const Body = () => (
     />
 
     <h2>Mistä hinta muodostuu?</h2>
-    <p>Kuusi tekijää selittää suurimman osan hintaeroista:</p>
     <ul>
       <li>
-        <strong>Katon koko.</strong> Suurempi katto tarkoittaa enemmän materiaalia ja työtunteja, mutta neliöhinta
-        laskee katon kasvaessa.
+        <strong>Katon koko.</strong> Isommalla katolla kuluu enemmän maalia ja työtunteja, mutta neliöhinta laskee.
       </li>
       <li>
-        <strong>Jyrkkyys.</strong> Jyrkempi katto vaatii enemmän turvavälineitä ja hidastaa työtä.
+        <strong>Jyrkkyys.</strong> Jyrkkä katto hidastaa työtä ja vaatii enemmän turvavälineitä.
       </li>
       <li>
         <strong>Katon muoto.</strong> Harjat, jiirit ja läpiviennit lisäävät työvaiheita.
       </li>
       <li>
-        <strong>Rakennuksen korkeus.</strong> Korkea rakennus vaatii pidemmät telineet ja enemmän
-        turvallisuusjärjestelyjä.
+        <strong>Rakennuksen korkeus.</strong> Korkea talo vaatii pidemmät telineet.
       </li>
       <li>
-        <strong>Tiilien kunto.</strong> Jos tiiliä on paljon rikki, vaihtotyö lisää kestoa ja materiaalikuluja.
+        <strong>Tiilien kunto.</strong> Jos tiiliä on paljon rikki, vaihtaminen lisää työtä ja materiaalia.
       </li>
       <li>
-        <strong>Suojaustarve.</strong> Pihan, terassien ja istutusten suojaus kuuluu hintaan, mutta vaikuttaa työn
-        laajuuteen.
+        <strong>Suojaustarve.</strong> Pihan, terassin ja istutusten suojaus kuuluu hintaan, mutta sen määrä vaihtelee.
       </li>
     </ul>
 
     <h2>Mitä hintaan sisältyy?</h2>
-    <p>Pintasen pinnoitushinta kattaa koko työn alusta loppuun:</p>
     <ol>
       <li>Suunnittelu ja suojaustyöt</li>
       <li>Katon pesu</li>
@@ -114,41 +106,37 @@ const Body = () => (
       <li>Siivous</li>
     </ol>
     <p>
-      Ennen tarjousta tarkistetaan tiilien lisäksi aluskate ja läpiviennit. Katto maalataan ruiskulla kahteen kertaan
-      Tikkurilan ja Nowocoatin kattomaaleilla, ja työlle annetaan 5 vuoden kirjallinen takuu. Työvaiheet on kuvattu
-      tarkemmin sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoitus</Link>.
+      Tarkistamme ennen tarjousta tiilien lisäksi aluskatteen ja läpiviennit. Maalaamme katon ruiskulla kahteen
+      kertaan Tikkurilan ja Nowocoatin kattomaaleilla ja annamme työlle 5 vuoden kirjallisen takuun. Työvaiheet
+      on kuvattu sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
 
-    <h2>Kotitalousvähennys pienentää lopullista hintaa</h2>
+    <h2>Paljonko kotitalousvähennys pienentää hintaa?</h2>
     <p>
-      Pinnoituksessa suurin osa laskusta on työtä, ja työn osuudesta saa kotitalousvähennyksen. Jos työn osuus on
-      esimerkiksi 2 800 euroa, vähennys on vuoden 2027 40 prosentin säännöllä 970 euroa omavastuun jälkeen. Säännöt ja
-      laskuesimerkit löytyvät artikkelista{" "}
+      Työn osuudesta saa vuosina 2026 ja 2027 vähentää 40 %. Jos laskun työn osuus on 2 800 euroa, vähennys on
+      970 euroa 150 euron omavastuun jälkeen. Säännöt ja laskuesimerkit ovat artikkelissa{" "}
       <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot">
         kotitalousvähennys katto- ja maalaustöissä
       </Link>
       .
     </p>
 
-    <h2>Pinnoitus, puhdistus vai uusi katto?</h2>
+    <h2>Riittäisikö pelkkä puhdistus?</h2>
     <p>
-      Pinnoitus ei ole aina oikea ratkaisu. Jos tiilet ovat hyvässä kunnossa ja katto on vain sammaloitunut,{" "}
-      <Link to="/katon-puhdistus-hinta-pirkanmaa">pelkkä puhdistus</Link> voi riittää. Sen hinta on omakotitalossa
-      tyypillisesti 800–2 500 euroa. Jos taas katossa on laajoja rakenteellisia vaurioita, pinnoitus ei korjaa niitä.
-    </p>
-    <p>
-      Pinnoitus on järkevin silloin, kun aluskate ja rakenteet ovat kunnossa, mutta tiilen pinta on kulunut. Merkit
-      tästä on käyty läpi artikkelissa{" "}
-      <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto">milloin tiilikatto pitää pinnoittaa</Link>.
+      Joskus riittää. Jos tiilet ovat hyvässä kunnossa ja katto on vain sammaloitunut,{" "}
+      <Link to="/katon-puhdistus-hinta-pirkanmaa">puhdistus</Link> maksaa omakotitalossa noin 800–2 500 euroa.
+      Pinnoitus on oikea valinta, kun tiilen pinta on kulunut, mutta aluskate ja rakenteet ovat kunnossa.
+      Rakenteellisia vaurioita pinnoitus ei korjaa. Kuluneen pinnan tunnistat artikkelin{" "}
+      <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto">milloin tiilikatto pitää pinnoittaa</Link> avulla.
     </p>
 
     <h2>Mitä tarjouksesta kannattaa tarkistaa?</h2>
     <ul>
       <li>Onko hinta kiinteä urakkahinta vai arvio?</li>
-      <li>Sisältyvätkö pesu, kasvustontorjunta ja rikkinäisten tiilien vaihto?</li>
+      <li>Kuuluvatko pesu, kasvustontorjunta ja rikkinäisten tiilien vaihto hintaan?</li>
       <li>Montako maalikerrosta tehdään ja millä tuotteilla?</li>
       <li>Onko työn ja materiaalien osuus eritelty kotitalousvähennystä varten?</li>
-      <li>Kuinka pitkä takuu on ja saako sen kirjallisena?</li>
+      <li>Kuinka pitkä takuu on, ja saako sen kirjallisena?</li>
     </ul>
 
     <ArticleFaq items={faq} />

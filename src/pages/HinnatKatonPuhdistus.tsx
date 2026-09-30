@@ -3,6 +3,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
@@ -181,6 +182,7 @@ const HinnatKatonPuhdistus = () => {
 
       <KotitalousVahennys />
       <FAQSection items={faqItems} />
+      <RelatedArticles categories={["katto", "raha"]} />
       <ServiceContactSection variant="katto" />
     </div>
   );

@@ -3,6 +3,7 @@ import { Check, ArrowRight, ChevronRight } from "lucide-react";
 import { ShieldCheck, Wrench, FileText } from "@/components/icons/BrandIcons";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import ChatPriceCalculator from "@/components/ChatPriceCalculator";
@@ -216,6 +217,7 @@ const Hinnat = () => {
       {/* 5. Kotitalousvähennys */}
       <KotitalousVahennys />
 
+      <RelatedArticles categories={["raha", "katto", "maalaus"]} />
       {/* 6. Yhteystiedot */}
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />

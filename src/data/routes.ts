@@ -10,7 +10,7 @@
  */
 import { cities as fullServiceCities, allCities, maalausCities } from "./cityData";
 import { articles, isPublished, getPublishedArticles } from "./articles";
-import { getRouteSeo } from "./seo";
+import { getRouteSeo, heroPreload } from "./seo";
 
 export interface SiteRoute {
   path: string;
@@ -174,4 +174,32 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     ...allCities.map((c) => `- [${c.name}](${url(`/maalauspalvelut-${c.slug}`)})`),
     "",
   ].join("\n");
+};
+
+/** Etusivun hero-kuva (sama kuin src/components/Hero.tsx). */
+const HOME_HERO_IMAGE =
+  "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Eerik-maalaa/Eerik-maalaa-kattoa-1200.avif";
+
+const xmlEscape = (value: string) =>
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/**
+ * Kuvasitemap: jokaisen kanonisen sivun pääkuva (sama kuva, jonka sivu oikeasti näyttää).
+ * Generoidaan datasta, jotta osoitteet eivät vanhene, kun kuvia tai reittejä vaihdetaan.
+ */
+export const buildImageSitemapXml = (now: Date = new Date()): string => {
+  const entries = getCanonicalRoutes(now)
+    .map((r) => {
+      const seo = getRouteSeo(r.path);
+      if (r.path === "/") {
+        return `  <url>\n    <loc>${SITE_ORIGIN}/</loc>\n    <image:image>\n      <image:loc>${HOME_HERO_IMAGE}</image:loc>\n      <image:title>Tiilikaton pinnoitus Pirkanmaalla – Pintanen Oy</image:title>\n    </image:image>\n  </url>`;
+      }
+      if (!seo?.hero) return "";
+      const loc = r.path === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${r.path}/`;
+      const title = seo.title.replace(/\s*\|.*$/, "");
+      return `  <url>\n    <loc>${loc}</loc>\n    <image:image>\n      <image:loc>${xmlEscape(heroPreload(seo.hero).href)}</image:loc>\n      <image:title>${xmlEscape(title)}</image:title>\n    </image:image>\n  </url>`;
+    })
+    .filter(Boolean)
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${entries}\n</urlset>\n`;
 };

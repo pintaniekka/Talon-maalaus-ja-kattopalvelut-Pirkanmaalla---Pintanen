@@ -3,6 +3,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { Droplets, Shield, Paintbrush, Clock, BadgeCheck, Ruler, Mountain, Layers, Building2, Wrench as WrenchIcon, ShieldCheck } from "@/components/icons/BrandIcons";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
@@ -265,6 +266,7 @@ const HinnatTiilikalonPinnoitus = () => {
       {/* FAQ */}
       <FAQSection items={faqItems} />
 
+      <RelatedArticles categories={["katto", "raha"]} />
       {/* Contact - only Eerik */}
       <ServiceContactSection variant="katto" />
     </>

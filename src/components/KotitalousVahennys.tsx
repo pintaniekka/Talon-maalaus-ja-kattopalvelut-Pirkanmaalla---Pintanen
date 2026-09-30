@@ -49,12 +49,12 @@ const KotitalousVahennys = () => {
                 <span className="font-semibold text-foreground">4 000 €</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-border">
-                <span className="text-muted-foreground">Vähennys (40 %, omavastuu 150 € huomioitu)</span>
-                <span className="font-semibold text-accent">−1 450 €</span>
+                <span className="text-muted-foreground">Vähennys (40 %)</span>
+                <span className="font-semibold text-accent">−1 600 €</span>
               </div>
               <div className="flex justify-between items-center py-3 bg-accent/10 rounded-lg px-4 -mx-4">
                 <span className="font-bold text-foreground">Lopullinen hinta</span>
-                <span className="text-2xl font-bold text-accent">3 550 €</span>
+                <span className="text-2xl font-bold text-accent">3 400 €</span>
               </div>
             </div>
           </motion.div>

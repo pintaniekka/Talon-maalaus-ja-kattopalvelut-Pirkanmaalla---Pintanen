@@ -44,11 +44,20 @@ const closingNotes: Record<ArticleMeta["category"], ReactNode> = {
       <a href="tel:+358401642233">040 164 2233</a>.
     </>
   ),
+  raha: (
+    <>
+      Tarkan hinnan omalle kohteellesi saat maksuttomalla arviokäynnillä Pirkanmaalla. Suuntaa antavan arvion voit
+      laskea itse <Link to="/maalauspalvelut-hinta-pirkanmaa">hintalaskurilla</Link>, tai voit soittaa numeroon{" "}
+      <a href="tel:+358409640066">040 964 0066</a>.
+    </>
+  ),
 };
 
 interface ArticleLayoutProps {
   meta: ArticleMeta;
   children: ReactNode;
+  /** Jonossa olevan artikkelin esikatselu: noindex ja huomautuspalkki. */
+  preview?: boolean;
 }
 
 /**
@@ -56,7 +65,7 @@ interface ArticleLayoutProps {
  * pääkuva, sisällysluettelo, leipäteksti, kirjoittajalaatikko ja "Lue myös".
  * Tarkoituksella tekstivetoinen: ei heroa, ei CTA-nappeja, ei lomaketta.
  */
-const ArticleLayout = ({ meta, children }: ArticleLayoutProps) => {
+const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) => {
   const author = authors[meta.author];
   const bodyRef = useRef<HTMLDivElement>(null);
   const [toc, setToc] = useState<TocEntry[]>([]);
@@ -136,6 +145,7 @@ const ArticleLayout = ({ meta, children }: ArticleLayoutProps) => {
         description={meta.description}
         ogImage={heroUrl}
         preloadImage={heroUrl}
+        noindex={preview}
       />
       <Helmet defer={false}>
         <meta property="og:type" content="article" />
@@ -147,6 +157,11 @@ const ArticleLayout = ({ meta, children }: ArticleLayoutProps) => {
 
       <article className="pt-28 md:pt-40 pb-16 md:pb-24">
         <header className="article-column">
+          {preview && (
+            <p className="mb-6 rounded-lg border border-paint-yellow bg-paint-yellow/20 px-4 py-3 text-sm font-semibold text-foreground">
+              Esikatselu. Artikkeli julkaistaan {formatDateFi(meta.publishedAt)}.
+            </p>
+          )}
           <nav aria-label="Murupolku" className="text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground">Etusivu</Link>
             <span className="mx-2" aria-hidden="true">/</span>

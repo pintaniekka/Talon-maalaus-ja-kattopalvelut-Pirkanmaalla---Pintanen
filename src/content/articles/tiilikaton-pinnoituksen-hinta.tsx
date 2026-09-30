@@ -122,7 +122,7 @@ const Body = () => (
     <h2>Kotitalousvähennys pienentää lopullista hintaa</h2>
     <p>
       Pinnoituksessa suurin osa laskusta on työtä, ja työn osuudesta saa kotitalousvähennyksen. Jos työn osuus on
-      esimerkiksi 2 800 euroa, vähennys on nykyisellä 35 prosentin säännöllä 830 euroa omavastuun jälkeen. Säännöt ja
+      esimerkiksi 2 800 euroa, vähennys on vuoden 2026 40 prosentin säännöllä 970 euroa omavastuun jälkeen. Säännöt ja
       laskuesimerkit löytyvät artikkelista{" "}
       <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot">
         kotitalousvähennys katto- ja maalaustöissä

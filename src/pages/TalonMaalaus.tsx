@@ -23,7 +23,7 @@ const heroSrcSet = getResponsiveSrcSet(heroBase);
 const faqItems = [
   {
     question: "Saako talon maalauksesta kotitalousvähennystä?",
-    answer: "Kyllä saa! Koska <strong>Pintanen kuuluu ennakkoperintärekisteriin</strong>, tekemämme työ on täysin kotitalousvähennyskelpoista, ja erittelemme työn osuuden aina selkeästi loppulaskuun helpottaaksemme vähennyksen hakemista. Vuonna 2026 voit <strong>vähentää 35 % työn osuudesta</strong> suoraan verotuksessasi, ja puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 3 200 euroa vuodessa</strong>.",
+    answer: "Kyllä saa! Koska <strong>Pintanen kuuluu ennakkoperintärekisteriin</strong>, tekemämme työ on täysin kotitalousvähennyskelpoista, ja erittelemme työn osuuden aina selkeästi loppulaskuun helpottaaksemme vähennyksen hakemista. Vuonna 2026 voit <strong>vähentää 40 % työn osuudesta</strong> suoraan verotuksessasi, ja puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 4 200 euroa vuodessa</strong>.",
   },
   {
     question: "Mitä talon maalaus maksaa?",

@@ -63,8 +63,8 @@ export const articles: ArticleMeta[] = [
     title: "Kotitalousvähennys katto- ja maalaustöissä 2026: paljonko saat takaisin?",
     seoTitle: "Kotitalousvähennys 2026 katto- ja maalaustöissä",
     description:
-      "Kotitalousvähennys 2026: 35 % työn osuudesta, enintään 1 600 € henkilöltä. Laskuesimerkit katto- ja maalaustöille sekä vireillä oleva korotus.",
-    lead: "Yritykseltä ostetusta katto- tai maalaustyöstä saa vähentää 35 % työn osuudesta, enintään 1 600 euroa henkilöltä vuodessa. Omavastuu on 150 euroa. Hallitus on esittänyt vuosille 2026 ja 2027 korotusta.",
+      "Kotitalousvähennys 2026: 40 % työn osuudesta, enintään 2 100 € henkilöltä. Laskuesimerkit tiilikaton pinnoitukselle ja talon maalaukselle.",
+    lead: "Yritykseltä ostetusta katto- tai maalaustyöstä saa vuosina 2026 ja 2027 vähentää 40 % työn osuudesta, enintään 2 100 euroa henkilöltä vuodessa. Omavastuu on 150 euroa.",
     category: "raha",
     author: "eerik",
     publishedAt: "2026-10-06",

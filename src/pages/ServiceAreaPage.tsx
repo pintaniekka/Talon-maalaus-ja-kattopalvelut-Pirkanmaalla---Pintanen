@@ -67,7 +67,7 @@ const getAreaFAQ = (cityName: string, cityIn: string, cityGenitive: string) => [
   },
   {
     question: `Oikeuttaako työnne kotitalousvähennykseen ${cityIn}?`,
-    answer: `Kyllä. Kaikki tekemämme huolto- ja maalaustyöt ${cityGenitive} alueella oikeuttavat kotitalousvähennykseen. Voit vähentää <strong>35 % työn osuudesta</strong> henkilökohtaisessa verotuksessasi.`,
+    answer: `Kyllä. Kaikki tekemämme huolto- ja maalaustyöt ${cityGenitive} alueella oikeuttavat kotitalousvähennykseen. Voit vähentää <strong>40 % työn osuudesta</strong> henkilökohtaisessa verotuksessasi.`,
   },
 ];
 

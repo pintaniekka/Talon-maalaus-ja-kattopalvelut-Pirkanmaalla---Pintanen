@@ -28,11 +28,11 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Yritykseltä ostetusta työstä saa vähentää 35 % työn osuudesta.</li>
-        <li>Enimmäismäärä on 1 600 euroa henkilöltä vuodessa ja omavastuu 150 euroa.</li>
-        <li>Puolisot voivat saada yhteensä enintään 3 200 euroa.</li>
+        <li>Yritykseltä ostetusta työstä saa vuosina 2026 ja 2027 vähentää 40 % työn osuudesta.</li>
+        <li>Enimmäismäärä on 2 100 euroa henkilöltä vuodessa ja omavastuu 150 euroa.</li>
+        <li>Puolisot voivat saada yhteensä enintään 4 200 euroa.</li>
         <li>Vähennys koskee vain työtä, ei materiaaleja eikä matkakuluja.</li>
-        <li>Hallitus on esittänyt vuosille 2026 ja 2027 korotusta 40 prosenttiin ja 2 100 euroon.</li>
+        <li>Korotus koskee 1.1.2026 alkaen maksettuja laskuja. Aiemmin luvut olivat 35 % ja 1 600 euroa.</li>
       </ul>
     </KeyPoints>
 
@@ -45,15 +45,16 @@ const Body = () => (
 
     <h2>Paljonko kotitalousvähennys on vuonna 2026?</h2>
     <p>
-      Verohallinnon mukaan yritykseltä ostetusta työstä saa vähentää <strong>35 % työn osuudesta</strong>. Vähennys
-      lasketaan työn arvonlisäverollisesta hinnasta. Enimmäismäärä on <strong>1 600 euroa henkilöltä vuodessa</strong>,
+      Yritykseltä ostetusta työstä saa vuosina 2026 ja 2027 vähentää <strong>40 % työn osuudesta</strong>. Vähennys
+      lasketaan työn arvonlisäverollisesta hinnasta. Enimmäismäärä on <strong>2 100 euroa henkilöltä vuodessa</strong>,
       ja jokaisella on 150 euron vuosittainen omavastuu.
     </p>
-    <Note title="Korotus on vireillä">
+    <Note title="Määräaikainen korotus">
       <p>
-        Hallitus on esittänyt, että vuosina 2026 ja 2027 vähennysprosentti nousee 40 prosenttiin ja enimmäismäärä
-        2 100 euroon. Verohallinnon kesäkuussa 2026 julkaiseman tiedotteen mukaan korotus koskisi 1.1.2026 alkaen
-        maksettuja kustannuksia, jos eduskunta hyväksyy esityksen. Tarkista ajantasainen tilanne{" "}
+        Vuonna 2025 vähennys oli 35 % ja enintään 1 600 euroa. Hallituksen esityksen mukaan luvut nousevat vuosiksi
+        2026 ja 2027 40 prosenttiin ja 2 100 euroon, ja korotus koskee takautuvasti 1.1.2026 alkaen maksettuja
+        kustannuksia. Verohallinnon kesäkuun 2026 tiedotteen mukaan korotus edellyttää eduskunnan hyväksyntää.
+        Tarkista ajantasainen tilanne{" "}
         <a href="https://www.vero.fi/henkiloasiakkaat/vahennykset/kotitalousvahennys/kotitalousvahennyksen-maara" target="_blank" rel="noopener noreferrer">
           Verohallinnon sivulta
         </a>{" "}
@@ -66,22 +67,22 @@ const Body = () => (
       Oletetaan, että pinnoituksen laskussa työn osuus on 2 800 euroa. Vähennys lasketaan näin:
     </p>
     <ul>
-      <li>35 % × 2 800 € = 980 €</li>
-      <li>980 € − 150 € omavastuu = <strong>830 € vähennystä</strong></li>
+      <li>40 % × 2 800 € = 1 120 €</li>
+      <li>1 120 € − 150 € omavastuu = <strong>970 € vähennystä</strong></li>
     </ul>
     <p>
-      Jos esitetty korotus tulee voimaan, sama lasku antaisi 40 % × 2 800 € − 150 € eli 970 euroa. Pinnoituksessa ja
-      maalauksessa suurin osa laskusta on työtä, joten vähennys on näissä töissä tavallista suurempi.
+      Vanhalla 35 prosentin säännöllä sama lasku olisi antanut 830 euroa. Pinnoituksessa ja maalauksessa suurin osa
+      laskusta on työtä, joten vähennys on näissä töissä tavallista suurempi.
     </p>
 
     <h2>Milloin enimmäismäärä tulee täyteen?</h2>
     <p>
-      Nykyisillä luvuilla yksi henkilö saa täyden 1 600 euron vähennyksen, kun vuoden aikana maksettujen töiden osuus
-      on yhteensä 5 000 euroa. Laskutapa on 35 % × 5 000 € − 150 €.
+      Yksi henkilö saa täyden 2 100 euron vähennyksen, kun vuoden aikana maksettujen töiden osuus on yhteensä
+      5 625 euroa. Laskutapa on 40 % × 5 625 € − 150 €.
     </p>
     <p>
       Vähennys on henkilökohtainen. Puolisot voivat kumpikin vähentää oman osuutensa, jolloin yhteinen enimmäismäärä
-      on 3 200 euroa. Jos toisen vähennys ylittää enimmäismäärän, ylimenevä osa siirtyy Verohallinnon mukaan puolison
+      on 4 200 euroa. Jos toisen vähennys ylittää enimmäismäärän, ylimenevä osa siirtyy Verohallinnon mukaan puolison
       verotukseen. Isommassa urakassa vähennys kannattaa siis jakaa kahdelle.
     </p>
 
@@ -107,8 +108,8 @@ const Body = () => (
     </ul>
     <p>
       Yrityksen pitää kuulua ennakkoperintärekisteriin. Sen voi tarkistaa maksutta Yritys- ja yhteisötietojärjestelmästä
-      osoitteessa ytj.fi. Pyydä aina lasku, jossa työn ja materiaalien osuudet on eritelty. Pintasen laskuissa työ ja
-      materiaalit eritellään, jotta vähennyksen hakeminen on helppoa.
+      osoitteessa ytj.fi. Pyydä aina lasku, jossa työn ja materiaalien osuudet on eritelty. Pintanen kuuluu
+      ennakkoperintärekisteriin ja erittelee työn ja materiaalit laskulle, jotta vähennyksen hakeminen on helppoa.
     </p>
 
     <h2>Maksupäivä ratkaisee verovuoden</h2>

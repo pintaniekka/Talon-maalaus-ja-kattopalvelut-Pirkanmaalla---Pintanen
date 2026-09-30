@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { supabase } from '@/integrations/supabase/client';
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(1, 'Nimi on pakollinen').max(100, 'Nimi on liian pitkä'),
@@ -27,6 +26,10 @@ export type ContactFormPayload = z.infer<typeof contactFormSchema>;
 
 export const submitContactForm = async (payload: ContactFormPayload) => {
   const parsed = contactFormSchema.parse(payload);
+
+  // Supabase-asiakas ladataan vasta lähetyshetkellä, jotta se ei kasvata
+  // jokaisen sivulatauksen JavaScript-pakettia.
+  const { supabase } = await import('@/integrations/supabase/client');
 
   const { data, error } = await supabase.functions.invoke('send-contact-email', {
     body: parsed,

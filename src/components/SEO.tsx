@@ -5,6 +5,10 @@ import { DEFAULT_DESCRIPTION, canonicalUrl, withBrand } from '@/data/seo';
 interface SEOProps {
   title?: string;
   description?: string;
+  /**
+   * @deprecated Ei enää käytössä. Pääkuvan preload kirjoitetaan build-aikana staattiseen
+   * HTML:ään (src/data/seo.ts → hero), jolloin se ehtii ennen JavaScriptiä ja käyttää srcsetiä.
+   */
   preloadImage?: string;
   ogImage?: string;
   /** Estä indeksointi (esim. 404-sivu). Canonicalia ei tällöin aseteta. */
@@ -20,7 +24,6 @@ const defaultOgImage = "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/obje
 const SEO = ({
   title,
   description,
-  preloadImage,
   ogImage,
   noindex = false,
   ogType = 'website',
@@ -72,7 +75,6 @@ const SEO = ({
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={imageUrl} />
-      {preloadImage && <link rel="preload" as="image" href={preloadImage} type="image/webp" />}
       {breadcrumbJsonLd && <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>}
     </Helmet>
   );

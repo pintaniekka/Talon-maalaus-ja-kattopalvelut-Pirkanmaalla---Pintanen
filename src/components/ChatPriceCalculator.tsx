@@ -583,7 +583,7 @@ const ChatPriceCalculator = () => {
                         min="1"
                         value={numberInput}
                         onChange={e => setNumberInput(e.target.value)}
-                        placeholder={stepUI.placeholder}
+                        placeholder={stepUI.placeholder} aria-label={stepUI.placeholder}
                         className="w-full px-4 py-2.5 rounded-xl border border-border/60 bg-white text-base focus:outline-none focus:border-primary transition-colors"
                         autoFocus
                       />
@@ -612,7 +612,7 @@ const ChatPriceCalculator = () => {
                       type="text"
                       value={textInput}
                       onChange={e => setTextInput(e.target.value)}
-                      placeholder={stepUI.placeholder}
+                      placeholder={stepUI.placeholder} aria-label={stepUI.placeholder}
                       className="flex-1 px-4 py-2.5 rounded-xl border border-border/60 bg-white text-base focus:outline-none focus:border-primary transition-colors"
                       autoFocus
                     />
@@ -658,7 +658,7 @@ const ChatPriceCalculator = () => {
                       type="text"
                       value={contactName}
                       onChange={e => setContactName(e.target.value)}
-                      placeholder="Nimi *"
+                      placeholder="Nimi *" aria-label="Nimi"
                       className="w-full px-4 py-2.5 rounded-xl border border-border/60 bg-white text-base focus:outline-none focus:border-primary transition-colors"
                       autoFocus
                     />

@@ -14,12 +14,14 @@
     <!-- Supabase Storage preconnect (non-CORS for <img> tags) -->
     <link rel="preconnect" href="https://fndkkgfpsgghvewvoysr.supabase.co" />
 
-    <!-- Critical inline CSS for above-the-fold paint -->
+    <!-- Critical inline CSS for above-the-fold paint.
+         :where() nollaa spesifisyyden, jotta nämä toimivat vain ennen varsinaisen CSS:n
+         latautumista eivätkä jyrää Tailwind-luokkia (esim. alasivujen valkoista hero-otsikkoa). -->
     <style>
       body { margin: 0; }
-      .hero-critical { background: #F7F7F7; }
-      .hero-critical h1 { color: #1a1a1a; font-size: 2rem; line-height: 1.1; }
-      .hero-critical .hero-lead { color: #4b5563; font-size: 1.125rem; }
+      :where(.hero-critical) { background: #F7F7F7; }
+      :where(.hero-critical h1) { color: #1a1a1a; font-size: 2rem; line-height: 1.1; }
+      :where(.hero-critical .hero-lead) { color: #4b5563; font-size: 1.125rem; }
     </style>
 
     <!-- Preload Hero Image for LCP – vain etusivulla; vite-plugin-spa-routes poistaa tämän alasivujen kopioista -->

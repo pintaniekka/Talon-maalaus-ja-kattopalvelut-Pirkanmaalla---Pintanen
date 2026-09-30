@@ -77,7 +77,7 @@ const ResponsiveSupabaseImage = ({
       className={className}
       loading={priority ? undefined : 'lazy'}
       decoding={priority ? 'sync' : 'async'}
-      fetchPriority={priority ? 'high' : 'low'}
+      {...({ fetchpriority: priority ? 'high' : 'low' } as Record<string, string>)}
       sizes={resolvedSizes}
       draggable={draggable}
       style={style}

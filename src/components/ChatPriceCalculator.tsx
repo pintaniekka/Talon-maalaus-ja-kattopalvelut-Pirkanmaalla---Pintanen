@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Loader2 } from 'lucide-react';
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
 import { submitContactForm } from '@/lib/contactForm';
+import FormPrivacyNote from '@/components/FormPrivacyNote';
 import { useToast } from '@/hooks/use-toast';
 import CityCombobox from '@/components/CityCombobox';
 import PhoneInput from '@/components/PhoneInput';
@@ -422,6 +423,7 @@ const ChatPriceCalculator = () => {
         name: contactName,
         phone: internationalPhone,
         service: path === 'maalaus' ? 'ulkomaalaus' : 'tiilikatto',
+        city: d.city || undefined,
         message: `Chat-hintalaskuri: ${details}`,
         priceEstimate: priceStr,
         calculatorDetails: details,
@@ -692,6 +694,7 @@ const ChatPriceCalculator = () => {
                         </>
                       )}
                     </button>
+                    <FormPrivacyNote variant="light" />
                   </div>
                 )}
               </div>

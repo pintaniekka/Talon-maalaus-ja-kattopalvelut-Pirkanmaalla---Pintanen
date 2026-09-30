@@ -22,7 +22,7 @@ const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, c
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
           decoding="sync"
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as Record<string, string>)}
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark" />

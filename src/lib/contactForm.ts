@@ -9,6 +9,10 @@ const contactFormSchema = z.object({
   message: z.string().trim().max(2000, 'Viesti on liian pitkä').optional().default(''),
   priceEstimate: z.string().trim().max(100, 'Hinta-arvio on liian pitkä').optional(),
   calculatorDetails: z.string().trim().max(1000, 'Laskurin tiedot ovat liian pitkät').optional(),
+  address: z.string().trim().max(200, 'Osoite on liian pitkä').optional(),
+  city: z.string().trim().max(100, 'Kaupunki on liian pitkä').optional(),
+  /** Honeypot: piilotettu kenttä, jonka vain botit täyttävät. Palvelin hylkää täytetyt hiljaisesti. */
+  website: z.string().max(200).optional(),
 }).superRefine((data, ctx) => {
   if (data.email && !z.string().email().safeParse(data.email).success) {
     ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Virheellinen sähköposti', path: ['email'] });

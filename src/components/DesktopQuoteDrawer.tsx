@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { UserRound, Phone, MapPin, Mail, Building, MessageSquare } from "@/components/icons/BrandIcons";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
+import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
 
 // Global open trigger – allows any component to open the drawer
 let globalOpenFn: (() => void) | null = null;
@@ -24,6 +25,7 @@ const DesktopQuoteDrawer = () => {
     postalCode: "",
     city: "",
     message: "",
+    website: "", // honeypot – oikea käyttäjä ei täytä tätä
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -81,10 +83,13 @@ const DesktopQuoteDrawer = () => {
         email: "",
         phone: form.phone,
         service: "Arviokäynti",
+        address: [form.address, form.postalCode].filter(Boolean).join(", "),
+        city: form.city,
         message: `Osoite: ${form.address}\nPostinumero: ${form.postalCode}\nKaupunki: ${form.city}\n\n${form.message}`,
+        website: form.website,
       });
       setIsSubmitted(true);
-      setForm({ name: "", phone: "", address: "", postalCode: "", city: "", message: "" });
+      setForm({ name: "", phone: "", address: "", postalCode: "", city: "", message: "", website: "" });
       toast({ title: "Kiitos! Olemme sinuun yhteydessä pian." });
     } catch {
       toast({ title: "Jokin meni pieleen. Yritä uudelleen.", variant: "destructive" });
@@ -207,6 +212,9 @@ const DesktopQuoteDrawer = () => {
                     className="w-full rounded-lg border border-border bg-white px-3 py-2.5 pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/40 transition resize-none"
                   />
                 </div>
+
+                <HoneypotField value={form.website} onChange={(v) => setForm((prev) => ({ ...prev, website: v }))} />
+                <FormPrivacyNote />
 
                 <button
                   type="submit"

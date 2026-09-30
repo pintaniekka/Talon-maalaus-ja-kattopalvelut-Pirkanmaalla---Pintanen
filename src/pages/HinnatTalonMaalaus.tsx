@@ -63,7 +63,7 @@ const HinnatTalonMaalaus = () => {
         description="Paljonko talon maalaus maksaa? Laske suuntaa antava hinta laskurilla ja katso hintaesimerkit. Kotitalousvähennys pienentää kustannuksia."
         preloadImage={heroImage}
       />
-      <Helmet>
+      <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 

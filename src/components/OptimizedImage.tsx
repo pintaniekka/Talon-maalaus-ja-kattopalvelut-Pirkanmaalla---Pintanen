@@ -77,7 +77,7 @@ const OptimizedImage = ({
       className={className}
       loading={priority ? undefined : "lazy"}
       decoding="async"
-      fetchPriority={priority ? "high" : "low"}
+      {...({ fetchpriority: priority ? "high" : "low" } as Record<string, string>)}
       sizes={finalSizes}
       draggable={draggable}
       style={style}

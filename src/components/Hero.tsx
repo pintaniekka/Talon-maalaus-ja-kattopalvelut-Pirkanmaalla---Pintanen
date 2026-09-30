@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Building2 } from "@/components/icons/BrandIcons";
 
@@ -37,13 +38,13 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4 sm:gap-6 mb-10 md:mb-12">
-            <a
-              href="/hinnat"
+            <Link
+              to="/maalauspalvelut-hinta-pirkanmaa"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-paint-yellow hover:bg-paint-yellow-hover text-paint-yellow-foreground font-heading font-extrabold rounded-2xl transition-all hover:scale-[1.03] shadow-xl shadow-paint-yellow/40 text-lg group"
             >
               Laske hinta
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
             <a
               href="#yhteystiedot"
               className="inline-flex items-center justify-center px-8 py-4 bg-card border-2 border-accent text-accent font-heading font-extrabold rounded-2xl hover:bg-accent hover:text-accent-foreground transition-all text-lg"
@@ -90,7 +91,7 @@ const Hero = () => {
             sizes="(max-width: 1024px) 100vw, 34vw"
             className="absolute inset-0 w-full h-full object-cover"
             decoding="sync"
-            fetchPriority="high"
+            {...({ fetchpriority: "high" } as Record<string, string>)}
           />
 
           {/* Skewed white transition (desktop only) */}

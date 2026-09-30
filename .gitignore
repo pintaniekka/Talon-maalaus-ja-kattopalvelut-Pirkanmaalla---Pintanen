@@ -31,3 +31,11 @@ dist-ssr
 
 # Supabase CLI:n paikalliset tilatiedostot
 supabase/.temp
+
+# iCloud/Finder-synkronoinnin luomat kaksoiskappaleet ("tiedosto 2.ts")
+* [0-9].ts
+* [0-9].tsx
+* [0-9].json
+* [0-9].md
+* [0-9].css
+* [0-9].html

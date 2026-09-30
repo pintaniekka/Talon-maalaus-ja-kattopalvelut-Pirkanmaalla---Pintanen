@@ -4,6 +4,7 @@ import { Paintbrush, Ruler, Building2, Layers, Droplets } from "@/components/ico
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import WallPriceCalculator from "@/components/WallPriceCalculator";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
@@ -59,8 +60,7 @@ const HinnatTalonMaalaus = () => {
   return (
     <>
       <SEO
-        title="Talon maalaus hinta – Laske arvio heti"
-        description="Paljonko talon maalaus maksaa? Laske suuntaa antava hinta laskurilla ja katso hintaesimerkit. Kotitalousvähennys pienentää kustannuksia."
+        {...staticSeo["/talon-maalaus-hinta-pirkanmaa"]}
         preloadImage={heroImage}
       />
       <Helmet defer={false}>

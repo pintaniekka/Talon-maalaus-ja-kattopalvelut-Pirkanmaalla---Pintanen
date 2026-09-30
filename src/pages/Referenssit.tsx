@@ -5,6 +5,7 @@ import ServicePageHero from '@/components/ServicePageHero';
 import ServiceContactSection from '@/components/ServiceContactSection';
 import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import SEO from '@/components/SEO';
+import { staticSeo } from "@/data/seo";
 import ResponsiveSupabaseImage from '@/components/ResponsiveSupabaseImage';
 import { getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
 
@@ -327,7 +328,8 @@ const Referenssit = () => {
 
   return (
     <div>
-      <SEO title="Referenssit – Katon pinnoitus ja talon maalaus" description="Tutustu toteuttamiimme katto- ja maalausprojekteihin Pirkanmaalla. Näe ero ennen maalausta ja maalauksen jälkeen." />
+      <SEO
+        {...staticSeo["/referenssit"]} />
       <ServicePageHero
         title=""
         subtitle=""

@@ -264,7 +264,7 @@ export const cities: CityData[] = [
     puhdistusMetaTitle: "Katon puhdistus Huittinen – Poistaa levän ja sammaleen",
     puhdistusMetaDesc:
       "Tiilikaton puhdistus Huittisissa tehokkaasti ja edullisesti. Katto pysyy kunnossa pidempään. Kysy tarjous.",
-    maalausMetaTitle: "Talon maalaus Huittinen | Maksuton arviokäynti| Pintanen",
+    maalausMetaTitle: "Talon maalaus Huittinen | Maksuton arviokäynti | Pintanen",
     maalausMetaDesc:
       "Suojaa kotisi Satakunnan säältä. Laadukas talon ulkomaalaus Huittisissa suoraan yrittäjältä. Hinta-arvio nopeasti hintalaskurilla ja hyödynnä merkittävä kotitalousvähennys.",
     maalausLocalHookTitle: "Satakunnan lakeuksien tuulikuorman ja säärasituksen hallinta",

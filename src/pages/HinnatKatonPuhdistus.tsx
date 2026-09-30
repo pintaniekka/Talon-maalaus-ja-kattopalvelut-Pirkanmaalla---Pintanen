@@ -3,6 +3,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
@@ -50,8 +51,7 @@ const HinnatKatonPuhdistus = () => {
   return (
     <div>
       <SEO
-        title="Katon puhdistus hinta – Sammaleen poisto ja suojakäsittely"
-        description="Paljonko katon puhdistus maksaa? Katso hintaesimerkit, mitä puhdistus sisältää ja milloin pelkkä pesu riittää. Toimimme Pirkanmaalla ja Kanta-Hämeessä."
+        {...staticSeo["/katon-puhdistus-hinta-pirkanmaa"]}
         preloadImage={heroImage}
       />
       <Helmet defer={false}>

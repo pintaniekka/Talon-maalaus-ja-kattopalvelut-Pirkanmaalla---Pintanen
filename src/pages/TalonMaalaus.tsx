@@ -13,6 +13,8 @@ import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
+import ServiceSchema from "@/components/ServiceSchema";
+import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { Link } from "react-router-dom";
 
@@ -51,10 +53,10 @@ const TalonMaalaus = () => {
   return (
     <div>
       <SEO
-        title="Talon maalaus Pirkanmaa | Hintalaskuri"
-        description="Laadukas talon ulkomaalaus Pirkanmaalla. Yrittäjä tekee työn. Laske hinta hintalaskurilla, hyödynnä kotitalousvähennys ja tilaa ilmainen arvio!"
+        {...staticSeo["/talon-maalaus-pirkanmaa"]}
         preloadImage={heroImage}
       />
+      <ServiceSchema name="Talon ulkomaalaus" area="Pirkanmaa" areaType="AdministrativeArea" description={staticSeo["/talon-maalaus-pirkanmaa"].description} />
 
       <ServicePageHero
         title=""

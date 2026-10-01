@@ -36,6 +36,14 @@
       fetchpriority="high"
     />
 
+    <!-- Ilman JavaScriptiä esirenderöidyn sivun animoidut osiot jäisivät läpinäkyviksi
+         (framer-motionin alkutila). Näytetään ne suoraan. -->
+    <noscript>
+      <style>
+        [style*="opacity:0"], [style*="opacity: 0"] { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
+
     <!-- Canonical handled dynamically by SEO.tsx via React Helmet -->
 
     <!-- Basic SEO -->

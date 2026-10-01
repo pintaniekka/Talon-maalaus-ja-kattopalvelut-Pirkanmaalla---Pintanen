@@ -20,15 +20,22 @@ export const render = (url: string): Promise<PrerenderResult> =>
   new Promise((resolve, reject) => {
     const helmetContext: { helmet?: HelmetServerState } = {};
     let html = "";
+    // Aikakatkaisu puretaan aina, muuten ajastimet pitäisivät build-prosessin käynnissä.
+    const timer = setTimeout(() => fail(new Error(`esirenderöinti aikakatkaistiin: ${url}`)), 20000);
+    const fail = (error: unknown) => {
+      clearTimeout(timer);
+      reject(error);
+    };
     const sink = new Writable({
       write(chunk, _encoding, callback) {
         html += chunk.toString();
         callback();
       },
     });
-    sink.on("finish", () =>
-      resolve({ html, headScripts: helmetContext.helmet?.script.toString() ?? "" }),
-    );
+    sink.on("finish", () => {
+      clearTimeout(timer);
+      resolve({ html, headScripts: helmetContext.helmet?.script.toString() ?? "" });
+    });
 
     const stream = renderToPipeableStream(
       <HelmetProvider context={helmetContext}>
@@ -41,11 +48,8 @@ export const render = (url: string): Promise<PrerenderResult> =>
         onAllReady() {
           stream.pipe(sink);
         },
-        onShellError: reject,
-        onError(error) {
-          reject(error);
-        },
+        onShellError: fail,
+        onError: fail,
       },
     );
-    setTimeout(() => reject(new Error(`esirenderöinti aikakatkaistiin: ${url}`)), 20000);
   });

@@ -25,7 +25,7 @@ const esc = (value: string) =>
 const setMeta = (html: string, attr: "name" | "property", key: string, value: string) => {
   const re = new RegExp(`<meta\\s+${attr}="${key}"[\\s\\S]*?/>`);
   if (!re.test(html)) throw new Error(`[spa-routes] index.html: <meta ${attr}="${key}"> puuttuu`);
-  return html.replace(re, `<meta ${attr}="${key}" content="${esc(value)}" />`);
+  return html.replace(re, () => `<meta ${attr}="${key}" content="${esc(value)}" />`);
 };
 
 const removeMeta = (html: string, key: string) =>
@@ -35,9 +35,10 @@ const removeMeta = (html: string, key: string) =>
 export const applySeo = (html: string, routePath: string, seo: RouteSeo): string => {
   const title = withBrand(seo.title);
   const url = canonicalUrl(routePath);
+  // Korvaukset annetaan funktiona, jottei sisällön mahdollinen "$" tulkitu korvauskuvioksi.
   let out = html.replace(
     /<title>[\s\S]*?<\/title>/,
-    `<title>${esc(title)}</title>\n    <link rel="canonical" href="${url}" />`,
+    () => `<title>${esc(title)}</title>\n    <link rel="canonical" href="${url}" />`,
   );
   out = setMeta(out, "name", "description", seo.description);
   out = setMeta(out, "property", "og:title", title);
@@ -56,11 +57,14 @@ export const applySeo = (html: string, routePath: string, seo: RouteSeo): string
     const { href, imagesrcset, imagesizes } = heroPreload(seo.hero);
     out = out.replace(
       "</title>",
-      `</title>\n    <link rel="preload" as="image" href="${href}" imagesrcset="${imagesrcset}" imagesizes="${imagesizes}" type="image/webp" fetchpriority="high" />`,
+      () =>
+        `</title>\n    <link rel="preload" as="image" href="${href}" imagesrcset="${imagesrcset}" imagesizes="${imagesizes}" type="image/webp" fetchpriority="high" />`,
     );
   }
   return out;
 };
+
+const EMPTY_ROOT = '<div id="root"></div>';
 
 type Prerender = (url: string) => Promise<{ html: string; headScripts: string }>;
 
@@ -73,9 +77,10 @@ const injectPrerender = async (html: string, route: string, prerender: Prerender
   try {
     const { html: body, headScripts } = await prerender(route);
     if (!body.includes("<h1")) throw new Error("ei h1-otsikkoa");
+    if (!html.includes(EMPTY_ROOT)) throw new Error("index.html: tyhjää #root-elementtiä ei löytynyt");
     return html
-      .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
-      .replace("</head>", `${headScripts ? `    ${headScripts}\n  ` : ""}</head>`);
+      .replace(EMPTY_ROOT, () => `<div id="root">${body}</div>`)
+      .replace("</head>", () => `${headScripts ? `    ${headScripts}\n  ` : ""}</head>`);
   } catch (error) {
     failed.push(`${route}: ${error instanceof Error ? error.message : String(error)}`);
     return html;
@@ -134,7 +139,7 @@ export default function spaRoutes() {
       const homeSeo = getRouteSeo("/");
       if (homeSeo) {
         const homeHtml = await injectPrerender(applySeo(baseHtml, "/", homeSeo), "/", prerender, failed);
-        if (!homeHtml.includes('<div id="root"></div>')) prerendered++;
+        if (!homeHtml.includes(EMPTY_ROOT)) prerendered++;
         fs.writeFileSync(indexPath, homeHtml, "utf-8");
       }
 
@@ -146,7 +151,7 @@ export default function spaRoutes() {
         let html = seo ? applySeo(subpageHtml, route, seo) : subpageHtml;
         if (seo) {
           if (publicPaths.has(route)) html = await injectPrerender(html, route, prerender, failed);
-          if (!html.includes('<div id="root"></div>')) prerendered++;
+          if (!html.includes(EMPTY_ROOT)) prerendered++;
           withSeo++;
         }
         fs.writeFileSync(path.join(dir, "index.html"), html, "utf-8");
@@ -160,7 +165,8 @@ export default function spaRoutes() {
       fs.writeFileSync(path.join(distDir, "llms.txt"), buildLlmsTxt(), "utf-8");
 
       await ssrServer?.close();
-      process.env.NODE_ENV = previousNodeEnv;
+      if (previousNodeEnv === undefined) delete process.env.NODE_ENV;
+      else process.env.NODE_ENV = previousNodeEnv;
 
       console.log(
         `[spa-routes] Generated ${routes.length} route files (${withSeo} with page-specific head, ${prerendered} prerendered), 404.html, sitemaps and llms.txt.`,

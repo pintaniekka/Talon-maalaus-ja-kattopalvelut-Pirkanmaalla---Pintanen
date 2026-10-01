@@ -7,6 +7,7 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FAQSection from "@/components/FAQSection";
 import { generalFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
+import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 const heroBase = "ammattilainen-maalaa-talon-ulkoverhousta-pensselilla";
@@ -39,7 +40,8 @@ const Meista = () => {
 
   return (
     <div>
-      <SEO title="Pintanen Oy – Perheyritys katto- ja maalaustöissä" description="Pintanen on perheyritys, joka on erikoistunut katto- ja seinämaalauksiin. Teemme työt itse ja panostamme huolelliseen lopputulokseen." />
+      <SEO
+        {...staticSeo["/meista"]} />
       <ServicePageHero
         title=""
         subtitle=""

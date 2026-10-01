@@ -13,6 +13,9 @@ import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
+import ServiceSchema from "@/components/ServiceSchema";
+import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { Link } from "react-router-dom";
 
@@ -23,7 +26,7 @@ const heroSrcSet = getResponsiveSrcSet(heroBase);
 const faqItems = [
   {
     question: "Saako talon maalauksesta kotitalousvähennystä?",
-    answer: "Kyllä saa! Koska <strong>Pintanen kuuluu ennakkoperintärekisteriin</strong>, tekemämme työ on täysin kotitalousvähennyskelpoista, ja erittelemme työn osuuden aina selkeästi loppulaskuun helpottaaksemme vähennyksen hakemista. Vuonna 2026 voit <strong>vähentää 35 % työn osuudesta</strong> suoraan verotuksessasi, ja puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 3 200 euroa vuodessa</strong>.",
+    answer: "Kyllä saa! Koska <strong>Pintanen kuuluu ennakkoperintärekisteriin</strong>, tekemämme työ on täysin kotitalousvähennyskelpoista, ja erittelemme työn osuuden aina selkeästi loppulaskuun helpottaaksemme vähennyksen hakemista. Vuonna 2027 voit <strong>vähentää 40 % työn osuudesta</strong> suoraan verotuksessasi, ja puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 4 200 euroa vuodessa</strong>.",
   },
   {
     question: "Mitä talon maalaus maksaa?",
@@ -51,10 +54,10 @@ const TalonMaalaus = () => {
   return (
     <div>
       <SEO
-        title="Talon maalaus Pirkanmaa | Hintalaskuri"
-        description="Laadukas talon ulkomaalaus Pirkanmaalla. Yrittäjä tekee työn. Laske hinta hintalaskurilla, hyödynnä kotitalousvähennys ja tilaa ilmainen arvio!"
+        {...staticSeo["/talon-maalaus-pirkanmaa"]}
         preloadImage={heroImage}
       />
+      <ServiceSchema name="Talon ulkomaalaus" area="Pirkanmaa" areaType="AdministrativeArea" description={staticSeo["/talon-maalaus-pirkanmaa"].description} />
 
       <ServicePageHero
         title=""
@@ -100,6 +103,7 @@ const TalonMaalaus = () => {
       <MaalausFinancing />
       <MaalausEntrepreneur />
       <FAQSection items={faqItems} />
+      <RelatedArticles categories={["maalaus", "raha"]} />
       <ServiceContactSection variant="maalaus" />
       <ToimintaAlueetBanner />
     </div>

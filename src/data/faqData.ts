@@ -6,11 +6,11 @@ interface FAQItem {
 export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
-    answer: 'Kyllä saa! Tiilikaton pesu ja pinnoitus oikeuttavat merkittävään kotitalousvähennykseen. Voit vähentää <strong>35 % työn osuudesta</strong> suoraan henkilökohtaisessa verotuksessasi. Koska pinnoitusurakoissa työn osuus on tyypillisesti <strong>jopa 80 % kokonaishinnasta</strong>, vähennyksen tuoma säästö on usein noin tuhat euroa. Puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 3 200 euroa vuodessa</strong>.',
+    answer: 'Kyllä saa! Tiilikaton pesu ja pinnoitus oikeuttavat merkittävään kotitalousvähennykseen. Voit vähentää <strong>40 % työn osuudesta</strong> suoraan henkilökohtaisessa verotuksessasi. Koska pinnoitusurakoissa työn osuus on tyypillisesti <strong>jopa 80 % kokonaishinnasta</strong>, vähennyksen tuoma säästö on usein noin tuhat euroa. Puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 4 200 euroa vuodessa</strong>.',
   },
   {
     question: 'Mitä tiilikaton pinnoitus maksaa?',
-    answer: 'Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 4 880 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi kotitalousvähennyksen ansiosta – jopa alle 2 200 €. Hintamme sisältävät aina avaimet käteen -toteutuksen ja loppusiivouksen.',
+    answer: 'Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 4 880 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältävät aina avaimet käteen -toteutuksen ja loppusiivouksen.',
   },
   {
     question: 'Voiko tiilikaton pinnoitustyön maksaa osissa?',
@@ -91,7 +91,7 @@ export const generalFAQ: FAQItem[] = [
   },
   {
     question: 'Saanko teidän työstänne kotitalousvähennyksen?',
-    answer: 'Kyllä saa! Voit hyödyntää 35 % vähennyksen työn osuudesta henkilökohtaisessa verotuksessasi. Erittelemme työn ja materiaalien osuuden selkeästi laskussa, jotta vähennyksen hakeminen on helppoa ja nopeaa.',
+    answer: 'Kyllä saa! Voit hyödyntää 40 % vähennyksen työn osuudesta henkilökohtaisessa verotuksessasi. Erittelemme työn ja materiaalien osuuden selkeästi laskussa, jotta vähennyksen hakeminen on helppoa ja nopeaa.',
   },
 ];
 
@@ -113,11 +113,11 @@ export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityI
 export const getPinnoitusCityFAQ = (cityName: string): FAQItem[] => [
   {
     question: `Saako tiilikaton pinnoituksesta kotitalousvähennystä?`,
-    answer: `Kyllä saa! Tiilikaton pesu ja pinnoitus oikeuttavat merkittävään kotitalousvähennykseen. Voit vähentää <strong>35 % työn osuudesta</strong> suoraan henkilökohtaisessa verotuksessasi. Koska pinnoitusurakoissa työn osuus on tyypillisesti <strong>jopa 80 % kokonaishinnasta</strong>, vähennyksen tuoma säästö on usein yli tuhat euroa. Puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 3 200 euroa vuodessa</strong>.`,
+    answer: `Kyllä saa! Tiilikaton pesu ja pinnoitus oikeuttavat merkittävään kotitalousvähennykseen. Voit vähentää <strong>40 % työn osuudesta</strong> suoraan henkilökohtaisessa verotuksessasi. Koska pinnoitusurakoissa työn osuus on tyypillisesti <strong>jopa 80 % kokonaishinnasta</strong>, vähennyksen tuoma säästö on usein yli tuhat euroa. Puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 4 200 euroa vuodessa</strong>.`,
   },
   {
     question: `Mitä tiilikaton pinnoitus maksaa?`,
-    answer: `Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 4 880 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi yllä mainitun kotitalousvähennyksen ansiosta – jopa alle 2 200 €. Hintamme sisältää aina avaimet käteen -toteutuksen ja loppusiivouksen.`,
+    answer: `Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 4 880 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi yllä mainitun kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältää aina avaimet käteen -toteutuksen ja loppusiivouksen.`,
   },
   {
     question: `Voiko tiilikaton pinnoitustyön maksaa osissa?`,

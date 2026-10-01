@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import ServicePageHero from '@/components/ServicePageHero';
 import ServiceContactSection from '@/components/ServiceContactSection';
 import SEO from '@/components/SEO';
+import { staticSeo } from "@/data/seo";
 import { allCities } from '@/data/cityData';
 import { getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
 
@@ -13,7 +14,8 @@ const heroBase = "keltainen-omakotitalo-julkisivumaalaus-jalkeen";
 const ToimintaAlueet = () => {
   return (
     <div>
-      <SEO title="Toiminta-alueet Pirkanmaa ja lähikunnat" description="Palvelemme koko Pirkanmaan alueella ja lähikunnissa. Katon pinnoitus, puhdistus ja talon maalaus noin tunnin säteellä Tampereelta." />
+      <SEO
+        {...staticSeo["/toiminta-alueet"]} />
       <ServicePageHero
         title=""
         subtitle=""

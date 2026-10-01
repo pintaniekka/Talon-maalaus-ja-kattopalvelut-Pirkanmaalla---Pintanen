@@ -9,6 +9,9 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FAQSection from "@/components/FAQSection";
 import { puhdistusFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
+import ServiceSchema from "@/components/ServiceSchema";
+import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 const puhdistusBase = "puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen";
@@ -32,7 +35,9 @@ const KattopalvelutPuhdistus = () => {
 
   return (
     <div>
-      <SEO title="Katon puhdistus Pirkanmaa – Ilmainen arvio" description="Tiilikaton puhdistus Pirkanmaalla - tehokas suoja katollesi. Sammaleet ja lika poistetaan mekaanisesti." />
+      <SEO
+        {...staticSeo["/katon-puhdistus-pirkanmaa"]} />
+      <ServiceSchema name="Tiilikaton puhdistus" area="Pirkanmaa" areaType="AdministrativeArea" description={staticSeo["/katon-puhdistus-pirkanmaa"].description} />
       <ServicePageHero
         title=""
         subtitle=""
@@ -129,6 +134,7 @@ const KattopalvelutPuhdistus = () => {
       </section>
 
       <FAQSection items={puhdistusFAQ} />
+      <RelatedArticles categories={["katto", "raha"]} />
       <ServiceContactSection variant="katto" />
       <KotitalousVahennys />
       <ToimintaAlueetBanner />

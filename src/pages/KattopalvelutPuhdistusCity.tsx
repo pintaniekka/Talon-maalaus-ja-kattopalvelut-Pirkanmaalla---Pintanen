@@ -9,6 +9,8 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import { getPuhdistusCityFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
+import ServiceSchema from "@/components/ServiceSchema";
+import { puhdistusCitySeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { getCityBySlug } from "@/data/cityData";
 
@@ -40,9 +42,9 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
   return (
     <div>
       <SEO
-        title={cityData.puhdistusMetaTitle || `Tiilikaton puhdistus ${cityData.name}`}
-        description={cityData.puhdistusMetaDesc || `Tiilikaton mekaaninen puhdistus ja sammaleentorjunta ${cityData.name}. Alkaen 800 €. Ilmainen kuntotarkastus.`}
+        {...puhdistusCitySeo(cityData)}
       />
+      <ServiceSchema name="Tiilikaton puhdistus" area={cityData.name} description={puhdistusCitySeo(cityData).description} />
       <ServicePageHero
         title=""
         subtitle=""

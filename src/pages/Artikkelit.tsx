@@ -1,90 +1,68 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import SEO from '@/components/SEO';
-import ServicePageHero from '@/components/ServicePageHero';
-import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
-import { getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
+import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
+import { staticSeo } from "@/data/seo";
+import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
+import { authors } from "@/data/authors";
+import { categoryLabels, formatDateFi, getPublishedArticles } from "@/data/articles";
 
-const heroBase = 'kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen';
-
-const articles = [
-  {
-    slug: 'milloin-pinnoittaa-tiilikatto',
-    title: 'Milloin tiilikatto pitää pinnoittaa? — 5 merkkiä',
-    excerpt:
-      'Epäiletkö kattosi kuntoa? Lue viisi selkeää merkkiä, jotka kertovat milloin pinnoituksen aika on käsillä.',
-    imageBase: 'kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen',
-  },
-];
-
+/** Artikkelilistaus: julkaistut artikkelit uusimmasta vanhimpaan. */
 const Artikkelit = () => {
+  const published = getPublishedArticles();
+
   return (
-    <div>
+    <div className="bg-card">
       <SEO
-        title="Artikkelit ja oppaat"
-        description="Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta."
+        {...staticSeo["/artikkelit"]}
       />
 
-      <ServicePageHero
-        title=""
-        subtitle=""
-        backgroundImage={getResponsiveSrc(heroBase)}
-        backgroundSrcSet={getResponsiveSrcSet(heroBase)}
-      >
-        <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto text-left">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-            Artikkelit ja{' '}
-            <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">oppaat</span>
+      <div className="pt-28 md:pt-40 pb-16 md:pb-24">
+        <header className="article-column mb-10 md:mb-14">
+          <h1 className="font-heading font-extrabold text-3xl md:text-[2.75rem] leading-[1.15] text-foreground mb-4">
+            Artikkelit ja oppaat
           </h1>
-          <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
-            Käytännön neuvoja <strong>tiilikaton pinnoituksesta</strong>, katon huollosta ja talon maalauksesta — kirjoitettuna pirkanmaalaisten ammattilaisten näkökulmasta.
+          <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
+            Käytännön tietoa tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Kirjoittajina työn
+            itse tekevät yrittäjät.
           </p>
-        </div>
-      </ServicePageHero>
+        </header>
 
-      <section className="section-padding bg-background">
-        <div className="section-container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {articles.map((article, index) => (
-              <motion.article
-                key={article.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
+        <div className="article-column">
+          <ul className="divide-y divide-border border-t border-border">
+            {published.map((article) => (
+              <li key={article.slug}>
                 <Link
                   to={`/artikkelit/${article.slug}`}
-                  className="group block bg-card rounded-2xl overflow-hidden shadow-md border border-border hover:shadow-xl transition-shadow"
+                  className="group grid sm:grid-cols-[220px_1fr] gap-5 md:gap-7 py-8 items-start"
                 >
-                  <div className="aspect-[4/3] overflow-hidden bg-muted">
-                    <img
-                      src={getResponsiveSrc(article.imageBase)}
-                      srcSet={getResponsiveSrcSet(article.imageBase)}
-                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                      alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
+                  <img
+                    src={getResponsiveSrc(article.heroImage)}
+                    srcSet={getResponsiveSrcSet(article.heroImage)}
+                    sizes="(min-width: 640px) 220px, 100vw"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full aspect-[3/2] object-cover rounded-xl bg-muted"
+                  />
+                  <div>
+                    <p className="text-xs font-heading font-bold uppercase tracking-[0.18em] text-[#006ead] mb-2">
+                      {categoryLabels[article.category]}
+                    </p>
+                    <h2 className="font-heading font-bold text-xl md:text-2xl leading-snug text-foreground mb-2 group-hover:text-[#006ead] transition-colors">
                       {article.title}
                     </h2>
-                    <p className="text-muted-foreground leading-relaxed">{article.excerpt}</p>
-                    <span className="inline-block mt-4 text-accent font-semibold">
-                      Lue artikkeli →
-                    </span>
+                    <p className="text-muted-foreground leading-relaxed mb-3">{article.lead}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {authors[article.author].name} ·{" "}
+                      <time dateTime={article.publishedAt}>{formatDateFi(article.publishedAt)}</time> ·{" "}
+                      {article.readingMinutes} min lukuaika
+                    </p>
                   </div>
                 </Link>
-              </motion.article>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-      </section>
-
-      <ToimintaAlueetBanner />
+      </div>
     </div>
   );
 };

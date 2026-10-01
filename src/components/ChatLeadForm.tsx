@@ -435,7 +435,7 @@ const ChatLeadForm = () => {
                       <textarea
                         value={questionText}
                         onChange={e => setQuestionText(e.target.value)}
-                        placeholder={currentStep.placeholder}
+                        placeholder={currentStep.placeholder} aria-label={currentStep.placeholder}
                         className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm resize-none focus:ring-2 focus:ring-[#38b6ff] outline-none"
                         rows={3}
                       />
@@ -456,7 +456,7 @@ const ChatLeadForm = () => {
                           type="text"
                           value={contactName}
                           onChange={e => setContactName(e.target.value)}
-                          placeholder="Nimi"
+                          placeholder="Nimi" aria-label="Nimi"
                           className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm focus:ring-2 focus:ring-[#38b6ff] outline-none"
                         />
                       )}
@@ -465,7 +465,7 @@ const ChatLeadForm = () => {
                           type="tel"
                           value={contactPhone}
                           onChange={e => setContactPhone(e.target.value)}
-                          placeholder="Puhelinnumero"
+                          placeholder="Puhelinnumero" aria-label="Puhelinnumero"
                           className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm focus:ring-2 focus:ring-[#38b6ff] outline-none"
                         />
                       )}
@@ -474,7 +474,7 @@ const ChatLeadForm = () => {
                           type="email"
                           value={contactEmail}
                           onChange={e => setContactEmail(e.target.value)}
-                          placeholder="Sähköposti"
+                          placeholder="Sähköposti" aria-label="Sähköposti"
                           className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm focus:ring-2 focus:ring-[#38b6ff] outline-none"
                         />
                       )}

@@ -4,9 +4,9 @@ import { Clock } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
 
 const cards = [
-  { size: '1-kerroksinen omakotitalo', label: 'Pieni tai keskisuuri koti', duration: '2–4 työpäivää', normalPrice: '3 500 € – 6 000 €', afterPrice: 'alk. 2 520 €', featured: false },
-  { size: '1,5-kerroksinen talo', label: 'Yleisin talon koko', duration: '3–5 työpäivää', normalPrice: '5 000 € – 8 000 €', afterPrice: 'alk. 3 600 €', featured: true },
-  { size: '2-kerroksinen talo', label: 'Suuret omakotitalot', duration: '4–8 työpäivää', normalPrice: '7 000 € – 11 000 €', afterPrice: 'alk. 5 040 €', featured: false },
+  { size: '1-kerroksinen omakotitalo', label: 'Pieni tai keskisuuri koti', duration: '2–4 työpäivää', normalPrice: '3 500 € – 6 000 €', afterPrice: 'alk. 2 380 €', featured: false },
+  { size: '1,5-kerroksinen talo', label: 'Yleisin talon koko', duration: '3–5 työpäivää', normalPrice: '5 000 € – 8 000 €', afterPrice: 'alk. 3 400 €', featured: true },
+  { size: '2-kerroksinen talo', label: 'Suuret omakotitalot', duration: '4–8 työpäivää', normalPrice: '7 000 € – 11 000 €', afterPrice: 'alk. 4 760 €', featured: false },
 ];
 
 const pricingIncludes = [

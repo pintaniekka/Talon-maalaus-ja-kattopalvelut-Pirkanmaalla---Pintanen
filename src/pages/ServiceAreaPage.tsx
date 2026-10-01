@@ -13,7 +13,7 @@ import SEO from "@/components/SEO";
 import ResponsiveSupabaseImage from "@/components/ResponsiveSupabaseImage";
 import { RoofTileIcon, RoofCleanIcon, PaintBrushIcon } from "@/components/ServiceIcons";
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
-import { getCityBySlug, cityHasServicePages } from "@/data/cityData";
+import { getCityBySlug, cityHasServicePages, maalausCities } from "@/data/cityData";
 import { getAreaCityContent } from "@/data/areaCityContent";
 import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
 import { getTestimonialsForCity } from "@/data/testimonialsData";
@@ -67,7 +67,7 @@ const getAreaFAQ = (cityName: string, cityIn: string, cityGenitive: string) => [
   },
   {
     question: `Oikeuttaako työnne kotitalousvähennykseen ${cityIn}?`,
-    answer: `Kyllä. Kaikki tekemämme huolto- ja maalaustyöt ${cityGenitive} alueella oikeuttavat kotitalousvähennykseen. Voit vähentää <strong>35 % työn osuudesta</strong> henkilökohtaisessa verotuksessasi.`,
+    answer: `Kyllä. Kaikki tekemämme huolto- ja maalaustyöt ${cityGenitive} alueella oikeuttavat kotitalousvähennykseen. Voit vähentää <strong>40 % työn osuudesta</strong> henkilökohtaisessa verotuksessasi.`,
   },
 ];
 
@@ -102,7 +102,10 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     },
     {
       title: "Talon maalaus",
-      href: hasSubPages ? `/talon-maalaus-${cityData.slug}` : "/talon-maalaus-pirkanmaa",
+      // Maalauksen kaupunkisivu on useammalla paikkakunnalla kuin kattopalvelujen sivut.
+      href: maalausCities.some((c) => c.slug === cityData.slug)
+        ? `/talon-maalaus-${cityData.slug}`
+        : "/talon-maalaus-pirkanmaa",
       description: "Ammattitaitoinen ulkomaalaus laadukkailla materiaaleilla suojaa taloasi säältä ja kosteudelta.",
       warranty: "2v takuu",
       baseName: "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
@@ -122,7 +125,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     "@context": "https://schema.org",
     "@type": "Service",
     name: `Tiilikaton pinnoitus ja talon maalaus ${cityName}`,
-    provider: { "@type": "LocalBusiness", name: "Pintanen Oy", url: "https://pintanen.fi" },
+    provider: { "@id": "https://pintanen.fi/#yritys" },
     areaServed: { "@type": "City", name: cityName },
     description: areaContent.alueMetaDesc,
   };

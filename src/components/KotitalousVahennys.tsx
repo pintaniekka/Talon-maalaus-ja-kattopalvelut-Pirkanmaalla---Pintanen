@@ -19,11 +19,11 @@ const KotitalousVahennys = () => {
               Hyödynnä kotitalousvähennys
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Yritykseltä ostettu työ: Saat vähentää <strong className="text-foreground">35 %</strong> työn osuudesta. 
+              Yritykseltä ostettu työ: Saat vähentää vuosina 2026 ja 2027 <strong className="text-foreground">40 %</strong> työn osuudesta. 
               Vähennys lasketaan työn arvonlisäverollisesta hinnasta.
             </p>
             <p className="text-muted-foreground mt-2">
-              Kotitalousvähennyksen määrä on enintään <strong className="text-foreground">1 600 €</strong> henkilöltä vuodessa.
+              Kotitalousvähennyksen määrä on enintään <strong className="text-foreground">2 100 €</strong> henkilöltä vuodessa, ja omavastuu on 150 €.
             </p>
           </div>
 
@@ -49,12 +49,12 @@ const KotitalousVahennys = () => {
                 <span className="font-semibold text-foreground">4 000 €</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-border">
-                <span className="text-muted-foreground">Vähennys (35 %)</span>
-                <span className="font-semibold text-accent">−1 400 €</span>
+                <span className="text-muted-foreground">Vähennys (40 %)</span>
+                <span className="font-semibold text-accent">−1 600 €</span>
               </div>
               <div className="flex justify-between items-center py-3 bg-accent/10 rounded-lg px-4 -mx-4">
                 <span className="font-bold text-foreground">Lopullinen hinta</span>
-                <span className="text-2xl font-bold text-accent">3 600 €</span>
+                <span className="text-2xl font-bold text-accent">3 400 €</span>
               </div>
             </div>
           </motion.div>

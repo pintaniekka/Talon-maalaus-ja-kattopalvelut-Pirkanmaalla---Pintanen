@@ -1,8 +1,7 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
@@ -25,19 +24,34 @@ const HinnatKatonPuhdistus = lazyWithRetry(() => import("./pages/HinnatKatonPuhd
 const HinnatTalonMaalaus = lazyWithRetry(() => import("./pages/HinnatTalonMaalaus"));
 const Meista = lazyWithRetry(() => import("./pages/Meista"));
 const Artikkelit = lazyWithRetry(() => import("./pages/Artikkelit"));
-const ArtikkeliMilloinPinnoittaa = lazyWithRetry(() => import("./pages/ArtikkeliMilloinPinnoittaa"));
+const Artikkeli = lazyWithRetry(() => import("./pages/Artikkeli"));
 const Tietosuoja = lazyWithRetry(() => import("./pages/Tietosuoja"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
-const queryClient = new QueryClient();
+/**
+ * Sovelluksen sisältö ilman reititintä. Selaimessa se kääritään BrowserRouteriin (App),
+ * build-aikaisessa esirenderöinnissä StaticRouteriin (src/entry-prerender.tsx).
+ * `fallback` näytetään, kun laiskasti ladattava sivu on vielä tulossa.
+ */
+/** Ilmoittaa, kun Suspensen sisältö on oikeasti näkyvissä (ei latausnäkymä). */
+const OnReady = ({ onReady }: { onReady?: () => void }) => {
+  useEffect(() => {
+    onReady?.();
+  }, [onReady]);
+  return null;
+};
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+export const AppContent = ({
+  fallback = <div className="min-h-screen" />,
+  onReady,
+}: {
+  fallback?: ReactNode;
+  onReady?: () => void;
+}) => (
+  <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Suspense fallback={<div className="min-h-screen" />}>
+        <Suspense fallback={fallback}>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
@@ -54,7 +68,7 @@ const App = () => (
               <Route path="/referenssit" element={<Referenssit />} />
               <Route path="/meista" element={<Meista />} />
               <Route path="/artikkelit" element={<Artikkelit />} />
-              <Route path="/artikkelit/milloin-pinnoittaa-tiilikatto" element={<ArtikkeliMilloinPinnoittaa />} />
+              <Route path="/artikkelit/:slug" element={<Artikkeli />} />
               <Route path="/tietosuoja" element={<Tietosuoja />} />
 
               {/* ── City service pages (8 full-service cities × 3 services) ── */}
@@ -103,10 +117,15 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
+          <OnReady onReady={onReady} />
         </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  </TooltipProvider>
+);
+
+const App = ({ fallback, onReady }: { fallback?: ReactNode; onReady?: () => void }) => (
+  <BrowserRouter>
+    <AppContent fallback={fallback} onReady={onReady} />
+  </BrowserRouter>
 );
 
 export default App;

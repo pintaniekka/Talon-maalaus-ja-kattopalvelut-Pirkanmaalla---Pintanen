@@ -15,6 +15,9 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ResponsiveSupabaseImage from "@/components/ResponsiveSupabaseImage";
 import { pinnoitusFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
+import ServiceSchema from "@/components/ServiceSchema";
+import { staticSeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 const heroBase = "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen";
@@ -31,9 +34,9 @@ const trustStats = [
 
 /* ── Pricing cards ── */
 const pricingCards = [
-  { size: "150–180 m²", label: "Pieni/keskisuuri koti", duration: "2 työpäivää", normalPrice: "2 850 € – 3 200 €", afterPrice: "alk. 2 150 €", featured: false },
-  { size: "190–240 m²", label: "Yleisin kattokoko", duration: "2–3 työpäivää", normalPrice: "3 300 € – 3 700 €", afterPrice: "alk. 2 480 €", featured: true },
-  { size: "250–300 m²", label: "Suuri omakotitalo", duration: "2–4 työpäivää", normalPrice: "3 750 € – 4 880 €", afterPrice: "alk. 2 800 €", featured: false },
+  { size: "150–180 m²", label: "Pieni/keskisuuri koti", duration: "2 työpäivää", normalPrice: "2 850 € – 3 200 €", afterPrice: "alk. 2 050 €", featured: false },
+  { size: "190–240 m²", label: "Yleisin kattokoko", duration: "2–3 työpäivää", normalPrice: "3 300 € – 3 700 €", afterPrice: "alk. 2 380 €", featured: true },
+  { size: "250–300 m²", label: "Suuri omakotitalo", duration: "2–4 työpäivää", normalPrice: "3 750 € – 4 880 €", afterPrice: "alk. 2 700 €", featured: false },
 ];
 
 const pricingIncludes = [
@@ -55,9 +58,9 @@ const KattopalvelutPinnoitus = () => {
   return (
     <div>
       <SEO
-        title="Tiilikaton pinnoitus Pirkanmaa & Tampere | 5v takuu | Pintanen"
-        description="Tiilikaton pinnoitus Pirkanmaalla. Säästä jopa 80 % vs. kattoremontti! Hyödynnä kotitalousvähennys ja tilaa ilmainen kuntoarvio. 5 vuoden takuu työlle."
+        {...staticSeo["/tiilikaton-pinnoitus-pirkanmaa"]}
       />
+      <ServiceSchema name="Tiilikaton pinnoitus" area="Pirkanmaa" areaType="AdministrativeArea" description={staticSeo["/tiilikaton-pinnoitus-pirkanmaa"].description} />
 
       {/* ═══ HERO ═══ */}
       <ServicePageHero
@@ -395,6 +398,7 @@ const KattopalvelutPinnoitus = () => {
       {/* ═══ FAQ ═══ */}
       <FAQSection items={pinnoitusFAQ} />
 
+      <RelatedArticles categories={["katto", "raha"]} />
       {/* ═══ CONTACT ═══ */}
       <ServiceContactSection variant="katto" />
 

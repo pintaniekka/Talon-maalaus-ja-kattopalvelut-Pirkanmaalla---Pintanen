@@ -3,6 +3,8 @@ import { Check, ArrowRight, ChevronRight } from "lucide-react";
 import { ShieldCheck, Wrench, FileText } from "@/components/icons/BrandIcons";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
+import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import ChatPriceCalculator from "@/components/ChatPriceCalculator";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
@@ -69,14 +71,13 @@ const Hinnat = () => {
   return (
     <>
       <SEO
-        title="Tiilikaton pinnoitus ja talon maalaus hinta – Laske arvio"
-        description="Paljonko tiilikaton pinnoitus tai talon maalaus maksaa? Laske arvio hintalaskurilla ja katso hintaesimerkit Pirkanmaan alueella."
+        {...staticSeo["/maalauspalvelut-hinta-pirkanmaa"]}
         preloadImage={heroImage}
       />
 
       {/* 1. Hero */}
       <ServicePageHero
-        title="Hinnat"
+        title="Tiilikaton pinnoituksen ja talon maalauksen hinnat"
         subtitle="Laske tiilikaton pinnoituksen tai talon maalauksen hinta heti"
         backgroundImage={heroImage}
         backgroundSrcSet={heroSrcSet}
@@ -216,6 +217,7 @@ const Hinnat = () => {
       {/* 5. Kotitalousvähennys */}
       <KotitalousVahennys />
 
+      <RelatedArticles categories={["raha", "katto", "maalaus"]} />
       {/* 6. Yhteystiedot */}
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />

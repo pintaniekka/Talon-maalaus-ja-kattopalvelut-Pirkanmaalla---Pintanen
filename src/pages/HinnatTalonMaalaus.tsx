@@ -4,6 +4,8 @@ import { Paintbrush, Ruler, Building2, Layers, Droplets } from "@/components/ico
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import RelatedArticles from "@/components/RelatedArticles";
+import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
 import WallPriceCalculator from "@/components/WallPriceCalculator";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
@@ -59,8 +61,7 @@ const HinnatTalonMaalaus = () => {
   return (
     <>
       <SEO
-        title="Talon maalaus hinta – Laske arvio heti"
-        description="Paljonko talon maalaus maksaa? Laske suuntaa antava hinta laskurilla ja katso hintaesimerkit. Kotitalousvähennys pienentää kustannuksia."
+        {...staticSeo["/talon-maalaus-hinta-pirkanmaa"]}
         preloadImage={heroImage}
       />
       <Helmet defer={false}>
@@ -79,7 +80,7 @@ const HinnatTalonMaalaus = () => {
             <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">hinta</span>
           </h1>
           <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
-            <strong>Laske suuntaa antava hinta laskurillamme</strong> ja katso konkreettisia hintaesimerkkejä. Hinta määräytyy talon koon, kerrosten ja pohjatöiden mukaan. <strong>Kotitalousvähennys</strong> pienentää lopullista kustannusta jopa 1 600 €. Tarjoamme aina <strong>läpinäkyvän hinnoittelun</strong> ja <strong>maksuttoman arviokäynnin</strong> kotiovellesi.
+            <strong>Laske suuntaa antava hinta laskurillamme</strong> ja katso konkreettisia hintaesimerkkejä. Hinta määräytyy talon koon, kerrosten ja pohjatöiden mukaan. <strong>Kotitalousvähennys</strong> pienentää lopullista kustannusta jopa 2 100 € henkilöä kohden. Tarjoamme aina <strong>läpinäkyvän hinnoittelun</strong> ja <strong>maksuttoman arviokäynnin</strong> kotiovellesi.
           </p>
         </div>
 
@@ -223,6 +224,7 @@ const HinnatTalonMaalaus = () => {
       {/* FAQ */}
       <FAQSection items={faqItems} />
 
+      <RelatedArticles categories={["maalaus", "raha"]} />
       {/* Contact - only Eemil */}
       <ServiceContactSection variant="maalaus" />
     </>

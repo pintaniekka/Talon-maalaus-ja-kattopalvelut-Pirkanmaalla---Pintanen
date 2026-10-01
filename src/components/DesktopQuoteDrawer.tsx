@@ -191,6 +191,7 @@ const DesktopQuoteDrawer = () => {
                       name={f.name}
                       type={f.type || "text"}
                       placeholder={f.placeholder}
+                      aria-label={f.placeholder}
                       value={form[f.name]}
                       onChange={handleChange}
                       className={inputClasses}
@@ -206,6 +207,7 @@ const DesktopQuoteDrawer = () => {
                   <textarea
                     name="message"
                     placeholder="Viestisi"
+                    aria-label="Viestisi"
                     value={form.message}
                     onChange={handleChange}
                     rows={3}

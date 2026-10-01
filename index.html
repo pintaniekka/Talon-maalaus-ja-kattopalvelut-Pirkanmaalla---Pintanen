@@ -36,6 +36,14 @@
       fetchpriority="high"
     />
 
+    <!-- Ilman JavaScriptiä esirenderöidyn sivun animoidut osiot jäisivät läpinäkyviksi
+         (framer-motionin alkutila). Näytetään ne suoraan. -->
+    <noscript>
+      <style>
+        [style*="opacity:0"], [style*="opacity: 0"] { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
+
     <!-- Canonical handled dynamically by SEO.tsx via React Helmet -->
 
     <!-- Basic SEO -->
@@ -75,11 +83,12 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": ["RoofingContractor", "HousePainter"],
+        "@id": "https://pintanen.fi/#yritys",
         "name": "Pintanen Oy",
-        "url": "https://pintanen.fi",
-        "logo": "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/logo.webp",
-        "image": "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Samaan_kohtaan_synkronoidut_kuvat_erikseen/Laivaston%20sininen%20talo%20maalauksen%20jalkeen.webp",
+        "url": "https://pintanen.fi/",
+        "logo": "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pintanen-logo.png",
+        "image": "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pictures-1500/tummansininen-puutalo-ulkomaalaus-jalkeen-1500.webp",
         "description": "Tiilikattojen pinnoitukset ja ulkomaalaukset ammattitaidolla Pirkanmaalla. 5 vuoden takuu.",
         "telephone": "+358409640066",
         "email": "myynti@pintanen.fi",
@@ -90,12 +99,29 @@
           "https://www.instagram.com/pintanenoy/",
           "https://x.com/PintanenOy"
         ],
-        "areaServed": {
-          "@type": "State",
-          "name": "Pirkanmaa"
-        },
+        "founder": [
+          { "@type": "Person", "name": "Eerik Pitkänen", "jobTitle": "Kattomaalari" },
+          { "@type": "Person", "name": "Eemil Pitkänen", "jobTitle": "Seinämaalari" }
+        ],
+        "knowsAbout": ["Tiilikaton pinnoitus", "Tiilikaton puhdistus", "Talon ulkomaalaus", "Julkisivumaalaus"],
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Pirkanmaa" },
+          { "@type": "City", "name": "Tampere" },
+          { "@type": "City", "name": "Nokia" },
+          { "@type": "City", "name": "Ylöjärvi" },
+          { "@type": "City", "name": "Kangasala" },
+          { "@type": "City", "name": "Lempäälä" },
+          { "@type": "City", "name": "Pirkkala" },
+          { "@type": "City", "name": "Sastamala" },
+          { "@type": "City", "name": "Hämeenkyrö" },
+          { "@type": "City", "name": "Hämeenlinna" },
+          { "@type": "City", "name": "Forssa" },
+          { "@type": "City", "name": "Huittinen" }
+        ],
         "address": {
           "@type": "PostalAddress",
+          "addressLocality": "Tampere",
+          "postalCode": "33300",
           "addressRegion": "Pirkanmaa",
           "addressCountry": "FI"
         },
@@ -108,6 +134,17 @@
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Katon puhdistus" } }
           ]
         }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://pintanen.fi/#sivusto",
+        "url": "https://pintanen.fi/",
+        "name": "Pintanen Oy",
+        "inLanguage": "fi",
+        "publisher": { "@id": "https://pintanen.fi/#yritys" }
       }
     </script>
   </head>

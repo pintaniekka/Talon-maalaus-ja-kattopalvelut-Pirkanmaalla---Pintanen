@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import ResponsiveSupabaseImage from "./ResponsiveSupabaseImage";
+import ResponsiveImage from "./ResponsiveImage";
 import { RoofTileIcon, RoofCleanIcon, PaintBrushIcon } from "./ServiceIcons";
 
 const services = [
@@ -75,7 +75,7 @@ const Services = () => {
                 className="relative rounded-xl overflow-hidden group cursor-pointer h-full aspect-[4/5] md:aspect-[3/4] lg:aspect-[3/4] flex flex-col justify-end shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Background image */}
-                <ResponsiveSupabaseImage
+                <ResponsiveImage
                   baseName={service.imageBase}
                   alt={service.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

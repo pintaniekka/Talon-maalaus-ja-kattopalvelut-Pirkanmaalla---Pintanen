@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { getResponsiveSrc, getResponsiveSrcSet, getResponsiveUrl } from '@/lib/storage';
 
-interface ResponsiveSupabaseImageProps {
+interface ResponsiveImageProps {
   baseName: string;
   alt?: string;
   cityIn?: string;
@@ -23,7 +23,7 @@ const baseNameToAlt = (baseName: string): string => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
-const ResponsiveSupabaseImage = ({
+const ResponsiveImage = ({
   baseName,
   alt,
   cityIn,
@@ -35,7 +35,7 @@ const ResponsiveSupabaseImage = ({
   onError,
   width,
   height,
-}: ResponsiveSupabaseImageProps) => {
+}: ResponsiveImageProps) => {
   const location = cityIn || 'Pirkanmaalla';
   const resolvedAlt = alt || `${baseNameToAlt(baseName)} ${location}`;
 
@@ -88,4 +88,4 @@ const ResponsiveSupabaseImage = ({
   );
 };
 
-export default ResponsiveSupabaseImage;
+export default ResponsiveImage;

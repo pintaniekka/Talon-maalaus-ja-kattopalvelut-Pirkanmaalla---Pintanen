@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
-import ResponsiveSupabaseImage from "./ResponsiveSupabaseImage";
+import ResponsiveImage from "./ResponsiveImage";
 
 const images = [
   {
@@ -68,7 +68,7 @@ const Gallery = () => {
               transition={{ delay: index * 0.1 }}
               className="group relative w-full aspect-[4/3] min-h-[260px] sm:min-h-0 rounded-2xl overflow-hidden bg-muted"
             >
-              <ResponsiveSupabaseImage
+              <ResponsiveImage
                 baseName={image.baseName}
                 alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

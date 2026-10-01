@@ -6,7 +6,7 @@ import ServiceContactSection from '@/components/ServiceContactSection';
 import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import SEO from '@/components/SEO';
 import { staticSeo } from "@/data/seo";
-import ResponsiveSupabaseImage from '@/components/ResponsiveSupabaseImage';
+import ResponsiveImage from '@/components/ResponsiveImage';
 import { getResponsiveSrc, getResponsiveSrcSet, getResponsiveUrl } from '@/lib/storage';
 
 type Category = 'all' | 'pinnoitus' | 'puhdistus' | 'maalaus';
@@ -36,7 +36,7 @@ const CompositeThumbnail = ({ images }: { images: ProjectImage[] }) => (
   <div className="relative w-full h-full flex overflow-hidden">
     {images.map((img, idx) => (
       <div key={idx} className="h-full overflow-hidden bg-muted/40" style={{ width: `${100 / images.length}%` }}>
-        <ResponsiveSupabaseImage
+        <ResponsiveImage
           baseName={img.baseName}
           alt={img.label}
           sizes="(min-width: 1024px) 17vw, (min-width: 640px) 25vw, 50vw"
@@ -405,7 +405,7 @@ const Referenssit = () => {
                     {project.type === 'group' && project.images.length > 1 ? (
                       <CompositeThumbnail images={project.images} />
                     ) : (
-                      <ResponsiveSupabaseImage
+                      <ResponsiveImage
                         baseName={project.type === 'group' ? project.images[0].baseName : project.baseName}
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

@@ -10,7 +10,7 @@ import FAQSection from "@/components/FAQSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
-import ResponsiveSupabaseImage from "@/components/ResponsiveSupabaseImage";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import { RoofTileIcon, RoofCleanIcon, PaintBrushIcon } from "@/components/ServiceIcons";
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { getCityBySlug, cityHasServicePages, maalausCities } from "@/data/cityData";
@@ -247,7 +247,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
                   to={service.href}
                   className="block rounded-2xl overflow-hidden group relative h-full min-h-[320px]"
                 >
-                  <ResponsiveSupabaseImage
+                  <ResponsiveImage
                     baseName={service.baseName}
                     alt={`${service.title} ${cityIn}`}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

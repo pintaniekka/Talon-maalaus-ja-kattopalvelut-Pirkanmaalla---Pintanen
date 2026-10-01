@@ -10,7 +10,7 @@ import ChatPriceCalculator from "@/components/ChatPriceCalculator";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
-import ResponsiveSupabaseImage from "@/components/ResponsiveSupabaseImage";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import { RoofTileIcon, RoofCleanIcon, PaintBrushIcon } from "@/components/ServiceIcons";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
@@ -150,7 +150,7 @@ const Hinnat = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <Link to={card.href} className="block rounded-2xl overflow-hidden group relative h-full min-h-[320px]">
-                  <ResponsiveSupabaseImage
+                  <ResponsiveImage
                     baseName={card.baseName}
                     alt={card.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

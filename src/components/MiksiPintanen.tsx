@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
-import ResponsiveSupabaseImage from "./ResponsiveSupabaseImage";
+import ResponsiveImage from "./ResponsiveImage";
 
 const sideBase = "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen";
 
@@ -54,7 +54,7 @@ const MiksiPintanen = () => {
             viewport={{ once: true }}
             className="rounded-2xl overflow-hidden"
           >
-            <ResponsiveSupabaseImage
+            <ResponsiveImage
               baseName={sideBase}
               alt="Tummansininen puutalo ulkomaalaus jälkeen Pirkanmaalla"
               className="w-full h-full object-cover rounded-2xl"

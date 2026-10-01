@@ -1,7 +1,7 @@
 import SEO from "@/components/SEO";
 import { staticSeo } from "@/data/seo";
 
-const UPDATED = "30.9.2026";
+const UPDATED = "1.10.2026";
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="mb-10">
@@ -81,7 +81,7 @@ const Tietosuoja = () => (
         <ul className="list-disc pl-6 space-y-1">
           <li>sähköpostin välityspalvelu, jolla lomakkeen tiedot toimitetaan myyntiimme</li>
           <li>asiakashallintajärjestelmämme, johon tarjouspyynnöt tallennetaan käsittelyä varten</li>
-          <li>sivuston teknisen alustan ja lomakkeiden käsittelyn palveluntarjoaja (Supabase) sekä sisällönjakeluverkko (Cloudflare)</li>
+          <li>sivuston julkaisualustan, lomakkeiden käsittelyn ja sisällönjakeluverkon palveluntarjoaja (Cloudflare)</li>
         </ul>
         <p>
           Osa palveluntarjoajista voi käsitellä tietoja EU:n tai ETA:n ulkopuolella. Tällöin siirto perustuu Euroopan
@@ -124,9 +124,9 @@ const Tietosuoja = () => (
 
       <Section title="8. Evästeet ja ulkoiset resurssit">
         <p>
-          Sivusto ei aseta seurantaevästeitä. Sivuston kuvat ladataan Supabase-tallennuspalvelusta ja fontit sivuston
-          omalta palvelimelta. Kuvia ladattaessa palveluntarjoaja näkee selaimesi IP-osoitteen teknisen tiedonsiirron
-          toteuttamiseksi.
+          Sivusto ei aseta seurantaevästeitä. Sivuston kuvat ja fontit ladataan sivuston omasta osoitteesta, eikä
+          sivusto lataa sisältöä kolmansien osapuolten palvelimilta. Sivuston julkaisualusta näkee selaimesi
+          IP-osoitteen teknisen tiedonsiirron toteuttamiseksi.
         </p>
       </Section>
 

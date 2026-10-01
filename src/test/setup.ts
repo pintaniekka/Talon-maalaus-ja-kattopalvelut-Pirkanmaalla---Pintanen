@@ -1,6 +1,8 @@
 import "@testing-library/jest-dom";
 
-Object.defineProperty(window, "matchMedia", {
+// Selainympäristön (jsdom) testeille; node-ympäristön testeissä ikkunaa ei ole.
+if (typeof window !== "undefined")
+  Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({
     matches: false,

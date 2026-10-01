@@ -1,21 +1,19 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-
-// Supabase-asiakas korvataan testissä: mitään ei lähetetä oikeaan palveluun.
-const invoke = vi.fn();
-vi.mock("@/integrations/supabase/client", () => ({
-  supabase: { functions: { invoke: (...args: unknown[]) => invoke(...args) } },
-}));
-
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { submitContactForm } from "@/lib/contactForm";
+
+// fetch korvataan testissä: mitään ei lähetetä oikeaan palveluun.
+const fetchMock = vi.fn();
 
 describe("submitContactForm", () => {
   beforeEach(() => {
-    invoke.mockReset();
-    invoke.mockResolvedValue({ data: { success: true }, error: null });
+    fetchMock.mockReset();
+    fetchMock.mockResolvedValue(new Response(JSON.stringify({ success: true }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
   });
+  afterEach(() => vi.unstubAllGlobals());
 
-  it("lähettää lomakkeen tiedot send-contact-email-funktiolle", async () => {
-    await submitContactForm({
+  it("lähettää lomakkeen tiedot osoitteeseen /api/contact", async () => {
+    const result = await submitContactForm({
       name: " Testi Henkilö ",
       phone: "040 123 4567",
       email: "",
@@ -25,10 +23,13 @@ describe("submitContactForm", () => {
       city: "Tampere",
       website: "",
     });
-    expect(invoke).toHaveBeenCalledTimes(1);
-    const [fn, options] = invoke.mock.calls[0] as [string, { body: Record<string, unknown> }];
-    expect(fn).toBe("send-contact-email");
-    expect(options.body).toMatchObject({
+    expect(result).toEqual({ success: true });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe("/api/contact");
+    expect(init.method).toBe("POST");
+    expect((init.headers as Record<string, string>)["Content-Type"]).toBe("application/json");
+    expect(JSON.parse(init.body as string)).toMatchObject({
       name: "Testi Henkilö",
       phone: "040 123 4567",
       service: "tiilikatto",
@@ -41,13 +42,20 @@ describe("submitContactForm", () => {
   it("ei lähetä mitään, jos nimi tai yhteystieto puuttuu", async () => {
     await expect(submitContactForm({ name: "", phone: "040", service: "", message: "" })).rejects.toThrow();
     await expect(submitContactForm({ name: "Testi", phone: "", email: "", service: "", message: "" })).rejects.toThrow();
-    expect(invoke).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("välittää funktion virheen kutsujalle", async () => {
-    invoke.mockResolvedValue({ data: { error: "Sähköpostin lähetys epäonnistui" }, error: null });
+  it("välittää funktion virheilmoituksen kutsujalle", async () => {
+    fetchMock.mockResolvedValue(new Response(JSON.stringify({ error: "Sähköpostin lähetys epäonnistui" }), { status: 502 }));
     await expect(
       submitContactForm({ name: "Testi", phone: "040 1", service: "", message: "" }),
     ).rejects.toThrow("Sähköpostin lähetys epäonnistui");
+  });
+
+  it("käsittelee vastauksen, joka ei ole JSONia", async () => {
+    fetchMock.mockResolvedValue(new Response("<html>virhe</html>", { status: 500 }));
+    await expect(
+      submitContactForm({ name: "Testi", phone: "040 1", service: "", message: "" }),
+    ).rejects.toThrow("Lähetys epäonnistui (500)");
   });
 });

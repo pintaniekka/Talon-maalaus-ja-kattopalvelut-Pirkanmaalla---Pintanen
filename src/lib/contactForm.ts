@@ -24,19 +24,29 @@ const contactFormSchema = z.object({
 
 export type ContactFormPayload = z.infer<typeof contactFormSchema>;
 
+/** Lomakkeen vastaanotto: Cloudflare Pages -funktio `functions/api/contact.ts`. */
+const CONTACT_ENDPOINT = '/api/contact';
+
 export const submitContactForm = async (payload: ContactFormPayload) => {
   const parsed = contactFormSchema.parse(payload);
 
-  // Supabase-asiakas ladataan vasta lähetyshetkellä, jotta se ei kasvata
-  // jokaisen sivulatauksen JavaScript-pakettia.
-  const { supabase } = await import('@/integrations/supabase/client');
-
-  const { data, error } = await supabase.functions.invoke('send-contact-email', {
-    body: parsed,
+  const response = await fetch(CONTACT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(parsed),
   });
 
-  if (error) throw error;
-  if (data?.error) throw new Error(data.error);
+  // Funktio vastaa aina JSON:lla: { success: true } tai { error: "…" }.
+  let data: { success?: boolean; error?: string } | null = null;
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
+  }
+
+  if (!response.ok || data?.error) {
+    throw new Error(data?.error ?? `Lähetys epäonnistui (${response.status})`);
+  }
 
   return data;
 };

@@ -4,9 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Marketing/lead-gen website for Pintanen Oy, a roof-coating/cleaning and house-painting company in Pirkanmaa, Finland (pintanen.fi). It's a Vite + React + TypeScript SPA, built with shadcn-ui and Tailwind, originally scaffolded and still partly managed via [Lovable](https://lovable.dev) (see `.lovable/plan/*` for past change specs and `lovable-tagger` in the Vite plugins). Content and UI copy are in Finnish.
+Marketing/lead-gen website for Pintanen Oy, a roof-coating/cleaning and house-painting company in Pirkanmaa, Finland (pintanen.fi). It's a Vite + React + TypeScript SPA, built with shadcn-ui and Tailwind, whose pages are prerendered to static HTML at build time. Content and UI copy are in Finnish. The site was originally built with Lovable; since October 2026 it no longer depends on Lovable.
 
-The site is a static SPA served behind Cloudflare at `pintanen.fi` (production responds with `server: cloudflare` and honours `public/_redirects`, so the 301s there are real server-side redirects). On every push to `main`, `.github/workflows/sync-to-old.yml` force-pushes the repo to a `paivitys-lovablesta` branch on a second, older repo (`Pintaniekka/Talon-maalaus-ja-kattopalvelut-Pirkanmaalla---Pintanen`) — this only runs when `github.repository == 'Pintaniekka/easy-web-start-62'`. The owner then opens a PR from that branch to the old repo's `main`, and production builds from there. The `CNAME` file is a leftover from GitHub Pages and is harmless.
+## Repository and deployment
+
+- **One repository**: `Pintaniekka/Talon-maalaus-ja-kattopalvelut-Pirkanmaalla---Pintanen` (public). Local clone: `~/GitHub/pintanen-fi`. Keep the clone **outside** `~/Documents`: iCloud sync creates "file 2" duplicates there, also inside `.git`, which breaks git.
+- **Cloudflare Pages** project `talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen` is connected to this repo by Git integration. A merge to `main` deploys to `https://pintanen.fi`. Every other branch gets a preview at `https://<branch>.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev` (served with `x-robots-tag: noindex`).
+- **Workflow**: branch `claude/…` → PR to `main` → wait for the "Cloudflare Pages" check → verify the preview → merge → verify production. `python3 scripts/verify_live.py <url> <dir>` followed by `python3 scripts/verify_dist.py <dir>` checks all sitemap pages without JavaScript (status, head values, links, images, llms.txt, schema).
+- Cloudflare installs dependencies with **bun** (`bun.lock`). When dependencies change, update both `bun.lock` and `package-lock.json`, or the Cloudflare build fails on the frozen lockfile.
+- `public/_redirects` holds real server-side 301s; `public/_headers` sets security and cache headers; `public/_routes.json` limits Pages Functions to `/api/*`.
+- The old working repo `Pintaniekka/easy-web-start-62` and its sync workflow are retired. Do not push there.
+- Secrets (`RESEND_API_KEY`, `LEAD_INTAKE_SECRET`) live in the Pages project settings. Never print, paste or commit secret values; the owner runs secret-related commands himself.
 
 ## Commands
 
@@ -23,8 +31,6 @@ To run a single test file: `npx vitest run src/test/example.test.ts` (or any pat
 
 `.npmrc` sets `engine-strict=true` and `package.json` requires Node >=18 — use a matching Node version or installs will fail.
 
-Note: `git` on this machine currently errors via `xcode-select` because Xcode Command Line Tools aren't installed; run `xcode-select --install` if git commands fail.
-
 ## Architecture
 
 **Routing is generated from city data, not hand-written per page.** `src/data/cityData.ts` exports `cities` (8 "full-service" cities with dedicated pinnoitus/puhdistus/maalaus subpages) and `allCities` (24 cities total, all get a unified area page). `src/App.tsx` maps over these arrays to produce `<Route>` entries for:
@@ -37,7 +43,7 @@ Note: `git` on this machine currently errors via `xcode-select` because Xcode Co
 
 Per-city copy (SEO titles/descriptions, intro text, local "hook" paragraphs) lives alongside the city definitions in `src/data/cityData.ts`, `areaCityContent.ts`, `cityNeighborhoods.ts`, `faqData.ts`, and `testimonialsData.ts` — these are large content tables, not logic; page components pull from them via slug lookups (`getCityBySlug`, `getAreaCityContent`, etc.).
 
-**Images are always served from a fixed Supabase Storage bucket**, never bundled locally or made relative. `src/lib/storage.ts` hardcodes `FIXED_SUPABASE_URL` for the `fndkkgfpsgghvewvoysr` Supabase project/`images` bucket — the file's own comment warns not to change this constant or make paths relative, since images must load the same way in every environment. Use `getStorageUrl`, `getResponsiveSrc`, and `getResponsiveSrcSet` (not the deprecated `getMobileImageUrl`) when referencing new images, and render them through `OptimizedImage`/`ResponsiveSupabaseImage` components rather than raw `<img>`.
+**Images are the site's own files in `public/images/`**, served at `/images/…` (30-day cache, see `public/_headers`). Folders: `Pictures-400|800|1200|1500/` (responsive WebP, file name `<base>-<width>.webp`), `Pictures-200/` (portraits), `Eerik-maalaa/` (home hero, AVIF), `Icons/`, plus logo, favicon and map in the root. `src/lib/storage.ts` builds the URLs: use `getStorageUrl`, `getResponsiveSrc` and `getResponsiveSrcSet`, and render through `OptimizedImage`/`ResponsiveSupabaseImage` rather than raw `<img>`. Social tags, JSON-LD and the image sitemap need absolute URLs: use `toAbsoluteUrl`. To add an image, add the 400, 800 and 1200 px files and refer to it by base name; `src/test/seo.test.ts` fails if a size is missing.
 
 **Supabase** (`src/integrations/supabase/`) is used both for image storage and a `send-contact-email` edge function (`supabase/functions/send-contact-email/index.ts`) backing the contact form. `client.ts` is marked "automatically generated. Do not edit it directly" (Lovable's Supabase integration regenerates it); the actual Supabase URL/key come from `VITE_SUPABASE_URL`/`VITE_SUPABASE_PUBLISHABLE_KEY` in `.env`, separate from the fixed image-storage URL above.
 

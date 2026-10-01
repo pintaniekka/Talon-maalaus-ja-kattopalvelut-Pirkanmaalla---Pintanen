@@ -1,51 +1,31 @@
 /**
- * Pintanen Oy – Kuvaresurssien hallinta
+ * Pintanen Oy – kuvien osoitteet
  *
- * Kaikki julkiset kuvat haetaan **aina** Pintanen-tilin Supabase Storage
- * -bucketista (projekti: fndkkgfpsgghvewvoysr, bucket: "images").
+ * Kuvat ovat sivuston omia tiedostoja kansiossa `public/images/` ja ne julkaistaan
+ * sivuston mukana osoitteessa `/images/…` (Cloudflare Pages). Kansiorakenne:
+ * `Pictures-400|800|1200|1500/` (responsiiviset WebP-kuvat), `Pictures-200/` (henkilökuvat),
+ * `Eerik-maalaa/` (etusivun hero, AVIF), `Icons/` ja juuressa logo, favicon ja kartta.
  *
- * ⚠️  ÄLÄ muuta FIXED_SUPABASE_URL-arvoa äläkä vaihda polkuja suhteellisiksi.
- *     Kuvat on tarkoitettu ladattaviksi pilvestä kaikissa ympäristöissä.
+ * Uusi kuva: lisää tiedostot kansioihin Pictures-400, -800 ja -1200 nimellä
+ * `<perusnimi>-<leveys>.webp` ja viittaa siihen perusnimellä.
  *
  * @module storage
  */
 
-/** Kiinteä Supabase-osoite Pintanen-projektille (fndkkgfpsgghvewvoysr). */
-const FIXED_SUPABASE_URL = "https://fndkkgfpsgghvewvoysr.supabase.co";
+/** Sivuston osoite absoluuttisia kuvaosoitteita varten (og:image, JSON-LD, kuvasitemap). */
+export const SITE_ORIGIN = "https://pintanen.fi";
 
-/**
- * Palauttaa absoluuttisen URL-osoitteen Lovable Cloudin tallennustilasta (images-bucket).
- */
+/** Palauttaa sivuston sisäisen osoitteen kuvalle, esim. "Pintanen-logo.png" → "/images/Pintanen-logo.png". */
 export function getStorageUrl(path: string): string {
-  return `${FIXED_SUPABASE_URL}/storage/v1/object/public/images/${encodeURI(path)}`;
+  return `/images/${encodeURI(path)}`;
 }
 
 /**
- * Palauttaa mobiilioptimoitua kuvan URL:n annetusta desktop-URL:sta.
- * Mobiiliversiot sijaitsevat pictures-480/ tai pictures-750/ -kansiossa.
- * @deprecated Käytä getResponsiveSrcSet uusille kuville.
+ * Muuttaa sivuston sisäisen osoitteen absoluuttiseksi. Some-jakojen esikatselut, JSON-LD
+ * ja kuvasitemap vaativat täyden osoitteen.
  */
-export function getMobileImageUrl(desktopUrl: string, width: 480 | 750): string {
-  if (!desktopUrl.includes('/storage/v1/object/public/images/')) return desktopUrl;
-  const basePath = desktopUrl.split('/storage/v1/object/public/images/')[1];
-  const segments = basePath.split('/');
-  const encodedFilename = segments[segments.length - 1];
-  const filename = decodeURI(encodedFilename);
-  const dotIdx = filename.lastIndexOf('.');
-  const name = filename.substring(0, dotIdx);
-  const ext = filename.substring(dotIdx);
-  const folder = width === 750 ? 'pictures-750' : 'pictures-480';
-  return `${FIXED_SUPABASE_URL}/storage/v1/object/public/images/${folder}/${encodeURI(`${name}-${width}${ext}`)}`;
-}
-
-/** @deprecated Käytä getResponsiveSrcSet uusille kuville. */
-export function getHeroSrcSet(desktopUrl: string): string {
-  return `${getMobileImageUrl(desktopUrl, 750)} 750w, ${desktopUrl} 1125w`;
-}
-
-/** @deprecated Käytä getResponsiveSrcSet uusille kuville. */
-export function getImageSrcSet(desktopUrl: string): string {
-  return `${getMobileImageUrl(desktopUrl, 480)} 480w, ${desktopUrl} 900w`;
+export function toAbsoluteUrl(url: string): string {
+  return url.startsWith("/") ? `${SITE_ORIGIN}${url}` : url;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -57,21 +37,16 @@ export function getImageSrcSet(desktopUrl: string): string {
 
 export type ResponsiveWidth = 400 | 800 | 1200 | 1500;
 
-// Vain 400/800/1200 ovat aina saatavilla bucketissa; 1500 puuttuu osasta
+// Vain 400/800/1200 ovat aina saatavilla; 1500 puuttuu osasta
 // kuvia, joten oletus-srcSet ei käytä sitä. Tämä estää tilanteen, jossa
 // selain valitsee 1500w-version, saa 400-virheen eikä näytä kuvaa lainkaan.
 const RESPONSIVE_WIDTHS: ResponsiveWidth[] = [400, 800, 1200];
 
 /**
- * Kuvaversiot, jotka puuttuvat bucketista (tarkistettu 1.10.2026, palvelin vastaa 400).
- * Ne jätetään pois srcsetistä, koska selain ei yritä toista kokoa, jos valittu puuttuu:
- * kuva jäisi kokonaan näkymättä niillä näytöillä, joille 800 px osuu.
- * Kun tiedosto on ladattu bucketiin, rivin voi poistaa.
+ * Kuvaversiot, joita ei ole kansiossa public/images. Ne jätetään pois srcsetistä, koska
+ * selain ei yritä toista kokoa, jos valittu puuttuu. Tällä hetkellä kaikki koot ovat olemassa.
  */
-const MISSING_VARIANTS: Record<string, ResponsiveWidth[]> = {
-  "violetti-puutalo-varinvaihto-peittomaalaus-jalkeen": [800],
-  "vihrea-puutalo-ulkomaalaus-jalkeen": [800],
-};
+const MISSING_VARIANTS: Record<string, ResponsiveWidth[]> = {};
 
 /**
  * Palauttaa URL:n yksittäiselle responsiiviselle kuvaversiolle.
@@ -79,7 +54,7 @@ const MISSING_VARIANTS: Record<string, ResponsiveWidth[]> = {
  * @param width - Haluttu leveys (400, 800, 1200 tai 1500)
  */
 export function getResponsiveUrl(baseName: string, width: ResponsiveWidth): string {
-  return `${FIXED_SUPABASE_URL}/storage/v1/object/public/images/Pictures-${width}/${encodeURI(baseName)}-${width}.webp`;
+  return getStorageUrl(`Pictures-${width}/${baseName}-${width}.webp`);
 }
 
 /**

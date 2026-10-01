@@ -15,30 +15,12 @@ interface OptimizedImageProps {
 }
 
 /**
- * Strips known transformation parameters and any "Pictures-XXX/" path segment
- * from a Supabase storage URL, returning the largest known fallback URL.
- * If src already points at the largest variant, returns it unchanged.
+ * Varakuva latausvirheen varalle: sama kuva 1200 px -kansiosta ilman kyselyparametreja.
+ * 1200 px on aina saatavilla; 1500 px puuttuu osasta kuvia.
  */
 const buildFallbackUrl = (src: string): string => {
-  try {
-    const url = new URL(src);
-    // Drop any query params (Supabase image transforms etc.)
-    url.search = '';
-    // If URL points to a Pictures-<n>/ folder with -<n>.webp suffix, swap to 1200
-    // (1200 on aina saatavilla; 1500 puuttuu osasta kuvia).
-    const path = url.pathname;
-    const m = path.match(/\/Pictures-(\d+)\/([^/]+)-(\d+)\.webp$/);
-    if (m) {
-      const baseName = m[2];
-      url.pathname = path.replace(
-        /\/Pictures-\d+\/[^/]+-\d+\.webp$/,
-        `/Pictures-1200/${baseName}-1200.webp`
-      );
-    }
-    return url.toString();
-  } catch {
-    return src;
-  }
+  const [path] = src.split("?");
+  return path.replace(/\/Pictures-\d+\/([^/]+)-\d+\.webp$/, "/Pictures-1200/$1-1200.webp");
 };
 
 const OptimizedImage = ({

@@ -169,7 +169,7 @@ export const getRouteSeo = (path: string): RouteSeo | undefined => {
     return {
       title: article.seoTitle ?? article.title,
       description: article.description,
-      image: getResponsiveSrc(article.heroImage),
+      image: SITE_URL + getResponsiveSrc(article.heroImage),
       type: "article",
       hero: { base: article.heroImage, sizes: "(min-width: 896px) 848px, 100vw" },
     };

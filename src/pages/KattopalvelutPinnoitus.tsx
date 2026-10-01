@@ -371,7 +371,7 @@ const KattopalvelutPinnoitus = () => {
             <div className="grid md:grid-cols-[auto_1fr] gap-8 items-start">
               <div className="flex justify-center">
                 <img
-                  src={`https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp`}
+                  src="/images/Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp"
                   alt="Eerik Pitkänen – Pintanen Oy, kattopalvelut"
                   className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-primary/20"
                   loading="lazy"

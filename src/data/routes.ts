@@ -177,8 +177,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
 };
 
 /** Etusivun hero-kuva (sama kuin src/components/Hero.tsx). */
-const HOME_HERO_IMAGE =
-  "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Eerik-maalaa/Eerik-maalaa-kattoa-1200.avif";
+const HOME_HERO_IMAGE = `${SITE_ORIGIN}/images/Eerik-maalaa/Eerik-maalaa-kattoa-1200.avif`;
 
 const xmlEscape = (value: string) =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -197,7 +196,7 @@ export const buildImageSitemapXml = (now: Date = new Date()): string => {
       if (!seo?.hero) return "";
       const loc = r.path === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${r.path}/`;
       const title = seo.title.replace(/\s*\|.*$/, "");
-      return `  <url>\n    <loc>${loc}</loc>\n    <image:image>\n      <image:loc>${xmlEscape(heroPreload(seo.hero).href)}</image:loc>\n      <image:title>${xmlEscape(title)}</image:title>\n    </image:image>\n  </url>`;
+      return `  <url>\n    <loc>${loc}</loc>\n    <image:image>\n      <image:loc>${xmlEscape(SITE_ORIGIN + heroPreload(seo.hero).href)}</image:loc>\n      <image:title>${xmlEscape(title)}</image:title>\n    </image:image>\n  </url>`;
     })
     .filter(Boolean)
     .join("\n");

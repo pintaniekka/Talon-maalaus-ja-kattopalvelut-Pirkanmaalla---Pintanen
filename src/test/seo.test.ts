@@ -86,12 +86,28 @@ describe("kuvasitemap", () => {
 });
 
 describe("responsiiviset kuvat", () => {
-  it("srcset jättää pois bucketista puuttuvat kuvakoot", async () => {
+  it("jokaisella koodissa käytetyllä kuvalla on kaikki srcsetin koot kansiossa public/images", async () => {
     const { getResponsiveSrcSet } = await import("@/lib/storage");
-    const violetti = getResponsiveSrcSet("violetti-puutalo-varinvaihto-peittomaalaus-jalkeen");
-    expect(violetti).toContain("-400.webp 400w");
-    expect(violetti).toContain("-1200.webp 1200w");
-    expect(violetti).not.toContain("800w");
-    expect(getResponsiveSrcSet("kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen")).toContain("800w");
+    const imagesDir = path.resolve(__dirname, "../../public/images");
+    const baseNames = fs
+      .readdirSync(path.join(imagesDir, "Pictures-1200"))
+      .filter((f) => f.endsWith("-1200.webp"))
+      .map((f) => f.replace(/-1200\.webp$/, ""));
+    expect(baseNames.length).toBeGreaterThan(30);
+    const missing: string[] = [];
+    for (const base of baseNames) {
+      for (const entry of getResponsiveSrcSet(base).split(", ")) {
+        const file = decodeURI(entry.split(" ")[0]).replace(/^\/images\//, "");
+        if (!fs.existsSync(path.join(imagesDir, file))) missing.push(file);
+      }
+    }
+    expect(missing).toEqual([]);
+  });
+
+  it("kuvaosoitteet ovat sivuston omia eivätkä osoita ulkoiseen tallennuspalveluun", async () => {
+    const { getStorageUrl, getResponsiveSrc, toAbsoluteUrl } = await import("@/lib/storage");
+    expect(getStorageUrl("Icons/Tiilikatto icon.svg")).toBe("/images/Icons/Tiilikatto%20icon.svg");
+    expect(getResponsiveSrc("x")).toBe("/images/Pictures-1200/x-1200.webp");
+    expect(toAbsoluteUrl("/images/a.webp")).toBe("https://pintanen.fi/images/a.webp");
   });
 });

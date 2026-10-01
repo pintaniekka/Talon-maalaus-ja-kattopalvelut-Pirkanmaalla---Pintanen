@@ -7,7 +7,7 @@ import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import SEO from '@/components/SEO';
 import { staticSeo } from "@/data/seo";
 import ResponsiveSupabaseImage from '@/components/ResponsiveSupabaseImage';
-import { getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
+import { getResponsiveSrc, getResponsiveSrcSet, getResponsiveUrl } from '@/lib/storage';
 
 type Category = 'all' | 'pinnoitus' | 'puhdistus' | 'maalaus';
 
@@ -66,7 +66,7 @@ const LightboxImage = ({
 }) => {
   const [errored, setErrored] = useState(false);
   const src = errored
-    ? `https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pictures-1500/${encodeURI(baseName)}-1500.webp`
+    ? getResponsiveUrl(baseName, 1500)
     : getResponsiveSrc(baseName);
   return (
     <img
@@ -140,8 +140,9 @@ const Lightbox = ({
         onClick={(e) => e.stopPropagation()}
         onError={(e) => {
           const img = e.currentTarget as HTMLImageElement;
-          const fallback = `https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pictures-1500/${encodeURI(project.images[currentIndex].baseName)}-1500.webp`;
-          if (img.src !== fallback) img.src = fallback;
+          const fallback = getResponsiveUrl(project.images[currentIndex].baseName, 1500);
+          // img.src on absoluuttinen, fallback suhteellinen: verrataan polun loppua.
+          if (!img.src.endsWith(fallback)) img.src = fallback;
         }}
       />
 

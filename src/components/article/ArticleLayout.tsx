@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
-import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
+import { getResponsiveSrc, getResponsiveSrcSet, toAbsoluteUrl } from "@/lib/storage";
 import { authors } from "@/data/authors";
 import {
   type ArticleMeta,
@@ -105,7 +105,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
     "@type": "Article",
     headline: meta.title,
     description: meta.description,
-    image: [heroUrl],
+    image: [toAbsoluteUrl(heroUrl)],
     datePublished: meta.publishedAt,
     dateModified: meta.updatedAt ?? meta.publishedAt,
     inLanguage: "fi",
@@ -123,7 +123,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
       url: "https://pintanen.fi/",
       logo: {
         "@type": "ImageObject",
-        url: "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pintanen-logo.png",
+        url: "https://pintanen.fi/images/Pintanen-logo.png",
       },
     },
   };
@@ -143,7 +143,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
       <SEO
         title={meta.seoTitle ?? meta.title}
         description={meta.description}
-        ogImage={heroUrl}
+        ogImage={toAbsoluteUrl(heroUrl)}
         preloadImage={heroUrl}
         noindex={preview}
         ogType="article"

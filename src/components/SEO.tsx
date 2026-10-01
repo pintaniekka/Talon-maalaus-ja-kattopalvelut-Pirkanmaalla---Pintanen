@@ -19,7 +19,7 @@ interface SEOProps {
   breadcrumb?: boolean;
 }
 
-const defaultOgImage = "https://fndkkgfpsgghvewvoysr.supabase.co/storage/v1/object/public/images/Pictures-1500/tummansininen-puutalo-ulkomaalaus-jalkeen-1500.webp";
+const defaultOgImage = "https://pintanen.fi/images/Pictures-1500/tummansininen-puutalo-ulkomaalaus-jalkeen-1500.webp";
 
 const SEO = ({
   title,

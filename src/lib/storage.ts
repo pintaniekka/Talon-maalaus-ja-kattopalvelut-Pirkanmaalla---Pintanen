@@ -63,6 +63,17 @@ export type ResponsiveWidth = 400 | 800 | 1200 | 1500;
 const RESPONSIVE_WIDTHS: ResponsiveWidth[] = [400, 800, 1200];
 
 /**
+ * Kuvaversiot, jotka puuttuvat bucketista (tarkistettu 1.10.2026, palvelin vastaa 400).
+ * Ne jätetään pois srcsetistä, koska selain ei yritä toista kokoa, jos valittu puuttuu:
+ * kuva jäisi kokonaan näkymättä niillä näytöillä, joille 800 px osuu.
+ * Kun tiedosto on ladattu bucketiin, rivin voi poistaa.
+ */
+const MISSING_VARIANTS: Record<string, ResponsiveWidth[]> = {
+  "violetti-puutalo-varinvaihto-peittomaalaus-jalkeen": [800],
+  "vihrea-puutalo-ulkomaalaus-jalkeen": [800],
+};
+
+/**
  * Palauttaa URL:n yksittäiselle responsiiviselle kuvaversiolle.
  * @param baseName - Kuvan perusnimi ilman leveyssuffiksia tai tiedostopäätettä, esim. "vihrea-puutalo-ulkomaalaus-jalkeen"
  * @param width - Haluttu leveys (400, 800, 1200 tai 1500)
@@ -79,7 +90,9 @@ export function getResponsiveSrcSet(
   baseName: string,
   widths: ResponsiveWidth[] = RESPONSIVE_WIDTHS
 ): string {
+  const missing = MISSING_VARIANTS[baseName] ?? [];
   return widths
+    .filter(w => !missing.includes(w))
     .map(w => `${getResponsiveUrl(baseName, w)} ${w}w`)
     .join(', ');
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
@@ -22,8 +23,32 @@ document.head
   )
   .forEach((el) => el.remove());
 
-createRoot(document.getElementById("root")!).render(
+const rootEl = document.getElementById("root")!;
+
+// Esirenderöity sivu: #root sisältää jo valmiin HTML:n (build-aikainen esirenderöinti).
+// React rakentaa saman näkymän uudelleen. Siksi aikaa, kun sivun oma koodipaketti latautuu,
+// näytetään tämä sama HTML, ettei ruutu välähdä tyhjäksi.
+//
+// Tilannekuvaa käytetään vain ensimmäisellä latauksella. Kun sovellus on kerran näkyvissä,
+// se tyhjennetään: myöhemmissä sivunvaihdoissa latausnäkymä on tyhjä, ei vanha sivu.
+let prerenderedHtml = rootEl.innerHTML.trim();
+
+const InitialFallback = () => {
+  // Arvo luetaan kerran tämän latausnäkymän syntyessä.
+  const [html] = useState(prerenderedHtml);
+  return html ? (
+    <div data-prerender-snapshot dangerouslySetInnerHTML={{ __html: html }} />
+  ) : (
+    <div className="min-h-screen" />
+  );
+};
+
+const clearPrerenderedHtml = () => {
+  prerenderedHtml = "";
+};
+
+createRoot(rootEl).render(
   <HelmetProvider>
-    <App />
+    <App fallback={<InitialFallback />} onReady={clearPrerenderedHtml} />
   </HelmetProvider>
 );

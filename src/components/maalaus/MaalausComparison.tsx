@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import ResponsiveSupabaseImage from '@/components/ResponsiveSupabaseImage';
+import ResponsiveImage from '@/components/ResponsiveImage';
 
 const comparisonBase = "keltainen-ulkoverhous-huoltomaalaus-jalkeen";
 
@@ -45,7 +45,7 @@ const MaalausComparison = ({ cityIn }: { cityIn?: string }) => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <ResponsiveSupabaseImage
+              <ResponsiveImage
                 baseName={comparisonBase}
                 cityIn={cityIn}
                 className="w-full rounded-2xl shadow-lg"

@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import BeforeAfterSlider from "./BeforeAfterSlider";
-import ResponsiveSupabaseImage from "./ResponsiveSupabaseImage";
+import ResponsiveImage from "./ResponsiveImage";
 import { RoofCleanIcon } from "./ServiceIcons";
 
 interface CityServicesProps {
@@ -96,7 +96,7 @@ const CityServices = ({ cityName, citySlug, cityGenitive }: CityServicesProps) =
             onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/katon-puhdistus-${citySlug}`); }}
             className="block rounded-2xl overflow-hidden relative group cursor-pointer"
           >
-            <ResponsiveSupabaseImage
+            <ResponsiveImage
               baseName={puhdistusBase}
               alt={`Puhdas tiilikatto mekaanisen puhdistuksen jälkeen ${cityName}`}
               className="absolute inset-0 w-full h-full object-cover"

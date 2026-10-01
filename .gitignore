@@ -29,8 +29,6 @@ dist-ssr
 .env.production
 .env.development
 
-# Supabase CLI:n paikalliset tilatiedostot
-supabase/.temp
 
 # iCloud/Finder-synkronoinnin luomat kaksoiskappaleet ("tiedosto 2.ts")
 * [0-9].ts

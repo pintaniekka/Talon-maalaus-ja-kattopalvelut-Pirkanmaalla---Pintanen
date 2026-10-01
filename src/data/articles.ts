@@ -29,7 +29,7 @@ export interface ArticleMeta {
   /** Viimeisin sisältöpäivitys YYYY-MM-DD, jos tekstiä on muutettu julkaisun jälkeen. */
   updatedAt?: string;
   readingMinutes: number;
-  /** Pääkuvan perusnimi Supabase-bucketissa (Pictures-400/800/1200). */
+  /** Pääkuvan perusnimi kansiossa public/images (Pictures-400/800/1200). */
   heroImage: string;
   heroAlt: string;
   heroCaption?: string;

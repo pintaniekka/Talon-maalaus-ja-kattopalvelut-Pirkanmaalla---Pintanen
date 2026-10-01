@@ -12,7 +12,7 @@ import FAQSection from "@/components/FAQSection";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import { roofTestimonials } from "@/data/testimonialsData";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
-import ResponsiveSupabaseImage from "@/components/ResponsiveSupabaseImage";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import { pinnoitusFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -234,7 +234,7 @@ const KattopalvelutPinnoitus = () => {
                 </div>
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-                <ResponsiveSupabaseImage
+                <ResponsiveImage
                   baseName="tummanharmaa-kattotiili-pesu-ja-pinnoitustyo"
                   alt="Tummanharmaa kattotiili pesu ja pinnoitustyö Pirkanmaalla"
                   className="w-full rounded-2xl shadow-lg"

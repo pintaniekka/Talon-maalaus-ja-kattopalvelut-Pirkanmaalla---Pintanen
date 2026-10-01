@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
-/** Kuva kuvatekstillä. `image` on perusnimi Supabase-bucketissa. */
+/** Kuva kuvatekstillä. `image` on perusnimi kansiossa public/images. */
 export const Figure = ({ image, alt, caption }: { image: string; alt: string; caption?: string }) => (
   <figure>
     <img

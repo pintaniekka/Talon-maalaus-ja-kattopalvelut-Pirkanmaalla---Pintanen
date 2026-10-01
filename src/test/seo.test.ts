@@ -84,3 +84,14 @@ describe("kuvasitemap", () => {
     expect(xml).not.toContain("%20");
   });
 });
+
+describe("responsiiviset kuvat", () => {
+  it("srcset jättää pois bucketista puuttuvat kuvakoot", async () => {
+    const { getResponsiveSrcSet } = await import("@/lib/storage");
+    const violetti = getResponsiveSrcSet("violetti-puutalo-varinvaihto-peittomaalaus-jalkeen");
+    expect(violetti).toContain("-400.webp 400w");
+    expect(violetti).toContain("-1200.webp 1200w");
+    expect(violetti).not.toContain("800w");
+    expect(getResponsiveSrcSet("kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen")).toContain("800w");
+  });
+});

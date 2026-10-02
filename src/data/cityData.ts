@@ -32,9 +32,9 @@ export const cities: CityData[] = [
     alueMetaTitle: "Tiilikaton pinnoitus ja talon maalaus Tampere",
     alueMetaDesc:
       "Tiilikaton pinnoitus ja talon maalaus Tampereella. Yrittäjät tekevät työn 2-5v takuulla. Hinnat alk. 2700€ (katso hintalaskuri). Kotitalousvähennys!",
-    pinnoitusMetaTitle: "Tiilikaton pinnoitus Tampere | Hinta alk. 2750€-7000€",
+    pinnoitusMetaTitle: "Tiilikaton pinnoitus Tampere | Hinta 2 850–7 000 €",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Tampereella. Me yrittäjät teemme työn itse. 5v takuu, kotitalousvähennys ja nopea hintalaskuri. Hinnat alk. 2750€-7000€.",
+      "Tiilikaton pinnoitus Tampereella. Me yrittäjät teemme työn itse. 5v takuu, kotitalousvähennys ja nopea hintalaskuri. Hinnat 2 850–7 000 €.",
     pinnoitusLocalHookTitle: "Tiilikaton suojaaminen Näsijärven ja Pyhäjärven kosteudelta",
     pinnoitusLocalHookText: "Tampereella Näsijärven ja Pyhäjärven läheisyys luo kaupunkiin jatkuvan ilmankosteuden. Vesistöjen tuoma kosteus on erittäin hyvä kasvuympäristö sammaleelle. Sammale voi nopeasti heikentää tiilikaton kuntoa. Olit sitten asuinalueella Hervannassa, Lielahdessa tai Pyynikin vanhemmassa osassa, ammattitaitoinen tiilikaton pinnoitus on hyvä tapa suojata kotisi. Kun me pinnoitamme kattosi, se saa takaisin alkuperäisen vettä hylkivän suojansa. Näin me varmistamme, että tiilikatto kestää Tampereen vaihtelevia sääolosuhteita luotettavasti vielä jopa 10–15 vuotta. Tällä tavoin vältyt myös kalliilta kattoremontilta.",
     puhdistusMetaTitle: "Katon puhdistus Tampere – Poistaa sammaleen",
@@ -66,7 +66,7 @@ export const cities: CityData[] = [
       "Talon maalaus ja tiilikaton pinnoitus Sastamalassa. Hinnat alk. 2700€, testaa hintalaskuria! Yrittäjät tekevät työn 2-5v takuulla. Kotitalousvähennys.",
     pinnoitusMetaTitle: "Tiilikaton pinnoitus Sastamala | Yrittäjät tekevät työn",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Sastamalassa. Hinta alk. 2750€-7000€. Testaa hintalaskuri ja hyödynnä kotitalousvähennys. 5v takuu!",
+      "Tiilikaton pinnoitus Sastamalassa. Hinta 2 850–7 000 €. Testaa hintalaskuri ja hyödynnä kotitalousvähennys. 5v takuu!",
     pinnoitusLocalHookTitle: "Tiilikaton suojaaminen Sastamalan järvimaisemien kosteudelta",
     pinnoitusLocalHookText: "Sastamalan ja historiallisen Tyrvään upeat maisemat Rautaveden ja Liekoveden rannoilla ovat todella kauniit, mutta ne myös tuovat mukanaan paljon kosteutta. Tämä kosteus on suoraan vesistöjen lähellä olemisen seuraus, ja se luo ihanteelliset olosuhteet sammaleelle, joka voi vahingoittaa tiilikattoja. On siis tärkeää, että huolehdit säännöllisestä huollosta ja ammattitaitoisesta pinnoituksesta, riippumatta siitä, asutko Vammalan keskustassa tai maaseudun rauhassa. Tiilikaton pinnoitus on paras keino suojata sekä perinteikäs että uudempi talosi Pirkanmaan sääolosuhteilta. Kun pinnoitamme tiilikaton, palautamme tiilen alkuperäisen suojan ja varmistamme, että se palvelee sinua hyvin jopa 10-15 vuotta.",
     puhdistusMetaTitle: "Katon puhdistus Sastamala – Katto puhtaaksi kerralla",
@@ -96,9 +96,9 @@ export const cities: CityData[] = [
     alueMetaTitle: "Tiilikaton pinnoitus ja talon maalaus Hämeenkyrö",
     alueMetaDesc:
       "Tiilikaton pinnoitus & talon maalaus Hämeenkyrössä. Kokeile hintalaskuria (hinnat alk. 2700€). Yrittäjät tekevät työn, 2-5v takuu ja kotitalousvähennys.",
-    pinnoitusMetaTitle: "Tiilikaton pinnoitus Hämeenkyrö | Alk. 2750€-7000€",
+    pinnoitusMetaTitle: "Tiilikaton pinnoitus Hämeenkyrö | Hinta 2 850–7 000 €",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Hämeenkyrössä yrittäjä tekee työn. 5v takuu, kotitalousvähennys ja selkeä hintalaskuri. Hinnat alk. vain 2750€-7000€.",
+      "Tiilikaton pinnoitus Hämeenkyrössä yrittäjä tekee työn. 5v takuu, kotitalousvähennys ja selkeä hintalaskuri. Hinnat 2 850–7 000 €.",
     pinnoitusLocalHookTitle: "Hämeenkyrön kansallismaisemien ja Kyröskosken säärasitusten hallinta",
     pinnoitusLocalHookText: "Hämeenkyrön laajat pellot ja Kyröskosken ympärillä olevat vanhat maisemat saavat talojen katot alttiiksi suoralle tuulelle, epätasaisille sateille ja talven raskaalle lumelle. Kun tiilikaton pinta alkaa vähitellen muuttua huokoiseksi, sääolosuhteet voivat aiheuttaa vahinkoa rakenteille pakkasen myötä. Oikea-aikainen pinnoitus takaa, että tiili pysyy kosteudenkestävänä ja kestävänä kaikissa sääolosuhteissa. Tämä on hyvä ratkaisu, joka auttaa säilyttämään kotisi arvon ja ulkonäön keskellä Pirkanmaan kauneinta luontoa.",
     puhdistusMetaTitle: "Katon puhdistus Hämeenkyrö – Turvallisesti ja huolellisesti",
@@ -130,7 +130,7 @@ export const cities: CityData[] = [
       "Ammattimainen talon maalaus ja tiilikaton pinnoitus Ylöjärvellä. Yrittäjät tekevät työn (2-5v takuu). Hinnat alk. 2700€. Katso hintalaskuri. Kotitalousvähennys.",
     pinnoitusMetaTitle: "Tiilikaton pinnoitus Ylöjärvi | Hintalaskuri",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Ylöjärvellä. Me yrittäjät teemme työn itse. 5v takuu, kotitalousvähennys ja hinnat alk. 2750€-7000€. Kokeile hintalaskuria!",
+      "Tiilikaton pinnoitus Ylöjärvellä. Me yrittäjät teemme työn itse. 5v takuu, kotitalousvähennys ja hinnat 2 850–7 000 €. Kokeile hintalaskuria!",
     pinnoitusLocalHookTitle: "Ylöjärven puutarhakaupungin kattojen suojaus sammaleelta",
     pinnoitusLocalHookText: "Ylöjärven puutarhakaupungissa luonto on aivan lähellä. Asuinalueet kuten Metsäkylä ja Siivikkala sijaitsevat usein metsän reunalla tai Näsijärven rantamaisemissa. Puiden antama varjo ja vesistöjen kosteus pitävät kattoja pitkään märkinä sateen jälkeen, ja tämä houkuttelee sammalta. Laadukas tiilikaton pinnoitus Ylöjärvellä on oiva ratkaisu, sillä se palauttaa vanhan katon loiston ja luo sille vettä ja likaa hylkivän suojan. Näin voit varmistaa, että kotisi katto pysyy hyvässä kunnossa, eikä metsän läheisyys pääse heikentämään sen arvoa ennenaikaisesti.",
     puhdistusMetaTitle: "Katon puhdistus Ylöjärvi – Pidentää katon ikää",
@@ -162,7 +162,7 @@ export const cities: CityData[] = [
       "Tiilikaton pinnoitus ja talon maalaus Nokialla. Yrittäjät tekevät työn 2-5v takuulla. Hinnat alk. 2700€ (katso hintalaskuri). Kotitalousvähennys!",
     pinnoitusMetaTitle: "Tiilikaton pinnoitus Nokia | Yrittäjät tekevät työn",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Nokialla. Hinta alk. 2750€-7000€. Hyödynnä kotitalousvähennys ja laske kustannus hintalaskurilla. 5v takuu suoraan yrittäjiltä.",
+      "Tiilikaton pinnoitus Nokialla. Hinta 2 850–7 000 €. Hyödynnä kotitalousvähennys ja laske kustannus hintalaskurilla. 5v takuu suoraan yrittäjiltä.",
     pinnoitusLocalHookTitle: "Nokian pientaloalueiden kattojen elinkaaren maksimointi",
     pinnoitusLocalHookText: "Nokialla asuinalueet ovat levittäytyneet Nokianvirran rannoille ja vihreisiin lähiöihin, kuten Harjuniittyyn ja Sammalistoon. Alueen vesistöjen aiheuttama kosteus ja vaihtelevat sääolot koettelevat talojen tiilikattoja jatkuvasti. Kun tehdaspinnoite kuluu, tiili alkaa heikentyä ja kerätä sammalta ja muuta kasvustoa. Fiksusti ennakoivat Nokialla asuvat valitsevat ammattitaitoisen pinnoituksen, koska se on nopea, ympäristöystävällinen ja ennen kaikkea taloudellinen ratkaisu välttääkseen raskaat kattoremontit ja pitääkseen kodin turvassa.",
     puhdistusMetaTitle: "Katon puhdistus Nokia – Ammattitaidolla",
@@ -192,9 +192,9 @@ export const cities: CityData[] = [
     alueMetaTitle: "Talon maalaus ja tiilikaton pinnoitus Forssa",
     alueMetaDesc:
       "Talon maalaus ja tiilikaton pinnoitus Forssassa. Hinnat alk. 2700€, testaa hintalaskuria! Yrittäjät tekevät työn 2-5v takuulla. Kotitalousvähennys.",
-    pinnoitusMetaTitle: "Tiilikaton pinnoitus Forssa | Hinta alk. 2750€-7000€",
+    pinnoitusMetaTitle: "Tiilikaton pinnoitus Forssa | Hinta 2 850–7 000 €",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Forssassa. Yrittäjät asialla, 5v takuu ja kotitalousvähennys. Alk. 2750€-7000€. Katso tarkka hinta hintalaskurista.",
+      "Tiilikaton pinnoitus Forssassa. Yrittäjät asialla, 5v takuu ja kotitalousvähennys. Hinta 2 850–7 000 €. Katso tarkka hinta hintalaskurista.",
     pinnoitusLocalHookTitle: "Forssan ja Lounais-Hämeen vaativien sääolojen kestävä kattosuoja",
     pinnoitusLocalHookText: "Forssan seudulla, joka sijaitsee Lounais-Hämeen sydämessä, sää voi muuttua nopeasti. Loimijoen laakso tuo alueelle kosteutta, ja talven loputtua pakkaset voivat olla edelleen voimakkaita. Tämä voi vaatia paljon pientalon tiilikatolta. Jos huomaat, että tiilen pinta on muuttunut karheaksi ja menettänyt värinsä, on aika tehdä jotain asialle. Ammattitason tiilikaton pinnoitus on hyvä ratkaisu, koska se sulkee tiilen huokoset tehokkaasti. Tämä varmistaa, että kattosi on kuiva, tiivis ja näyttävä, jopa Forssan talvikauden haastavissa olosuhteissa.",
     puhdistusMetaTitle: "Katon puhdistus Forssa – Säännöllinen huolto kannattaa",
@@ -226,7 +226,7 @@ export const cities: CityData[] = [
       "Tiilikaton pinnoitus & talon maalaus Hämeenlinnassa. Kokeile hintalaskuria (hinnat alk. 2700€). Yrittäjät tekevät työn, 2-5v takuu ja kotitalousvähennys.",
     pinnoitusMetaTitle: "Tiilikaton pinnoitus Hämeenlinna | 5v takuu",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Hämeenlinnassa. Yrittäjät tekevät työn, hinta alk. 2750€-7000€. Käytä hintalaskuria ja hyödynnä kotitalousvähennys.",
+      "Tiilikaton pinnoitus Hämeenlinnassa. Yrittäjät tekevät työn, hinta 2 850–7 000 €. Käytä hintalaskuria ja hyödynnä kotitalousvähennys.",
     pinnoitusLocalHookTitle: "Hämeenlinnan arvokiinteistöjen ja pientalojen tiilikattojen pinnoitus",
     pinnoitusLocalHookText: "Hämeenlinnassa vanhat ja uudet talot elävät hyvin yhdessä Vanajaveden rannalla. Vanajaveden läheisyys tuo kuitenkin omat haasteensa. Ilmankosteus on jatkuva ongelma, joka vaikuttaa tiilikattojen kestävyyteen ja saa ne helposti sammaloitumaan. Onneksi on olemassa ratkaisu. Pintasen asiantunteva tiilikaton pinnoitus on edullinen tapa uudistaa katon ulkonäkö ja palauttaa sen suojakyky. Riippumatta siitä, asutko Aulangon lähellä tai Jukolassa, hyvä tiilikaton pinnoitus takaa, että kattosi kestää Hämeenlinnan sään jopa seuraavat 10-15 vuotta.",
     puhdistusMetaTitle: "Katon puhdistus Hämeenlinna – Ilmainen arvio",
@@ -256,9 +256,9 @@ export const cities: CityData[] = [
     alueMetaTitle: "Talon maalaus & tiilikaton pinnoitus Huittinen",
     alueMetaDesc:
       "Ammattimainen talon maalaus ja tiilikaton pinnoitus Huittisissa. Yrittäjät tekevät työn (2-5v takuu). Hinnat alk. 2700€. Katso hintalaskuri. Kotitalousvähennys.",
-    pinnoitusMetaTitle: "Tiilikaton pinnoitus Huittinen | Alk. 2750€-7000€",
+    pinnoitusMetaTitle: "Tiilikaton pinnoitus Huittinen | Hinta 2 850–7 000 €",
     pinnoitusMetaDesc:
-      "Tiilikaton pinnoitus Huittisissa. Yrittäjät tekee työn. 5v takuu, kotitalousvähennys ja hintalaskuri. Hinnat alk. 2750€-7000€.",
+      "Tiilikaton pinnoitus Huittisissa. Yrittäjät tekee työn. 5v takuu, kotitalousvähennys ja hintalaskuri. Hinnat 2 850–7 000 €.",
     pinnoitusLocalHookTitle: "Satakunnan avarien maisemien tuulikuorma ja katon tiiveys Huittisissa",
     pinnoitusLocalHookText: "Huittisten laajat pellot ja avonaiset maisemat tuottavat omakotitalojen katoille omanlaisensa haasteen. Tuuli on esteetön ja sateet voimakkaat. Tällaisessa ympäristössä tiili, joka on päässyt huokoiseksi, on erityisen altis kosteuden imeytymiselle ja rapautumiselle. Pintasen tiilikaton pinnoitus ratkaisee tämän ongelman. Pinnoituksella luodaan tiilelle säänkestävä suojakerros. Se pitää veden katon yläpuolella ja estää sammaleen kasvun tehokkaasti, myös Satakunnan vaikeimmissa sääolosuhteissa.",
     puhdistusMetaTitle: "Katon puhdistus Huittinen – Poistaa levän ja sammaleen",

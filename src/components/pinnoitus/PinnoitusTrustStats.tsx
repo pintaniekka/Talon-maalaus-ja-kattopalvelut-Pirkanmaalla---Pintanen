@@ -5,7 +5,7 @@ interface PinnoitusTrustStatsProps {
 }
 
 const trustStats = [
-  { value: '5,0 / 5', label: 'Google-arvostelut', sub: 'Tampereen tyytyväisimmät asiakkaat.' },
+  { value: '5,0 / 5', label: 'Google-arvostelut', sub: '' },
   { value: 'Yli 100', label: 'Pinnoitettua kattoa', sub: 'Olen toteuttanut jokaisen urakan henkilökohtaisesti.' },
   { value: '+5 vuotta', label: 'Kokemusta alalta', sub: 'Tiedän tarkalleen, miten kattosi saadaan kuntoon.' },
   { value: '5 vuotta', label: 'Takuu työlle', sub: 'Kotimainen yrittäjä vastaa laadusta.' },

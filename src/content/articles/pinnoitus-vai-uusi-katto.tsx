@@ -65,7 +65,7 @@ const Body = () => (
       <li>Aluskate on ehjä, eikä ullakolla näy vuotojälkiä.</li>
     </ul>
     <p>
-      Vaihdamme rikkinäiset tiilet uusiin pinnoituksen yhteydessä. Kuluneen pinnan merkit näet artikkelista{" "}
+      Vaihdamme rikkinäiset tiilet uusiin pinnoituksen yhteydessä ja korjaamme samalla pienet aluskatteen vauriot. Kuluneen pinnan merkit näet artikkelista{" "}
       <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto">milloin tiilikatto pitää pinnoittaa</Link>.
     </p>
     <Figure

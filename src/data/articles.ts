@@ -106,8 +106,8 @@ export const articles: ArticleMeta[] = [
     slug: "tiilikaton-puhdistus-itse-vai-ammattilainen",
     title: "Tiilikaton puhdistus: voiko katon pestä itse?",
     description:
-      "Tiilikatto kannattaa puhdistaa 2–5 vuoden välein. Lue, mitä voit tehdä itse, miksi liian kova painepesu vaurioittaa tiiltä ja mitä puhdistus maksaa.",
-    lead: "Kevyen puhdistuksen voi tehdä itse, mutta liian kova vedenpaine kuluttaa tiilen pintaa, ja ilman kasvustontorjuntaa sammal palaa nopeasti. Tavallinen puhdistusväli on 2–5 vuotta.",
+      "Tiilikatto puhdistetaan yleensä 2–5 vuoden välein. Lue, mitä voit tehdä itse, miksi liian kova painepesu kuluttaa tiiltä ja mitä puhdistus maksaa.",
+    lead: "Kevyen puhdistuksen voit tehdä itse, mutta liian kova vedenpaine kuluttaa tiilen pintaa. Ilman kasvustontorjunta-ainetta sammal kasvaa nopeasti takaisin.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-11-10",

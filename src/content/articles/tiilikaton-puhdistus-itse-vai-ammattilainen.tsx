@@ -89,7 +89,7 @@ const Body = () => (
     <ol>
       <li>Teemme tarvittavat suojaustyöt.</li>
       <li>Kaavimme sammaleen irti ja harjaamme katon.</li>
-      <li>Vaihdamme rikkinäiset tiilet ehjiin.</li>
+      <li>Vaihdamme rikkinäiset tiilet uusiin.</li>
       <li>Levitämme katolle kasvustontorjunta-aineen.</li>
       <li>Tyhjennämme räystäskourut ja siivoamme jälkemme.</li>
     </ol>

@@ -34,7 +34,7 @@ const steps: Step[] = [
     icon: BrickWall,
     title: "4. Kasvustonesto ja tiilten vaihto",
     content: (
-      <>Levitämme torjunta-aineen, joka <strong>tuhoaa sammaleen itiöt tiilen huokosista asti</strong>. Tämän jälkeen rikkinäiset tiilet vaihdetaan ehjiin.</>
+      <>Levitämme torjunta-aineen, joka <strong>tuhoaa sammaleen itiöt tiilen huokosista asti</strong>. Tämän jälkeen rikkinäiset tiilet vaihdetaan uusiin.</>
     ),
   },
   {

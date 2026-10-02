@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getStorageUrl } from '@/lib/storage';
 import OptimizedImage from './OptimizedImage';
+import { GOOGLE_PROFILE_URL } from "@/data/company";
 
 const logoUrl = getStorageUrl("Pintanen-logo.png");
 
@@ -82,6 +83,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>Y-tunnus: 3525786-9</li>
+              <li>
+                <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
+                  Google-arvostelut
+                </a>
+              </li>
             </ul>
 
             {/* Social Icons */}

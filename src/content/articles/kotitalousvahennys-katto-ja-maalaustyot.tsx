@@ -28,7 +28,7 @@ const Body = () => (
     <KeyPoints>
       <ul>
         <li>Vuosina 2026 ja 2027 saat vähentää 40 % yritykseltä ostetun työn hinnasta.</li>
-        <li>Vähennystä saa enintään 2 100 euroa vuodessa. Puolisot saavat yhteensä 4 200 euroa.</li>
+        <li>Vähennystä saa enintään 2 100 euroa vuodessa. Pariskunta saa yhteensä 4 200 euroa.</li>
         <li>Omavastuu on 150 euroa vuodessa.</li>
         <li>Vähennyksen saa työstä. Maaleista ja matkakuluista sitä ei saa.</li>
       </ul>
@@ -60,11 +60,11 @@ const Body = () => (
 
     <h2>Milloin saat täyden vähennyksen?</h2>
     <p>
-      Saat täydet 2 100 euroa, kun maksat vuoden aikana työstä 5 625 euroa. Vähennys on jokaisen oma. Puolisot
-      voivat siis saada yhteensä 4 200 euroa.
+      Saat täydet 2 100 euroa, kun maksat vuoden aikana työstä 5 625 euroa. Vähennys on jokaisen oma. Pariskunta
+      voi siis saada yhteensä 4 200 euroa.
     </p>
     <p>
-      Jos laskun työn osuus on yli 6 000 euroa, lasku kannattaa maksaa puoliksi puolison kanssa. Silloin kumpikin
+      Jos laskun työn osuus on yli 6 000 euroa, pariskunnan kannattaa maksaa lasku puoliksi. Silloin kumpikin
       saa oman vähennyksensä, ja saatte yhdessä enemmän takaisin.
     </p>
 

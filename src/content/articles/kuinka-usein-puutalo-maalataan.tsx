@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Note, Sources, Table } from "@/components/article/ArticleKit";
+import { ArticleFaq, Figure, KeyPoints, Note, Sources } from "@/components/article/ArticleKit";
 
 const faq = [
   {
     question: "Kuinka usein puutalo pitää maalata?",
     answer:
-      "Tavallisesti 10–15 vuoden välein. Väli riippuu maalista ja säärasituksesta, ja talon aurinkoisimmat seinät kuluvat muita nopeammin.",
+      "Puutalo maalataan yleensä 10–15 vuoden välein. Aurinkoiset seinät kuluvat nopeammin kuin muut, joten katso seinät läpi joka vuosi.",
   },
   {
     question: "Missä lämpötilassa taloa voi maalata?",
     answer:
-      "Useimpien ulkomaalien alin käyttölämpötila on +5 °C, ja ne toimivat parhaiten +10–+30 asteessa. Maalattavan puun kosteus saa olla enintään 20 %.",
+      "Useimmat ulkomaalit vaativat vähintään +5 astetta. Paras lämpötila on +10–+30 astetta. Puun pitää olla kuivaa. Sen kosteus saa olla enintään 20 %.",
   },
   {
     question: "Kuinka kauan talon ulkomaalaus kestää?",
-    answer: "Meillä omakotitalon ulkomaalaus kestää yleensä 3–7 päivää talon koon ja pohjatöiden mukaan.",
+    answer: "Meillä omakotitalon ulkomaalaus kestää yleensä 3–7 päivää. Aika riippuu talon koosta ja pohjatöiden määrästä.",
   },
   {
     question: "Paljonko talon huoltomaalaus maksaa?",
     answer:
-      "Yksikerroksinen omakotitalo maksaa meillä noin 3 500–6 000 euroa ja kaksikerroksinen noin 7 000–11 000 euroa. Tarkan hinnan annamme maksuttoman arviokäynnin jälkeen.",
+      "Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–6 000 euroa ja kaksikerroksisen noin 7 000–11 000 euroa. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.",
   },
 ];
 
@@ -27,56 +27,54 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Puutalo maalataan tavallisesti 10–15 vuoden välein.</li>
-        <li>Maalauksen tarpeesta kertovat hilseily, haalistuminen, liituuntuminen ja homepilkut.</li>
-        <li>Pohjatyöt määräävät, kuinka kauan uusi maali kestää.</li>
-        <li>Ulkomaalien alaraja on yleensä +5 °C, ja puun pitää olla kuivaa.</li>
+        <li>Puutalo maalataan yleensä 10–15 vuoden välein.</li>
+        <li>Hilseily, haalistunut väri, liituava pinta ja homepilkut kertovat, että on aika maalata.</li>
+        <li>Pohjatyöt ratkaisevat, kuinka kauan uusi maali kestää.</li>
+        <li>Maalata voi, kun on vähintään +5 astetta ja puu on kuivaa.</li>
       </ul>
     </KeyPoints>
 
     <p>
-      Maali on puuverhouksen ainoa suoja aurinkoa, sadetta ja pakkasta vastaan. Kun se pettää, puu alkaa imeä
-      vettä ja korjaaminen käy joka vuosi työläämmäksi. Vuosiluku ei silti kerro kaikkea. Seinän kunnon näkee
-      seinästä.
+      Maali suojaa puutaloa auringolta, sateelta ja pakkaselta. Kun maali kuluu, puu alkaa imeä vettä. Mitä
+      pidempään odotat, sitä enemmän työtä seinä vaatii. Vuosiluku ei kerro kaikkea. Katso seinää, niin näet,
+      missä kunnossa se on.
     </p>
 
     <h2>Kuinka usein puutalo pitää maalata?</h2>
     <p>
-      Puuverhoiltu talo tarvitsee uuden maalipinnan tavallisesti <strong>10–15 vuoden välein</strong>. Talo ei
-      kulu tasaisesti. Seinät, joihin aurinko ja sade osuvat eniten, kuluvat ensin, ja usein yksi tai kaksi seinää
-      on jo maalauksen tarpeessa, kun muut näyttävät vielä hyviltä.
+      Puutalo tarvitsee uuden maalin yleensä <strong>10–15 vuoden välein</strong>. Kaikki seinät eivät kulu yhtä
+      nopeasti. Aurinko ja sade kuluttavat joitakin seiniä enemmän. Usein yksi tai kaksi seinää tarvitsee jo
+      maalia, vaikka muut näyttävät vielä hyviltä.
     </p>
 
-    <h2>Mistä tietää, että talo pitää maalata?</h2>
+    <h2>Mistä tiedät, että talo pitää maalata?</h2>
+    <p>Kierrä talo ja katso seinät läpi. Nämä viisi merkkiä kertovat, että maali ei enää suojaa puuta.</p>
 
     <h3>1. Maali hilseilee tai lohkeilee</h3>
     <p>
-      Tämä on selvin merkki. Irtoava maali ei suojaa puuta, ja paljas kohta kastuu jokaisella sateella. Hilseilevän
-      pinnan päälle ei voi maalata, vaan irtonainen maali kaavitaan ensin pois.
+      Tämä on selvin merkki. Kun maali irtoaa, puu jää paljaaksi ja kastuu joka sateella. Hilseilevän maalin
+      päälle ei voi maalata. Irtonainen maali pitää ensin kaapia pois.
     </p>
 
     <h3>2. Väri on haalistunut</h3>
+    <p>Aurinko haalistaa värin ja haurastuttaa maalin. Haalistuminen alkaa aurinkoisimmilta seiniltä.</p>
+
+    <h3>3. Maali jää käteen</h3>
     <p>
-      Auringon UV-säteily haalistaa väriä ja haurastuttaa maalikalvoa. Haalistuminen alkaa aurinkoisimmilta
-      seiniltä.
+      Pyyhkäise seinää kämmenellä. Jos käteen jää väriä pölynä, maali on kulunut. Tätä sanotaan liituuntumiseksi.
+      Seinä pitää pestä hyvin, tai uusi maali ei tartu.
     </p>
 
-    <h3>3. Pinta liituuntuu</h3>
+    <h3>4. Seinässä on homepilkkuja tai likaa</h3>
     <p>
-      Pyyhkäise seinää kämmenellä. Jos käteen jää väriä jauheena, maalin sideaine on kulunut. Liituuntunut seinä
-      pitää pestä kunnolla, tai uusi maali ei tartu.
-    </p>
-
-    <h3>4. Seinässä on homepilkkuja tai pinttynyttä likaa</h3>
-    <p>
-      Tummat pilkut ja vihertävä kasvusto viihtyvät varjoisilla ja kosteilla seinillä. Ne eivät peity maalilla.
+      Tummat pilkut ja vihreä kasvusto viihtyvät varjoisilla ja kosteilla seinillä. Ne eivät peity maalilla.
       Seinä tarvitsee homepesun ennen maalausta.
     </p>
 
-    <h3>5. Puu on paikoin paljas tai pehmeä</h3>
+    <h3>5. Puu on paljas tai pehmeä</h3>
     <p>
-      Harmaantunut, paljas puu on ollut suojatta jo pitkään. Jos lauta tuntuu pehmeältä, siinä voi olla lahoa, ja
-      se vaihdetaan ennen maalausta.
+      Harmaa, paljas puu on ollut pitkään ilman suojaa. Paina lautaa. Jos se tuntuu pehmeältä, siinä voi olla
+      lahoa. Lahon laudan päälle ei kannata maalata.
     </p>
     <Figure
       image="vihrea-puutalo-ennen-ulkomaalausta-ja-pohjatoita"
@@ -84,49 +82,50 @@ const Body = () => (
       caption="Puutalo ennen pohjatöitä ja ulkomaalausta."
     />
 
-    <h2>Mitä pohjatöitä maalaus vaatii?</h2>
-    <p>Uusi maali kestää yhtä hyvin kuin sen alusta. Teemme pohjatyöt tässä järjestyksessä:</p>
+    <h2>Mitä pohjatöitä talon maalaus vaatii?</h2>
+    <p>
+      Uusi maali kestää vain, jos pohja on tehty hyvin. Siksi pohjatyöt ovat maalauksen tärkein vaihe. Me teemme
+      ne näin:
+    </p>
     <ol>
-      <li>Pesemme julkisivun homepesuaineella ja harjoilla.</li>
-      <li>Kaavimme irtoilevan ja kuplivan maalin pois.</li>
-      <li>Pohjamaalaamme paljaat puupinnat ennen pintamaalia.</li>
+      <li>Pesemme seinät homepesuaineella ja harjoilla.</li>
+      <li>Kaavimme irtoavan maalin pois.</li>
+      <li>Annamme seinän kuivua.</li>
+      <li>Pohjamaalaamme paljaat puukohdat.</li>
+      <li>Maalaamme pintamaalin pensselillä.</li>
     </ol>
     <p>
-      Vanha maalityyppi pitää myös tunnistaa, koska öljymaali ja vesiohenteinen maali käyttäytyvät eri tavoin.
-      Tunnistamme maalin ja arvioimme pohjatöiden määrän arviokäynnillä ennen tarjousta. Työvaiheet on kuvattu
-      sivulla <Link to="/talon-maalaus-pirkanmaa">talon maalaus Pirkanmaalla</Link>.
+      Käymme talon läpi ennen tarjousta. Samalla katsomme, mitä maalia seinässä on ja paljonko pohjatöitä
+      tarvitaan. Lue lisää sivulta <Link to="/talon-maalaus-pirkanmaa">talon maalaus Pirkanmaalla</Link>.
     </p>
 
     <h2>Mihin aikaan vuodesta talo kannattaa maalata?</h2>
     <p>
-      Useimpien ulkomaalien alin käyttölämpötila on +5 °C, ja ne toimivat parhaiten +10–+30 asteessa. Maalattavan
-      puun kosteus saa olla enintään 20 %. Paras sää on pilvipouta. Suorassa auringonpaisteessa maali kuivuu liian
-      nopeasti ja tartunta heikkenee.
+      Useimmat ulkomaalit vaativat vähintään +5 astetta. Paras lämpötila on +10–+30 astetta. Puun pitää olla
+      kuivaa, eli sen kosteus saa olla enintään 20 %. Paras maalaussää on pilvinen ja poutainen päivä. Kovassa
+      auringonpaisteessa maali kuivuu liian nopeasti eikä tartu kunnolla.
     </p>
     <p>
-      Alkukesä on usein loppukesää parempi, koska heinä- ja elokuussa ilmankosteus nousee ja maali kuivuu
-      hitaammin. Sateella emme maalaa.
+      Alkukesä on usein parempi kuin loppukesä. Heinä- ja elokuussa ilma on kosteampaa ja maali kuivuu hitaammin.
+      Sateella emme maalaa.
     </p>
-    <Note title="Syksy on hyvä aika pyytää arvio">
+    <Note title="Syksyllä on hyvä pyytää arvio">
       <p>
-        Kun maalauskausi on ohi, seinät ehtii tarkistaa rauhassa. Keväällä työ alkaa heti, kun sää sallii.
+        Kun maalauskausi on ohi, ehdimme katsoa seinät rauhassa. Keväällä pääsemme aloittamaan heti, kun sää
+        sallii.
       </p>
     </Note>
 
     <h2>Paljonko talon huoltomaalaus maksaa?</h2>
-    <Table
-      head={["Talo", "Hinta"]}
-      rows={[
-        ["1-kerroksinen omakotitalo", "noin 3 500–6 000 €"],
-        ["1,5-kerroksinen talo", "noin 5 000–8 000 €"],
-        ["2-kerroksinen talo", "noin 7 000–11 000 €"],
-      ]}
-      caption="Pintasen hintaesimerkit Pirkanmaalla, sis. ALV 25,5 %."
-    />
     <p>
-      Eniten hintaan vaikuttavat pohjatöiden määrä, talon korkeus ja pinta-ala. Oman talosi arvion saat{" "}
-      <Link to="/talon-maalaus-hinta-pirkanmaa">maalauksen hintalaskurilla</Link>. Työn osuudesta saa
-      kotitalousvähennyksen, ja sen säännöt ovat artikkelissa{" "}
+      Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–6 000 euroa. Kaksikerroksisen talon maalaus
+      maksaa noin 7 000–11 000 euroa. Hinta riippuu pohjatöiden määrästä, talon korkeudesta ja seinien
+      pinta-alasta.
+    </p>
+    <p>
+      Suuntaa antavan hinnan omalle talollesi saat{" "}
+      <Link to="/talon-maalaus-hinta-pirkanmaa">maalauksen hintalaskurilla</Link>. Työn osuudesta saat
+      kotitalousvähennyksen. Lue siitä lisää artikkelista{" "}
       <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot">
         kotitalousvähennys katto- ja maalaustöissä
       </Link>

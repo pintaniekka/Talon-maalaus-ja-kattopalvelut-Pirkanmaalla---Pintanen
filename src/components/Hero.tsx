@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Building2 } from "@/components/icons/BrandIcons";
+import { GOOGLE_PROFILE_URL } from "@/data/company";
 
 const heroBase = "/images/Eerik-maalaa/Eerik-maalaa-kattoa";
 const heroSrc = `${heroBase}-1200.avif`;
@@ -54,12 +55,18 @@ const Hero = () => {
 
           {/* Trust row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 gap-y-6 pt-8 border-t border-border">
-            <div className="flex flex-col">
+            <a
+              href={GOOGLE_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Lue Pintasen Google-arviot"
+              className="group flex flex-col"
+            >
               <span className="text-roof-red font-heading font-extrabold text-2xl md:text-3xl">5,0 / 5</span>
-              <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest">
+              <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest group-hover:underline">
                 Google-arviot
               </span>
-            </div>
+            </a>
             <div className="flex flex-col">
               <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">200+</span>
               <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest">

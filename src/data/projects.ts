@@ -215,5 +215,43 @@ export const projectItems: ProjectItem[] = [
   },
 ];
 
+const matches = (item: ProjectItem, service?: ProjectService) => !service || item.services.includes(service);
+
 export const getProjectItems = (city: string, service?: ProjectService): ProjectItem[] =>
-  projectItems.filter((item) => item.city === city && (!service || item.services.includes(service)));
+  projectItems.filter((item) => item.city === city && matches(item, service));
+
+/** Lähimmät paikkakunnat, joilta on kohteita. Käytetään täytteen järjestämiseen. */
+const nearbyCities: Record<string, string[]> = {
+  tampere: ["ylojarvi", "nokia", "kangasala"],
+  ylojarvi: ["tampere", "nokia", "hameenkyro"],
+  nokia: ["tampere", "ylojarvi", "hameenkyro"],
+  hameenkyro: ["ylojarvi", "nokia", "tampere"],
+  kangasala: ["tampere", "orivesi"],
+  orivesi: ["kangasala", "tampere"],
+  parkano: ["hameenkyro", "ylojarvi"],
+};
+
+export const MIN_PROJECT_ITEMS = 3;
+
+/**
+ * Paikkakunnan omat kohteet ja, jos niitä on alle kolme, täytteeksi kohteita muualta Pirkanmaalta
+ * (lähimmät ensin). Yhden kortin "luettelo" näyttää tyhjältä. Jos omia kohteita ei ole, lohkoa ei näytetä.
+ */
+export const getProjectItemsWithNearby = (
+  city: string,
+  service?: ProjectService,
+): { items: ProjectItem[]; hasNearby: boolean } => {
+  const own = getProjectItems(city, service);
+  if (own.length === 0 || own.length >= MIN_PROJECT_ITEMS) return { items: own, hasNearby: false };
+
+  const order = nearbyCities[city] ?? [];
+  const rank = (item: ProjectItem) => {
+    const i = order.indexOf(item.city);
+    return i === -1 ? order.length : i;
+  };
+  const others = projectItems
+    .filter((item) => item.city !== city && matches(item, service))
+    .sort((a, b) => rank(a) - rank(b) || Number(Boolean(b.pair)) - Number(Boolean(a.pair)));
+  const fill = others.slice(0, MIN_PROJECT_ITEMS - own.length);
+  return { items: [...own, ...fill], hasNearby: fill.length > 0 };
+};

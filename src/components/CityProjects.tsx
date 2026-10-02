@@ -1,6 +1,6 @@
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import ResponsiveImage from "@/components/ResponsiveImage";
-import { getProjectItems, type ProjectService } from "@/data/projects";
+import { getProjectItemsWithNearby, type ProjectService } from "@/data/projects";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 interface CityProjectsProps {
@@ -15,9 +15,12 @@ const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
   all: (cityIn) => `Kohteitamme ${cityIn}`,
 };
 
-/** Kohdelohko: oman paikkakunnan oikeat kohteet. Ei näy, jos paikkakunnalta ei ole kuvia. */
+/**
+ * Kohdelohko: oman paikkakunnan oikeat kohteet. Ei näy, jos paikkakunnalta ei ole kuvia.
+ * Jos omia kohteita on alle kolme, rivi täytetään muun Pirkanmaan kohteilla ja otsikko kertoo sen.
+ */
 const CityProjects = ({ citySlug, cityIn, service }: CityProjectsProps) => {
-  const items = getProjectItems(citySlug, service);
+  const { items, hasNearby } = getProjectItemsWithNearby(citySlug, service);
   if (items.length === 0) return null;
 
   return (
@@ -26,6 +29,7 @@ const CityProjects = ({ citySlug, cityIn, service }: CityProjectsProps) => {
         <div className="max-w-3xl mx-auto text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading mb-3">
             {headings[service ?? "all"](cityIn)}
+            {hasNearby && " ja muualla Pirkanmaalla"}
           </h2>
           <p className="text-muted-foreground">Kuvat ovat omista kohteistamme.</p>
         </div>

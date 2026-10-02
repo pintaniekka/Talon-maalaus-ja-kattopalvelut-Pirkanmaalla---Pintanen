@@ -1,4 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
+import CityProjects from "@/components/CityProjects";
 import PinnoitusCityHero from "@/components/pinnoitus/PinnoitusCityHero";
 import PinnoitusTrustStats from "@/components/pinnoitus/PinnoitusTrustStats";
 import PinnoitusLocalHook from "@/components/pinnoitus/PinnoitusLocalHook";
@@ -50,6 +51,8 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
           text={cityData.pinnoitusLocalHookText}
         />
       )}
+
+      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" />
 
       <TestimonialsMarquee testimonials={roofTestimonials} title="Mitä kattoasiakkaat sanovat meistä?" />
 

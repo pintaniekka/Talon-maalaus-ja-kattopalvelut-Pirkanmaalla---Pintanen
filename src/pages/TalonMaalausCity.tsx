@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import CityProjects from "@/components/CityProjects";
 import { motion } from "framer-motion";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from "react-router-dom";
@@ -102,6 +103,8 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
           </motion.div>
         </div>
       </section>
+
+      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
 
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
       <MaalausProblemSection cityName={cityName} />

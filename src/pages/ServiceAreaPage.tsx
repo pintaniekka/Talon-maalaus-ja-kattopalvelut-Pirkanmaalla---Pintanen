@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import CityProjects from "@/components/CityProjects";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -325,6 +326,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
           </div>
         </section>
       )}
+
+      <CityProjects citySlug={citySlug} cityIn={cityIn} />
 
       {/* ══════════════════ ASIAKASPALAUTTEET – yksi kaupunkikohtainen karuselli ══════════════════ */}
       <TestimonialsMarquee

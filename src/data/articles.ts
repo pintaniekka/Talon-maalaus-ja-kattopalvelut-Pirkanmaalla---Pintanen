@@ -82,6 +82,7 @@ export const articles: ArticleMeta[] = [
     category: "katto",
     author: "eerik",
     publishedAt: "2026-09-30",
+    updatedAt: "2026-10-02",
     readingMinutes: 6,
     heroImage: "vastamaalattu-tiilikatto-kattopinnoitus-jalkeen",
     heroAlt: "Vastamaalattu tiilikatto pinnoituksen jälkeen",
@@ -132,7 +133,7 @@ export const articles: ArticleMeta[] = [
     seoTitle: "Tiilikaton pinnoitus: työvaiheet ja kesto",
     description:
       "Tiilikaton pinnoituksessa on kuusi työvaihetta kuntotarkastuksesta lopputarkastukseen. Lue, mitä kussakin vaiheessa tehdään ja kauanko työ kestää.",
-    lead: "Tiilikaton pinnoitus etenee kuudessa vaiheessa: kuntotarkastus, suojaus, pesu, kasvustonesto ja tiilten vaihto, kaksi maalikerrosta ja lopputarkastus. Omakotitalon katto valmistuu 2–4 työpäivässä.",
+    lead: "Tiilikaton pinnoitus etenee kuudessa vaiheessa: kuntotarkastus, tarvittavat suojaukset, pesu, kasvustonesto ja tiilten vaihto, kaksi maalikerrosta ja lopputarkastus. Omakotitalon katto valmistuu 2–4 työpäivässä.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-10-27",

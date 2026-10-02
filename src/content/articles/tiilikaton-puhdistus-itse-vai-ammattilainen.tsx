@@ -87,9 +87,9 @@ const Body = () => (
     <h2>Miten ammattilainen puhdistaa tiilikaton?</h2>
     <p>Puhdistamme tiilikatot mekaanisesti ilman painepesua, jotta tiilet eivät vaurioidu.</p>
     <ol>
-      <li>Suojaamme pihan.</li>
+      <li>Teemme tarvittavat suojaustyöt.</li>
       <li>Kaavimme sammaleen irti ja harjaamme katon.</li>
-      <li>Vaihdamme rikkinäiset tiilet uusiin.</li>
+      <li>Vaihdamme rikkinäiset tiilet ehjiin.</li>
       <li>Levitämme katolle kasvustontorjunta-aineen.</li>
       <li>Tyhjennämme räystäskourut ja siivoamme jälkemme.</li>
     </ol>

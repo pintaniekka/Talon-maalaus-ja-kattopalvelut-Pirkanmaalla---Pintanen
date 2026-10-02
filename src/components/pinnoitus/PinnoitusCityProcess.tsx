@@ -17,18 +17,18 @@ const steps: Step[] = [
   },
   {
     icon: ShieldCheck,
-    title: '2. Pihapiirin ja pintojen suojaus',
-    content: 'Katon pesu on sotkuista työtä. Suojaamme julkisivut, terassit ja istutukset huolellisesti. Jätämme pihasi vähintään yhtä siistiksi kuin se oli saapuessamme.',
+    title: '2. Tarvittavat suojaukset',
+    content: 'Katon pesu on sotkuista työtä. Teemme ennen pesua kohteen vaatimat suojaukset. Jätämme pihasi vähintään yhtä siistiksi kuin se oli saapuessamme.',
   },
   {
     icon: Droplets,
-    title: '3. Korkeapainepesu ja rännien puhdistus',
+    title: '3. Painepesu ja rännien puhdistus',
     content: 'Poistamme pinttyneen lian ja sammaleen tehokkaalla ammattitason pesurilla. Tyhjennämme samalla sadevesikourut ja huuhtelemme ne puhtaiksi.',
   },
   {
     icon: BrickWall,
     title: '4. Kasvuston torjuminen ja tiilten vaihto',
-    content: 'Käytämme kasvustontorjunta-ainetta, joka tuhoaa kasvuston itiöt syvältä tiilen huokosista. Tämän jälkeen vaihdamme kaikki vaurioituneet tiilet uusiin.',
+    content: 'Käytämme kasvustontorjunta-ainetta, joka tuhoaa kasvuston itiöt syvältä tiilen huokosista. Tämän jälkeen vaihdamme kaikki vaurioituneet tiilet ehjiin.',
   },
   {
     icon: Paintbrush,

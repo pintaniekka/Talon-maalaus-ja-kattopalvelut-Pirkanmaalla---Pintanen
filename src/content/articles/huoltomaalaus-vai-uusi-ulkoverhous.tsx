@@ -10,7 +10,7 @@ const faq = [
   {
     question: "Mitä tehdään, jos maalin alta löytyy lahoa?",
     answer:
-      "Vaihdamme lahovaurioituneet puuosat ennen maalausta. Ilmoitamme löytyneistä vaurioista asiakkaalle ennen kuin jatkamme työtä.",
+      "Ilmoitamme löytyneistä lahovaurioista asiakkaalle ennen kuin jatkamme työtä.",
   },
   {
     question: "Kuinka kauan talon ulkomaalaus kestää?",

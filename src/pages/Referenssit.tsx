@@ -286,7 +286,7 @@ const Referenssit = () => {
     { type: 'single', baseName: 'tummanharmaa-kattotiili-pesu-ja-pinnoitustyo', category: 'pinnoitus', title: 'Tummanharmaa kattotiili pesu ja pinnoitustyö Pirkanmaalla' },
     { type: 'single', baseName: 'vastamaalattu-tiilikatto-kattopinnoitus-jalkeen', category: 'pinnoitus', title: 'Vastamaalattu tiilikatto kattopinnoitus jälkeen Pirkanmaalla' },
     { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-ennen-jalkeen', category: 'pinnoitus', title: 'Tiilikaton pesu ja pinnoitus ennen jälkeen Pirkanmaalla' },
-    { type: 'single', baseName: 'tiilikaton-tehopesu-ja-sammaleenpoisto', category: 'puhdistus', title: 'Tiilikaton tehopesu ja sammaleenpoisto Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-tehopesu-ja-sammaleenpoisto', category: 'puhdistus', title: 'Tiilikaton pesu ja sammaleenpoisto Pirkanmaalla' },
     { type: 'single', baseName: 'tiilikaton-harjatiivisteen-asennus-kattohuolto', category: 'puhdistus', title: 'Tiilikaton harjatiivisteen asennus kattohuolto Pirkanmaalla' },
     { type: 'single', baseName: 'huolellinen-ympariston-suojaus-ennen-maalausta', category: 'maalaus', title: 'Huolellinen ympäristön suojaus ennen maalausta Pirkanmaalla' },
     { type: 'single', baseName: 'talon-julkisivun-ja-ikkunoiden-suojaustyot', category: 'maalaus', title: 'Talon julkisivun ja ikkunoiden suojaustyöt Pirkanmaalla' },

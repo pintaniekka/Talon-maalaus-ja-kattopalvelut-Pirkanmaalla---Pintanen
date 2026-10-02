@@ -10,7 +10,7 @@ const faq = [
   {
     question: "Mitä pinnoituksen hintaan sisältyy?",
     answer:
-      "Suunnittelu ja suojaustyöt, katon pesu, kasvustontorjunta-aine, rikkinäisten tiilien vaihto, pohjamaali, pintamaali ja siivous.",
+      "Suunnittelu ja tarvittavat suojaustyöt, katon pesu, kasvustontorjunta-aine, rikkinäisten tiilien vaihto, kaksi kerrosta kattomaalia ja siivous.",
   },
   {
     question: "Voiko pinnoituksen maksaa osissa?",
@@ -91,18 +91,17 @@ const Body = () => (
         <strong>Tiilien kunto.</strong> Jos tiiliä on paljon rikki, vaihtaminen lisää työtä ja materiaalia.
       </li>
       <li>
-        <strong>Suojaustarve.</strong> Pihan, terassin ja istutusten suojaus kuuluu hintaan, mutta sen määrä vaihtelee.
+        <strong>Suojaustarve.</strong> Kohteen vaatimat suojaukset kuuluvat hintaan, mutta niiden määrä vaihtelee.
       </li>
     </ul>
 
     <h2>Mitä hintaan sisältyy?</h2>
     <ol>
-      <li>Suunnittelu ja suojaustyöt</li>
+      <li>Suunnittelu ja tarvittavat suojaustyöt</li>
       <li>Katon pesu</li>
       <li>Kasvustontorjunta-aine</li>
       <li>Rikkinäisten tiilien vaihto</li>
-      <li>Pohjamaali</li>
-      <li>Pintamaali</li>
+      <li>Kaksi kerrosta kattomaalia</li>
       <li>Siivous</li>
     </ol>
     <p>

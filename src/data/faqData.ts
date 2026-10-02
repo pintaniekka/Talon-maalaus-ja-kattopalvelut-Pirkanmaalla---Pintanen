@@ -18,7 +18,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   },
   {
     question: 'Kuinka kauan tiilikaton pinnoitus kestää?',
-    answer: 'Tyypillisen omakotitalon (noin 150–200 m²) tiilikaton pesu ja pinnoitus kestää noin <strong>2–4 työpäivää</strong> sääolosuhteista riippuen. Työ pitää sisällään huolelliset pohjatyöt (kuten korkeapainepesun ja torjunta-ainekäsittelyn), riittävän kuivumisajan sekä kaksinkertaisen ruiskumaalauksen.',
+    answer: 'Tyypillisen omakotitalon (noin 150–200 m²) tiilikaton pesu ja pinnoitus kestää noin <strong>2–4 työpäivää</strong> sääolosuhteista riippuen. Työ pitää sisällään huolelliset pohjatyöt (kuten painepesun ja torjunta-ainekäsittelyn), riittävän kuivumisajan sekä kaksinkertaisen ruiskumaalauksen.',
   },
   {
     question: 'Milloin tiilikatto pitää pinnoittaa?',
@@ -52,7 +52,7 @@ export const maalausFAQ: FAQItem[] = [
   },
   {
     question: 'Kuinka tärkeää pohjatöiden tekeminen on ennen maalausta?',
-    answer: 'Ammattilaisten tekemät huolelliset pohjatyöt ovat kestävän maalausjäljen perusta. Maalausprosessiimme kuuluu olennaisena osana hilseilevän maalin kaavinta, huolellinen homepesu ja tarvittaessa lahovaurioituneiden puuosien vaihto. Paljaat puupinnat pohjamaalataan ennen varsinaista pintamaalausta.',
+    answer: 'Ammattilaisten tekemät huolelliset pohjatyöt ovat kestävän maalausjäljen perusta. Maalausprosessiimme kuuluu olennaisena osana hilseilevän maalin kaavinta ja huolellinen homepesu. Paljaat puupinnat pohjamaalataan ennen varsinaista pintamaalausta.',
   },
   {
     question: 'Mitä maalia talooni tulisi käyttää?',
@@ -87,7 +87,7 @@ export const generalFAQ: FAQItem[] = [
   },
   {
     question: 'Tarvitseeko minun suojata pihaani tai siirtää tavaroita?',
-    answer: 'Suojaamme itse talon ympäristön, terassit ja istutukset huolellisesti ennen työn aloittamista. Pyydämme vain, että siirrät kevyen irtaimiston, kuten pihakalusteet ja ruukut, hieman kauemmas talosta ennen työmme aloittamista.',
+    answer: 'Teemme tarvittavat suojaukset itse ennen työn aloittamista. Pyydämme vain, että siirrät kevyen irtaimiston, kuten pihakalusteet ja ruukut, hieman kauemmas talosta ennen työmme aloittamista.',
   },
   {
     question: 'Saanko teidän työstänne kotitalousvähennyksen?',
@@ -125,7 +125,7 @@ export const getPinnoitusCityFAQ = (cityName: string): FAQItem[] => [
   },
   {
     question: `Kuinka kauan tiilikaton pinnoitus kestää?`,
-    answer: `Tyypillisen omakotitalon (noin 150–200 m²) tiilikaton pesu ja pinnoitus kestää noin <strong>2–4 työpäivää</strong> sääolosuhteista riippuen. Työ pitää sisällään huolelliset pohjatyöt (kuten korkeapainepesun ja torjunta-ainekäsittelyn), riittävän kuivumisajan sekä kaksinkertaisen ruiskumaalauksen.`,
+    answer: `Tyypillisen omakotitalon (noin 150–200 m²) tiilikaton pesu ja pinnoitus kestää noin <strong>2–4 työpäivää</strong> sääolosuhteista riippuen. Työ pitää sisällään huolelliset pohjatyöt (kuten painepesun ja torjunta-ainekäsittelyn), riittävän kuivumisajan sekä kaksinkertaisen ruiskumaalauksen.`,
   },
   {
     question: `Milloin tiilikatto pitää pinnoittaa?`,

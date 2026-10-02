@@ -26,7 +26,7 @@ const heroSrcSet = getResponsiveSrcSet(heroBase);
 
 /* ── Trust-box data ── */
 const trustStats = [
-  { value: "5,0 / 5", label: "Google-arvostelut", sub: "Pirkanmaan tyytyväisimmät asiakkaat." },
+  { value: "5,0 / 5", label: "Google-arvostelut", sub: "" },
   { value: "Yli 100", label: "Pinnoitettua kattoa", sub: "Olen tehnyt jokaisen urakan henkilökohtaisesti." },
   { value: "+5 vuotta", label: "Kokemusta alalta", sub: "Tiedän, miten suomalainen tiilikatto saadaan kestämään." },
   { value: "5 vuotta", label: "Takuu työlle", sub: "Seison yrittäjänä oman jäljen takana." },

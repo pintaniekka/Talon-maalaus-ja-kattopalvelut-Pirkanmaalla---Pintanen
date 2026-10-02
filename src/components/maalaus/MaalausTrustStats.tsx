@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 const trustStats = [
-  { value: '5,0 / 5', label: 'Google-arvostelut', sub: 'Pirkanmaan tyytyväisimmät asiakkaat.' },
+  { value: '5,0 / 5', label: 'Google-arvostelut', sub: '' },
   { value: 'Yli 60', label: 'Maalattua taloa', sub: (<>Jokainen urakka on tehty <strong className="text-foreground">henkilökohtaisesti</strong>.</>) },
   { value: '+5 vuotta', label: 'Kokemusta alalta', sub: 'Talon maalaus ei enää herätä kysymyksiä.' },
   { value: '2 vuotta', label: 'Takuu työlle', sub: (<><strong className="text-foreground">Seison yrittäjänä oman jälkeni takana.</strong></>) },

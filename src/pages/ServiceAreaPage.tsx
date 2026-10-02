@@ -28,7 +28,7 @@ const getTrustStats = (cityIn: string) => [
   {
     value: "5,0 / 5",
     label: "Google-arvostelut",
-    sub: "Pirkanmaan tyytyväisimmät asiakkaat.",
+    sub: "",
   },
   {
     value: "Yli 200",

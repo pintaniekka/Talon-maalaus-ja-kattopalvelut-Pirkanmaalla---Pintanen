@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Sources, Table } from "@/components/article/ArticleKit";
+import { ArticleFaq, Figure, KeyPoints, Sources } from "@/components/article/ArticleKit";
 
 const faq = [
   {
     question: "Kuinka usein tiilikatto pitää puhdistaa?",
     answer:
-      "Tavallisesti 2–5 vuoden välein ympäristöstä riippuen. Puiden varjossa oleva katto sammaloituu nopeammin kuin avoimella paikalla oleva.",
+      "Yleensä 2–5 vuoden välein. Jos katto on puiden varjossa, sammal kasvaa nopeammin kuin avoimella paikalla.",
   },
   {
     question: "Vaurioittaako puhdistus kattoa?",
     answer:
-      "Oikein tehtynä ei. Puhdistamme katon kaapimalla ja harjaamalla ilman painepesua, jotta tiilen pinta ei kulu.",
+      "Oikein tehtynä ei. Me puhdistamme katon kaapimalla ja harjaamalla ilman painepesua, jotta tiilen pinta ei kulu.",
   },
   {
     question: "Paljonko tiilikaton puhdistus maksaa?",
     answer:
-      "Pieni omakotitalo maksaa meillä noin 800–1 200 euroa, keskikokoinen noin 1 200–1 800 euroa ja suurempi kohde noin 1 800–2 500 euroa. Hinnat sisältävät arvonlisäveron.",
+      "Omakotitalon tiilikaton puhdistus maksaa meillä noin 800–2 500 euroa katon koon mukaan. Tarkan hinnan saat ilmaisen kuntotarkastuksen jälkeen.",
   },
   {
     question: "Kauanko katon puhdistus kestää?",
@@ -27,74 +27,72 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Sammal pitää tiilen kosteana, ja jäätyvä vesi rikkoo tiiliä.</li>
-        <li>Tiilikatto puhdistetaan tavallisesti 2–5 vuoden välein.</li>
-        <li>Kevyen puhdistuksen voi tehdä itse, mutta liian kova vedenpaine kuluttaa tiilen pintaa.</li>
-        <li>Ilman kasvustontorjuntaa sammal palaa nopeasti.</li>
-        <li>Kotitalousvähennyksen saa vain ostetusta työstä.</li>
+        <li>Sammal pitää tiilen kosteana. Kun vesi jäätyy, tiili voi haljeta.</li>
+        <li>Tiilikatto puhdistetaan yleensä 2–5 vuoden välein.</li>
+        <li>Kevyen puhdistuksen voit tehdä itse, mutta liian kova vedenpaine kuluttaa tiilen pintaa.</li>
+        <li>Ilman kasvustontorjunta-ainetta sammal kasvaa nopeasti takaisin.</li>
+        <li>Kotitalousvähennyksen saat vain yritykseltä ostetusta työstä.</li>
       </ul>
     </KeyPoints>
 
     <p>
-      Sammal ja jäkälä keräävät kosteutta tiilen pintaan ja rakoihin. Kun kosteus talvella jäätyy, tiili voi
-      haljeta. Puhdistus pysäyttää tämän, kunhan se tehdään tavalla, joka ei itse kuluta tiiltä.
+      Voiko tiilikaton puhdistaa itse? Osittain voi. Sammal ja jäkälä keräävät kosteutta tiilen pintaan ja rakoihin.
+      Kun kosteus jäätyy talvella, tiili voi haljeta. Puhdistus auttaa, kunhan se tehdään niin, ettei tiili itse
+      kulu.
     </p>
 
     <h2>Milloin tiilikatto pitää puhdistaa?</h2>
     <p>
-      Kun tiilten raoissa tai pinnalla näkyy sammalta, jäkälää tai muuta kasvustoa. Tavallinen puhdistusväli on
-      2–5 vuotta. Keväällä ja syksyllä kannattaa samalla katsoa, että tiilet ovat ehjiä ja paikoillaan.
+      Katto pitää puhdistaa, kun tiilien pinnalla tai raoissa näkyy sammalta tai jäkälää. Yleensä puhdistus tehdään
+      2–5 vuoden välein. Katso samalla keväällä ja syksyllä, että tiilet ovat ehjiä ja paikoillaan.
     </p>
     <Figure
       image="likainen-tiilikatto-ennen-pesua-ja-suojakasittelya"
       alt="Likainen tiilikatto ennen pesua ja suojakäsittelyä"
-      caption="Kasvusto pitää tiilen pinnan kosteana."
+      caption="Sammal pitää tiilen pinnan kosteana."
     />
 
     <h2>Voiko tiilikaton puhdistaa itse?</h2>
     <p>
-      Voi, osittain. Roskat, lehdet ja irtonaisen sammaleen saa pois itse, ja räystäskourut voi tyhjentää. Katon
-      voi myös pestä vedellä, kunhan paine ei ole liian kova. Aloita pienellä paineella ja lisää sitä vain, jos
-      on pakko.
+      Roskat, lehdet ja irtonaisen sammaleen saat pois itse. Myös sadevesikourut voit tyhjentää itse. Katon voi
+      pestä vedellä, jos paine ei ole liian kova. Aloita pienellä paineella.
     </p>
-    <p>Kolme asiaa kannattaa tietää ennen kuin nousee katolle.</p>
+    <p>Kolme asiaa on hyvä tietää ennen kuin nouset katolle.</p>
 
     <h3>Liian kova paine kuluttaa tiilen pintaa</h3>
     <p>
-      Painepesuri irrottaa sammaleen, mutta väärin käytettynä se vie mukanaan myös tiilen suojaavaa pintaa. Karhea
-      pinta imee vettä, ja sammal kasvaa siihen entistä helpommin.
+      Painepesuri irrottaa sammaleen. Väärin käytettynä se vie mukanaan myös tiilen pintaa. Karhea tiili imee vettä,
+      ja sammal tarttuu siihen entistä helpommin.
     </p>
 
-    <h3>Vesi voi mennä tiilten alle</h3>
+    <h3>Vesi voi mennä tiilien alle</h3>
     <p>
-      Jos vettä suihkuttaa alhaalta ylöspäin, se painuu tiilten limitysten alle. Katto pestään aina harjalta
-      räystäälle päin.
+      Jos suihkutat vettä alhaalta ylöspäin, vesi painuu tiilien alle. Katto pestään aina harjalta räystäälle päin.
     </p>
 
     <h3>Märkä tiili on liukas</h3>
     <p>
-      Katolla ei pidä työskennellä ilman turvavarusteita. Tiilten päällä pitää myös osata liikkua niin, etteivät
-      ne rikkoudu jalan alla.
+      Katolla ei pidä olla ilman turvavarusteita. Tiilien päällä pitää myös osata liikkua niin, etteivät ne mene
+      rikki jalan alla.
     </p>
 
-    <h2>Miksi sammal palaa pesun jälkeen?</h2>
+    <h2>Miksi sammal kasvaa takaisin pesun jälkeen?</h2>
     <p>
-      Sammaleen itiöt jäävät tiilen huokosiin, vaikka pinta näyttää puhtaalta. Ilman kasvustontorjunta-ainetta
-      katto vihertyy pian uudelleen. Torjunta-aine on se osa puhdistusta, jonka ansiosta katto pysyy puhtaana
-      pidempään.
+      Sammaleen itiöt jäävät tiilen huokosiin, vaikka pinta näyttää puhtaalta. Ilman kasvustontorjunta-ainetta katto
+      vihertyy pian uudestaan. Torjunta-aine pitää katon puhtaana pidempään.
     </p>
 
-    <h2>Miten ammattilainen puhdistaa tiilikaton?</h2>
-    <p>Puhdistamme tiilikatot mekaanisesti ilman painepesua, jotta tiilet eivät vaurioidu.</p>
+    <h2>Miten me puhdistamme tiilikaton?</h2>
+    <p>Puhdistamme tiilikaton mekaanisesti ilman painepesua, jotta tiilet eivät vaurioidu.</p>
     <ol>
       <li>Teemme tarvittavat suojaustyöt.</li>
       <li>Kaavimme sammaleen irti ja harjaamme katon.</li>
       <li>Vaihdamme rikkinäiset tiilet uusiin.</li>
       <li>Levitämme katolle kasvustontorjunta-aineen.</li>
-      <li>Tyhjennämme räystäskourut ja siivoamme jälkemme.</li>
+      <li>Tyhjennämme sadevesikourut ja siivoamme jälkemme.</li>
     </ol>
     <p>
-      Useimmat omakotitalojen katot valmistuvat yhdessä työpäivässä. Palvelu on kuvattu sivulla{" "}
+      Useimmat omakotitalojen katot valmistuvat yhdessä työpäivässä. Lue lisää sivulta{" "}
       <Link to="/katon-puhdistus-pirkanmaa">katon puhdistus Pirkanmaalla</Link>.
     </p>
     <Figure
@@ -104,18 +102,12 @@ const Body = () => (
     />
 
     <h2>Paljonko tiilikaton puhdistus maksaa?</h2>
-    <Table
-      head={["Kohde", "Hinta"]}
-      rows={[
-        ["Pieni omakotitalo", "noin 800–1 200 €"],
-        ["Keskikokoinen omakotitalo", "noin 1 200–1 800 €"],
-        ["Suurempi kohde", "noin 1 800–2 500 €"],
-      ]}
-      caption="Pintasen hintaesimerkit Pirkanmaalla, sis. ALV 25,5 %."
-    />
     <p>
-      Annamme lopullisen hinnan kuntotarkastuksen jälkeen. Itse tehdystä työstä ei saa kotitalousvähennystä, mutta
-      yritykseltä ostetun työn osuudesta saa. Säännöt ovat artikkelissa{" "}
+      Omakotitalon tiilikaton puhdistus maksaa meillä noin 800–2 500 euroa. Hinta riippuu katon koosta, jyrkkyydestä
+      ja sammaleen määrästä. Tarkan hinnan saat ilmaisen kuntotarkastuksen jälkeen.
+    </p>
+    <p>
+      Itse tehdystä työstä et saa kotitalousvähennystä. Yritykseltä ostetusta työstä saat. Lue lisää artikkelista{" "}
       <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot">
         kotitalousvähennys katto- ja maalaustöissä
       </Link>
@@ -124,10 +116,9 @@ const Body = () => (
 
     <h2>Milloin puhdistus ei enää riitä?</h2>
     <p>
-      Puhdistus riittää, kun katto on likainen ja sammaleinen mutta tiilet ovat hyvässä kunnossa. Jos tiilen pinta
-      on kulunut, vesi imeytyy tiileen tai rikkinäisiä tiiliä on useita, pinnoitus suojaa kattoa paremmin. Eron
-      tunnistat artikkelin <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto">milloin tiilikatto pitää pinnoittaa</Link>{" "}
-      avulla, ja vaihtoehtoja vertaillaan artikkelissa{" "}
+      Puhdistus riittää, kun katto on likainen ja sammaleinen, mutta tiilet ovat hyvässä kunnossa. Jos tiilen pinta
+      on kulunut ja tiili imee vettä, pinnoitus suojaa kattoa paremmin. Lue{" "}
+      <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto">milloin tiilikatto pitää pinnoittaa</Link> ja{" "}
       <Link to="/artikkelit/pinnoitus-vai-uusi-katto">pinnoitus vai uusi katto</Link>.
     </p>
 

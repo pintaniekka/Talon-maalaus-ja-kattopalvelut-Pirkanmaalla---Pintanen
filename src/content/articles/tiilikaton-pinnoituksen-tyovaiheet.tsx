@@ -41,7 +41,8 @@ const Body = () => (
     <h2>1. Ilmainen kuntotarkastus ja tarjous</h2>
     <p>
       Tulemme ensin katsomaan katon. Käynti on ilmainen. Tarkistamme tiilet ja aina myös aluskatteen ja
-      läpiviennit. Jos katossa on isoja vaurioita, kerromme sen suoraan. Käynnin jälkeen saat tarjouksen.
+      läpiviennit. Pienet aluskatteen vauriot korjaamme pinnoituksen yhteydessä. Jos vauriot ovat isoja, kerromme sen
+      suoraan. Käynnin jälkeen saat tarjouksen.
     </p>
 
     <h2>2. Tarvittavat suojaukset</h2>

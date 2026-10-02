@@ -27,7 +27,8 @@ const calculatorIncludes = [
   "Katon pesu",
   "Kasvustontorjunta-aine",
   "Rikkinäisten tiilien vaihto",
-  "Kaksi kerrosta kattomaalia",
+  "Pohjamaali",
+  "Pintamaali",
   "Siivous",
 ];
 

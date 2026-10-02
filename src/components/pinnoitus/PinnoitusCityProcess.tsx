@@ -28,7 +28,7 @@ const steps: Step[] = [
   {
     icon: BrickWall,
     title: '4. Kasvuston torjuminen ja tiilten vaihto',
-    content: 'Käytämme kasvustontorjunta-ainetta, joka tuhoaa kasvuston itiöt syvältä tiilen huokosista. Tämän jälkeen vaihdamme kaikki vaurioituneet tiilet ehjiin.',
+    content: 'Käytämme kasvustontorjunta-ainetta, joka tuhoaa kasvuston itiöt syvältä tiilen huokosista. Tämän jälkeen vaihdamme kaikki vaurioituneet tiilet uusiin.',
   },
   {
     icon: Paintbrush,

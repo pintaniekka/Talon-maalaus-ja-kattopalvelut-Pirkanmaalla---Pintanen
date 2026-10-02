@@ -65,7 +65,7 @@ const Body = () => (
     <h2>4. Kasvustonesto ja tiilten vaihto</h2>
     <p>
       Levitämme pestylle katolle torjunta-aineen, joka tuhoaa sammaleen itiöt tiilen huokosista asti. Sen jälkeen
-      vaihdamme rikkinäiset tiilet ehjiin. Ilman kasvustonestoa sammal kasvaisi pian uuden maalin läpi.
+      vaihdamme rikkinäiset tiilet uusiin. Ilman kasvustonestoa sammal kasvaisi pian uuden maalin läpi.
     </p>
 
     <h2>5. Kaksi ruiskumaalauskertaa</h2>

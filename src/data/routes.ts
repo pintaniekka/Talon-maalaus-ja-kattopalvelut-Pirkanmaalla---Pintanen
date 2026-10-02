@@ -140,7 +140,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     "## Suuntaa antavat hinnat",
     "",
-    "- Tiilikaton pinnoitus: omakotitalo 2 850–4 880 €, 15–25 €/m² katon jyrkkyyden mukaan",
+    "- Tiilikaton pinnoitus: omakotitalo 2 850–4 880 €, alkaen 15 €/m²",
     "- Tiilikaton puhdistus: omakotitalo noin 800–2 500 €",
     "- Talon ulkomaalaus: 1-kerroksinen noin 3 500–6 000 €, 1,5-kerroksinen noin 5 000–8 000 €, 2-kerroksinen noin 7 000–11 000 €",
     "- Tarkka urakkahinta annetaan maksuttoman arviokäynnin jälkeen",

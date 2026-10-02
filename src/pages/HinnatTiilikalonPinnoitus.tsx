@@ -23,12 +23,11 @@ const priceExamples = [
 ];
 
 const calculatorIncludes = [
-  "Suunnittelu + suojaustyöt",
+  "Suunnittelu + tarvittavat suojaustyöt",
   "Katon pesu",
   "Kasvustontorjunta-aine",
   "Rikkinäisten tiilien vaihto",
-  "Pohjamaali",
-  "Pintamaali",
+  "Kaksi kerrosta kattomaalia",
   "Siivous",
 ];
 
@@ -38,7 +37,7 @@ const priceFactors = [
   { icon: Layers, title: "Lappeiden lukumäärä", description: "Monimutkaisempi kattorakenne lisää työvaiheita harjojen, jiirin ja läpivientien kohdalla." },
   { icon: Building2, title: "Korkeus", description: "Korkeampi rakennus vaatii pidemmät telineet ja lisää turvallisuusjärjestelyjä." },
   { icon: WrenchIcon, title: "Tiilien kunto", description: "Jos tiiliä on paljon rikki, vaihtotyö lisää urakan kestoa ja materiaalikustannuksia." },
-  { icon: ShieldCheck, title: "Suojauksen tarve", description: "Piha-alueiden, terassien ja istutusten suojaus kuuluu hintaan mutta vaikuttaa työn laajuuteen." },
+  { icon: ShieldCheck, title: "Suojauksen tarve", description: "Kohteen vaatimat suojaukset kuuluvat hintaan mutta vaikuttavat työn laajuuteen." },
 ];
 
 const faqItems = [

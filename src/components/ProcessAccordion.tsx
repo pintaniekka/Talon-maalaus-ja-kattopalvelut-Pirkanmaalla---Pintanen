@@ -19,22 +19,22 @@ const steps: Step[] = [
   },
   {
     icon: ShieldCheck,
-    title: "2. Pihapiirin suojaus",
+    title: "2. Tarvittavat suojaukset",
     content: (
-      <>Katon pesu irrottaa likaa. Siksi suojaamme aina kriittisimmät paikat, jonne ei kuravettä saa mennä. <strong>Jätämme pihasi yhtä siistiksi kuin se oli tullessamme.</strong></>
+      <>Katon pesu irrottaa likaa. Teemme ennen pesua kohteen vaatimat suojaukset. <strong>Jätämme pihasi yhtä siistiksi kuin se oli tullessamme.</strong></>
     ),
   },
   {
     icon: Droplets,
     title: "3. Katon ja rännien pesu",
     content:
-      "Puhdistamme katon ammattitason korkeapainepesurilla. Samalla tyhjennämme ja huuhtelemme sadevesikourut (rännit) katolta irtoavasta liasta ja sammaleesta.",
+      "Puhdistamme katon ammattitason painepesurilla. Samalla tyhjennämme ja huuhtelemme sadevesikourut (rännit) katolta irtoavasta liasta ja sammaleesta.",
   },
   {
     icon: BrickWall,
     title: "4. Kasvustonesto ja tiilten vaihto",
     content: (
-      <>Levitämme torjunta-aineen, joka <strong>tuhoaa sammaleen itiöt tiilen huokosista asti</strong>. Tämän jälkeen rikkinäiset tiilet vaihdetaan uusiin.</>
+      <>Levitämme torjunta-aineen, joka <strong>tuhoaa sammaleen itiöt tiilen huokosista asti</strong>. Tämän jälkeen rikkinäiset tiilet vaihdetaan ehjiin.</>
     ),
   },
   {

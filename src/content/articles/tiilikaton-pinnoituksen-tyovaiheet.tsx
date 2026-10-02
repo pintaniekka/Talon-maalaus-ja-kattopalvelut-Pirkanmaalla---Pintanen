@@ -19,7 +19,7 @@ const faq = [
   {
     question: "Pitääkö pihaa valmistella ennen työtä?",
     answer:
-      "Suojaamme talon ympäristön, terassit ja istutukset itse. Riittää, että siirrät pihakalusteet, ruukut ja muun kevyen irtaimiston kauemmas talosta.",
+      "Teemme tarvittavat suojaukset itse. Riittää, että siirrät pihakalusteet, ruukut ja muun kevyen irtaimiston kauemmas talosta.",
   },
 ];
 
@@ -45,15 +45,15 @@ const Body = () => (
       aluskatteen vauriot korjaamme pinnoituksen yhteydessä. Jos vauriot ovat isompia, kerromme sen suoraan.
     </p>
 
-    <h2>2. Pihan ja rakenteiden suojaus</h2>
+    <h2>2. Tarvittavat suojaukset</h2>
     <p>
-      Pesussa katolta irtoaa likaa, joten suojaamme ensin paikat, joihin kuravettä ei saa mennä. Jätämme pihan yhtä
+      Pesussa katolta irtoaa likaa, joten teemme ensin kohteen vaatimat suojaukset. Jätämme pihan yhtä
       siistiksi kuin se oli tullessamme.
     </p>
 
     <h2>3. Katon pesu</h2>
     <p>
-      Pesemme katon ammattitason korkeapainepesurilla. Samalla tyhjennämme ja huuhtelemme sadevesikourut katolta
+      Pesemme katon ammattitason painepesurilla. Samalla tyhjennämme ja huuhtelemme sadevesikourut katolta
       irtoavasta liasta ja sammaleesta.
     </p>
     <Figure
@@ -65,7 +65,7 @@ const Body = () => (
     <h2>4. Kasvustonesto ja tiilten vaihto</h2>
     <p>
       Levitämme pestylle katolle torjunta-aineen, joka tuhoaa sammaleen itiöt tiilen huokosista asti. Sen jälkeen
-      vaihdamme rikkinäiset tiilet uusiin. Ilman kasvustonestoa sammal kasvaisi pian uuden maalin läpi.
+      vaihdamme rikkinäiset tiilet ehjiin. Ilman kasvustonestoa sammal kasvaisi pian uuden maalin läpi.
     </p>
 
     <h2>5. Kaksi ruiskumaalauskertaa</h2>

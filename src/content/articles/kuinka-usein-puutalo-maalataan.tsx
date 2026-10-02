@@ -89,7 +89,6 @@ const Body = () => (
     <ol>
       <li>Pesemme julkisivun homepesuaineella ja harjoilla.</li>
       <li>Kaavimme irtoilevan ja kuplivan maalin pois.</li>
-      <li>Vaihdamme lahovaurioituneet puuosat.</li>
       <li>Pohjamaalaamme paljaat puupinnat ennen pintamaalia.</li>
     </ol>
     <p>

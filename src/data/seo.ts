@@ -83,7 +83,7 @@ export const staticSeo: Record<string, RouteSeo> = {
       "Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta.",
   },
   "/hintalaskuri": {
-    title: "Hintalaskuri – laske katon pinnoituksen tai maalauksen hinta",
+    title: "Hintalaskuri – laske pinnoituksen tai maalauksen hinta",
     description:
       "Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Vastaa muutamaan kysymykseen ja saat suuntaa antavan hinta-arvion heti. Pintanen, Pirkanmaa.",
   },

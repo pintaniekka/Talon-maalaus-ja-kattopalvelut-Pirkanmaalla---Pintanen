@@ -113,7 +113,7 @@ const Hinnat = () => {
                     <card.Icon className="w-7 h-7" />
                   </div>
                   <h3 className="text-xl font-bold mb-1">{card.title}</h3>
-                  <p className="text-2xl font-bold text-accent mb-2">{card.price}</p>
+                  <p className="text-2xl font-bold text-paint-yellow mb-2">{card.price}</p>
                   <p className="text-sm text-white/80 mb-4">{card.description}</p>
                   <span className="inline-flex items-center gap-1 text-sm font-semibold">
                     {card.cta} <ChevronRight className="w-4 h-4" />

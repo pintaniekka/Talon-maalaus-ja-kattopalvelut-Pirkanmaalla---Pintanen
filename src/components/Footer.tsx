@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { getStorageUrl } from '@/lib/storage';
 import OptimizedImage from './OptimizedImage';
 import { GOOGLE_PROFILE_URL } from "@/data/company";
+import { openConsentSettings } from "@/lib/analytics";
 
 const logoUrl = getStorageUrl("Pintanen-logo.png");
 
@@ -162,6 +163,11 @@ const Footer = () => {
                 <Link to="/tietosuoja" className="hover:text-primary-foreground transition-colors">
                   Tietosuojaseloste
                 </Link>
+              </li>
+              <li>
+                <button type="button" onClick={openConsentSettings} className="hover:text-primary-foreground transition-colors">
+                  Evästeasetukset
+                </button>
               </li>
             </ul>
           </div>

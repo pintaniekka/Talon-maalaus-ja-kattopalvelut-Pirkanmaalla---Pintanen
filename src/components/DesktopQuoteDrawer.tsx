@@ -121,6 +121,7 @@ const DesktopQuoteDrawer = () => {
       {/* Fixed right-edge CTA tab — desktop only */}
       <button
         onClick={handleOpen}
+        data-track="tarjouspyynto"
         aria-label="Tilaa maksuton arviokäynti"
         className="hidden lg:flex fixed right-0 top-1/2 -translate-y-1/2 z-[60] items-center justify-center cursor-pointer group"
         style={{ writingMode: "vertical-rl" }}

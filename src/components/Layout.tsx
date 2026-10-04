@@ -5,6 +5,7 @@ import Footer from './Footer';
 import MobileBottomBar from './MobileBottomBar';
 import DesktopQuoteDrawer from './DesktopQuoteDrawer';
 import ChatLeadForm from './ChatLeadForm';
+import CookieBanner from './CookieBanner';
 
 
 const ScrollToTop = () => {
@@ -29,6 +30,7 @@ const Layout = () => {
       <MobileBottomBar />
       <DesktopQuoteDrawer />
       <ChatLeadForm />
+      <CookieBanner />
     </div>
   );
 };

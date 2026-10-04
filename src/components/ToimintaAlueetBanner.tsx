@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
-import { allCities, cities as fullServiceCities, maalausCities } from '@/data/cityData';
+import { allCities, pinnoitusCities, maalausCities } from '@/data/cityData';
 import { getStorageUrl } from '@/lib/storage';
 import { cn } from '@/lib/utils';
 
@@ -35,7 +35,7 @@ const regions = Object.entries(regionSlugs).map(([title, slugs]) => ({
     .filter((c): c is NonNullable<typeof c> => Boolean(c)),
 }));
 
-const pinnoitusSlugs = new Set(fullServiceCities.map((c) => c.slug));
+const pinnoitusSlugs = new Set(pinnoitusCities.map((c) => c.slug));
 const maalausSlugs = new Set(maalausCities.map((c) => c.slug));
 
 /**

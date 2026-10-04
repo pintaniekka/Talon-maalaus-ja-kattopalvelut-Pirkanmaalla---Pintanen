@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
-import { cities as fullServiceCities, allCities, maalausCities } from "./data/cityData";
+import { cities as fullServiceCities, allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./data/cityData";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Lazy-loaded subpages
@@ -74,11 +74,11 @@ export const AppContent = ({
               <Route path="/artikkelit/:slug" element={<Artikkeli />} />
               <Route path="/tietosuoja" element={<Tietosuoja />} />
 
-              {/* ── City service pages (8 full-service cities × 3 services) ── */}
-              {fullServiceCities.map(city => (
+              {/* ── Kaupunkikohtaiset palvelusivut (listat: src/data/cityData.ts) ── */}
+              {pinnoitusCities.map(city => (
                 <Route key={`pin-${city.slug}`} path={`/tiilikaton-pinnoitus-${city.slug}`} element={<KattopalvelutPinnoitusCity citySlug={city.slug} />} />
               ))}
-              {fullServiceCities.map(city => (
+              {puhdistusCities.map(city => (
                 <Route key={`puh-${city.slug}`} path={`/katon-puhdistus-${city.slug}`} element={<KattopalvelutPuhdistusCity citySlug={city.slug} />} />
               ))}
               {maalausCities.map(city => (

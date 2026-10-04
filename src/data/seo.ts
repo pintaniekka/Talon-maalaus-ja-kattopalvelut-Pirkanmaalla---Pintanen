@@ -9,7 +9,7 @@
  *
  * EI komponentti-importteja: tiedosto luetaan myös Nodessa build-aikana.
  */
-import { type CityData, cities, allCities, maalausCities } from "./cityData";
+import { type CityData, allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./cityData";
 import { getAreaCityContent } from "./areaCityContent";
 import { articles } from "./articles";
 import { getResponsiveSrc, getResponsiveSrcSet } from "../lib/storage";
@@ -187,8 +187,10 @@ export const getRouteSeo = (path: string): RouteSeo | undefined => {
       if (area) return { title: area.alueMetaTitle, description: area.alueMetaDesc, hero: HERO.alue };
     }
   }
-  for (const city of cities) {
+  for (const city of pinnoitusCities) {
     if (path === `/tiilikaton-pinnoitus-${city.slug}`) return { ...pinnoitusCitySeo(city), hero: HERO.pinnoitus };
+  }
+  for (const city of puhdistusCities) {
     if (path === `/katon-puhdistus-${city.slug}`) return { ...puhdistusCitySeo(city), hero: HERO.puhdistus };
   }
   for (const city of maalausCities) {

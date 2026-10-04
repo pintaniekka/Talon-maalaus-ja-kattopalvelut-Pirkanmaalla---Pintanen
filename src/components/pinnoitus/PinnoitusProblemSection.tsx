@@ -34,7 +34,7 @@ const PinnoitusProblemSection = ({ cityName, cityIn, cityGenitive }: PinnoitusPr
             Onko kattosi vaarassa {cityGenitive} vaihtelevassa säässä?
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Moni tamperelainen luulee, että omakotitalon katto on kunnossa, jos se näyttää siistiltä kaukaa katsottuna. Mutta totuus on toinen. Kun tiilen suoja kuluu pois, tiili imee kosteutta kuin <strong className="text-foreground">kuiva pesusieni</strong>. Siinä vaiheessa pelkkä puhdistus ei riitä. Katto tarvitsee ammattitaitoista pinnoitusta, jotta se kestää teknisesti pitkään.
+            Moni luulee, että omakotitalon katto on kunnossa, jos se näyttää siistiltä kaukaa katsottuna. Mutta totuus on toinen. Kun tiilen suoja kuluu pois, tiili imee kosteutta kuin <strong className="text-foreground">kuiva pesusieni</strong>. Siinä vaiheessa pelkkä puhdistus ei riitä. Katto tarvitsee ammattitaitoista pinnoitusta, jotta se kestää teknisesti pitkään.
           </p>
         </motion.div>
 

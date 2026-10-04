@@ -7,9 +7,9 @@ import ServicePageHero from "@/components/ServicePageHero";
 import MaalausTrustStats from "@/components/maalaus/MaalausTrustStats";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import { wallTestimonials } from "@/data/testimonialsData";
-import MaalausProblemSection from "@/components/maalaus/MaalausProblemSection";
-import MaalausProcessAccordion from "@/components/maalaus/MaalausProcessAccordion";
-import MaalausComparison from "@/components/maalaus/MaalausComparison";
+import { MaalausCitySigns, MaalausCityProcess, MaalausCityComparison } from "@/components/maalaus/MaalausCitySections";
+import CityHousingFacts from "@/components/CityHousingFacts";
+import CityNeighborLinks from "@/components/CityNeighborLinks";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import MaalausFinancing from "@/components/maalaus/MaalausFinancing";
@@ -23,6 +23,7 @@ import { maalausCitySeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { getCityBySlug } from "@/data/cityData";
 import { getMaalausCityFAQ } from "@/data/faqData";
+import { getLocalCityFaq } from "@/data/cityFaq";
 
 const heroBase = "moderni-tumma-puutalo-julkisivumaalaus-valmis";
 const heroImage = getResponsiveSrc(heroBase);
@@ -107,15 +108,17 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
 
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
-      <MaalausProblemSection cityName={cityName} />
-      <MaalausProcessAccordion cityName={cityName} />
-      <MaalausComparison cityIn={cityData.cityIn} />
+      <MaalausCitySigns cityName={cityName} cityIn={cityData.cityIn} />
+      <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
+      <MaalausCityProcess cityName={cityName} cityIn={cityData.cityIn} />
+      <MaalausCityComparison cityName={cityName} cityIn={cityData.cityIn} />
       <MaalausPricingCards cityName={cityName} />
       <KotitalousVahennys />
       <MaalausFinancing cityName={cityName} />
       <MaalausEntrepreneur />
-      <FAQSection items={getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)} />
+      <FAQSection items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]} />
       <TeamContactSection cityName={cityName} cityGenitive={cityData.cityGenitive} />
+      <CityNeighborLinks city={cityData} service="maalaus" />
       <ToimintaAlueetBanner activeCity={citySlug} service="maalaus" />
     </div>
   );

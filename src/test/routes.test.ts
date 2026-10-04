@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 import { getCanonicalRoutes, legacyRoutes, getAllRoutePaths, buildSitemapXml, articlePath } from "@/data/routes";
-import { cities, allCities, maalausCities } from "@/data/cityData";
+import { allCities, maalausCities, pinnoitusCities, puhdistusCities } from "@/data/cityData";
 import { articles, isPublished, getPublishedArticles } from "@/data/articles";
 import { authors } from "@/data/authors";
 
@@ -23,10 +23,10 @@ describe("reittilista (src/data/routes.ts) vs App.tsx", () => {
 
   it("kaupunkisivut on johdettu samasta cityData-lähteestä", () => {
     for (const c of allCities) expect(canonicalPaths.has(`/maalauspalvelut-${c.slug}`)).toBe(true);
-    for (const c of cities) {
-      expect(canonicalPaths.has(`/tiilikaton-pinnoitus-${c.slug}`)).toBe(true);
-      expect(canonicalPaths.has(`/katon-puhdistus-${c.slug}`)).toBe(true);
-    }
+    for (const c of pinnoitusCities) expect(canonicalPaths.has(`/tiilikaton-pinnoitus-${c.slug}`)).toBe(true);
+    for (const c of puhdistusCities) expect(canonicalPaths.has(`/katon-puhdistus-${c.slug}`)).toBe(true);
+    // Puhdistussivuja ei tehdä uusille paikkakunnille.
+    expect(puhdistusCities.length).toBe(8);
     for (const c of maalausCities) expect(canonicalPaths.has(`/talon-maalaus-${c.slug}`)).toBe(true);
   });
 

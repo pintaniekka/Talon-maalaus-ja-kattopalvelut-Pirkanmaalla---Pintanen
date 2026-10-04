@@ -390,7 +390,9 @@ const ChatPriceCalculator = () => {
         message: `Chat-hintalaskuri: ${details}`,
         priceEstimate: priceStr,
         calculatorDetails: details,
-      });
+      },
+        "etusivun chat-laskuri"
+      );
 
       const priceMsg = path === 'maalaus'
         ? `Kiitos! 🎉 Alustava hinta-arvio maalaukselle on ${priceStr}. Tämä on tosiaan suuntaa antava arvio. Tulen mielelläni paikan päälle tekemään ilmaisen ja tarkan arvion!`

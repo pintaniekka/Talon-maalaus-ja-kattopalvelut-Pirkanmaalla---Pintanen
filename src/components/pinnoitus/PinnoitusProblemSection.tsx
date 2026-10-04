@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { Search } from "@/components/icons/BrandIcons";
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
@@ -85,13 +86,13 @@ const PinnoitusProblemSection = ({ cityName, cityIn, cityGenitive }: PinnoitusPr
               </ul>
             </motion.div>
 
-            <a
-              href="#yhteystiedot"
+            <Link
+              to="/tarjouspyynto?palvelu=pinnoitus"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
               style={{ backgroundColor: "hsl(var(--accent-strong))" }}
             >
               Varaa maksuton kuntotarkastus {cityIn}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

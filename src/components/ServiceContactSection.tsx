@@ -117,7 +117,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
     setIsLoading(true);
     try {
       const { services, ...rest } = formState;
-      await submitContactForm({ ...rest, service: services.join(', ') });
+      await submitContactForm({ ...rest, service: services.join(', ') }, "sivun lopun lomake");
       setIsSubmitted(true);
       setFormState({ name: '', email: '', phone: '', services: [], message: '', website: '' });
       toast({ title: 'Tarjouspyyntö lähetetty!', description: 'Vastaamme mahdollisimman pian.' });

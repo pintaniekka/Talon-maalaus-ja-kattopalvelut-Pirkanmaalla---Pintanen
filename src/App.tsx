@@ -19,6 +19,7 @@ const ToimintaAlueet = lazyWithRetry(() => import("./pages/ToimintaAlueet"));
 const ServiceAreaPage = lazyWithRetry(() => import("./pages/ServiceAreaPage"));
 const Referenssit = lazyWithRetry(() => import("./pages/Referenssit"));
 const Hintalaskuri = lazyWithRetry(() => import("./pages/Hintalaskuri"));
+const Tarjouspyynto = lazyWithRetry(() => import("./pages/Tarjouspyynto"));
 const HinnatTiilikalonPinnoitus = lazyWithRetry(() => import("./pages/HinnatTiilikalonPinnoitus"));
 const HinnatKatonPuhdistus = lazyWithRetry(() => import("./pages/HinnatKatonPuhdistus"));
 const HinnatTalonMaalaus = lazyWithRetry(() => import("./pages/HinnatTalonMaalaus"));
@@ -61,6 +62,7 @@ export const AppContent = ({
               <Route path="/katon-puhdistus-pirkanmaa" element={<KattopalvelutPuhdistus />} />
               <Route path="/talon-maalaus-pirkanmaa" element={<TalonMaalaus />} />
               <Route path="/hintalaskuri" element={<Hintalaskuri />} />
+              <Route path="/tarjouspyynto" element={<Tarjouspyynto />} />
               <Route path="/maalauspalvelut-hinta-pirkanmaa" element={<Navigate to="/hintalaskuri" replace />} />
               <Route path="/tiilikaton-pinnoitus-hinta-pirkanmaa" element={<HinnatTiilikalonPinnoitus />} />
               <Route path="/katon-puhdistus-hinta-pirkanmaa" element={<HinnatKatonPuhdistus />} />

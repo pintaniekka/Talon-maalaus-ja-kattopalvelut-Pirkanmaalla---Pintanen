@@ -159,13 +159,13 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
             style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Pyydä maksuton kuntotarkastus
-          </a>
+          </Link>
           <Link
             to="/hintalaskuri"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors"

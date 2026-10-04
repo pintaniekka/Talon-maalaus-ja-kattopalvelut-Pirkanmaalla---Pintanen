@@ -62,13 +62,13 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto?palvelu=maalaus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-all hover:brightness-110 text-base"
             style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Pyydä ilmainen kuntoarvio
-          </a>
+          </Link>
           <Link
             to="/hintalaskuri?palvelu=maalaus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-base"

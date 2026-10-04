@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { CreditCard } from 'lucide-react';
 
@@ -20,13 +21,13 @@ const MaalausFinancing = ({ cityName = 'Pirkanmaa' }: { cityName?: string }) => 
           <p className="text-muted-foreground leading-relaxed mb-6">
             Ulkoverhouksen huoltoa ei kannata lykätä säästöjä odotellessa, sillä vaurioitunut puurakenne tai <strong className="text-foreground">ulkoverhousremontti on aina kalliimpi vaihtoehto</strong>. Kauttamme saat <strong className="text-foreground">joustavan rahoituksen</strong>, jolla voit maksaa maalauksen sinulle sopivissa kuukausierissä. Kysy lisää arviokäynnin yhteydessä!
           </p>
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto?palvelu=maalaus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-all hover:brightness-110"
             style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Kysy tarjous: Talon maalaus {cityName}
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

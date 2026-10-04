@@ -99,9 +99,9 @@ const HinnatTalonMaalaus = () => {
           <Link to="/hintalaskuri?palvelu=maalaus" className="btn-hero">
             Laske hinta laskurilla
           </Link>
-          <a href="#yhteystiedot" className="btn-hero-outline">
+          <Link to="/tarjouspyynto?palvelu=maalaus" className="btn-hero-outline">
             Pyydä ilmainen arviokäynti
-          </a>
+          </Link>
         </div>
       </ServicePageHero>
 

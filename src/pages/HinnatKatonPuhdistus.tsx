@@ -83,13 +83,13 @@ const HinnatKatonPuhdistus = () => {
           >
             Katso hintaesimerkit
           </a>
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto?palvelu=puhdistus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-base"
             style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
           >
             Pyydä ilmainen tarjous
-          </a>
+          </Link>
         </div>
       </ServicePageHero>
 

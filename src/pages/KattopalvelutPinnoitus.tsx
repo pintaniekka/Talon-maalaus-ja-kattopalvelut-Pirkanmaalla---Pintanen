@@ -79,13 +79,13 @@ const KattopalvelutPinnoitus = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto?palvelu=pinnoitus"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
             style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Pyydä maksuton kuntotarkastus
-          </a>
+          </Link>
           <Link
             to="/hintalaskuri?palvelu=pinnoitus"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
@@ -188,13 +188,13 @@ const KattopalvelutPinnoitus = () => {
                 </ul>
               </motion.div>
 
-              <a
-                href="#yhteystiedot"
+              <Link
+                to="/tarjouspyynto?palvelu=pinnoitus"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
                 style={{ backgroundColor: "hsl(var(--accent-strong))" }}
               >
                 Pyydä maksuton kuntotarkastus
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -302,8 +302,8 @@ const KattopalvelutPinnoitus = () => {
                     Kesto: {card.duration}
                   </div>
 
-                  <a
-                    href="#yhteystiedot"
+                  <Link
+                    to="/tarjouspyynto?palvelu=pinnoitus"
                     className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-md text-sm ${
                       card.featured
                         ? "bg-accent-strong text-accent-foreground"
@@ -311,7 +311,7 @@ const KattopalvelutPinnoitus = () => {
                     }`}
                   >
                     Pyydä tarjous tästä
-                  </a>
+                  </Link>
                 </div>
               </motion.div>
             ))}

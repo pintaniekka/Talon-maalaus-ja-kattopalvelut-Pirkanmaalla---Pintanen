@@ -274,7 +274,9 @@ const ChatLeadForm = () => {
         email: contactEmail.trim() || undefined,
         service: selectedServices.join(', ') || 'Chat-yhteydenotto',
         message: details,
-      });
+      },
+        "chat-kupla"
+      );
       setMessages(prev => [...prev, { from: 'user', text: `${contactName}${contactPhone ? ', ' + contactPhone : ''}${contactEmail ? ', ' + contactEmail : ''}` }]);
       setCurrentStep({ kind: 'done' });
       botSay('Iso kiitos! Tiedot vastaanotettu, olemme sinuun pian yhteydessä. 🛠️', { kind: 'done' });

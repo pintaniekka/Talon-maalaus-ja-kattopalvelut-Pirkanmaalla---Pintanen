@@ -24,13 +24,13 @@ const PinnoitusCityHero = ({ cityName, cityIn, backgroundImage, backgroundSrcSet
 
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="#yhteystiedot"
+        <Link
+          to="/tarjouspyynto?palvelu=pinnoitus"
           className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
           style={{ backgroundColor: "hsl(var(--accent-strong))" }}
         >
           Pyydä ilmainen kuntotarkastus
-        </a>
+        </Link>
         <Link
           to="/hintalaskuri?palvelu=pinnoitus"
           className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors"

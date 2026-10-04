@@ -110,9 +110,9 @@ const HinnatTiilikalonPinnoitus = () => {
           <Link to="/hintalaskuri?palvelu=pinnoitus" className="btn-hero">
             Laske hinta laskurilla
           </Link>
-          <a href="#yhteystiedot" className="btn-hero-outline">
+          <Link to="/tarjouspyynto?palvelu=pinnoitus" className="btn-hero-outline">
             Pyydä ilmainen kuntotarkastus
-          </a>
+          </Link>
         </div>
       </ServicePageHero>
 

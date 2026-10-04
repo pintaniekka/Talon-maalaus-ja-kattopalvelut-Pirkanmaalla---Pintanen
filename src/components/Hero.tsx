@@ -45,12 +45,12 @@ const Hero = () => {
               Laske hinta
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
-            <a
-              href="#yhteystiedot"
+            <Link
+              to="/tarjouspyynto"
               className="inline-flex items-center justify-center px-8 py-4 bg-card border-2 border-accent text-accent-ink font-heading font-extrabold rounded-2xl hover:bg-accent-strong hover:text-accent-foreground transition-all text-lg"
             >
               Ilmainen arviokäynti
-            </a>
+            </Link>
           </div>
 
           {/* Trust row */}

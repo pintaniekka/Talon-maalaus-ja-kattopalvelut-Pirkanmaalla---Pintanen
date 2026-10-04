@@ -86,8 +86,8 @@ const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/hintalasku
                   Kesto: {card.duration}
                 </div>
 
-                <a
-                  href="#yhteystiedot"
+                <Link
+                  to="/tarjouspyynto?palvelu=pinnoitus"
                   className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-md text-sm ${
                     card.featured
                       ? 'bg-accent-strong text-accent-foreground'
@@ -95,7 +95,7 @@ const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/hintalasku
                   }`}
                 >
                   Pyydä tarjous tästä
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}

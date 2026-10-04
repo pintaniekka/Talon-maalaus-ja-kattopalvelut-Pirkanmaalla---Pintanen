@@ -31,16 +31,16 @@ const CookieBanner = () => {
     <div
       role="region"
       aria-label="Evästeet"
-      className="fixed z-[70] left-3 right-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] lg:left-4 lg:right-auto lg:bottom-4 lg:max-w-md rounded-2xl border border-border bg-card p-4 shadow-2xl"
+      className="fixed z-[70] left-3 right-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] lg:left-4 lg:right-auto lg:bottom-4 lg:max-w-md rounded-2xl border border-border bg-card p-3 lg:p-4 shadow-2xl"
     >
-      <p className="text-sm text-foreground leading-relaxed">
+      <p className="text-[13px] lg:text-sm text-foreground leading-snug lg:leading-relaxed">
         Käytämme evästeitä sivuston kävijämäärän seuraamiseen. Voit hyväksyä tai hylätä ne.{" "}
         <Link to="/tietosuoja" className="underline underline-offset-2">
           Tietosuojaseloste
         </Link>
       </p>
       {/* Puhelimessa oikea alakulma jää vapaaksi chat-napille. */}
-      <div className="mt-3 flex gap-3 pr-16 lg:pr-0">
+      <div className="mt-2.5 flex gap-3 pr-16 lg:pr-0">
         <button type="button" onClick={() => choose("denied")} className={button}>
           Hylkää
         </button>

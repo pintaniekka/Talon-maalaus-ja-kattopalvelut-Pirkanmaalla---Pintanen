@@ -81,8 +81,9 @@ const deleteGaCookies = () => {
     .split(";")
     .map((c) => c.split("=")[0].trim())
     .filter((name) => name === "_ga" || name.startsWith("_ga_") || name === "_gid");
-  const host = window.location.hostname;
-  const domains = ["", host, `.${host}`, `.${host.split(".").slice(-2).join(".")}`];
+  // GA asettaa evästeen ylimmälle sallitulle verkkotunnukselle, joten kokeillaan kaikki tasot.
+  const labels = window.location.hostname.split(".");
+  const domains = ["", ...labels.map((_, i) => labels.slice(i).join(".")).flatMap((d) => [d, `.${d}`])];
   for (const name of names) {
     for (const domain of domains) {
       document.cookie = `${name}=; Max-Age=0; path=/${domain ? `; domain=${domain}` : ""}`;

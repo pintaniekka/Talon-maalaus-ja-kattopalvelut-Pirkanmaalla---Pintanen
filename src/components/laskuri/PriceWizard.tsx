@@ -232,7 +232,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const optionButton = "w-full text-left rounded-xl border border-border bg-background px-5 py-4 text-foreground font-medium transition-all hover:border-accent hover:bg-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
   return (
-    <div ref={topRef} className="bg-card/95 backdrop-blur rounded-3xl shadow-2xl border border-border/60 p-6 md:p-10 max-w-2xl mx-auto scroll-mt-28">
+    <div ref={topRef} className="bg-card rounded-3xl shadow-2xl border border-border/60 p-6 md:p-10 max-w-2xl mx-auto scroll-mt-28">
       {result ? (
         <div className="text-center py-4">
           <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-5">

@@ -43,7 +43,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/tiilikaton-pinnoitus-pirkanmaa": HERO.pinnoitus,
   "/katon-puhdistus-pirkanmaa": HERO.puhdistus,
   "/talon-maalaus-pirkanmaa": HERO.maalaus,
-  "/hintalaskuri": fullHero("keltainen-talo-pinnoitettu-tiilikatto-ylojarvi"),
+  "/hintalaskuri": fullHero("hintalaskuri-tausta"),
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
   "/katon-puhdistus-hinta-pirkanmaa": fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
   "/talon-maalaus-hinta-pirkanmaa": fullHero("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen"),

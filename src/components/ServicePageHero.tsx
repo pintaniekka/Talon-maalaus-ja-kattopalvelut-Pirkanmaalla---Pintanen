@@ -7,11 +7,13 @@ interface ServicePageHeroProps {
   backgroundImage?: string;
   backgroundSrcSet?: string;
   children?: ReactNode;
+  /** Matalampi pääkuva, jotta sisältö alkaa ensimmäisellä ruudulla (hintasivut). */
+  compact?: boolean;
 }
 
-const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, children }: ServicePageHeroProps) => {
+const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, children, compact = false }: ServicePageHeroProps) => {
   return (
-    <section className="hero-critical relative min-h-[60svh] min-h-[60vh] flex items-center justify-center overflow-hidden isolate" style={{ backgroundColor: 'hsl(215,30%,10%)' }}>
+    <section className={`hero-critical relative ${compact ? "min-h-[38svh] min-h-[38vh]" : "min-h-[60svh] min-h-[60vh]"} flex items-center justify-center overflow-hidden isolate`} style={{ backgroundColor: 'hsl(215,30%,10%)' }}>
       {/* Background image – separate layer, no blend/filter/opacity */}
       {backgroundImage ? (
         <img
@@ -34,7 +36,7 @@ const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, c
       )}
 
       {/* Content */}
-      <div className="relative z-[2] section-container text-center text-primary-foreground pt-28 xl:pt-36 pb-16">
+      <div className={`relative z-[2] section-container text-center text-primary-foreground ${compact ? "pt-28 pb-10" : "pt-28 xl:pt-36 pb-16"}`}>
         {title && (
           <motion.h1
             initial={{ opacity: 0, y: 30 }}

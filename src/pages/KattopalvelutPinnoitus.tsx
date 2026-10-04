@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { pinnoitusPrices, fmtCardRange, fmtCardAfter } from "@/data/prices";
 import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import { Search, Clock } from "@/components/icons/BrandIcons";
@@ -33,11 +34,7 @@ const trustStats = [
 ];
 
 /* ── Pricing cards ── */
-const pricingCards = [
-  { size: "150–180 m²", label: "Pieni/keskisuuri koti", duration: "2 työpäivää", normalPrice: "2 850 € – 3 200 €", afterPrice: "alk. 2 050 €", featured: false },
-  { size: "190–240 m²", label: "Yleisin kattokoko", duration: "2–3 työpäivää", normalPrice: "3 300 € – 3 700 €", afterPrice: "alk. 2 380 €", featured: true },
-  { size: "250–300 m²", label: "Suuri omakotitalo", duration: "2–4 työpäivää", normalPrice: "3 750 € – 4 880 €", afterPrice: "alk. 2 700 €", featured: false },
-];
+const pricingCards = pinnoitusPrices.cards;
 
 const pricingIncludes = [
   "Syväpuhdistava pesu",
@@ -90,7 +87,7 @@ const KattopalvelutPinnoitus = () => {
             Pyydä maksuton kuntotarkastus
           </a>
           <Link
-            to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+            to="/hintalaskuri?palvelu=pinnoitus"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
             style={{ backgroundColor: "hsla(30, 52%, 90%, 0.15)" }}
           >
@@ -225,7 +222,7 @@ const KattopalvelutPinnoitus = () => {
                 </div>
                 <div className="mt-8">
                   <Link
-                    to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+                    to="/hintalaskuri?palvelu=pinnoitus"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-lg"
                     style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
                   >
@@ -285,9 +282,9 @@ const KattopalvelutPinnoitus = () => {
 
                   <div className="mb-5">
                     <p className="text-sm line-through text-muted-foreground/60 mb-1">
-                      Norm. {card.normalPrice}
+                      Norm. {fmtCardRange(card)}
                     </p>
-                    <p className="text-3xl md:text-4xl font-bold text-accent">{card.afterPrice}</p>
+                    <p className="text-3xl md:text-4xl font-bold text-accent">{fmtCardAfter(card)}</p>
                     <p className="text-xs text-muted-foreground mt-1">kotitalousvähennyksen jälkeen</p>
                   </div>
 
@@ -323,7 +320,7 @@ const KattopalvelutPinnoitus = () => {
           {/* Price calculator CTA button */}
           <div className="text-center mt-10">
             <Link
-              to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+              to="/hintalaskuri?palvelu=pinnoitus"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
               style={{ backgroundColor: "hsl(38, 60%, 65%)", color: "hsl(215, 25%, 15%)" }}
             >

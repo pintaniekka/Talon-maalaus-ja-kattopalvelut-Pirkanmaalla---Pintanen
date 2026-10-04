@@ -30,7 +30,7 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
 
               <div className="mt-8">
                 <Link
-                  to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+                  to="/hintalaskuri?palvelu=pinnoitus"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-lg"
                   style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
                 >

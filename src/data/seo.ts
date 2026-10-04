@@ -43,7 +43,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/tiilikaton-pinnoitus-pirkanmaa": HERO.pinnoitus,
   "/katon-puhdistus-pirkanmaa": HERO.puhdistus,
   "/talon-maalaus-pirkanmaa": HERO.maalaus,
-  "/maalauspalvelut-hinta-pirkanmaa": fullHero("moderni-tumma-puutalo-julkisivumaalaus-valmis"),
+  "/hintalaskuri": fullHero("keltainen-talo-pinnoitettu-tiilikatto-ylojarvi"),
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
   "/katon-puhdistus-hinta-pirkanmaa": fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
   "/talon-maalaus-hinta-pirkanmaa": fullHero("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen"),
@@ -82,10 +82,10 @@ export const staticSeo: Record<string, RouteSeo> = {
     description:
       "Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta.",
   },
-  "/maalauspalvelut-hinta-pirkanmaa": {
-    title: "Tiilikaton pinnoitus ja talon maalaus hinta – Laske arvio",
+  "/hintalaskuri": {
+    title: "Hintalaskuri – laske pinnoituksen tai maalauksen hinta",
     description:
-      "Paljonko tiilikaton pinnoitus tai talon maalaus maksaa? Laske arvio hintalaskurilla ja katso hintaesimerkit Pirkanmaan alueella.",
+      "Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Vastaa muutamaan kysymykseen ja saat suuntaa antavan hinta-arvion heti. Pintanen, Pirkanmaa.",
   },
   "/katon-puhdistus-hinta-pirkanmaa": {
     title: "Katon puhdistus hinta – Sammaleen poisto ja suojakäsittely",
@@ -93,14 +93,14 @@ export const staticSeo: Record<string, RouteSeo> = {
       "Paljonko katon puhdistus maksaa? Katso hintaesimerkit, mitä puhdistus sisältää ja milloin pelkkä pesu riittää. Toimimme Pirkanmaalla ja Kanta-Hämeessä.",
   },
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": {
-    title: "Tiilikaton pinnoitus hinta – Laske arvio heti",
+    title: "Tiilikaton pinnoitus hinta 2027 – hintaesimerkit ja laskuri",
     description:
-      "Paljonko tiilikaton pinnoitus maksaa? Laske arvio hintalaskurilla ja katso hintaesimerkit. Toimimme Pirkanmaalla ja Kanta-Hämeessä.",
+      "Tiilikaton pinnoitus maksaa omakotitalossa yleensä 2 850–7 000 €. Katso hintaesimerkit, laske arvio laskurilla ja lue, mitä hintaan kuuluu. Pirkanmaa ja Kanta-Häme.",
   },
   "/talon-maalaus-hinta-pirkanmaa": {
-    title: "Talon maalaus hinta – Laske arvio heti",
+    title: "Talon maalaus hinta 2027 – hintaesimerkit ja laskuri",
     description:
-      "Paljonko talon maalaus maksaa? Laske suuntaa antava hinta laskurilla ja katso hintaesimerkit. Kotitalousvähennys pienentää kustannuksia.",
+      "Talon ulkomaalaus maksaa omakotitalossa yleensä 3 500–11 000 €. Katso hintaesimerkit, laske arvio laskurilla ja lue, mistä hinta syntyy. Pirkanmaa.",
   },
   "/meista": {
     title: "Pintanen Oy – Perheyritys katto- ja maalaustöissä",

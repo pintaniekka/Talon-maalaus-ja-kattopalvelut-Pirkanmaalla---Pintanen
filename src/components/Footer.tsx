@@ -129,7 +129,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/maalauspalvelut-hinta-pirkanmaa" className="hover:text-primary-foreground transition-colors">
+                <Link to="/hintalaskuri" className="hover:text-primary-foreground transition-colors">
                   Hintalaskuri
                 </Link>
               </li>

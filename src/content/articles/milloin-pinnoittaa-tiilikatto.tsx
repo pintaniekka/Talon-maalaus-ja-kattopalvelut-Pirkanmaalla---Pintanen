@@ -10,7 +10,7 @@ const faq = [
   {
     question: "Mitä tiilikaton pinnoitus maksaa?",
     answer:
-      "Omakotitalon tiilikaton pinnoitus maksaa meillä 2 850–4 880 euroa katon koon ja jyrkkyyden mukaan. Työn osuudesta saa kotitalousvähennyksen.",
+      "Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–7 000 euroa katon koon ja jyrkkyyden mukaan. Työn osuudesta saa kotitalousvähennyksen.",
   },
   {
     question: "Kauanko pinnoitus kestää?",

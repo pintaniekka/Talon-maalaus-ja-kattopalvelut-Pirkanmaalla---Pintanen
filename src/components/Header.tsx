@@ -29,8 +29,9 @@ const Header = () => {
     },
     {
       label: "Hinnat & Laskuri",
-      href: "/maalauspalvelut-hinta-pirkanmaa",
+      href: "/hintalaskuri",
       dropdown: [
+        { label: "Hintalaskuri", href: "/hintalaskuri" },
         { label: "Tiilikaton pinnoitus hinta", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
         { label: "Katon puhdistus hinta", href: "/katon-puhdistus-hinta-pirkanmaa" },
         { label: "Talon maalaus hinta", href: "/talon-maalaus-hinta-pirkanmaa" },

@@ -98,7 +98,7 @@ const Body = () => (
     </p>
     <p>
       Ostetulla työllä on myös takuu. Saat tiilikaton pinnoitukselle meiltä 5 vuoden kirjallisen takuun. Lue myös{" "}
-      <Link to="/artikkelit/tiilikaton-pinnoituksen-hinta">tiilikaton pinnoituksen hinta</Link> ja{" "}
+      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">tiilikaton pinnoituksen hinta</Link> ja{" "}
       <Link to="/artikkelit/tiilikaton-pinnoituksen-tyovaiheet">näin tiilikaton pinnoitus etenee</Link>.
     </p>
 

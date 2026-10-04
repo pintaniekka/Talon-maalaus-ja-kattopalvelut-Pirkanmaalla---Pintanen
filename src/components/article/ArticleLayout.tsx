@@ -47,7 +47,7 @@ const closingNotes: Record<ArticleMeta["category"], ReactNode> = {
   raha: (
     <>
       Tarkan hinnan omalle kohteellesi saat maksuttomalla arviokäynnillä Pirkanmaalla. Suuntaa antavan arvion voit
-      laskea itse <Link to="/maalauspalvelut-hinta-pirkanmaa">hintalaskurilla</Link>, tai voit soittaa numeroon{" "}
+      laskea itse <Link to="/hintalaskuri">hintalaskurilla</Link>, tai voit soittaa numeroon{" "}
       <a href="tel:+358409640066">040 964 0066</a>.
     </>
   ),

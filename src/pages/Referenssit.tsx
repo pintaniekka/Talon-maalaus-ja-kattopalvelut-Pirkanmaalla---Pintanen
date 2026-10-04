@@ -292,6 +292,18 @@ const Referenssit = () => {
     { type: 'single', baseName: 'talon-julkisivun-ja-ikkunoiden-suojaustyot', category: 'maalaus', title: 'Talon julkisivun ja ikkunoiden suojaustyöt Pirkanmaalla' },
     { type: 'single', baseName: 'punainen-tiilikatto-kattopinnoitus-ja-huolto-jalkeen', category: 'pinnoitus', title: 'Punainen tiilikatto kattopinnoitus ja huolto jälkeen Pirkanmaalla' },
     { type: 'single', baseName: 'uutta-vastaava-tiilikatto-pesu-ja-suojakasittely', category: 'pinnoitus', title: 'Uutta vastaava tiilikatto pesu ja suojakäsittely Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-tampere-tiilitalo-jalkeen', category: 'pinnoitus', title: 'Tiilikaton pinnoitus Tampereella 2026' },
+    { type: 'single', baseName: 'tummanharmaa-tiilikatto-pinnoituksen-jalkeen-tampere', category: 'pinnoitus', title: 'Tummanharmaa tiilikatto pinnoituksen jälkeen Tampereella 2026' },
+    { type: 'single', baseName: 'puutalon-katon-ja-seinien-maalaus-tampere', category: 'maalaus', title: 'Katon ja seinien maalaus Tampereella 2026' },
+    { type: 'single', baseName: 'musta-tiilikatto-pinnoituksen-jalkeen-ylojarvi', category: 'pinnoitus', title: 'Musta tiilikatto pinnoituksen jälkeen Ylöjärvellä 2026' },
+    { type: 'single', baseName: 'ruskea-tiilikatto-pinnoituksen-jalkeen-ylojarvi', category: 'pinnoitus', title: 'Ruskea tiilikatto pinnoituksen jälkeen Ylöjärvellä 2026' },
+    { type: 'single', baseName: 'keltainen-talo-pinnoitettu-tiilikatto-ylojarvi', category: 'pinnoitus', title: 'Pinnoitettu tiilikatto Ylöjärvellä 2026' },
+    { type: 'single', baseName: 'keltainen-talo-pinnoitettu-tiilikatto-kangasala', category: 'pinnoitus', title: 'Pinnoitettu tiilikatto Kangasalla 2026' },
+    { type: 'single', baseName: 'punainen-tiilikatto-pinnoituksen-jalkeen-orivesi', category: 'pinnoitus', title: 'Punainen tiilikatto pinnoituksen jälkeen Orivedellä 2026' },
+    { type: 'single', baseName: 'tummanharmaa-tiilikatto-pinnoituksen-jalkeen-nokia', category: 'pinnoitus', title: 'Tummanharmaa tiilikatto pinnoituksen jälkeen Nokialla 2026' },
+    { type: 'single', baseName: 'musta-tiilikatto-pinnoituksen-jalkeen-loimaa', category: 'pinnoitus', title: 'Musta tiilikatto pinnoituksen jälkeen Loimaalla 2026' },
+    { type: 'single', baseName: 'vihrea-talo-pinnoitettu-punainen-tiilikatto', category: 'pinnoitus', title: 'Pinnoitettu punainen tiilikatto Pirkanmaalla 2026' },
+    { type: 'single', baseName: 'keltainen-puutalo-maalauksen-jalkeen-parkano', category: 'maalaus', title: 'Talon maalaus Parkanossa 2026' },
   ];
 
   const filteredProjects = activeCategory === 'all' ? projects : projects.filter((p) => p.category === activeCategory);

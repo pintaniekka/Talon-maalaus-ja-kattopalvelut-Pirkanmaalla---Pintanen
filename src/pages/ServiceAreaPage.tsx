@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import CityProjects from "@/components/CityProjects";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -51,7 +52,7 @@ const getTrustStats = (cityIn: string) => [
 const getAreaFAQ = (cityName: string, cityIn: string, cityGenitive: string) => [
   {
     question: `Paljonko talon maalaus tai katon pinnoitus maksaa ${cityIn}?`,
-    answer: `Hinta riippuu aina kohteen koosta, jyrkkyydestä ja pohjatöiden tarpeesta ${cityGenitive} alueella. Esimerkiksi omakotitalon maalaus tai tiilikaton pinnoitus maksaa tyypillisesti <strong>muutamasta tuhannesta eurosta ylöspäin</strong>. 👉 <a href="/talon-maalaus-hinta-pirkanmaa/" class="text-accent underline">Katso tarkat hintaesimerkit talon maalauksesta</a> 👉 <a href="/tiilikaton-pinnoitus-hinta-pirkanmaa/" class="text-accent underline">Katso tiilikaton pinnoituksen hintalaskuri</a>`,
+    answer: `Hinta riippuu aina kohteen koosta, jyrkkyydestä ja pohjatöiden tarpeesta ${cityGenitive} alueella. Esimerkiksi omakotitalon maalaus tai tiilikaton pinnoitus maksaa tyypillisesti <strong>muutamasta tuhannesta eurosta ylöspäin</strong>. 👉 <a href="/talon-maalaus-hinta-pirkanmaa/" class="text-accent underline">Katso tarkat hintaesimerkit talon maalauksesta</a> 👉 <a href="/hintalaskuri?palvelu=pinnoitus" class="text-accent underline">Katso tiilikaton pinnoituksen hintalaskuri</a>`,
   },
   {
     question: `Kuinka kauan maalaus- tai kattotyö kestää ${cityIn}?`,
@@ -166,7 +167,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
             Pyydä maksuton kuntotarkastus
           </a>
           <Link
-            to="/maalauspalvelut-hinta-pirkanmaa"
+            to="/hintalaskuri"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
             style={{ backgroundColor: "hsla(30, 52%, 90%, 0.15)" }}
           >
@@ -315,7 +316,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
               </div>
 
               <Link
-                to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+                to="/hintalaskuri?palvelu=pinnoitus"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 style={{ backgroundColor: "hsl(38, 60%, 65%)", color: "hsl(215, 25%, 15%)" }}
               >
@@ -325,6 +326,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
           </div>
         </section>
       )}
+
+      <CityProjects citySlug={citySlug} cityIn={cityIn} />
 
       {/* ══════════════════ ASIAKASPALAUTTEET – yksi kaupunkikohtainen karuselli ══════════════════ */}
       <TestimonialsMarquee

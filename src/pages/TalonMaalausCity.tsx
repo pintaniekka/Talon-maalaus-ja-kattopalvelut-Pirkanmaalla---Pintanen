@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import CityProjects from "@/components/CityProjects";
 import { motion } from "framer-motion";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from "react-router-dom";
@@ -69,7 +70,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
             Pyydä ilmainen kuntoarvio
           </a>
           <Link
-            to="/talon-maalaus-hinta-pirkanmaa"
+            to="/hintalaskuri?palvelu=maalaus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-base"
             style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
           >
@@ -102,6 +103,8 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
           </motion.div>
         </div>
       </section>
+
+      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
 
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
       <MaalausProblemSection cityName={cityName} />

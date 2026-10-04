@@ -82,7 +82,7 @@ export const articles: ArticleMeta[] = [
     lead: "Puutalo maalataan yleensä 10–15 vuoden välein. Hilseily, haalistunut väri ja homepilkut kertovat, että maali ei enää suojaa puuta.",
     category: "maalaus",
     author: "eemil",
-    publishedAt: "2026-10-06",
+    publishedAt: "2026-10-04",
     readingMinutes: 6,
     heroImage: "tummansininen-puutalo-ulkomaalaus-jalkeen",
     heroAlt: "Tummansininen puutalo ulkomaalauksen jälkeen",

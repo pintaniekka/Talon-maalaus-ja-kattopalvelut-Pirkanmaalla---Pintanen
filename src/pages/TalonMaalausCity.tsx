@@ -116,7 +116,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       <MaalausEntrepreneur />
       <FAQSection items={getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)} />
       <TeamContactSection cityName={cityName} cityGenitive={cityData.cityGenitive} />
-      <ToimintaAlueetBanner activeCity={citySlug} />
+      <ToimintaAlueetBanner activeCity={citySlug} service="maalaus" />
     </div>
   );
 };

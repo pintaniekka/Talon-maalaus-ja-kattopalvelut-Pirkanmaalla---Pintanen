@@ -2,18 +2,18 @@ import { useState } from 'react';
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
-import { allCities, cities as fullServiceCities } from '@/data/cityData';
+import { allCities, cities as fullServiceCities, maalausCities } from '@/data/cityData';
 import { getStorageUrl } from '@/lib/storage';
 import { cn } from '@/lib/utils';
 
 const mapImage = getStorageUrl("Toiminta-alue-kartta-pirkanmaa-kantahame.png");
 
-type Service = 'maalaus' | 'pinnoitus';
+type Service = 'maalaus' | 'pinnoitus' | 'alue';
 
 interface ToimintaAlueetBannerProps {
   /** Nykyisen sivun paikkakunnan slug — korostetaan aktiivisena chippinä */
   activeCity?: string;
-  /** Mihin chipit linkittävät: maalaussivuille (oletus) tai pinnoitussivuille */
+  /** Minkä ryhmän chippi korostetaan aktiivisena: aluesivu (oletus), pinnoituksen tai maalauksen kaupunkisivu */
   service?: Service;
 }
 
@@ -36,13 +36,17 @@ const regions = Object.entries(regionSlugs).map(([title, slugs]) => ({
 }));
 
 const pinnoitusSlugs = new Set(fullServiceCities.map((c) => c.slug));
+const maalausSlugs = new Set(maalausCities.map((c) => c.slug));
 
-// Pinnoituksen kaupunkisivu on vain osalla paikkakunnista. Muille linkitetään
-// paikkakunnan aluesivulle, ettei linkki vie 404-sivulle.
-const cityHref = (slug: string, service: Service) =>
-  service === 'pinnoitus' && pinnoitusSlugs.has(slug)
-    ? `/tiilikaton-pinnoitus-${slug}`
-    : `/maalauspalvelut-${slug}`;
+/**
+ * Linkkiryhmät maakunnan sisällä. Palvelukohtaiset kaupunkisivut saavat omat linkkinsä
+ * (vain paikkakunnat, joilla sivu on), ja kaikki paikkakunnat linkittävät aluesivulleen.
+ */
+const linkGroups = [
+  { key: 'pinnoitus', title: 'Tiilikaton pinnoitus', has: (slug: string) => pinnoitusSlugs.has(slug), href: (slug: string) => `/tiilikaton-pinnoitus-${slug}` },
+  { key: 'maalaus', title: 'Talon maalaus', has: (slug: string) => maalausSlugs.has(slug), href: (slug: string) => `/talon-maalaus-${slug}` },
+  { key: 'alue', title: 'Kaikki palvelut paikkakunnittain', has: () => true, href: (slug: string) => `/maalauspalvelut-${slug}` },
+] as const;
 
 const chipBase =
   'px-4 py-2 bg-secondary/60 border border-border rounded-xl text-sm font-semibold transition-colors';
@@ -106,19 +110,31 @@ const RegionCard = ({
         aria-hidden={!open}
       >
         <div className="overflow-hidden">
-          <div className="flex flex-wrap gap-2 px-4 pb-5 pt-1 md:px-5 md:pb-6">
-            {cities.map((city) => {
-              const isActive = activeCity === city.slug;
+          <div className="space-y-4 px-4 pb-5 pt-1 md:px-5 md:pb-6">
+            {linkGroups.map((group) => {
+              const groupCities = cities.filter((city) => group.has(city.slug));
+              if (groupCities.length === 0) return null;
               return (
-                <Link
-                  key={city.slug}
-                  to={cityHref(city.slug, service)}
-                  tabIndex={open ? undefined : -1}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={cn(chipBase, isActive ? chipActive : chipIdle)}
-                >
-                  {city.name}
-                </Link>
+                <div key={group.key}>
+                  <h3 className="mb-2 text-sm font-bold text-foreground">{group.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {groupCities.map((city) => {
+                      const isActive = activeCity === city.slug && group.key === service;
+                      return (
+                        <Link
+                          key={city.slug}
+                          to={group.href(city.slug)}
+                          tabIndex={open ? undefined : -1}
+                          aria-current={isActive ? 'page' : undefined}
+                          className={cn(chipBase, isActive ? chipActive : chipIdle)}
+                        >
+                          {group.key !== 'alue' && <span className="sr-only">{group.title} </span>}
+                          {city.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
               );
             })}
           </div>
@@ -128,7 +144,7 @@ const RegionCard = ({
   );
 };
 
-const ToimintaAlueetBanner = ({ activeCity, service = 'maalaus' }: ToimintaAlueetBannerProps) => {
+const ToimintaAlueetBanner = ({ activeCity, service = 'alue' }: ToimintaAlueetBannerProps) => {
   const [mapFailed, setMapFailed] = useState(false);
 
   return (

@@ -4,8 +4,9 @@ import { Check } from "lucide-react";
 import { getStoredConsent, initAnalytics, initClickTracking, onOpenConsentSettings, setConsent } from "@/lib/analytics";
 
 /**
- * Evästebanneri. Ensimmäisessä näkymässä "Hyväksy" ja "Asetukset"; asetuksissa välttämättömät (aina päällä)
- * ja analytiikka (valinta). Näkyy, kunnes kävijä on valinnut, ja avautuu uudelleen alatunnisteen linkistä.
+ * Evästebanneri. Ensimmäisessä näkymässä "Hyväksy" (korostettu), "Vain välttämättömät" ja linkki asetuksiin;
+ * asetuksissa välttämättömät (aina päällä) ja analytiikka (valinta). Traficomin valvontapäätösten mukaan
+ * kieltäytymisen pitää onnistua ensimmäisellä tasolla yhtä helposti kuin hyväksymisen. Näkyy, kunnes kävijä on valinnut, ja avautuu uudelleen alatunnisteen linkistä.
  * Renderöidään vasta selaimessa ja kiinteänä kerroksena, joten sivu ei hypi.
  */
 const CookieBanner = () => {
@@ -84,11 +85,16 @@ const CookieBanner = () => {
               Tallenna valinnat
             </button>
           ) : (
-            <button type="button" onClick={() => setSettingsOpen(true)} className={secondary}>
-              Asetukset
+            <button type="button" onClick={() => close(false)} className={secondary}>
+              Vain välttämättömät
             </button>
           )}
         </div>
+        {!settingsOpen && (
+          <button type="button" onClick={() => setSettingsOpen(true)} className="mt-2.5 text-[13px] text-muted-foreground underline underline-offset-2 hover:text-foreground">
+            Asetukset
+          </button>
+        )}
       </div>
     </div>
   );

@@ -74,21 +74,6 @@ export const articles: ArticleMeta[] = [
     heroAlt: "Keltainen omakotitalo julkisivumaalauksen jälkeen",
   },
   {
-    slug: "tiilikaton-pinnoituksen-hinta",
-    title: "Tiilikaton pinnoituksen hinta 2027: mistä hinta muodostuu?",
-    seoTitle: "Tiilikaton pinnoituksen hinta 2027",
-    description:
-      "Tiilikaton pinnoitus maksaa omakotitalossa yleensä 2 850–4 880 €. Lue, mistä hinta syntyy, mitä siihen kuuluu ja paljonko kotitalousvähennys pienentää sitä.",
-    lead: "Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–4 880 euroa. Kotitalousvähennyksen jälkeen hinta on alkaen 2 050 euroa.",
-    category: "katto",
-    author: "eerik",
-    publishedAt: "2026-09-30",
-    updatedAt: "2026-10-02",
-    readingMinutes: 6,
-    heroImage: "vastamaalattu-tiilikatto-kattopinnoitus-jalkeen",
-    heroAlt: "Vastamaalattu tiilikatto pinnoituksen jälkeen",
-  },
-  {
     slug: "kuinka-usein-puutalo-maalataan",
     title: "Kuinka usein puutalo pitää maalata? 5 merkkiä huoltomaalauksen tarpeesta",
     seoTitle: "Kuinka usein puutalo pitää maalata? 5 merkkiä",

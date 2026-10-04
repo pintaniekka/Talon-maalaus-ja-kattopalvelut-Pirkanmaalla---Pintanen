@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { pinnoitusPrices, fmtCardRange, fmtCardAfter } from "@/data/prices";
 import { Link } from "react-router-dom";
 import { Check } from "lucide-react";
 import { Search, Clock } from "@/components/icons/BrandIcons";
@@ -33,11 +34,7 @@ const trustStats = [
 ];
 
 /* ── Pricing cards ── */
-const pricingCards = [
-  { size: "150–180 m²", label: "Pieni/keskisuuri koti", duration: "2 työpäivää", normalPrice: "2 850 € – 3 200 €", afterPrice: "alk. 2 050 €", featured: false },
-  { size: "190–240 m²", label: "Yleisin kattokoko", duration: "2–3 työpäivää", normalPrice: "3 300 € – 3 700 €", afterPrice: "alk. 2 380 €", featured: true },
-  { size: "250–300 m²", label: "Suuri omakotitalo", duration: "2–4 työpäivää", normalPrice: "3 750 € – 4 880 €", afterPrice: "alk. 2 700 €", featured: false },
-];
+const pricingCards = pinnoitusPrices.cards;
 
 const pricingIncludes = [
   "Syväpuhdistava pesu",
@@ -285,9 +282,9 @@ const KattopalvelutPinnoitus = () => {
 
                   <div className="mb-5">
                     <p className="text-sm line-through text-muted-foreground/60 mb-1">
-                      Norm. {card.normalPrice}
+                      Norm. {fmtCardRange(card)}
                     </p>
-                    <p className="text-3xl md:text-4xl font-bold text-accent">{card.afterPrice}</p>
+                    <p className="text-3xl md:text-4xl font-bold text-accent">{fmtCardAfter(card)}</p>
                     <p className="text-xs text-muted-foreground mt-1">kotitalousvähennyksen jälkeen</p>
                   </div>
 

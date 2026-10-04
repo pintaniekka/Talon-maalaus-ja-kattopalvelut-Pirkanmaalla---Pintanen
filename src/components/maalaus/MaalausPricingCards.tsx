@@ -2,12 +2,9 @@ import { motion } from 'framer-motion';
 import { Check } from "lucide-react";
 import { Clock } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
+import { maalausPrices, fmtCardRange, fmtCardAfter } from '@/data/prices';
 
-const cards = [
-  { size: '1-kerroksinen omakotitalo', label: 'Pieni tai keskisuuri koti', duration: '2–4 työpäivää', normalPrice: '3 500 € – 6 000 €', afterPrice: 'alk. 2 380 €', featured: false },
-  { size: '1,5-kerroksinen talo', label: 'Yleisin talon koko', duration: '3–5 työpäivää', normalPrice: '5 000 € – 8 000 €', afterPrice: 'alk. 3 400 €', featured: true },
-  { size: '2-kerroksinen talo', label: 'Suuret omakotitalot', duration: '4–8 työpäivää', normalPrice: '7 000 € – 11 000 €', afterPrice: 'alk. 4 760 €', featured: false },
-];
+const cards = maalausPrices.cards;
 
 const pricingIncludes = [
   'Huolellinen suojaus',
@@ -16,7 +13,7 @@ const pricingIncludes = [
   'Pintamaalaus',
 ];
 
-const MaalausPricingCards = ({ cityName = 'Pirkanmaa' }: { cityName?: string }) => {
+const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/talon-maalaus-hinta-pirkanmaa', calculatorLabel }: { cityName?: string; calculatorHref?: string; calculatorLabel?: string }) => {
   return (
     <section className="section-padding bg-secondary">
       <div className="section-container max-w-5xl mx-auto">
@@ -60,9 +57,9 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa' }: { cityName?: string }) 
 
                 <div className="mb-5">
                   <p className="text-sm line-through text-muted-foreground/60 mb-1">
-                    Norm. {card.normalPrice}
+                    Norm. {fmtCardRange(card)}
                   </p>
-                  <p className="text-3xl md:text-4xl font-bold text-accent"><strong>{card.afterPrice}</strong></p>
+                  <p className="text-3xl md:text-4xl font-bold text-accent"><strong>{fmtCardAfter(card)}</strong></p>
                   <p className="text-xs text-muted-foreground mt-1"><strong>kotitalousvähennyksen jälkeen</strong></p>
                 </div>
 
@@ -97,11 +94,11 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa' }: { cityName?: string }) 
 
         <div className="text-center mt-10">
           <Link
-            to="/talon-maalaus-hinta-pirkanmaa"
+            to={calculatorHref}
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{ backgroundColor: 'hsl(38, 60%, 65%)', color: 'hsl(215, 25%, 15%)' }}
           >
-            Laske hinta: Talon maalaus {cityName}
+            {calculatorLabel ?? `Laske hinta: Talon maalaus ${cityName}`}
           </Link>
         </div>
       </div>

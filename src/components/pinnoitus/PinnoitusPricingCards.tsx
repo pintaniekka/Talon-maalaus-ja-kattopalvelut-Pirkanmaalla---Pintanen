@@ -2,12 +2,9 @@ import { motion } from 'framer-motion';
 import { Check } from "lucide-react";
 import { Clock } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
+import { pinnoitusPrices, fmtCardRange, fmtCardAfter } from '@/data/prices';
 
-const cards = [
-  { size: '150–180 m²', label: 'Pieni/keskisuuri koti', duration: '2 työpäivää', normalPrice: '2 850 € – 3 200 €', afterPrice: 'alk. 2 050 €', featured: false },
-  { size: '190–240 m²', label: 'Yleisin kattokoko', duration: '2–3 työpäivää', normalPrice: '3 300 € – 3 700 €', afterPrice: 'alk. 2 380 €', featured: true },
-  { size: '250–300 m²', label: 'Suuri omakotitalo', duration: '2–4 työpäivää', normalPrice: '3 750 € – 4 880 €', afterPrice: 'alk. 2 700 €', featured: false },
-];
+const cards = pinnoitusPrices.cards;
 
 const pricingIncludes = [
   'Syväpuhdistava pesu',
@@ -19,9 +16,12 @@ const pricingIncludes = [
 interface PinnoitusPricingCardsProps {
   cityName: string;
   cityIn: string;
+  /** Hintasivulla linkki osoittaa laskuriin samalla sivulla. */
+  calculatorHref?: string;
+  calculatorLabel?: string;
 }
 
-const PinnoitusPricingCards = ({ cityName, cityIn }: PinnoitusPricingCardsProps) => {
+const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/tiilikaton-pinnoitus-hinta-pirkanmaa", calculatorLabel }: PinnoitusPricingCardsProps) => {
   return (
     <section className="section-padding bg-secondary">
       <div className="section-container max-w-5xl mx-auto">
@@ -66,9 +66,9 @@ const PinnoitusPricingCards = ({ cityName, cityIn }: PinnoitusPricingCardsProps)
 
                 <div className="mb-5">
                   <p className="text-sm line-through text-muted-foreground/60 mb-1">
-                    Norm. {card.normalPrice}
+                    Norm. {fmtCardRange(card)}
                   </p>
-                  <p className="text-3xl md:text-4xl font-bold text-accent">{card.afterPrice}</p>
+                  <p className="text-3xl md:text-4xl font-bold text-accent">{fmtCardAfter(card)}</p>
                   <p className="text-xs text-muted-foreground mt-1">kotitalousvähennyksen jälkeen</p>
                 </div>
 
@@ -103,11 +103,11 @@ const PinnoitusPricingCards = ({ cityName, cityIn }: PinnoitusPricingCardsProps)
 
         <div className="text-center mt-10">
           <Link
-            to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+            to={calculatorHref}
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{ backgroundColor: 'hsl(38, 60%, 65%)', color: 'hsl(215, 25%, 15%)' }}
           >
-            Laske hinta: tiilikaton pinnoitus {cityName}
+            {calculatorLabel ?? `Laske hinta: tiilikaton pinnoitus ${cityName}`}
           </Link>
         </div>
       </div>

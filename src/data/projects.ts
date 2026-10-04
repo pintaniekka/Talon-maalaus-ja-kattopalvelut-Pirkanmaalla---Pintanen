@@ -255,3 +255,15 @@ export const getProjectItemsWithNearby = (
   const fill = others.slice(0, MIN_PROJECT_ITEMS - own.length);
   return { items: [...own, ...fill], hasNearby: fill.length > 0 };
 };
+
+/** Nostot hintasivuille: ennen–jälkeen-parit ensin, sitten yksittäiset kuvat eri paikkakunnilta. */
+export const getFeaturedProjectItems = (service: ProjectService, count = 3): ProjectItem[] => {
+  const all = projectItems.filter((item) => matches(item, service));
+  const picked: ProjectItem[] = [];
+  for (const item of [...all.filter((i) => i.pair), ...all.filter((i) => !i.pair)]) {
+    if (picked.length >= count) break;
+    if (picked.some((p) => p.city === item.city && !item.pair)) continue;
+    picked.push(item);
+  }
+  return picked;
+};

@@ -15,7 +15,7 @@ const faq = [
   {
     question: "Paljonko pinnoitus maksaa uuteen kattoon verrattuna?",
     answer:
-      "Pinnoitus maksaa tyypillisesti noin 10–20 % uuden katon hinnasta. Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–4 880 euroa.",
+      "Pinnoitus maksaa tyypillisesti noin 10–20 % uuden katon hinnasta. Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–7 000 euroa.",
   },
   {
     question: "Kuinka monta vuotta pinnoitus antaa katolle lisää?",
@@ -93,9 +93,9 @@ const Body = () => (
     </p>
     <p>
       Pinnoitus maksaa tyypillisesti noin 10–20 % uuden katon hinnasta. Kun teet pinnoituksen ajoissa, voit
-      säästää jopa 15 000 euroa. Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–4 880 euroa, ja työn
+      säästää jopa 15 000 euroa. Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–7 000 euroa, ja työn
       osuudesta saat kotitalousvähennyksen. Lue lisää artikkelista{" "}
-      <Link to="/artikkelit/tiilikaton-pinnoituksen-hinta">tiilikaton pinnoituksen hinta</Link>.
+      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">tiilikaton pinnoituksen hinta</Link>.
     </p>
 
     <h2>Miten voit tarkistaa katon kunnon itse?</h2>

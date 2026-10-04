@@ -10,7 +10,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   },
   {
     question: 'Mitä tiilikaton pinnoitus maksaa?',
-    answer: 'Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 4 880 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältävät aina avaimet käteen -toteutuksen ja loppusiivouksen.',
+    answer: 'Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 7 000 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältävät aina avaimet käteen -toteutuksen ja loppusiivouksen.',
   },
   {
     question: 'Voiko tiilikaton pinnoitustyön maksaa osissa?',
@@ -117,7 +117,7 @@ export const getPinnoitusCityFAQ = (cityName: string): FAQItem[] => [
   },
   {
     question: `Mitä tiilikaton pinnoitus maksaa?`,
-    answer: `Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 4 880 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi yllä mainitun kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältää aina avaimet käteen -toteutuksen ja loppusiivouksen.`,
+    answer: `Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 7 000 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi yllä mainitun kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältää aina avaimet käteen -toteutuksen ja loppusiivouksen.`,
   },
   {
     question: `Voiko tiilikaton pinnoitustyön maksaa osissa?`,

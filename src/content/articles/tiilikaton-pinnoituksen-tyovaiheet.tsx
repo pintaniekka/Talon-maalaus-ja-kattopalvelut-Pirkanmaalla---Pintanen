@@ -100,7 +100,7 @@ const Body = () => (
     </ul>
     <p>
       Tuomme telineet, nostimet ja turvavarusteet mukanamme. Hinnoista kerromme artikkelissa{" "}
-      <Link to="/artikkelit/tiilikaton-pinnoituksen-hinta">tiilikaton pinnoituksen hinta</Link>. Lue lisää
+      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">tiilikaton pinnoituksen hinta</Link>. Lue lisää
       palvelusta sivulta <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
 

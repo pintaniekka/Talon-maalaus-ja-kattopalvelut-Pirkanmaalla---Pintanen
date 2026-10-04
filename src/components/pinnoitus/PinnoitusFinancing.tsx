@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { CreditCard } from 'lucide-react';
 
@@ -20,13 +21,13 @@ const PinnoitusFinancing = () => {
           <p className="text-muted-foreground leading-relaxed mb-6">
             Katon huoltoa ei pidä lykätä, odotellessa säästöjä. <strong className="text-foreground">Vesivahinko tai kattoremontti on aina kalliimpi vaihtoehto</strong>. Meiltä saat <strong className="text-foreground">joustavan rahoituksen</strong>, jolla voit maksaa pinnoituksen sinulle sopivissa kuukausierissä. Voit kysyä lisää arviokäynnin yhteydessä.
           </p>
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto?palvelu=pinnoitus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-all hover:brightness-110"
             style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Kysy tarjous
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

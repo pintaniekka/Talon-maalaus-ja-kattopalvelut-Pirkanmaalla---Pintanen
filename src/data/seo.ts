@@ -44,6 +44,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/katon-puhdistus-pirkanmaa": HERO.puhdistus,
   "/talon-maalaus-pirkanmaa": HERO.maalaus,
   "/hintalaskuri": fullHero("hintalaskuri-tausta"),
+  "/tarjouspyynto": fullHero("hintalaskuri-tausta"),
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
   "/katon-puhdistus-hinta-pirkanmaa": fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
   "/talon-maalaus-hinta-pirkanmaa": fullHero("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen"),
@@ -81,6 +82,11 @@ export const staticSeo: Record<string, RouteSeo> = {
     title: "Artikkelit ja oppaat",
     description:
       "Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta.",
+  },
+  "/tarjouspyynto": {
+    title: "Pyydä tarjous – ilmainen kuntotarkastus",
+    description:
+      "Pyydä tarjous tiilikaton pinnoituksesta tai talon maalauksesta. Yrittäjä soittaa sinulle itse ja tulee ilmaiselle kuntotarkastukselle. Pintanen, Pirkanmaa.",
   },
   "/hintalaskuri": {
     title: "Hintalaskuri – laske pinnoituksen tai maalauksen hinta",

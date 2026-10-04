@@ -129,6 +129,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/tarjouspyynto" className="hover:text-primary-foreground transition-colors">
+                  Pyydä tarjous
+                </Link>
+              </li>
+              <li>
                 <Link to="/hintalaskuri" className="hover:text-primary-foreground transition-colors">
                   Hintalaskuri
                 </Link>

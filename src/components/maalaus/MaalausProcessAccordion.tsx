@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { ClipboardCheck, ShieldCheck, Droplets, Paintbrush, Layers, CheckCircle } from "@/components/icons/BrandIcons";
@@ -96,13 +97,13 @@ const MaalausProcessAccordion = ({ cityName = 'Pirkanmaa' }: { cityName?: string
         </Accordion>
 
         <div className="text-center mt-8">
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto?palvelu=maalaus"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
             style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Tästä ilmainen kuntoarvio talon maalaukselle
-          </a>
+          </Link>
         </div>
       </div>
     </section>

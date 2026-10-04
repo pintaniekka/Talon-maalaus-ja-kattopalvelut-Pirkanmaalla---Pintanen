@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { Search } from "@/components/icons/BrandIcons";
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
@@ -81,13 +82,13 @@ const MaalausProblemSection = ({ cityName = 'Pirkanmaa' }: { cityName?: string }
               </ul>
             </motion.div>
 
-            <a
-              href="#yhteystiedot"
+            <Link
+              to="/tarjouspyynto?palvelu=maalaus"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
               style={{ backgroundColor: "hsl(var(--accent-strong))" }}
             >
               Pyydä maksuton kuntotarkastus – {cityName}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

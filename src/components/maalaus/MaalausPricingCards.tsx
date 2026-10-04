@@ -77,8 +77,8 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
                   Kesto: {card.duration}
                 </div>
 
-                <a
-                  href="#yhteystiedot"
+                <Link
+                  to="/tarjouspyynto?palvelu=maalaus"
                   className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-md text-sm ${
                     card.featured
                       ? 'bg-accent-strong text-accent-foreground'
@@ -86,7 +86,7 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
                   }`}
                 >
                   Pyydä tarjous tästä
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}

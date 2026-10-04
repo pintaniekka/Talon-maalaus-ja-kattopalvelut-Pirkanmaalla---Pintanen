@@ -266,12 +266,12 @@ const Header = () => {
             >
               <WhatsAppIcon className="w-5 h-5" />
             </a>
-            <a
+            <Link
               className="flex items-center gap-2 px-7 py-3 rounded-full font-extrabold text-xs uppercase tracking-[0.1em] transition-all duration-300 bg-accent-strong text-accent-foreground shadow-lg shadow-accent/40 hover:bg-accent-strong/90 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
-              href="#yhteystiedot"
+              to="/tarjouspyynto"
             >
               Pyydä tarjous
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -347,13 +347,13 @@ const Header = () => {
                   </div>
                 );
               })}
-              <a
-                href="#yhteystiedot"
+              <Link
+                to="/tarjouspyynto"
                 onClick={closeNavigationMenus}
                 className="mt-2 flex items-center justify-center gap-2 py-3 px-4 bg-accent-strong text-accent-foreground rounded-xl font-bold uppercase text-sm tracking-wider"
               >
                 Pyydä tarjous
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}

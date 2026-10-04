@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ClipboardCheck, ShieldCheck, Droplets, BrickWall, Paintbrush, CheckCircle } from "@/components/icons/BrandIcons";
@@ -97,13 +98,13 @@ const ProcessAccordion = () => {
         </div>
 
         <div className="text-center mt-10">
-          <a
-            href="#yhteystiedot"
+          <Link
+            to="/tarjouspyynto?palvelu=pinnoitus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
             style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Tästä ilmainen kuntoarvio
-          </a>
+          </Link>
         </div>
       </div>
     </section>

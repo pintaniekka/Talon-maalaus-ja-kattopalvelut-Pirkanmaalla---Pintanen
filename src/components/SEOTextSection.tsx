@@ -125,7 +125,7 @@ const SEOTextSection = () => {
 
             <p className="mt-6">
               Älä anna kattosi sammaloitua tai julkisivusi rapistua. Ota yhteyttä luotettavaan pirkanmaalaiseen tekijään ja{" "}
-              <a href="#yhteystiedot" className="text-primary font-semibold hover:underline">pyydä ilmainen kuntokartoitus jo tänään!</a>
+              <Link to="/tarjouspyynto" className="text-primary font-semibold hover:underline">pyydä ilmainen kuntokartoitus jo tänään!</Link>
             </p>
           </div>
         </motion.div>

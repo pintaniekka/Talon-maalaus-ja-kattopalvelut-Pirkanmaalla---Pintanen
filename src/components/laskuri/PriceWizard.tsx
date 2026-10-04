@@ -220,7 +220,9 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
         message: `Hintalaskuri: ${details}`,
         priceEstimate: priceStr,
         calculatorDetails: details,
-      });
+      },
+        "hintalaskuri"
+      );
       setResult(priceStr);
     } catch {
       toast({ title: "Virhe", description: "Jokin meni pieleen. Yritä uudelleen tai soita meille.", variant: "destructive" });

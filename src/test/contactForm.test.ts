@@ -33,7 +33,7 @@ describe("submitContactForm", () => {
       name: "Testi Henkilö",
       phone: "040 123 4567",
       service: "tiilikatto",
-      message: "Viesti",
+      message: expect.stringMatching(/^Viesti\n\nLähde: /),
       address: "Katu 1, 33100",
       city: "Tampere",
     });

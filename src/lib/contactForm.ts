@@ -27,8 +27,19 @@ export type ContactFormPayload = z.infer<typeof contactFormSchema>;
 /** Lomakkeen vastaanotto: Cloudflare Pages -funktio `functions/api/contact.ts`. */
 const CONTACT_ENDPOINT = '/api/contact';
 
-export const submitContactForm = async (payload: ContactFormPayload) => {
-  const parsed = contactFormSchema.parse(payload);
+/**
+ * Lisää viestin loppuun rivin, josta näkee, miltä sivulta ja mistä lomakkeesta liidi tuli
+ * (esim. "Lähde: /tiilikaton-pinnoitus-tampere/ · tarjouspyyntösivu"). Näkyy sähköpostissa ja CRM:ssä.
+ */
+const withSource = (message: string, source?: string): string => {
+  const path = typeof window !== 'undefined' ? window.location.pathname : '';
+  const line = `Lähde: ${[path, source].filter(Boolean).join(' · ')}`;
+  return [message, line].filter(Boolean).join('\n\n').slice(0, 2000);
+};
+
+export const submitContactForm = async (payload: ContactFormPayload, source?: string) => {
+  const validated = contactFormSchema.parse(payload);
+  const parsed = { ...validated, message: withSource(validated.message, source) };
 
   const response = await fetch(CONTACT_ENDPOINT, {
     method: 'POST',

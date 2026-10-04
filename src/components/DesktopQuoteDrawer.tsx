@@ -87,7 +87,9 @@ const DesktopQuoteDrawer = () => {
         city: form.city,
         message: `Osoite: ${form.address}\nPostinumero: ${form.postalCode}\nKaupunki: ${form.city}\n\n${form.message}`,
         website: form.website,
-      });
+      },
+        "sivureunan laatikko"
+      );
       setIsSubmitted(true);
       setForm({ name: "", phone: "", address: "", postalCode: "", city: "", message: "", website: "" });
       toast({ title: "Kiitos! Olemme sinuun yhteydessä pian." });

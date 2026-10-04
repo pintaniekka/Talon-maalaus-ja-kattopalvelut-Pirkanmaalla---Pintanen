@@ -86,7 +86,9 @@ const TeamContactSection = ({ cityName, cityGenitive }: TeamContactSectionProps)
         phone: form.phone,
         service: selectedServices.length > 0 ? selectedServices.join(', ') : 'Ei valittu',
         message: `Osoite: ${form.address}\nPostinumero: ${form.postalCode}\nKaupunki: ${form.city}\n\n${form.message}`,
-      });
+      },
+        "maalaussivun lomake"
+      );
       setIsSubmitted(true);
       setForm({ name: '', phone: '', email: '', address: '', postalCode: '', city: '', message: '' });
       setSelectedServices([]);

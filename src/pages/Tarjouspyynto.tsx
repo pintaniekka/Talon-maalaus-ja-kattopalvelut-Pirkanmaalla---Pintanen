@@ -65,7 +65,7 @@ const Tarjouspyynto = () => {
         <img src={bgSrc} srcSet={bgSrcSet} sizes="100vw" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" />
         <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(10,25,47,0.78) 0%, rgba(10,25,47,0.6) 50%, rgba(10,25,47,0.78) 100%)" }} />
 
-        <div className="relative z-[2] section-container w-full pt-28 pb-16 md:pt-32 md:pb-20">
+        <div className="relative z-[2] section-container w-full pt-28 pb-28 md:pt-32 lg:pb-20">
           <div className="max-w-2xl mx-auto text-center text-primary-foreground mb-8">
             <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary-foreground">Pyydä tarjous</h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 leading-relaxed">

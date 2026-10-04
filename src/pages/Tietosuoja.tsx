@@ -1,7 +1,7 @@
 import SEO from "@/components/SEO";
 import { staticSeo } from "@/data/seo";
 
-const UPDATED = "1.10.2026";
+const UPDATED = "5.10.2026";
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="mb-10">
@@ -54,7 +54,8 @@ const Tietosuoja = () => (
           <li>hintalaskuriin syöttämäsi tiedot (esim. katon tai seinien pinta-ala, kerrosluku, katon kunto) ja laskurin antama hinta-arvio</li>
         </ul>
         <p>
-          Sivusto ei käytä analytiikka- tai mainontaevästeitä eikä seurantatyökaluja. Sivusto ei kerää tietoja selailustasi.
+          Jos hyväksyt analytiikkaevästeet, keräämme lisäksi tilastotietoa sivuston käytöstä Google Analyticsilla.
+          Kerromme siitä kohdassa 8. Mainontaevästeitä sivusto ei käytä.
         </p>
       </Section>
 
@@ -82,6 +83,7 @@ const Tietosuoja = () => (
           <li>sähköpostin välityspalvelu, jolla lomakkeen tiedot toimitetaan myyntiimme</li>
           <li>asiakashallintajärjestelmämme, johon tarjouspyynnöt tallennetaan käsittelyä varten</li>
           <li>sivuston julkaisualustan, lomakkeiden käsittelyn ja sisällönjakeluverkon palveluntarjoaja (Cloudflare)</li>
+          <li>kävijätilastojen palveluntarjoaja (Google Analytics, Google Ireland Limited), jos olet hyväksynyt analytiikkaevästeet</li>
         </ul>
         <p>
           Osa palveluntarjoajista voi käsitellä tietoja EU:n tai ETA:n ulkopuolella. Tällöin siirto perustuu Euroopan
@@ -95,6 +97,7 @@ const Tietosuoja = () => (
           asiakassuhde edellyttävät. Yhteydenotot, jotka eivät johda tilaukseen, poistetaan viimeistään kahden vuoden
           kuluttua. Kirjanpitolain edellyttämät tiedot säilytetään lain vaatiman ajan.
         </p>
+        <p>Google Analyticsin tilastotiedot säilytetään 14 kuukautta.</p>
       </Section>
 
       <Section title="6. Oikeutesi">
@@ -122,11 +125,44 @@ const Tietosuoja = () => (
         </p>
       </Section>
 
-      <Section title="8. Evästeet ja ulkoiset resurssit">
+      <Section title="8. Evästeet ja kävijäseuranta">
         <p>
-          Sivusto ei aseta seurantaevästeitä. Sivuston kuvat ja fontit ladataan sivuston omasta osoitteesta, eikä
-          sivusto lataa sisältöä kolmansien osapuolten palvelimilta. Sivuston julkaisualusta näkee selaimesi
+          Sivuston kuvat ja fontit ladataan sivuston omasta osoitteesta. Sivuston julkaisualusta näkee selaimesi
           IP-osoitteen teknisen tiedonsiirron toteuttamiseksi.
+        </p>
+        <p>
+          <strong>Google Analytics.</strong> Käytämme Google Analytics 4 -palvelua vain, jos hyväksyt
+          analytiikkaevästeet sivuston evästeilmoituksessa. Ennen hyväksyntää Googlelle ei lähde tietoja eikä
+          evästeitä aseteta. Seuraamme:
+        </p>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>millä sivuilla käydään ja mistä sivustolle tullaan</li>
+          <li>laitteen ja selaimen tyyppi sekä karkea sijainti (maa ja paikkakunta)</li>
+          <li>lomakkeen lähetys (vain lomakkeen nimi, ei lomakkeen sisältöä)</li>
+          <li>WhatsApp-, puhelin-, sähköposti- ja tarjouspyyntölinkkien klikkaukset</li>
+        </ul>
+        <p>
+          Emme lähetä Googlelle nimeäsi, puhelinnumeroasi, sähköpostiosoitettasi, osoitettasi emmekä lomakkeen
+          sisältöä. IP-osoitettasi ei tallenneta. Mainonta- ja personointiominaisuudet eivät ole käytössä.
+        </p>
+        <p>
+          Google Analytics asettaa evästeet <code>_ga</code> ja <code>_ga_QCNVJFMDFY</code>, joilla kävijät erotetaan
+          toisistaan tilastoissa. Evästeet ovat voimassa enintään 14 kuukautta, ja tilastotiedot säilytetään 14
+          kuukautta.
+        </p>
+        <p>
+          Käsittelyn oikeusperuste on suostumuksesi (tietosuoja-asetuksen 6 artiklan 1 kohdan a alakohta). Voit perua
+          suostumuksen milloin tahansa sivun alareunan linkistä "Evästeasetukset". Kun perut suostumuksen, mittaus
+          loppuu ja evästeet poistetaan selaimestasi. Valintasi tallennetaan selaimesi muistiin, jotta emme kysy sitä
+          joka käynnillä.
+        </p>
+        <p>
+          Tietoja käsittelee Google Ireland Limited. Tietoja voidaan siirtää Yhdysvaltoihin EU:n ja Yhdysvaltojen
+          välisen tietosuojakehyksen (Data Privacy Framework) perusteella.
+        </p>
+        <p>
+          <strong>Cloudflare Web Analytics.</strong> Käytämme lisäksi Cloudflaren kävijätilastoa, joka ei käytä
+          evästeitä eikä tunnista yksittäistä kävijää.
         </p>
       </Section>
 

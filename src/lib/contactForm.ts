@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { trackLead } from '@/lib/analytics';
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(1, 'Nimi on pakollinen').max(100, 'Nimi on liian pitkä'),
@@ -58,6 +59,9 @@ export const submitContactForm = async (payload: ContactFormPayload, source?: st
   if (!response.ok || data?.error) {
     throw new Error(data?.error ?? `Lähetys epäonnistui (${response.status})`);
   }
+
+  // Analytiikkaan vain lomakkeen nimi, ei mitään lomakkeen sisällöstä.
+  trackLead(source);
 
   return data;
 };

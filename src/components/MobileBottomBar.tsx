@@ -17,6 +17,7 @@ const MobileBottomBar = () => {
         </a>
         <button
           onClick={() => openQuoteDrawer()}
+          data-track="tarjouspyynto"
           className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] rounded-xl bg-navy text-navy-foreground font-semibold text-sm tracking-tight shadow-lg shadow-navy/20 transition-all duration-200 active:scale-[0.98]"
         >
           <FileText className="w-5 h-5 text-paint-yellow" />

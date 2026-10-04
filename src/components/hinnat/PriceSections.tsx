@@ -17,7 +17,7 @@ export const PriceIncludes = ({ title, items, note }: { title: string; items: st
       {items.map((item) => (
         <li key={item} className="flex items-center gap-3">
           <span className="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-            <Check className="w-3 h-3 text-accent" />
+            <Check className="w-3 h-3 text-accent-ink" />
           </span>
           <span className="text-foreground text-sm">{item}</span>
         </li>
@@ -73,7 +73,7 @@ export const CompareCards = ({
   <div className="grid md:grid-cols-2 gap-6">
     <div className="bg-card rounded-2xl p-6 border border-accent/30">
       <h3 className="text-lg font-bold text-foreground mb-2">{left.title}</h3>
-      <p className="text-3xl font-bold text-accent mb-1">{left.price}</p>
+      <p className="text-3xl font-bold text-accent-ink mb-1">{left.price}</p>
       <p className="text-sm text-muted-foreground">{left.note}</p>
     </div>
     <div className="bg-card rounded-2xl p-6 border border-border">

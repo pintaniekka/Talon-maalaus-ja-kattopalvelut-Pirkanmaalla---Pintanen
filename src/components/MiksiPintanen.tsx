@@ -11,7 +11,7 @@ const MiksiPintanen = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Text */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <h2 className="heading-style text-3xl md:text-4xl text-accent mb-6 leading-tight">
+            <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6 leading-tight">
               Miksi kannattaa tilata katon huolto tai maalaus Pintaselta?
             </h2>
 

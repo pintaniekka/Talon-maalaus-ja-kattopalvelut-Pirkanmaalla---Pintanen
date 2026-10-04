@@ -37,7 +37,7 @@ const CalculatorCta = ({ service, title, imageBase }: CalculatorCtaProps) => {
               {d.bullets.map((b) => (
                 <li key={b} className="flex items-center gap-3 text-primary-foreground/90">
                   <span className="w-6 h-6 rounded-full bg-accent/30 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-4 h-4 text-accent" />
+                    <Check className="w-4 h-4 text-accent-ink" />
                   </span>
                   {b}
                 </li>

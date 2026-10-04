@@ -100,7 +100,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 ${isScrolled ? "shadow-lg" : ""}`}
+      className={`on-dark fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 ${isScrolled ? "shadow-lg" : ""}`}
     >
       {/* Desktop utility bar — collapses on scroll */}
       <div
@@ -181,7 +181,7 @@ const Header = () => {
                     key={item.href}
                     to={item.href}
                     onClick={handleNavigationLinkClick}
-                    className={`font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent ${location.pathname === item.href ? "text-accent" : ""}`}
+                    className={`font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent-ink ${location.pathname === item.href ? "text-accent-ink" : ""}`}
                   >
                     {item.label}
                   </Link>
@@ -199,7 +199,7 @@ const Header = () => {
                     <Link
                       to={item.href}
                       onClick={handleNavigationLinkClick}
-                      className="font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent"
+                      className="font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent-ink"
                     >
                       {item.label}
                     </Link>
@@ -222,7 +222,7 @@ const Header = () => {
                             key={subItem.href}
                             to={subItem.href}
                             onClick={handleNavigationLinkClick}
-                            className="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-accent transition-colors font-medium"
+                            className="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-accent-ink transition-colors font-medium"
                           >
                             {subItem.label}
                           </Link>
@@ -246,7 +246,7 @@ const Header = () => {
               <WhatsAppIcon className="w-5 h-5" />
             </a>
             <a
-              className="flex items-center gap-2 px-7 py-3 rounded-full font-extrabold text-xs uppercase tracking-[0.1em] transition-all duration-300 bg-accent text-accent-foreground shadow-lg shadow-accent/40 hover:bg-accent/90 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+              className="flex items-center gap-2 px-7 py-3 rounded-full font-extrabold text-xs uppercase tracking-[0.1em] transition-all duration-300 bg-accent-strong text-accent-foreground shadow-lg shadow-accent/40 hover:bg-accent-strong/90 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
               href="#yhteystiedot"
             >
               Pyydä tarjous
@@ -276,7 +276,7 @@ const Header = () => {
                       key={item.href}
                       to={item.href}
                       onClick={closeNavigationMenus}
-                      className="py-3 px-4 text-white/90 font-medium hover:bg-white/5 hover:text-accent rounded-lg transition-colors"
+                      className="py-3 px-4 text-white/90 font-medium hover:bg-white/5 hover:text-accent-ink rounded-lg transition-colors"
                     >
                       {item.label}
                     </Link>
@@ -289,13 +289,13 @@ const Header = () => {
                       <Link
                         to={item.href}
                         onClick={closeNavigationMenus}
-                        className="flex-1 py-3 px-4 text-white/90 font-medium hover:bg-white/5 hover:text-accent rounded-lg transition-colors"
+                        className="flex-1 py-3 px-4 text-white/90 font-medium hover:bg-white/5 hover:text-accent-ink rounded-lg transition-colors"
                       >
                         {item.label}
                       </Link>
                       <button
                         onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                        className="py-3 px-4 text-white/70 hover:bg-white/5 hover:text-accent rounded-lg transition-colors"
+                        className="py-3 px-4 text-white/70 hover:bg-white/5 hover:text-accent-ink rounded-lg transition-colors"
                       >
                         <ChevronDown
                           className={`w-4 h-4 transition-transform duration-200 ${openDropdown === item.label ? "rotate-180" : ""}`}
@@ -315,7 +315,7 @@ const Header = () => {
                               key={subItem.href}
                               to={subItem.href}
                               onClick={closeNavigationMenus}
-                              className="block py-2 px-4 text-white/70 hover:text-accent transition-colors"
+                              className="block py-2 px-4 text-white/70 hover:text-accent-ink transition-colors"
                             >
                               {subItem.label}
                             </Link>
@@ -329,7 +329,7 @@ const Header = () => {
               <a
                 href="#yhteystiedot"
                 onClick={closeNavigationMenus}
-                className="mt-2 flex items-center justify-center gap-2 py-3 px-4 bg-accent text-accent-foreground rounded-xl font-bold uppercase text-sm tracking-wider"
+                className="mt-2 flex items-center justify-center gap-2 py-3 px-4 bg-accent-strong text-accent-foreground rounded-xl font-bold uppercase text-sm tracking-wider"
               >
                 Pyydä tarjous
               </a>

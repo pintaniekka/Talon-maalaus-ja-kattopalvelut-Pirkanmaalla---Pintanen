@@ -13,9 +13,9 @@ const KotitalousVahennys = () => {
         >
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Euro className="w-8 h-8 text-accent" />
+              <Euro className="w-8 h-8 text-accent-ink" />
             </div>
-            <h2 className="heading-style text-3xl md:text-4xl text-accent mb-4">
+            <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-4">
               Hyödynnä kotitalousvähennys
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -35,7 +35,7 @@ const KotitalousVahennys = () => {
             className="bg-card rounded-2xl p-6 md:p-8 shadow-lg border border-accent/20"
           >
             <div className="flex items-center gap-3 mb-6">
-              <Calculator className="w-6 h-6 text-accent" />
+              <Calculator className="w-6 h-6 text-accent-ink" />
               <h3 className="text-xl font-bold text-foreground">Esimerkkilaskelma</h3>
             </div>
             
@@ -50,11 +50,11 @@ const KotitalousVahennys = () => {
               </div>
               <div className="flex justify-between items-center py-2 border-b border-border">
                 <span className="text-muted-foreground">Vähennys (40 %)</span>
-                <span className="font-semibold text-accent">−1 600 €</span>
+                <span className="font-semibold text-accent-ink">−1 600 €</span>
               </div>
               <div className="flex justify-between items-center py-3 bg-accent/10 rounded-lg px-4 -mx-4">
                 <span className="font-bold text-foreground">Lopullinen hinta</span>
-                <span className="text-2xl font-bold text-accent">3 400 €</span>
+                <span className="text-2xl font-bold text-accent-ink">3 400 €</span>
               </div>
             </div>
           </motion.div>

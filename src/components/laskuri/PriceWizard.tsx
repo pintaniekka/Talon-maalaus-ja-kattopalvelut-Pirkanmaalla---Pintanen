@@ -236,7 +236,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
       {result ? (
         <div className="text-center py-4">
           <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-5">
-            <Check className="w-7 h-7 text-accent" />
+            <Check className="w-7 h-7 text-accent-ink" />
           </div>
           <p className="text-muted-foreground mb-2">Alustava hinta-arvio</p>
           <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>

@@ -52,7 +52,12 @@
     /* Accent - Brand blue #38b6ff */
     --accent: 202 100% 61%;
     --accent-foreground: 0 0% 100%;
+    /* Nappien ja tekstiä sisältävien sinisten pintojen tausta: #0091eb, valkoinen teksti 3,4:1
+       (brändin #38b6ff on 2,3:1). Raikkaampi kuin #0077cc (4,7:1), jota Eerik piti liian tummana. */
+    --accent-strong: 203 100% 46%;
     --accent-light: 205 100% 96%; /* #ecf7ff */
+    /* Sininen tekstinä: vaalealla pohjalla #0091eb, tummalla pohjalla brändin kirkas sininen. */
+    --accent-ink: 203 100% 46%;
 
     /* Header navy #0A192F & deep blue CTA #0038A8 */
     --navy: 222 64% 11%;
@@ -185,9 +190,37 @@
 }
 
 @layer components {
+  /* Tumma tausta: sininen teksti pysyy brändin kirkkaana sinisenä. */
+  .on-dark,
+  .bg-primary,
+  .bg-primary\/90,
+  .bg-primary\/80,
+  .bg-primary-dark,
+  .bg-foreground,
+  .bg-foreground\/70,
+  .bg-navy,
+  .bg-black\/45,
+  .bg-black\/50,
+  .bg-black\/60,
+  .bg-black\/70,
+  .bg-black\/80,
+  .bg-black\/90 {
+    --accent-ink: 202 100% 61%;
+  }
+  /* Vaalea kortti tumman osion sisällä: takaisin tummempaan siniseen. */
+  .on-light,
+  .bg-card,
+  .bg-background,
+  .bg-white,
+  .bg-secondary,
+  .bg-muted,
+  .bg-accent-light {
+    --accent-ink: 203 100% 46%;
+  }
+
   .btn-hero {
     @apply inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300;
-    @apply bg-accent text-white;
+    @apply bg-accent-strong text-accent-foreground;
     @apply hover:scale-105 hover:shadow-lg hover:brightness-110;
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary;
   }

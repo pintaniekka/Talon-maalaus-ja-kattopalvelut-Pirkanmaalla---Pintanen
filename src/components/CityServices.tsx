@@ -70,7 +70,7 @@ const CityServices = ({ cityName, citySlug, cityGenitive }: CityServicesProps) =
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2 text-foreground">
-                      <Check className="w-4 h-4 text-accent" />
+                      <Check className="w-4 h-4 text-accent-ink" />
                       <span className="text-sm">{feature}</span>
                     </li>
                   ))}

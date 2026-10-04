@@ -58,7 +58,7 @@ const PinnoitusCityProcess = ({ cityName }: PinnoitusCityProcessProps) => {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
             Pintasen 6-vaiheinen prosessi: Tiilikaton pinnoitus {cityName}
           </h2>
         </motion.div>
@@ -95,8 +95,8 @@ const PinnoitusCityProcess = ({ cityName }: PinnoitusCityProcessProps) => {
         <div className="text-center mt-10">
           <a
             href="#yhteystiedot"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-colors hover:brightness-110"
-            style={{ backgroundColor: 'hsl(202, 100%, 61%)' }}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
+            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Tilaa ilmainen kuntotarkastus tästä
           </a>

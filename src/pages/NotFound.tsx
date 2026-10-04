@@ -5,7 +5,7 @@ const NotFound = () => (
   <div className="section-padding pt-32 md:pt-40 min-h-[60vh] flex items-center justify-center bg-background">
     <SEO title="Sivua ei löytynyt" description="Etsimääsi sivua ei löytynyt." noindex />
     <div className="text-center max-w-xl px-4">
-      <p className="text-accent font-heading font-extrabold uppercase tracking-[0.2em] text-sm mb-3">Virhe 404</p>
+      <p className="text-accent-ink font-heading font-extrabold uppercase tracking-[0.2em] text-sm mb-3">Virhe 404</p>
       <h1 className="text-3xl md:text-5xl font-bold mb-4 font-heading">Sivua ei löytynyt</h1>
       <p className="text-lg text-muted-foreground mb-8">
         Osoite on saattanut muuttua tai sivu on poistettu. Löydät palvelumme ja hinnat etusivulta.
@@ -19,7 +19,7 @@ const NotFound = () => (
         </Link>
         <Link
           to="/hintalaskuri"
-          className="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent font-heading font-extrabold rounded-2xl hover:bg-accent hover:text-accent-foreground transition-all"
+          className="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent-ink font-heading font-extrabold rounded-2xl hover:bg-accent-strong hover:text-accent-foreground transition-all"
         >
           Hintalaskuriin
         </Link>

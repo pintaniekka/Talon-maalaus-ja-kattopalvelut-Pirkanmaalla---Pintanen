@@ -98,7 +98,7 @@ const HinnatTiilikalonPinnoitus = () => {
       <ServicePageHero title="" subtitle="" backgroundImage={heroImage} backgroundSrcSet={heroSrcSet} compact>
         <div className="bg-black/45 rounded-2xl p-5 md:p-8 max-w-4xl mx-auto text-left mb-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-            Tiilikaton pinnoituksen <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">hinta</span>
+            Tiilikaton pinnoituksen <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">hinta</span>
           </h1>
           <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
             Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä <strong>{general}</strong>. Kotitalousvähennyksen

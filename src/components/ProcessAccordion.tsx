@@ -62,7 +62,7 @@ const ProcessAccordion = () => {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
             Näin homma etenee: tiilikaton pinnoitus Pirkanmaa
           </h2>
         </motion.div>
@@ -100,7 +100,7 @@ const ProcessAccordion = () => {
           <a
             href="#yhteystiedot"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
-            style={{ backgroundColor: "hsl(202, 100%, 61%)" }}
+            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Tästä ilmainen kuntoarvio
           </a>

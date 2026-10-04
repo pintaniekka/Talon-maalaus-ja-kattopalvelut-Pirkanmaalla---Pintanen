@@ -330,7 +330,7 @@ const ChatLeadForm = () => {
         {!open && (
           <button
             onClick={handleOpen}
-            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-[#38b6ff] border border-white/60 hover:scale-105 transition-transform"
+            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-accent-strong border border-white/60 hover:scale-105 transition-transform"
             aria-label="Avaa chat"
           >
             <img src={eerikImage} alt="Eerik – Pintanen" className="w-full h-full rounded-full object-cover" />
@@ -351,10 +351,10 @@ const ChatLeadForm = () => {
             style={{ maxHeight: 'min(600px, calc(100vh - 120px))' }}
           >
             {/* Header */}
-            <div className="bg-[#38b6ff] text-white px-4 py-3 flex items-center gap-3">
+            <div className="bg-accent-strong text-accent-foreground px-4 py-3 flex items-center gap-3">
               <div className="relative shrink-0">
                 <img src={eerikImage} alt="Eerik" className="w-10 h-10 rounded-full object-cover border-2 border-white/40" />
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-[#38b6ff]" />
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-accent-strong" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm leading-tight">Eerik – Pintanen Oy</p>
@@ -381,7 +381,7 @@ const ChatLeadForm = () => {
                   </div>
                 ) : (
                   <div key={i} className="flex justify-end mb-3">
-                    <div className="bg-[#38b6ff] text-white text-[13px] leading-relaxed rounded-2xl rounded-tr-sm px-3.5 py-2.5 shadow-sm max-w-[85%]">
+                    <div className="bg-accent-strong text-accent-foreground text-[13px] leading-relaxed rounded-2xl rounded-tr-sm px-3.5 py-2.5 shadow-sm max-w-[85%]">
                       {msg.text}
                     </div>
                   </div>
@@ -399,7 +399,7 @@ const ChatLeadForm = () => {
                         <button
                           key={opt.value}
                           onClick={() => handleButtonClick(opt.value)}
-                          className="bg-[#38b6ff] text-white text-[13px] font-medium rounded-2xl px-4 py-2 shadow-md hover:opacity-90 transition-all active:scale-95"
+                          className="bg-accent-strong text-accent-foreground text-[13px] font-medium rounded-2xl px-4 py-2 shadow-md hover:opacity-90 transition-all active:scale-95"
                         >
                           {opt.label}
                         </button>
@@ -423,7 +423,7 @@ const ChatLeadForm = () => {
                       <button
                         onClick={handleServicesSubmit}
                         disabled={selectedServices.length === 0}
-                        className="bg-[#38b6ff] text-white text-[13px] font-medium rounded-2xl px-5 py-2 shadow-md hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-1"
+                        className="bg-accent-strong text-accent-foreground text-[13px] font-medium rounded-2xl px-5 py-2 shadow-md hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-1"
                       >
                         Jatka
                       </button>
@@ -442,7 +442,7 @@ const ChatLeadForm = () => {
                       <button
                         onClick={handleQuestionSubmit}
                         disabled={!questionText.trim()}
-                        className="bg-[#38b6ff] text-white text-[13px] font-medium rounded-2xl px-5 py-2 shadow-md hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-accent-strong text-accent-foreground text-[13px] font-medium rounded-2xl px-5 py-2 shadow-md hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Jatka
                       </button>
@@ -481,7 +481,7 @@ const ChatLeadForm = () => {
                       <button
                         onClick={handleFinalSubmit}
                         disabled={isSubmitting || !contactName.trim() || (!contactPhone.trim() && !contactEmail.trim())}
-                        className="bg-[#38b6ff] text-white text-[13px] font-medium rounded-2xl px-5 py-2 shadow-md hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                        className="bg-accent-strong text-accent-foreground text-[13px] font-medium rounded-2xl px-5 py-2 shadow-md hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                       >
                         {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                         Lähetä

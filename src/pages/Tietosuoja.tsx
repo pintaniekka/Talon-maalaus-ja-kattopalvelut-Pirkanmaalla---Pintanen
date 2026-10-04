@@ -22,7 +22,7 @@ const Tietosuoja = () => (
         {...staticSeo["/tietosuoja"]}
     />
     <article className="section-container max-w-3xl mx-auto px-4">
-      <p className="text-accent font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm mb-3">
+      <p className="text-accent-ink font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm mb-3">
         Pintanen Oy
       </p>
       <h1 className="text-3xl md:text-5xl font-bold font-heading mb-3">Tietosuojaseloste</h1>

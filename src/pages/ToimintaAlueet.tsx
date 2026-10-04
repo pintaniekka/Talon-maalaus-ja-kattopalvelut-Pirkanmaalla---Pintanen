@@ -24,7 +24,7 @@ const ToimintaAlueet = () => {
       >
         <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto text-left mb-10 md:mb-12">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-            <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Toiminta-alueemme</span>
+            <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Toiminta-alueemme</span>
           </h1>
           <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
             Palvelemme koko <strong>Pirkanmaan alueella</strong> ja lähikunnissa noin <strong>tunnin säteellä Tampereelta</strong>. Tarjoamme <strong>tiilikaton pinnoituksen</strong>, <strong>katon puhdistuksen</strong> ja <strong>talon maalauksen</strong> ammattitaidolla. Olemme <strong>paikallinen perheyritys</strong>, johon voit luottaa.
@@ -36,7 +36,7 @@ const ToimintaAlueet = () => {
       <section className="section-padding bg-background">
         <div className="section-container max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-base text-muted-foreground mb-12 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4 text-center">Missä toimimme?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 text-center">Missä toimimme?</h2>
             <p>Meidän toiminta-alueemme on <strong className="text-foreground">Pirkanmaa</strong> ja sen lähialueet. Pintanen Oy suorittaa <strong className="text-foreground">tiilikattojen pinnoitukset</strong>, <strong className="text-foreground">katon puhdistukset</strong> ja <strong className="text-foreground">talojen ulkomaalaukset</strong> pääasiassa Pirkanmaan alueella. Suurin osa asiakkaistamme on Tampereella ja sen ympäristökunnissa, mutta me palvelemme myös muualla Pirkanmaalla ja valituilla lähialueilla.</p>
             <p>Me toimimme yleensä noin <strong className="text-foreground">tunnin ajomatkan säteellä Tampereelta</strong>. Tämä mahdollistaa sujuvan työskentelyn ja kohtuulliset matkakulut asiakkaillemme. Me teemme vuosittain projekteja useissa Pirkanmaan kunnissa, ja kohteita löytyy sekä kaupunkialueilta että maaseudulta.</p>
             <p>Tyypillisiä työalueitamme ovat esimerkiksi <strong className="text-foreground">Tampere</strong>, Nokia, Ylöjärvi, Kangasala, Pirkkala ja Lempäälä. Me toteutamme kattotöitä ja ulkomaalauksia myös muualla Pirkanmaalla sekä lähialueilla, kuten Hämeenlinnassa ja Forssassa.</p>
@@ -44,7 +44,7 @@ const ToimintaAlueet = () => {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mb-12">
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-accent">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-accent-ink">
               <MapPin className="w-6 h-6 text-primary" />
               Palvelualueet
             </h2>

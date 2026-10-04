@@ -124,8 +124,8 @@ const DesktopQuoteDrawer = () => {
         style={{ writingMode: "vertical-rl" }}
       >
         <span
-          className="flex items-center gap-2 px-3 py-6 rounded-l-xl text-white font-semibold text-sm tracking-wide shadow-md transition-all duration-200 group-hover:px-4 group-hover:shadow-lg"
-          style={{ backgroundColor: "hsl(var(--accent))" }}
+          className="flex items-center gap-2 px-3 py-6 rounded-l-xl text-accent-foreground font-semibold text-sm tracking-wide shadow-md transition-all duration-200 group-hover:px-4 group-hover:shadow-lg"
+          style={{ backgroundColor: "hsl(var(--accent-strong))" }}
         >
           Tilaa maksuton arviokäynti
         </span>
@@ -221,8 +221,8 @@ const DesktopQuoteDrawer = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || isSubmitted}
-                  className="mt-2 mb-4 w-full rounded-xl py-3 font-semibold text-white text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 disabled:opacity-60"
-                  style={{ backgroundColor: "hsl(var(--accent))" }}
+                  className="mt-2 mb-4 w-full rounded-xl py-3 font-semibold text-accent-foreground text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 disabled:opacity-60"
+                  style={{ backgroundColor: "hsl(var(--accent-strong))" }}
                 >
                   {isSubmitted ? "Lähetetty ✓" : isSubmitting ? "Lähetetään..." : "Lähetä"}
                 </button>

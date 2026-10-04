@@ -54,7 +54,7 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
         <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto mb-10 md:mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 md:mb-6 font-heading">
             Tiilikaton puhdistus –{' '}
-            <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{cityData.name}</span>
+            <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{cityData.name}</span>
           </h1>
           <p className="text-base md:text-lg text-primary-foreground/85 leading-relaxed max-w-3xl mx-auto">
             Ammattimainen mekaaninen puhdistus ja käsittely pidentää kattosi ikää huomattavasti
@@ -65,7 +65,7 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <section className="section-padding bg-background">
         <div className="section-container">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-accent mb-6 text-center">Tiilikaton mekaaninen puhdistus ja käsittely</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6 text-center">Tiilikaton mekaaninen puhdistus ja käsittely</h2>
             <div className="space-y-6 text-lg text-muted-foreground">
               <p>{cityData.puhdistusIntro}</p>
               <p>Suosittelemme <strong className="text-foreground">tiilikaton tarkastusta vuosittain</strong>. Sammal, jäkälä ja roskat kannattaa poistaa säännöllisesti, jotta katto pysyy hyvässä kunnossa mahdollisimman pitkään.</p>
@@ -78,7 +78,7 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <section className="section-padding bg-accent-light">
         <div className="section-container">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">Mitä puhdistus sisältää?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Mitä puhdistus sisältää?</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Kattavat puhdistuspalvelut yhdellä hinnalla – ei piilokustannuksia.</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -98,12 +98,12 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <section className="section-padding bg-secondary">
         <div className="section-container">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
-            <h2 className="text-3xl font-bold text-accent mb-6 text-center">Puhdistuksen hyödyt</h2>
+            <h2 className="text-3xl font-bold text-accent-ink mb-6 text-center">Puhdistuksen hyödyt</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
               {benefits.map((benefit, index) => (
                 <motion.div key={benefit} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }} className="flex items-center gap-3 bg-card p-4 rounded-xl">
                   <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Check className="w-4 h-4 text-accent" />
+                    <Check className="w-4 h-4 text-accent-ink" />
                   </div>
                   <span className="text-foreground font-medium">{benefit}</span>
                 </motion.div>
@@ -112,10 +112,10 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-2xl mx-auto">
             <div className="bg-card rounded-2xl p-8 text-center shadow-lg">
-              <h2 className="text-2xl font-bold text-accent mb-4">Hinnoittelu</h2>
+              <h2 className="text-2xl font-bold text-accent-ink mb-4">Hinnoittelu</h2>
               <p className="text-muted-foreground mb-6">Tiilikaton mekaanisen puhdistuksen ja käsittelyn hinta riippuu katon koosta ja sammaleen määrästä.</p>
               <div className="text-4xl font-bold text-primary mb-2">alkaen 800 €</div>
-              <p className="text-accent font-medium">Pyydä tarjous, niin kerromme tarkan hinnan!</p>
+              <p className="text-accent-ink font-medium">Pyydä tarjous, niin kerromme tarkan hinnan!</p>
             </div>
           </motion.div>
         </div>
@@ -126,7 +126,7 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-6">
               <MapPin className="w-6 h-6 text-primary" />
-              <h2 className="text-3xl md:text-4xl font-bold text-accent">Palvelu {cityData.cityGenitive} alueella</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink">Palvelu {cityData.cityGenitive} alueella</h2>
             </div>
             <p className="text-lg text-muted-foreground leading-relaxed">{cityData.localSection}</p>
           </motion.div>

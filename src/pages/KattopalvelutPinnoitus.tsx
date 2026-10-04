@@ -70,7 +70,7 @@ const KattopalvelutPinnoitus = () => {
         <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto mb-10 md:mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 md:mb-6 font-heading">
             Tiilikaton pinnoitus{' '}
-            <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Pirkanmaa</span>
+            <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Pirkanmaa</span>
           </h1>
           <p className="text-base md:text-lg text-primary-foreground/85 leading-relaxed max-w-3xl mx-auto">
             Pysäytä katon rapautuminen ennen kuin on liian myöhäistä. Laadukas tiilikaton pinnoitus Pirkanmaalla <strong className="text-primary-foreground">säästää sinut kalliilta kattoremontilta</strong>. Pintasen ammattimainen pesu ja pinnoitus palauttavat katon loiston ja antavat sille <strong className="text-primary-foreground">jopa 10–15 vuotta lisäaikaa</strong>.
@@ -82,7 +82,7 @@ const KattopalvelutPinnoitus = () => {
           <a
             href="#yhteystiedot"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
-            style={{ backgroundColor: "hsl(202, 100%, 61%)" }}
+            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Pyydä maksuton kuntotarkastus
           </a>
@@ -109,7 +109,7 @@ const KattopalvelutPinnoitus = () => {
                 transition={{ delay: i * 0.08 }}
                 className="bg-card rounded-2xl p-5 md:p-6 text-center shadow-sm border border-border/50"
               >
-                <p className="text-2xl md:text-3xl font-bold text-accent mb-1">{stat.value}</p>
+                <p className="text-2xl md:text-3xl font-bold text-accent-ink mb-1">{stat.value}</p>
                 <p className="text-sm font-semibold text-foreground mb-2">{stat.label}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">{stat.sub}</p>
               </motion.div>
@@ -130,7 +130,7 @@ const KattopalvelutPinnoitus = () => {
             viewport={{ once: true }}
             className="text-center mb-10"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
               Miksi tiilikaton pinnoitus on elintärkeää juuri nyt?
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -173,7 +173,7 @@ const KattopalvelutPinnoitus = () => {
 
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                 <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                  <Search className="w-5 h-5 text-accent" />
+                  <Search className="w-5 h-5 text-accent-ink" />
                   Huomaatko nämä merkit katollasi? Silloin pinnoituksella on kiire:
                 </h4>
                 <ul className="space-y-3">
@@ -191,7 +191,7 @@ const KattopalvelutPinnoitus = () => {
               <a
                 href="#yhteystiedot"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
-                style={{ backgroundColor: "hsl(202, 100%, 61%)" }}
+                style={{ backgroundColor: "hsl(var(--accent-strong))" }}
               >
                 Pyydä maksuton kuntotarkastus
               </a>
@@ -209,7 +209,7 @@ const KattopalvelutPinnoitus = () => {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <h2 className="text-3xl md:text-4xl font-bold text-accent mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">
                   Tiilikaton pinnoitus vai kokonaan uusi kattoremontti?
                 </h2>
                 <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
@@ -247,7 +247,7 @@ const KattopalvelutPinnoitus = () => {
       <section className="section-padding bg-secondary">
         <div className="section-container max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
               Paljonko maksaa tiilikaton pinnoitus Pirkanmaalla?
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -271,7 +271,7 @@ const KattopalvelutPinnoitus = () => {
                 }`}
               >
                 {card.featured && (
-                  <div className="bg-accent text-accent-foreground text-xs font-bold uppercase tracking-wider text-center py-1.5">
+                  <div className="bg-accent-strong text-accent-foreground text-xs font-bold uppercase tracking-wider text-center py-1.5">
                     Yleisin kattokoko
                   </div>
                 )}
@@ -284,14 +284,14 @@ const KattopalvelutPinnoitus = () => {
                     <p className="text-sm line-through text-muted-foreground/60 mb-1">
                       Norm. {fmtCardRange(card)}
                     </p>
-                    <p className="text-3xl md:text-4xl font-bold text-accent">{fmtCardAfter(card)}</p>
+                    <p className="text-3xl md:text-4xl font-bold text-accent-ink">{fmtCardAfter(card)}</p>
                     <p className="text-xs text-muted-foreground mt-1">kotitalousvähennyksen jälkeen</p>
                   </div>
 
                   <ul className="space-y-2.5 mb-5 flex-1">
                     {pricingIncludes.map((item) => (
                       <li key={item} className="flex items-center gap-2.5 text-sm text-foreground">
-                        <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                        <Check className="w-4 h-4 text-accent-ink flex-shrink-0" />
                         {item}
                       </li>
                     ))}
@@ -306,7 +306,7 @@ const KattopalvelutPinnoitus = () => {
                     href="#yhteystiedot"
                     className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-md text-sm ${
                       card.featured
-                        ? "bg-accent text-accent-foreground"
+                        ? "bg-accent-strong text-accent-foreground"
                         : "bg-primary text-primary-foreground"
                     }`}
                   >
@@ -361,7 +361,7 @@ const KattopalvelutPinnoitus = () => {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-accent mb-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center">
               Kuka katollesi kiipeää? Terveiset yrittäjältä
             </h2>
 

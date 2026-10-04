@@ -28,7 +28,7 @@ const SEOTextSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="heading-style text-3xl md:text-4xl text-accent mb-6">
+          <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6">
             Luotettava maalausliike ja kattoasiantuntija Pirkanmaalla
           </h2>
            <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
@@ -56,7 +56,7 @@ const SEOTextSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="heading-style text-2xl md:text-3xl text-accent mb-6">
+          <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
             Tiilikaton pinnoitus ja puhdistus – jatka kattosi elinikää
           </h3>
           <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
@@ -75,7 +75,7 @@ const SEOTextSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="heading-style text-2xl md:text-3xl text-accent mb-6">
+          <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
             Talon ulkomaalaus suojaa kotiasi säiltä
           </h3>
           <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
@@ -94,7 +94,7 @@ const SEOTextSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="heading-style text-2xl md:text-3xl text-accent mb-6">
+          <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
             Miksi valita Pintanen huoltamaan kotisi?
           </h3>
           <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
@@ -114,7 +114,7 @@ const SEOTextSection = () => {
                   className="flex items-start gap-3"
                 >
                   <div className="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-accent" />
+                    <Check className="w-4 h-4 text-accent-ink" />
                   </div>
                   <span>
                     <strong className="text-foreground">{item.bold}</strong> {item.text}

@@ -148,7 +148,7 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     >
       {headingText && (
         <div className="section-container mb-8 text-center">
-          <h2 className="heading-style text-2xl md:text-3xl text-accent">
+          <h2 className="heading-style text-2xl md:text-3xl text-accent-ink">
             {headingText}
           </h2>
         </div>

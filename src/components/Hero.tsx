@@ -20,14 +20,14 @@ const Hero = () => {
         <div className="relative z-10 w-full lg:w-2/3 p-8 md:p-12 lg:px-16 lg:py-16 xl:px-20 flex flex-col justify-center bg-card">
           <div className="inline-flex items-center gap-3 mb-6 md:mb-8">
             <span className="h-1 w-12 bg-accent rounded-full" aria-hidden="true" />
-            <span className="text-accent font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm">
+            <span className="text-accent-ink font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm">
               Pirkanmaan paikallinen perheyritys
             </span>
           </div>
 
           <h1 className="heading-style max-w-3xl text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-6 md:mb-8">
             Tiilikaton pinnoitus ja talon maalaus{" "}
-            <span className="text-accent">Pirkanmaalla</span>
+            <span className="text-accent-ink">Pirkanmaalla</span>
           </h1>
 
           <p className="hero-lead text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl leading-relaxed font-sans">
@@ -47,7 +47,7 @@ const Hero = () => {
             </Link>
             <a
               href="#yhteystiedot"
-              className="inline-flex items-center justify-center px-8 py-4 bg-card border-2 border-accent text-accent font-heading font-extrabold rounded-2xl hover:bg-accent hover:text-accent-foreground transition-all text-lg"
+              className="inline-flex items-center justify-center px-8 py-4 bg-card border-2 border-accent text-accent-ink font-heading font-extrabold rounded-2xl hover:bg-accent-strong hover:text-accent-foreground transition-all text-lg"
             >
               Ilmainen arviokäynti
             </a>
@@ -80,7 +80,7 @@ const Hero = () => {
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-accent font-heading font-extrabold text-2xl md:text-3xl">0 €</span>
+              <span className="text-accent-ink font-heading font-extrabold text-2xl md:text-3xl">0 €</span>
               <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest">
                 Kartoituskäynti
               </span>

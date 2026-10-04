@@ -23,7 +23,7 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
             Paljonko maksaa talon maalaus – {cityName}?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -46,7 +46,7 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
               }`}
             >
               {card.featured && (
-                <div className="bg-accent text-accent-foreground text-xs font-bold uppercase tracking-wider text-center py-1.5">
+                <div className="bg-accent-strong text-accent-foreground text-xs font-bold uppercase tracking-wider text-center py-1.5">
                   Yleisin talon koko
                 </div>
               )}
@@ -59,14 +59,14 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
                   <p className="text-sm line-through text-muted-foreground/60 mb-1">
                     Norm. {fmtCardRange(card)}
                   </p>
-                  <p className="text-3xl md:text-4xl font-bold text-accent"><strong>{fmtCardAfter(card)}</strong></p>
+                  <p className="text-3xl md:text-4xl font-bold text-accent-ink"><strong>{fmtCardAfter(card)}</strong></p>
                   <p className="text-xs text-muted-foreground mt-1"><strong>kotitalousvähennyksen jälkeen</strong></p>
                 </div>
 
                 <ul className="space-y-2.5 mb-5 flex-1">
                   {pricingIncludes.map((item) => (
                     <li key={item} className="flex items-center gap-2.5 text-sm text-foreground">
-                      <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                      <Check className="w-4 h-4 text-accent-ink flex-shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -81,7 +81,7 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
                   href="#yhteystiedot"
                   className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-md text-sm ${
                     card.featured
-                      ? 'bg-accent text-accent-foreground'
+                      ? 'bg-accent-strong text-accent-foreground'
                       : 'bg-primary text-primary-foreground'
                   }`}
                 >

@@ -13,7 +13,7 @@ const PinnoitusEntrepreneur = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center">
             Kuka katollesi kiipeää? Terveiset yrittäjältä
           </h2>
 

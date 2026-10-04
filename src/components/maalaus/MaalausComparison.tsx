@@ -16,7 +16,7 @@ const MaalausComparison = ({ cityIn }: { cityIn?: string }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-accent mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">
                 Talon maalaus vai kokonaan uusi ulkoverhousremontti?
               </h2>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">

@@ -93,10 +93,28 @@ const Header = () => {
     }, 100);
   };
 
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const cancelDesktopDropdownClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
   const handleDesktopDropdownOpen = (label: string) => {
     if (isHoverLocked.current) return;
+    cancelDesktopDropdownClose();
     setOpenDropdown(label);
   };
+
+  // Pieni viive sulkemiseen: valikko ei katoa, vaikka hiiri käy hetken sen ulkopuolella matkalla alas.
+  const handleDesktopDropdownClose = () => {
+    cancelDesktopDropdownClose();
+    closeTimer.current = setTimeout(() => setOpenDropdown(null), 220);
+  };
+
+  useEffect(() => cancelDesktopDropdownClose, []);
 
   return (
     <header
@@ -193,9 +211,9 @@ const Header = () => {
                   key={item.label}
                   className="relative group"
                   onMouseEnter={() => handleDesktopDropdownOpen(item.label)}
-                  onMouseLeave={() => setOpenDropdown(null)}
+                  onMouseLeave={handleDesktopDropdownClose}
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 py-7 -my-7">
                     <Link
                       to={item.href}
                       onClick={handleNavigationLinkClick}
@@ -215,18 +233,21 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 w-56 bg-navy rounded-xl shadow-2xl border border-white/10 overflow-hidden z-50"
+                        // Näkymätön reunus (padding) pitää hiiren valikon alueella myös otsikon ja listan välissä ja sivuilla.
+                        className="absolute top-full -left-6 pt-2 px-6 pb-6 z-50"
                       >
-                        {item.dropdown.map((subItem) => (
-                          <Link
-                            key={subItem.href}
-                            to={subItem.href}
-                            onClick={handleNavigationLinkClick}
-                            className="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-accent-ink transition-colors font-medium"
-                          >
-                            {subItem.label}
-                          </Link>
-                        ))}
+                        <div className="w-60 bg-navy rounded-xl shadow-2xl border border-white/10 overflow-hidden">
+                          {item.dropdown.map((subItem) => (
+                            <Link
+                              key={subItem.href}
+                              to={subItem.href}
+                              onClick={handleNavigationLinkClick}
+                              className="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-accent-ink transition-colors font-medium"
+                            >
+                              {subItem.label}
+                            </Link>
+                          ))}
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>

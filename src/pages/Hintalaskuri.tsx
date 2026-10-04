@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { Star } from "lucide-react";
 import SEO from "@/components/SEO";
+import ServiceContactSection from "@/components/ServiceContactSection";
 import PriceWizard, { type WizardService } from "@/components/laskuri/PriceWizard";
 import { staticSeo } from "@/data/seo";
 import { roofTestimonials, wallTestimonials } from "@/data/testimonialsData";
@@ -66,6 +67,8 @@ const Hintalaskuri = () => {
           )}
         </div>
       </section>
+
+      <ServiceContactSection variant="general" />
     </>
   );
 };

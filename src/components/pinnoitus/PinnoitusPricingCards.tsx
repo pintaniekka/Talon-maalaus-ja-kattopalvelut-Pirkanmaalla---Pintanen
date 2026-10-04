@@ -31,7 +31,7 @@ const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/hintalasku
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
             Mitä tiilikaton pinnoitus maksaa {cityIn}?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -55,7 +55,7 @@ const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/hintalasku
               }`}
             >
               {card.featured && (
-                <div className="bg-accent text-accent-foreground text-xs font-bold uppercase tracking-wider text-center py-1.5">
+                <div className="bg-accent-strong text-accent-foreground text-xs font-bold uppercase tracking-wider text-center py-1.5">
                   Yleisin kattokoko
                 </div>
               )}
@@ -68,14 +68,14 @@ const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/hintalasku
                   <p className="text-sm line-through text-muted-foreground/60 mb-1">
                     Norm. {fmtCardRange(card)}
                   </p>
-                  <p className="text-3xl md:text-4xl font-bold text-accent">{fmtCardAfter(card)}</p>
+                  <p className="text-3xl md:text-4xl font-bold text-accent-ink">{fmtCardAfter(card)}</p>
                   <p className="text-xs text-muted-foreground mt-1">kotitalousvähennyksen jälkeen</p>
                 </div>
 
                 <ul className="space-y-2.5 mb-5 flex-1">
                   {pricingIncludes.map((item) => (
                     <li key={item} className="flex items-center gap-2.5 text-sm text-foreground">
-                      <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                      <Check className="w-4 h-4 text-accent-ink flex-shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -90,7 +90,7 @@ const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/hintalasku
                   href="#yhteystiedot"
                   className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-md text-sm ${
                     card.featured
-                      ? 'bg-accent text-accent-foreground'
+                      ? 'bg-accent-strong text-accent-foreground'
                       : 'bg-primary text-primary-foreground'
                   }`}
                 >

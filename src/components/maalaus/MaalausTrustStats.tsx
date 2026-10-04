@@ -21,7 +21,7 @@ const MaalausTrustStats = () => {
               transition={{ delay: i * 0.08 }}
               className="bg-card rounded-2xl p-5 md:p-6 text-center shadow-sm border border-border/50"
             >
-              <p className="text-2xl md:text-3xl font-bold text-accent mb-1">{stat.value}</p>
+              <p className="text-2xl md:text-3xl font-bold text-accent-ink mb-1">{stat.value}</p>
               <p className="text-sm font-semibold text-foreground mb-2">{stat.label}</p>
               <p className="text-xs text-muted-foreground leading-relaxed">{stat.sub}</p>
             </motion.div>

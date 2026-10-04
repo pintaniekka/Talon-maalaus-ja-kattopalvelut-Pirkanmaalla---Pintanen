@@ -351,7 +351,7 @@ const Referenssit = () => {
       >
         <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto text-left mb-10 md:mb-12">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-            <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Referenssit</span>
+            <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Referenssit</span>
           </h1>
           <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
             Tutustu <strong>toteuttamiimme katto- ja maalausprojekteihin</strong> Pirkanmaalla ja lähikunnissa. Näet selkeästi <strong>ennen ja jälkeen</strong> -kuvat, jotka kertovat työn jäljestä enemmän kuin sanat. <strong>Laatu puhuu puolestaan</strong> – jokainen kohde on tehty huolellisesti ja viimeistellysti.
@@ -368,7 +368,7 @@ const Referenssit = () => {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center mb-12 space-y-4"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-accent font-heading">Referenssejä kattotöistä ja ulkomaalauksista</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink font-heading">Referenssejä kattotöistä ja ulkomaalauksista</h2>
             <p className="text-muted-foreground text-base">
               Käy kurkkaamassa töitämme <strong>Pirkanmaan</strong> alueella. Olemme tehneet tiilikattojen pinnoituksia, katon puhdistuksia ja talojen ulkomaalauksia monissa paikoissa Pirkanmaalla ja lähikunnissa.
             </p>

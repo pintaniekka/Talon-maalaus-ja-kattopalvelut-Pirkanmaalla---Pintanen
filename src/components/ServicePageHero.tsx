@@ -13,7 +13,7 @@ interface ServicePageHeroProps {
 
 const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, children, compact = false }: ServicePageHeroProps) => {
   return (
-    <section className={`hero-critical relative ${compact ? "min-h-[38svh] min-h-[38vh]" : "min-h-[60svh] min-h-[60vh]"} flex items-center justify-center overflow-hidden isolate`} style={{ backgroundColor: 'hsl(215,30%,10%)' }}>
+    <section className={`hero-critical on-dark relative ${compact ? "min-h-[38svh] min-h-[38vh]" : "min-h-[60svh] min-h-[60vh]"} flex items-center justify-center overflow-hidden isolate`} style={{ backgroundColor: 'hsl(215,30%,10%)' }}>
       {/* Background image – separate layer, no blend/filter/opacity */}
       {backgroundImage ? (
         <img

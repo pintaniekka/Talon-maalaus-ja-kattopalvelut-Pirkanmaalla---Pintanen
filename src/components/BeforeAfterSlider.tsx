@@ -100,7 +100,7 @@ const BeforeAfterSlider = ({
       <div className="absolute top-3 left-3 px-3 py-1 rounded-md bg-foreground/70 text-primary-foreground font-semibold text-xs">
         Ennen
       </div>
-      <div className="absolute top-3 right-3 px-3 py-1 rounded-md bg-accent/80 text-accent-foreground font-semibold text-xs">
+      <div className="absolute top-3 right-3 px-3 py-1 rounded-md bg-accent-strong/90 text-accent-foreground font-semibold text-xs">
         Jälkeen
       </div>
     </div>

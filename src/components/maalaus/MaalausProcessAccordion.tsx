@@ -64,7 +64,7 @@ const MaalausProcessAccordion = ({ cityName = 'Pirkanmaa' }: { cityName?: string
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4 font-heading">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">
             Näin talon ulkomaalaus etenee – {cityName}
           </h2>
         </motion.div>
@@ -98,8 +98,8 @@ const MaalausProcessAccordion = ({ cityName = 'Pirkanmaa' }: { cityName?: string
         <div className="text-center mt-8">
           <a
             href="#yhteystiedot"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-white transition-colors hover:brightness-110"
-            style={{ backgroundColor: 'hsl(202, 100%, 61%)' }}
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
+            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Tästä ilmainen kuntoarvio talon maalaukselle
           </a>

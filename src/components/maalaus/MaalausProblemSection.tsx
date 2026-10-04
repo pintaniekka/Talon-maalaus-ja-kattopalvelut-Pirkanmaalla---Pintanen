@@ -23,7 +23,7 @@ const MaalausProblemSection = ({ cityName = 'Pirkanmaa' }: { cityName?: string }
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
             Miksi talon huoltomaalaus on tärkeää juuri nyt?
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -66,7 +66,7 @@ const MaalausProblemSection = ({ cityName = 'Pirkanmaa' }: { cityName?: string }
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                <Search className="w-5 h-5 text-accent" />
+                <Search className="w-5 h-5 text-accent-ink" />
                 Onko talosi ulkoseinässä näitä merkkejä? Silloin maalauksella on kiire:
               </h4>
               <ul className="space-y-3">
@@ -83,8 +83,8 @@ const MaalausProblemSection = ({ cityName = 'Pirkanmaa' }: { cityName?: string }
 
             <a
               href="#yhteystiedot"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-white transition-colors hover:brightness-110"
-              style={{ backgroundColor: 'hsl(202, 100%, 61%)' }}
+              className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
+              style={{ backgroundColor: "hsl(var(--accent-strong))" }}
             >
               Pyydä maksuton kuntotarkastus – {cityName}
             </a>

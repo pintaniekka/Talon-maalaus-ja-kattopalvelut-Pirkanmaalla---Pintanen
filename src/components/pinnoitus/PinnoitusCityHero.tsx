@@ -15,7 +15,7 @@ const PinnoitusCityHero = ({ cityName, cityIn, backgroundImage, backgroundSrcSet
       <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto mb-10 md:mb-12">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 md:mb-6 font-heading">
           Tiilikaton pinnoitus{' '}
-          <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{cityName}</span>
+          <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{cityName}</span>
         </h1>
         <p className="text-base md:text-lg text-primary-foreground/85 leading-relaxed max-w-3xl mx-auto">
           Pysäytä katon kuluminen ennen kuin vauriot tulevat liian kalliiksi. Laadukas tiilikaton pinnoitus {cityIn} on järkevin tapa estää kalliiden kattoremonttien tarve. Pintasen asiantuntija toteuttaa pinnoitukset ammattitaidolla, jolloin katto saa takaisin alkuperäisen suojansa. Tämä myös parantaa talon julkisivun ilmettä ja antaa katolle jopa <strong className="text-primary-foreground">10–15 vuotta lisäaikaa</strong>.
@@ -27,7 +27,7 @@ const PinnoitusCityHero = ({ cityName, cityIn, backgroundImage, backgroundSrcSet
         <a
           href="#yhteystiedot"
           className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
-          style={{ backgroundColor: 'hsl(202, 100%, 61%)' }}
+          style={{ backgroundColor: "hsl(var(--accent-strong))" }}
         >
           Pyydä ilmainen kuntotarkastus
         </a>

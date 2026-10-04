@@ -16,7 +16,7 @@ const PinnoitusLocalHook = ({ title, text }: PinnoitusLocalHookProps) => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-accent mb-4 font-heading">
+          <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">
             {title}
           </h2>
           <p className="text-muted-foreground leading-relaxed text-base md:text-lg">

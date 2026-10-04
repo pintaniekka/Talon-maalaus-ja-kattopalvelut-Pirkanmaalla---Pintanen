@@ -52,7 +52,7 @@ const getTrustStats = (cityIn: string) => [
 const getAreaFAQ = (cityName: string, cityIn: string, cityGenitive: string) => [
   {
     question: `Paljonko talon maalaus tai katon pinnoitus maksaa ${cityIn}?`,
-    answer: `Hinta riippuu aina kohteen koosta, jyrkkyydestä ja pohjatöiden tarpeesta ${cityGenitive} alueella. Esimerkiksi omakotitalon maalaus tai tiilikaton pinnoitus maksaa tyypillisesti <strong>muutamasta tuhannesta eurosta ylöspäin</strong>. 👉 <a href="/talon-maalaus-hinta-pirkanmaa/" class="text-accent underline">Katso tarkat hintaesimerkit talon maalauksesta</a> 👉 <a href="/hintalaskuri?palvelu=pinnoitus" class="text-accent underline">Katso tiilikaton pinnoituksen hintalaskuri</a>`,
+    answer: `Hinta riippuu aina kohteen koosta, jyrkkyydestä ja pohjatöiden tarpeesta ${cityGenitive} alueella. Esimerkiksi omakotitalon maalaus tai tiilikaton pinnoitus maksaa tyypillisesti <strong>muutamasta tuhannesta eurosta ylöspäin</strong>. 👉 <a href="/talon-maalaus-hinta-pirkanmaa/" class="text-accent-ink underline">Katso tarkat hintaesimerkit talon maalauksesta</a> 👉 <a href="/hintalaskuri?palvelu=pinnoitus" class="text-accent-ink underline">Katso tiilikaton pinnoituksen hintalaskuri</a>`,
   },
   {
     question: `Kuinka kauan maalaus- tai kattotyö kestää ${cityIn}?`,
@@ -152,7 +152,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto mb-10 md:mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 md:mb-6 font-heading">
             Tiilikaton pinnoitus ja talon maalaus{' '}
-            <span className="text-accent drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{cityName}</span>
+            <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{cityName}</span>
           </h1>
           <p className="text-base md:text-lg text-primary-foreground/85 leading-relaxed max-w-3xl mx-auto">
             <strong className="text-primary-foreground">Suojaa kotisi arvokkaimmat rakenteet säänvaihteluilta.</strong> Pintanen tarjoaa ammattimaiset tiilikattojen pinnoitukset, kattojen puhdistukset sekä talojen ulkomaalaukset {cityIn} ja koko Pirkanmaalla. <strong className="text-primary-foreground">Yrittäjät tekevät itse työn.</strong>
@@ -162,7 +162,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
           <a
             href="#yhteystiedot"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors"
-            style={{ backgroundColor: "#38b6ff" }}
+            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
           >
             Pyydä maksuton kuntotarkastus
           </a>
@@ -189,7 +189,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
                 transition={{ delay: i * 0.08 }}
                 className="bg-card rounded-2xl p-5 md:p-6 text-center shadow-sm border border-border/50"
               >
-                <p className="text-2xl md:text-3xl font-bold text-accent mb-1">{stat.value}</p>
+                <p className="text-2xl md:text-3xl font-bold text-accent-ink mb-1">{stat.value}</p>
                 <p className="text-sm font-semibold text-foreground mb-2">{stat.label}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">{stat.sub}</p>
               </motion.div>
@@ -208,7 +208,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-accent mb-4 font-heading">
+            <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">
               {areaContent.alueLocalHookTitle}
             </h2>
             <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
@@ -227,7 +227,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
               Palvelut {cityGenitive} alueella
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -289,7 +289,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-4xl mx-auto text-center"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4 font-heading">
+              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">
                 Palvelemme koko {cityGenitive} alueella
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
@@ -298,7 +298,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
               <div className="bg-card rounded-2xl p-6 md:p-8 shadow-sm border border-border/50 mb-10">
                 <div className="flex items-center justify-center gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-accent flex-shrink-0" />
+                  <MapPin className="w-5 h-5 text-accent-ink flex-shrink-0" />
                   <span className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                     Kaupunginosat ja kylät
                   </span>
@@ -345,7 +345,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-accent mb-3 text-center font-heading">
+            <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-3 text-center font-heading">
               Keitä me olemme?
             </h2>
             <p className="text-center text-muted-foreground mb-8 italic">Terveisiä meiltä yrittäjiltä</p>

@@ -46,8 +46,8 @@ const cityHref = (slug: string, service: Service) =>
 
 const chipBase =
   'px-4 py-2 bg-secondary/60 border border-border rounded-xl text-sm font-semibold transition-colors';
-const chipIdle = 'text-muted-foreground hover:border-accent hover:text-accent';
-const chipActive = 'bg-accent border-accent text-accent-foreground hover:border-accent';
+const chipIdle = 'text-muted-foreground hover:border-accent hover:text-accent-ink';
+const chipActive = 'bg-accent-strong border-accent text-accent-foreground hover:border-accent';
 
 const RegionCard = ({
   title,
@@ -80,7 +80,7 @@ const RegionCard = ({
         className="flex w-full items-center justify-between gap-4 p-4 md:p-5 text-left"
       >
         <span className="flex items-center gap-3">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground shadow-lg shadow-accent/30">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-strong text-accent-foreground shadow-lg shadow-accent/30">
             <MapPin className="h-4 w-4" aria-hidden="true" />
           </span>
           <span className="text-lg font-bold tracking-tight text-foreground font-heading">
@@ -90,7 +90,7 @@ const RegionCard = ({
         <ChevronDown
           aria-hidden="true"
           className={cn(
-            'h-5 w-5 shrink-0 text-accent transition-transform duration-300 motion-reduce:transition-none',
+            'h-5 w-5 shrink-0 text-accent-ink transition-transform duration-300 motion-reduce:transition-none',
             open && 'rotate-180'
           )}
         />
@@ -159,7 +159,7 @@ const ToimintaAlueetBanner = ({ activeCity, service = 'maalaus' }: ToimintaAluee
           </div>
 
           {/* Oikea: karttasarake */}
-           <div className="relative flex flex-col items-center justify-center overflow-hidden bg-accent p-4 text-accent-foreground md:p-5 lg:w-[380px]">
+           <div className="relative flex flex-col items-center justify-center overflow-hidden bg-accent-strong p-4 text-accent-foreground md:p-5 lg:w-[380px]">
             {/* Hienovarainen ruudukkokuvio */}
             <div
               aria-hidden="true"

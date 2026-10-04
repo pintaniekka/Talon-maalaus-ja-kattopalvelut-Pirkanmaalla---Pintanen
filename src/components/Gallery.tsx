@@ -52,7 +52,7 @@ const Gallery = () => {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-12"
         >
-          <h2 className="heading-style text-3xl md:text-4xl text-accent mb-4">Esimerkkikohteita</h2>
+          <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-4">Esimerkkikohteita</h2>
           <p className="text-muted-foreground text-lg">
             Tutustu tekemiimme töihin. Jokainen työ on tehty ammattitaidolla alusta loppuun.
           </p>

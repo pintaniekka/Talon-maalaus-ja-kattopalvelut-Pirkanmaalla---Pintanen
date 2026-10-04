@@ -46,6 +46,8 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
           light: "hsl(var(--accent-light))",
+          ink: "hsl(var(--accent-ink))",
+          strong: "hsl(var(--accent-strong))",
         },
         navy: {
           DEFAULT: "hsl(var(--navy))",

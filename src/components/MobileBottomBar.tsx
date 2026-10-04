@@ -10,7 +10,7 @@ const MobileBottomBar = () => {
       <div className="flex items-center gap-3 p-3 shadow-[0_-8px_32px_hsl(var(--navy)/0.18)]">
         <a
           href="tel:+358409640066"
-          className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] rounded-xl bg-accent text-accent-foreground font-semibold text-sm tracking-tight transition-all duration-200 active:scale-[0.98]"
+          className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] rounded-xl bg-accent-strong text-accent-foreground font-semibold text-sm tracking-tight transition-all duration-200 active:scale-[0.98]"
         >
           <Phone className="w-5 h-5" />
           Soita meille

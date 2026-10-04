@@ -30,7 +30,7 @@ const MaalausComparison = ({ cityIn }: { cityIn?: string }) => {
 
               <div className="mt-8">
                 <Link
-                  to="/talon-maalaus-hinta-pirkanmaa"
+                  to="/hintalaskuri?palvelu=maalaus"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-lg"
                   style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
                 >

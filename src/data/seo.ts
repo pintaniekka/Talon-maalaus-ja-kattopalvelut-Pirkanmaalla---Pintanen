@@ -43,7 +43,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/tiilikaton-pinnoitus-pirkanmaa": HERO.pinnoitus,
   "/katon-puhdistus-pirkanmaa": HERO.puhdistus,
   "/talon-maalaus-pirkanmaa": HERO.maalaus,
-  "/maalauspalvelut-hinta-pirkanmaa": fullHero("moderni-tumma-puutalo-julkisivumaalaus-valmis"),
+  "/hintalaskuri": fullHero("keltainen-talo-pinnoitettu-tiilikatto-ylojarvi"),
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
   "/katon-puhdistus-hinta-pirkanmaa": fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
   "/talon-maalaus-hinta-pirkanmaa": fullHero("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen"),
@@ -82,10 +82,10 @@ export const staticSeo: Record<string, RouteSeo> = {
     description:
       "Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta.",
   },
-  "/maalauspalvelut-hinta-pirkanmaa": {
-    title: "Hinnat ja hintalaskuri",
+  "/hintalaskuri": {
+    title: "Hintalaskuri – laske katon pinnoituksen tai maalauksen hinta",
     description:
-      "Pintasen hinnat yhdellä sivulla: tiilikaton pinnoitus 2 850–7 000 €, talon maalaus 3 500–11 000 €. Laske arvio laskurilla ja katso palvelukohtaiset hintasivut.",
+      "Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Vastaa muutamaan kysymykseen ja saat suuntaa antavan hinta-arvion heti. Pintanen, Pirkanmaa.",
   },
   "/katon-puhdistus-hinta-pirkanmaa": {
     title: "Katon puhdistus hinta – Sammaleen poisto ja suojakäsittely",

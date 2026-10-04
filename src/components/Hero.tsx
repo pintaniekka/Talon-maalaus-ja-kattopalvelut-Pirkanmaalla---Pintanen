@@ -39,7 +39,7 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4 sm:gap-6 mb-10 md:mb-12">
             <Link
-              to="/maalauspalvelut-hinta-pirkanmaa"
+              to="/hintalaskuri"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-paint-yellow hover:bg-paint-yellow-hover text-paint-yellow-foreground font-heading font-extrabold rounded-2xl transition-all hover:scale-[1.03] shadow-xl shadow-paint-yellow/40 text-lg group"
             >
               Laske hinta

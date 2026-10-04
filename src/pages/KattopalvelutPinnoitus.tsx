@@ -87,7 +87,7 @@ const KattopalvelutPinnoitus = () => {
             Pyydä maksuton kuntotarkastus
           </a>
           <Link
-            to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+            to="/hintalaskuri?palvelu=pinnoitus"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
             style={{ backgroundColor: "hsla(30, 52%, 90%, 0.15)" }}
           >
@@ -222,7 +222,7 @@ const KattopalvelutPinnoitus = () => {
                 </div>
                 <div className="mt-8">
                   <Link
-                    to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+                    to="/hintalaskuri?palvelu=pinnoitus"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-lg"
                     style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
                   >
@@ -320,7 +320,7 @@ const KattopalvelutPinnoitus = () => {
           {/* Price calculator CTA button */}
           <div className="text-center mt-10">
             <Link
-              to="/tiilikaton-pinnoitus-hinta-pirkanmaa"
+              to="/hintalaskuri?palvelu=pinnoitus"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
               style={{ backgroundColor: "hsl(38, 60%, 65%)", color: "hsl(215, 25%, 15%)" }}
             >

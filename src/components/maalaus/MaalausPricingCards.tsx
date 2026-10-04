@@ -13,7 +13,7 @@ const pricingIncludes = [
   'Pintamaalaus',
 ];
 
-const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/talon-maalaus-hinta-pirkanmaa', calculatorLabel }: { cityName?: string; calculatorHref?: string; calculatorLabel?: string }) => {
+const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintalaskuri?palvelu=maalaus', calculatorLabel }: { cityName?: string; calculatorHref?: string; calculatorLabel?: string }) => {
   return (
     <section className="section-padding bg-secondary">
       <div className="section-container max-w-5xl mx-auto">

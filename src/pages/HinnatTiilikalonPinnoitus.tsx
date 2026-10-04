@@ -9,7 +9,7 @@ import ServicePageHero from "@/components/ServicePageHero";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
-import RoofPriceCalculator from "@/components/RoofPriceCalculator";
+import CalculatorCta from "@/components/hinnat/CalculatorCta";
 import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
 import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist, CompareCards } from "@/components/hinnat/PriceSections";
@@ -107,9 +107,9 @@ const HinnatTiilikalonPinnoitus = () => {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#hintalaskuri" className="btn-hero">
+          <Link to="/hintalaskuri?palvelu=pinnoitus" className="btn-hero">
             Laske hinta laskurilla
-          </a>
+          </Link>
           <a href="#yhteystiedot" className="btn-hero-outline">
             Pyydä ilmainen kuntotarkastus
           </a>
@@ -117,17 +117,14 @@ const HinnatTiilikalonPinnoitus = () => {
       </ServicePageHero>
 
       {/* Hintaesimerkit: samat kortit kuin palvelu- ja kaupunkisivuilla */}
-      <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" calculatorHref="#hintalaskuri" calculatorLabel="Laske oman kattosi hinta" />
+      <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" calculatorHref="/hintalaskuri?palvelu=pinnoitus" calculatorLabel="Laske oman kattosi hinta" />
 
-      {/* Laskuri ja mitä hintaan kuuluu */}
-      <section id="hintalaskuri" className="section-padding bg-accent-light scroll-mt-24">
+      <CalculatorCta service="pinnoitus" />
+
+      {/* Mitä hintaan kuuluu */}
+      <section className="section-padding bg-background">
         <div className="section-container max-w-3xl mx-auto">
-          <PriceSectionHeading
-            title="Laske tiilikaton pinnoituksen hinta"
-            intro="Laskuri antaa suuntaa antavan hinnan katon koon ja jyrkkyyden mukaan. Tarkan urakkahinnan annamme ilmaisen kuntotarkastuksen jälkeen."
-          />
-          <RoofPriceCalculator />
-          <div className="mt-10">
+          <div>
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={pinnoitusPrices.includes}

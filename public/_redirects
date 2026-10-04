@@ -9,7 +9,7 @@
 /talon-maalaus /talon-maalaus-pirkanmaa 301
 
 # Price pages
-/hinnat /maalauspalvelut-hinta-pirkanmaa 301
+/hinnat /hintalaskuri 301
 /hinnat/tiilikaton-pinnoitus /tiilikaton-pinnoitus-hinta-pirkanmaa 301
 /hinnat/katon-puhdistus /katon-puhdistus-hinta-pirkanmaa 301
 /hinnat/talon-maalaus /talon-maalaus-hinta-pirkanmaa 301
@@ -71,3 +71,5 @@
 /alue/virrat /maalauspalvelut-virrat 301
 /artikkelit/tiilikaton-pinnoituksen-hinta /tiilikaton-pinnoitus-hinta-pirkanmaa 301
 /artikkelit/tiilikaton-pinnoituksen-hinta/ /tiilikaton-pinnoitus-hinta-pirkanmaa 301
+/maalauspalvelut-hinta-pirkanmaa /hintalaskuri 301
+/maalauspalvelut-hinta-pirkanmaa/ /hintalaskuri 301

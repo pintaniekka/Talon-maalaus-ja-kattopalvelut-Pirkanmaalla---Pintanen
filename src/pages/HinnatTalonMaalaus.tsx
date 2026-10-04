@@ -6,7 +6,7 @@ import ServiceSchema from "@/components/ServiceSchema";
 import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
 import ServicePageHero from "@/components/ServicePageHero";
-import WallPriceCalculator from "@/components/WallPriceCalculator";
+import CalculatorCta from "@/components/hinnat/CalculatorCta";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
@@ -96,25 +96,22 @@ const HinnatTalonMaalaus = () => {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#hintalaskuri" className="btn-hero">
+          <Link to="/hintalaskuri?palvelu=maalaus" className="btn-hero">
             Laske hinta laskurilla
-          </a>
+          </Link>
           <a href="#yhteystiedot" className="btn-hero-outline">
             Pyydä ilmainen arviokäynti
           </a>
         </div>
       </ServicePageHero>
 
-      <MaalausPricingCards cityName="Pirkanmaa" calculatorHref="#hintalaskuri" calculatorLabel="Laske oman talosi hinta" />
+      <MaalausPricingCards cityName="Pirkanmaa" calculatorHref="/hintalaskuri?palvelu=maalaus" calculatorLabel="Laske oman talosi hinta" />
 
-      <section id="hintalaskuri" className="section-padding bg-accent-light scroll-mt-24">
+      <CalculatorCta service="maalaus" />
+
+      <section className="section-padding bg-background">
         <div className="section-container max-w-3xl mx-auto">
-          <PriceSectionHeading
-            title="Laske talon maalauksen hinta"
-            intro="Laskuri antaa suuntaa antavan hinnan talon koon ja kunnon mukaan. Tarkan urakkahinnan annamme ilmaisen arviokäynnin jälkeen."
-          />
-          <WallPriceCalculator />
-          <div className="mt-10">
+          <div>
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={maalausPrices.includes}

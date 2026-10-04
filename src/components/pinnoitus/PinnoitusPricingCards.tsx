@@ -21,7 +21,7 @@ interface PinnoitusPricingCardsProps {
   calculatorLabel?: string;
 }
 
-const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/tiilikaton-pinnoitus-hinta-pirkanmaa", calculatorLabel }: PinnoitusPricingCardsProps) => {
+const PinnoitusPricingCards = ({ cityName, cityIn, calculatorHref = "/hintalaskuri?palvelu=pinnoitus", calculatorLabel }: PinnoitusPricingCardsProps) => {
   return (
     <section className="section-padding bg-secondary">
       <div className="section-container max-w-5xl mx-auto">

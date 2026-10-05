@@ -1,3 +1,4 @@
+import ResponsiveImage from "@/components/ResponsiveImage";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -21,12 +22,13 @@ const SEOTextSection = () => {
 
   return (
     <section className="section-padding bg-background">
-      <div className="section-container max-w-4xl mx-auto space-y-20">
+      <div className="section-container max-w-6xl mx-auto space-y-16 md:space-y-24">
         {/* Block 1 */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
         >
           <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6">
             Luotettava maalausliike ja kattoasiantuntija Pirkanmaalla
@@ -55,7 +57,17 @@ const SEOTextSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
         >
+          <ResponsiveImage
+            baseName="tiilikaton-pesu-kesken-tampere"
+            alt="Tiilikaton pesu käynnissä Tampereella: pesty tiili on puhdas ja valmis pinnoitukseen"
+            className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg"
+            sizes="(max-width: 1024px) 100vw, 560px"
+            width={800}
+            height={600}
+          />
+          <div>
           <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
             Tiilikaton pinnoitus ja puhdistus – jatka kattosi elinikää
           </h3>
@@ -67,6 +79,7 @@ const SEOTextSection = () => {
               Me Pintasella teemme tiilikaton pinnoitukset, huollot ja puhdistukset <strong className="text-foreground">huolellisena käsityönä</strong>. <strong className="text-foreground">Eerik</strong> vastaa tiilikattokohteistamme ja varmistaa, että jokainen neliömetri käsitellään huolellisesti. Annamme tekemillemme tiilikaton pinnoituksille aina reilun <strong className="text-foreground">5 vuoden takuun</strong>.
             </p>
           </div>
+          </div>
         </motion.div>
 
         {/* Block 3 */}
@@ -74,7 +87,17 @@ const SEOTextSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
         >
+          <ResponsiveImage
+            baseName="puutalon-seinien-maalaus-kaynnissa-tampere"
+            alt="Talon ulkomaalaus käynnissä Tampereella: Pintasen maalari maalaa puutalon seinää pensselillä"
+            className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg lg:order-2"
+            sizes="(max-width: 1024px) 100vw, 560px"
+            width={800}
+            height={600}
+          />
+          <div>
           <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
             Talon ulkomaalaus suojaa kotiasi säiltä
           </h3>
@@ -86,6 +109,7 @@ const SEOTextSection = () => {
               Toteutamme talojen maalaukset aina <strong className="text-foreground">avaimet käteen -periaatteella</strong>. Tämä tarkoittaa, että me huolehdimme kaikesta: huolellisista pesuista ja homeenpoistoista, kaapimisesta, suojauksista, itse maalaustyöstä ja loppusiivouksesta. Käytämme vain <strong className="text-foreground">Suomessa suunniteltuja ja valmistettuja huippumaaleja</strong>. Myönnämme ulkomaalaustöillemme <strong className="text-foreground">2 vuoden takuun</strong>, jotta voit nukkua yösi rauhassa.
             </p>
           </div>
+          </div>
         </motion.div>
 
         {/* Block 4 - Miksi valita Pintanen */}
@@ -93,7 +117,17 @@ const SEOTextSection = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
         >
+          <ResponsiveImage
+            baseName="tummanharmaa-tiilikatto-pinnoituksen-jalkeen-nokia"
+            alt="Pinnoitettu tummanharmaa tiilikatto Nokialla: tasainen pinta ja 5 vuoden takuu"
+            className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg"
+            sizes="(max-width: 1024px) 100vw, 560px"
+            width={800}
+            height={600}
+          />
+          <div>
           <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
             Miksi valita Pintanen huoltamaan kotisi?
           </h3>
@@ -127,6 +161,7 @@ const SEOTextSection = () => {
               Älä anna kattosi sammaloitua tai julkisivusi rapistua. Ota yhteyttä luotettavaan pirkanmaalaiseen tekijään ja{" "}
               <Link to="/tarjouspyynto" className="text-primary font-semibold hover:underline">pyydä ilmainen kuntokartoitus jo tänään!</Link>
             </p>
+          </div>
           </div>
         </motion.div>
       </div>

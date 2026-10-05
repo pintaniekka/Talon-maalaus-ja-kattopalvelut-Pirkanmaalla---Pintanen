@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import ResponsiveImage from "./ResponsiveImage";
 
-const sideBase = "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen";
+const sideBase = "puutalon-katon-ja-seinien-maalaus-tampere";
 
 const MiksiPintanen = () => {
   return (
@@ -56,7 +56,7 @@ const MiksiPintanen = () => {
           >
             <ResponsiveImage
               baseName={sideBase}
-              alt="Tummansininen puutalo ulkomaalaus jälkeen Pirkanmaalla"
+              alt="Pintasen maalaama puutalo Tampereella: sekä tiilikatto että seinät maalattu"
               className="w-full h-full object-cover rounded-2xl"
               sizes="(max-width: 768px) 100vw, 600px"
             />

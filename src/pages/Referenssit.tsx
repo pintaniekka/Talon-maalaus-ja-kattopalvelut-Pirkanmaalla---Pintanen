@@ -354,8 +354,8 @@ const Referenssit = () => {
             <strong className="text-foreground">Kuvat ovat omista kohteistamme.</strong>
           </>
         }
-        primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
-        secondary={{ to: "/hintalaskuri/", label: "Laske hinta" }}
+        primary={{ to: "/hintalaskuri/", label: "Laske hinta" }}
+        secondary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
         trust="yleinen"
         image={{ base: HERO_BASE.referenssit, alt: "Vastamaalattu tiilikatto pinnoituksen jälkeen" }}
         breadcrumbs={[{ name: "Referenssit" }]}

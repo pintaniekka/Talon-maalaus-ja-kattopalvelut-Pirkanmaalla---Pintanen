@@ -57,8 +57,8 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
             katsomaan kattosi ilmaiseksi.
           </>
         }
-        primary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
-        secondary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
+        primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
         trust="pinnoitus"
         image={{
           base: heroBase,

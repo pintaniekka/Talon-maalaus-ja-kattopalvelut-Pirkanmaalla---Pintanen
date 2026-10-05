@@ -123,8 +123,7 @@ export const MaalausCityComparison = ({ cityIn }: CityProps) => (
           <div className="mt-8">
             <Link
               to="/hintalaskuri/?palvelu=maalaus"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-lg"
-              style={{ backgroundColor: "hsl(36, 56%, 91%)" }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-paint-yellow hover:bg-paint-yellow-hover text-paint-yellow-foreground font-heading font-extrabold rounded-2xl transition-all hover:scale-[1.03] shadow-xl shadow-paint-yellow/40 text-lg"
             >
               Laske maalauksen hinta
             </Link>

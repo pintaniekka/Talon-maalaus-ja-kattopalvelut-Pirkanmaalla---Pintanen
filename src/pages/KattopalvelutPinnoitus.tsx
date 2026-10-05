@@ -59,8 +59,8 @@ const KattopalvelutPinnoitus = () => {
             kattosi ilmaiseksi.
           </>
         }
-        primary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
-        secondary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
+        primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
         trust="pinnoitus"
         image={{ base: HERO_BASE.pinnoitus, alt: "Kirkkaan punainen tiilikatto pinnoituksen jälkeen" }}
         badge={{ title: "Yrittäjä itse katolla", text: "Eerik tekee työn itse." }}

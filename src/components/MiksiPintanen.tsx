@@ -1,66 +1,44 @@
-import { motion } from "framer-motion";
-import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import ResponsiveImage from "./ResponsiveImage";
+import { TOIMINTA_ALUE } from "@/data/company";
 
 const sideBase = "puutalon-katon-ja-seinien-maalaus-tampere";
 
+/** Etusivun "Miksi Pintanen?" lyhennettynä puoleen (8.3, S32). */
 const MiksiPintanen = () => {
   return (
     <section className="section-padding bg-accent-light">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          {/* Text */}
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6 leading-tight">
-              Miksi kannattaa tilata katon huolto tai maalaus Pintaselta?
-            </h2>
+          <div>
+            <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6 leading-tight">Miksi Pintanen?</h2>
 
             <div className="space-y-4 text-foreground leading-relaxed">
-              <p>Terve, ja mukava että löysit Pintasen.</p>
               <p>
-                Me olemme veljekset <strong>Eerik</strong> ja <strong>Eemil</strong>. Pintanen syntyi halusta tehdä
-                maalaustyöt paremmin – <strong>ilman turhia välikäsiä</strong> tai raskasta kulurakennetta, ja ilman
-                että laatu kärsii.
+                Me olemme veljekset <strong>Eerik</strong> ja <strong>Eemil</strong>. <strong>Teemme työt itse</strong>: tulemme katsomaan
+                kohteen, annamme kiinteän hinnan ja hoidamme työn alusta loppuun. Ei välikäsiä.
               </p>
               <p>
-                <strong>Teemme työt itse.</strong> Tulemme paikan päälle, arvioimme kohteen ja hoidamme työn alusta
-                loppuun <strong>omalla tiimillä</strong>. Näin tiedämme, että sovitut asiat myös toteutuvat.
+                <strong>Eerik</strong> pinnoittaa tiilikatot: pesu painepesulla ja maalaus ruiskulla kahteen kertaan. <strong>Eemil</strong>{" "}
+                maalaa talojen ulkoseinät: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.
               </p>
               <p>
-                <strong>Eerik</strong> vastaa tiilikatoista – <strong>puhdistuksista ja pinnoituksista</strong>, joilla
-                katon käyttöikää voidaan jatkaa vuosilla. <strong>Eemil</strong> keskittyy talojen seinien{" "}
-                <strong>maalauksiin</strong>, joiden kanssa hänellä on pitkä historia.
-              </p>
-              <p>
-                Meille mikään kohde ei ole liian pieni tai liian suuri. Teemme töitä
-                <strong> kesämökeistä taloyhtiöihin</strong> noin <strong>tunnin säteellä Tampereelta</strong>.
-              </p>
-              <p>
-                <strong>Arviointi on aina maksuton.</strong> Pinnoituksille annamme <strong>5 vuoden takuun</strong> ja
-                talon maalauksille <strong>2 vuotta</strong>.
-              </p>
-              <p>
-                Jos etsit tekijää, joka <strong>seisoo työnsä takana</strong> ja tekee sen minkä lupaa, ota yhteyttä —
-                jutellaan rauhassa mikä olisi paras ratkaisu sinun katolle tai julkisivulle.
+                Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt {TOIMINTA_ALUE}. <strong>Arviokäynti on ilmainen.</strong> Pinnoitukselle
+                annamme <strong>5 vuoden</strong> ja maalaukselle <strong>2 vuoden takuun</strong>.
               </p>
               <p className="font-semibold text-primary">– Eerik &amp; Eemil</p>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl overflow-hidden"
-          >
+          <div className="rounded-2xl overflow-hidden">
             <ResponsiveImage
               baseName={sideBase}
               alt="Pintasen maalaama puutalo Tampereella: sekä tiilikatto että seinät maalattu"
               className="w-full h-full object-cover rounded-2xl"
               sizes="(max-width: 768px) 100vw, 600px"
+              width={1200}
+              height={1600}
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

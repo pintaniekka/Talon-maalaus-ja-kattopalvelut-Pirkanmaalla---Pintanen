@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
+/** Vanha koko leveyden hero. Käytössä enää puhdistussivuilla; ei sisääntuloanimaatiota (teksti näkyy ilman JavaScriptiä). */
 interface ServicePageHeroProps {
   title: string;
   subtitle: string | ReactNode;
@@ -38,34 +38,13 @@ const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, c
       {/* Content */}
       <div className={`relative z-[2] section-container text-center text-primary-foreground ${compact ? "pt-28 pb-10" : "pt-28 xl:pt-36 pb-16"}`}>
         {title && (
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-5xl mx-auto"
-          >
-            {title}
-          </motion.h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-5xl mx-auto">{title}</h1>
         )}
         {subtitle && (
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl md:text-2xl text-primary-foreground/80 max-w-3xl mx-auto italic"
-          >
-            {subtitle}
-          </motion.p>
+          <p className="text-xl md:text-2xl text-primary-foreground/80 max-w-3xl mx-auto italic">{subtitle}</p>
         )}
         {children && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8"
-          >
-            {children}
-          </motion.div>
+          <div className="mt-8">{children}</div>
         )}
       </div>
     </section>

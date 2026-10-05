@@ -104,7 +104,7 @@ const KattopalvelutPinnoitus = () => {
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Pesu ei riitä, jos tiilen pinta on kulunut</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Sammal ja jäkälä pitää katon märkänä. Pesu poistaa kasvuston, mutta kulunut pinta imee vettä, vaikka katto olisi
+                  Sammal ja jäkälä pitävät katon märkänä. Pesu poistaa kasvuston, mutta kulunut pinta imee vettä, vaikka katto olisi
                   juuri pesty. Siksi pesemme katon ja maalaamme sen ruiskulla kahteen kertaan. Ahtaat paikat, joihin ruisku ei yllä,
                   maalaamme telalla tai käsin.
                 </p>

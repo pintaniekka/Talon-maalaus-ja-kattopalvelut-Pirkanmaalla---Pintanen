@@ -22,7 +22,7 @@ export const vanhatKaupunkisivut: Record<string, Partial<CityData>> = {
       "Nokia on Tampereen länsinaapuri. Kaupunki on Pyhäjärven ja Nokianvirran rannalla, ja veden lähellä katto pysyy sateen jälkeen pitkään kosteana. Kostealla ja kuluneella tiilellä sammal kasvaa nopeasti. Pinnoitamme tiilikattoja koko Nokialla, esimerkiksi Harjuniityssä, Viholassa, Koskenmäellä, Siurossa ja Linnavuoressa. Kuvia kohteistamme Nokialla näet tältä sivulta. Tulemme katsomaan kattosi ilmaiseksi.",
     maalausLocalHookTitle: "Talon maalaus Nokialla: keskusta, Siuro ja Linnavuori",
     maalausLocalHookText:
-      "Nokia on Tampereen länsinaapuri Pyhäjärven rannalla. Nokialla on paljon 1970- ja 1980-lukujen omakotitaloja, joiden puuverhous on maalattu jo monta kertaa. Silloin pohjatyöt ratkaisevat: irtoava maali kaavitaan pois ennen uutta maalia. Eemil maalaa taloja koko Nokialla, esimerkiksi keskustassa, Harjuniityssä, Siurossa, Linnavuoressa ja Tottijärvellä. Arviokäynti on ilmainen.",
+      "Nokia on Tampereen länsinaapuri Pyhäjärven rannalla. Nokialla on 1 531 omakoti- ja paritaloa 1970- ja 1980-luvuilta. Sen ikäinen puutalo on maalattu jo monta kertaa. Silloin pohjatyöt ratkaisevat: irtoava maali kaavitaan pois ennen uutta maalia. Eemil maalaa taloja koko Nokialla, esimerkiksi keskustassa, Harjuniityssä, Siurossa, Linnavuoressa ja Tottijärvellä. Arviokäynti on ilmainen.",
   },
   ylojarvi: {
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Ylöjärvellä Näsijärven länsirannalla",
@@ -80,6 +80,6 @@ export const vanhatKaupunkisivut: Record<string, Partial<CityData>> = {
   pirkkala: {
     maalausLocalHookTitle: "Talon maalaus Pirkkalassa, 10 kilometriä Tampereelta",
     maalausLocalHookText:
-      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja Tampereelle on matkaa 10 kilometriä. Pirkkalassa on paljon 1970- ja 1980-lukujen omakotitaloja, joiden puuverhous on maalattu jo monta kertaa. Silloin irtoava maali kaavitaan pois ja paljaat kohdat pohjamaalataan ennen pintamaalia. Eemil maalaa taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa. Arviokäynti on ilmainen.",
+      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja Tampereelle on matkaa 10 kilometriä. Pirkkalassa on 774 omakoti- ja paritaloa 1970- ja 1980-luvuilta. Sen ikäinen puutalo on maalattu jo monta kertaa. Silloin irtoava maali kaavitaan pois ja paljaat kohdat pohjamaalataan ennen pintamaalia. Eemil maalaa taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa. Arviokäynti on ilmainen.",
   },
 };

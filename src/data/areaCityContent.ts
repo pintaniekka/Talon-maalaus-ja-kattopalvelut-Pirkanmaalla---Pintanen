@@ -42,7 +42,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "nokia",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Nokialla",
     alueLocalHookText:
-      "Nokia on Tampereen länsinaapuri Pyhäjärven ja Nokianvirran rannalla. Veden lähellä katto ja seinät pysyvät sateen jälkeen pitkään kosteina. Nokialla on paljon 1970- ja 1980-lukujen omakotitaloja, joiden katto ja maali ovat huollon iässä. Pinnoitamme kattoja ja maalaamme taloja koko Nokialla, esimerkiksi Harjuniityssä, Viholassa, Siurossa ja Linnavuoressa. Käynti on ilmainen.",
+      "Nokia on Tampereen länsinaapuri Pyhäjärven ja Nokianvirran rannalla. Veden lähellä katto ja seinät pysyvät sateen jälkeen pitkään kosteina. Nokialla on 1 531 omakoti- ja paritaloa 1970- ja 1980-luvuilta. Sen ikäisessä talossa katto ja maali ovat usein huollon iässä. Pinnoitamme kattoja ja maalaamme taloja koko Nokialla, esimerkiksi Harjuniityssä, Viholassa, Siurossa ja Linnavuoressa. Käynti on ilmainen.",
   },
   {
     slug: "forssa",
@@ -120,7 +120,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "pirkkala",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Pirkkalassa",
     alueLocalHookText:
-      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja Tampereelle on matkaa 10 kilometriä. Pirkkalassa on paljon 1970- ja 1980-lukujen omakotitaloja, joiden katto ja maali ovat huollon iässä. Pinnoitamme kattoja ja maalaamme taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa. Käynti on ilmainen.",
+      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja Tampereelle on matkaa 10 kilometriä. Pirkkalassa on 774 omakoti- ja paritaloa 1970- ja 1980-luvuilta. Sen ikäisessä talossa katto ja maali ovat usein huollon iässä. Pinnoitamme kattoja ja maalaamme taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa. Käynti on ilmainen.",
   },
   {
     slug: "palkane",

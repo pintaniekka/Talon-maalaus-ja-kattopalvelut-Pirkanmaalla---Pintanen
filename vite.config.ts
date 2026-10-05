@@ -18,6 +18,12 @@ export default defineConfig(() => ({
   build: {
     rollupOptions: {
       output: {
+        // Nimimalli vaihdettu 5.10.2026 ("-" → "."), jotta kaikki pakettitiedostot saivat uudet
+        // osoitteet: selaimet olivat tallentaneet vanhoille nimille 404-vastauksen vuodeksi
+        // (ks. functions/assets/[[path]].ts). Älä vaihda takaisin.
+        entryFileNames: "assets/[name].[hash].js",
+        chunkFileNames: "assets/[name].[hash].js",
+        assetFileNames: "assets/[name].[hash][extname]",
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           'vendor-motion': ['framer-motion'],

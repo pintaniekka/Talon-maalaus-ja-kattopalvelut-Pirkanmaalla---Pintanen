@@ -213,6 +213,154 @@ export const projectItems: ProjectItem[] = [
     caption: "Sama talo maalauksen jälkeen, Parkano 2026",
     alt: "Keltainen puutalo maalauksen jälkeen Parkanossa",
   },
+  // Lokakuussa 2026 lisätyt kohteet (vuotta ei kuvateksteissä, koska sitä ei ole vahvistettu)
+  {
+    city: "nokia",
+    services: ["pinnoitus"],
+    image: "ruskea-tiilikatto-pinnoituksen-jalkeen-nokia",
+    caption: "Ruskea tiilikatto pinnoituksen jälkeen, Nokia",
+    alt: "Ruskea tiilikatto pinnoituksen jälkeen Nokialla",
+  },
+  {
+    city: "pirkkala",
+    services: ["pinnoitus"],
+    image: "punainen-tiilikatto-pinnoituksen-jalkeen-pirkkala",
+    caption: "Punainen tiilikatto pinnoituksen jälkeen, Pirkkala",
+    alt: "Punainen tiilikatto pinnoituksen jälkeen Pirkkalassa",
+  },
+  {
+    city: "pirkkala",
+    services: ["pinnoitus"],
+    image: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-pirkkala",
+    caption: "Tummanharmaa tiilikatto pinnoituksen jälkeen, Pirkkala",
+    alt: "Tummanharmaa tiilikatto pinnoituksen jälkeen Pirkkalassa",
+  },
+  {
+    city: "pirkkala",
+    services: ["pinnoitus"],
+    image: "punainen-pinnoitettu-tiilikatto-harja-pirkkala",
+    caption: "Pinnoitettu harja ja tiilet läheltä, Pirkkala",
+    alt: "Pinnoitettu punainen tiilikatto ja harja läheltä Pirkkalassa",
+  },
+  {
+    city: "sastamala",
+    services: ["pinnoitus"],
+    image: "tiilikatto-aurinkopaneelit-pinnoituksen-jalkeen-sastamala",
+    caption: "Tiilikatto pinnoituksen jälkeen, Sastamala",
+    alt: "Punainen tiilikatto ja aurinkopaneelit pinnoituksen jälkeen Sastamalassa",
+  },
+  {
+    city: "sastamala",
+    services: ["pinnoitus"],
+    image: "tiilikatto-aurinkopaneelit-ennen-pinnoitusta-sastamala",
+    caption: "Sama katto ennen pinnoitusta, Sastamala",
+    alt: "Haalistunut tiilikatto ja aurinkopaneelit ennen pinnoitusta Sastamalassa",
+  },
+  {
+    city: "sastamala",
+    services: ["pinnoitus"],
+    image: "punainen-tiilikatto-pinnoituksen-jalkeen-sastamala",
+    caption: "Punainen tiilikatto pinnoituksen jälkeen, Sastamala",
+    alt: "Punainen tiilikatto pinnoituksen jälkeen Sastamalassa",
+  },
+  {
+    city: "sastamala",
+    services: ["pinnoitus"],
+    image: "sammaleinen-tiilikatto-ennen-pinnoitusta-sastamala",
+    caption: "Sammaleinen tiilikatto ennen pinnoitusta, Sastamala",
+    alt: "Sammaleinen tiilikatto ennen pinnoitusta Sastamalassa",
+  },
+  {
+    city: "valkeakoski",
+    services: ["pinnoitus"],
+    pair: "tiilikaton-pinnoitus-valkeakoski-harmaa-katto",
+    caption: "Tiilikaton pinnoitus, Valkeakoski",
+    alt: "Tiilikatto Valkeakoskella ennen ja jälkeen pinnoituksen",
+  },
+  {
+    city: "valkeakoski",
+    services: ["pinnoitus"],
+    image: "punainen-tiilikatto-aurinkopaneelit-pinnoitettu-valkeakoski",
+    caption: "Pinnoitettu tiilikatto ja aurinkopaneelit, Valkeakoski",
+    alt: "Pinnoitettu punainen tiilikatto ja aurinkopaneelit Valkeakoskella",
+  },
+  {
+    city: "valkeakoski",
+    services: ["pinnoitus"],
+    image: "punainen-tiilikatto-pinnoituksen-jalkeen-valkeakoski",
+    caption: "Punainen tiilikatto pinnoituksen jälkeen, Valkeakoski",
+    alt: "Punainen tiilikatto pinnoituksen jälkeen Valkeakoskella",
+  },
+  {
+    city: "lempaala",
+    services: ["pinnoitus"],
+    image: "punainen-tiilikatto-pinnoituksen-jalkeen-lempaala",
+    caption: "Punainen tiilikatto pinnoituksen jälkeen, Lempäälä",
+    alt: "Punainen tiilikatto pinnoituksen jälkeen Lempäälässä",
+  },
+  {
+    city: "lempaala",
+    services: ["pinnoitus"],
+    image: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-lempaala",
+    caption: "Tummanharmaa tiilikatto pinnoituksen jälkeen, Lempäälä",
+    alt: "Tummanharmaa tiilikatto pinnoituksen jälkeen Lempäälässä",
+  },
+  {
+    city: "lempaala",
+    services: ["pinnoitus"],
+    image: "harmaa-tiilikatto-ennen-pinnoitusta-lempaala",
+    caption: "Tiilikatto ennen pinnoitusta, Lempäälä",
+    alt: "Harmaa kulunut tiilikatto ennen pinnoitusta Lempäälässä",
+  },
+  {
+    city: "lempaala",
+    services: ["pinnoitus"],
+    image: "punainen-pinnoitettu-tiilikatto-lempaala",
+    caption: "Pinnoitettu tiilikatto, Lempäälä",
+    alt: "Pinnoitettu punainen tiilikatto Lempäälässä",
+  },
+  {
+    city: "palkane",
+    services: ["pinnoitus"],
+    pair: "tiilikaton-pinnoitus-palkane-harmaa-katto",
+    caption: "Tiilikaton pinnoitus, Pälkäne",
+    alt: "Tiilikatto Pälkäneellä ennen ja jälkeen pinnoituksen",
+  },
+  {
+    city: "palkane",
+    services: ["pinnoitus"],
+    image: "punainen-tiilikatto-pinnoituksen-jalkeen-palkane",
+    caption: "Punainen tiilikatto pinnoituksen jälkeen, Pälkäne",
+    alt: "Punainen tiilikatto pinnoituksen jälkeen Pälkäneellä",
+  },
+  {
+    city: "palkane",
+    services: ["pinnoitus"],
+    image: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-palkane",
+    caption: "Tummanharmaa tiilikatto pinnoituksen jälkeen, Pälkäne",
+    alt: "Tummanharmaa tiilikatto pinnoituksen jälkeen Pälkäneellä",
+  },
+  {
+    city: "urjala",
+    services: ["pinnoitus"],
+    image: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-urjala",
+    caption: "Tummanharmaa tiilikatto pinnoituksen jälkeen, Urjala",
+    alt: "Tummanharmaa tiilikatto pinnoituksen jälkeen Urjalassa",
+  },
+  {
+    city: "urjala",
+    services: ["pinnoitus"],
+    image: "musta-tiilikatto-pinnoituksen-jalkeen-urjala",
+    caption: "Musta tiilikatto pinnoituksen jälkeen, Urjala",
+    alt: "Musta tiilikatto pinnoituksen jälkeen Urjalassa",
+  },
+  {
+    city: "urjala",
+    services: ["pinnoitus"],
+    image: "punainen-pinnoitettu-tiilikatto-lahikuva-urjala",
+    caption: "Pinnoitettu pinta läheltä, Urjala",
+    alt: "Pinnoitettu punainen tiilikatto läheltä Urjalassa",
+  },
 ];
 
 const matches = (item: ProjectItem, service?: ProjectService) => !service || item.services.includes(service);
@@ -229,6 +377,12 @@ const nearbyCities: Record<string, string[]> = {
   kangasala: ["tampere", "orivesi"],
   orivesi: ["kangasala", "tampere"],
   parkano: ["hameenkyro", "ylojarvi"],
+  pirkkala: ["tampere", "nokia", "lempaala"],
+  sastamala: ["nokia", "hameenkyro", "urjala"],
+  valkeakoski: ["lempaala", "palkane", "kangasala"],
+  lempaala: ["tampere", "pirkkala", "valkeakoski"],
+  palkane: ["kangasala", "valkeakoski"],
+  urjala: ["sastamala", "valkeakoski", "lempaala"],
 };
 
 export const MIN_PROJECT_ITEMS = 3;
@@ -241,7 +395,12 @@ export const getProjectItemsWithNearby = (
   city: string,
   service?: ProjectService,
 ): { items: ProjectItem[]; hasNearby: boolean } => {
-  const own = getProjectItems(city, service);
+  const all = getProjectItems(city, service);
+  // Sivun hero näyttää jo paikkakunnan oman kuvan: sitä ei toisteta heti alla kohdelohkossa,
+  // jos muita omia kuvia on tarpeeksi.
+  const hero = getCityHeroBase(city, service);
+  const withoutHero = all.filter((item) => item.image !== hero);
+  const own = withoutHero.length > 0 ? withoutHero : all;
   if (own.length === 0 || own.length >= MIN_PROJECT_ITEMS) return { items: own, hasNearby: false };
 
   const order = nearbyCities[city] ?? [];
@@ -274,7 +433,8 @@ export const getFeaturedProjectItems = (service: ProjectService, count = 3): Pro
  */
 export const getCityHeroBase = (city: string, service?: ProjectService): string | undefined => {
   const own = getProjectItems(city, service);
-  const preferred = own.find((i) => i.pair) ?? own.find((i) => i.image && !/ennen|kesken|puoliksi|suojattu/.test(i.image)) ?? own[0];
+  // Yksittäinen valmis kuva ensin: parin jälkeen-kuva näkyy jo liukusäätimessä kohdelohkossa.
+  const preferred = own.find((i) => i.image && !/ennen|kesken|puoliksi|suojattu|lahikuva|asennus/.test(i.image)) ?? own.find((i) => i.pair) ?? own[0];
   if (!preferred) return undefined;
   return preferred.pair ? `${preferred.pair}-jalkeen` : preferred.image;
 };

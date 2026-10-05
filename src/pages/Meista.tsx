@@ -36,7 +36,7 @@ const faktalaatikko = [
 ];
 
 /**
- * Meistä. Yksi totuus yrityksestä (korjaus 8): juuret Oulussa, työt Pirkanmaalla ja Kanta-Hämeessä,
+ * Meistä. Yksi totuus yrityksestä (korjaus 8): tamperelainen yritys (Eerikin päätös 5.10.2026: Oulua ei mainita), työt Pirkanmaalla ja Kanta-Hämeessä,
  * vain ulkotyöt omakotitaloihin, paritaloihin ja mökkeihin. Tekstit lyhennetty (S27–S29).
  */
 const Meista = () => {
@@ -71,7 +71,7 @@ const Meista = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Mikä on Pintanen?</h2>
             <div className="space-y-4 text-muted-foreground text-lg">
               <p>
-                Pintanen on nuori perheyritys. Olemme kotoisin Oulusta ja teemme töitä Pirkanmaalla ja Kanta-Hämeessä. Yritys on uusi, mutta
+                Pintanen on nuori tamperelainen perheyritys. Teemme töitä Pirkanmaalla ja Kanta-Hämeessä. Yritys on uusi, mutta
                 olemme molemmat tehneet tätä työtä yli viisi vuotta.
               </p>
               <p>

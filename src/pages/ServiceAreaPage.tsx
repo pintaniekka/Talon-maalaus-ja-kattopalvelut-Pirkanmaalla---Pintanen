@@ -129,8 +129,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
             katsomaan kohteen ilmaiseksi.
           </>
         }
-        primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
-        secondary={{ to: "/hintalaskuri/", label: "Laske hinta" }}
+        primary={{ to: "/hintalaskuri/", label: "Laske hinta" }}
+        secondary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
         trust="yleinen"
         image={{ base: heroBase, alt: ownPhoto ? `Kohteemme ${cityIn}` : "Pintasen maalaama puutalo: katto ja seinät maalattu" }}
         breadcrumbs={crumbs}

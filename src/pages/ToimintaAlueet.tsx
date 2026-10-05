@@ -26,8 +26,8 @@ const ToimintaAlueet = () => {
             Pinnoitamme tiilikattoja ja maalaamme taloja {TOIMINTA_ALUE}. Tulemme katsomaan kohteen ilmaiseksi.
           </>
         }
-        primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
-        secondary={{ to: "/hintalaskuri/", label: "Laske hinta" }}
+        primary={{ to: "/hintalaskuri/", label: "Laske hinta" }}
+        secondary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
         trust="yleinen"
         image={{ base: HERO_BASE.toimintaAlueet, alt: "Keltainen omakotitalo julkisivumaalauksen jälkeen" }}
         breadcrumbs={[{ name: "Toiminta-alueet" }]}

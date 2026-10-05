@@ -85,8 +85,7 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
         <div className="text-center mt-6">
           <Link
             to={calculatorHref}
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            style={{ backgroundColor: "hsl(38, 60%, 65%)", color: "hsl(215, 25%, 15%)" }}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-paint-yellow hover:bg-paint-yellow-hover text-paint-yellow-foreground font-heading font-extrabold rounded-2xl transition-all hover:scale-[1.03] shadow-xl shadow-paint-yellow/40 text-lg"
           >
             {calculatorLabel ?? `Laske hinta: tiilikaton pinnoitus ${cityIn}`}
           </Link>

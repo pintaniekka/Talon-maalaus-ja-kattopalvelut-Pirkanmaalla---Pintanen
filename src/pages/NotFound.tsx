@@ -12,16 +12,16 @@ const NotFound = () => (
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Link
-          to="/"
+          to="/hintalaskuri/"
           className="inline-flex items-center justify-center px-8 py-4 bg-paint-yellow hover:bg-paint-yellow-hover text-paint-yellow-foreground font-heading font-extrabold rounded-2xl transition-all"
         >
-          Etusivulle
+          Hintalaskuriin
         </Link>
         <Link
-          to="/hintalaskuri/"
+          to="/"
           className="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent-ink font-heading font-extrabold rounded-2xl hover:bg-accent-strong hover:text-accent-foreground transition-all"
         >
-          Hintalaskuriin
+          Etusivulle
         </Link>
       </div>
     </div>

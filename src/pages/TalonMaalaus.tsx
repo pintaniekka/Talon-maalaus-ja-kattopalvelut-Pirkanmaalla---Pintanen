@@ -44,8 +44,8 @@ const TalonMaalaus = () => {
             on ilmainen.
           </>
         }
-        primary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
-        secondary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
+        primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
         trust="maalaus"
         image={{ base: HERO_BASE.maalaus, alt: "Tummansininen puutalo ulkomaalauksen jälkeen" }}
         badge={{ title: "Yrittäjä itse tikkailla", text: "Eemil maalaa ja vastaa jäljestä." }}

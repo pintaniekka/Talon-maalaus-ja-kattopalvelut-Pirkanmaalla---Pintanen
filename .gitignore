@@ -38,3 +38,6 @@ dist-ssr
 * [0-9].css
 * [0-9].html
 * [0-9]
+
+# Wrangler pages dev -emulaation välimuisti
+.wrangler/

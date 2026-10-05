@@ -6,7 +6,18 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Referrer-Policy: strict-origin-when-cross-origin
 
-# Tiedostonimessä on sisältötiiviste, joten tiedosto ei koskaan muutu
+# HTML-sivut: selain tarkistaa aina palvelimelta, onko sivu muuttunut (ei pitkää välimuistia,
+# jotta uusi julkaisu ja sen uudet tiedostonimet tulevat heti käyttöön).
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/*/
+  Cache-Control: public, max-age=0, must-revalidate
+/404.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Tiedostonimessä on sisältötiiviste, joten tiedosto ei koskaan muutu.
+# HUOM: tämä otsake tulee myös 404-vastauksiin, joten /assets/* kulkee Pages Functionin
+# functions/assets/[[path]].ts kautta: vain onnistunut vastaus saa immutable-välimuistin.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 

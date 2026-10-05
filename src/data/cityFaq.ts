@@ -2,7 +2,6 @@ import type { CityData } from "./cityData";
 import { getProjectItems, type ProjectService } from "./projects";
 import { housingFactsText } from "./cityHousingText";
 import { HOUSING_STATS_SOURCE_LABEL } from "./cityHousingStats";
-import { roofJobSentence } from "./roofJobCounts";
 
 interface FAQItem {
   question: string;
@@ -22,7 +21,6 @@ export const getLocalCityFaq = (city: CityData, service: ProjectService): FAQIte
       question: `Teettekö tiilikaton pinnoituksia ${city.cityIn}?`,
       answer:
         `Kyllä teemme. ${city.name} kuuluu toiminta-alueeseemme. Tulemme katsomaan katon ilmaiseksi, ja saat tarjouksen käynnin jälkeen.` +
-        (roofJobSentence(city.slug, city.cityIn) ? ` ${roofJobSentence(city.slug, city.cityIn)}` : "") +
         (hasProject ? " Kuvia kohteistamme on tällä sivulla." : ""),
     });
   } else {
@@ -30,7 +28,7 @@ export const getLocalCityFaq = (city: CityData, service: ProjectService): FAQIte
       question: `Teettekö talon maalauksia ${city.cityIn}?`,
       answer:
         `Kyllä teemme. ${city.name} kuuluu toiminta-alueeseemme. Eemil tulee katsomaan talon ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.` +
-        (hasProject ? ` Olemme maalanneet talon myös ${city.cityIn}. Kuvia kohteesta on tällä sivulla.` : ""),
+        (hasProject ? " Kuvia kohteistamme on tällä sivulla." : ""),
     });
   }
 

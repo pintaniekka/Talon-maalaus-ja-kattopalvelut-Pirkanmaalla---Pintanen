@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 import { Phone } from "@/components/icons/BrandIcons";
 import SEO from "@/components/SEO";
 import QuoteWizard, { type QuoteService } from "@/components/tarjous/QuoteWizard";
-import { GOOGLE_PROFILE_URL } from "@/data/company";
+import { GOOGLE_PROFILE_URL, VASTAUSLUPAUS } from "@/data/company";
 import { staticSeo } from "@/data/seo";
 import { allTestimonials } from "@/data/testimonialsData";
 import { getResponsiveSrc, getResponsiveSrcSet, getStorageUrl } from "@/lib/storage";
@@ -35,6 +35,13 @@ const people = {
 const steps = ["Soitamme sinulle ja sovimme käynnin.", "Tulemme ilmaiselle kuntotarkastukselle.", "Saat kirjallisen tarjouksen."];
 
 const paramToService: Record<string, QuoteService> = { pinnoitus: "tiilikatto", maalaus: "ulkomaalaus", puhdistus: "puhdistus" };
+
+/** Lyhyt FAQ lomakkeen alle (P4). Ei schemaa: sivu on lomake, ei sisältösivu. */
+const tarjousFaq = [
+  { q: "Sitooko tarjouspyyntö?", a: "Ei. Tarjouspyyntö ja arviokäynti ovat ilmaisia, eikä sinun tarvitse tilata mitään." },
+  { q: "Kuinka nopeasti soitatte?", a: `${VASTAUSLUPAUS} Soitamme ja sovimme käynnin sinulle sopivaan aikaan.` },
+  { q: "Mitä arviokäynnillä tapahtuu?", a: "Katsomme kohteen, mittaamme ja tarkistamme kunnon. Saat kirjallisen tarjouksen, jossa on kiinteä hinta." },
+];
 
 const reviews = [
   allTestimonials.find((t) => t.category === "katto"),
@@ -111,6 +118,18 @@ const Tarjouspyynto = () => {
               </div>
             </aside>
           </div>
+
+          <section className="max-w-5xl mx-auto mt-10" aria-labelledby="tarjous-faq">
+            <h2 id="tarjous-faq" className="text-xl font-bold text-primary-foreground mb-4 font-heading">Usein kysyttyä tarjouspyynnöstä</h2>
+            <dl className="grid md:grid-cols-3 gap-4">
+              {tarjousFaq.map((f) => (
+                <div key={f.q} className="bg-card/95 rounded-2xl p-5">
+                  <dt className="font-semibold text-foreground mb-1">{f.q}</dt>
+                  <dd className="text-sm text-muted-foreground leading-relaxed">{f.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
 
           <div className="max-w-5xl mx-auto mt-10">
             <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary-foreground font-semibold mb-4 hover:underline">

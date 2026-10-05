@@ -100,10 +100,19 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     return () => mq.removeEventListener?.("change", update);
   }, []);
 
-  // Reduced-motion: 3× kopiota saumatonta loop-scrollia varten. Normaalisti 2× riittää CSS-translaatiolle.
+  // Esirenderöintiin ja ensimmäiseen renderöintiin vain yksi sarja arvosteluja (V13: kopiot
+  // paisuttivat HTML:ää ja toistivat saman tekstin neljästi). Saumattoman loopin kopiot
+  // lisätään vasta selaimessa ja piilotetaan ruudunlukijoilta.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const loopLength = (reducedMotion ? 3 : 2) * baseItems.length;
+  const copies = mounted ? Math.max(0, loopLength - data.length) : 0;
   const items = useMemo(
-    () => (reducedMotion ? [...baseItems, ...baseItems, ...baseItems] : [...baseItems, ...baseItems]),
-    [baseItems, reducedMotion]
+    () => [
+      ...data.map((t) => ({ t, hidden: false })),
+      ...Array.from({ length: copies }, (_, i) => ({ t: data[i % data.length], hidden: true })),
+    ],
+    [data, copies]
   );
 
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -164,9 +173,15 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
           className={reducedMotion ? "flex w-max" : "flex w-max animate-marquee"}
           style={reducedMotion ? undefined : { animationDuration: `${duration}s` }}
         >
-          {items.map((t, i) => (
-            <TestimonialCard key={i} {...t} />
-          ))}
+          {items.map(({ t, hidden }, i) =>
+            hidden ? (
+              <div key={i} aria-hidden="true">
+                <TestimonialCard {...t} />
+              </div>
+            ) : (
+              <TestimonialCard key={i} {...t} />
+            )
+          )}
         </div>
       </div>
     </section>

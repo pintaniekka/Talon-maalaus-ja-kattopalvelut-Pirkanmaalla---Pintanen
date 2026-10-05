@@ -20,26 +20,26 @@ const Header = () => {
   const navItems = [
     {
       label: "Palvelut",
-      href: "#",
+      href: "/tiilikaton-pinnoitus-pirkanmaa/",
       dropdown: [
-        { label: "Tiilikaton pinnoitus", href: "/tiilikaton-pinnoitus-pirkanmaa" },
-        { label: "Katon puhdistus", href: "/katon-puhdistus-pirkanmaa" },
-        { label: "Talon maalaus", href: "/talon-maalaus-pirkanmaa" },
+        { label: "Tiilikaton pinnoitus", href: "/tiilikaton-pinnoitus-pirkanmaa/" },
+        { label: "Katon puhdistus", href: "/katon-puhdistus-pirkanmaa/" },
+        { label: "Talon maalaus", href: "/talon-maalaus-pirkanmaa/" },
       ],
     },
     {
       label: "Hinnat & Laskuri",
-      href: "/hintalaskuri",
+      href: "/hintalaskuri/",
       dropdown: [
-        { label: "Hintalaskuri", href: "/hintalaskuri" },
-        { label: "Tiilikaton pinnoitus hinta", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
-        { label: "Katon puhdistus hinta", href: "/katon-puhdistus-hinta-pirkanmaa" },
-        { label: "Talon maalaus hinta", href: "/talon-maalaus-hinta-pirkanmaa" },
+        { label: "Hintalaskuri", href: "/hintalaskuri/" },
+        { label: "Tiilikaton pinnoitus hinta", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/" },
+        { label: "Katon puhdistus hinta", href: "/katon-puhdistus-hinta-pirkanmaa/" },
+        { label: "Talon maalaus hinta", href: "/talon-maalaus-hinta-pirkanmaa/" },
       ],
     },
-    { label: "Referenssit", href: "/referenssit" },
-    { label: "Artikkelit", href: "/artikkelit" },
-    { label: "Tutustu meihin", href: "/meista" },
+    { label: "Referenssit", href: "/referenssit/" },
+    { label: "Artikkelit", href: "/artikkelit/" },
+    { label: "Tutustu meihin", href: "/meista/" },
   ];
 
   function closeNavigationMenus(event?: MouseEvent<HTMLElement>) {
@@ -199,7 +199,7 @@ const Header = () => {
                     key={item.href}
                     to={item.href}
                     onClick={handleNavigationLinkClick}
-                    className={`font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent-ink ${location.pathname === item.href ? "text-accent-ink" : ""}`}
+                    className={`font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent-ink ${location.pathname.replace(/\/+$/, "") === item.href.replace(/\/+$/, "") ? "text-accent-ink" : ""}`}
                   >
                     {item.label}
                   </Link>
@@ -214,13 +214,15 @@ const Header = () => {
                   onMouseLeave={handleDesktopDropdownClose}
                 >
                   <div className="flex items-center gap-1 py-7 -my-7">
-                    <Link
-                      to={item.href}
-                      onClick={handleNavigationLinkClick}
+                    <button
+                      type="button"
+                      onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
+                      aria-expanded={openDropdown === item.label}
+                      aria-haspopup="true"
                       className="font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent-ink"
                     >
                       {item.label}
-                    </Link>
+                    </button>
                     <ChevronDown
                       className={`w-4 h-4 transition-transform duration-200 text-white/50 ${openDropdown === item.label ? "rotate-180" : ""}`}
                     />
@@ -268,7 +270,7 @@ const Header = () => {
             </a>
             <Link
               className="flex items-center gap-2 px-7 py-3 rounded-full font-extrabold text-xs uppercase tracking-[0.1em] transition-all duration-300 bg-accent-strong text-accent-foreground shadow-lg shadow-accent/40 hover:bg-accent-strong/90 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
-              to="/tarjouspyynto"
+              to="/tarjouspyynto/"
             >
               Pyydä tarjous
             </Link>
@@ -307,14 +309,17 @@ const Header = () => {
                 return (
                   <div key={item.label}>
                     <div className="flex items-center">
-                      <Link
-                        to={item.href}
-                        onClick={closeNavigationMenus}
-                        className="flex-1 py-3 px-4 text-white/90 font-medium hover:bg-white/5 hover:text-accent-ink rounded-lg transition-colors"
+                      <button
+                        type="button"
+                        onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
+                        aria-expanded={openDropdown === item.label}
+                        className="flex-1 text-left py-3 px-4 text-white/90 font-medium hover:bg-white/5 hover:text-accent-ink rounded-lg transition-colors"
                       >
                         {item.label}
-                      </Link>
+                      </button>
                       <button
+                        type="button"
+                        aria-label={`${item.label}: avaa alavalikko`}
                         onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                         className="py-3 px-4 text-white/70 hover:bg-white/5 hover:text-accent-ink rounded-lg transition-colors"
                       >
@@ -348,7 +353,7 @@ const Header = () => {
                 );
               })}
               <Link
-                to="/tarjouspyynto"
+                to="/tarjouspyynto/"
                 onClick={closeNavigationMenus}
                 className="mt-2 flex items-center justify-center gap-2 py-3 px-4 bg-accent-strong text-accent-foreground rounded-xl font-bold uppercase text-sm tracking-wider"
               >

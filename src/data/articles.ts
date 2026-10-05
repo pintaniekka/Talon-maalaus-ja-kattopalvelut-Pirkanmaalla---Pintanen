@@ -97,15 +97,15 @@ export const articles: ArticleMeta[] = [
     author: "eerik",
     publishedAt: "2026-11-10",
     readingMinutes: 5,
-    heroImage: "tiilikaton-tehopesu-ja-sammaleenpoisto",
+    heroImage: "tiilikaton-pesu-ja-sammaleenpoisto",
     heroAlt: "Tiilikaton puhdistus ja sammaleenpoisto",
   },
   {
     slug: "pinnoitus-vai-uusi-katto",
     title: "Tiilikaton pinnoitus vai uusi katto: kumpi kannattaa?",
     description:
-      "Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää ja maksaa noin 10–20 % uuden katon hinnasta. Lue, milloin katto pitää uusia.",
-    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa noin 10–20 % uuden katon hinnasta ja pidentää katon käyttöikää 10–15 vuotta.",
+      "Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää ja maksaa selvästi vähemmän kuin uusi katto. Lue, milloin katto pitää uusia.",
+    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa yleensä 2 850–7 000 euroa, selvästi vähemmän kuin uusi katto, ja pidentää katon käyttöikää 10–15 vuotta.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-10-13",

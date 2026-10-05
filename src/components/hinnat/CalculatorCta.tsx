@@ -43,7 +43,7 @@ const CalculatorCta = ({ service, title, imageBase }: CalculatorCtaProps) => {
                 </li>
               ))}
             </ul>
-            <Link to={`/hintalaskuri?palvelu=${service}`} className="btn-hero">
+            <Link to={`/hintalaskuri/?palvelu=${service}`} className="btn-hero">
               Avaa hintalaskuri
             </Link>
           </div>

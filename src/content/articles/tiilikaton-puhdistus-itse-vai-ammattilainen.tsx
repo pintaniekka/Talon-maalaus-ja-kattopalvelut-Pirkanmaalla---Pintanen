@@ -93,7 +93,7 @@ const Body = () => (
     </ol>
     <p>
       Useimmat omakotitalojen katot valmistuvat yhdessä työpäivässä. Lue lisää sivulta{" "}
-      <Link to="/katon-puhdistus-pirkanmaa">katon puhdistus Pirkanmaalla</Link>.
+      <Link to="/katon-puhdistus-pirkanmaa/">katon puhdistus Pirkanmaalla</Link>.
     </p>
     <Figure
       image="puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"
@@ -108,7 +108,7 @@ const Body = () => (
     </p>
     <p>
       Itse tehdystä työstä et saa kotitalousvähennystä. Yritykseltä ostetusta työstä saat. Lue lisää artikkelista{" "}
-      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot">
+      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/">
         kotitalousvähennys katto- ja maalaustöissä
       </Link>
       .
@@ -118,8 +118,8 @@ const Body = () => (
     <p>
       Puhdistus riittää, kun katto on likainen ja sammaleinen, mutta tiilet ovat hyvässä kunnossa. Jos tiilen pinta
       on kulunut ja tiili imee vettä, pinnoitus suojaa kattoa paremmin. Lue{" "}
-      <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto">milloin tiilikatto pitää pinnoittaa</Link> ja{" "}
-      <Link to="/artikkelit/pinnoitus-vai-uusi-katto">pinnoitus vai uusi katto</Link>.
+      <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto/">milloin tiilikatto pitää pinnoittaa</Link> ja{" "}
+      <Link to="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</Link>.
     </p>
 
     <ArticleFaq items={faq} />

@@ -43,9 +43,9 @@ const maalausSlugs = new Set(maalausCities.map((c) => c.slug));
  * (vain paikkakunnat, joilla sivu on), ja kaikki paikkakunnat linkittävät aluesivulleen.
  */
 const linkGroups = [
-  { key: 'pinnoitus', title: 'Tiilikaton pinnoitus', has: (slug: string) => pinnoitusSlugs.has(slug), href: (slug: string) => `/tiilikaton-pinnoitus-${slug}` },
-  { key: 'maalaus', title: 'Talon maalaus', has: (slug: string) => maalausSlugs.has(slug), href: (slug: string) => `/talon-maalaus-${slug}` },
-  { key: 'alue', title: 'Kaikki palvelut paikkakunnittain', has: () => true, href: (slug: string) => `/maalauspalvelut-${slug}` },
+  { key: 'pinnoitus', title: 'Tiilikaton pinnoitus', has: (slug: string) => pinnoitusSlugs.has(slug), href: (slug: string) => `/tiilikaton-pinnoitus-${slug}/` },
+  { key: 'maalaus', title: 'Talon maalaus', has: (slug: string) => maalausSlugs.has(slug), href: (slug: string) => `/talon-maalaus-${slug}/` },
+  { key: 'alue', title: 'Kaikki palvelut paikkakunnittain', has: () => true, href: (slug: string) => `/maalauspalvelut-${slug}/` },
 ] as const;
 
 const chipBase =
@@ -213,7 +213,7 @@ const ToimintaAlueetBanner = ({ activeCity, service = 'alue' }: ToimintaAlueetBa
                  Maalaamme taloja ja kattoja alueellasi!
               </h3>
               <Link
-                to="/toiminta-alueet"
+                to="/toiminta-alueet/"
                 className="group mt-3 inline-flex items-center gap-1.5 text-sm font-semibold underline-offset-4 transition-colors hover:underline"
               >
                  Katso, missä palvelemme

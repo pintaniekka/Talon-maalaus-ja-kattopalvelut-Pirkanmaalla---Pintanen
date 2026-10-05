@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import ServicePageHero from "@/components/ServicePageHero";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
-import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FAQSection from "@/components/FAQSection";
 import { puhdistusFAQ } from "@/data/faqData";
 import SEO from "@/components/SEO";
@@ -114,7 +113,7 @@ const KattopalvelutPuhdistus = () => {
           </motion.div>
         </div>
         <div className="text-center mt-8">
-          <Link to="/katon-puhdistus-hinta-pirkanmaa" className="inline-flex items-center gap-2 text-primary font-semibold hover:underline text-lg">
+          <Link to="/katon-puhdistus-hinta-pirkanmaa/" className="inline-flex items-center gap-2 text-primary font-semibold hover:underline text-lg">
             Katso katon puhdistuksen hintaesimerkit <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
@@ -137,7 +136,6 @@ const KattopalvelutPuhdistus = () => {
       <RelatedArticles categories={["katto", "raha"]} />
       <ServiceContactSection variant="katto" />
       <KotitalousVahennys />
-      <ToimintaAlueetBanner />
     </div>
   );
 };

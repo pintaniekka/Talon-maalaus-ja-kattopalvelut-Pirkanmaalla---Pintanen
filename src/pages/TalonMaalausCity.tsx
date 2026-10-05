@@ -1,125 +1,104 @@
 import { Navigate } from "react-router-dom";
+import PageHero from "@/components/PageHero";
+import Lyhyesti from "@/components/Lyhyesti";
+import ProcessList from "@/components/ProcessList";
 import CityProjects from "@/components/CityProjects";
-import { motion } from "framer-motion";
-import { MapPin } from "@/components/icons/BrandIcons";
-import { Link } from "react-router-dom";
-import ServicePageHero from "@/components/ServicePageHero";
-import MaalausTrustStats from "@/components/maalaus/MaalausTrustStats";
-import TestimonialsMarquee from "@/components/TestimonialsMarquee";
-import { wallTestimonials } from "@/data/testimonialsData";
-import { MaalausCitySigns, MaalausCityProcess, MaalausCityComparison } from "@/components/maalaus/MaalausCitySections";
 import CityHousingFacts from "@/components/CityHousingFacts";
 import CityNeighborLinks from "@/components/CityNeighborLinks";
+import { MaalausCitySigns, MaalausCityComparison } from "@/components/maalaus/MaalausCitySections";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
-import KotitalousVahennys from "@/components/KotitalousVahennys";
-import MaalausFinancing from "@/components/maalaus/MaalausFinancing";
 import MaalausEntrepreneur from "@/components/maalaus/MaalausEntrepreneur";
+import KotitalousVahennys from "@/components/KotitalousVahennys";
 import FAQSection from "@/components/FAQSection";
-import TeamContactSection from "@/components/TeamContactSection";
-import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
+import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
-import { maalausCitySeo } from "@/data/seo";
-import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
+import { maalausCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { getCityBySlug } from "@/data/cityData";
 import { getMaalausCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
+import { maalausPrices } from "@/data/prices";
+import { maalausTyovaiheet, maalausLyhyesti, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
-const heroBase = "moderni-tumma-puutalo-julkisivumaalaus-valmis";
-const heroImage = getResponsiveSrc(heroBase);
-const heroSrcSet = getResponsiveSrcSet(heroBase);
-
+/**
+ * Talon maalauksen kaupunkisivu. Sama tiivistetty järjestys kuin pinnoituksen kaupunkisivulla.
+ * Yhteydenotto samalla lomakkeella kuin muualla (V15: tietosuojalause, honeypot, samat yhteystiedot).
+ */
 const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
   const cityData = getCityBySlug(citySlug);
 
   if (!cityData || !cityData.maalausLocalHookTitle) {
-    return <Navigate to="/talon-maalaus-pirkanmaa" replace />;
+    return <Navigate to="/talon-maalaus-pirkanmaa/" replace />;
   }
 
   const cityName = cityData.name;
+  const seo = maalausCitySeo(cityData);
+  const crumbs = [{ name: "Talon maalaus", path: "/talon-maalaus-pirkanmaa" }, { name: cityName }];
+  const heroBase = cityHeroBase(cityData.slug, "maalaus");
+  const ownPhoto = heroBase !== HERO_BASE.maalaus;
 
   return (
     <div>
-      <SEO
-        {...maalausCitySeo(cityData)}
-        preloadImage={heroImage}
+      <SEO {...seo} breadcrumbs={crumbs} />
+      <ServiceSchema name="Talon ulkomaalaus" area={cityName} description={seo.description} priceRange={maalausPrices.general} />
+
+      <PageHero
+        eyebrow={`Talon maalaus · ${cityName}`}
+        title={
+          <>
+            Talon maalaus <span className="text-accent-ink">{cityName}</span>
+          </>
+        }
+        lead={
+          <>
+            Maalaamme taloja {cityData.cityIn}. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat kohdat ja
+            maalaamme pintamaalin pensselillä. Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>. Arviokäynti
+            on ilmainen.
+          </>
+        }
+        primary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
+        secondary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
+        trust="maalaus"
+        image={{ base: heroBase, alt: ownPhoto ? `Maalaamamme talo ${cityData.cityIn}` : "Tummansininen puutalo ulkomaalauksen jälkeen" }}
+        badge={{ title: "Yrittäjä itse tikkailla", text: "Eemil maalaa ja vastaa jäljestä." }}
+        breadcrumbs={crumbs}
       />
-      <ServiceSchema name="Talon ulkomaalaus" area={cityData.name} description={maalausCitySeo(cityData).description} />
 
-      <ServicePageHero
-        title=""
-        subtitle=""
-        backgroundImage={heroImage}
-        backgroundSrcSet={heroSrcSet}
-      >
-        <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto text-left mb-10 md:mb-12">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
-            Talon maalaus{' '}
-            <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">{cityName}</span>
-          </h1>
-          <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
-            <strong>Suojaa kotisi säänvaihteluilta ja pidennä ulkoverhouksen ikää laadukkaalla maalauksella.</strong> Meiltä saat <strong>perusteelliset pohjatyöt</strong>, <strong>säänkestävän lopputuloksen</strong> ja <strong>täysin läpinäkyvän hinnoittelun</strong>. <strong>Kokeile avointa hintalaskuriamme heti verkossa</strong> tai kutsu meidät <strong>maksuttomalle arviokäynnille</strong> suoraan kotiovellesi – palvelemme paikallisesti ja joustavasti!
-          </p>
-        </div>
+      <Lyhyesti items={maalausLyhyesti(cityData.cityIn)} />
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            to="/tarjouspyynto?palvelu=maalaus"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-all hover:brightness-110 text-base"
-            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
-          >
-            Pyydä ilmainen kuntoarvio
-          </Link>
-          <Link
-            to="/hintalaskuri?palvelu=maalaus"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-base"
-            style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
-          >
-            Laske hinta laskurilla
-          </Link>
-        </div>
-      </ServicePageHero>
-
-      <MaalausTrustStats />
-
-      {/* Local Hook */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-card">
         <div className="section-container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <MapPin className="w-6 h-6 text-primary" />
-              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink text-center">
-                {cityData.maalausLocalHookTitle}
-              </h2>
-            </div>
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{cityData.maalausLocalHookTitle}</h2>
             <p
-              className="text-lg text-muted-foreground leading-relaxed text-center"
-              dangerouslySetInnerHTML={{ __html: cityData.maalausLocalHookText || '' }}
+              className="text-muted-foreground leading-relaxed text-base md:text-lg [&_strong]:text-foreground"
+              dangerouslySetInnerHTML={{ __html: cityData.maalausLocalHookText || "" }}
             />
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
-
-      <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
-      <MaalausCitySigns cityName={cityName} cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
-      <MaalausCityProcess cityName={cityName} cityIn={cityData.cityIn} />
+      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
+      <MaalausCitySigns cityName={cityName} cityIn={cityData.cityIn} />
+
+      <ProcessList
+        title={`Näin talon maalaus ${cityData.cityIn} etenee`}
+        intro="Omakotitalon ulkomaalaus kestää meillä yleensä 3–7 päivää. Aika riippuu talon koosta ja pohjatöiden määrästä."
+        steps={maalausTyovaiheet}
+        cta={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Varaa ilmainen arviokäynti" }}
+      />
+
       <MaalausCityComparison cityName={cityName} cityIn={cityData.cityIn} />
       <MaalausPricingCards cityName={cityName} />
       <KotitalousVahennys />
-      <MaalausFinancing cityName={cityName} />
-      <MaalausEntrepreneur />
-      <FAQSection items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]} />
-      <TeamContactSection cityName={cityName} cityGenitive={cityData.cityGenitive} />
+      <MaalausEntrepreneur cityIn={cityData.cityIn} />
+      <FAQSection
+        items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
+        title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}
+      />
+      <ServiceContactSection variant="maalaus" cityName={cityName} cityGenitive={cityData.cityGenitive} />
       <CityNeighborLinks city={cityData} service="maalaus" />
-      <ToimintaAlueetBanner activeCity={citySlug} service="maalaus" />
     </div>
   );
 };

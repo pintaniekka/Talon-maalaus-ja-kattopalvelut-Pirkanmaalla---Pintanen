@@ -63,7 +63,7 @@ export const AppContent = ({
               <Route path="/talon-maalaus-pirkanmaa" element={<TalonMaalaus />} />
               <Route path="/hintalaskuri" element={<Hintalaskuri />} />
               <Route path="/tarjouspyynto" element={<Tarjouspyynto />} />
-              <Route path="/maalauspalvelut-hinta-pirkanmaa" element={<Navigate to="/hintalaskuri" replace />} />
+              <Route path="/maalauspalvelut-hinta-pirkanmaa" element={<Navigate to="/hintalaskuri/" replace />} />
               <Route path="/tiilikaton-pinnoitus-hinta-pirkanmaa" element={<HinnatTiilikalonPinnoitus />} />
               <Route path="/katon-puhdistus-hinta-pirkanmaa" element={<HinnatKatonPuhdistus />} />
               <Route path="/talon-maalaus-hinta-pirkanmaa" element={<HinnatTalonMaalaus />} />
@@ -91,28 +91,28 @@ export const AppContent = ({
               ))}
 
               {/* ═══ 301-style redirects (old → new) ═══ */}
-              <Route path="/kattopalvelut/pinnoitus" element={<Navigate to="/tiilikaton-pinnoitus-pirkanmaa" replace />} />
-              <Route path="/kattopalvelut/puhdistus" element={<Navigate to="/katon-puhdistus-pirkanmaa" replace />} />
-              <Route path="/talon-maalaus" element={<Navigate to="/talon-maalaus-pirkanmaa" replace />} />
-              <Route path="/hinnat" element={<Navigate to="/hintalaskuri" replace />} />
-              <Route path="/hinnat/tiilikaton-pinnoitus" element={<Navigate to="/tiilikaton-pinnoitus-hinta-pirkanmaa" replace />} />
-              <Route path="/hinnat/katon-puhdistus" element={<Navigate to="/katon-puhdistus-hinta-pirkanmaa" replace />} />
-              <Route path="/hinnat/talon-maalaus" element={<Navigate to="/talon-maalaus-hinta-pirkanmaa" replace />} />
+              <Route path="/kattopalvelut/pinnoitus" element={<Navigate to="/tiilikaton-pinnoitus-pirkanmaa/" replace />} />
+              <Route path="/kattopalvelut/puhdistus" element={<Navigate to="/katon-puhdistus-pirkanmaa/" replace />} />
+              <Route path="/talon-maalaus" element={<Navigate to="/talon-maalaus-pirkanmaa/" replace />} />
+              <Route path="/hinnat" element={<Navigate to="/hintalaskuri/" replace />} />
+              <Route path="/hinnat/tiilikaton-pinnoitus" element={<Navigate to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" replace />} />
+              <Route path="/hinnat/katon-puhdistus" element={<Navigate to="/katon-puhdistus-hinta-pirkanmaa/" replace />} />
+              <Route path="/hinnat/talon-maalaus" element={<Navigate to="/talon-maalaus-hinta-pirkanmaa/" replace />} />
 
               {/* Old city service redirects */}
               {fullServiceCities.map(city => (
-                <Route key={`rpin-${city.slug}`} path={`/kattopalvelut/pinnoitus/${city.slug}`} element={<Navigate to={`/tiilikaton-pinnoitus-${city.slug}`} replace />} />
+                <Route key={`rpin-${city.slug}`} path={`/kattopalvelut/pinnoitus/${city.slug}`} element={<Navigate to={`/tiilikaton-pinnoitus-${city.slug}/`} replace />} />
               ))}
               {fullServiceCities.map(city => (
-                <Route key={`rpuh-${city.slug}`} path={`/kattopalvelut/puhdistus/${city.slug}`} element={<Navigate to={`/katon-puhdistus-${city.slug}`} replace />} />
+                <Route key={`rpuh-${city.slug}`} path={`/kattopalvelut/puhdistus/${city.slug}`} element={<Navigate to={`/katon-puhdistus-${city.slug}/`} replace />} />
               ))}
               {maalausCities.map(city => (
-                <Route key={`rmaal-${city.slug}`} path={`/talon-maalaus/${city.slug}`} element={<Navigate to={`/talon-maalaus-${city.slug}`} replace />} />
+                <Route key={`rmaal-${city.slug}`} path={`/talon-maalaus/${city.slug}`} element={<Navigate to={`/talon-maalaus-${city.slug}/`} replace />} />
               ))}
 
               {/* Old area page redirects */}
               {allCities.map(city => (
-                <Route key={`ralue-${city.slug}`} path={`/alue/${city.slug}`} element={<Navigate to={`/maalauspalvelut-${city.slug}`} replace />} />
+                <Route key={`ralue-${city.slug}`} path={`/alue/${city.slug}`} element={<Navigate to={`/maalauspalvelut-${city.slug}/`} replace />} />
               ))}
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE.

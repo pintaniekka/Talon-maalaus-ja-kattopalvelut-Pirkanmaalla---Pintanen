@@ -91,15 +91,15 @@ const Body = () => (
       Vähemmän kuin luulisi. Välineet pitää ostaa tai vuokrata ja maalit hankkia itse. Omasta työstä et saa
       kotitalousvähennystä. Kun ostat pinnoituksen meiltä, suurin osa laskusta on työtä. Siitä saat vuosina 2026 ja
       2027 vähentää 40 %. Lue lisää artikkelista{" "}
-      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot">
+      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/">
         kotitalousvähennys katto- ja maalaustöissä
       </Link>
       .
     </p>
     <p>
       Ostetulla työllä on myös takuu. Saat tiilikaton pinnoitukselle meiltä 5 vuoden kirjallisen takuun. Lue myös{" "}
-      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">tiilikaton pinnoituksen hinta</Link> ja{" "}
-      <Link to="/artikkelit/tiilikaton-pinnoituksen-tyovaiheet">näin tiilikaton pinnoitus etenee</Link>.
+      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link> ja{" "}
+      <Link to="/artikkelit/tiilikaton-pinnoituksen-tyovaiheet/">näin tiilikaton pinnoitus etenee</Link>.
     </p>
 
     <h2>Mitä katolle kannattaa tehdä itse?</h2>

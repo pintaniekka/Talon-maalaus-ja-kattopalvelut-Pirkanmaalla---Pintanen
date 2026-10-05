@@ -70,8 +70,8 @@ const Body = () => (
 
     <h2>5. Pohjamaali ja pintamaali ruiskulla</h2>
     <p>
-      Maalaamme katon kahteen kertaan maaliruiskulla. Ensin tulee pohjamaali ja sen päälle pintamaali. Katon reunat
-      maalaamme telalla. Käytämme Tikkurilan ja Nowocoatin kattomaaleja.
+      Maalaamme katon ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei
+      yllä, maalaamme telalla tai käsin. Käytämme Tikkurilan ja Nowocoatin kattomaaleja.
     </p>
     <p>Katon pitää kuivua pesun jälkeen ja maalikerrosten välissä. Siksi työ kestää useamman päivän.</p>
 
@@ -100,8 +100,8 @@ const Body = () => (
     </ul>
     <p>
       Tuomme telineet, nostimet ja turvavarusteet mukanamme. Hinnoista kerromme artikkelissa{" "}
-      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">tiilikaton pinnoituksen hinta</Link>. Lue lisää
-      palvelusta sivulta <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoitus Pirkanmaalla</Link>.
+      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link>. Lue lisää
+      palvelusta sivulta <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
 
     <ArticleFaq items={faq} />

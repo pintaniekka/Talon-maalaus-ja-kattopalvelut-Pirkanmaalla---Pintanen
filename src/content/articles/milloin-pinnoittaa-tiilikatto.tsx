@@ -59,7 +59,7 @@ const Body = () => (
     <p>
       Sammal tarttuu vain huokoiseen ja kosteaan pintaan. Jos katto puhdistettiin muutama vuosi sitten ja se on
       taas vihreä, tiilen pinta pidättää jo kosteutta. Silloin{" "}
-      <Link to="/katon-puhdistus-pirkanmaa">katon puhdistus</Link> auttaa vain hetkeksi. Pysyvämpi ratkaisu on uusi
+      <Link to="/katon-puhdistus-pirkanmaa/">katon puhdistus</Link> auttaa vain hetkeksi. Pysyvämpi ratkaisu on uusi
       pinnoite, joka tekee pinnasta vettä hylkivän.
     </p>
     <Figure
@@ -98,7 +98,7 @@ const Body = () => (
     </ol>
     <p>
       Omakotitalon katolla tähän menee 2–4 työpäivää, ja annamme työlle 5 vuoden kirjallisen takuun. Tarkempi
-      kuvaus on sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoitus Pirkanmaalla</Link>.
+      kuvaus on sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
     <Figure
       image="tummanharmaa-tiilikaton-pinnoitus-ja-huolto-jalkeen"

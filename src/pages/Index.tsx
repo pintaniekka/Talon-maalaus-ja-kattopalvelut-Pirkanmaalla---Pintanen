@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import Hero from "@/components/Hero";
 import ReviewHighlights from "@/components/ReviewHighlights";
-import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import Services from "@/components/Services";
 import MiksiPintanen from "@/components/MiksiPintanen";
 import { lazyWithRetry } from "@/lib/lazyWithRetry";
@@ -21,6 +20,7 @@ const Index = () => {
   return (
     <>
       <SEO />
+      {/* Arvostelut yhdessä osiossa (ReviewHighlights); karuselli poistettu etusivulta (8.3). */}
       <Hero />
       <ReviewHighlights />
       <Services />
@@ -32,7 +32,6 @@ const Index = () => {
 
         <Gallery />
       </Suspense>
-      <TestimonialsMarquee title="Lisää asiakkaiden arvosteluja" />
       <FAQSection items={generalFAQ} />
       <KotitalousVahennys />
       <ServiceContactSection variant="general" />

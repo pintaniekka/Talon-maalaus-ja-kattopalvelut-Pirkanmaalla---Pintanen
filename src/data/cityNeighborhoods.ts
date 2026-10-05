@@ -35,7 +35,7 @@ export const cityNeighborhoods: CityNeighborhoods[] = [
   { slug: "vesilahti", regionGenitive: "Pirkanmaan", neighborhoods: ["Narva", "Krääkkiö", "Rämsöö", "Onkemäki", "Riehu", "Kirkonkylä"] },
   { slug: "virrat", regionGenitive: "Pirkanmaan", neighborhoods: ["Killinkoski", "Liedenpohja", "Vaskivesi", "Äijänneva", "Herranen", "Kotala"] },
   { slug: "forssa", regionGenitive: "Kanta-Hämeen", neighborhoods: ["Koijärvi", "Matku", "Vieremä", "Kaukjärvi", "Paavola", "Ojalanmäki"] },
-  { slug: "hameenlinna", regionGenitive: "Kanta-Hämeen", neighborhoods: ["Aulanko", "Parola", "Iittala", "Hauho", "Lammi", "Kalvola", "Renko"] },
+  { slug: "hameenlinna", regionGenitive: "Kanta-Hämeen", neighborhoods: ["Aulanko", "Iittala", "Hauho", "Lammi", "Kalvola", "Renko", "Tuulos"] },
   { slug: "huittinen", regionGenitive: "Satakunnan", neighborhoods: ["Lauttakylä", "Vampula", "Suttila", "Rekikoski", "Korkeakoski", "Huhtamo"] },
 ];
 

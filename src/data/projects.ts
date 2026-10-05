@@ -267,3 +267,14 @@ export const getFeaturedProjectItems = (service: ProjectService, count = 3): Pro
   }
   return picked;
 };
+
+/**
+ * Paikkakunnan oma kohdekuva heroon (korjaus 1: kaupunkisivun hero näyttää paikkakunnan oman kohteen,
+ * jos sellainen on). Ennen–jälkeen-parista käytetään jälkeen-kuvaa. Palauttaa undefined, jos kuvaa ei ole.
+ */
+export const getCityHeroBase = (city: string, service?: ProjectService): string | undefined => {
+  const own = getProjectItems(city, service);
+  const preferred = own.find((i) => i.pair) ?? own.find((i) => i.image && !/ennen|kesken|puoliksi|suojattu/.test(i.image)) ?? own[0];
+  if (!preferred) return undefined;
+  return preferred.pair ? `${preferred.pair}-jalkeen` : preferred.image;
+};

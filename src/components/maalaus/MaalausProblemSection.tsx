@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from 'framer-motion';
 import { Search } from "@/components/icons/BrandIcons";
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
@@ -10,27 +9,23 @@ const afterBase = "violetti-puutalo-varinvaihto-peittomaalaus-jalkeen";
 const warningSignsData = [
   { sign: 'Maali hilseilee tai lohkeilee', desc: 'Kosteus on päässyt maalin alle ja heikentänyt sen tartunnan puuhun.' },
   { sign: 'Pinta liituuntuu tai haalistuu', desc: 'Maalipinta on hapettunut, eikä se enää hylje vettä tai likaa.' },
-  { sign: 'Mustat pisteet (sinistäjäsieni tai homesieni)', desc: (<>Pintamulta tai ilman epäpuhtaudet tarjoavat kasvualustan homeelle, joka on <strong className="text-foreground">puhdistettava homepesulla ennen maalausta</strong>.</>) },
+  { sign: 'Mustat pilkut seinässä', desc: (<>Pilkut ovat hometta tai likaa. Seinä <strong className="text-foreground">pestään homepesuaineella ennen maalausta</strong>.</>) },
   { sign: 'Halkeamat paneelien päissä', desc: 'Puu on päässyt kastumaan ja kuivumaan toistuvasti, mikä on rikkonut puun rakenteen.' },
 ];
 
-const MaalausProblemSection = ({ cityName = 'Pirkanmaa' }: { cityName?: string }) => {
+const MaalausProblemSection = () => {
   return (
     <section className="section-padding bg-accent-light">
       <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
+        <div
+          className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
-            Miksi talon huoltomaalaus on tärkeää juuri nyt?
+            Miksi talo kannattaa maalata ajoissa?
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Talon ulkoverhouksen maalaus ei ole vain esteettinen asia. Se on myös tärkeää puun suojaamiseksi. Kun <strong className="text-foreground">maalin sideaineet kuluvat</strong> ja pinta alkaa haalistua tai halkeilla, <strong className="text-foreground">puun luonnollinen suoja heikkenee</strong>. Tämä on merkki siitä, että talo tarvitsee huoltomaalausta ennen kuin vauriot ehtivät syvälle puukuituun.
+            Maali suojaa puuta vedeltä ja auringolta. Kun maali haalistuu, hilseilee tai halkeilee, <strong className="text-foreground">puu alkaa imeä vettä</strong>. Silloin talo kannattaa maalata ennen kuin vesi ehtii puun sisään.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-10 items-start max-w-6xl mx-auto">
           {/* Left: Before/After slider (sticky on desktop) */}
@@ -40,35 +35,35 @@ const MaalausProblemSection = ({ cityName = 'Pirkanmaa' }: { cityName?: string }
               afterImage={getResponsiveSrc(afterBase)}
               beforeSrcSet={getResponsiveSrcSet(beforeBase)}
               afterSrcSet={getResponsiveSrcSet(afterBase)}
-              beforeAlt={`Keltainen puutalo värinvaihto ennen maalausta – ${cityName}`}
-              afterAlt={`Violetti puutalo värinvaihto peittomaalaus jälkeen – ${cityName}`}
+              beforeAlt="Keltainen puutalo ennen maalausta"
+              afterAlt="Sama puutalo violettina maalauksen jälkeen"
             />
           </div>
 
           {/* Right: Informational text */}
           <div className="space-y-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div>
               <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-                Estä kosteuseläminen ja lahottajasienien kasvu
+                Maali pitää veden pois puusta
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Suomen syksyn viistosateet ja talven kostea ilma ovat rankkoja suojaamattomalle puupinnalle. Jos maalipinta on rikki, vesi pääsee imeytymään puuhun. Se aiheuttaa <strong className="text-foreground">voimakasta kosteusliikettä – puu laajenee ja supistuu</strong>, mikä avaa halkeamia entisestään. <strong className="text-foreground">Jatkuva kosteus luo hyvät olot lahottajasienille</strong>, jotka tuhoavat puun rakenteen sisältäpäin. Ammattilaisen tekemä maalaus muodostaa pinnalle kalvon, joka säätelee puun kosteustasapainoa, pitää rakenteet kuivina ja <strong className="text-foreground">viivästyttää kallista ulkoverhousremonttia</strong>.
+                Syksyn viistosade ja talven kostea ilma kastelevat suojaamattoman puun. Märkä puu <strong className="text-foreground">laajenee ja kutistuu</strong>, ja laudat halkeilevat. Jatkuva kosteus on myös hyvä kasvualusta homeelle ja laholle. Ehjä maalipinta pitää veden puun ulkopuolella, ja ulkoverhous kestää pitkään.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div>
               <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-                UV-säteily – Puukuidun ja sideaineiden kuluttaja
+                Aurinko haalistaa ja haurastuttaa maalin
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Aurinko on julkisivun suurin rasite. Suora UV-säteily hajottaa maalin sideaineita ja harmaannuttaa suojaamatonta puuta. Tämä tekee puun pinnasta nukkaisen, jolloin maali ei tartu siihen kunnolla. <strong className="text-foreground">Laadukas ammattitason maali sisältää UV-suojan</strong>, joka pitää värin kirkkaana ja estää puun pinnan haurastumisen.
+                Aurinko haalistaa maalin ja harmaannuttaa paljaan puun. Harmaantunut puu on nukkainen, eikä uusi maali tartu siihen kunnolla. Siksi <strong className="text-foreground">paljaat kohdat pohjamaalataan</strong> ennen pintamaalia. Eteläseinä kuluu yleensä ensin.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div>
               <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                 <Search className="w-5 h-5 text-accent-ink" />
-                Onko talosi ulkoseinässä näitä merkkejä? Silloin maalauksella on kiire:
+                Onko talosi seinässä näitä merkkejä?
               </h4>
               <ul className="space-y-3">
                 {warningSignsData.map((w) => (
@@ -80,14 +75,14 @@ const MaalausProblemSection = ({ cityName = 'Pirkanmaa' }: { cityName?: string }
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
             <Link
-              to="/tarjouspyynto?palvelu=maalaus"
+              to="/tarjouspyynto/?palvelu=maalaus"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
               style={{ backgroundColor: "hsl(var(--accent-strong))" }}
             >
-              Pyydä maksuton kuntotarkastus – {cityName}
+              Pyydä ilmainen arviokäynti
             </Link>
           </div>
         </div>

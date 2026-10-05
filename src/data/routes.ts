@@ -11,13 +11,15 @@
 import { cities as fullServiceCities, allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./cityData";
 import { articles, isPublished, getPublishedArticles } from "./articles";
 import { getRouteSeo, heroPreload } from "./seo";
+import { SITE_UPDATED, TOIMINTA_ALUE, KOTITALOUSVAHENNYS, TAKUU } from "./company";
+import { pinnoitusTyovaiheet, maalausTyovaiheet, EMME_TEE, PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
 
 export interface SiteRoute {
   path: string;
   /** Sitemap-prioriteetti 0–1. */
   priority: number;
   changefreq: "weekly" | "monthly" | "yearly";
-  /** Viimeisin muutos YYYY-MM-DD, jos tiedossa (artikkelit). */
+  /** Viimeisin muutos YYYY-MM-DD. Artikkeleilla oma päivä, muilla sivuston yhteinen tarkistuspäivä (SITE_UPDATED). */
   lastmod?: string;
 }
 
@@ -67,9 +69,9 @@ export const getArticleRoutes = (now: Date = new Date()): SiteRoute[] =>
 
 /** Kaikki kanoniset (indeksoitavat) reitit. */
 export const getCanonicalRoutes = (now: Date = new Date()): SiteRoute[] => [
-  ...staticRoutes,
+  ...staticRoutes.map((r) => ({ ...r, lastmod: r.lastmod ?? SITE_UPDATED })),
   ...getArticleRoutes(now),
-  ...cityRoutes,
+  ...cityRoutes.map((r) => ({ ...r, lastmod: r.lastmod ?? SITE_UPDATED })),
 ];
 
 /**
@@ -125,40 +127,61 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     return `- [${label}](${url(p)})${seo ? `: ${seo.description}` : ""}`;
   };
   const published = getPublishedArticles(now);
+  const cityLine = (c: { slug: string; name: string }) => {
+    const links = [`[kaikki palvelut](${url(`/maalauspalvelut-${c.slug}`)})`];
+    if (pinnoitusCities.some((p) => p.slug === c.slug)) links.push(`[tiilikaton pinnoitus](${url(`/tiilikaton-pinnoitus-${c.slug}`)})`);
+    if (maalausCities.some((m) => m.slug === c.slug)) links.push(`[talon maalaus](${url(`/talon-maalaus-${c.slug}`)})`);
+    return `- ${c.name}: ${links.join(", ")}`;
+  };
 
   return [
     "# Pintanen Oy",
     "",
-    "> Pintanen Oy on pirkanmaalainen perheyritys, joka tekee tiilikattojen pinnoituksia, tiilikattojen puhdistuksia ja talojen ulkomaalauksia. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Toiminta-alue on Pirkanmaa ja lähikunnat noin tunnin säteellä Tampereelta.",
+    `> Pintanen Oy on perheyritys, joka pinnoittaa tiilikattoja ja maalaa talojen ulkoseiniä. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Toiminta-alue on ${TOIMINTA_ALUE}. Yrityksen juuret ovat Oulussa.`,
     "",
     "## Perustiedot",
     "",
     "- Y-tunnus: 3525786-9",
     "- Puhelin: 040 964 0066",
     "- Sähköposti: myynti@pintanen.fi",
-    "- Takuu: tiilikaton pinnoitus 5 vuotta (kirjallinen), talon maalaus 2 vuotta",
-    "- Arviokäynti on maksuton",
-    "- Työt oikeuttavat kotitalousvähennykseen työn osuudesta",
+    `- Takuu: tiilikaton pinnoitus ${TAKUU.pinnoitus} (kirjallinen), talon maalaus ${TAKUU.maalaus}`,
+    "- Arviokäynti ja kuntotarkastus ovat ilmaisia",
+    `- Kotitalousvähennys työn osuudesta: ${KOTITALOUSVAHENNYS}`,
+    `- Sisältö tarkistettu ${SITE_UPDATED}`,
     "",
     "## Suuntaa antavat hinnat",
     "",
-    "- Tiilikaton pinnoitus: omakotitalo yleensä 2 850–7 000 €, alkaen 15 €/m²; esimerkit 150–180 m² 2 850–3 200 €, 190–240 m² 3 300–3 700 €, 250–300 m² 3 750–4 880 €",
-    "- Tiilikaton puhdistus: omakotitalo noin 800–2 500 €",
-    "- Talon ulkomaalaus: 1-kerroksinen noin 3 500–6 000 €, 1,5-kerroksinen noin 5 000–8 000 €, 2-kerroksinen noin 7 000–11 000 €",
-    "- Tarkka urakkahinta annetaan maksuttoman arviokäynnin jälkeen",
+    `- Tiilikaton pinnoitus: omakotitalo yleensä ${PINNOITUS_HINTA}. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta.`,
+    `- Talon ulkomaalaus: omakotitalo yleensä ${MAALAUS_HINTA}. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä.`,
+    "- Tarkka urakkahinta annetaan ilmaisen arviokäynnin jälkeen. Tarjous on kiinteä hinta, johon kuuluu koko työ ja siivous.",
+    "",
+    "## Näin tiilikaton pinnoitus tehdään",
+    "",
+    ...pinnoitusTyovaiheet.map((t, i) => `${i + 1}. ${t.title}: ${t.text}`),
+    "",
+    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Katto saa jopa 10–15 vuotta lisää ikää. Työ kestää yleensä 2–4 päivää.",
+    "",
+    "## Näin talon maalaus tehdään",
+    "",
+    ...maalausTyovaiheet.map((t, i) => `${i + 1}. ${t.title}: ${t.text}`),
+    "",
+    "Talon maalausta kutsutaan myös ulkomaalaukseksi, julkisivumaalaukseksi ja huoltomaalaukseksi. Työ kestää yleensä 3–7 päivää.",
+    "",
+    "## Mitä emme tee",
+    "",
+    ...EMME_TEE.map((t) => `- ${t}`),
     "",
     "## Palvelut",
     "",
     line("/tiilikaton-pinnoitus-pirkanmaa", "Tiilikaton pinnoitus Pirkanmaalla"),
-    line("/katon-puhdistus-pirkanmaa", "Tiilikaton puhdistus Pirkanmaalla"),
     line("/talon-maalaus-pirkanmaa", "Talon maalaus Pirkanmaalla"),
+    line("/katon-puhdistus-pirkanmaa", "Tiilikaton puhdistus Pirkanmaalla"),
     "",
     "## Hinnat ja hintalaskurit",
     "",
     line("/hintalaskuri", "Hintalaskuri"),
     line("/tarjouspyynto", "Tarjouspyyntö"),
     line("/tiilikaton-pinnoitus-hinta-pirkanmaa", "Tiilikaton pinnoituksen hinta"),
-    line("/katon-puhdistus-hinta-pirkanmaa", "Katon puhdistuksen hinta"),
     line("/talon-maalaus-hinta-pirkanmaa", "Talon maalauksen hinta"),
     "",
     "## Artikkelit",
@@ -172,9 +195,9 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     line("/toiminta-alueet", "Toiminta-alueet"),
     line("/tietosuoja", "Tietosuojaseloste"),
     "",
-    "## Toiminta-alueet",
+    "## Toiminta-alueet paikkakunnittain",
     "",
-    ...allCities.map((c) => `- [${c.name}](${url(`/maalauspalvelut-${c.slug}`)})`),
+    ...allCities.map(cityLine),
     "",
   ].join("\n");
 };

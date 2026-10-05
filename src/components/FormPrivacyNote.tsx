@@ -13,7 +13,7 @@ const FormPrivacyNote = ({ variant = 'dark', className = '' }: FormPrivacyNotePr
   return (
     <p className={`text-xs leading-snug ${color} ${className}`}>
       Lähettämällä hyväksyt, että käsittelemme tietojasi{' '}
-      <Link to="/tietosuoja" className={link}>
+      <Link to="/tietosuoja/" className={link}>
         tietosuojaselosteen
       </Link>{' '}
       mukaisesti yhteydenottoosi vastaamiseksi.

@@ -31,23 +31,23 @@ const closingNotes: Record<ArticleMeta["category"], ReactNode> = {
     <>
       Haluatko tietää oman kattosi kunnon? Teemme Pirkanmaalla maksuttoman arviokäynnin ja kerromme suoraan,
       kannattaako työ tehdä nyt vai vasta myöhemmin. Lue lisää{" "}
-      <Link to="/tiilikaton-pinnoitus-pirkanmaa">tiilikaton pinnoituksesta</Link>, katso{" "}
-      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">hintaesimerkit</Link> tai soita{" "}
+      <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoituksesta</Link>, katso{" "}
+      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">hintaesimerkit</Link> tai soita{" "}
       <a href="tel:+358409640066">040 964 0066</a>.
     </>
   ),
   maalaus: (
     <>
       Mietitkö oman talosi maalausta? Teemme Pirkanmaalla maksuttoman arviokäynnin ja kerromme suoraan, mitä
-      pinta tarvitsee. Lue lisää <Link to="/talon-maalaus-pirkanmaa">talon maalauksesta</Link>, katso{" "}
-      <Link to="/talon-maalaus-hinta-pirkanmaa">hintaesimerkit</Link> tai soita{" "}
+      pinta tarvitsee. Lue lisää <Link to="/talon-maalaus-pirkanmaa/">talon maalauksesta</Link>, katso{" "}
+      <Link to="/talon-maalaus-hinta-pirkanmaa/">hintaesimerkit</Link> tai soita{" "}
       <a href="tel:+358401642233">040 164 2233</a>.
     </>
   ),
   raha: (
     <>
       Tarkan hinnan omalle kohteellesi saat maksuttomalla arviokäynnillä Pirkanmaalla. Suuntaa antavan arvion voit
-      laskea itse <Link to="/hintalaskuri">hintalaskurilla</Link>, tai voit soittaa numeroon{" "}
+      laskea itse <Link to="/hintalaskuri/">hintalaskurilla</Link>, tai voit soittaa numeroon{" "}
       <a href="tel:+358409640066">040 964 0066</a>.
     </>
   ),
@@ -166,7 +166,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
           <nav aria-label="Murupolku" className="text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-foreground">Etusivu</Link>
             <span className="mx-2" aria-hidden="true">/</span>
-            <Link to="/artikkelit" className="hover:text-foreground">Artikkelit</Link>
+            <Link to="/artikkelit/" className="hover:text-foreground">Artikkelit</Link>
           </nav>
 
           <p className="text-xs md:text-sm font-heading font-bold uppercase tracking-[0.18em] text-[#006ead] mb-3">
@@ -252,7 +252,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
                 <p className="text-sm text-muted-foreground mb-2">{author.role}</p>
                 <p className="text-muted-foreground leading-relaxed">
                   {author.bio}{" "}
-                  <Link to="/meista" className="text-[#006ead] underline underline-offset-2">
+                  <Link to="/meista/" className="text-[#006ead] underline underline-offset-2">
                     Tutustu meihin
                   </Link>
                 </p>
@@ -265,7 +265,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
                 <ul className="divide-y divide-border border-y border-border">
                   {related.map((a) => (
                     <li key={a.slug}>
-                      <Link to={`/artikkelit/${a.slug}`} className="group flex items-baseline justify-between gap-4 py-4">
+                      <Link to={`/artikkelit/${a.slug}/`} className="group flex items-baseline justify-between gap-4 py-4">
                         <span className="font-semibold text-foreground group-hover:text-[#006ead] transition-colors">
                           {a.title}
                         </span>
@@ -280,7 +280,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
             )}
 
             <p className="mt-10">
-              <Link to="/artikkelit" className="text-[#006ead] font-semibold underline underline-offset-2">
+              <Link to="/artikkelit/" className="text-[#006ead] font-semibold underline underline-offset-2">
                 ← Kaikki artikkelit
               </Link>
             </p>

@@ -71,7 +71,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     {
       title: `Tiilikaton pinnoitus ${cityName}`,
       href: `${pinnoitusHref}/`,
-      description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta lisää ikää. Hinta yleensä ${PINNOITUS_HINTA}.`,
+      description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta yleensä ${PINNOITUS_HINTA}.`,
       warranty: "5 v takuu",
       baseName: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
       Icon: RoofTileIcon,

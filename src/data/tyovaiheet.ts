@@ -24,7 +24,7 @@ export const pinnoitusTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Suojaus",
-    text: "Suojaamme tarvittaessa esimerkiksi aurinkopaneelit. Siivoamme jälkemme.",
+    text: "Suojaamme esimerkiksi aurinkopaneelit, lasiterassit ja valokatteet. Kourujen syöksyihin tulee suodatinkankaat.",
   },
   {
     title: "Pesu painepesulla",
@@ -32,15 +32,15 @@ export const pinnoitusTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Rikkinäisten tiilien vaihto",
-    text: "Vaihdamme rikkinäiset tiilet uusiin. Katto saa kuivua ennen maalausta.",
+    text: "Vaihdamme rikkinäiset tiilet uusiin. Ennen maalausta katto saa kuivua.",
   },
   {
     title: "Maalaus ruiskulla kahteen kertaan",
-    text: `${KATON_MAALAUS_LAUSE} Käytämme Tikkurilan ja Nowocoatin kattomaaleja.`,
+    text: `${KATON_MAALAUS_LAUSE} Käytämme Nowocoatin kattomaaleja.`,
   },
   {
     title: "Lopputarkastus ja takuu",
-    text: "Kierrämme katon yhdessä sinun kanssasi. Saat työlle 5 vuoden kirjallisen takuun.",
+    text: "Kierrämme katon yhdessä sinun kanssasi ja siivoamme jälkemme. Saat työlle 5 vuoden kirjallisen takuun.",
   },
 ];
 
@@ -80,7 +80,7 @@ export const pinnoitusLyhyesti = (cityIn?: string): string[] => [
   `Pinnoitamme tiilikattoja ${cityIn ?? "Pirkanmaalla ja lähikunnissa"}.`,
   "Pesemme katon painepesulla ja vaihdamme rikkinäiset tiilet uusiin.",
   "Maalaamme katon ruiskulla kahteen kertaan: pohjamaali ja pintamaali. Ahtaat paikat telalla tai käsin.",
-  "Työ kestää yleensä 2–4 päivää. Takuu on 5 vuotta.",
+  "Työ kestää yleensä 2–4 päivää, ja työllä on 5 vuoden takuu.",
   `Hinta on yleensä ${PINNOITUS_HINTA}. Työn osuudesta saat kotitalousvähennyksen.`,
   "Kuntotarkastus on ilmainen.",
 ];

@@ -64,7 +64,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
           base: heroBase,
           alt: ownPhoto ? `Pinnoittamamme tiilikatto ${cityData.cityIn}` : "Kirkkaan punainen tiilikatto pinnoituksen jälkeen",
         }}
-        badge={{ title: "Yrittäjä itse katolla", text: "Eerik tekee työn ja vastaa jäljestä." }}
+        badge={{ title: "Yrittäjä itse katolla", text: "Eerik tekee työn itse." }}
         breadcrumbs={crumbs}
       />
 

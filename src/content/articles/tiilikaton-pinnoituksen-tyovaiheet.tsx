@@ -71,7 +71,7 @@ const Body = () => (
     <h2>5. Pohjamaali ja pintamaali ruiskulla</h2>
     <p>
       Maalaamme katon ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei
-      yllä, maalaamme telalla tai käsin. Käytämme Tikkurilan ja Nowocoatin kattomaaleja.
+      yllä, maalaamme telalla tai käsin. Käytämme Nowocoatin kattomaaleja.
     </p>
     <p>Katon pitää kuivua pesun jälkeen ja maalikerrosten välissä. Siksi työ kestää useamman päivän.</p>
 

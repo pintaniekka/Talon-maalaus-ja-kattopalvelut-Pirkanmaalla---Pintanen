@@ -29,11 +29,11 @@ const PinnoitusEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
             </div>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Moi, olen Eerik. Perustin Pintasen yhdessä veljeni Eemilin kanssa. Hoidan tiilikattojen pinnoitukset {paikka} itse
+                Moi, olen Eerik. Perustin Pintasen yhdessä veljeni Eemilin kanssa. Teen tiilikattojen pinnoitukset {paikka} itse
                 alusta loppuun.
               </p>
               <p>
-                Olen tehnyt tätä työtä yli viisi vuotta ja pinnoittanut {LUVUT.pinnoitetutKatot} kattoa. Tiedät aina, kuka on katollasi ja kuka vastaa jäljestä. Siksi annan työlleni{' '}
+                Olen tehnyt tätä työtä yli viisi vuotta ja pinnoittanut {LUVUT.pinnoitetutKatot} kattoa. Tiedät aina, kuka on katollasi. Minä vastaan jäljestä, ja siksi annan työlle{' '}
                 <strong className="text-foreground">5 vuoden kirjallisen takuun</strong>.
               </p>
               <p className="font-medium text-foreground">— Eerik, Pintanen Oy</p>

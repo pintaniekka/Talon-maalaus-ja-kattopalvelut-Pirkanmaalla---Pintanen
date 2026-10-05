@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import OptimizedImage from "./OptimizedImage";
 
 
@@ -25,13 +25,35 @@ const BeforeAfterSlider = ({
   const [isDragging, setIsDragging] = useState(false);
   const didDrag = useRef(false);
 
-  const handleMove = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+  const handleMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     if (!isDragging) return;
     didDrag.current = true;
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = "touches" in e ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
+    const x = e.touches[0].clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
     setSliderPosition(percentage);
+  }, [isDragging]);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Hiirellä vedettäessä seurataan koko ikkunaa: ote ei irtoa, vaikka osoitin
+  // karkaa kortin ulkopuolelle. Kosketus toimii elementin omilla tapahtumilla.
+  useEffect(() => {
+    if (!isDragging) return;
+    const onMove = (e: MouseEvent) => {
+      const el = containerRef.current;
+      if (!el) return;
+      didDrag.current = true;
+      const rect = el.getBoundingClientRect();
+      setSliderPosition(Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)));
+    };
+    const onUp = () => setIsDragging(false);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
   }, [isDragging]);
 
   const handlePointerDown = useCallback(() => {
@@ -55,10 +77,11 @@ const BeforeAfterSlider = ({
     <div
       className="relative w-full rounded-xl overflow-hidden cursor-ew-resize select-none touch-pan-y bg-muted min-h-[260px] sm:min-h-0"
       style={{ aspectRatio }}
-      onMouseDown={handlePointerDown}
-      onMouseUp={handlePointerUp}
-      onMouseLeave={handlePointerUp}
-      onMouseMove={handleMove}
+      ref={containerRef}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        handlePointerDown();
+      }}
       onTouchStart={handlePointerDown}
       onTouchEnd={handlePointerUp}
       onTouchMove={handleMove}

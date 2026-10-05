@@ -31,7 +31,7 @@ const Artikkelit = () => {
             {published.map((article) => (
               <li key={article.slug}>
                 <Link
-                  to={`/artikkelit/${article.slug}/`}
+                  to={`/artikkelit/${article.slug}`}
                   className="group grid sm:grid-cols-[220px_1fr] gap-5 md:gap-7 py-8 items-start"
                 >
                   <img

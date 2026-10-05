@@ -18,26 +18,18 @@ const ScrollToTop = () => {
   return null;
 };
 
-/** Sivut, joilla on oma lomake: kelluva alapalkki ja chat eivät saa peittää sitä (auditointi 8.4). */
-const LOMAKESIVUT = ["/tarjouspyynto", "/hintalaskuri"];
-
 const Layout = () => {
-  const { pathname } = useLocation();
-  const path = pathname.replace(/\/+$/, "") || "/";
-  const lomakesivu = LOMAKESIVUT.includes(path);
-
   return (
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
       <Header />
-      {/* Puhelimella footerin viimeinen rivi jäisi kiinteän alapalkin alle ilman alatäytettä. */}
-      <main className={`flex-1 ${lomakesivu ? "" : "pb-[5.25rem] lg:pb-0"}`}>
+      <main className="flex-1">
         <Outlet />
       </main>
       <Footer />
-      {!lomakesivu && <MobileBottomBar />}
+      <MobileBottomBar />
       <DesktopQuoteDrawer />
-      {!lomakesivu && <ChatLeadForm />}
+      <ChatLeadForm />
       <CookieBanner />
     </div>
   );

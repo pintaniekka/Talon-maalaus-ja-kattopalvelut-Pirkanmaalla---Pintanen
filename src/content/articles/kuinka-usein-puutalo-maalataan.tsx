@@ -96,7 +96,7 @@ const Body = () => (
     </ol>
     <p>
       Käymme talon läpi ennen tarjousta. Samalla katsomme, mitä maalia seinässä on ja paljonko pohjatöitä
-      tarvitaan. Lue lisää sivulta <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.
+      tarvitaan. Lue lisää sivulta <Link to="/talon-maalaus-pirkanmaa">talon maalaus Pirkanmaalla</Link>.
     </p>
 
     <h2>Mihin aikaan vuodesta talo kannattaa maalata?</h2>
@@ -124,9 +124,9 @@ const Body = () => (
     </p>
     <p>
       Suuntaa antavan hinnan omalle talollesi saat{" "}
-      <Link to="/talon-maalaus-hinta-pirkanmaa/">maalauksen hintalaskurilla</Link>. Työn osuudesta saat
+      <Link to="/talon-maalaus-hinta-pirkanmaa">maalauksen hintalaskurilla</Link>. Työn osuudesta saat
       kotitalousvähennyksen. Lue siitä lisää artikkelista{" "}
-      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/">
+      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot">
         kotitalousvähennys katto- ja maalaustöissä
       </Link>
       .

@@ -91,34 +91,6 @@ describe("artikkelit", () => {
 });
 
 describe("sisäiset linkit", () => {
-  it("kovakoodatut sisäiset linkit päättyvät kauttaviivaan kuten canonical ja sivukartta (V14)", () => {
-    const srcDir = path.resolve(__dirname, "..");
-    const files: string[] = [];
-    const walk = (dir: string) => {
-      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-        const full = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-          if (!["test", "ui", "data"].includes(entry.name)) walk(full);
-        } else if (/\.tsx$/.test(entry.name) && entry.name !== "App.tsx") files.push(full);
-      }
-    };
-    walk(srcDir);
-    const slashless: string[] = [];
-    for (const file of files) {
-      const source = fs.readFileSync(file, "utf-8");
-      // to="/polku" ja href="/polku" (+ kyselyosa): polun pitää päättyä kauttaviivaan ennen "?"-merkkiä
-      for (const m of source.matchAll(/\b(?:to|href)(?:=|:\s*)"(\/[a-z0-9/-]*[a-z0-9])(\?[^"]*)?"/g)) {
-        slashless.push(`${path.relative(srcDir, file)}: ${m[1]}${m[2] ?? ""}`);
-      }
-      // to={`/polku-${slug}`} ilman loppukauttaviivaa
-      for (const m of source.matchAll(/\b(?:to|href)=\{`(\/[^`?]*[^/`?])(\?[^`]*)?`\}/g)) {
-        slashless.push(`${path.relative(srcDir, file)}: ${m[1]}`);
-      }
-    }
-    expect(slashless).toEqual([]);
-  });
-
-
   it("lähdekoodin kovakoodatut sisäiset linkit osoittavat olemassa oleviin reitteihin", () => {
     const known = new Set([...getAllRoutePaths(), "/"]);
     const srcDir = path.resolve(__dirname, "..");

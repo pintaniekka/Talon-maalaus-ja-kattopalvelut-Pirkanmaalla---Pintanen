@@ -1,11 +1,3 @@
-/**
- * Usein kysytyt kysymykset. Vastaukset noudattavat sivuston sanastoa:
- * lyhyet virkkeet, me-muoto, yksi hintahaarukka per palvelu (pinnoitus 2 850–7 000 €,
- * maalaus 3 500–11 000 €), ei "alkaen"-hintoja eikä neliöhintoja.
- * Vastaukset renderöidään näkyvään HTML:ään (FAQSection), joten ne saavat sisältää vain <strong>-tageja.
- */
-import { KOTITALOUSVAHENNYS as KOTITALOUSVAHENNYS_LAUSE } from "./company";
-
 interface FAQItem {
   question: string;
   answer: string;
@@ -13,42 +5,28 @@ interface FAQItem {
 
 export const pinnoitusFAQ: FAQItem[] = [
   {
-    question: 'Mitä tiilikaton pinnoitus maksaa?',
-    answer:
-      'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hintaan kuuluu koko työ ja siivous. Työn osuudesta saat kotitalousvähennyksen.',
-  },
-  {
-    question: 'Onko tiilikaton pinnoitus sama asia kuin tiilikaton maalaus?',
-    answer:
-      'Käytännössä kyllä. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin. Uusi maalipinta pitää veden tiilen ulkopuolella.',
-  },
-  {
     question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
-    answer: `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Erittelemme työn osuuden laskuun, joten vähennyksen hakeminen on helppoa.`,
+    answer: 'Kyllä saa! Tiilikaton pesu ja pinnoitus oikeuttavat merkittävään kotitalousvähennykseen. Voit vähentää <strong>40 % työn osuudesta</strong> suoraan henkilökohtaisessa verotuksessasi. Koska pinnoitusurakoissa työn osuus on tyypillisesti <strong>jopa 80 % kokonaishinnasta</strong>, vähennyksen tuoma säästö on usein noin tuhat euroa. Puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 4 200 euroa vuodessa</strong>.',
+  },
+  {
+    question: 'Mitä tiilikaton pinnoitus maksaa?',
+    answer: 'Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 7 000 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältävät aina avaimet käteen -toteutuksen ja loppusiivouksen.',
+  },
+  {
+    question: 'Voiko tiilikaton pinnoitustyön maksaa osissa?',
+    answer: 'Kyllä voi! Tarjoamme asiakkaillemme joustavan maksujärjestelyn. Näin voit jakaa työn kustannukset pienemmiksi, kuukausittain maksettaviksi osiksi. Katon huoltoa ei kannata lykätä säästöjen vuoksi. Ajoissa tehty pinnoitustyö on aina edullisempi kuin kallis kattoremontti, joka voi tulla tarpeeseen, jos odottaa liian kauan.',
   },
   {
     question: 'Kuinka kauan tiilikaton pinnoitus kestää?',
-    answer:
-      'Omakotitalon katto valmistuu yleensä <strong>2–4 työpäivässä</strong>. Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Välissä katto saa kuivua.',
+    answer: 'Tyypillisen omakotitalon (noin 150–200 m²) tiilikaton pesu ja pinnoitus kestää noin <strong>2–4 työpäivää</strong> sääolosuhteista riippuen. Työ pitää sisällään huolelliset pohjatyöt (kuten painepesun ja torjunta-ainekäsittelyn), riittävän kuivumisajan sekä kaksinkertaisen ruiskumaalauksen.',
   },
   {
     question: 'Milloin tiilikatto pitää pinnoittaa?',
-    answer:
-      'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 10–15 vuotta vanha. Ajoissa tehty pinnoitus estää pakkasrapautumisen.',
+    answer: 'Katto on syytä huoltaa ja pinnoittaa, kun tiilen alkuperäinen tehdaspinnoite on kulunut tai haalistunut, pinta tuntuu huokoiselta ja sammalta alkaa kertyä nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 10–15 vuotta vanha. Ajoissa tehty huolto estää pakkasrapautumisen ja pelastaa kalliilta kattoremontilta.',
   },
   {
-    question: 'Kattoremontti vai pinnoitus?',
-    answer:
-      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa. Kattoremontteja emme tee.',
-  },
-  {
-    question: 'Pinnoitatteko myös peltikattoja?',
-    answer: 'Emme. Teemme vain tiilikattoja.',
-  },
-  {
-    question: 'Voiko tiilikaton pinnoittaa itse?',
-    answer:
-      'Katon voi pestä ja maalata itse, mutta ilman ruiskua ja oikeaa kalustoa tasaista pintaa on vaikea saada. Meiltä saat työlle <strong>5 vuoden kirjallisen takuun</strong>, ja vain yritykseltä ostetusta työstä saa kotitalousvähennyksen.',
+    question: 'Voiko tiilikaton pinnoittaa itse vai kannattaako käyttää ammattilaista?',
+    answer: 'Teknisesti katon voi pestä ja maalata itse, mutta kestävän ammattitason tuloksen saavuttaminen on erittäin vaikeaa ilman oikeaa kalustoa. Väärät menetelmät voivat vahingoittaa vanhaa kattoa, ja ilman ammattitason kasvustonestoainetta sammal tunkee nopeasti uuden maalin läpi. Ammattilaisen tekemälle pinnoitukselle saat <strong>5 vuoden kirjallisen takuun</strong>, ja <strong>vain ammattilaisen työstä voi hakea kotitalousvähennystä</strong>.',
   },
 ];
 
@@ -69,130 +47,95 @@ export const puhdistusFAQ: FAQItem[] = [
 
 export const maalausFAQ: FAQItem[] = [
   {
-    question: 'Mitä talon ulkomaalaus maksaa?',
-    answer:
-      'Omakotitalon maalaus maksaa meillä yleensä <strong>3 500–11 000 €</strong>. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen. Työn osuudesta saat kotitalousvähennyksen.',
+    question: 'Milloin on oikea aika maalata talon ulkoverhous uudelleen?',
+    answer: 'Tyypillinen huoltomaalausväli on 10–15 vuotta riippuen ympäristöstä ja säärasituksesta. Selkeitä merkkejä maalauksen tarpeelle ovat maalipinnan hilseily, värien haalistuminen sekä homepilkut julkisivussa.',
   },
   {
-    question: 'Milloin talon ulkoverhous pitää maalata uudelleen?',
-    answer:
-      'Yleensä 10–15 vuoden välein. Maalaus on ajankohtainen, kun maali hilseilee, väri on haalistunut tai seinässä on homepilkkuja.',
+    question: 'Kuinka tärkeää pohjatöiden tekeminen on ennen maalausta?',
+    answer: 'Ammattilaisten tekemät huolelliset pohjatyöt ovat kestävän maalausjäljen perusta. Maalausprosessiimme kuuluu olennaisena osana hilseilevän maalin kaavinta ja huolellinen homepesu. Paljaat puupinnat pohjamaalataan ennen varsinaista pintamaalausta.',
   },
   {
-    question: 'Mitä pohjatöitä teette ennen maalausta?',
-    answer:
-      'Pesemme seinät homepesuaineella. Kaavimme irtoavan maalin pois. Pohjamaalaamme paljaat kohdat. Sitten maalaamme pintamaalin pensselillä. Lautoja emme vaihda.',
+    question: 'Mitä maalia talooni tulisi käyttää?',
+    answer: 'Oikean maalityypin valinta riippuu täysin kohteesta ja sen materiaaleista. Käytämme laadukkaita maaleja ja valitsemme kohteeseen aina parhaiten sopivan vaihtoehdon, kuten hengittävän vesiohenteisen maalin tai öljymaalin. Väärällä maalilla ei saa maalata!',
   },
   {
-    question: 'Mitä maalia käytätte?',
-    answer:
-      'Valitsemme maalin vanhan maalin ja puun kunnon mukaan. Yleensä käytämme vesiohenteista talomaalia, joskus öljymaalia. Kerromme valinnan tarjouksessa.',
-  },
-  {
-    question: 'Maalaatteko myös sisätiloja tai taloyhtiöitä?',
-    answer: 'Emme. Maalaamme omakotitalojen, paritalojen ja mökkien ulkoseinät.',
+    question: 'Mikä on talon ulkomaalauksen hinta-arvio?',
+    answer: 'Keskikokoisen omakotitalon maalaus, jossa on jonkin verran hilseilevää maalia, maksaa tyypillisesti 4 000 – 8 000 euroa. Koska maalausurakan kokonaiskustannuksista jopa 80 prosenttia voi olla työn osuutta, olet oikeutettu hakemaan merkittävää kotitalousvähennystä, mikä kutistaa urakan todellista hintaa huomattavasti.',
   },
 ];
 
 export const generalFAQ: FAQItem[] = [
   {
-    question: 'Sisältääkö tarjous kaiken, vai tulee piilokuluja?',
-    answer:
-      'Tarjous sisältää kaiken: työn, maalit, telineet ja nostimet, matkat ja loppusiivouksen. Ylimääräisiä kuluja ei tule.',
+    question: 'Sisältääkö tarjous kaiken kattavasti, vai tulemme kohtaamaan piilokuluja?',
+    answer: 'Meidän tarjouksemme on aina avaimet käteen -paketti, joka sisältää kaiken tarpeellisen: työn, tarvikkeet, laadukkaat maalit, tarvittavat telineet ja nostimet, matkakulut sekä huolellisen loppusiivouksen. Ylimääräisiä kuluja ei siis tule.',
   },
   {
-    question: 'Kuinka kauan tiilikaton pinnoitus tai talon maalaus kestää?',
-    answer:
-      'Tiilikaton pinnoitus kestää yleensä 2–4 työpäivää. Talon ulkomaalaus kestää yleensä 3–7 työpäivää. Työ ei estä normaalia asumista.',
+    question: 'Kuinka kauan kestää tiilikaton pinnoitus tai talon maalaus?',
+    answer: 'Keskikokoisen omakotitalon tiilikaton pesu ja pinnoitus vie tyypillisesti 2–3 päivää, riippuen sääolosuhteista. Talon ulkomaalaus puolestaan kestää noin 3–7 päivää, kohteen ja pohjatöiden määrästä riippuen. Työmme suunnitellaan siten, ettei se häiritse normaalia asumista.',
   },
   {
     question: 'Mitä tehdään, jos sovittuna työpäivänä sataa?',
-    answer:
-      'Emme maalaa sateella, koska pinnan pitää olla kuiva. Seuraamme sääennustetta ja sovimme tarvittaessa uuden päivän. Siitä ei tule lisäkuluja.',
+    answer: 'Seuraamme aina säätiedotuksia tarkasti etukäteen. Emme suorita maalaus- tai pinnoitustöitä sateisena säällä, koska pintojen on oltava kuivat työn onnistumisen ja kestävyyden takia. Jos sää yllättää, sovitaan uusi työpäivä joustavasti ilman lisäkuluja.',
   },
   {
-    question: 'Tuotteko telineet ja nostimet?',
-    answer: 'Kyllä. Tuomme telineet, nostimet ja turvavaljaat itse. Sinun ei tarvitse vuokrata mitään.',
+    question: 'Tuotteko te telineet ja nostimet mukananne?',
+    answer: 'Kyllä, tuomme kaikki tarvittavat rakennustelineet, henkilönostimet ja turvavaljaat työmaalle. Et tarvitse huolehtia kaluston vuokraamisesta tai pystyttämisestä.',
   },
   {
-    question: 'Paljonko tiilikaton pinnoitus tai talon maalaus maksaa?',
-    answer:
-      'Tiilikaton pinnoitus maksaa yleensä 2 850–7 000 €. Talon ulkomaalaus maksaa yleensä 3 500–11 000 €. Suuntaa antavan arvion saat hintalaskurista. Tarkan hinnan saat ilmaisen käynnin jälkeen.',
+    question: 'Paljonko tiilikaton pinnoitus tai ulkomaalaus maksaa?',
+    answer: 'Hinnan määräytymiseen vaikuttavat kohteen koko, kunto sekä tarvittavat pohjatyöt. Tarkan hinta-arvion omalle kohteellesi saat helposti ja nopeasti laskurillamme. Katso tarkemmat hinnat ja laske hinta-arvio hinnat-sivulta.',
   },
   {
-    question: 'Pitääkö minun siirtää tavaroita pihalta?',
-    answer:
-      'Siirrä kevyet pihakalusteet ja ruukut hieman kauemmas talosta. Muusta huolehdimme itse.',
+    question: 'Tarvitseeko minun suojata pihaani tai siirtää tavaroita?',
+    answer: 'Teemme tarvittavat suojaukset itse ennen työn aloittamista. Pyydämme vain, että siirrät kevyen irtaimiston, kuten pihakalusteet ja ruukut, hieman kauemmas talosta ennen työmme aloittamista.',
   },
   {
-    question: 'Saanko työstä kotitalousvähennyksen?',
-    answer: `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Erittelemme työn osuuden laskuun.`,
+    question: 'Saanko teidän työstänne kotitalousvähennyksen?',
+    answer: 'Kyllä saa! Voit hyödyntää 40 % vähennyksen työn osuudesta henkilökohtaisessa verotuksessasi. Erittelemme työn ja materiaalien osuuden selkeästi laskussa, jotta vähennyksen hakeminen on helppoa ja nopeaa.',
   },
 ];
 
-export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityIn?: string): FAQItem[] => {
-  const gen = cityGenitive || `${cityName}n`;
-  const paikka = cityIn || `${gen} alueella`;
-  return [
-    {
-      question: `Mitä omakotitalon maalaus maksaa ${paikka}?`,
-      answer:
-        'Omakotitalon maalaus maksaa meillä yleensä <strong>3 500–11 000 €</strong>. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.',
-    },
-    {
-      question: 'Mistä tiedän, että taloni pitää maalata?',
-      answer: `Maali hilseilee, väri on haalistunut tai seinässä on homepilkkuja. Puutalot ${paikka} tarvitsevat uuden maalin yleensä 10–15 vuoden välein.`,
-    },
-    {
-      question: 'Mitä pohjatöitä teette ennen maalausta?',
-      answer:
-        'Pesemme seinät homepesuaineella. Kaavimme irtoavan maalin pois. Pohjamaalaamme paljaat kohdat. Sitten maalaamme pintamaalin pensselillä. Lautoja emme vaihda.',
-    },
-    {
-      question: 'Saako talon maalauksesta kotitalousvähennystä?',
-      answer: `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Erittelemme työn osuuden laskuun.`,
-    },
-  ];
-};
+export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityIn?: string): FAQItem[] => [
+  {
+    question: 'Mistä tiedän, että taloni kaipaa huoltomaalausta?',
+    answer: `Yleisin syy tilata ulkomaalaus on vanhan maalipinnan haalistuminen, liituuntuminen tai näkyvä hilseily. Myös pinttynyt lika ja homepilkut kertovat huollon tarpeesta. Puuverhoillut talot ${cityGenitive || cityName + 'n'} alueella kaipaavat tyypillisesti uutta maalipintaa 10–15 vuoden välein, jotta puurakenteet pysyvät suojassa säärasitukselta ja kosteudelta.`,
+  },
+  {
+    question: 'Mitä pohjatöitä teette ennen varsinaista maalaamista?',
+    answer: 'Kestävä lopputulos vaatii aina huolelliset pohjatyöt, ja siksi panostamme niihin erityisesti. Poistamme hilseilevän vanhan maalin huolellisesti ja teemme julkisivulle perusteellisen homepesun. Lisäksi pohjamaalaamme paljaat puupinnat ennen varsinaista pintamaalin levitystä.',
+  },
+  {
+    question: `Mitä omakotitalon maalaus ${cityGenitive || cityName + 'n'} alueella suurin piirtein maksaa?`,
+    answer: `Keskikokoisen puutalon huoltomaalaus asettuu useimmiten 5 000 ja 6 500 euron väliin, riippuen tarvittavien pohjatöiden määrästä. Koska suurin osa urakan hinnasta on työn osuutta, saat siitä tuntuvan kotitalousvähennyksen verotuksessasi. Tulemme mielellämme tekemään ilmaisen tarkan kuntoarvion paikan päälle!`,
+  },
+];
 
-export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[] => {
-  const paikka = cityIn || `${cityName}n alueella`;
-  return [
-    {
-      question: `Paljonko tiilikaton pinnoitus maksaa ${paikka}?`,
-      answer:
-        'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hintaan kuuluu koko työ ja siivous. Työn osuudesta saat kotitalousvähennyksen.',
-    },
-    {
-      question: 'Onko tiilikaton pinnoitus sama asia kuin tiilikaton maalaus?',
-      answer:
-        'Käytännössä kyllä. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin.',
-    },
-    {
-      question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
-      answer: `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Erittelemme työn osuuden laskuun, joten vähennyksen hakeminen on helppoa.`,
-    },
-    {
-      question: 'Kuinka kauan tiilikaton pinnoitus kestää?',
-      answer:
-        'Omakotitalon katto valmistuu yleensä <strong>2–4 työpäivässä</strong>. Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan. Välissä katto saa kuivua.',
-    },
-    {
-      question: 'Milloin tiilikatto pitää pinnoittaa?',
-      answer:
-        'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 10–15 vuotta vanha.',
-    },
-    {
-      question: `Tiilikattoremontti vai pinnoitus ${paikka}?`,
-      answer:
-        'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä. Kattoremontteja emme tee.',
-    },
-    {
-      question: 'Pinnoitatteko myös peltikattoja?',
-      answer: 'Emme. Teemme vain tiilikattoja.',
-    },
-  ];
-};
+export const getPinnoitusCityFAQ = (cityName: string): FAQItem[] => [
+  {
+    question: `Saako tiilikaton pinnoituksesta kotitalousvähennystä?`,
+    answer: `Kyllä saa! Tiilikaton pesu ja pinnoitus oikeuttavat merkittävään kotitalousvähennykseen. Voit vähentää <strong>40 % työn osuudesta</strong> suoraan henkilökohtaisessa verotuksessasi. Koska pinnoitusurakoissa työn osuus on tyypillisesti <strong>jopa 80 % kokonaishinnasta</strong>, vähennyksen tuoma säästö on usein yli tuhat euroa. Puolisot voivat hyödyntää vähennyksen yhdessä, jolloin <strong>maksimietu on jopa 4 200 euroa vuodessa</strong>.`,
+  },
+  {
+    question: `Mitä tiilikaton pinnoitus maksaa?`,
+    answer: `Tiilikaton pinnoituksen hinta asettuu tyypillisesti 2 850 € ja 7 000 € välille katon koosta ja jyrkkyydestä riippuen. Lopullinen kustannus asiakkaalle on kuitenkin huomattavasti edullisempi yllä mainitun kotitalousvähennyksen ansiosta – jopa alle 2 100 €. Hintamme sisältää aina avaimet käteen -toteutuksen ja loppusiivouksen.`,
+  },
+  {
+    question: `Voiko tiilikaton pinnoitustyön maksaa osissa?`,
+    answer: `Kyllä voi! Tarjoamme asiakkaillemme joustavan maksujärjestelyn. Näin voit jakaa työn kustannukset pienemmiksi, kuukausittain maksettaviksi osiksi. Katon huoltoa ei kannata lykätä säästöjen vuoksi. Ajoissa tehty pinnoitustyö on aina edullisempi kuin kallis kattoremontti, joka voi tulla tarpeeseen, jos odottaa liian kauan.`,
+  },
+  {
+    question: `Kuinka kauan tiilikaton pinnoitus kestää?`,
+    answer: `Tyypillisen omakotitalon (noin 150–200 m²) tiilikaton pesu ja pinnoitus kestää noin <strong>2–4 työpäivää</strong> sääolosuhteista riippuen. Työ pitää sisällään huolelliset pohjatyöt (kuten painepesun ja torjunta-ainekäsittelyn), riittävän kuivumisajan sekä kaksinkertaisen ruiskumaalauksen.`,
+  },
+  {
+    question: `Milloin tiilikatto pitää pinnoittaa?`,
+    answer: `Katto on syytä huoltaa ja pinnoittaa, kun tiilen alkuperäinen tehdaspinnoite on kulunut tai haalistunut, pinta tuntuu huokoiselta ja sammalta alkaa kertyä nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 10–15 vuotta vanha. Ajoissa tehty huolto estää pakkasrapautumisen ja pelastaa kalliilta kattoremontilta.`,
+  },
+  {
+    question: `Voiko tiilikaton pinnoittaa itse vai kannattaako käyttää ammattilaista?`,
+    answer: `Teknisesti katon voi pestä ja maalata itse, mutta kestävän ammattitason tuloksen saavuttaminen on erittäin vaikeaa ilman oikeaa kalustoa. Väärät menetelmät voivat vahingoittaa vanhaa kattoa, ja ilman ammattitason kasvustonestoainetta sammal tunkee nopeasti uuden maalin läpi. Ammattilaisen tekemälle pinnoitukselle saat <strong>5 vuoden kirjallisen takuun</strong>, ja <strong>vain ammattilaisen työstä voi hakea kotitalousvähennystä</strong>.`,
+  },
+];
 
 export const getPuhdistusCityFAQ = (cityName: string, cityGenitive?: string): FAQItem[] => [
   {

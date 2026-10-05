@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Send, Check, Loader2 } from "lucide-react";
 import { Phone, Mail, User } from "@/components/icons/BrandIcons";
 import { toast } from '@/hooks/use-toast';
 import { getStorageUrl } from '@/lib/storage';
-import { VASTAUSLUPAUS } from '@/data/company';
 import { submitContactForm } from '@/lib/contactForm';
 import FormPrivacyNote, { HoneypotField } from '@/components/FormPrivacyNote';
 import WhatsAppIcon from './WhatsAppIcon';
@@ -120,7 +120,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
       await submitContactForm({ ...rest, service: services.join(', ') }, "sivun lopun lomake");
       setIsSubmitted(true);
       setFormState({ name: '', email: '', phone: '', services: [], message: '', website: '' });
-      toast({ title: 'Viesti lähetetty!', description: VASTAUSLUPAUS });
+      toast({ title: 'Tarjouspyyntö lähetetty!', description: 'Vastaamme mahdollisimman pian.' });
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err: unknown) {
       console.error('Form submission error:', err);
@@ -148,17 +148,25 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
   return (
     <section id="yhteystiedot" className="section-padding bg-background">
       <div className="section-container">
-        <div className="text-center max-w-2xl mx-auto mb-12"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center max-w-2xl mx-auto mb-12"
         >
           <h2 className="heading-style text-3xl md:text-4xl text-foreground mb-4">{title}</h2>
           <p className="text-muted-foreground text-lg">
-            Pyydä <strong className="text-foreground">ilmainen arviokäynti</strong>. {VASTAUSLUPAUS}
+            Pyydä <strong className="text-foreground">ilmainen arviokäynti</strong> tai tarjouspyyntö. Vastaamme <strong className="text-foreground">vuorokauden sisään</strong>!
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto lg:items-stretch">
           {/* Form (left) */}
-          <div className="h-full flex justify-center"
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="h-full flex justify-center"
           >
             <form
               onSubmit={handleSubmit}
@@ -266,15 +274,19 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
 
           {/* Persons (right) — stacked, top & bottom edges align with form */}
-          <div className={`flex flex-col gap-6 h-full ${persons.length > 1 ? 'lg:justify-between' : 'lg:justify-center'}`}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className={`flex flex-col gap-6 h-full ${persons.length > 1 ? 'lg:justify-between' : 'lg:justify-center'}`}
           >
             {persons.map((person) => (
               <PersonCard key={person.name} person={person} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

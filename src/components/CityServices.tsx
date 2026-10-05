@@ -18,21 +18,21 @@ const CityServices = ({ cityName, citySlug, cityGenitive }: CityServicesProps) =
   const services = [
     {
       title: "Tiilikaton pinnoitus",
-      href: `/tiilikaton-pinnoitus-${citySlug}/`,
+      href: `/tiilikaton-pinnoitus-${citySlug}`,
       beforeBase: "haalistunut-punainen-tiilikatto-ennen-pinnoitusta",
       afterBase: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-      description: "Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 10–15 vuotta lisää ikää.",
-      features: ["Pesu painepesulla", "Rikkinäiset tiilet uusiin", "Pohjamaali ja pintamaali ruiskulla"],
-      warranty: "5 v takuu",
+      description: "Vanha tiilikatto uuteen loistoon. Puhdistamme sammaleen, suojaamme tiilen ja maalaamme pinnan kestäväksi.",
+      features: ["Sammaleenpuhdistus", "Suojakäsittely", "Pinnoitus"],
+      warranty: "5v takuu",
     },
     {
       title: "Ulkomaalaus",
-      href: `/talon-maalaus-${citySlug}/`,
+      href: `/talon-maalaus-${citySlug}`,
       beforeBase: "keltainen-puutalo-varinvaihto-ennen-maalausta",
       afterBase: "violetti-puutalo-varinvaihto-peittomaalaus-jalkeen",
-      description: "Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
-      features: ["Homepesu ja kaavinta", "Pintamaali pensselillä", "2 v takuu"],
-      warranty: "2 v takuu",
+      description: "Huolelliset pohjatyöt ja laadukas maalipinta suojaavat taloasi vuosiksi eteenpäin.",
+      features: ["Pohjatyöt", "Laadukkaat maalit", "Siisti työnjälki"],
+      warranty: "2v takuu",
     },
   ];
 
@@ -43,7 +43,7 @@ const CityServices = ({ cityName, citySlug, cityGenitive }: CityServicesProps) =
       <div className="section-container">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-heading">Palvelut {cityGenitive} alueella</h2>
-          <p className="text-muted-foreground text-lg">Yrittäjät tekevät työn itse. Arviokäynti on ilmainen.</p>
+          <p className="text-muted-foreground text-lg">Ammattitaitoinen maalari edullisesti. Yli 200 tyytyväistä asiakasta.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -92,13 +92,13 @@ const CityServices = ({ cityName, citySlug, cityGenitive }: CityServicesProps) =
           <div
             role="link"
             tabIndex={0}
-            onClick={() => navigate(`/katon-puhdistus-${citySlug}/`)}
-            onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/katon-puhdistus-${citySlug}/`); }}
+            onClick={() => navigate(`/katon-puhdistus-${citySlug}`)}
+            onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/katon-puhdistus-${citySlug}`); }}
             className="block rounded-2xl overflow-hidden relative group cursor-pointer"
           >
             <ResponsiveImage
               baseName={puhdistusBase}
-              alt="Puhdas tiilikatto mekaanisen puhdistuksen jälkeen"
+              alt={`Puhdas tiilikatto mekaanisen puhdistuksen jälkeen ${cityName}`}
               className="absolute inset-0 w-full h-full object-cover"
               sizes="(max-width: 640px) 90vw, 800px"
             />

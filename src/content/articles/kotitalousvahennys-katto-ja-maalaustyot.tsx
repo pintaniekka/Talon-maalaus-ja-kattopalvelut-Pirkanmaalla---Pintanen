@@ -104,9 +104,9 @@ const Body = () => (
 
     <h2>Paljonko tiilikaton pinnoitus maksaa kotitalousvähennyksen jälkeen?</h2>
     <p>
-      Tiilikaton pinnoitus maksaa meillä yleensä 2 850–7 000 euroa. Työn osuudesta saat vähennyksen. Katso lisää sivuilta{" "}
-      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link> ja{" "}
-      <Link to="/talon-maalaus-hinta-pirkanmaa/">talon maalauksen hinta</Link>.
+      Meillä tiilikaton pinnoitus maksaa kotitalousvähennyksen jälkeen alkaen 2 050 euroa. Katso lisää sivuilta{" "}
+      <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa">tiilikaton pinnoituksen hinta</Link> ja{" "}
+      <Link to="/talon-maalaus-hinta-pirkanmaa">talon maalauksen hinta</Link>.
     </p>
 
     <ArticleFaq items={faq} />

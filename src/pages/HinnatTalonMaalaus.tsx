@@ -5,7 +5,7 @@ import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
-import PageHero from "@/components/PageHero";
+import ServicePageHero from "@/components/ServicePageHero";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
@@ -14,11 +14,13 @@ import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausComparison from "@/components/maalaus/MaalausComparison";
 import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist } from "@/components/hinnat/PriceSections";
-import { maalausPrices, fmtRange } from "@/data/prices";
-import { HERO_BASE } from "@/data/seo";
-import { KOTITALOUSVAHENNYS } from "@/data/company";
+import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
+import { maalausPrices, fmtRange, fmtEur } from "@/data/prices";
 
+const heroImage = getResponsiveSrc("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen");
+const heroSrcSet = getResponsiveSrcSet("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen");
 const general = fmtRange(maalausPrices.general.min, maalausPrices.general.max);
+const afterFrom = fmtEur(Math.min(...maalausPrices.cards.map((c) => c.afterFrom)));
 
 const priceFactors = [
   { icon: Layers, title: "Pohjatyöt", description: "Hilseilevä tai vaurioitunut pinta vaatii enemmän pesua ja kaavintaa." },
@@ -43,15 +45,15 @@ const faqItems = [
   },
   {
     question: "Mitä talon maalauksen hintaan kuuluu?",
-    answer: "Hintaan kuuluu homepesu, irtoavan maalin kaavinta, terassien ja ikkunoiden suojaus, pohjamaali paljaisiin kohtiin, pintamaali pensselillä ja siivous. Lautoja emme vaihda. Ylimääräisiä kuluja ei tule.",
+    answer: "Hintaan kuuluu homepesu, tarvittavat pohjatyöt, suojaukset, pohjamaalaus ja pintamaalaus sekä työmaan siivous. Ylimääräisiä kuluja ei tule.",
   },
   { question: "Kuinka kauan talon maalaus kestää?", answer: "Yleensä 3–7 päivää talon koon ja pohjatöiden määrän mukaan." },
   { question: "Pitääkö olla kotona työn aikana?", answer: "Ei tarvitse, kunhan sovitut asiat ovat kunnossa." },
-  { question: "Kuinka usein talo pitää maalata?", answer: "Yleensä 10–15 vuoden välein. Väli riippuu maalista ja säästä. Eteläseinä kuluu ensin." },
-  { question: "Mitä jos maalin alta löytyy lahovaurioita?", answer: "Kerromme niistä sinulle ennen kuin jatkamme työtä. Lautoja emme vaihda, joten lahot laudat korjaa kirvesmies." },
+  { question: "Kuinka usein talo pitää maalata?", answer: "Tyypillisesti 10 vuoden välein, riippuen maalista ja sääolosuhteista." },
+  { question: "Mitä jos maalin alta löytyy lahovaurioita?", answer: "Kerromme niistä sinulle ennen kuin jatkamme työtä." },
   {
     question: "Saako talon maalauksesta kotitalousvähennyksen?",
-    answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi.`,
+    answer: "Kyllä saa. Vuosina 2026 ja 2027 saat vähentää verotuksessa 40 % työn osuudesta. Erittelemme työn ja materiaalit laskulle valmiiksi.",
   },
   { question: "Kuinka pitkä takuu maalauksella on?", answer: "Saat talon maalaukselle meiltä 2 vuoden takuun." },
 ];
@@ -66,13 +68,11 @@ const faqSchema = {
   })),
 };
 
-const crumbs = [{ name: "Talon maalaus", path: "/talon-maalaus-pirkanmaa" }, { name: "Hinta" }];
-
 const HinnatTalonMaalaus = () => {
   const seo = staticSeo["/talon-maalaus-hinta-pirkanmaa"];
   return (
     <>
-      <SEO {...seo} breadcrumbs={crumbs} />
+      <SEO {...seo} preloadImage={heroImage} />
       <ServiceSchema
         name="Talon ulkomaalaus"
         area="Pirkanmaa"
@@ -84,29 +84,28 @@ const HinnatTalonMaalaus = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
-      <PageHero
-        eyebrow="Hinta · talon maalaus"
-        title={
-          <>
-            Talon maalauksen <span className="text-accent-ink">hinta</span>
-          </>
-        }
-        lead={
-          <>
-            Omakotitalon ulkomaalaus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu talon
-            koosta, korkeudesta ja pohjatöiden määrästä. Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan saat, kun käymme
-            katsomassa talon. Käynti on ilmainen.
-          </>
-        }
-        primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta laskurilla" }}
-        secondary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
-        trust="maalaus"
-        image={{ base: HERO_BASE.maalausHinta, alt: "Vaalea puutalo ulkomaalauksen jälkeen" }}
-        badge={null}
-        breadcrumbs={crumbs}
-      />
+      <ServicePageHero title="" subtitle="" backgroundImage={heroImage} backgroundSrcSet={heroSrcSet} compact>
+        <div className="bg-black/45 rounded-2xl p-5 md:p-8 max-w-4xl mx-auto text-left mb-8">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
+            Talon maalauksen <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">hinta</span>
+          </h1>
+          <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
+            Omakotitalon ulkomaalaus maksaa meillä yleensä <strong>{general}</strong>. Kotitalousvähennyksen jälkeen
+            hinta on alkaen <strong>{afterFrom}</strong>. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden
+            määrästä. Tarkan hinnan saat, kun käymme katsomassa talon. Käynti on ilmainen.
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link to="/hintalaskuri?palvelu=maalaus" className="btn-hero">
+            Laske hinta laskurilla
+          </Link>
+          <Link to="/tarjouspyynto?palvelu=maalaus" className="btn-hero-outline">
+            Pyydä ilmainen arviokäynti
+          </Link>
+        </div>
+      </ServicePageHero>
 
-      <MaalausPricingCards cityName="Pirkanmaa" calculatorHref="/hintalaskuri/?palvelu=maalaus" calculatorLabel="Laske oman talosi hinta" />
+      <MaalausPricingCards cityName="Pirkanmaa" calculatorHref="/hintalaskuri?palvelu=maalaus" calculatorLabel="Laske oman talosi hinta" />
 
       <CalculatorCta service="maalaus" />
 
@@ -116,7 +115,7 @@ const HinnatTalonMaalaus = () => {
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={maalausPrices.includes}
-              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Maalaamme seinät pensselillä, ja saat työlle 2 vuoden kirjallisen takuun."
+              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Maalaamme seinät pensselillä, ja saat työlle 2 vuoden takuun."
             />
           </div>
         </div>
@@ -131,7 +130,7 @@ const HinnatTalonMaalaus = () => {
 
       <KotitalousVahennys />
 
-      <MaalausComparison />
+      <MaalausComparison cityIn="Pirkanmaalla" />
 
       <section className="section-padding bg-background">
         <div className="section-container">
@@ -142,7 +141,7 @@ const HinnatTalonMaalaus = () => {
           <Checklist items={offerChecklist} />
           <p className="text-center mt-8 text-muted-foreground">
             Lue myös{" "}
-            <Link to="/artikkelit/kuinka-usein-puutalo-maalataan/" className="text-primary font-semibold hover:underline">
+            <Link to="/artikkelit/kuinka-usein-puutalo-maalataan" className="text-primary font-semibold hover:underline">
               kuinka usein puutalo pitää maalata
             </Link>
             .

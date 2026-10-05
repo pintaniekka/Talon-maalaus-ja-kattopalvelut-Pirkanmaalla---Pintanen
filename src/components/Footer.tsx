@@ -115,52 +115,52 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/tiilikaton-pinnoitus-pirkanmaa/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/tiilikaton-pinnoitus-pirkanmaa" className="hover:text-primary-foreground transition-colors">
                   Tiilikaton pinnoitus
                 </Link>
               </li>
               <li>
-                <Link to="/katon-puhdistus-pirkanmaa/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/katon-puhdistus-pirkanmaa" className="hover:text-primary-foreground transition-colors">
                   Katon puhdistus
                 </Link>
               </li>
               <li>
-                <Link to="/talon-maalaus-pirkanmaa/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/talon-maalaus-pirkanmaa" className="hover:text-primary-foreground transition-colors">
                   Ulkomaalaus
                 </Link>
               </li>
               <li>
-                <Link to="/tarjouspyynto/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/tarjouspyynto" className="hover:text-primary-foreground transition-colors">
                   Pyydä tarjous
                 </Link>
               </li>
               <li>
-                <Link to="/hintalaskuri/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/hintalaskuri" className="hover:text-primary-foreground transition-colors">
                   Hintalaskuri
                 </Link>
               </li>
               <li>
-                <Link to="/toiminta-alueet/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/toiminta-alueet" className="hover:text-primary-foreground transition-colors">
                   Toiminta-alueet
                 </Link>
               </li>
               <li>
-                <Link to="/referenssit/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/referenssit" className="hover:text-primary-foreground transition-colors">
                   Referenssit
                 </Link>
               </li>
               <li>
-                <Link to="/meista/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/meista" className="hover:text-primary-foreground transition-colors">
                   Tutustu meihin
                 </Link>
               </li>
               <li>
-                <Link to="/artikkelit/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/artikkelit" className="hover:text-primary-foreground transition-colors">
                   Artikkelit
                 </Link>
               </li>
               <li>
-                <Link to="/tietosuoja/" className="hover:text-primary-foreground transition-colors">
+                <Link to="/tietosuoja" className="hover:text-primary-foreground transition-colors">
                   Tietosuojaseloste
                 </Link>
               </li>
@@ -178,7 +178,7 @@ const Footer = () => {
             <p className="text-sm text-primary-foreground/70 leading-loose">
               {[...pirkanmaaCities, ...pirkanmaaExtra].map((city, i, arr) => (
                 <span key={city.slug}>
-                  <Link to={`/maalauspalvelut-${city.slug}/`} className="hover:underline hover:text-primary-foreground transition-colors">
+                  <Link to={`/maalauspalvelut-${city.slug}`} className="hover:underline hover:text-primary-foreground transition-colors">
                     {city.name}
                   </Link>
                   {i < arr.length - 1 && ", "}
@@ -193,7 +193,7 @@ const Footer = () => {
             <p className="text-sm text-primary-foreground/70 leading-loose">
               {kantaHameCities.map((city, i, arr) => (
                 <span key={city.slug}>
-                  <Link to={`/maalauspalvelut-${city.slug}/`} className="hover:underline hover:text-primary-foreground transition-colors">
+                  <Link to={`/maalauspalvelut-${city.slug}`} className="hover:underline hover:text-primary-foreground transition-colors">
                     {city.name}
                   </Link>
                   {i < arr.length - 1 && ", "}
@@ -206,7 +206,7 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/60">
           <p>
             © {new Date().getFullYear()} Pintanen Oy. Kaikki oikeudet pidätetään.{" "}
-            <Link to="/tietosuoja/" className="underline underline-offset-2 hover:text-primary-foreground transition-colors">
+            <Link to="/tietosuoja" className="underline underline-offset-2 hover:text-primary-foreground transition-colors">
               Tietosuojaseloste
             </Link>
           </p>

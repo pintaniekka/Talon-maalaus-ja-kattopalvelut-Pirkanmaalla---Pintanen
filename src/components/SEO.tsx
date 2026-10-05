@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
-import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_URL, canonicalUrl, withBrand } from '@/data/seo';
-import type { Crumb } from '@/components/Breadcrumbs';
+import { DEFAULT_DESCRIPTION, canonicalUrl, withBrand } from '@/data/seo';
 
 interface SEOProps {
   title?: string;
@@ -16,14 +15,11 @@ interface SEOProps {
   noindex?: boolean;
   /** og:type, oletus "website". Artikkelit käyttävät arvoa "article". */
   ogType?: 'website' | 'article';
-  /** Tuota murupolku-schema. Artikkelit tuottavat omansa. */
+  /** Tuota kaksitasoinen murupolku-schema (Etusivu › sivu). Artikkelit tuottavat omansa. */
   breadcrumb?: boolean;
-  /**
-   * Murupolun välitasot ja nykyinen sivu (sama lista kuin näkyvässä Breadcrumbs-komponentissa).
-   * Jos puuttuu, tuotetaan kaksitasoinen Etusivu › sivu.
-   */
-  breadcrumbs?: Crumb[];
 }
+
+const defaultOgImage = "https://pintanen.fi/images/Pictures-1500/tummansininen-puutalo-ulkomaalaus-jalkeen-1500.webp";
 
 const SEO = ({
   title,
@@ -32,30 +28,28 @@ const SEO = ({
   noindex = false,
   ogType = 'website',
   breadcrumb = true,
-  breadcrumbs,
 }: SEOProps) => {
   const { pathname } = useLocation();
   const pageTitle = withBrand(title);
   const pageDescription = description || DEFAULT_DESCRIPTION;
   const canonical = canonicalUrl(pathname);
-  const isHome = canonical === `${SITE_URL}/`;
-  const imageUrl = ogImage || DEFAULT_OG_IMAGE.url;
-  const isDefaultOgImage = imageUrl === DEFAULT_OG_IMAGE.url;
+  const isHome = canonical === 'https://pintanen.fi/';
+  const imageUrl = ogImage || defaultOgImage;
+  const isDefaultOgImage = imageUrl === defaultOgImage;
 
-  const crumbs: Crumb[] = breadcrumbs ?? [{ name: pageTitle.replace(/\s*\|.*$/, '') }];
   const breadcrumbJsonLd =
     breadcrumb && !noindex && !isHome
       ? {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Etusivu', item: `${SITE_URL}/` },
-            ...crumbs.map((c, i) => ({
+            { '@type': 'ListItem', position: 1, name: 'Etusivu', item: 'https://pintanen.fi/' },
+            {
               '@type': 'ListItem',
-              position: i + 2,
-              name: c.name,
-              item: i === crumbs.length - 1 || !c.path ? canonical : canonicalUrl(c.path),
-            })),
+              position: 2,
+              name: pageTitle.replace(/\s*\|.*$/, ''),
+              item: canonical,
+            },
           ],
         }
       : null;
@@ -75,8 +69,8 @@ const SEO = ({
       <meta property="og:site_name" content="Pintanen Oy" />
       <meta property="og:image" content={imageUrl} />
       {isDefaultOgImage && <meta property="og:image:type" content="image/webp" />}
-      {isDefaultOgImage && <meta property="og:image:width" content={String(DEFAULT_OG_IMAGE.width)} />}
-      {isDefaultOgImage && <meta property="og:image:height" content={String(DEFAULT_OG_IMAGE.height)} />}
+      {isDefaultOgImage && <meta property="og:image:width" content="1500" />}
+      {isDefaultOgImage && <meta property="og:image:height" content="2000" />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />

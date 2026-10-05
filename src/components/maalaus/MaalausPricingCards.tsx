@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { Check } from "lucide-react";
 import { Clock } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
@@ -5,28 +6,39 @@ import { maalausPrices, fmtCardRange, fmtCardAfter } from '@/data/prices';
 
 const cards = maalausPrices.cards;
 
-/** Hintakortit säilyvät sellaisinaan (sääntö). Sisältölista noudattaa sovittua sanastoa. */
-const pricingIncludes = ['Homepesu', 'Irtoavan maalin kaavinta', 'Pohjamaali paljaisiin kohtiin', 'Pintamaali pensselillä'];
+const pricingIncludes = [
+  'Huolellinen suojaus',
+  'Homepesu ja kaavinta',
+  'Puupuhtaiden pintojen pohjamaalaus',
+  'Pintamaalaus',
+];
 
-const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintalaskuri/?palvelu=maalaus', calculatorLabel }: { cityName?: string; calculatorHref?: string; calculatorLabel?: string }) => {
+const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintalaskuri?palvelu=maalaus', calculatorLabel }: { cityName?: string; calculatorHref?: string; calculatorLabel?: string }) => {
   return (
     <section className="section-padding bg-secondary">
       <div className="section-container max-w-5xl mx-auto">
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="text-center mb-10"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
-            Mitä talon maalaus maksaa{cityName === 'Pirkanmaa' ? ' Pirkanmaalla' : ` – ${cityName}`}?
+            Paljonko maksaa talon maalaus – {cityName}?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Hintaan kuuluu koko työ ja siivous. Piilokuluja ei ole.
+            Haluamme olla hinnoittelussamme täysin avoimia. Lopullinen hinta määräytyy maalattavan pinta-alan, kohteen korkeuden ja erityisesti pohjatöiden vaativuuden perusteella.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {cards.map((card, i) => (
-            <div
+            <motion.div
               key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
               className={`relative bg-card rounded-2xl shadow-sm flex flex-col overflow-hidden ${
                 card.featured
                   ? 'border-2 border-accent md:scale-105 md:shadow-lg'
@@ -66,7 +78,7 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
                 </div>
 
                 <Link
-                  to="/tarjouspyynto/?palvelu=maalaus"
+                  to="/tarjouspyynto?palvelu=maalaus"
                   className={`inline-flex items-center justify-center w-full py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-md text-sm ${
                     card.featured
                       ? 'bg-accent-strong text-accent-foreground'
@@ -76,21 +88,17 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
                   Pyydä tarjous tästä
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto">
-          Työn osuudesta saat kotitalousvähennyksen. Voit maksaa myös kuukausierissä. Kysy lisää arviokäynnillä.
-        </p>
-
-        <div className="text-center mt-6">
+        <div className="text-center mt-10">
           <Link
             to={calculatorHref}
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{ backgroundColor: 'hsl(38, 60%, 65%)', color: 'hsl(215, 25%, 15%)' }}
           >
-            {calculatorLabel ?? `Laske hinta: talon maalaus ${cityName}`}
+            {calculatorLabel ?? `Laske hinta: Talon maalaus ${cityName}`}
           </Link>
         </div>
       </div>

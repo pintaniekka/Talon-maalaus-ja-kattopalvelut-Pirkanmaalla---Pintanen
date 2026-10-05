@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Building2 } from "@/components/icons/BrandIcons";
-import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
+import { GOOGLE_PROFILE_URL } from "@/data/company";
 
 const heroBase = "/images/Eerik-maalaa/Eerik-maalaa-kattoa";
 const heroSrc = `${heroBase}-1200.avif`;
@@ -32,21 +32,21 @@ const Hero = () => {
 
           <p className="hero-lead text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl leading-relaxed font-sans">
             <strong className="text-foreground">Perheyritys</strong>, jossa{" "}
-            <strong className="text-foreground">yrittäjät tekevät työn itse</strong>:{" "}
+            <strong className="text-foreground">yrittäjät tekevät työn itse</strong> –{" "}
             <strong className="text-foreground">tiilikaton pinnoitukset</strong> ja{" "}
-            <strong className="text-foreground">talon maalaukset</strong> Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta.
+            <strong className="text-foreground">talon maalaukset</strong> Pirkanmaalla.
           </p>
 
           <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4 sm:gap-6 mb-10 md:mb-12">
             <Link
-              to="/hintalaskuri/"
+              to="/hintalaskuri"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-paint-yellow hover:bg-paint-yellow-hover text-paint-yellow-foreground font-heading font-extrabold rounded-2xl transition-all hover:scale-[1.03] shadow-xl shadow-paint-yellow/40 text-lg group"
             >
               Laske hinta
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
-              to="/tarjouspyynto/"
+              to="/tarjouspyynto"
               className="inline-flex items-center justify-center px-8 py-4 bg-card border-2 border-accent text-accent-ink font-heading font-extrabold rounded-2xl hover:bg-accent-strong hover:text-accent-foreground transition-all text-lg"
             >
               Ilmainen arviokäynti
@@ -68,21 +68,21 @@ const Hero = () => {
               </span>
             </a>
             <div className="flex flex-col">
-              <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">{LUVUT.pinnoitetutKatot}</span>
+              <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">200+</span>
               <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest">
-                Pinnoitettua kattoa
+                Projektia
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">{LUVUT.maalatutTalot}</span>
+              <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">5+ v</span>
               <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest">
-                Maalattua taloa
+                Kokemusta
               </span>
             </div>
             <div className="flex flex-col">
               <span className="text-accent-ink font-heading font-extrabold text-2xl md:text-3xl">0 €</span>
               <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest">
-                Arviokäynti
+                Kartoituskäynti
               </span>
             </div>
           </div>
@@ -93,9 +93,7 @@ const Hero = () => {
           <img
             src={heroSrc}
             srcSet={heroSrcSet}
-            alt="Eerik maalaa tiilikattoa ruiskulla"
-            width={1200}
-            height={1600}
+            alt="Eerik maalaa kattoa Pirkanmaalla"
             sizes="(max-width: 1024px) 100vw, 34vw"
             className="absolute inset-0 w-full h-full object-cover"
             decoding="sync"

@@ -3,8 +3,7 @@ import fs from "fs";
 import path from "path";
 import { getCanonicalRoutes, buildLlmsTxt, buildSitemapXml } from "@/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl } from "@/data/seo";
-import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
-import { allCities } from "@/data/cityData";
+import { applySeo } from "../../vite-plugin-spa-routes";
 
 const routes = getCanonicalRoutes().map((r) => r.path);
 
@@ -49,19 +48,6 @@ describe("staattinen head (vite-plugin-spa-routes)", () => {
     expect(html.match(/<title>/g)).toHaveLength(1);
   });
 
-  it("index.html:ssä ei ole keywords-metaa ja jakokuva on vaakakuva (V24, V25)", () => {
-    expect(indexHtml).not.toContain('name="keywords"');
-    expect(indexHtml).toContain('<meta property="og:image:width" content="1500" />');
-    expect(indexHtml).toContain('<meta property="og:image:height" content="1125" />');
-  });
-
-  it("areaServed sisältää kaikki toiminta-alueen paikkakunnat (V16)", () => {
-    const html = applyAreaServed(indexHtml);
-    for (const c of allCities) expect(html).toContain(`"name": "${c.name}"`);
-    const schema = html.match(/<script type="application\/ld\+json">\s*(\{[\s\S]*?)\s*<\/script>/)![1];
-    expect(JSON.parse(schema).areaServed).toHaveLength(allCities.length + 2);
-  });
-
   it("artikkelin kuva korvaa oletuskuvan ja sen mitat poistetaan", () => {
     const html = applySeo(indexHtml, "/artikkelit/x", {
       title: "A",
@@ -76,48 +62,15 @@ describe("staattinen head (vite-plugin-spa-routes)", () => {
 });
 
 describe("llms.txt ja sitemap", () => {
-  it("llms.txt listaa palvelut, hinnat, työvaiheet, rajaukset ja julkaistut artikkelit", () => {
+  it("llms.txt listaa palvelut, hinnat ja julkaistut artikkelit", () => {
     const txt = buildLlmsTxt();
     expect(txt.startsWith("# Pintanen Oy")).toBe(true);
     expect(txt).toContain("https://pintanen.fi/tiilikaton-pinnoitus-pirkanmaa/");
-    expect(txt).toContain("## Näin tiilikaton pinnoitus tehdään");
-    expect(txt).toContain("## Mitä emme tee");
     expect(txt).toContain("## Artikkelit");
-    expect(txt).toContain("https://pintanen.fi/tiilikaton-pinnoitus-tampere/");
-    // Säännöt: ei neliöhintaa, ei "alkaen"-hintaa, ei prosenttisäästöväitettä
-    expect(txt).not.toMatch(/€\/m²|alkaen \d|alk\. |jopa \d+ %/);
   });
 
-  it("jokaisella sivulla on sitemapissa lastmod (P5)", () => {
-    const xml = buildSitemapXml();
-    expect(xml).toMatch(/artikkelit\/milloin-pinnoittaa-tiilikatto\/<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
-    expect((xml.match(/<lastmod>/g) ?? []).length).toBe((xml.match(/<loc>/g) ?? []).length);
-  });
-});
-
-describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
-  it("lähdekoodin teksteissä ei ole kiellettyjä sanoja eikä ristiriitaisia lukuja", () => {
-    const srcDir = path.resolve(__dirname, "..");
-    const files: string[] = [];
-    const walk = (dir: string) => {
-      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-        const full = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-          if (entry.name !== "test") walk(full);
-        } else if (/\.tsx?$/.test(entry.name)) files.push(full);
-      }
-    };
-    walk(srcDir);
-    // Puhdistussivut jäävät ennalleen (palvelu poistuu), joten ne jätetään tarkistuksen ulkopuolelle.
-    const skip = /Puhdistus|puhdistusFAQ|puhdistus-itse|HinnatKatonPuhdistus/;
-    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /15[-–]20 vuotta/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /€\/m²/, /200\+/, /Yli 200/];
-    const hits: string[] = [];
-    for (const file of files) {
-      if (skip.test(file)) continue;
-      const source = fs.readFileSync(file, "utf-8");
-      for (const re of forbidden) if (re.test(source)) hits.push(`${path.relative(srcDir, file)}: ${re}`);
-    }
-    expect(hits).toEqual([]);
+  it("artikkeleilla on sitemapissa lastmod", () => {
+    expect(buildSitemapXml()).toMatch(/artikkelit\/milloin-pinnoittaa-tiilikatto\/<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   });
 });
 

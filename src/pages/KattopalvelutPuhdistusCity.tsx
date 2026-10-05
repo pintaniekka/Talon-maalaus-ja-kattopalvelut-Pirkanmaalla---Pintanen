@@ -21,7 +21,7 @@ const KattopalvelutPuhdistusCity = ({ citySlug: propSlug }: { citySlug?: string 
   const city = propSlug || paramCity;
   const cityData = city ? getCityBySlug(city) : undefined;
 
-  if (!cityData) return <Navigate to="/katon-puhdistus-pirkanmaa/" replace />;
+  if (!cityData) return <Navigate to="/katon-puhdistus-pirkanmaa" replace />;
 
   const features = [
     { icon: Droplets, title: "Mekaaninen puhdistus", description: "Puhdistamme katon mekaanisesti ilman painepesua – painepesuri voi kuluttaa tiilen pintaa." },

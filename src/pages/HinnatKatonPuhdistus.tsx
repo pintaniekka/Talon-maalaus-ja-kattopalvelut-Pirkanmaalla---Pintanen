@@ -84,7 +84,7 @@ const HinnatKatonPuhdistus = () => {
             Katso hintaesimerkit
           </a>
           <Link
-            to="/tarjouspyynto/?palvelu=puhdistus"
+            to="/tarjouspyynto?palvelu=puhdistus"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95 text-base"
             style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
           >
@@ -172,7 +172,7 @@ const HinnatKatonPuhdistus = () => {
               <p>Katon kunto vaatii joskus laajempaa huolenpitoa. Tutustu myös tiilikaton pinnoituksen hintoihin.</p>
             </div>
             <div className="mt-6 text-center">
-              <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" className="inline-flex items-center gap-2 text-primary font-semibold hover:underline text-lg">
+              <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa" className="inline-flex items-center gap-2 text-primary font-semibold hover:underline text-lg">
                 Katso tiilikaton pinnoituksen hintaesimerkit <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

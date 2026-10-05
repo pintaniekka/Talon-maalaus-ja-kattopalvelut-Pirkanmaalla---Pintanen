@@ -7,15 +7,11 @@
  *    staattiseen HTML:ään, jotta JavaScriptiä ajamattomat lukijat (some-jakojen
  *    esikatselut, tekoälyhakujen crawlerit) näkevät oikean otsikon ja kuvauksen.
  *
- * Kaupunkisivujen titlet ja kuvaukset tuotetaan yhdestä mallista (auditoinnin korjaukset 2 ja 3,
- * V22): sama luku ja sama lupaus joka paikkakunnalla, eikä kuvaus kasva yli 160 merkin.
- *
  * EI komponentti-importteja: tiedosto luetaan myös Nodessa build-aikana.
  */
 import { type CityData, allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./cityData";
+import { getAreaCityContent } from "./areaCityContent";
 import { articles } from "./articles";
-import { getCityHeroBase } from "./projects";
-import { PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
 import { getResponsiveSrc, getResponsiveSrcSet } from "../lib/storage";
 
 export interface RouteSeo {
@@ -32,50 +28,29 @@ export interface RouteSeo {
   hero?: { base: string; sizes: string };
 }
 
-export const SITE_URL = "https://pintanen.fi";
-
-/** Oletusjakokuva: vaakakuva omasta kohteesta (V24). Pystykuva rajautui Facebookissa ja WhatsAppissa. */
-export const DEFAULT_OG_IMAGE = {
-  url: `${SITE_URL}/images/Pictures-1500/moderni-tumma-puutalo-julkisivumaalaus-valmis-1500.webp`,
-  width: 1500,
-  height: 1125,
-} as const;
-
-/** Koko ruudun hero (ServicePageHero, hintalaskurin ja tarjouspyynnön tausta). */
+/** Koko ruudun hero (ServicePageHero). */
 const fullHero = (base: string) => ({ base, sizes: "100vw" });
-/** Korttihero (PageHero): kuva on oikealla kolmanneksella tietokoneella, koko leveydellä puhelimella. */
-const cardHero = (base: string) => ({ base, sizes: "(max-width: 1024px) 100vw, 34vw" });
 
-export const HERO_BASE = {
-  pinnoitus: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-  puhdistus: "puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen",
-  maalaus: "tummansininen-puutalo-ulkomaalaus-jalkeen",
-  alue: "puutalon-katon-ja-seinien-maalaus-tampere",
-  pinnoitusHinta: "tiilikaton-pesu-ja-sammaleenpoisto",
-  maalausHinta: "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
-  meista: "eerik-tiilikatolla-tampere",
-  toimintaAlueet: "keltainen-omakotitalo-julkisivumaalaus-jalkeen",
-  referenssit: "vastamaalattu-tiilikatto-kattopinnoitus-jalkeen",
-} as const;
-
-/** Kaupunkisivun hero-kuva: paikkakunnan oma kohde, jos sellainen on, muuten palvelun vakiokuva. */
-export const cityHeroBase = (slug: string, service: "pinnoitus" | "maalaus" | "alue"): string =>
-  getCityHeroBase(slug, service === "alue" ? undefined : service) ??
-  (service === "pinnoitus" ? HERO_BASE.pinnoitus : service === "maalaus" ? HERO_BASE.maalaus : HERO_BASE.alue);
+const HERO = {
+  pinnoitus: fullHero("kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen"),
+  puhdistus: fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
+  maalaus: fullHero("moderni-tumma-puutalo-julkisivumaalaus-valmis"),
+  alue: fullHero("ammattilainen-maalaa-talon-ulkoverhousta-pensselilla"),
+};
 
 /** Staattisten sivujen pääkuvat (samat kuin sivukomponenttien heroissa). */
 const staticHero: Record<string, RouteSeo["hero"]> = {
-  "/tiilikaton-pinnoitus-pirkanmaa": cardHero(HERO_BASE.pinnoitus),
-  "/katon-puhdistus-pirkanmaa": fullHero(HERO_BASE.puhdistus),
-  "/talon-maalaus-pirkanmaa": cardHero(HERO_BASE.maalaus),
+  "/tiilikaton-pinnoitus-pirkanmaa": HERO.pinnoitus,
+  "/katon-puhdistus-pirkanmaa": HERO.puhdistus,
+  "/talon-maalaus-pirkanmaa": HERO.maalaus,
   "/hintalaskuri": fullHero("hintalaskuri-tausta"),
   "/tarjouspyynto": fullHero("hintalaskuri-tausta"),
-  "/tiilikaton-pinnoitus-hinta-pirkanmaa": cardHero(HERO_BASE.pinnoitusHinta),
-  "/katon-puhdistus-hinta-pirkanmaa": fullHero(HERO_BASE.puhdistus),
-  "/talon-maalaus-hinta-pirkanmaa": cardHero(HERO_BASE.maalausHinta),
-  "/meista": cardHero(HERO_BASE.meista),
-  "/toiminta-alueet": cardHero(HERO_BASE.toimintaAlueet),
-  "/referenssit": cardHero(HERO_BASE.referenssit),
+  "/tiilikaton-pinnoitus-hinta-pirkanmaa": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
+  "/katon-puhdistus-hinta-pirkanmaa": fullHero("puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen"),
+  "/talon-maalaus-hinta-pirkanmaa": fullHero("vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen"),
+  "/meista": fullHero("ammattilainen-maalaa-talon-ulkoverhousta-pensselilla"),
+  "/toiminta-alueet": fullHero("keltainen-omakotitalo-julkisivumaalaus-jalkeen"),
+  "/referenssit": fullHero("tiilikaton-tehopesu-ja-sammaleenpoisto"),
 };
 
 /** Preload-linkin attribuutit pääkuvalle. */
@@ -85,9 +60,10 @@ export const heroPreload = (hero: NonNullable<RouteSeo["hero"]>) => ({
   imagesizes: hero.sizes,
 });
 
+export const SITE_URL = "https://pintanen.fi";
 export const DEFAULT_TITLE = "Tiilikaton pinnoitus ja talon maalaus Pirkanmaa | Pintanen";
 export const DEFAULT_DESCRIPTION =
-  "Pintanen Oy pinnoittaa tiilikattoja ja maalaa taloja Pirkanmaalla ja lähikunnissa. Yrittäjät tekevät työn itse. Ilmainen arviokäynti ja kirjallinen takuu.";
+  "Tiilikaton pinnoitus, katon puhdistus ja talon maalaus takuutyönä Pirkanmaalla. Yrittäjät mukana jokaisessa työssä. Pyydä maksuton arvio.";
 
 /** Lisää "| Pintanen" otsikon loppuun, jos sitä ei vielä ole. */
 export const withBrand = (title?: string): string =>
@@ -105,7 +81,7 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/artikkelit": {
     title: "Artikkelit ja oppaat",
     description:
-      "Lue Pintasen oppaat tiilikaton pinnoituksesta ja talon maalauksesta. Käytännön neuvoja yrittäjiltä, jotka tekevät työn itse Pirkanmaalla.",
+      "Lue Pintasen oppaat tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Käytännön neuvoja pirkanmaalaisilta ammattilaisilta.",
   },
   "/tarjouspyynto": {
     title: "Pyydä tarjous – ilmainen kuntotarkastus",
@@ -124,29 +100,33 @@ export const staticSeo: Record<string, RouteSeo> = {
   },
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": {
     title: "Tiilikaton pinnoitus hinta 2027 – hintaesimerkit ja laskuri",
-    description: `Tiilikaton pinnoitus maksaa omakotitalossa yleensä ${PINNOITUS_HINTA}. Katso hintaesimerkit, laske arvio laskurilla ja lue, mitä hintaan kuuluu. Pirkanmaa ja Kanta-Häme.`,
+    description:
+      "Tiilikaton pinnoitus maksaa omakotitalossa yleensä 2 850–7 000 €. Katso hintaesimerkit, laske arvio laskurilla ja lue, mitä hintaan kuuluu. Pirkanmaa ja Kanta-Häme.",
   },
   "/talon-maalaus-hinta-pirkanmaa": {
     title: "Talon maalaus hinta 2027 – hintaesimerkit ja laskuri",
-    description: `Talon ulkomaalaus maksaa omakotitalossa yleensä ${MAALAUS_HINTA}. Katso hintaesimerkit, laske arvio laskurilla ja lue, mistä hinta syntyy. Pirkanmaa.`,
+    description:
+      "Talon ulkomaalaus maksaa omakotitalossa yleensä 3 500–11 000 €. Katso hintaesimerkit, laske arvio laskurilla ja lue, mistä hinta syntyy. Pirkanmaa.",
   },
   "/meista": {
-    title: "Meistä: veljekset Eerik ja Eemil tekevät työn itse",
+    title: "Pintanen Oy – Perheyritys katto- ja maalaustöissä",
     description:
-      "Pintanen Oy on nuori perheyritys. Eerik pinnoittaa tiilikattoja ja Eemil maalaa taloja Pirkanmaalla ja Kanta-Hämeessä. Ei välikäsiä, kirjallinen takuu.",
+      "Pintanen on perheyritys, joka on erikoistunut katto- ja seinämaalauksiin. Teemme työt itse ja panostamme huolelliseen lopputulokseen.",
   },
   "/tiilikaton-pinnoitus-pirkanmaa": {
-    title: "Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Pintanen",
-    description: `Tiilikaton pinnoitus Pirkanmaalla. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Hinta yleensä ${PINNOITUS_HINTA}, 5 v takuu, ilmainen kuntotarkastus.`,
+    title: "Tiilikaton pinnoitus Pirkanmaa & Tampere | 5v takuu | Pintanen",
+    description:
+      "Tiilikaton pinnoitus Pirkanmaalla. Säästä jopa 80 % vs. kattoremontti! Hyödynnä kotitalousvähennys ja tilaa ilmainen kuntoarvio. 5 vuoden takuu työlle.",
   },
   "/katon-puhdistus-pirkanmaa": {
     title: "Katon puhdistus Pirkanmaa – Ilmainen arvio",
     description:
-      "Tiilikaton puhdistus Pirkanmaalla. Sammal ja lika poistetaan mekaanisesti ilman painepesua, ja katto saa kasvustontorjunta-aineen. Ilmainen kuntotarkastus.",
+      "Tiilikaton puhdistus Pirkanmaalla - tehokas suoja katollesi. Sammaleet ja lika poistetaan mekaanisesti.",
   },
   "/talon-maalaus-pirkanmaa": {
-    title: "Talon maalaus Pirkanmaa – ulkomaalaus ja julkisivumaalaus",
-    description: `Talon maalaus Pirkanmaalla. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin ja maalaamme pensselillä. Hinta yleensä ${MAALAUS_HINTA}, 2 v takuu.`,
+    title: "Talon maalaus Pirkanmaa | Hintalaskuri",
+    description:
+      "Laadukas talon ulkomaalaus Pirkanmaalla. Yrittäjä tekee työn. Laske hinta hintalaskurilla, hyödynnä kotitalousvähennys ja tilaa ilmainen arvio!",
   },
   "/tietosuoja": {
     title: "Tietosuojaseloste",
@@ -154,44 +134,36 @@ export const staticSeo: Record<string, RouteSeo> = {
       "Pintanen Oy:n tietosuojaseloste: mitä tietoja keräämme yhteydenotto- ja tarjouspyyntölomakkeilla, mihin niitä käytetään ja mitkä ovat oikeutesi.",
   },
   "/referenssit": {
-    title: "Referenssit – kuvia omista kohteistamme",
+    title: "Referenssit – Katon pinnoitus ja talon maalaus",
     description:
-      "Kuvia Pintasen töistä Pirkanmaalla ja lähikunnissa: tiilikattoja ennen ja jälkeen pinnoituksen sekä maalattuja taloja. Kuvat ovat omista kohteistamme.",
+      "Tutustu toteuttamiimme katto- ja maalausprojekteihin Pirkanmaalla. Näe ero ennen maalausta ja maalauksen jälkeen.",
   },
   "/toiminta-alueet": {
-    title: "Toiminta-alueet – Pirkanmaa ja lähikunnat",
+    title: "Toiminta-alueet Pirkanmaa ja lähikunnat",
     description:
-      "Pinnoitamme tiilikattoja ja maalaamme taloja Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta. Katso kunnat ja pyydä ilmainen arviokäynti.",
+      "Palvelemme koko Pirkanmaan alueella ja lähikunnissa. Katon pinnoitus, puhdistus ja talon maalaus noin tunnin säteellä Tampereelta.",
   },
 };
 
-/** Pinnoituksen kaupunkisivu: sama malli joka paikkakunnalla (S2, V22). */
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
-  title: `Tiilikaton pinnoitus ${city.name} | Hinta ${PINNOITUS_HINTA} | Pintanen`,
-  description: `Tiilikaton pinnoitus ${city.cityIn}. Yrittäjä tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
+  title: city.pinnoitusMetaTitle || `Tiilikaton pinnoitus ${city.name}`,
+  description:
+    city.pinnoitusMetaDesc ||
+    `Tiilikaton maalauspinnoitus ${city.name} – pidentää katon ikää jopa 15-20 vuotta. 5 vuoden takuu.`,
 });
 
 export const puhdistusCitySeo = (city: CityData): RouteSeo => ({
   title: city.puhdistusMetaTitle || `Tiilikaton puhdistus ${city.name}`,
   description:
     city.puhdistusMetaDesc ||
-    `Tiilikaton mekaaninen puhdistus ja sammaleentorjunta ${city.cityIn}. Ilmainen kuntotarkastus ja kirjallinen tarjous.`,
+    `Tiilikaton mekaaninen puhdistus ja sammaleentorjunta ${city.name}. Alkaen 800 €. Ilmainen kuntotarkastus.`,
 });
 
-/** Maalauksen kaupunkisivu: hakutermit "ulkomaalaus" ja "julkisivumaalaus" titleen (korjaus 2). */
-export const maalausCitySeo = (city: CityData): RouteSeo => {
-  const full = `Talon maalaus ${city.name} – ulkomaalaus ja julkisivumaalaus | Pintanen`;
-  const short = `Talon maalaus ${city.name} – ulkomaalaus | Pintanen`;
-  return {
-    title: full.length <= 62 ? full : short,
-    description: `Talon maalaus ${city.cityIn}. Eemil pesee, kaapii ja maalaa pensselillä itse. Ilmainen arviokäynti, 2 v takuu ja kotitalousvähennys. Hinta ${MAALAUS_HINTA}.`,
-  };
-};
-
-/** Aluesivu: kokoava sivu, joka linkittää palvelusivuille. Ei kilpaile palvelusivujen kanssa (korjaus 2). */
-export const areaCitySeo = (city: CityData): RouteSeo => ({
-  title: `Maalaus- ja kattopalvelut ${city.name} | Pintanen`,
-  description: `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Yrittäjät tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
+export const maalausCitySeo = (city: CityData): RouteSeo => ({
+  title: city.maalausMetaTitle || `Talon maalaus ${city.name} | Hintalaskuri | Pintanen`,
+  description:
+    city.maalausMetaDesc ||
+    `Laadukas talon ulkomaalaus ${city.name}. Yrittäjä tekee työn. Laske hinta hintalaskurilla, hyödynnä kotitalousvähennys ja tilaa ilmainen arvio!`,
 });
 
 /** SEO-tiedot mille tahansa kanoniselle polulle (ilman loppukauttaviivaa). */
@@ -210,16 +182,19 @@ export const getRouteSeo = (path: string): RouteSeo | undefined => {
   }
 
   for (const city of allCities) {
-    if (path === `/maalauspalvelut-${city.slug}`) return { ...areaCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "alue")) };
+    if (path === `/maalauspalvelut-${city.slug}`) {
+      const area = getAreaCityContent(city.slug);
+      if (area) return { title: area.alueMetaTitle, description: area.alueMetaDesc, hero: HERO.alue };
+    }
   }
   for (const city of pinnoitusCities) {
-    if (path === `/tiilikaton-pinnoitus-${city.slug}`) return { ...pinnoitusCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "pinnoitus")) };
+    if (path === `/tiilikaton-pinnoitus-${city.slug}`) return { ...pinnoitusCitySeo(city), hero: HERO.pinnoitus };
   }
   for (const city of puhdistusCities) {
-    if (path === `/katon-puhdistus-${city.slug}`) return { ...puhdistusCitySeo(city), hero: fullHero(HERO_BASE.puhdistus) };
+    if (path === `/katon-puhdistus-${city.slug}`) return { ...puhdistusCitySeo(city), hero: HERO.puhdistus };
   }
   for (const city of maalausCities) {
-    if (path === `/talon-maalaus-${city.slug}`) return { ...maalausCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "maalaus")) };
+    if (path === `/talon-maalaus-${city.slug}`) return { ...maalausCitySeo(city), hero: HERO.maalaus };
   }
   return undefined;
 };

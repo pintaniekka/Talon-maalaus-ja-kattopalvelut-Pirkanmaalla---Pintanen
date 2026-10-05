@@ -81,9 +81,9 @@ const Body = () => (
     </p>
     <p>
       Suuntaa antavan hinnan omalle talollesi saat{" "}
-      <Link to="/talon-maalaus-hinta-pirkanmaa/">maalauksen hintalaskurilla</Link>. Lue myös{" "}
-      <Link to="/artikkelit/kuinka-usein-puutalo-maalataan/">kuinka usein puutalo pitää maalata</Link> ja katso
-      palvelu sivulta <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.
+      <Link to="/talon-maalaus-hinta-pirkanmaa">maalauksen hintalaskurilla</Link>. Lue myös{" "}
+      <Link to="/artikkelit/kuinka-usein-puutalo-maalataan">kuinka usein puutalo pitää maalata</Link> ja katso
+      palvelu sivulta <Link to="/talon-maalaus-pirkanmaa">talon maalaus Pirkanmaalla</Link>.
     </p>
     <Figure
       image="puutalon-ja-parvekkeen-huoltomaalaus-jalkeen"

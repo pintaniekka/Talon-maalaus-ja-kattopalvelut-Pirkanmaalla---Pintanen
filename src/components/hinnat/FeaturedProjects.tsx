@@ -15,7 +15,7 @@ const FeaturedProjects = ({ service, title }: { service: ProjectService; title: 
         </div>
         <ProjectGrid items={items} />
         <div className="text-center mt-8">
-          <Link to="/referenssit/" className="text-primary font-semibold hover:underline">
+          <Link to="/referenssit" className="text-primary font-semibold hover:underline">
             Katso lisää referenssejä
           </Link>
         </div>

@@ -43,11 +43,8 @@ const Hintalaskuri = () => {
           <div className="max-w-2xl mx-auto text-center text-primary-foreground mb-8">
             <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary-foreground">Hintalaskuri</h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 leading-relaxed">
-              Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa.
-            </p>
-            <p className="mt-4 text-base text-primary-foreground/80 leading-relaxed">
-              Katon arvio perustuu katon kokoon, jyrkkyyteen ja kuntoon. Talon arvio perustuu talon kokoon, kerroksiin ja pohjatöiden
-              määrään. Arvio on suuntaa antava. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen, kun olemme nähneet kohteen.
+              Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Arvio on suuntaa antava, ja tarkan
+              hinnan saat ilmaisen arviokäynnin jälkeen.
             </p>
           </div>
 

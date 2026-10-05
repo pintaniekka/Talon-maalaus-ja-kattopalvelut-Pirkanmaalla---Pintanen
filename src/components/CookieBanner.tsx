@@ -35,21 +35,22 @@ const CookieBanner = () => {
   };
 
   const primary =
-    "min-h-[40px] lg:min-h-[44px] px-4 lg:px-5 rounded-xl bg-accent-strong text-accent-foreground font-bold text-sm shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2";
+    "min-h-[44px] px-5 rounded-xl bg-accent-strong text-accent-foreground font-bold text-sm shadow-md transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2";
   const secondary =
-    "min-h-[40px] lg:min-h-[44px] px-4 lg:px-5 rounded-xl border border-border bg-background text-foreground font-semibold text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+    "min-h-[44px] px-5 rounded-xl border border-border bg-background text-foreground font-semibold text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
   return (
     <div
       role="region"
       aria-label="Evästeet"
-      className="fixed z-[70] left-3 right-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] lg:left-4 lg:right-auto lg:bottom-4 lg:w-[26rem] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl text-[13px]"
+      className="fixed z-[70] left-3 right-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] lg:left-4 lg:right-auto lg:bottom-4 lg:w-[26rem] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
     >
-      <div className="h-1 w-full bg-gradient-to-r from-accent via-paint-yellow to-accent" aria-hidden="true" />
-      <div className="p-3 lg:p-5">
+      <div className="h-1.5 w-full bg-gradient-to-r from-accent via-paint-yellow to-accent" aria-hidden="true" />
+      <div className="p-4 lg:p-5">
+        <p className="font-heading font-bold text-foreground mb-1">Evästeet</p>
         <p className="text-[13px] lg:text-sm text-muted-foreground leading-snug lg:leading-relaxed">
-          <span className="font-heading font-bold text-foreground">Evästeet.</span> Käytämme evästeitä kävijämäärän seuraamiseen.{" "}
-          <Link to="/tietosuoja/" className="underline underline-offset-2 text-foreground">
+          Käytämme evästeitä sivuston kävijämäärän seuraamiseen.{" "}
+          <Link to="/tietosuoja" className="underline underline-offset-2 text-foreground">
             Tietosuojaseloste
           </Link>
         </p>
@@ -76,7 +77,7 @@ const CookieBanner = () => {
         )}
 
         {/* Puhelimessa oikea alakulma jää vapaaksi chat-napille. */}
-        <div className="mt-2.5 flex flex-wrap gap-2 pr-14 lg:pr-0">
+        <div className="mt-3 flex flex-wrap gap-2.5 pr-16 lg:pr-0">
           <button type="button" onClick={() => close(true)} className={`${primary} flex-1 sm:flex-none`}>
             {settingsOpen ? "Hyväksy kaikki" : "Hyväksy"}
           </button>

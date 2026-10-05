@@ -16,7 +16,6 @@ import path from "path";
 import type { ViteDevServer } from "vite";
 import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt } from "./src/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
-import { allCities } from "./src/data/cityData";
 
 const HOME_ONLY_TAG = /\s*<link\s[^>]*data-home-only[^>]*>/g;
 
@@ -67,22 +66,6 @@ export const applySeo = (html: string, routePath: string, seo: RouteSeo): string
 
 const EMPTY_ROOT = '<div id="root"></div>';
 
-/**
- * Yritys-scheman areaServed kaikista 24 paikkakunnasta (V16). index.html:ssä on vain maakunnat;
- * kunnat lisätään buildissa samasta listasta kuin reitit, jotta lista ei vanhene.
- */
-export const applyAreaServed = (html: string): string => {
-  const areas = [
-    { "@type": "AdministrativeArea", name: "Pirkanmaa" },
-    { "@type": "AdministrativeArea", name: "Kanta-Häme" },
-    ...allCities.map((c) => ({ "@type": "City", name: c.name })),
-  ];
-  const json = areas.map((a) => `          ${JSON.stringify(a).replace(/"@type":"/, '"@type": "').replace(/","name":"/, '", "name": "').replace(/"}$/, '" }')}`).join(",\n");
-  const re = /"areaServed": \[[\s\S]*?\n {8}\]/;
-  if (!re.test(html)) throw new Error('[spa-routes] index.html: "areaServed" puuttuu');
-  return html.replace(re, () => `"areaServed": [\n${json}\n        ]`);
-};
-
 type Prerender = (url: string) => Promise<{ html: string; headScripts: string }>;
 
 /**
@@ -114,7 +97,7 @@ export default function spaRoutes() {
 
       if (!fs.existsSync(indexPath)) return;
 
-      const baseHtml = applyAreaServed(fs.readFileSync(indexPath, "utf-8"));
+      const baseHtml = fs.readFileSync(indexPath, "utf-8");
       const subpageHtml = baseHtml.replace(HOME_ONLY_TAG, "");
       const routes = getAllRoutePaths();
       let withSeo = 0;

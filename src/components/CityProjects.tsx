@@ -5,6 +5,8 @@ interface CityProjectsProps {
   citySlug: string;
   cityIn: string;
   service?: ProjectService;
+  /** Ensimmäinen kohde isona. */
+  featureFirst?: boolean;
 }
 
 const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
@@ -17,7 +19,7 @@ const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
  * Kohdelohko: oman paikkakunnan oikeat kohteet. Ei näy, jos paikkakunnalta ei ole kuvia.
  * Jos omia kohteita on alle kolme, rivi täytetään muun Pirkanmaan kohteilla ja otsikko kertoo sen.
  */
-const CityProjects = ({ citySlug, cityIn, service }: CityProjectsProps) => {
+const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsProps) => {
   const { items, hasNearby } = getProjectItemsWithNearby(citySlug, service);
   if (items.length === 0) return null;
 
@@ -31,7 +33,7 @@ const CityProjects = ({ citySlug, cityIn, service }: CityProjectsProps) => {
           </h2>
           <p className="text-muted-foreground">Kuvat ovat omista kohteistamme.</p>
         </div>
-        <ProjectGrid items={items} />
+        <ProjectGrid items={items} featureFirst={featureFirst && items.length >= 3} />
       </div>
     </section>
   );

@@ -1,14 +1,11 @@
 import { useParams, Navigate } from "react-router-dom";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
-import ProcessList from "@/components/ProcessList";
 import CityProjects from "@/components/CityProjects";
+import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
 import CityNeighborLinks from "@/components/CityNeighborLinks";
-import PinnoitusComparison from "@/components/pinnoitus/PinnoitusComparison";
-import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
 import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur";
-import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import SEO from "@/components/SEO";
@@ -18,7 +15,7 @@ import { getLocalCityFaq } from "@/data/cityFaq";
 import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
 import { pinnoitusPrices } from "@/data/prices";
-import { pinnoitusTyovaiheet, pinnoitusLyhyesti, PINNOITUS_HINTA } from "@/data/tyovaiheet";
+import { pinnoitusLyhyesti, PINNOITUS_HINTA } from "@/data/tyovaiheet";
 
 /**
  * Tiilikaton pinnoituksen kaupunkisivu. Järjestys (auditointi 8.3): hero → Lyhyesti → paikallinen
@@ -81,19 +78,9 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         </section>
       )}
 
+      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" featureFirst />
+      <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" />
-      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" />
-
-      <ProcessList
-        title={`Näin tiilikaton pinnoitus ${cityData.cityIn} etenee`}
-        intro="Omakotitalon katto valmistuu yleensä 2–4 työpäivässä. Välissä katto saa kuivua."
-        steps={pinnoitusTyovaiheet}
-        cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
-      />
-
-      <PinnoitusComparison cityIn={cityData.cityIn} />
-      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} />
-      <KotitalousVahennys />
       <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
 
       <FAQSection

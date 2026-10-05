@@ -39,11 +39,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Kattoremontti vai pinnoitus?',
     answer:
-      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa. Kattoremontteja emme tee.',
-  },
-  {
-    question: 'Pinnoitatteko myös peltikattoja?',
-    answer: 'Emme. Teemme vain tiilikattoja.',
+      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa.',
   },
   {
     question: 'Voiko tiilikaton pinnoittaa itse?',
@@ -81,16 +77,12 @@ export const maalausFAQ: FAQItem[] = [
   {
     question: 'Mitä pohjatöitä teette ennen maalausta?',
     answer:
-      'Pesemme seinät homepesuaineella. Kaavimme irtoavan maalin pois. Pohjamaalaamme paljaat kohdat. Sitten maalaamme pintamaalin pensselillä. Lautoja emme vaihda.',
+      'Pesemme seinät homepesuaineella. Kaavimme irtoavan maalin pois. Pohjamaalaamme paljaat kohdat. Sitten maalaamme pintamaalin pensselillä. Suojaamme terassit ja ikkunat huolellisesti ennen työtä.',
   },
   {
     question: 'Mitä maalia käytätte?',
     answer:
       'Valitsemme maalin vanhan maalin ja puun kunnon mukaan. Yleensä käytämme vesiohenteista talomaalia, joskus öljymaalia. Kerromme valinnan tarjouksessa.',
-  },
-  {
-    question: 'Maalaatteko myös sisätiloja tai taloyhtiöitä?',
-    answer: 'Emme. Maalaamme omakotitalojen, paritalojen ja mökkien ulkoseinät.',
   },
 ];
 
@@ -146,7 +138,7 @@ export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityI
     {
       question: 'Mitä pohjatöitä teette ennen maalausta?',
       answer:
-        'Pesemme seinät homepesuaineella. Kaavimme irtoavan maalin pois. Pohjamaalaamme paljaat kohdat. Sitten maalaamme pintamaalin pensselillä. Lautoja emme vaihda.',
+        'Pesemme seinät homepesuaineella. Kaavimme irtoavan maalin pois. Pohjamaalaamme paljaat kohdat. Sitten maalaamme pintamaalin pensselillä. Suojaamme terassit ja ikkunat huolellisesti ennen työtä.',
     },
     {
       question: 'Saako talon maalauksesta kotitalousvähennystä?',
@@ -185,11 +177,7 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: `Tiilikattoremontti vai pinnoitus ${paikka}?`,
       answer:
-        'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä. Kattoremontteja emme tee.',
-    },
-    {
-      question: 'Pinnoitatteko myös peltikattoja?',
-      answer: 'Emme. Teemme vain tiilikattoja.',
+        'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa.',
     },
   ];
 };

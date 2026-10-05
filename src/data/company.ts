@@ -15,10 +15,11 @@ export const paivaFi = (iso: string): string => {
   return `${d}.${m}.${y}`;
 };
 
-/** Yksi lukusarja koko sivustolle. Vanhat "yli 200 urakkaa" -luvut poistettu, koska ne eivät täsmänneet palvelusivujen kanssa. */
+/** Yksi lukusarja koko sivustolle (Eerikin päätös 5.10.2026). */
 export const LUVUT = {
-  pinnoitetutKatot: "yli 100",
-  maalatutTalot: "yli 60",
+  kohteet: "yli 200",
+  pinnoitetutKatot: "yli 130",
+  maalatutTalot: "yli 80",
   kokemusVuotta: "yli 5",
   googleArvio: "5,0 / 5",
 } as const;

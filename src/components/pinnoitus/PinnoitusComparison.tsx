@@ -21,14 +21,14 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
                   Pinnoitus riittää, jos <strong className="text-foreground">aluskate ja rakenteet ovat kunnossa</strong>. Silloin
-                  tiilet pestään, rikkinäiset vaihdetaan ja katto maalataan ruiskulla kahteen kertaan. Katto saa jopa 10–15 vuotta
+                  tiilet pestään, rikkinäiset vaihdetaan ja katto maalataan ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta
                   lisää ikää.
                 </p>
                 <p>
                   Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Pinnoitus maksaa yleensä{' '}
                   <strong className="text-foreground">{PINNOITUS_HINTA}</strong>. Uusi katto maksaa yleensä paljon enemmän.
                 </p>
-                <p>Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa. Kattoremontteja emme tee.</p>
+                <p>Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa.</p>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-4">

@@ -76,12 +76,11 @@ describe("staattinen head (vite-plugin-spa-routes)", () => {
 });
 
 describe("llms.txt ja sitemap", () => {
-  it("llms.txt listaa palvelut, hinnat, työvaiheet, rajaukset ja julkaistut artikkelit", () => {
+  it("llms.txt listaa palvelut, hinnat, työvaiheet ja julkaistut artikkelit", () => {
     const txt = buildLlmsTxt();
     expect(txt.startsWith("# Pintanen Oy")).toBe(true);
     expect(txt).toContain("https://pintanen.fi/tiilikaton-pinnoitus-pirkanmaa/");
     expect(txt).toContain("## Näin tiilikaton pinnoitus tehdään");
-    expect(txt).toContain("## Mitä emme tee");
     expect(txt).toContain("## Artikkelit");
     expect(txt).toContain("https://pintanen.fi/tiilikaton-pinnoitus-tampere/");
     // Säännöt: ei neliöhintaa, ei "alkaen"-hintaa, ei prosenttisäästöväitettä
@@ -110,7 +109,7 @@ describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
     walk(srcDir);
     // Puhdistussivut jäävät ennalleen (palvelu poistuu), joten ne jätetään tarkistuksen ulkopuolelle.
     const skip = /Puhdistus|puhdistusFAQ|puhdistus-itse|HinnatKatonPuhdistus/;
-    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /15[-–]20 vuotta/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /€\/m²/, /200\+/, /Yli 200/];
+    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /€\/m²/, /emme tee/i, /emme vaihda/i, /peltikat/i, /sisämaalau/i, /Emme\. /, /kirvesmies/];
     const hits: string[] = [];
     for (const file of files) {
       if (skip.test(file)) continue;

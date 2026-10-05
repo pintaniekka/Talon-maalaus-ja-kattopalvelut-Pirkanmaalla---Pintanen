@@ -42,7 +42,7 @@ export const trustFor = (variant: TrustVariant): TrustItem[] => {
     default:
       return [
         google,
-        { value: `${LUVUT.kokemusVuotta} v`, label: "Kokemusta" },
+        { value: LUVUT.kohteet, label: "Kohdetta" },
         { value: "2–5 v", label: "Takuu työlle" },
         { value: "0 €", label: "Arviokäynti", tone: "blue" },
       ];

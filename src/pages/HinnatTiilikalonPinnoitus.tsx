@@ -47,7 +47,7 @@ const faqItems = [
   { question: "Kuinka kauan pinnoitus kestää?", answer: "Työ kestää yleensä 2–4 päivää katon koon mukaan." },
   {
     question: "Kuinka pitkään pinnoitus kestää käytössä?",
-    answer: "Katto saa pinnoituksesta jopa 10–15 vuotta lisää ikää. Kesto riippuu säästä ja katon kunnosta.",
+    answer: "Katto saa pinnoituksesta jopa 15–20 vuotta lisää ikää. Kesto riippuu säästä ja katon kunnosta.",
   },
   {
     question: "Voiko pinnoituksen tehdä, jos tiiliä on rikki?",

@@ -54,7 +54,7 @@ const KattopalvelutPinnoitus = () => {
         }
         lead={
           <>
-            Pesemme tiilikaton painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 10–15 vuotta lisää ikää. Hinta on
+            Pesemme tiilikaton painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta lisää ikää. Hinta on
             yleensä <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja annamme työlle 5 vuoden takuun. Tulemme katsomaan
             kattosi ilmaiseksi.
           </>
@@ -156,7 +156,7 @@ const KattopalvelutPinnoitus = () => {
               katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan. Ensin tulee pohjamaali,
               sitten pintamaali.
             </p>
-            <p>Käytämme Tikkurilan ja Nowocoatin kattomaaleja. Peltikattoja emme maalaa, vain tiilikattoja.</p>
+            <p>Käytämme Tikkurilan ja Nowocoatin kattomaaleja.</p>
           </div>
         </div>
       </section>

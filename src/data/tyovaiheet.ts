@@ -3,7 +3,7 @@
  * kaupunkisivuilla ja llms.txt:ssä, joten työ kuvataan kaikkialla samalla tavalla.
  * Sanasto: katto = pesu painepesulla, rikkinäiset tiilet uusiin, maalaus ruiskulla kahteen kertaan
  * (pohjamaali + pintamaali), ahtaat paikat telalla tai käsin. Talo = homepesu, kaavinta,
- * pohjamaali paljaisiin kohtiin, pintamaali pensselillä. Lautoja ei vaihdeta.
+ * pohjamaali paljaisiin kohtiin, pintamaali pensselillä.
  * Ei komponentti-importteja: luetaan myös build-aikana (routes.ts).
  */
 import { pinnoitusPrices, maalausPrices, fmtRange } from "./prices";
@@ -51,7 +51,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Suojaus",
-    text: "Suojaamme ennen työtä esimerkiksi terassit.",
+    text: "Suojaamme terassit, ikkunat ja pihan huolellisesti ennen työtä.",
   },
   {
     title: "Homepesu",
@@ -63,7 +63,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Pohjamaali paljaisiin kohtiin",
-    text: "Pohjamaalaamme kohdat, joissa puu on paljaana. Lautoja emme vaihda.",
+    text: "Pohjamaalaamme kohdat, joissa puu on paljaana.",
   },
   {
     title: "Pintamaali pensselillä",
@@ -89,16 +89,9 @@ export const pinnoitusLyhyesti = (cityIn?: string): string[] => [
 export const maalausLyhyesti = (cityIn?: string): string[] => [
   `Maalaamme talojen ulkoseinät ${cityIn ?? "Pirkanmaalla ja lähikunnissa"}.`,
   "Pesemme seinät homepesuaineella ja kaavimme irtoavan maalin.",
-  "Pohjamaalaamme paljaat kohdat ja maalaamme pintamaalin pensselillä. Lautoja emme vaihda.",
+  "Pohjamaalaamme paljaat kohdat ja maalaamme pintamaalin pensselillä.",
   "Työ kestää yleensä 3–7 päivää. Takuu on 2 vuotta.",
   `Hinta on yleensä ${MAALAUS_HINTA}. Työn osuudesta saat kotitalousvähennyksen.`,
   "Arviokäynti on ilmainen.",
 ];
 
-/** Mitä emme tee (llms.txt ja FAQ). */
-export const EMME_TEE = [
-  "Peltikattoja emme pinnoita. Teemme vain tiilikattoja.",
-  "Kattoremontteja emme tee. Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa.",
-  "Sisämaalauksia emme tee. Maalaamme omakotitalojen, paritalojen ja mökkien ulkoseinät.",
-  "Lautoja emme vaihda maalauksen yhteydessä.",
-];

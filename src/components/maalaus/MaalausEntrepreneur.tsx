@@ -1,4 +1,5 @@
 import { getStorageUrl } from '@/lib/storage';
+import { LUVUT } from '@/data/company';
 
 const eemilImage = getStorageUrl('Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp');
 
@@ -29,7 +30,7 @@ const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
                 kohdat ja maalaan pintamaalin pensselillä.
               </p>
               <p>
-                Olen tehnyt tätä työtä viisi vuotta ja maalannut yli 60 taloa. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Siksi
+                Olen tehnyt tätä työtä yli viisi vuotta ja maalannut {LUVUT.maalatutTalot} taloa. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Siksi
                 annan työlleni <strong className="text-foreground">2 vuoden kirjallisen takuun</strong>.
               </p>
               <p className="font-medium text-foreground">— Eemil, Pintanen Oy</p>

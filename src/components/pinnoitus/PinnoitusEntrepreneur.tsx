@@ -1,4 +1,5 @@
 import { getStorageUrl } from '@/lib/storage';
+import { LUVUT } from '@/data/company';
 
 const eerikImage = getStorageUrl('Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp');
 
@@ -32,7 +33,7 @@ const PinnoitusEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
                 alusta loppuun.
               </p>
               <p>
-                Olen tehnyt tätä työtä viisi vuotta. Tiedät aina, kuka on katollasi ja kuka vastaa jäljestä. Siksi annan työlleni{' '}
+                Olen tehnyt tätä työtä yli viisi vuotta ja pinnoittanut {LUVUT.pinnoitetutKatot} kattoa. Tiedät aina, kuka on katollasi ja kuka vastaa jäljestä. Siksi annan työlleni{' '}
                 <strong className="text-foreground">5 vuoden kirjallisen takuun</strong>.
               </p>
               <p className="font-medium text-foreground">— Eerik, Pintanen Oy</p>

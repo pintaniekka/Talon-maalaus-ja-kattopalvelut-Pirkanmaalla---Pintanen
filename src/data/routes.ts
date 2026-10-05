@@ -12,7 +12,7 @@ import { cities as fullServiceCities, allCities, maalausCities, pinnoitusCities,
 import { articles, isPublished, getPublishedArticles } from "./articles";
 import { getRouteSeo, heroPreload } from "./seo";
 import { SITE_UPDATED, TOIMINTA_ALUE, KOTITALOUSVAHENNYS, TAKUU } from "./company";
-import { pinnoitusTyovaiheet, maalausTyovaiheet, EMME_TEE, PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
+import { pinnoitusTyovaiheet, maalausTyovaiheet, PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
 
 export interface SiteRoute {
   path: string;
@@ -137,7 +137,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
   return [
     "# Pintanen Oy",
     "",
-    `> Pintanen Oy on perheyritys, joka pinnoittaa tiilikattoja ja maalaa talojen ulkoseiniä. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Toiminta-alue on ${TOIMINTA_ALUE}. Yrityksen juuret ovat Oulussa.`,
+    `> Pintanen Oy on perheyritys, joka pinnoittaa tiilikattoja ja maalaa talojen ulkoseiniä. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Takana on yli 200 kohdetta: yli 130 pinnoitettua kattoa ja yli 80 maalattua taloa. Toiminta-alue on ${TOIMINTA_ALUE}. Yrityksen juuret ovat Oulussa.`,
     "",
     "## Perustiedot",
     "",
@@ -159,17 +159,13 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     ...pinnoitusTyovaiheet.map((t, i) => `${i + 1}. ${t.title}: ${t.text}`),
     "",
-    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Katto saa jopa 10–15 vuotta lisää ikää. Työ kestää yleensä 2–4 päivää.",
+    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Katto saa jopa 15–20 vuotta lisää ikää. Työ kestää yleensä 2–4 päivää.",
     "",
     "## Näin talon maalaus tehdään",
     "",
     ...maalausTyovaiheet.map((t, i) => `${i + 1}. ${t.title}: ${t.text}`),
     "",
     "Talon maalausta kutsutaan myös ulkomaalaukseksi, julkisivumaalaukseksi ja huoltomaalaukseksi. Työ kestää yleensä 3–7 päivää.",
-    "",
-    "## Mitä emme tee",
-    "",
-    ...EMME_TEE.map((t) => `- ${t}`),
     "",
     "## Palvelut",
     "",

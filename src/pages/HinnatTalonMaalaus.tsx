@@ -43,12 +43,12 @@ const faqItems = [
   },
   {
     question: "Mitä talon maalauksen hintaan kuuluu?",
-    answer: "Hintaan kuuluu homepesu, irtoavan maalin kaavinta, terassien ja ikkunoiden suojaus, pohjamaali paljaisiin kohtiin, pintamaali pensselillä ja siivous. Lautoja emme vaihda. Ylimääräisiä kuluja ei tule.",
+    answer: "Hintaan kuuluu homepesu, irtoavan maalin kaavinta, terassien ja ikkunoiden suojaus, pohjamaali paljaisiin kohtiin, pintamaali pensselillä ja siivous. Ylimääräisiä kuluja ei tule.",
   },
   { question: "Kuinka kauan talon maalaus kestää?", answer: "Yleensä 3–7 päivää talon koon ja pohjatöiden määrän mukaan." },
   { question: "Pitääkö olla kotona työn aikana?", answer: "Ei tarvitse, kunhan sovitut asiat ovat kunnossa." },
   { question: "Kuinka usein talo pitää maalata?", answer: "Yleensä 10–15 vuoden välein. Väli riippuu maalista ja säästä. Eteläseinä kuluu ensin." },
-  { question: "Mitä jos maalin alta löytyy lahovaurioita?", answer: "Kerromme niistä sinulle ennen kuin jatkamme työtä. Lautoja emme vaihda, joten lahot laudat korjaa kirvesmies." },
+  { question: "Mitä jos maalin alta löytyy lahovaurioita?", answer: "Kerromme niistä sinulle ennen kuin jatkamme työtä." },
   {
     question: "Saako talon maalauksesta kotitalousvähennyksen?",
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi.`,

@@ -42,7 +42,7 @@ const SEOTextSection = () => {
             height={600}
           />
           <div>
-            <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">Tiilikaton pinnoitus lisää katon ikää 10–15 vuotta</h3>
+            <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">Tiilikaton pinnoitus lisää katon ikää jopa 15–20 vuotta</h3>
             <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
               <p>
                 Kulunutta tiilikattoa ei yleensä tarvitse uusia. Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja
@@ -72,7 +72,7 @@ const SEOTextSection = () => {
             <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
               <p>
                 Maali suojaa puuta sateelta ja auringolta. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat
-                kohdat ja maalaamme pintamaalin pensselillä. Lautoja emme vaihda.
+                kohdat ja maalaamme pintamaalin pensselillä. Suojaamme terassit ja ikkunat huolellisesti.
               </p>
               <p>
                 Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja annamme työlle{" "}

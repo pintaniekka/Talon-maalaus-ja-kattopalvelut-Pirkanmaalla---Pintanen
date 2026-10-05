@@ -20,7 +20,7 @@ const MaalausComparison = () => {
                 </p>
                 <p>
                   Huoltomaalaus maksaa meillä yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>. Uusi ulkoverhous
-                  maksaa paljon enemmän. Lautoja emme vaihda: jos laudat ovat lahot, sanomme sen suoraan arviokäynnillä.
+                  maksaa paljon enemmän. Katsomme seinien kunnon arviokäynnillä ja kerromme suoraan, mitä ne tarvitsevat.
                 </p>
               </div>
 

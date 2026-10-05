@@ -71,7 +71,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     {
       title: `Tiilikaton pinnoitus ${cityName}`,
       href: `${pinnoitusHref}/`,
-      description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 10–15 vuotta lisää ikää. Hinta yleensä ${PINNOITUS_HINTA}.`,
+      description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta lisää ikää. Hinta yleensä ${PINNOITUS_HINTA}.`,
       warranty: "5 v takuu",
       baseName: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
       Icon: RoofTileIcon,
@@ -241,7 +241,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
           <p className="text-muted-foreground leading-relaxed text-center text-base md:text-lg">
             Hei! Olemme Eerik ja Eemil, Pintasen yrittäjät. <strong className="text-foreground">Eerik pinnoittaa tiilikatot ja Eemil maalaa talot</strong>{" "}
-            itse alusta loppuun. Takana on {LUVUT.kokemusVuotta} vuotta työtä, {LUVUT.pinnoitetutKatot} pinnoitettua kattoa ja {LUVUT.maalatutTalot} maalattua
+            itse alusta loppuun. Takana on {LUVUT.kokemusVuotta} vuotta työtä ja {LUVUT.kohteet} kohdetta: {LUVUT.pinnoitetutKatot} pinnoitettua kattoa ja {LUVUT.maalatutTalot} maalattua
             taloa. Tiedät aina, kuka pihallasi on.
           </p>
           <p className="mt-4 font-semibold text-foreground text-center">— Eerik & Eemil, Pintanen Oy</p>

@@ -4,13 +4,13 @@ import ResponsiveImage from "./ResponsiveImage";
 import { RoofTileIcon, RoofCleanIcon, PaintBrushIcon } from "./ServiceIcons";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
-/** Etusivun palvelukortit. Sama luku (10–15 vuotta) ja sama työn kuvaus kuin palvelusivuilla (S1). */
+/** Etusivun palvelukortit. Sama luku (jopa 15–20 vuotta) ja sama työn kuvaus kuin palvelusivuilla (S1). */
 const services = [
   {
     title: "Tiilikaton pinnoitus",
     href: "/tiilikaton-pinnoitus-pirkanmaa/",
     imageBase: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-    description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 10–15 vuotta lisää ikää. Hinta yleensä ${PINNOITUS_HINTA}.`,
+    description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta lisää ikää. Hinta yleensä ${PINNOITUS_HINTA}.`,
     tag: "5 v takuu",
     Icon: RoofTileIcon,
   },

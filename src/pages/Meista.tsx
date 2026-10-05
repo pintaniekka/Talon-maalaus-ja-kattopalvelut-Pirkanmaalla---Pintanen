@@ -20,9 +20,9 @@ const values = [
 
 /** Yksi lukusarja koko sivustolle (V23, korjaus 8). */
 const facts = [
+  { number: LUVUT.kohteet, label: "kohdetta" },
   { number: LUVUT.pinnoitetutKatot, label: "pinnoitettua kattoa" },
   { number: LUVUT.maalatutTalot, label: "maalattua taloa" },
-  { number: LUVUT.kokemusVuotta, label: "vuotta kokemusta" },
   { number: "2–5 v", label: "takuu työlle" },
 ];
 
@@ -110,7 +110,7 @@ const Meista = () => {
               </div>
             </div>
             <p className="text-center text-muted-foreground mt-6">
-              Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt. Sisämaalauksia ja kattoremontteja emme tee.
+              Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt.
             </p>
           </div>
         </div>

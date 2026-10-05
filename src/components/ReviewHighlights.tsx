@@ -1,8 +1,8 @@
 import { allTestimonials } from "@/data/testimonialsData";
 import { GOOGLE_PROFILE_URL } from "@/data/company";
 
-/** Etusivun nostot: kolme Google-arvostelua sanasta sanaan. Koko lista on karusellissa alempana. */
-const picks = ["Timo Piilonen", "Juuso Heimonen", "Anna-Riitta Taipale"];
+/** Etusivun kevyt nosto: arvosana ja kaksi lyhyttä Google-arvostelua sanasta sanaan. Koko lista on karusellissa alempana. */
+const picks = ["Juuso Heimonen", "Timo Leppänen"];
 const reviews = picks
   .map((name) => allTestimonials.find((t) => t.name === name))
   .filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -18,33 +18,23 @@ const Stars = ({ className = "w-5 h-5" }: { className?: string }) => (
 );
 
 const ReviewHighlights = () => (
-  <section className="py-12 md:py-16 bg-background" aria-label="Asiakkaiden arvosteluja">
+  <section className="py-5 md:py-6 bg-background" aria-label="Asiakkaiden arvosteluja">
     <div className="section-container max-w-6xl mx-auto">
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-        <div>
-          <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-3">Mitä asiakkaat sanovat meistä?</h2>
-          <div className="flex items-center gap-3">
-            <Stars />
-            <span className="font-bold text-foreground">5,0 / 5</span>
-            <span className="text-muted-foreground">Google-arvosteluissa</span>
-          </div>
-        </div>
+      <div className="grid gap-3 md:grid-cols-[auto_1fr_1fr] md:items-stretch">
         <a
           href={GOOGLE_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent-ink font-semibold underline underline-offset-4"
+          className="flex md:flex-col items-center md:items-start justify-center gap-x-3 gap-y-1 rounded-xl border border-border/50 bg-card px-5 py-3 hover:border-accent transition-colors"
         >
-          Lue arvostelut Googlessa
+          <Stars className="w-4 h-4" />
+          <span className="font-bold text-foreground leading-tight">5,0 / 5</span>
+          <span className="text-sm text-muted-foreground leading-tight">Google-arvostelut</span>
         </a>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-5">
         {reviews.map((r) => (
-          <figure key={r.name} className="bg-card rounded-2xl border border-border/50 shadow-sm p-6 flex flex-col">
-            <Stars className="w-4 h-4" />
-            <blockquote className="mt-3 text-foreground leading-relaxed flex-1">”{r.text}”</blockquote>
-            <figcaption className="mt-4 font-semibold text-foreground">{r.name}</figcaption>
+          <figure key={r.name} className="rounded-xl border border-border/50 bg-card px-5 py-3">
+            <blockquote className="text-sm text-foreground leading-snug">”{r.text}”</blockquote>
+            <figcaption className="mt-1.5 text-xs font-semibold text-muted-foreground">{r.name}</figcaption>
           </figure>
         ))}
       </div>

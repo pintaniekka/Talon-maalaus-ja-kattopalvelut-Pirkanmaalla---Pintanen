@@ -30,7 +30,7 @@ const RelatedArticles = ({ categories, title = "Lue lisää aiheesta", max = 3 }
         <ul className="divide-y divide-border border-y border-border">
           {articles.map((a) => (
             <li key={a.slug}>
-              <Link to={`/artikkelit/${a.slug}/`} className="group block py-5">
+              <Link to={`/artikkelit/${a.slug}`} className="group block py-5">
                 <p className="font-heading font-bold text-lg text-foreground group-hover:text-[#006ead] transition-colors">
                   {a.title}
                 </p>
@@ -43,7 +43,7 @@ const RelatedArticles = ({ categories, title = "Lue lisää aiheesta", max = 3 }
           ))}
         </ul>
         <p className="mt-5">
-          <Link to="/artikkelit/" className="text-[#006ead] font-semibold underline underline-offset-2">
+          <Link to="/artikkelit" className="text-[#006ead] font-semibold underline underline-offset-2">
             Kaikki artikkelit
           </Link>
         </p>

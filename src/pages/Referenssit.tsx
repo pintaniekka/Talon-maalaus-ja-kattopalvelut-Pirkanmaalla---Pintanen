@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import PageHero from '@/components/PageHero';
+import ServicePageHero from '@/components/ServicePageHero';
 import ServiceContactSection from '@/components/ServiceContactSection';
+import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import SEO from '@/components/SEO';
-import { HERO_BASE, staticSeo } from "@/data/seo";
+import { staticSeo } from "@/data/seo";
 import ResponsiveImage from '@/components/ResponsiveImage';
 import { getResponsiveSrc, getResponsiveSrcSet, getResponsiveUrl } from '@/lib/storage';
 
@@ -285,7 +286,7 @@ const Referenssit = () => {
     { type: 'single', baseName: 'tummanharmaa-kattotiili-pesu-ja-pinnoitustyo', category: 'pinnoitus', title: 'Tummanharmaa kattotiili pesu ja pinnoitustyö Pirkanmaalla' },
     { type: 'single', baseName: 'vastamaalattu-tiilikatto-kattopinnoitus-jalkeen', category: 'pinnoitus', title: 'Vastamaalattu tiilikatto kattopinnoitus jälkeen Pirkanmaalla' },
     { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-ennen-jalkeen', category: 'pinnoitus', title: 'Tiilikaton pesu ja pinnoitus ennen jälkeen Pirkanmaalla' },
-    { type: 'single', baseName: 'tiilikaton-pesu-ja-sammaleenpoisto', category: 'puhdistus', title: 'Tiilikaton pesu ja sammaleenpoisto Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-tehopesu-ja-sammaleenpoisto', category: 'puhdistus', title: 'Tiilikaton pesu ja sammaleenpoisto Pirkanmaalla' },
     { type: 'single', baseName: 'tiilikaton-harjatiivisteen-asennus-kattohuolto', category: 'puhdistus', title: 'Tiilikaton harjatiivisteen asennus kattohuolto Pirkanmaalla' },
     { type: 'single', baseName: 'huolellinen-ympariston-suojaus-ennen-maalausta', category: 'maalaus', title: 'Huolellinen ympäristön suojaus ennen maalausta Pirkanmaalla' },
     { type: 'single', baseName: 'talon-julkisivun-ja-ikkunoiden-suojaustyot', category: 'maalaus', title: 'Talon julkisivun ja ikkunoiden suojaustyöt Pirkanmaalla' },
@@ -340,26 +341,23 @@ const Referenssit = () => {
 
   return (
     <div>
-      <SEO {...staticSeo["/referenssit"]} breadcrumbs={[{ name: "Referenssit" }]} />
-      <PageHero
-        eyebrow="Referenssit"
-        title={
-          <>
-            Kuvia <span className="text-accent-ink">töistämme</span>
-          </>
-        }
-        lead={
-          <>
-            Tässä on kuvia töistämme Pirkanmaalla ja lähikunnissa: tiilikattoja ennen ja jälkeen pinnoituksen sekä maalattuja taloja.{" "}
-            <strong className="text-foreground">Kuvat ovat omista kohteistamme.</strong>
-          </>
-        }
-        primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
-        secondary={{ to: "/hintalaskuri/", label: "Laske hinta" }}
-        trust="yleinen"
-        image={{ base: HERO_BASE.referenssit, alt: "Vastamaalattu tiilikatto pinnoituksen jälkeen" }}
-        breadcrumbs={[{ name: "Referenssit" }]}
-      />
+      <SEO
+        {...staticSeo["/referenssit"]} />
+      <ServicePageHero
+        title=""
+        subtitle=""
+        backgroundImage={getResponsiveSrc("tiilikaton-tehopesu-ja-sammaleenpoisto")}
+        backgroundSrcSet={getResponsiveSrcSet("tiilikaton-tehopesu-ja-sammaleenpoisto")}
+      >
+        <div className="bg-black/45 rounded-2xl p-4 md:p-8 max-w-4xl mx-auto text-left mb-10 md:mb-12">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
+            <span className="text-accent-ink drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">Referenssit</span>
+          </h1>
+          <p className="text-base md:text-lg text-primary-foreground/90 leading-relaxed">
+            Tutustu <strong>toteuttamiimme katto- ja maalausprojekteihin</strong> Pirkanmaalla ja lähikunnissa. Näet selkeästi <strong>ennen ja jälkeen</strong> -kuvat, jotka kertovat työn jäljestä enemmän kuin sanat. <strong>Laatu puhuu puolestaan</strong> – jokainen kohde on tehty huolellisesti ja viimeistellysti.
+          </p>
+        </div>
+      </ServicePageHero>
 
 
       <section className="section-padding bg-background">
@@ -477,6 +475,7 @@ const Referenssit = () => {
       </AnimatePresence>
 
       <ServiceContactSection variant="general" />
+      <ToimintaAlueetBanner />
     </div>
   );
 };

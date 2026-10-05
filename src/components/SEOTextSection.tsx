@@ -1,64 +1,94 @@
 import ResponsiveImage from "@/components/ResponsiveImage";
+import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
-import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
-/**
- * Etusivun tekstiosio tiivistettynä kolmeen kappaleeseen (8.3): maalausliike ja kattomaalari
- * Pirkanmaalla, tiilikaton pinnoitus, talon ulkomaalaus. Linkit paikkakuntasivuille ankkureilla,
- * joissa on palvelu ja paikka (korjaus 2).
- */
+const bulletVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: i * 0.1, duration: 0.4 },
+  }),
+};
+
 const SEOTextSection = () => {
+  const bullets = [
+    { bold: "Ei välikäsiä:", text: "Vastaamme itse työn laadusta alusta loppuun." },
+    { bold: "Maksuton arviokäynti:", text: "Tulemme paikan päälle kartoittamaan tilanteen veloituksetta." },
+    { bold: "Takuutyö:", text: "5 vuoden takuu pinnoituksille ja 2 vuoden takuu maalauksille." },
+    { bold: "Kotitalousvähennys:", text: "Kaikki työmme oikeuttavat verotuksessa tehtävään kotitalousvähennykseen (40 % työn osuudesta)." },
+  ];
+
   return (
     <section className="section-padding bg-background">
-      <div className="section-container max-w-6xl mx-auto space-y-16">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6">Maalausliike ja kattomaalari Pirkanmaalla</h2>
-          <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
+      <div className="section-container max-w-6xl mx-auto space-y-16 md:space-y-24">
+        {/* Block 1 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto"
+        >
+          <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6">
+            Luotettava maalausliike ja kattoasiantuntija Pirkanmaalla
+          </h2>
+           <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
             <p>
-              <strong className="text-foreground">Pintanen Oy</strong> on perheyritys, jonka perustivat veljekset Eerik ja Eemil Pitkänen.
-              Pinnoitamme tiilikattoja ja maalaamme talojen ulkoseiniä omakotitaloihin, paritaloihin ja mökkeihin. Teemme työn itse, annamme
-              kiinteän hinnan ja kirjallisen takuun.
+              Joko talosi julkisivu on menettänyt uutuuden viehätyksen tai onko tiilikattosi alkanut kerätä sammalta? <strong className="text-foreground">Pintanen Oy</strong> on pirkanmaalainen <strong className="text-foreground">maalausliike</strong> ja <strong className="text-foreground">kattohuoltojen ammattilainen</strong>. Yrityksemme on perustettu kahden veljeksen, <strong className="text-foreground">Eerikin ja Eemilin</strong>, toimesta. Meidän tahtomme on tarjota <strong className="text-foreground">korkealaatuista ja kestävää pintakäsittelyä</strong> ilman turhia välikäsiä.
             </p>
             <p>
-              Toimimme Pirkanmaalla ja lähikunnissa, esimerkiksi{" "}
-              <Link to="/tiilikaton-pinnoitus-tampere/" className="text-primary hover:underline">Tampereella</Link>,{" "}
-              <Link to="/tiilikaton-pinnoitus-nokia/" className="text-primary hover:underline">Nokialla</Link>,{" "}
-              <Link to="/tiilikaton-pinnoitus-ylojarvi/" className="text-primary hover:underline">Ylöjärvellä</Link>,{" "}
-              <Link to="/talon-maalaus-kangasala/" className="text-primary hover:underline">Kangasalla</Link>,{" "}
-              <Link to="/talon-maalaus-lempaala/" className="text-primary hover:underline">Lempäälässä</Link> ja{" "}
-              <Link to="/tiilikaton-pinnoitus-hameenkyro/" className="text-primary hover:underline">Hämeenkyrössä</Link>. Kaikki paikkakunnat
-              löydät <Link to="/toiminta-alueet/" className="text-primary hover:underline">toiminta-alueet-sivulta</Link>.
+              Toimimme laajasti <strong className="text-foreground">koko Pirkanmaan alueella</strong>, palvellen asiakkaitamme muun muassa{" "}
+              <Link to="/maalauspalvelut-tampere" className="text-primary hover:underline">Tampereella</Link>,{" "}
+              <Link to="/maalauspalvelut-nokia" className="text-primary hover:underline">Nokialla</Link>,{" "}
+              <Link to="/maalauspalvelut-ylojarvi" className="text-primary hover:underline">Ylöjärvellä</Link>,{" "}
+              <Link to="/maalauspalvelut-sastamala" className="text-primary hover:underline">Sastamalassa</Link>,{" "}
+              <Link to="/maalauspalvelut-kangasala" className="text-primary hover:underline">Kangasalla</Link> ja{" "}
+              <Link to="/maalauspalvelut-hameenkyro" className="text-primary hover:underline">Hämeenkyrössä</Link>.
+            </p>
+            <p>
+              Oli kyseessä sitten <strong className="text-foreground">omakotitalon ulkomaalaus</strong>, kesämökin huoltomaalaus tai <strong className="text-foreground">taloyhtiön tiilikaton pinnoitus</strong>, me hoidamme urakan alusta loppuun saakka reippaalla asenteella. Tiedämme, että Suomen vaihtelevat sääolosuhteet asettavat rakennusten ulkopinnoille kovat vaatimukset. Siksi käytämme työssämme vain <strong className="text-foreground">alan parhaita menetelmiä</strong> ja <strong className="text-foreground">laadukkaimpia materiaaleja</strong>.
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* Block 2 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+        >
           <ResponsiveImage
             baseName="tiilikaton-pesu-kesken-tampere"
-            alt="Tiilikaton pesu käynnissä Tampereella: pesty tiili on puhdas ja valmis maalaukseen"
+            alt="Tiilikaton pesu käynnissä Tampereella: pesty tiili on puhdas ja valmis pinnoitukseen"
             className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg"
             sizes="(max-width: 1024px) 100vw, 560px"
             width={800}
             height={600}
           />
           <div>
-            <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">Tiilikaton pinnoitus lisää katon ikää 10–15 vuotta</h3>
-            <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
-              <p>
-                Kulunutta tiilikattoa ei yleensä tarvitse uusia. Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja
-                maalaamme katon ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat maalaamme telalla tai käsin.
-                Uusi maalipinta pitää veden tiilen ulkopuolella ja estää pakkasrapautumisen.
-              </p>
-              <p>
-                Hinta on yleensä <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja annamme työlle{" "}
-                <strong className="text-foreground">5 vuoden takuun</strong>. Lue lisää:{" "}
-                <Link to="/tiilikaton-pinnoitus-pirkanmaa/" className="text-primary font-semibold hover:underline">tiilikaton pinnoitus Pirkanmaalla</Link>.
-              </p>
-            </div>
+          <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
+            Tiilikaton pinnoitus ja puhdistus – jatka kattosi elinikää
+          </h3>
+          <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
+            <p>
+              Tiesitkö, että huonokuntoisen näköistä tiilikattoa ei useinkaan tarvitse uusia kokonaan? Ammattitaitoisesti tehty <strong className="text-foreground">tiilikaton pinnoitus</strong> ja <strong className="text-foreground">sammaleenpuhdistus</strong> ovat <strong className="text-foreground">kustannustehokkaita</strong> tapoja palauttaa vanha katto uudenveroiseen loistoon. Säännöllinen katon huolto ja pinnoitus estävät kosteuden pääsyn kattorakenteisiin, ehkäisevät <strong className="text-foreground">pakkasrapautumista</strong> ja pidentävät katon käyttöikää jopa <strong className="text-foreground">kymmenillä vuosilla</strong>.
+            </p>
+            <p>
+              Me Pintasella teemme tiilikaton pinnoitukset, huollot ja puhdistukset <strong className="text-foreground">huolellisena käsityönä</strong>. <strong className="text-foreground">Eerik</strong> vastaa tiilikattokohteistamme ja varmistaa, että jokainen neliömetri käsitellään huolellisesti. Annamme tekemillemme tiilikaton pinnoituksille aina reilun <strong className="text-foreground">5 vuoden takuun</strong>.
+            </p>
           </div>
-        </div>
+          </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* Block 3 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+        >
           <ResponsiveImage
             baseName="puutalon-seinien-maalaus-kaynnissa-tampere"
             alt="Talon ulkomaalaus käynnissä Tampereella: Pintasen maalari maalaa puutalon seinää pensselillä"
@@ -68,20 +98,72 @@ const SEOTextSection = () => {
             height={600}
           />
           <div>
-            <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">Talon ulkomaalaus pitää veden pois puusta</h3>
-            <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
-              <p>
-                Maali suojaa puuta sateelta ja auringolta. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat
-                kohdat ja maalaamme pintamaalin pensselillä. Lautoja emme vaihda.
-              </p>
-              <p>
-                Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja annamme työlle{" "}
-                <strong className="text-foreground">2 vuoden takuun</strong>. Lue lisää:{" "}
-                <Link to="/talon-maalaus-pirkanmaa/" className="text-primary font-semibold hover:underline">talon maalaus Pirkanmaalla</Link>.
-              </p>
-            </div>
+          <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
+            Talon ulkomaalaus suojaa kotiasi säiltä
+          </h3>
+          <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
+            <p>
+              Laadukas <strong className="text-foreground">ulkomaalaus</strong> on paitsi esteettinen kasvojenkohotus, myös kotisi tärkein suojakilpi. Oikein tehty pohjatyö ja laadukas maalipinta suojaavat puuverhousta auringon <strong className="text-foreground">UV-säteilyltä</strong>, sateelta ja <strong className="text-foreground">homeelta</strong>. <strong className="text-foreground">Eemil</strong> johtaa Pintasen maalausprojekteja vuosien kokemuksella, varmistaen, että maali pysyy seinässä ja rajaukset ovat viivasuoria.
+            </p>
+            <p>
+              Toteutamme talojen maalaukset aina <strong className="text-foreground">avaimet käteen -periaatteella</strong>. Tämä tarkoittaa, että me huolehdimme kaikesta: huolellisista pesuista ja homeenpoistoista, kaapimisesta, suojauksista, itse maalaustyöstä ja loppusiivouksesta. Käytämme vain <strong className="text-foreground">Suomessa suunniteltuja ja valmistettuja huippumaaleja</strong>. Myönnämme ulkomaalaustöillemme <strong className="text-foreground">2 vuoden takuun</strong>, jotta voit nukkua yösi rauhassa.
+            </p>
           </div>
-        </div>
+          </div>
+        </motion.div>
+
+        {/* Block 4 - Miksi valita Pintanen */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+        >
+          <ResponsiveImage
+            baseName="tummanharmaa-tiilikatto-pinnoituksen-jalkeen-nokia"
+            alt="Pinnoitettu tummanharmaa tiilikatto Nokialla: tasainen pinta ja 5 vuoden takuu"
+            className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg"
+            sizes="(max-width: 1024px) 100vw, 560px"
+            width={800}
+            height={600}
+          />
+          <div>
+          <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">
+            Miksi valita Pintanen huoltamaan kotisi?
+          </h3>
+          <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
+            <p>
+              Markkinoilla on monia toimijoita, mutta me erotumme joukosta <strong className="text-foreground">henkilökohtaisella palvelulla</strong> ja <strong className="text-foreground">suoraviivaisella toimintamallilla</strong>. Kun pyydät meiltä tarjouksen, kohtaat <strong className="text-foreground">samat henkilöt, jotka tulevat suorittamaan itse työn</strong>.
+            </p>
+
+            <ul className="space-y-4 list-none pl-0">
+              {bullets.map((item, i) => (
+                <motion.li
+                  key={i}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={bulletVariants}
+                  className="flex items-start gap-3"
+                >
+                  <div className="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-4 h-4 text-accent-ink" />
+                  </div>
+                  <span>
+                    <strong className="text-foreground">{item.bold}</strong> {item.text}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+
+            <p className="mt-6">
+              Älä anna kattosi sammaloitua tai julkisivusi rapistua. Ota yhteyttä luotettavaan pirkanmaalaiseen tekijään ja{" "}
+              <Link to="/tarjouspyynto" className="text-primary font-semibold hover:underline">pyydä ilmainen kuntokartoitus jo tänään!</Link>
+            </p>
+          </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

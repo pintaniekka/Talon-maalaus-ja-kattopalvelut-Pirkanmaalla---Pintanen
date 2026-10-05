@@ -18,7 +18,7 @@ const NotFound = () => (
           Etusivulle
         </Link>
         <Link
-          to="/hintalaskuri/"
+          to="/hintalaskuri"
           className="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent-ink font-heading font-extrabold rounded-2xl hover:bg-accent-strong hover:text-accent-foreground transition-all"
         >
           Hintalaskuriin

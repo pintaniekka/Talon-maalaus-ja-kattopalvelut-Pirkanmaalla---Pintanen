@@ -4,7 +4,6 @@
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Referrer-Policy: strict-origin-when-cross-origin
 
 # Tiedostonimessä on sisältötiiviste, joten tiedosto ei koskaan muutu
 /assets/*

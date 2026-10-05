@@ -35,14 +35,14 @@ const copy: Record<Service, { title: (cityIn: string) => string; advice: string;
     advice:
       "Tiilen tehdaspinta kuluu yleensä 10–15 vuodessa. Jos talossasi on tiilikatto näiltä vuosilta eikä sitä ole pinnoitettu, pinta on todennäköisesti jo kulunut. Tulemme katsomaan katon ilmaiseksi.",
     cta: "Pyydä ilmainen kuntotarkastus",
-    href: "/tarjouspyynto/?palvelu=pinnoitus",
+    href: "/tarjouspyynto?palvelu=pinnoitus",
   },
   maalaus: {
     title: (cityIn) => `Kuinka moni talo ${cityIn} on jo maalausiässä?`,
     advice:
       "Puutalo maalataan yleensä 10–15 vuoden välein. Jos talossasi on puuverhous ja edellisestä maalauksesta on yli kymmenen vuotta, seinät kannattaa katsoa läpi. Arviokäynti on ilmainen.",
     cta: "Pyydä ilmainen arviokäynti",
-    href: "/tarjouspyynto/?palvelu=maalaus",
+    href: "/tarjouspyynto?palvelu=maalaus",
   },
 };
 

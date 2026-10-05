@@ -14,16 +14,16 @@ const config: Record<Service, {
   pinnoitus: {
     title: (c) => `Pinnoitamme tiilikattoja myös ${c.cityGenitive} naapurikunnissa`,
     label: "Tiilikaton pinnoitus",
-    href: (slug) => `/tiilikaton-pinnoitus-${slug}/`,
+    href: (slug) => `/tiilikaton-pinnoitus-${slug}`,
     has: hasPinnoitusPage,
-    other: { label: (c) => `Talon maalaus ${c.cityIn}`, href: (slug) => `/talon-maalaus-${slug}/`, has: hasMaalausPage },
+    other: { label: (c) => `Talon maalaus ${c.cityIn}`, href: (slug) => `/talon-maalaus-${slug}`, has: hasMaalausPage },
   },
   maalaus: {
     title: (c) => `Maalaamme taloja myös ${c.cityGenitive} naapurikunnissa`,
     label: "Talon maalaus",
-    href: (slug) => `/talon-maalaus-${slug}/`,
+    href: (slug) => `/talon-maalaus-${slug}`,
     has: hasMaalausPage,
-    other: { label: (c) => `Tiilikaton pinnoitus ${c.cityIn}`, href: (slug) => `/tiilikaton-pinnoitus-${slug}/`, has: hasPinnoitusPage },
+    other: { label: (c) => `Tiilikaton pinnoitus ${c.cityIn}`, href: (slug) => `/tiilikaton-pinnoitus-${slug}`, has: hasPinnoitusPage },
   },
 };
 
@@ -65,7 +65,7 @@ const CityNeighborLinks = ({ city, service }: { city: CityData; service: Service
               ja{" "}
             </>
           )}
-          <Link to={`/maalauspalvelut-${city.slug}/`} className="text-accent-ink underline font-medium">
+          <Link to={`/maalauspalvelut-${city.slug}`} className="text-accent-ink underline font-medium">
             {c.other.has(city.slug) ? "kaikki palvelumme" : "Kaikki palvelumme"} {city.cityIn}
           </Link>
           .

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
-// Itse tarjoillut fontit (ei Google Fonts -kutsuja kävijän selaimesta).
-// Vain neljä painoa (P14): Montserrat 700/800 otsikoihin ja painikkeisiin, Open Sans 400/600 leipätekstiin.
-// Välipainot (500, Montserrat 400/600) selain johtaa lähimmästä ladatusta painosta.
+// Itse tarjoillut fontit (ei Google Fonts -kutsuja kävijän selaimesta)
+import "@fontsource/montserrat/latin-400.css";
+import "@fontsource/montserrat/latin-500.css";
+import "@fontsource/montserrat/latin-600.css";
 import "@fontsource/montserrat/latin-700.css";
 import "@fontsource/montserrat/latin-800.css";
 import "@fontsource/open-sans/latin-400.css";
+import "@fontsource/open-sans/latin-500.css";
 import "@fontsource/open-sans/latin-600.css";
 import "./index.css";
 

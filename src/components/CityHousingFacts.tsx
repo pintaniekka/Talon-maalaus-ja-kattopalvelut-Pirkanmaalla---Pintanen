@@ -8,7 +8,6 @@ import {
 } from "@/data/cityHousingStats";
 
 import { housingFactsText } from "@/data/cityHousingText";
-import { roofJobSentence } from "@/data/roofJobCounts";
 
 type Service = "pinnoitus" | "maalaus";
 
@@ -59,7 +58,6 @@ const CityHousingFacts = ({ citySlug, cityIn, service }: CityHousingFactsProps) 
   const rows = bars(stats);
   const max = Math.max(...rows.map((r) => r.value));
   const c = copy[service];
-  const jobs = service === "pinnoitus" ? roofJobSentence(citySlug, cityIn) : undefined;
 
   return (
     <section className="section-padding bg-secondary">
@@ -68,10 +66,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service }: CityHousingFactsProps) 
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{c.title(cityIn)}</h2>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">{text}</p>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
-              {jobs && <strong className="text-foreground">{jobs} </strong>}
-              {c.advice}
-            </p>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">{c.advice}</p>
             <Link
               to={c.href}
               className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"

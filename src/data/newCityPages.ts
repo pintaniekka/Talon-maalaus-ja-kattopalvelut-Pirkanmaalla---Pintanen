@@ -78,7 +78,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...pinnoitusMeta("Orivesi", "Orivedellä", "keskusta, Eräjärvi ja Hirsilä"),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Orivedellä, yli 350 järven kaupungissa",
     pinnoitusLocalHookText:
-      "Orivedeltä on Tampereelle noin 40 kilometriä. Kaupungissa on yli 350 järveä, ja maisemaa hallitsee Längelmävesi. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Kun tiilen pinta on kulunut, sammal tarttuu siihen helposti. Teemme tiilikaton pinnoituksia Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä. Olemme pinnoittaneet Orivedellä tiilikaton vuonna 2026. Kuvat siitä näet tältä sivulta.",
+      "Orivedeltä on Tampereelle noin 40 kilometriä. Kaupungissa on yli 350 järveä, ja maisemaa hallitsee Längelmävesi. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Kun tiilen pinta on kulunut, sammal tarttuu siihen helposti. Teemme tiilikaton pinnoituksia Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä. Kuvia kohteistamme Orivedellä näet tältä sivulta.",
     ...maalausMeta("Orivesi", "Orivedellä", "keskusta, Eräjärvi ja Hirsilä"),
     maalausLocalHookTitle: "Talon maalaus Orivedellä: lähes puolet taloista on ajalta ennen 1960",
     maalausLocalHookText:
@@ -139,7 +139,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...maalausMeta("Parkano", "Parkanossa", "keskusta ja kylät"),
     maalausLocalHookTitle: "Talon maalaus Parkanossa metsien keskellä",
     maalausLocalHookText:
-      "Parkanon pinta-alasta 65 prosenttia on metsää. Puiden varjossa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Siksi pesemme seinät aina homepesuaineella ennen maalausta. Olemme maalanneet Parkanossa talon vuonna 2026. Kuvat siitä näet tältä sivulta. Eemil tulee katsomaan talosi ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.",
+      "Parkanon pinta-alasta 65 prosenttia on metsää. Puiden varjossa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Siksi pesemme seinät aina homepesuaineella ennen maalausta. Kuvia kohteestamme Parkanossa näet tältä sivulta. Eemil tulee katsomaan talosi ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.",
   },
   palkane: {
     ...era(2),

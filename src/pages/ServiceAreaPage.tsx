@@ -14,7 +14,7 @@ import SEO from "@/components/SEO";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import { RoofTileIcon, RoofCleanIcon, PaintBrushIcon } from "@/components/ServiceIcons";
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
-import { getCityBySlug, cityHasServicePages, maalausCities } from "@/data/cityData";
+import { getCityBySlug, hasPinnoitusPage, hasPuhdistusPage, hasMaalausPage } from "@/data/cityData";
 import { getAreaCityContent } from "@/data/areaCityContent";
 import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
 import { getTestimonialsForCity } from "@/data/testimonialsData";
@@ -82,12 +82,11 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
   const cityName = cityData.name;
   const cityIn = cityData.cityIn;
   const cityGenitive = cityData.cityGenitive;
-  const hasSubPages = cityHasServicePages(cityData);
 
   const services = [
     {
       title: "Tiilikaton pinnoitus",
-      href: hasSubPages ? `/tiilikaton-pinnoitus-${cityData.slug}` : "/tiilikaton-pinnoitus-pirkanmaa",
+      href: hasPinnoitusPage(cityData.slug) ? `/tiilikaton-pinnoitus-${cityData.slug}` : "/tiilikaton-pinnoitus-pirkanmaa",
       description: "Tiilikaton maalauspinnoitus pidentää katon ikää jopa 15–20 vuotta ja suojaa tiiliä rapautumiselta.",
       warranty: "5v takuu",
       baseName: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
@@ -95,7 +94,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     },
     {
       title: "Tiilikaton puhdistus",
-      href: hasSubPages ? `/katon-puhdistus-${cityData.slug}` : "/katon-puhdistus-pirkanmaa",
+      href: hasPuhdistusPage(cityData.slug) ? `/katon-puhdistus-${cityData.slug}` : "/katon-puhdistus-pirkanmaa",
       description: "Mekaaninen puhdistus ja sammaleentorjuntakäsittely pitävät katon kunnossa vuosiksi eteenpäin.",
       warranty: "Ilmainen tarkastus",
       baseName: "puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen",
@@ -103,10 +102,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     },
     {
       title: "Talon maalaus",
-      // Maalauksen kaupunkisivu on useammalla paikkakunnalla kuin kattopalvelujen sivut.
-      href: maalausCities.some((c) => c.slug === cityData.slug)
-        ? `/talon-maalaus-${cityData.slug}`
-        : "/talon-maalaus-pirkanmaa",
+      href: hasMaalausPage(cityData.slug) ? `/talon-maalaus-${cityData.slug}` : "/talon-maalaus-pirkanmaa",
       description: "Ammattitaitoinen ulkomaalaus laadukkailla materiaaleilla suojaa taloasi säältä ja kosteudelta.",
       warranty: "2v takuu",
       baseName: "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",

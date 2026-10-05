@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
-import { allCities, cities as fullServiceCities, maalausCities } from '@/data/cityData';
+import { allCities, pinnoitusCities, maalausCities } from '@/data/cityData';
 import { getStorageUrl } from '@/lib/storage';
 import { cn } from '@/lib/utils';
 
@@ -35,7 +35,7 @@ const regions = Object.entries(regionSlugs).map(([title, slugs]) => ({
     .filter((c): c is NonNullable<typeof c> => Boolean(c)),
 }));
 
-const pinnoitusSlugs = new Set(fullServiceCities.map((c) => c.slug));
+const pinnoitusSlugs = new Set(pinnoitusCities.map((c) => c.slug));
 const maalausSlugs = new Set(maalausCities.map((c) => c.slug));
 
 /**
@@ -191,7 +191,7 @@ const ToimintaAlueetBanner = ({ activeCity, service = 'alue' }: ToimintaAlueetBa
             <div aria-hidden="true" className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-accent-foreground/10 blur-3xl" />
 
             {!mapFailed && (
-               <div className="relative z-10 w-full max-w-[280px] rounded-3xl border border-accent-foreground/30 bg-accent-foreground/10 p-4 shadow-2xl">
+               <div className="relative z-10 w-full max-w-[280px] rounded-3xl border border-white/60 bg-white p-4 shadow-2xl">
                 <img
                   src={mapImage}
                   alt="Toimialuekartta: Pirkanmaa ja Kanta-Häme"

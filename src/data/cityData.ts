@@ -1,3 +1,5 @@
+import { newCityPages } from "./newCityPages";
+
 export interface CityData {
   name: string;
   cityIn: string;
@@ -20,6 +22,11 @@ export interface CityData {
   maalausLocalHookTitle?: string;
   maalausLocalHookText?: string;
   localSection?: string;
+  /**
+   * Uusien kaupunkisivujen julkaisuerä (1 tai 2). Puuttuu paikkakunnilta,
+   * joiden palvelusivut olivat olemassa jo ennen lokakuuta 2026.
+   */
+  uusiSivuEra?: 1 | 2;
 }
 
 /** Cities with full service subpages (pinnoitus/puhdistus/maalaus per city) */
@@ -283,7 +290,7 @@ export const cities: CityData[] = [
 ];
 
 /** Cities with area page but NO dedicated service subpages */
-export const simpleCities: CityData[] = [
+const simpleCitiesBase: CityData[] = [
   {
     name: "Akaa",
     cityIn: "Akaassa",
@@ -472,6 +479,19 @@ export const simpleCities: CityData[] = [
   },
 ];
 
+/**
+ * Julkaistavat uusien kaupunkisivujen erät. Erän pois jättäminen piilottaa sen
+ * paikkakuntien uudet pinnoitus- ja maalaussivut (reitit, sitemap ja linkit).
+ */
+export const JULKAISTAVAT_ERAT: ReadonlyArray<1 | 2> = [1, 2];
+
+/** Aluesivun paikkakunnat, joiden palvelusivujen sisältö tulee tiedostosta newCityPages.ts. */
+export const simpleCities: CityData[] = simpleCitiesBase.map((c) => {
+  const extra = newCityPages[c.slug];
+  if (!extra || !extra.uusiSivuEra || !JULKAISTAVAT_ERAT.includes(extra.uusiSivuEra)) return c;
+  return { ...c, ...extra };
+});
+
 /** All cities combined */
 export const allCities: CityData[] = [...cities, ...simpleCities];
 
@@ -479,10 +499,16 @@ export const getCityBySlug = (slug: string): CityData | undefined => {
   return allCities.find((c) => c.slug === slug);
 };
 
-/** Check if a city has dedicated service subpages */
-export const cityHasServicePages = (city: CityData): boolean => {
-  return !!city.pinnoitusIntro;
-};
+/** Paikkakunnat, joilla on oma tiilikaton pinnoituksen sivu. */
+export const pinnoitusCities: CityData[] = allCities.filter((c) => !!c.pinnoitusLocalHookTitle);
 
-/** Cities with dedicated maalaus (painting) subpages */
+/** Paikkakunnat, joilla on oma katon puhdistuksen sivu (ei laajenneta uusille paikkakunnille). */
+export const puhdistusCities: CityData[] = allCities.filter((c) => !!c.puhdistusIntro);
+
+/** Paikkakunnat, joilla on oma talon maalauksen sivu. */
 export const maalausCities: CityData[] = allCities.filter((c) => !!c.maalausLocalHookTitle);
+
+const hasPage = (list: CityData[], slug: string) => list.some((c) => c.slug === slug);
+export const hasPinnoitusPage = (slug: string) => hasPage(pinnoitusCities, slug);
+export const hasPuhdistusPage = (slug: string) => hasPage(puhdistusCities, slug);
+export const hasMaalausPage = (slug: string) => hasPage(maalausCities, slug);

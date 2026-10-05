@@ -20,7 +20,10 @@ import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import { pinnoitusCitySeo } from "@/data/seo";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
-import { getCityBySlug } from "@/data/cityData";
+import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
+import CityHousingFacts from "@/components/CityHousingFacts";
+import CityNeighborLinks from "@/components/CityNeighborLinks";
+import { getLocalCityFaq } from "@/data/cityFaq";
 
 const heroBase = "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen";
 const heroImage = getResponsiveSrc(heroBase);
@@ -31,7 +34,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
   const city = propSlug || paramCity;
   const cityData = city ? getCityBySlug(city) : undefined;
 
-  if (!cityData) return <Navigate to="/tiilikaton-pinnoitus-pirkanmaa" replace />;
+  if (!cityData || !hasPinnoitusPage(cityData.slug)) return <Navigate to="/tiilikaton-pinnoitus-pirkanmaa" replace />;
 
   return (
     <div>
@@ -57,6 +60,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <TestimonialsMarquee testimonials={roofTestimonials} title="Mitä kattoasiakkaat sanovat meistä?" />
 
       <PinnoitusProblemSection cityName={cityData.name} cityIn={cityData.cityIn} cityGenitive={cityData.cityGenitive} />
+      <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" />
       <PinnoitusCityProcess cityName={cityData.name} />
       <PinnoitusComparison cityIn={cityData.cityIn} />
       <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} />
@@ -64,8 +68,9 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <PinnoitusFinancing />
       <PinnoitusEntrepreneur />
 
-      <FAQSection items={getPinnoitusCityFAQ(cityData.name)} />
+      <FAQSection items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name)]} />
       <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
+      <CityNeighborLinks city={cityData} service="pinnoitus" />
       <ToimintaAlueetBanner activeCity={city} service="pinnoitus" />
     </div>
   );

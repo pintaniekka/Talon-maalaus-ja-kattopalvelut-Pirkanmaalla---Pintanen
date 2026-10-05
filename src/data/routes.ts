@@ -8,7 +8,7 @@
  *
  * Kun lisäät reitin App.tsx:ään, lisää se myös tähän.
  */
-import { cities as fullServiceCities, allCities, maalausCities } from "./cityData";
+import { cities as fullServiceCities, allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./cityData";
 import { articles, isPublished, getPublishedArticles } from "./articles";
 import { getRouteSeo, heroPreload } from "./seo";
 
@@ -46,8 +46,8 @@ export const cityRoutes: SiteRoute[] = [
     priority: fullServiceCities.some((f) => f.slug === c.slug) ? 0.8 : 0.7,
     changefreq: "monthly" as const,
   })),
-  ...fullServiceCities.map((c) => ({ path: `/tiilikaton-pinnoitus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
-  ...fullServiceCities.map((c) => ({ path: `/katon-puhdistus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
+  ...pinnoitusCities.map((c) => ({ path: `/tiilikaton-pinnoitus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
+  ...puhdistusCities.map((c) => ({ path: `/katon-puhdistus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
   ...maalausCities.map((c) => ({ path: `/talon-maalaus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
 ];
 

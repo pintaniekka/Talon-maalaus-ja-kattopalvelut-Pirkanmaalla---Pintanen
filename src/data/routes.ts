@@ -159,7 +159,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     ...pinnoitusTyovaiheet.map((t, i) => `${i + 1}. ${t.title}: ${t.text}`),
     "",
-    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Katto saa jopa 15–20 vuotta lisää ikää. Työ kestää yleensä 2–4 päivää.",
+    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Työ kestää yleensä 2–4 päivää.",
     "",
     "## Näin talon maalaus tehdään",
     "",

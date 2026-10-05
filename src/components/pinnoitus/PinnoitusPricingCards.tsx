@@ -23,7 +23,7 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Mitä tiilikaton pinnoitus maksaa {cityIn}?</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hintaan kuuluu koko työ ja siivous. Piilokuluja ei ole.
+            Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hinta sisältää työn, materiaalit ja siivouksen. Piilokuluja ei ole.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
         </div>
 
         <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto">
-          Työn osuudesta saat kotitalousvähennyksen. Voit maksaa myös kuukausierissä. Kysy lisää arviokäynnillä.
+          Työn osuudesta saat kotitalousvähennyksen. Työn voi maksaa myös kuukausierissä. Kerromme vaihtoehdoista arviokäynnillä.
         </p>
 
         <div className="text-center mt-6">

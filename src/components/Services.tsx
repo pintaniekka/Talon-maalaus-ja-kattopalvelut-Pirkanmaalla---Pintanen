@@ -10,7 +10,7 @@ const services = [
     title: "Tiilikaton pinnoitus",
     href: "/tiilikaton-pinnoitus-pirkanmaa/",
     imageBase: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-    description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta lisää ikää. Hinta yleensä ${PINNOITUS_HINTA}.`,
+    description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta yleensä ${PINNOITUS_HINTA}.`,
     tag: "5 v takuu",
     Icon: RoofTileIcon,
   },

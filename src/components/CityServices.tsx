@@ -21,7 +21,7 @@ const CityServices = ({ cityName, citySlug, cityGenitive }: CityServicesProps) =
       href: `/tiilikaton-pinnoitus-${citySlug}/`,
       beforeBase: "haalistunut-punainen-tiilikatto-ennen-pinnoitusta",
       afterBase: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-      description: "Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta lisää ikää.",
+      description: "Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään.",
       features: ["Pesu painepesulla", "Rikkinäiset tiilet uusiin", "Pohjamaali ja pintamaali ruiskulla"],
       warranty: "5 v takuu",
     },

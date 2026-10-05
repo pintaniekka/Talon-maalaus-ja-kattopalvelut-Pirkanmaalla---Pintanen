@@ -15,12 +15,12 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Mitä tiilikaton pinnoitus maksaa?',
     answer:
-      'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hintaan kuuluu koko työ ja siivous. Työn osuudesta saat kotitalousvähennyksen.',
+      'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hinta sisältää työn, materiaalit ja siivouksen. Työn osuudesta saat kotitalousvähennyksen.',
   },
   {
     question: 'Onko tiilikaton pinnoitus sama asia kuin tiilikaton maalaus?',
     answer:
-      'Käytännössä kyllä. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin. Uusi maalipinta pitää veden tiilen ulkopuolella.',
+      'Kyllä, sillä tarkoitetaan samaa työtä. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin. Uusi maalipinta pitää veden tiilen ulkopuolella.',
   },
   {
     question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
@@ -34,17 +34,17 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Milloin tiilikatto pitää pinnoittaa?',
     answer:
-      'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 10–15 vuotta vanha. Ajoissa tehty pinnoitus estää pakkasrapautumisen.',
+      'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 15–20 vuotta vanha. Ajoissa tehty pinnoitus estää pakkasrapautumisen.',
   },
   {
     question: 'Kattoremontti vai pinnoitus?',
     answer:
-      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa.',
+      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja kerromme suoraan, kumpi kannattaa.',
   },
   {
     question: 'Voiko tiilikaton pinnoittaa itse?',
     answer:
-      'Katon voi pestä ja maalata itse, mutta ilman ruiskua ja oikeaa kalustoa tasaista pintaa on vaikea saada. Meiltä saat työlle <strong>5 vuoden kirjallisen takuun</strong>, ja vain yritykseltä ostetusta työstä saa kotitalousvähennyksen.',
+      'Katon voi pestä ja maalata itse, mutta ilman ruiskua ja kunnon kalustoa pinnasta on vaikea saada tasainen. Meiltä saat työlle <strong>5 vuoden kirjallisen takuun</strong>, ja vain yritykseltä ostetusta työstä saa kotitalousvähennyksen.',
   },
 ];
 
@@ -153,12 +153,12 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: `Paljonko tiilikaton pinnoitus maksaa ${paikka}?`,
       answer:
-        'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hintaan kuuluu koko työ ja siivous. Työn osuudesta saat kotitalousvähennyksen.',
+        'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hinta sisältää työn, materiaalit ja siivouksen. Työn osuudesta saat kotitalousvähennyksen.',
     },
     {
       question: 'Onko tiilikaton pinnoitus sama asia kuin tiilikaton maalaus?',
       answer:
-        'Käytännössä kyllä. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin.',
+        'Kyllä, sillä tarkoitetaan samaa työtä. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin.',
     },
     {
       question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
@@ -172,12 +172,12 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: 'Milloin tiilikatto pitää pinnoittaa?',
       answer:
-        'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 10–15 vuotta vanha.',
+        'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 15–20 vuotta vanha.',
     },
     {
       question: `Tiilikattoremontti vai pinnoitus ${paikka}?`,
       answer:
-        'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja sanomme suoraan, kumpi kannattaa.',
+        'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen ilmaisella käynnillä ja kerromme suoraan, kumpi kannattaa.',
     },
   ];
 };

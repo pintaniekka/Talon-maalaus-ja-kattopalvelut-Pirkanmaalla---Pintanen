@@ -23,10 +23,10 @@ import { pinnoitusTyovaiheet, pinnoitusLyhyesti, PINNOITUS_HINTA } from "@/data/
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 const warningSigns = [
-  { sign: "Väri on haalistunut", desc: "Tiilen tehdaspinta on kulunut pois, ja tiili alkaa imeä vettä." },
-  { sign: "Sammal kasvaa nopeasti", desc: "Sammal tarttuu vain karheaan ja kuluneeseen pintaan." },
-  { sign: "Tiiliä on rikki", desc: "Vesi on päässyt tiilen sisään ja jäätynyt. Vaihdamme rikkinäiset tiilet uusiin." },
-  { sign: "Pinta tuntuu karhealta", desc: "Karhea tiili imee vettä jokaisella sateella." },
+  { sign: "Väri on haalistunut", desc: "tiilen tehdaspinta on kulunut pois, ja tiili alkaa imeä vettä." },
+  { sign: "Sammal kasvaa nopeasti", desc: "sammal tarttuu helpoimmin karheaan ja kuluneeseen pintaan." },
+  { sign: "Tiiliä on rikki", desc: "vesi on päässyt tiilen sisään ja jäätynyt. Vaihdamme rikkinäiset tiilet uusiin." },
+  { sign: "Pinta tuntuu karhealta", desc: "karhea tiili imee vettä jokaisella sateella." },
 ];
 
 /** Linkit kaupunkisivuille sisältöön (6.3): palvelusivu ohjaa paikkakuntasivuille muutenkin kuin palkin kautta. */
@@ -54,7 +54,7 @@ const KattopalvelutPinnoitus = () => {
         }
         lead={
           <>
-            Pesemme tiilikaton painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Katto saa jopa 15–20 vuotta lisää ikää. Hinta on
+            Pesemme tiilikaton painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on
             yleensä <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja annamme työlle 5 vuoden takuun. Tulemme katsomaan
             kattosi ilmaiseksi.
           </>
@@ -63,7 +63,7 @@ const KattopalvelutPinnoitus = () => {
         secondary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
         trust="pinnoitus"
         image={{ base: HERO_BASE.pinnoitus, alt: "Kirkkaan punainen tiilikatto pinnoituksen jälkeen" }}
-        badge={{ title: "Yrittäjä itse katolla", text: "Eerik tekee työn ja vastaa jäljestä." }}
+        badge={{ title: "Yrittäjä itse katolla", text: "Eerik tekee työn itse." }}
         breadcrumbs={[{ name: "Tiilikaton pinnoitus" }]}
       />
 
@@ -76,7 +76,7 @@ const KattopalvelutPinnoitus = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Miksi tiilikatto kannattaa pinnoittaa ajoissa?</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Moni tiilikatto näyttää kaukaa hyvältä, vaikka tiilen tehdaspinta on jo kulunut pois. Kun pinta kuluu, tiili alkaa imeä
-              vettä. Vesi jäätyy talvella ja rikkoo tiiltä. Uusi maalipinta pitää veden tiilen ulkopuolella.
+              vettä. Talvella vesi jäätyy ja rikkoo tiilen. Uusi maalipinta pitää veden tiilen ulkopuolella.
             </p>
           </div>
 
@@ -97,15 +97,15 @@ const KattopalvelutPinnoitus = () => {
                 <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Pakkasrapautuminen rikkoo kuluneen tiilen</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Suomen talvessa tiili jäätyy ja sulaa kymmeniä kertoja. Kun vesi on imeytynyt tiileen, jää laajenee ja murentaa
-                  tiiltä sisältä. Tiilet halkeilevat, ja lopulta vesi pääsee aluskatteelle. Pinnoitus katkaisee tämän kierteen.
+                  tiiltä sisältäpäin. Tiili halkeilee, ja lopulta vesi pääsee aluskatteelle. Pinnoitus katkaisee tämän kierteen.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Pesu ei riitä, jos tiilen pinta on kulunut</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Sammal ja jäkälä pitävät katon märkänä. Pesu poistaa kasvuston, mutta karhea tiili imee vettä heti seuraavalla
-                  sateella. Siksi pesemme katon ja maalaamme sen ruiskulla kahteen kertaan. Ahtaat paikat, joihin ruisku ei yllä,
+                  Sammal ja jäkälä pitää katon märkänä. Pesu poistaa kasvuston, mutta kulunut pinta imee vettä, vaikka katto olisi
+                  juuri pesty. Siksi pesemme katon ja maalaamme sen ruiskulla kahteen kertaan. Ahtaat paikat, joihin ruisku ei yllä,
                   maalaamme telalla tai käsin.
                 </p>
               </div>
@@ -141,7 +141,7 @@ const KattopalvelutPinnoitus = () => {
 
       <ProcessList
         title="Näin tiilikaton pinnoitus etenee"
-        intro="Omakotitalon katto valmistuu yleensä 2–4 työpäivässä. Välissä katto saa kuivua."
+        intro="Omakotitalon katto valmistuu yleensä 2–4 työpäivässä. Pesun ja maalauksen välissä katto saa kuivua."
         steps={pinnoitusTyovaiheet}
         cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
       />
@@ -152,11 +152,11 @@ const KattopalvelutPinnoitus = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Tiilikaton maalaus ja pinnoitus ovat sama asia</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Moni hakee tietoa tiilikaton maalauksesta, toinen tiilikaton pinnoituksesta. Me teemme molemmilla nimillä saman työn: pesemme
+              Joku hakee tietoa tiilikaton maalauksesta, toinen tiilikaton pinnoituksesta. Nämä kaksi tarkoittavat samaa asiaa: pesemme
               katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan. Ensin tulee pohjamaali,
               sitten pintamaali.
             </p>
-            <p>Käytämme Tikkurilan ja Nowocoatin kattomaaleja.</p>
+            <p>Käytämme Nowocoatin kattomaaleja.</p>
           </div>
         </div>
       </section>

@@ -287,16 +287,23 @@ export const projectItems: ProjectItem[] = [
   {
     city: "valkeakoski",
     services: ["pinnoitus"],
+    image: "tiilikatto-aurinkopaneelit-ennen-pinnoitusta-valkeakoski",
+    caption: "Sama katto ennen pinnoitusta, Valkeakoski",
+    alt: "Sammaleinen tiilikatto ja aurinkopaneelit ennen pinnoitusta Valkeakoskella",
+  },
+  {
+    city: "valkeakoski",
+    services: ["pinnoitus"],
+    image: "pinnoitettu-tiilikatto-lahikuva-valkeakoski",
+    caption: "Pinnoitettu pinta läheltä, Valkeakoski",
+    alt: "Pinnoitettu tiilikatto läheltä Valkeakoskella",
+  },
+  {
+    city: "valkeakoski",
+    services: ["pinnoitus"],
     image: "punainen-tiilikatto-pinnoituksen-jalkeen-valkeakoski",
     caption: "Punainen tiilikatto pinnoituksen jälkeen, Valkeakoski",
     alt: "Punainen tiilikatto pinnoituksen jälkeen Valkeakoskella",
-  },
-  {
-    city: "lempaala",
-    services: ["pinnoitus"],
-    image: "punainen-tiilikatto-pinnoituksen-jalkeen-lempaala",
-    caption: "Punainen tiilikatto pinnoituksen jälkeen, Lempäälä",
-    alt: "Punainen tiilikatto pinnoituksen jälkeen Lempäälässä",
   },
   {
     city: "lempaala",

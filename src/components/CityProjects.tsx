@@ -1,5 +1,8 @@
 import ProjectGrid from "@/components/ProjectGrid";
 import { getProjectItemsWithNearby, type ProjectService } from "@/data/projects";
+import { getCityStory } from "@/data/cityStories";
+import { getTestimonialsByCity } from "@/data/testimonialsData";
+import { TestimonialCard } from "@/components/TestimonialsMarquee";
 
 interface CityProjectsProps {
   citySlug: string;
@@ -21,6 +24,8 @@ const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
  */
 const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsProps) => {
   const { items, hasNearby } = getProjectItemsWithNearby(citySlug, service);
+  const story = getCityStory(citySlug, service);
+  const reviews = getTestimonialsByCity(citySlug);
   if (items.length === 0) return null;
 
   return (
@@ -31,9 +36,23 @@ const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsP
             {headings[service ?? "all"](cityIn)}
             {hasNearby && " ja muualla Pirkanmaalla"}
           </h2>
-          <p className="text-muted-foreground">Kuvat ovat omista kohteistamme.</p>
+          {story ? (
+            <p className="text-base md:text-lg text-foreground leading-relaxed">{story.text}</p>
+          ) : (
+            <p className="text-muted-foreground">Kuvat ovat omista kohteistamme.</p>
+          )}
         </div>
         <ProjectGrid items={items} featureFirst={featureFirst && items.length >= 3} />
+        {reviews.length > 0 && (
+          <div className="mt-10 max-w-6xl mx-auto">
+            <h3 className="text-xl font-bold text-foreground font-heading mb-4 text-center">Asiakkaiden arvosteluja {cityIn}</h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              {reviews.map((r) => (
+                <TestimonialCard key={r.name} name={r.name} stars={r.stars} text={r.text} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

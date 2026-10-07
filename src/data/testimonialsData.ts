@@ -18,6 +18,8 @@ export interface Testimonial {
   text: string;
   /** Mihin palvelukategoriaan arvio liittyy. */
   category: TestimonialCategory;
+  /** Paikkakunnan slug, jos kohde tiedetään (Eerikin kuvakansion nimistä 7.10.2026). */
+  city?: string;
 }
 
 /** Master-lista kaikista käytettävissä olevista arvosteluista. */
@@ -66,6 +68,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Jukka Peurala",
+    city: "tampere",
     stars: 5,
     text: "Haluan vilpittömästi kiittää upeasta työnjäljestä ja loistavasta palvelusta! Kattomaalaus toteutettiin äärimmäisen ammattitaidolla alusta loppuun asti. Työn jälki on ensiluokkaista – katto näyttää kuin uudelta, ja lopputulos ylitti reilusti odotuksemme. Erityisesti arvostan työn sujuvuutta ja tehokkuutta. Projekti hoidettiin nopeasti mutta huolellisesti. Kaikesta tekemisestä huokui vahva kokemus ja osaaminen. Lisäksi työskentely oli siistiä ja järjestelmällistä, mikä teki koko kokemuksesta erittäin miellyttävän. Kommunikointi oli selkeää ja ystävällistä koko prosessin ajan, ja sovituista asioista pidettiin kiinni täsmällisesti. Suosittelen lämpimästi! 👍",
     category: "katto",
@@ -138,6 +141,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Saarinen Seppo",
+    city: "tampere",
     stars: 5,
     text: "Eerik Pitkänen Pintanen oy pesi ja maalasi tiilikaton työn jälki loistava. Aikataulut pitivät sovitusti paikkansa, jälkisiivous hyvä. Erittäin ripeä ja kohtelias nuorimies. Suosittelen kattomaalausta harkitsevalle.",
     category: "katto",
@@ -183,3 +187,7 @@ export const getTestimonialsForCity = (
   }
   return picked;
 };
+
+/** Arvostelut, joiden kohde on tietyllä paikkakunnalla. */
+export const getTestimonialsByCity = (citySlug: string): Testimonial[] =>
+  allTestimonials.filter((t) => t.city === citySlug);

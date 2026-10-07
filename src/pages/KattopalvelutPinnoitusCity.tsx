@@ -9,6 +9,7 @@ import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur"
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import SEO from "@/components/SEO";
+import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import ServiceSchema from "@/components/ServiceSchema";
 import { getPinnoitusCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
@@ -87,6 +88,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name, cityData.cityIn)]}
         title={`Usein kysyttyä tiilikaton pinnoituksesta ${cityData.cityIn}`}
       />
+      <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
       <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
       <CityNeighborLinks city={cityData} service="pinnoitus" />
     </div>

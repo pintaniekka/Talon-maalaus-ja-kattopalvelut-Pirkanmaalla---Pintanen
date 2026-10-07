@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Hero from "@/components/Hero";
+import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import ReviewHighlights from "@/components/ReviewHighlights";
 import Services from "@/components/Services";
 import MiksiPintanen from "@/components/MiksiPintanen";
@@ -20,7 +21,6 @@ const Index = () => {
   return (
     <>
       <SEO />
-      {/* Arvostelut yhdessä osiossa (ReviewHighlights); karuselli poistettu etusivulta (8.3). */}
       <Hero />
       <ReviewHighlights />
       <Services />
@@ -28,6 +28,7 @@ const Index = () => {
         <ChatPriceCalculator />
       </Suspense>
       <MiksiPintanen />
+      <TestimonialsMarquee title="Lisää asiakkaiden arvosteluja" />
   <Suspense fallback={<div className="section-padding" aria-hidden="true" />}>
 
         <Gallery />

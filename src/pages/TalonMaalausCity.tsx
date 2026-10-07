@@ -10,6 +10,7 @@ import MaalausEntrepreneur from "@/components/maalaus/MaalausEntrepreneur";
 import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
+import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import ServiceSchema from "@/components/ServiceSchema";
 import { maalausCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { getCityBySlug } from "@/data/cityData";
@@ -85,6 +86,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}
       />
+      <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
       <ServiceContactSection variant="maalaus" cityName={cityName} cityGenitive={cityData.cityGenitive} />
       <CityNeighborLinks city={cityData} service="maalaus" />
     </div>

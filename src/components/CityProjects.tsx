@@ -3,6 +3,8 @@ import { getProjectItemsWithNearby, type ProjectService } from "@/data/projects"
 import { getCityStory } from "@/data/cityStories";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 import { TestimonialCard } from "@/components/TestimonialsMarquee";
+import CityReviewCard from "@/components/CityReviewCard";
+import { getReviewCases, reviewCaseImages } from "@/data/reviewCases";
 
 interface CityProjectsProps {
   citySlug: string;
@@ -23,10 +25,11 @@ const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
  * Jos omia kohteita on alle kolme, rivi täytetään muun Pirkanmaan kohteilla ja otsikko kertoo sen.
  */
 const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsProps) => {
-  const { items, hasNearby } = getProjectItemsWithNearby(citySlug, service);
+  const cases = getReviewCases(citySlug);
+  const { items, hasNearby } = getProjectItemsWithNearby(citySlug, service, reviewCaseImages(citySlug));
   const story = getCityStory(citySlug, service);
   const reviews = getTestimonialsByCity(citySlug);
-  if (items.length === 0) return null;
+  if (items.length === 0 && cases.length === 0) return null;
 
   return (
     <section className="py-16 md:py-20 bg-background">
@@ -42,14 +45,21 @@ const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsP
             <p className="text-muted-foreground">Kuvat ovat omista kohteistamme.</p>
           )}
         </div>
-        <ProjectGrid items={items} featureFirst={featureFirst && items.length >= 3} />
+        {items.length > 0 && <ProjectGrid items={items} featureFirst={featureFirst && items.length >= 3} />}
         {reviews.length > 0 && (
           <div className="mt-10 max-w-6xl mx-auto">
             <h3 className="text-xl font-bold text-foreground font-heading mb-4 text-center">Asiakkaiden arvosteluja {cityIn}</h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {reviews.map((r) => (
-                <TestimonialCard key={r.name} name={r.name} stars={r.stars} text={r.text} />
-              ))}
+            <div className="grid gap-5">
+              {reviews.map((r, i) => {
+                const c = cases.find((x) => x.name === r.name);
+                return c ? (
+                  <CityReviewCard key={r.name} review={r} reviewCase={c} index={i} />
+                ) : (
+                  <div key={r.name} className="flex justify-center">
+                    <TestimonialCard name={r.name} stars={r.stars} text={r.text} />
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

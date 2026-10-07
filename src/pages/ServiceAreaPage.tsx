@@ -15,7 +15,6 @@ import { getStorageUrl } from "@/lib/storage";
 import { getCityBySlug, hasPinnoitusPage, hasPuhdistusPage, hasMaalausPage } from "@/data/cityData";
 import { getAreaCityContent } from "@/data/areaCityContent";
 import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
-import { getTestimonialsForCity } from "@/data/testimonialsData";
 import { areaCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { KOTITALOUSVAHENNYS, LUVUT } from "@/data/company";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
@@ -226,8 +225,6 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
       <CityProjects citySlug={citySlug} cityIn={cityIn} />
 
-      <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" testimonials={getTestimonialsForCity(citySlug, 4)} />
-
       {/* ══ KEITÄ ME OLEMME? ══ */}
       <section className="section-padding bg-secondary">
         <div className="section-container max-w-4xl mx-auto">
@@ -250,6 +247,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
       <FAQSection items={getAreaFAQ(cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
 
+      <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
       <ServiceContactSection variant="general" cityIn={cityIn} />
 
       <ToimintaAlueetBanner activeCity={citySlug} />

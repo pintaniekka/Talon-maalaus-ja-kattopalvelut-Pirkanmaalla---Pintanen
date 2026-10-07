@@ -1,24 +1,23 @@
 import { Navigate } from "react-router-dom";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
-import ProcessList from "@/components/ProcessList";
 import CityProjects from "@/components/CityProjects";
+import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
 import CityNeighborLinks from "@/components/CityNeighborLinks";
-import { MaalausCitySigns, MaalausCityComparison } from "@/components/maalaus/MaalausCitySections";
-import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
+import { MaalausCitySigns } from "@/components/maalaus/MaalausCitySections";
 import MaalausEntrepreneur from "@/components/maalaus/MaalausEntrepreneur";
-import KotitalousVahennys from "@/components/KotitalousVahennys";
 import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
+import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import ServiceSchema from "@/components/ServiceSchema";
 import { maalausCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { getCityBySlug } from "@/data/cityData";
 import { getMaalausCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
 import { maalausPrices } from "@/data/prices";
-import { maalausTyovaiheet, maalausLyhyesti, MAALAUS_HINTA } from "@/data/tyovaiheet";
+import { maalausLyhyesti, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
 /**
  * Talon maalauksen kaupunkisivu. Sama tiivistetty järjestys kuin pinnoituksen kaupunkisivulla.
@@ -78,25 +77,16 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         </div>
       </section>
 
-      <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
-      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
+      <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" featureFirst />
       <MaalausCitySigns cityName={cityName} cityIn={cityData.cityIn} />
-
-      <ProcessList
-        title={`Näin talon maalaus ${cityData.cityIn} etenee`}
-        intro="Omakotitalon ulkomaalaus kestää meillä yleensä 3–7 päivää. Aika riippuu talon koosta ja pohjatöiden määrästä."
-        steps={maalausTyovaiheet}
-        cta={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Varaa ilmainen arviokäynti" }}
-      />
-
-      <MaalausCityComparison cityName={cityName} cityIn={cityData.cityIn} />
-      <MaalausPricingCards cityName={cityName} />
-      <KotitalousVahennys />
+      <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" />
+      <CityServiceSummary service="maalaus" cityIn={cityData.cityIn} />
       <MaalausEntrepreneur cityIn={cityData.cityIn} />
       <FAQSection
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}
       />
+      <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
       <ServiceContactSection variant="maalaus" cityName={cityName} cityGenitive={cityData.cityGenitive} />
       <CityNeighborLinks city={cityData} service="maalaus" />
     </div>

@@ -2,6 +2,8 @@
  * Omat kohteet paikkakunnittain. Näytetään kaupunki- ja aluesivujen kohdelohkossa (CityProjects).
  * Vain oikeita kohteita: paikkakunta, työ ja vuosi tulevat Eerikiltä, kuvat kansiosta ~/GitHub/uudet-kuvat.
  */
+import { reviewCaseImages } from "./reviewCases";
+
 export type ProjectService = "pinnoitus" | "maalaus";
 
 export interface ProjectItem {
@@ -12,8 +14,11 @@ export interface ProjectItem {
   alt: string;
   /** Yksittäinen kuva (perusnimi kansiossa public/images/Pictures-*). */
   image?: string;
-  /** Ennen–jälkeen-pari: perusnimi ilman loppuosaa -ennen / -jalkeen. */
+  /** Ennen–jälkeen-pari liukusäätimellä: perusnimi ilman loppuosaa -ennen / -jalkeen (kuvat samasta kohdasta). */
   pair?: string;
+  /** Ennen- ja jälkeen-kuvat vierekkäin, kun kuvakulma ei ole sama. */
+  before?: string;
+  after?: string;
 }
 
 export const projectItems: ProjectItem[] = [
@@ -38,20 +43,6 @@ export const projectItems: ProjectItem[] = [
     image: "tiilikaton-pesu-kesken-tampere",
     caption: "Tiilikaton pesu käynnissä, Tampere 2026",
     alt: "Tiilikaton pesu käynnissä Tampereella, puolet katosta pesty",
-  },
-  {
-    city: "tampere",
-    services: ["pinnoitus"],
-    image: "harmaa-tiilikatto-ennen-pinnoitusta-tampere",
-    caption: "Tiilikatto ennen pinnoitusta, Tampere 2026",
-    alt: "Harmaa tiilikatto ennen pinnoitusta Tampereella",
-  },
-  {
-    city: "tampere",
-    services: ["pinnoitus"],
-    image: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-tampere",
-    caption: "Sama katto pinnoituksen jälkeen, Tampere 2026",
-    alt: "Tummanharmaa tiilikatto pinnoituksen jälkeen Tampereella",
   },
   {
     city: "tampere",
@@ -245,16 +236,10 @@ export const projectItems: ProjectItem[] = [
   {
     city: "sastamala",
     services: ["pinnoitus"],
-    image: "tiilikatto-aurinkopaneelit-pinnoituksen-jalkeen-sastamala",
-    caption: "Tiilikatto pinnoituksen jälkeen, Sastamala",
-    alt: "Punainen tiilikatto ja aurinkopaneelit pinnoituksen jälkeen Sastamalassa",
-  },
-  {
-    city: "sastamala",
-    services: ["pinnoitus"],
-    image: "tiilikatto-aurinkopaneelit-ennen-pinnoitusta-sastamala",
-    caption: "Sama katto ennen pinnoitusta, Sastamala",
-    alt: "Haalistunut tiilikatto ja aurinkopaneelit ennen pinnoitusta Sastamalassa",
+    before: "tiilikatto-aurinkopaneelit-ennen-pinnoitusta-sastamala",
+    after: "tiilikatto-aurinkopaneelit-pinnoituksen-jalkeen-sastamala",
+    caption: "Tiilikatto ja aurinkopaneelit ennen ja jälkeen pinnoituksen, Sastamala",
+    alt: "Tiilikatto ja aurinkopaneelit Sastamalassa ennen ja jälkeen pinnoituksen",
   },
   {
     city: "sastamala",
@@ -287,6 +272,20 @@ export const projectItems: ProjectItem[] = [
   {
     city: "valkeakoski",
     services: ["pinnoitus"],
+    image: "tiilikatto-aurinkopaneelit-ennen-pinnoitusta-valkeakoski",
+    caption: "Sama katto ennen pinnoitusta, Valkeakoski",
+    alt: "Sammaleinen tiilikatto ja aurinkopaneelit ennen pinnoitusta Valkeakoskella",
+  },
+  {
+    city: "valkeakoski",
+    services: ["pinnoitus"],
+    image: "pinnoitettu-tiilikatto-lahikuva-valkeakoski",
+    caption: "Pinnoitettu pinta läheltä, Valkeakoski",
+    alt: "Pinnoitettu tiilikatto läheltä Valkeakoskella",
+  },
+  {
+    city: "valkeakoski",
+    services: ["pinnoitus"],
     image: "punainen-tiilikatto-pinnoituksen-jalkeen-valkeakoski",
     caption: "Punainen tiilikatto pinnoituksen jälkeen, Valkeakoski",
     alt: "Punainen tiilikatto pinnoituksen jälkeen Valkeakoskella",
@@ -294,16 +293,10 @@ export const projectItems: ProjectItem[] = [
   {
     city: "lempaala",
     services: ["pinnoitus"],
-    image: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-lempaala",
-    caption: "Tummanharmaa tiilikatto pinnoituksen jälkeen, Lempäälä",
-    alt: "Tummanharmaa tiilikatto pinnoituksen jälkeen Lempäälässä",
-  },
-  {
-    city: "lempaala",
-    services: ["pinnoitus"],
-    image: "harmaa-tiilikatto-ennen-pinnoitusta-lempaala",
-    caption: "Tiilikatto ennen pinnoitusta, Lempäälä",
-    alt: "Harmaa kulunut tiilikatto ennen pinnoitusta Lempäälässä",
+    before: "harmaa-tiilikatto-ennen-pinnoitusta-lempaala",
+    after: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-lempaala",
+    caption: "Harmaa tiilikatto ennen ja jälkeen pinnoituksen, Lempäälä",
+    alt: "Harmaa tiilikatto Lempäälässä ennen ja jälkeen pinnoituksen",
   },
   {
     city: "lempaala",
@@ -387,13 +380,17 @@ export const MIN_PROJECT_ITEMS = 3;
 export const getProjectItemsWithNearby = (
   city: string,
   service?: ProjectService,
+  exclude: Set<string> = new Set(),
 ): { items: ProjectItem[]; hasNearby: boolean } => {
-  const all = getProjectItems(city, service);
+  const all = getProjectItems(city, service).filter(
+    (item) => ![item.image, item.before, item.after].some((x) => x && exclude.has(x)),
+  );
   // Sivun hero näyttää jo paikkakunnan oman kuvan: sitä ei toisteta heti alla kohdelohkossa,
   // jos muita omia kuvia on tarpeeksi.
   const hero = getCityHeroBase(city, service);
   const withoutHero = all.filter((item) => item.image !== hero);
-  const own = withoutHero.length > 0 ? withoutHero : all;
+  // Jos ainoa oma kuva on jo herossa ja paikkakunnalla on arvostelukortti kuvineen, ruudukko jää pois.
+  const own = withoutHero.length > 0 ? withoutHero : exclude.size > 0 ? [] : all;
   if (own.length === 0 || own.length >= MIN_PROJECT_ITEMS) return { items: own, hasNearby: false };
 
   const order = nearbyCities[city] ?? [];
@@ -425,9 +422,11 @@ export const getFeaturedProjectItems = (service: ProjectService, count = 3): Pro
  * jos sellainen on). Ennen–jälkeen-parista käytetään jälkeen-kuvaa. Palauttaa undefined, jos kuvaa ei ole.
  */
 export const getCityHeroBase = (city: string, service?: ProjectService): string | undefined => {
-  const own = getProjectItems(city, service);
+  // Arvostelukorttien kuvia ei nosteta heroon: ne näkyvät jo kortissa.
+  const used = reviewCaseImages(city);
+  const own = getProjectItems(city, service).filter((i) => !(i.image && used.has(i.image)));
   // Yksittäinen valmis kuva ensin: parin jälkeen-kuva näkyy jo liukusäätimessä kohdelohkossa.
-  const preferred = own.find((i) => i.image && !/ennen|kesken|puoliksi|suojattu|lahikuva|asennus/.test(i.image)) ?? own.find((i) => i.pair) ?? own[0];
+  const preferred = own.find((i) => i.image && !/ennen|kesken|puoliksi|suojattu|lahikuva|asennus/.test(i.image)) ?? own.find((i) => i.pair) ?? own.find((i) => i.image) ?? own[0];
   if (!preferred) return undefined;
-  return preferred.pair ? `${preferred.pair}-jalkeen` : preferred.image;
+  return preferred.pair ? `${preferred.pair}-jalkeen` : preferred.image ?? preferred.after;
 };

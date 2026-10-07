@@ -18,10 +18,57 @@ export interface Testimonial {
   text: string;
   /** Mihin palvelukategoriaan arvio liittyy. */
   category: TestimonialCategory;
+  /** Paikkakunnan slug, jos kohde tiedetään (Eerikin kuvakansion nimistä tai arvostelun tekstistä, 7.10.2026). */
+  city?: string;
 }
 
 /** Master-lista kaikista käytettävissä olevista arvosteluista. */
 export const allTestimonials: Testimonial[] = [
+  // Lisätty 7.10.2026 Google-profiilista (28 arvostelua). Teksti sanasta sanaan.
+  {
+    name: "Toni Reunanen",
+    stars: 5,
+    text: "Kiitos ammattimaisesta kattojen pesusta ja pinnoituksesta, sekä kahden rakennuksen ulkoseinien maalauksesta. Kaikki meni sovitun mukaisesti ja ilman mitään huomauttamista. Olemme erittäin tyytyväisiä valinnastamme.",
+    category: "yleinen",
+    city: "tampere",
+  },
+  {
+    name: "mikko k",
+    stars: 5,
+    text: "Hyvin toimii homma Pintanen Oy, tulee kun sovittu ja katto pinnoituksen jälkeen kuin uusi.",
+    category: "katto",
+  },
+  {
+    name: "Lasse Haukisalmi",
+    stars: 5,
+    text: "Kaikki hommat hoidettiin mitä sovittiin. Työn jälki erinomaista katon maalauksessa.",
+    category: "katto",
+  },
+  {
+    name: "Sari Haataja",
+    stars: 5,
+    text: "Mainiota työtä - 25 vuotta vanha tiilikatto näyttää kuin uudelta!",
+    category: "katto",
+    city: "ylojarvi",
+  },
+  {
+    name: "Anne Lahtinen",
+    stars: 5,
+    text: "Työt sujuivat sovitusti. Kyseessä oli saattaa omistajilta kesken jäänyt ok-talon maalaus loppuun. Maalausjälki siistiä ja töiden jäljet (roskat yms.) kerättiin pois. Työntekijät ystävällisiä ja hommansa osaavia. Korjasivatpa vielä pari omistajilta maalaamatta jäänyttä kohtaakin. Suosittelemme lämpimästi!",
+    category: "seina",
+  },
+  {
+    name: "Jukka Loukkola",
+    stars: 5,
+    text: "Maalauspalvelu, talon maalaus sujui jouhevasti ja sopimuksen mukaisesti. Työn jälki oli erinomainen, tekijät ammattilaisia nuoresta iästä huolimatta. Kommunikointi yrittäjän kanssa oli helppoa. Lämpimästi voi suositella!",
+    category: "seina",
+  },
+  {
+    name: "Jani Kalliala",
+    stars: 5,
+    text: "Työ meni niinkuin sovittiin. Plussat ehdottomasti mukavalle työmiehelle ja hyvälle työjäljelle. Kiitos👍",
+    category: "yleinen",
+  },
   {
     name: "Anna-Riitta Taipale",
     stars: 5,
@@ -66,6 +113,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Jukka Peurala",
+    city: "tampere",
     stars: 5,
     text: "Haluan vilpittömästi kiittää upeasta työnjäljestä ja loistavasta palvelusta! Kattomaalaus toteutettiin äärimmäisen ammattitaidolla alusta loppuun asti. Työn jälki on ensiluokkaista – katto näyttää kuin uudelta, ja lopputulos ylitti reilusti odotuksemme. Erityisesti arvostan työn sujuvuutta ja tehokkuutta. Projekti hoidettiin nopeasti mutta huolellisesti. Kaikesta tekemisestä huokui vahva kokemus ja osaaminen. Lisäksi työskentely oli siistiä ja järjestelmällistä, mikä teki koko kokemuksesta erittäin miellyttävän. Kommunikointi oli selkeää ja ystävällistä koko prosessin ajan, ja sovituista asioista pidettiin kiinni täsmällisesti. Suosittelen lämpimästi! 👍",
     category: "katto",
@@ -78,6 +126,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Satu Junkkila",
+    city: "orivesi",
     stars: 5,
     text: "Olemme erittäin tyytyväisiä vanhempieni rintamamiestalon maalaukseen. Kaikki sujui kuten oli sovittu ja luvattu. Työnjälki on laadukasta ja maalausurakka pysyi täysin luvatussa aikataulussa. Palvelu oli ystävällistä, iloista ja asiantuntevaa. Kiitokset vielä täältä Orivedeltä ☺️",
     category: "seina",
@@ -138,6 +187,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Saarinen Seppo",
+    city: "tampere",
     stars: 5,
     text: "Eerik Pitkänen Pintanen oy pesi ja maalasi tiilikaton työn jälki loistava. Aikataulut pitivät sovitusti paikkansa, jälkisiivous hyvä. Erittäin ripeä ja kohtelias nuorimies. Suosittelen kattomaalausta harkitsevalle.",
     category: "katto",
@@ -183,3 +233,7 @@ export const getTestimonialsForCity = (
   }
   return picked;
 };
+
+/** Arvostelut, joiden kohde on tietyllä paikkakunnalla. */
+export const getTestimonialsByCity = (citySlug: string): Testimonial[] =>
+  allTestimonials.filter((t) => t.city === citySlug);

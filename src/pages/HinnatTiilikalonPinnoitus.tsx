@@ -53,7 +53,7 @@ const faqItems = [
     question: "Voiko pinnoituksen tehdä, jos tiiliä on rikki?",
     answer: "Yksittäiset rikkinäiset tiilet vaihdetaan uusiin. Laajat rakenteelliset vauriot edellyttävät muuta ratkaisua.",
   },
-  { question: "Pitääkö olla kotona työn aikana?", answer: "Ei tarvitse, kunhan sähkö ja vesipiste ovat käytettävissä." },
+  { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme katon ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sähkö ja vesipiste ovat käytettävissä." },
   {
     question: "Saako tiilikaton pinnoituksesta kotitalousvähennyksen?",
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi.`,

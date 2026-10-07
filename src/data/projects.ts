@@ -294,13 +294,6 @@ export const projectItems: ProjectItem[] = [
   {
     city: "lempaala",
     services: ["pinnoitus"],
-    image: "punainen-tiilikatto-pinnoituksen-jalkeen-lempaala",
-    caption: "Punainen tiilikatto pinnoituksen jälkeen, Lempäälä",
-    alt: "Punainen tiilikatto pinnoituksen jälkeen Lempäälässä",
-  },
-  {
-    city: "lempaala",
-    services: ["pinnoitus"],
     image: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-lempaala",
     caption: "Tummanharmaa tiilikatto pinnoituksen jälkeen, Lempäälä",
     alt: "Tummanharmaa tiilikatto pinnoituksen jälkeen Lempäälässä",

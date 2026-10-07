@@ -46,7 +46,7 @@ export const getLocalCityFaq = (city: CityData, service: ProjectService): FAQIte
 
 /**
  * Eerikin vastaukset 7.10.2026 muotoiltuna. Samat kaikilla paikkakunnilla; paikkakunnan nimi lauseessa.
- * Kotona olemisesta: Eerikin vastaus on "kyllä täytyy" (työvaiheartikkelissa lukee toisin, tarkistettava).
+ * Kotona olemisesta (Eerik 7.10.2026): arviokäynnillä pitää olla, etätarjousta ei tehdä; työn aikana mieluummin kotona.
  */
 const yleisetKysymykset = (city: CityData, service: ProjectService): FAQItem[] => {
   const katto = service === "pinnoitus";
@@ -69,7 +69,7 @@ const yleisetKysymykset = (city: CityData, service: ProjectService): FAQItem[] =
     },
     {
       question: "Pitääkö minun olla kotona?",
-      answer: "Kyllä. Käymme asiat läpi yhdessä paikan päällä sekä arviokäynnillä että työn aikana.",
+      answer: "Arviokäynnillä kyllä. Käymme katon ja tarjouksen läpi yhdessä paikan päällä, emmekä tee tarjousta etänä. Työn aikana on mukava, jos olet kotona, mutta pakollista se ei ole.",
     },
     {
       question: "Mitä tapahtuu, jos kesken työn sataa?",

@@ -9,7 +9,7 @@ const faq = [
   },
   {
     question: "Pitääkö työn aikana olla kotona?",
-    answer: "Ei tarvitse. Riittää, että saamme käyttää sähköä ja vettä.",
+    answer: "Arviokäynnillä kyllä, koska käymme katon ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko. Riittää, että saamme käyttää sähköä ja vettä.",
   },
   {
     question: "Mitä tapahtuu, jos sovittuna päivänä sataa?",
@@ -96,7 +96,7 @@ const Body = () => (
     <ul>
       <li>Siirrä pihakalusteet, ruukut ja muut kevyet tavarat kauemmas talosta.</li>
       <li>Varmista, että saamme käyttää sähköä ja vettä.</li>
-      <li>Kotona sinun ei tarvitse olla.</li>
+      <li>Työn aikana sinun ei ole pakko olla kotona, mutta olet tervetullut katsomaan.</li>
     </ul>
     <p>
       Tuomme telineet, nostimet ja turvavarusteet mukanamme. Hinnoista kerromme artikkelissa{" "}

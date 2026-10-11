@@ -4,7 +4,8 @@
  * Tekee kaksi asiaa jokaiselle hyväksytylle lähetykselle:
  *  1. lähettää sähköpostin myyntiin Resendillä (reply-to = asiakkaan osoite)
  *  2. välittää liidin CRM:ään (app.pintanen.fi). CRM-virhe ei kaada lomaketta:
- *     sähköposti lähtee silti ja virhe kirjataan lokiin.
+ *     sähköposti lähtee silti, mutta sen otsikossa lukee "[CRM EI VASTAANOTTANUT]" ja
+ *     viestin lopussa pyyntö lisätä liidi käsin, jotta virhe ei jää vain lokiin.
  *
  * Salaisuudet ovat Pages-projektin asetuksissa (RESEND_API_KEY, LEAD_INTAKE_SECRET),
  * eivät koodissa. Tarkistusjärjestys on tarkoituksella: origin → metodi → runko →
@@ -109,11 +110,17 @@ interface Lead {
   city: string;
 }
 
-const buildEmailHtml = (lead: Lead, heading: string, serviceLabel: string) => {
+const CRM_FAILED_TAG = "[CRM EI VASTAANOTTANUT]";
+
+const buildEmailHtml = (lead: Lead, heading: string, serviceLabel: string, crmOk: boolean) => {
   const row = (label: string, value: string) =>
     `<tr><td style="padding:8px;font-weight:bold;">${label}</td><td style="padding:8px;">${value}</td></tr>`;
   const place = [lead.address, lead.city].filter(Boolean).join(", ");
+  const crmNote = crmOk
+    ? ""
+    : `<p style="padding:12px;background:#fff3cd;border:1px solid #ffe69c;"><strong>Liidi ei mennyt CRM:ään.</strong> Lisää se käsin ja tarkista Cloudflaren loki (LEAD_INTAKE_SECRET tai CRM:n tila).</p>`;
   return `
+    ${crmNote}
     <h2>${escapeHtml(heading)}</h2>
     <table style="border-collapse:collapse;width:100%;max-width:500px;">
       ${row("Nimi", escapeHtml(lead.name))}
@@ -128,12 +135,12 @@ const buildEmailHtml = (lead: Lead, heading: string, serviceLabel: string) => {
   `;
 };
 
-/** Välitä liidi CRM:ään. Ei koskaan heitä: virheet kirjataan lokiin. */
-const sendToCrm = async (lead: Lead, secret: string | undefined): Promise<void> => {
+/** Välitä liidi CRM:ään. Ei koskaan heitä: palauttaa onnistuiko, ja virheet kirjataan lokiin. */
+const sendToCrm = async (lead: Lead, secret: string | undefined): Promise<boolean> => {
   try {
     if (!secret) {
       console.error("CRM: LEAD_INTAKE_SECRET puuttuu, liidiä ei välitetty");
-      return;
+      return false;
     }
     const res = await fetch(CRM_ENDPOINT, {
       method: "POST",
@@ -149,8 +156,10 @@ const sendToCrm = async (lead: Lead, secret: string | undefined): Promise<void> 
       }),
     });
     if (!res.ok) console.error("CRM: liidin välitys epäonnistui", res.status, (await res.text()).slice(0, 300));
+    return res.ok;
   } catch (error) {
     console.error("CRM: liidin välitys kaatui", error);
+    return false;
   }
 };
 
@@ -204,13 +213,13 @@ export const onRequest = async ({ request, env }: PagesContext): Promise<Respons
 
   const serviceLabel = toServiceLabel(lead.service);
   const isCalculatorLead = Boolean(lead.priceEstimate || lead.calculatorDetails);
-  const subject = `${isCalculatorLead ? "Hintalaskuri" : "Tarjouspyyntö"}: ${lead.name} – ${serviceLabel}`;
   const heading = isCalculatorLead
     ? "Uusi hintalaskurin käyttäjä pintanen.fi-sivustolta"
     : "Uusi tarjouspyyntö pintanen.fi-sivustolta";
 
-  // CRM-välitys käynnistetään rinnalle; sen epäonnistuminen ei vaikuta vastaukseen.
-  const crmPromise = sendToCrm(lead, env.LEAD_INTAKE_SECRET);
+  // CRM ensin, jotta sen tulos ehtii sähköpostiin. Epäonnistuminen ei vaikuta vastaukseen.
+  const crmOk = await sendToCrm(lead, env.LEAD_INTAKE_SECRET);
+  const subject = `${crmOk ? "" : `${CRM_FAILED_TAG} `}${isCalculatorLead ? "Hintalaskuri" : "Tarjouspyyntö"}: ${lead.name} – ${serviceLabel}`;
 
   let emailOk = false;
   try {
@@ -222,7 +231,7 @@ export const onRequest = async ({ request, env }: PagesContext): Promise<Respons
         to: [MAIL_TO],
         ...(lead.email ? { reply_to: lead.email } : {}),
         subject,
-        html: buildEmailHtml(lead, heading, serviceLabel),
+        html: buildEmailHtml(lead, heading, serviceLabel, crmOk),
       }),
     });
     emailOk = res.ok;
@@ -230,8 +239,6 @@ export const onRequest = async ({ request, env }: PagesContext): Promise<Respons
   } catch (error) {
     console.error("Resend: lähetys kaatui", error);
   }
-
-  await crmPromise;
 
   if (!emailOk) return json({ error: "Sähköpostin lähetys epäonnistui" }, 502, cors);
   return json({ success: true }, 200, cors);

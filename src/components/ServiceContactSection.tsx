@@ -4,7 +4,8 @@ import { Phone, Mail, User } from "@/components/icons/BrandIcons";
 import { toast } from '@/hooks/use-toast';
 import { getStorageUrl } from '@/lib/storage';
 import { VASTAUSLUPAUS } from '@/data/company';
-import { submitContactForm } from '@/lib/contactForm';
+import { submitContactForm, formErrorMessage } from '@/lib/contactForm';
+import { isValidFinnishMobile, PHONE_ERROR_MESSAGE } from '@/lib/phoneValidation';
 import FormPrivacyNote, { HoneypotField } from '@/components/FormPrivacyNote';
 import WhatsAppIcon from './WhatsAppIcon';
 
@@ -110,10 +111,27 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
   };
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  /** Virhe näytetään lomakkeessa kentän vieressä, ei vain toastina: kävijä näkee, mitä korjata. */
+  const [error, setError] = useState<string | null>(null);
+  const [phoneInvalid, setPhoneInvalid] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isLoading) return;
+    const phone = formState.phone.trim();
+    const email = formState.email.trim();
+    if (!phone && !email) {
+      setError('Anna puhelinnumero tai sähköposti, niin voimme vastata sinulle.');
+      setPhoneInvalid(true);
+      return;
+    }
+    if (phone && !isValidFinnishMobile(phone)) {
+      setError(PHONE_ERROR_MESSAGE);
+      setPhoneInvalid(true);
+      return;
+    }
+    setError(null);
+    setPhoneInvalid(false);
     setIsLoading(true);
     try {
       const { services, ...rest } = formState;
@@ -124,7 +142,9 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err: unknown) {
       console.error('Form submission error:', err);
-      toast({ title: 'Virhe lähetyksessä', description: 'Yritä uudelleen tai soita meille.', variant: 'destructive' });
+      const message = formErrorMessage(err);
+      setError(message);
+      toast({ title: 'Lähetys ei onnistunut', description: message, variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -199,8 +219,10 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                     type="tel"
                     value={formState.phone}
                     onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                    className={`${inputClass} pl-10`}
+                    className={`${inputClass} pl-10 ${phoneInvalid ? 'ring-2 ring-red-300' : ''}`}
                     placeholder="Puhelinnumero" aria-label="Puhelinnumero"
+                    aria-invalid={phoneInvalid || undefined}
+                    aria-describedby={error ? 'contact-form-error' : undefined}
                   />
                 </div>
 
@@ -246,6 +268,12 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
 
                 <HoneypotField value={formState.website} onChange={(v) => setFormState({ ...formState, website: v })} />
                 <FormPrivacyNote variant="light" />
+
+                {error && (
+                  <p id="contact-form-error" role="alert" className="rounded-xl bg-white/15 px-4 py-3 text-sm font-semibold">
+                    {error}
+                  </p>
+                )}
 
                 <button
                   type="submit"

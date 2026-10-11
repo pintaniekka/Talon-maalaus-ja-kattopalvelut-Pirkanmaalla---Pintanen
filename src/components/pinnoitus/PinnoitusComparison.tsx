@@ -1,14 +1,19 @@
 import { Link } from 'react-router-dom';
 import ResponsiveImage from '@/components/ResponsiveImage';
 import { PINNOITUS_HINTA } from '@/data/tyovaiheet';
+import { getArticleBySlug, isPublished } from '@/data/articles';
 
 const comparisonBase = "tummanharmaa-kattotiili-pesu-ja-pinnoitustyo";
+const ARTIKKELI_SLUG = "pinnoitus-vai-uusi-katto";
 
 /**
  * "Tiilikattoremontti vai pinnoitus?" (P1, korjaus 10). Vastaa suoraan hakuun
  * "tiilikattoremontti {kunta}". Ei prosentti- tai säästöväitteitä (V6): hinta haarukkana.
  */
 const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
+  // Linkki artikkeliin vasta julkaisupäivästä: jonossa oleva artikkeli on noindex-kuori (osa 2, luku 6).
+  const artikkeli = getArticleBySlug(ARTIKKELI_SLUG);
+  const artikkeliJulkaistu = !!artikkeli && isPublished(artikkeli);
   return (
     <section className="section-padding bg-background">
       <div className="section-container">
@@ -39,13 +44,15 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
                 >
                   Pyydä ilmainen kuntotarkastus
                 </Link>
-                <Link
-                  to="/artikkelit/pinnoitus-vai-uusi-katto/"
-                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95"
-                  style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
-                >
-                  Lue: pinnoitus vai uusi katto?
-                </Link>
+                {artikkeliJulkaistu && (
+                  <Link
+                    to={`/artikkelit/${ARTIKKELI_SLUG}/`}
+                    className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95"
+                    style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
+                  >
+                    Lue: pinnoitus vai uusi katto?
+                  </Link>
+                )}
               </div>
             </div>
 

@@ -5,7 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
-import { cities as fullServiceCities, allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./data/cityData";
+import { allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./data/cityData";
+import { legacyRedirects } from "./data/routes";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Lazy-loaded subpages
@@ -63,7 +64,6 @@ export const AppContent = ({
               <Route path="/talon-maalaus-pirkanmaa" element={<TalonMaalaus />} />
               <Route path="/hintalaskuri" element={<Hintalaskuri />} />
               <Route path="/tarjouspyynto" element={<Tarjouspyynto />} />
-              <Route path="/maalauspalvelut-hinta-pirkanmaa" element={<Navigate to="/hintalaskuri/" replace />} />
               <Route path="/tiilikaton-pinnoitus-hinta-pirkanmaa" element={<HinnatTiilikalonPinnoitus />} />
               <Route path="/katon-puhdistus-hinta-pirkanmaa" element={<HinnatKatonPuhdistus />} />
               <Route path="/talon-maalaus-hinta-pirkanmaa" element={<HinnatTalonMaalaus />} />
@@ -90,29 +90,10 @@ export const AppContent = ({
                 <Route key={`alue-${city.slug}`} path={`/maalauspalvelut-${city.slug}`} element={<ServiceAreaPage citySlug={city.slug} />} />
               ))}
 
-              {/* ═══ 301-style redirects (old → new) ═══ */}
-              <Route path="/kattopalvelut/pinnoitus" element={<Navigate to="/tiilikaton-pinnoitus-pirkanmaa/" replace />} />
-              <Route path="/kattopalvelut/puhdistus" element={<Navigate to="/katon-puhdistus-pirkanmaa/" replace />} />
-              <Route path="/talon-maalaus" element={<Navigate to="/talon-maalaus-pirkanmaa/" replace />} />
-              <Route path="/hinnat" element={<Navigate to="/hintalaskuri/" replace />} />
-              <Route path="/hinnat/tiilikaton-pinnoitus" element={<Navigate to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" replace />} />
-              <Route path="/hinnat/katon-puhdistus" element={<Navigate to="/katon-puhdistus-hinta-pirkanmaa/" replace />} />
-              <Route path="/hinnat/talon-maalaus" element={<Navigate to="/talon-maalaus-hinta-pirkanmaa/" replace />} />
-
-              {/* Old city service redirects */}
-              {fullServiceCities.map(city => (
-                <Route key={`rpin-${city.slug}`} path={`/kattopalvelut/pinnoitus/${city.slug}`} element={<Navigate to={`/tiilikaton-pinnoitus-${city.slug}/`} replace />} />
-              ))}
-              {fullServiceCities.map(city => (
-                <Route key={`rpuh-${city.slug}`} path={`/kattopalvelut/puhdistus/${city.slug}`} element={<Navigate to={`/katon-puhdistus-${city.slug}/`} replace />} />
-              ))}
-              {maalausCities.map(city => (
-                <Route key={`rmaal-${city.slug}`} path={`/talon-maalaus/${city.slug}`} element={<Navigate to={`/talon-maalaus-${city.slug}/`} replace />} />
-              ))}
-
-              {/* Old area page redirects */}
-              {allCities.map(city => (
-                <Route key={`ralue-${city.slug}`} path={`/alue/${city.slug}`} element={<Navigate to={`/maalauspalvelut-${city.slug}/`} replace />} />
+              {/* ═══ Vanhat osoitteet (src/data/routes.ts: legacyRedirects). Palvelin ohjaa 301:llä
+                  (_redirects); tämä on varmistus selaimessa, jos pyyntö pääsee sovellukseen asti. ═══ */}
+              {legacyRedirects.map(({ from, to }) => (
+                <Route key={`legacy-${from}`} path={from} element={<Navigate to={`${to}/`} replace />} />
               ))}
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE.

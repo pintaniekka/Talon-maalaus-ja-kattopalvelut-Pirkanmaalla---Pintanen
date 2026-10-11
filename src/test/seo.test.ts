@@ -109,7 +109,9 @@ describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
     walk(srcDir);
     // Puhdistussivut jäävät ennalleen (palvelu poistuu), joten ne jätetään tarkistuksen ulkopuolelle.
     const skip = /Puhdistus|puhdistusFAQ|puhdistus-itse|HinnatKatonPuhdistus/;
-    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /€\/m²/, /emme tee/i, /emme vaihda/i, /peltikat/i, /sisämaalau/i, /Emme\. /, /kirvesmies/];
+    // 15–20 vuotta on katon lisäikä; pinnoitus on ajankohtainen noin 10–15 vuoden iässä (Eerik 11.10.2026).
+    // Yritys on tamperelainen (Eerik 5.10. ja 11.10.2026): Oulua ei mainita.
+    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /€\/m²/, /emme tee/i, /emme vaihda/i, /peltikat/i, /sisämaalau/i, /Emme\. /, /kirvesmies/, /15[-–]20 vuotta vanha/, /15[-–]20 vuoden iässä/, /Oulu/];
     const hits: string[] = [];
     for (const file of files) {
       if (skip.test(file)) continue;

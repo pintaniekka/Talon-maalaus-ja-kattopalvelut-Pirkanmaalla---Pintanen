@@ -119,17 +119,41 @@ describe("lomakefunktio /api/contact", () => {
     expect(body.html).toContain("5 000 – 6 000 €");
   });
 
-  it("CRM-virhe ei kaada lomaketta: sähköposti lähtee ja vastaus on onnistunut", async () => {
+  it("CRM-virhe ei kaada lomaketta: sähköposti lähtee, mutta sen otsikko ja viesti kertovat virheestä", async () => {
+    const mailBody = () => {
+      const mail = fetchMock.mock.calls.find(([url]) => url === "https://api.resend.com/emails")!;
+      return JSON.parse((mail[1] as RequestInit).body as string);
+    };
+
     fetchMock.mockImplementation(async (url: string) =>
       url.includes("app.pintanen.fi") ? new Response("virhe", { status: 500 }) : new Response("{}", { status: 200 }),
     );
     expect((await call(valid)).status).toBe(200);
+    expect(mailBody().subject).toBe("[CRM EI VASTAANOTTANUT] Tarjouspyyntö: Testi Henkilö – Tiilikaton pinnoitus, Katon puhdistus");
+    expect(mailBody().html).toContain("Liidi ei mennyt CRM:ään");
 
+    fetchMock.mockClear();
     fetchMock.mockImplementation(async (url: string) => {
       if (url.includes("app.pintanen.fi")) throw new Error("verkkovirhe");
       return new Response("{}", { status: 200 });
     });
     expect((await call(valid)).status).toBe(200);
+    expect(mailBody().subject).toContain("[CRM EI VASTAANOTTANUT]");
+
+    // Puuttuva salaisuus on sama tilanne: liidi ei mene CRM:ään.
+    fetchMock.mockClear();
+    fetchMock.mockImplementation(async () => new Response("{}", { status: 200 }));
+    expect((await call(valid, { env: { RESEND_API_KEY: "test-resend" } })).status).toBe(200);
+    expect(mailBody().subject).toContain("[CRM EI VASTAANOTTANUT]");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("kun CRM vastaanottaa liidin, otsikossa ei ole varoitusta", async () => {
+    await call(valid);
+    const mail = fetchMock.mock.calls.find(([url]) => url === "https://api.resend.com/emails")!;
+    const body = JSON.parse((mail[1] as RequestInit).body as string);
+    expect(body.subject).not.toContain("CRM");
+    expect(body.html).not.toContain("Liidi ei mennyt");
   });
 
   it("Resend-virhe palauttaa virheen, jotta lomake ei väitä lähetyksen onnistuneen", async () => {

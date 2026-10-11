@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
-import { getCanonicalRoutes, legacyRoutes, getAllRoutePaths, buildSitemapXml, articlePath } from "@/data/routes";
+import { getCanonicalRoutes, legacyRoutes, legacyRedirects, buildRedirectsFile, getAllRoutePaths, buildSitemapXml, articlePath } from "@/data/routes";
 import { allCities, maalausCities, pinnoitusCities, puhdistusCities } from "@/data/cityData";
 import { articles, isPublished, getPublishedArticles } from "@/data/articles";
 import { authors } from "@/data/authors";
@@ -37,6 +37,35 @@ describe("reittilista (src/data/routes.ts) vs App.tsx", () => {
       expect(p.startsWith("/")).toBe(true);
       expect(p.endsWith("/")).toBe(false);
     }
+  });
+
+  it("vanhat osoitteet ohjataan kanonisiin sivuihin, eikä niille luoda kuoria", () => {
+    const all = new Set(getAllRoutePaths());
+    for (const { from, to } of legacyRedirects) {
+      expect(canonicalPaths.has(to), `${from} → ${to} ei ole kanoninen sivu`).toBe(true);
+      expect(from.endsWith("/")).toBe(false);
+      expect(to.endsWith("/")).toBe(false);
+      expect(all.has(from), `${from} saa yhä index.html-kuoren`).toBe(false);
+    }
+    expect(new Set(legacyRoutes).size).toBe(legacyRoutes.length);
+    // Jokainen maalauskunta, ei vain kahdeksan vanhaa (auditointi osa 4, luku 5).
+    for (const c of maalausCities) expect(legacyRoutes).toContain(`/talon-maalaus/${c.slug}`);
+  });
+
+  it("_redirects: jokaiselle vanhalle osoitteelle molemmat muodot, kohde kauttaviivalla, fallback viimeisenä", () => {
+    const tail = fs.readFileSync(path.resolve(__dirname, "../../public/_redirects"), "utf-8");
+    const file = buildRedirectsFile(tail);
+    const rules = file.split("\n").filter((l) => l && !l.startsWith("#"));
+    for (const { from, to } of legacyRedirects) {
+      expect(rules).toContain(`${from} ${to}/ 301`);
+      expect(rules).toContain(`${from}/ ${to}/ 301`);
+    }
+    for (const rule of rules) {
+      const [, target, status] = rule.split(/\s+/);
+      if (status === "301") expect(target.endsWith("/"), rule).toBe(true);
+    }
+    expect(rules[rules.length - 1]).toBe("/* /index.html 200");
+    expect(tail).not.toMatch(/\s301\s*$/m);
   });
 
   it("sitemap sisältää kaikki kanoniset reitit loppukauttaviivalla", () => {

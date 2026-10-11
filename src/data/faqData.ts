@@ -34,7 +34,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Milloin tiilikatto pitää pinnoittaa?',
     answer:
-      'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 15–20 vuotta vanha. Ajoissa tehty pinnoitus estää pakkasrapautumisen.',
+      'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 10–15 vuotta vanha. Ajoissa tehty pinnoitus estää pakkasrapautumisen.',
   },
   {
     question: 'Kattoremontti vai pinnoitus?',
@@ -172,7 +172,7 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: 'Milloin tiilikatto pitää pinnoittaa?',
       answer:
-        'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on 15–20 vuotta vanha.',
+        'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 10–15 vuotta vanha.',
     },
     {
       question: `Tiilikattoremontti vai pinnoitus ${paikka}?`,

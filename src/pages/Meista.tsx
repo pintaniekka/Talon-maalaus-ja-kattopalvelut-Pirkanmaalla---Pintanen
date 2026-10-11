@@ -36,7 +36,7 @@ const faktalaatikko = [
 ];
 
 /**
- * Meistä. Yksi totuus yrityksestä (korjaus 8): tamperelainen yritys (Eerikin päätös 5.10.2026: Oulua ei mainita), työt Pirkanmaalla ja Kanta-Hämeessä,
+ * Meistä. Yksi totuus yrityksestä (korjaus 8): tamperelainen yritys (Eerikin päätös 5.10. ja 11.10.2026: muuta kotipaikkaa ei mainita), työt Pirkanmaalla ja Kanta-Hämeessä,
  * vain ulkotyöt omakotitaloihin, paritaloihin ja mökkeihin. Tekstit lyhennetty (S27–S29).
  */
 const Meista = () => {

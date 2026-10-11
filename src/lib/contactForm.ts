@@ -1,5 +1,18 @@
-import { z } from 'zod';
+import { z, ZodError } from 'zod';
 import { trackLead } from '@/lib/analytics';
+
+export const GENERIC_FORM_ERROR = 'Lähetys ei onnistunut. Yritä uudelleen tai soita meille.';
+
+/**
+ * Virheilmoitus kävijälle. Validointivirheestä (zod) näytetään sen oma viesti, esimerkiksi
+ * "Anna puhelinnumero tai sähköposti", jotta kävijä tietää, mitä korjata. Palvelimen
+ * virheteksti on suomeksi ja näytetään sellaisenaan; muusta yleinen viesti.
+ */
+export const formErrorMessage = (err: unknown): string => {
+  if (err instanceof ZodError) return err.issues[0]?.message ?? GENERIC_FORM_ERROR;
+  if (err instanceof Error && err.message) return err.message;
+  return GENERIC_FORM_ERROR;
+};
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(1, 'Nimi on pakollinen').max(100, 'Nimi on liian pitkä'),

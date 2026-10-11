@@ -3,7 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { UserRound, Phone, MapPin, Mail, Building, MessageSquare } from "@/components/icons/BrandIcons";
 import { useToast } from "@/hooks/use-toast";
-import { submitContactForm } from "@/lib/contactForm";
+import { submitContactForm, formErrorMessage } from "@/lib/contactForm";
+import { isValidFinnishMobile, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
 
 // Global open trigger – allows any component to open the drawer
@@ -76,6 +77,11 @@ const DesktopQuoteDrawer = () => {
       toast({ title: "Täytä vähintään nimi ja puhelinnumero", variant: "destructive" });
       return;
     }
+    // Sama puhelinnumeron tarkistus kuin tarjouspyynnössä ja hintalaskurissa.
+    if (!isValidFinnishMobile(form.phone)) {
+      toast({ title: PHONE_ERROR_MESSAGE, variant: "destructive" });
+      return;
+    }
     setIsSubmitting(true);
     try {
       await submitContactForm({
@@ -93,8 +99,8 @@ const DesktopQuoteDrawer = () => {
       setIsSubmitted(true);
       setForm({ name: "", phone: "", address: "", postalCode: "", city: "", message: "", website: "" });
       toast({ title: "Kiitos! Olemme sinuun yhteydessä pian." });
-    } catch {
-      toast({ title: "Jokin meni pieleen. Yritä uudelleen.", variant: "destructive" });
+    } catch (err: unknown) {
+      toast({ title: "Lähetys ei onnistunut", description: formErrorMessage(err), variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }

@@ -3,7 +3,7 @@
  *
  * Käytetään kolmessa paikassa:
  *  - vite-plugin-spa-routes.ts: luo dist/<reitti>/index.html jokaiselle reitille
- *    (staattinen hosting palauttaa 200 eikä 404) ja generoi sitemap.xml:n
+ *    (staattinen hosting palauttaa 200 eikä 404), generoi sitemap.xml:n ja _redirects-tiedoston
  *  - src/test/routes.test.ts: varmistaa, että App.tsx:n reitit ovat tässä listassa
  *
  * Kun lisäät reitin App.tsx:ään, lisää se myös tähän.
@@ -74,24 +74,58 @@ export const getCanonicalRoutes = (now: Date = new Date()): SiteRoute[] => [
   ...cityRoutes.map((r) => ({ ...r, lastmod: r.lastmod ?? SITE_UPDATED })),
 ];
 
+export interface LegacyRedirect {
+  /** Vanha osoite ilman loppukauttaviivaa. */
+  from: string;
+  /** Nykyinen kanoninen sivu ilman loppukauttaviivaa. */
+  to: string;
+}
+
 /**
- * Vanhat osoitteet, joista App.tsx ohjaa uusiin. Näille luodaan index.html,
- * jotta ohjaus toimii myös ilman palvelinpuolen _redirects-tukea.
+ * Vanhat osoitteet ja niiden nykyiset sivut. Yksi lähde kolmeen käyttöön:
+ *  - vite-plugin-spa-routes.ts kirjoittaa dist/_redirects-tiedoston (Cloudflare Pages 301)
+ *  - App.tsx ohjaa selaimessa <Navigate>-reitillä, jos palvelinohjaus jostain syystä puuttuu
+ *  - routes.test.ts tarkistaa, että jokainen kohde on kanoninen sivu
+ * Vanhoille osoitteille ei enää luoda index.html-kuoria: kuori palautti 200:n etusivun
+ * otsikolla ilman canonicalia, ja Google indeksoi niitä (auditointi 11.10.2026, osa 4, luku 5).
  */
-export const legacyRoutes: string[] = [
-  "/kattopalvelut/pinnoitus",
-  "/kattopalvelut/puhdistus",
-  "/talon-maalaus",
-  "/hinnat",
-  "/maalauspalvelut-hinta-pirkanmaa",
-  "/hinnat/tiilikaton-pinnoitus",
-  "/hinnat/katon-puhdistus",
-  "/hinnat/talon-maalaus",
-  ...allCities.map((c) => `/alue/${c.slug}`),
-  ...fullServiceCities.map((c) => `/kattopalvelut/pinnoitus/${c.slug}`),
-  ...fullServiceCities.map((c) => `/kattopalvelut/puhdistus/${c.slug}`),
-  ...maalausCities.map((c) => `/talon-maalaus/${c.slug}`),
+export const legacyRedirects: LegacyRedirect[] = [
+  { from: "/kattopalvelut/pinnoitus", to: "/tiilikaton-pinnoitus-pirkanmaa" },
+  { from: "/kattopalvelut/puhdistus", to: "/katon-puhdistus-pirkanmaa" },
+  { from: "/talon-maalaus", to: "/talon-maalaus-pirkanmaa" },
+  { from: "/hinnat", to: "/hintalaskuri" },
+  { from: "/maalauspalvelut-hinta-pirkanmaa", to: "/hintalaskuri" },
+  { from: "/hinnat/tiilikaton-pinnoitus", to: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
+  { from: "/hinnat/katon-puhdistus", to: "/katon-puhdistus-hinta-pirkanmaa" },
+  { from: "/hinnat/talon-maalaus", to: "/talon-maalaus-hinta-pirkanmaa" },
+  { from: "/artikkelit/tiilikaton-pinnoituksen-hinta", to: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
+  ...allCities.map((c) => ({ from: `/alue/${c.slug}`, to: `/maalauspalvelut-${c.slug}` })),
+  ...fullServiceCities.map((c) => ({ from: `/kattopalvelut/pinnoitus/${c.slug}`, to: `/tiilikaton-pinnoitus-${c.slug}` })),
+  ...fullServiceCities.map((c) => ({ from: `/kattopalvelut/puhdistus/${c.slug}`, to: `/katon-puhdistus-${c.slug}` })),
+  ...maalausCities.map((c) => ({ from: `/talon-maalaus/${c.slug}`, to: `/talon-maalaus-${c.slug}` })),
 ];
+
+/** Vanhat osoitteet (vain polut). */
+export const legacyRoutes: string[] = legacyRedirects.map((r) => r.from);
+
+/**
+ * Cloudflare Pages -ohjaustiedoston sisältö (dist/_redirects). Jokaiselle vanhalle
+ * osoitteelle kaksi riviä, ilman ja kauttaviivalla, koska Pages vertaa polkua merkki
+ * merkiltä. Kohde on aina kauttaviivallinen: kauttaviivattomaan kohteeseen Pages lisäisi
+ * oman 308-ohjauksen, ja ketjusta tulisi kaksi hyppyä. `tail` on public/_redirects-tiedoston
+ * sisältö (säännöt, joita ei johdeta reittilistasta, ja SPA-fallback viimeisenä).
+ */
+export const buildRedirectsFile = (tail = ""): string => {
+  const rules = legacyRedirects.flatMap(({ from, to }) => [`${from} ${to}/ 301`, `${from}/ ${to}/ 301`]);
+  return [
+    "# Generoitu buildissa (vite-plugin-spa-routes.ts) tiedostosta src/data/routes.ts: legacyRedirects.",
+    "# Älä muokkaa tätä osaa käsin; muut säännöt ovat public/_redirects-tiedostossa.",
+    ...rules,
+    "",
+    tail.trimEnd(),
+    "",
+  ].join("\n");
+};
 
 /** Kaikki polut, joille build luo index.html:n (ilman juurta). */
 export const getAllRoutePaths = (): string[] => [
@@ -99,7 +133,6 @@ export const getAllRoutePaths = (): string[] => [
   // Myös ajastetuille artikkeleille luodaan hakemisto, jotta ne aukeavat
   // julkaisupäivänä ilman uutta buildia (sivu itse näyttää 404:n siihen asti).
   ...articles.map((a) => articlePath(a.slug)),
-  ...legacyRoutes,
 ];
 
 export const SITE_ORIGIN = "https://pintanen.fi";
@@ -137,7 +170,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
   return [
     "# Pintanen Oy",
     "",
-    `> Pintanen Oy on perheyritys, joka pinnoittaa tiilikattoja ja maalaa talojen ulkoseiniä. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Takana on yli 200 kohdetta: yli 130 pinnoitettua kattoa ja yli 80 maalattua taloa. Toiminta-alue on ${TOIMINTA_ALUE}. Yrityksen juuret ovat Oulussa.`,
+    `> Pintanen Oy on perheyritys, joka pinnoittaa tiilikattoja ja maalaa talojen ulkoseiniä. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Takana on yli 200 kohdetta: yli 130 pinnoitettua kattoa ja yli 80 maalattua taloa. Toiminta-alue on ${TOIMINTA_ALUE}. Pintanen on tamperelainen yritys.`,
     "",
     "## Perustiedot",
     "",

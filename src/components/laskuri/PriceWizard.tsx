@@ -7,6 +7,7 @@ import PhoneInput from "@/components/PhoneInput";
 import FormPrivacyNote from "@/components/FormPrivacyNote";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
+import { trackEvent } from "@/lib/analytics";
 import { calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
 import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 
@@ -168,16 +169,20 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     return service === "pinnoitus" ? calculateRoofPrice(m2, answers.slope) : calculateWallPrice(m2, answers.stories, answers.peeling);
   }, [service, answers]);
 
+  // GA4: laskurin aloitus, jokainen askel ja valmistuminen, jotta liidiportin (nimi ja
+  // puhelin ennen hintaa) keskeytyskohta näkyy datasta. Ei henkilötietoja parametreissa.
   const pickService = (s: WizardService) => {
     setService(s);
     setAnswers({});
     setIndex(0);
     setNumberInput("");
+    trackEvent("laskuri_aloitus", { palvelu: s });
   };
 
   const answer = (key: string, value: string) => {
     setAnswers((a) => ({ ...a, [key]: value }));
     setIndex((i) => i + 1);
+    if (service) trackEvent("laskuri_askel", { palvelu: service, askel: key });
   };
 
   const submitNumber = () => {
@@ -224,6 +229,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
         "hintalaskuri"
       );
       setResult(priceStr);
+      trackEvent("laskuri_valmis", { palvelu: service });
     } catch {
       toast({ title: "Virhe", description: "Jokin meni pieleen. Yritä uudelleen tai soita meille.", variant: "destructive" });
     } finally {

@@ -1,0 +1,45 @@
+# Jokaisessa PR:ssä ja main-haaran pushissa: tyypit, lint, testit, tuotantobuild ja buildin
+# tarkistus. Cloudflare Pagesin oma tarkistus kertoo vain, onnistuiko julkaisu; tämä kertoo,
+# ovatko testit ja sisältösäännöt kunnossa ennen mergeä (5.10.2026 suora commit kaatoi tuotannon).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  tarkistus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Riippuvuudet
+        run: npm ci
+
+      - name: Tyypit
+        run: npx tsc --noEmit -p tsconfig.app.json
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testit
+        run: npm test
+
+      - name: Tuotantobuild
+        run: npm run build
+
+      - name: Buildin tarkistus (sivut, head, linkit, schema)
+        run: python3 scripts/verify_dist.py dist
+
+      - name: Ohjaussääntöjen tarkistus
+        run: python3 scripts/verify_redirects.py --file dist/_redirects --sitemap dist/sitemap.xml

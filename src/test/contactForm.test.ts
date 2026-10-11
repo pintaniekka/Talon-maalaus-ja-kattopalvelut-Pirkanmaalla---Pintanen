@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { submitContactForm } from "@/lib/contactForm";
+import { submitContactForm, formErrorMessage, GENERIC_FORM_ERROR } from "@/lib/contactForm";
 
 // fetch korvataan testissä: mitään ei lähetetä oikeaan palveluun.
 const fetchMock = vi.fn();
@@ -50,6 +50,24 @@ describe("submitContactForm", () => {
     await expect(
       submitContactForm({ name: "Testi", phone: "040 1", service: "", message: "" }),
     ).rejects.toThrow("Sähköpostin lähetys epäonnistui");
+  });
+
+  it("validointivirheestä näytetään kävijälle sen oma viesti, ei yleistä virhettä (auditointi osa 2, löydös 1)", async () => {
+    const errors: string[] = [];
+    for (const payload of [
+      { name: "Testi", phone: "", email: "", service: "", message: "" },
+      { name: "Testi", phone: "", email: "ei-osoite", service: "", message: "" },
+    ]) {
+      try {
+        await submitContactForm(payload);
+      } catch (err) {
+        errors.push(formErrorMessage(err));
+      }
+    }
+    expect(errors).toEqual(["Anna puhelinnumero tai sähköposti", "Virheellinen sähköposti"]);
+    expect(formErrorMessage(new Error("Sähköpostin lähetys epäonnistui"))).toBe("Sähköpostin lähetys epäonnistui");
+    expect(formErrorMessage("x")).toBe(GENERIC_FORM_ERROR);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it("käsittelee vastauksen, joka ei ole JSONia", async () => {

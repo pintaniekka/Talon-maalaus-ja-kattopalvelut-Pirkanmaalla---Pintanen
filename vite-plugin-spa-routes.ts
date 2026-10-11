@@ -10,11 +10,14 @@
  *  4. Kirjoittaa dist/404.html:n (noindex), jotta tuntemattomat polut renderöivät
  *     SPA:n oman 404-sivun oikealla 404-statuksella.
  *  5. Generoi dist/sitemap.xml:n, dist/image-sitemap.xml:n ja dist/llms.txt:n samasta reittilistasta.
+ *  6. Kirjoittaa dist/_redirects-tiedoston: vanhat osoitteet 301:llä suoraan kanoniseen
+ *     sivuun molemmissa muodoissa (ilman ja kauttaviivalla), public/_redirects loppuun.
+ *  7. Merkitsee jonossa olevat (vielä julkaisemattomat) artikkelit noindexiksi.
  */
 import fs from "fs";
 import path from "path";
 import type { ViteDevServer } from "vite";
-import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt } from "./src/data/routes";
+import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt, buildRedirectsFile } from "./src/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
 import { allCities } from "./src/data/cityData";
 
@@ -66,6 +69,13 @@ export const applySeo = (html: string, routePath: string, seo: RouteSeo): string
 };
 
 const EMPTY_ROOT = '<div id="root"></div>';
+
+/**
+ * Jonossa oleva artikkeli: hakemisto luodaan, mutta sivu on noindex eikä sillä ole
+ * canonicalia ennen julkaisupäivää, jottei Google indeksoi tyhjää kuorta.
+ */
+export const applyNoindex = (html: string): string =>
+  html.replace(/\n\s*<link rel="canonical" href="[^"]*" \/>/, () => `\n    <meta name="robots" content="noindex" />`);
 
 /**
  * Yritys-scheman areaServed kaikista 24 paikkakunnasta (V16). index.html:ssä on vain maakunnat;
@@ -164,15 +174,24 @@ export default function spaRoutes() {
         const dir = path.join(distDir, route);
         const seo = getRouteSeo(route);
         fs.mkdirSync(dir, { recursive: true });
-        // Vain kanoniset sivut esirenderöidään; vanhat ohjausreitit jäävät tyhjiksi kuoriksi.
         let html = seo ? applySeo(subpageHtml, route, seo) : subpageHtml;
         if (seo) {
+          // Vain julkiset sivut esirenderöidään; jonossa oleva artikkeli jää noindex-kuoreksi.
           if (publicPaths.has(route)) html = await injectPrerender(html, route, prerender, failed);
+          else html = applyNoindex(html);
           if (!html.includes(EMPTY_ROOT)) prerendered++;
           withSeo++;
         }
         fs.writeFileSync(path.join(dir, "index.html"), html, "utf-8");
       }
+
+      // _redirects: Vite on kopioinut public/_redirects-tiedoston distiin; generoidut
+      // säännöt kirjoitetaan sen alkuun, SPA-fallback jää viimeiseksi.
+      const redirectsPath = path.join(distDir, "_redirects");
+      const redirectsTail = fs.existsSync(redirectsPath)
+        ? fs.readFileSync(redirectsPath, "utf-8")
+        : fs.readFileSync(path.resolve("public/_redirects"), "utf-8");
+      fs.writeFileSync(redirectsPath, buildRedirectsFile(redirectsTail), "utf-8");
 
       const notFoundHtml = subpageHtml
         .replace(/<title>[\s\S]*?<\/title>/, `<title>Sivua ei löytynyt | Pintanen</title>\n    <meta name="robots" content="noindex" />`);
@@ -186,7 +205,7 @@ export default function spaRoutes() {
       else process.env.NODE_ENV = previousNodeEnv;
 
       console.log(
-        `[spa-routes] Generated ${routes.length} route files (${withSeo} with page-specific head, ${prerendered} prerendered), 404.html, sitemaps and llms.txt.`,
+        `[spa-routes] Generated ${routes.length} route files (${withSeo} with page-specific head, ${prerendered} prerendered), 404.html, sitemaps, llms.txt and _redirects.`,
       );
       if (failed.length) console.warn(`[spa-routes] Esirenderöinti epäonnistui ${failed.length} reitillä:\n  ${failed.join("\n  ")}`);
     },

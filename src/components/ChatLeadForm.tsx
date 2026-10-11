@@ -70,8 +70,9 @@ const ChatLeadForm = () => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, currentStep, typing]);
 
-  // Trigger bubble after 5s (initial) or 40s (after dismiss)
-  const bubbleDelay = useRef(5000);
+  // Kupla avautuu 25 s kuluttua (Eerikin päätös 11.10.2026: 20–30 s, ei heti bannerin ja
+  // alapalkin päälle) tai 40 s kuluttua sulkemisesta.
+  const bubbleDelay = useRef(25000);
   const bubbleTimerRef = useRef<number | null>(null);
   useEffect(() => {
     bubbleTimerRef.current = window.setTimeout(() => { if (!open) setBubbleVisible(true); }, bubbleDelay.current);

@@ -1,75 +1,10 @@
-# SPA fallback
+# Cloudflare Pages -ohjaukset.
+#
+# Vanhojen osoitteiden 301-säännöt generoidaan buildissa tämän tiedoston ALKUUN
+# (vite-plugin-spa-routes.ts, lähde src/data/routes.ts: legacyRedirects), molemmissa
+# muodoissa ja aina kauttaviivalliseen kohteeseen. Älä lisää niitä tähän käsin.
+#
+# Tähän tiedostoon vain säännöt, joita ei voi johtaa reittilistasta.
+
+# SPA fallback (pidettävä viimeisenä)
 /* /index.html 200
-
-# ═══ 301 Redirects: Old → New URLs ═══
-
-# Main service pages
-/kattopalvelut/pinnoitus /tiilikaton-pinnoitus-pirkanmaa 301
-/kattopalvelut/puhdistus /katon-puhdistus-pirkanmaa 301
-/talon-maalaus /talon-maalaus-pirkanmaa 301
-
-# Price pages
-/hinnat /hintalaskuri 301
-/hinnat/tiilikaton-pinnoitus /tiilikaton-pinnoitus-hinta-pirkanmaa 301
-/hinnat/katon-puhdistus /katon-puhdistus-hinta-pirkanmaa 301
-/hinnat/talon-maalaus /talon-maalaus-hinta-pirkanmaa 301
-
-# City service pages - Tiilikaton pinnoitus
-/kattopalvelut/pinnoitus/tampere /tiilikaton-pinnoitus-tampere 301
-/kattopalvelut/pinnoitus/sastamala /tiilikaton-pinnoitus-sastamala 301
-/kattopalvelut/pinnoitus/hameenkyro /tiilikaton-pinnoitus-hameenkyro 301
-/kattopalvelut/pinnoitus/ylojarvi /tiilikaton-pinnoitus-ylojarvi 301
-/kattopalvelut/pinnoitus/nokia /tiilikaton-pinnoitus-nokia 301
-/kattopalvelut/pinnoitus/forssa /tiilikaton-pinnoitus-forssa 301
-/kattopalvelut/pinnoitus/hameenlinna /tiilikaton-pinnoitus-hameenlinna 301
-/kattopalvelut/pinnoitus/huittinen /tiilikaton-pinnoitus-huittinen 301
-
-# City service pages - Katon puhdistus
-/kattopalvelut/puhdistus/tampere /katon-puhdistus-tampere 301
-/kattopalvelut/puhdistus/sastamala /katon-puhdistus-sastamala 301
-/kattopalvelut/puhdistus/hameenkyro /katon-puhdistus-hameenkyro 301
-/kattopalvelut/puhdistus/ylojarvi /katon-puhdistus-ylojarvi 301
-/kattopalvelut/puhdistus/nokia /katon-puhdistus-nokia 301
-/kattopalvelut/puhdistus/forssa /katon-puhdistus-forssa 301
-/kattopalvelut/puhdistus/hameenlinna /katon-puhdistus-hameenlinna 301
-/kattopalvelut/puhdistus/huittinen /katon-puhdistus-huittinen 301
-
-# City service pages - Talon maalaus
-/talon-maalaus/tampere /talon-maalaus-tampere 301
-/talon-maalaus/sastamala /talon-maalaus-sastamala 301
-/talon-maalaus/hameenkyro /talon-maalaus-hameenkyro 301
-/talon-maalaus/ylojarvi /talon-maalaus-ylojarvi 301
-/talon-maalaus/nokia /talon-maalaus-nokia 301
-/talon-maalaus/forssa /talon-maalaus-forssa 301
-/talon-maalaus/hameenlinna /talon-maalaus-hameenlinna 301
-/talon-maalaus/huittinen /talon-maalaus-huittinen 301
-
-# Area pages → maalauspalvelut-[city]
-/alue/tampere /maalauspalvelut-tampere 301
-/alue/sastamala /maalauspalvelut-sastamala 301
-/alue/hameenkyro /maalauspalvelut-hameenkyro 301
-/alue/ylojarvi /maalauspalvelut-ylojarvi 301
-/alue/nokia /maalauspalvelut-nokia 301
-/alue/forssa /maalauspalvelut-forssa 301
-/alue/hameenlinna /maalauspalvelut-hameenlinna 301
-/alue/huittinen /maalauspalvelut-huittinen 301
-/alue/akaa /maalauspalvelut-akaa 301
-/alue/ikaalinen /maalauspalvelut-ikaalinen 301
-/alue/juupajoki /maalauspalvelut-juupajoki 301
-/alue/kangasala /maalauspalvelut-kangasala 301
-/alue/kihnio /maalauspalvelut-kihnio 301
-/alue/lempaala /maalauspalvelut-lempaala 301
-/alue/mantta-vilppula /maalauspalvelut-mantta-vilppula 301
-/alue/orivesi /maalauspalvelut-orivesi 301
-/alue/parkano /maalauspalvelut-parkano 301
-/alue/pirkkala /maalauspalvelut-pirkkala 301
-/alue/palkane /maalauspalvelut-palkane 301
-/alue/ruovesi /maalauspalvelut-ruovesi 301
-/alue/urjala /maalauspalvelut-urjala 301
-/alue/valkeakoski /maalauspalvelut-valkeakoski 301
-/alue/vesilahti /maalauspalvelut-vesilahti 301
-/alue/virrat /maalauspalvelut-virrat 301
-/artikkelit/tiilikaton-pinnoituksen-hinta /tiilikaton-pinnoitus-hinta-pirkanmaa 301
-/artikkelit/tiilikaton-pinnoituksen-hinta/ /tiilikaton-pinnoitus-hinta-pirkanmaa 301
-/maalauspalvelut-hinta-pirkanmaa /hintalaskuri 301
-/maalauspalvelut-hinta-pirkanmaa/ /hintalaskuri 301

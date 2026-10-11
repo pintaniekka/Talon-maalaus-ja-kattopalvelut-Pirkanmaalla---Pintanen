@@ -69,7 +69,7 @@ const yleisetKysymykset = (city: CityData, service: ProjectService): FAQItem[] =
     },
     {
       question: "Pitääkö minun olla kotona?",
-      answer: "Arviokäynnillä kyllä. Käymme katon ja tarjouksen läpi yhdessä paikan päällä, emmekä tee tarjousta etänä. Työn aikana on mukava, jos olet kotona, mutta pakollista se ei ole.",
+      answer: `Arviokäynnillä kyllä. Käymme ${katto ? "katon" : "seinät"} ja tarjouksen läpi yhdessä paikan päällä, emmekä tee tarjousta etänä. Työn aikana on mukava, jos olet kotona, mutta pakollista se ei ole.`,
     },
     {
       question: "Mitä tapahtuu, jos kesken työn sataa?",

@@ -4,10 +4,17 @@
  * `category` luokittelee arvostelun:
  *  - "katto" → katto- tai pinnoitustöitä koskevat arviot
  *  - "seina" → talon-/seinämaalausta koskevat arviot
+ *  - "molemmat" → katto ja seinät samassa kohteessa; näkyy sekä katto- että seinälistoissa
  *  - "yleinen" → ei selvää kohdetta; näkyy vain yleisessä karusellissa
+ *
+ * Luokat Eerikin tiedoilla 12.10.2026 (kahdeksan aiemmin "yleinen"-arvostelua luokiteltu).
  */
 
-export type TestimonialCategory = "katto" | "seina" | "yleinen";
+export type TestimonialCategory = "katto" | "seina" | "molemmat" | "yleinen";
+
+/** Kuuluuko arvostelu kategoriaan. "molemmat" lasketaan sekä kattoon että seinään. */
+export const matchesCategory = (t: Testimonial, category: TestimonialCategory): boolean =>
+  t.category === category || (t.category === "molemmat" && (category === "katto" || category === "seina"));
 
 export interface Testimonial {
   /** Asiakkaan nimi (Google-arvostelusta, sanasta sanaan). */
@@ -29,7 +36,7 @@ export const allTestimonials: Testimonial[] = [
     name: "Toni Reunanen",
     stars: 5,
     text: "Kiitos ammattimaisesta kattojen pesusta ja pinnoituksesta, sekä kahden rakennuksen ulkoseinien maalauksesta. Kaikki meni sovitun mukaisesti ja ilman mitään huomauttamista. Olemme erittäin tyytyväisiä valinnastamme.",
-    category: "yleinen",
+    category: "molemmat",
     city: "tampere",
   },
   {
@@ -67,7 +74,7 @@ export const allTestimonials: Testimonial[] = [
     name: "Jani Kalliala",
     stars: 5,
     text: "Työ meni niinkuin sovittiin. Plussat ehdottomasti mukavalle työmiehelle ja hyvälle työjäljelle. Kiitos👍",
-    category: "yleinen",
+    category: "katto",
   },
   {
     name: "Anna-Riitta Taipale",
@@ -85,19 +92,19 @@ export const allTestimonials: Testimonial[] = [
     name: "Mauri Rajuvaara",
     stars: 5,
     text: "Excellent quality of work within agreed budget and time frame",
-    category: "yleinen",
+    category: "katto",
   },
   {
     name: "Juuso Heimonen",
     stars: 5,
     text: "Erittäin hyvää palvelua. Urakka valmistui juuri niin kuin sovittiin ja työn jälki oli erinomaista. Suosittelen!",
-    category: "yleinen",
+    category: "katto",
   },
   {
     name: "Timo Leppänen",
     stars: 5,
     text: "Erittäin toimiva palvelu; hyvä yhteydenpito, siisti työnjälki ja ripeää toimintaa! Suosittelen!",
-    category: "yleinen",
+    category: "seina",
   },
   {
     name: "Timo Piilonen",
@@ -153,7 +160,7 @@ export const allTestimonials: Testimonial[] = [
     name: "Tapio Kivistö",
     stars: 5,
     text: "Hyvä työn jälki ja ahkera työnteko. Suosittelen!",
-    category: "yleinen",
+    category: "molemmat",
   },
   {
     name: "Ari Reunanen",
@@ -165,7 +172,7 @@ export const allTestimonials: Testimonial[] = [
     name: "Jari Sandelin",
     stars: 5,
     text: "Kattava tarjouksen tekeminen ja yksityiskohtien selvittäminen etukäteen. Lisäkysymyksiin vastattiin heti. Itse toteutus hoitui todella asiantuntevasti ja ripeästi. Työn jälki erinomaista ja kaikki sopimuksen kohdat hoidettiin esimerkillisesti. Ei mitään huomautettavaa. Kommunikointi selkeästi paikan päällä mitä suunnitteilla milloinkin ja Whatsappilla tavoitti myös jos oli kysyttävää. Täydet suosittelut kaikin puolin!",
-    category: "yleinen",
+    category: "katto",
   },
   {
     name: "Pirjo Raittila",
@@ -196,19 +203,15 @@ export const allTestimonials: Testimonial[] = [
     name: "Ilpo Lehto",
     stars: 5,
     text: "Asiallinen kaveri tämä Eerik Pitkänen 👍",
-    category: "yleinen",
+    category: "katto",
   },
 ];
 
 /** Vain kattoon liittyvät arviot. */
-export const roofTestimonials: Testimonial[] = allTestimonials.filter(
-  (t) => t.category === "katto",
-);
+export const roofTestimonials: Testimonial[] = allTestimonials.filter((t) => matchesCategory(t, "katto"));
 
 /** Vain seinä-/talonmaalaukseen liittyvät arviot. */
-export const wallTestimonials: Testimonial[] = allTestimonials.filter(
-  (t) => t.category === "seina",
-);
+export const wallTestimonials: Testimonial[] = allTestimonials.filter((t) => matchesCategory(t, "seina"));
 
 /**
  * Valitsee deterministisesti N arvostelua kaupungin slugin perusteella
@@ -237,3 +240,35 @@ export const getTestimonialsForCity = (
 /** Arvostelut, joiden kohde on tietyllä paikkakunnalla. */
 export const getTestimonialsByCity = (citySlug: string): Testimonial[] =>
   allTestimonials.filter((t) => t.city === citySlug);
+
+/** Arvostelujen määrä (näytetään Kokemuksia-sivulla ja arvostelunostoissa). */
+export const REVIEW_COUNT = allTestimonials.length;
+
+/**
+ * Kaupunkisivun arvostelunosto (12.10.2026): koko seinä näkyy vain etusivulla ja /kokemuksia/-sivulla,
+ * koska sama 28 arvostelun lohko joka sivulla teki sivuista Googlen silmissä samanlaisia.
+ * Tämä valitsee paikkakunnan slugin perusteella deterministisesti muutaman arvostelun palvelun
+ * kategoriasta ja jättää pois paikkakunnan omat arvostelut, jotka CityProjects näyttää jo.
+ */
+export const getTeaserTestimonials = (
+  citySlug: string,
+  category?: TestimonialCategory,
+  count = 2,
+): Testimonial[] => {
+  const pool = allTestimonials.filter(
+    (t) => t.city !== citySlug && (!category || matchesCategory(t, category)),
+  );
+  if (pool.length === 0) return [];
+
+  let offset = 0;
+  const seed = `${citySlug}-${category ?? "kaikki"}`;
+  for (let i = 0; i < seed.length; i++) {
+    offset = (offset + seed.charCodeAt(i)) % pool.length;
+  }
+
+  const picked: Testimonial[] = [];
+  for (let i = 0; i < Math.min(count, pool.length); i++) {
+    picked.push(pool[(offset + i) % pool.length]);
+  }
+  return picked;
+};

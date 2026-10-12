@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { MapPin } from "@/components/icons/BrandIcons";
 import PageHero from "@/components/PageHero";
 import CityProjects from "@/components/CityProjects";
-import TestimonialsMarquee from "@/components/TestimonialsMarquee";
+import ReviewsTeaser from "@/components/ReviewsTeaser";
 import FAQSection from "@/components/FAQSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
@@ -247,7 +247,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
       <FAQSection items={getAreaFAQ(cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
 
-      <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
+      <ReviewsTeaser citySlug={citySlug} />
       <ServiceContactSection variant="general" cityIn={cityIn} />
 
       <ToimintaAlueetBanner activeCity={citySlug} />

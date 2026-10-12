@@ -19,6 +19,7 @@ const TalonMaalausCity = lazyWithRetry(() => import("./pages/TalonMaalausCity"))
 const ToimintaAlueet = lazyWithRetry(() => import("./pages/ToimintaAlueet"));
 const ServiceAreaPage = lazyWithRetry(() => import("./pages/ServiceAreaPage"));
 const Referenssit = lazyWithRetry(() => import("./pages/Referenssit"));
+const Kokemuksia = lazyWithRetry(() => import("./pages/Kokemuksia"));
 const Hintalaskuri = lazyWithRetry(() => import("./pages/Hintalaskuri"));
 const Tarjouspyynto = lazyWithRetry(() => import("./pages/Tarjouspyynto"));
 const HinnatTiilikalonPinnoitus = lazyWithRetry(() => import("./pages/HinnatTiilikalonPinnoitus"));
@@ -69,6 +70,7 @@ export const AppContent = ({
               <Route path="/talon-maalaus-hinta-pirkanmaa" element={<HinnatTalonMaalaus />} />
               <Route path="/toiminta-alueet" element={<ToimintaAlueet />} />
               <Route path="/referenssit" element={<Referenssit />} />
+              <Route path="/kokemuksia" element={<Kokemuksia />} />
               <Route path="/meista" element={<Meista />} />
               <Route path="/artikkelit" element={<Artikkelit />} />
               <Route path="/artikkelit/:slug" element={<Artikkeli />} />

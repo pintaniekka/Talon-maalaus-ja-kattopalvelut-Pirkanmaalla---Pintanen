@@ -1,10 +1,10 @@
-import { allTestimonials } from "@/data/testimonialsData";
-import { GOOGLE_PROFILE_URL } from "@/data/company";
+import { Link } from "react-router-dom";
+import { allTestimonials, REVIEW_COUNT } from "@/data/testimonialsData";
 
 /**
  * Etusivun arvostelunosto: kolme Google-arvostelua Googlen korttien näköisinä.
  * Tekstit sanasta sanaan; päivämääriä ei näytetä, koska niitä ei ole tallessa.
- * Koko lista on karusellissa alempana.
+ * Koko lista on karusellissa alempana ja sivulla /kokemuksia/.
  */
 const picks = ["Juuso Heimonen", "Timo Leppänen", "Anna-Riitta Taipale"];
 const avatarColors = ["#0f766e", "#ea580c", "#7c3aed"];
@@ -71,10 +71,10 @@ const ReviewHighlights = () => (
         ))}
       </div>
       <p className="mt-3 text-sm text-muted-foreground md:text-right">
-        <strong className="text-foreground">5,0 / 5</strong> Google-arvosteluissa ·{" "}
-        <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="text-accent-ink font-semibold underline underline-offset-2">
-          Lue kaikki arvostelut
-        </a>
+        <strong className="text-foreground">5,0 / 5</strong> Google-arvosteluissa, {REVIEW_COUNT} arvostelua ·{" "}
+        <Link to="/kokemuksia/" className="text-accent-ink font-semibold underline underline-offset-2">
+          Lue kaikki kokemukset
+        </Link>
       </p>
     </div>
   </section>

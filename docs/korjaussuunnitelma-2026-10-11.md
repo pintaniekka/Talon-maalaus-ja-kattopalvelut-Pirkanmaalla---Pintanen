@@ -316,7 +316,7 @@ Jos 3.11. ollaan alle puolivälissä, painopiste siirtyy arvosteluihin ja mainin
 
 - Vaihe 1: jonossa olevat artikkelit noindex; FAQ "Pitääkö minun olla kotona?" palvelukohtaiseksi (maalaussivulla "seinät").
 - Vaihe 3: titlet alle 60 merkin (30 sivua), kuvaukset alle 160; sivukohtainen "Päivitetty"-päivä gitin viimeisestä muutoksesta.
-- Vaihe 4: llms.txt (link-tagi, FAQ-osio, rajauslause). **Kokemuksia-sivua ei tehdä** (Eerik 11.10.: "ei tarvi"). Arvosteluseinän rajaus (30 arvostelun seinä vain etusivulle, kaupunkisivuilla vain paikkakunnan omat arvostelut) on vielä päättämättä: kysytään kerran vaiheen 4 esikatselun yhteydessä perusteluineen (keventää joka sivun HTML:ää noin 700 sanaa ja vähentää toistoa).
+- Vaihe 4: llms.txt (link-tagi, FAQ-osio, rajauslause). **Kokemuksia-sivu tehdään** (Eerik 12.10.: "kokemussivu ok"; kumoaa 11.10. "ei tarvi"). **Arvosteluseinän rajaus päätetty** (Eerik 12.10.): koko seinä (28 arvostelua) vain etusivulla ja /kokemuksia/-sivulla, koska sama lohko joka sivulla teki sivuista Googlen silmissä samanlaisia. Kaupunkisivuilla paikkakunnan omat arvostelut (CityProjects) ja kahden arvostelun nosto linkillä Kokemuksia-sivulle (`ReviewsTeaser`). Palvelusivujen katto- ja seinäkarusellit jäivät ennalleen. Toteutus 12.10.2026 omassa PR:ssä (haara `claude/kokemuksia-arvostelut`), julkaisu Eerikin ok:lla.
 - Vaihe 5: vendor-ui-paketin purku (recharts, cmdk, vaul, embla pois yhteispaketista); kuvien pakkaus laatuun 75.
 - Ei tehdä: puhdistussivujen uusiminen (palvelu loppunut); Meistä-faktat.
 

@@ -3,7 +3,7 @@ import { TOIMINTA_ALUE } from "@/data/company";
 
 const sideBase = "puutalon-katon-ja-seinien-maalaus-tampere";
 
-/** Etusivun "Miksi Pintanen?" lyhennettynä puoleen (8.3, S32). */
+/** Etusivun "Miksi Pintanen?" lyhennettynä puoleen (8.3, S32). Vain yksi lihavointi (tarkastus 12.10.2026). */
 const MiksiPintanen = () => {
   return (
     <section className="section-padding bg-accent-light">
@@ -14,16 +14,16 @@ const MiksiPintanen = () => {
 
             <div className="space-y-4 text-foreground leading-relaxed">
               <p>
-                Me olemme veljekset <strong>Eerik</strong> ja <strong>Eemil</strong>. <strong>Teemme työt itse</strong>: tulemme katsomaan
-                kohteen, annamme kiinteän hinnan ja hoidamme työn alusta loppuun. Ei välikäsiä.
+                Me olemme veljekset Eerik ja Eemil. <strong>Teemme työt itse</strong>: tulemme katsomaan kohteen, annamme kiinteän
+                hinnan ja hoidamme työn alusta loppuun. Ei välikäsiä.
               </p>
               <p>
-                <strong>Eerik</strong> pinnoittaa tiilikatot: pesu painepesulla ja maalaus ruiskulla kahteen kertaan. <strong>Eemil</strong>{" "}
-                maalaa talojen ulkoseinät: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.
+                Eerik pinnoittaa tiilikatot: pesu painepesulla ja maalaus ruiskulla kahteen kertaan. Eemil maalaa talojen ulkoseinät:
+                homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.
               </p>
               <p>
-                Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt {TOIMINTA_ALUE}. <strong>Arviokäynti on ilmainen.</strong> Pinnoitukselle
-                annamme <strong>5 vuoden</strong> ja maalaukselle <strong>2 vuoden takuun</strong>.
+                Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt {TOIMINTA_ALUE}. Arviokäynti on ilmainen. Pinnoitukselle annamme 5
+                vuoden ja maalaukselle 2 vuoden takuun.
               </p>
               <p className="font-semibold text-primary">– Eerik &amp; Eemil</p>
             </div>

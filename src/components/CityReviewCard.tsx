@@ -2,8 +2,6 @@ import ResponsiveImage from "@/components/ResponsiveImage";
 import type { ReviewCase } from "@/data/reviewCases";
 import type { Testimonial } from "@/data/testimonialsData";
 
-const avatarColors = ["#0f766e", "#ea580c", "#7c3aed", "#0369a1"];
-
 const GoogleG = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" aria-label="Google" role="img">
     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -33,14 +31,15 @@ const VerifiedBadge = () => (
 interface Props {
   review: Testimonial;
   reviewCase: ReviewCase;
-  index: number;
+  /** Ei enää käytössä (alkukirjainpallot poistettiin 12.10.2026); hyväksytään, jotta kutsujat eivät muutu. */
+  index?: number;
 }
 
 /**
  * Asiakkaan Google-arvostelu ja sama kohde kuvina (ennen ja jälkeen tai yksi kuva).
- * Arvostelun teksti sanasta sanaan; kertomus on Eerikin.
+ * Arvostelun teksti sanasta sanaan; kertomus on Eerikin. Ei alkukirjainpalloa.
  */
-const CityReviewCard = ({ review, reviewCase, index }: Props) => {
+const CityReviewCard = ({ review, reviewCase }: Props) => {
   const photos = reviewCase.before && reviewCase.after
     ? [
         { base: reviewCase.before, label: "Ennen" },
@@ -54,13 +53,6 @@ const CityReviewCard = ({ review, reviewCase, index }: Props) => {
     <article className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden grid md:grid-cols-[1fr_minmax(0,40%)]">
       <div className="p-6 flex flex-col">
         <div className="flex items-center gap-3 mb-2.5">
-          <span
-            className="w-11 h-11 rounded-full flex items-center justify-center text-white text-lg font-medium flex-shrink-0"
-            style={{ backgroundColor: avatarColors[index % avatarColors.length] }}
-            aria-hidden="true"
-          >
-            {review.name[0]}
-          </span>
           <span className="font-bold text-foreground font-heading flex-1 leading-tight">{review.name}</span>
           <GoogleG />
         </div>

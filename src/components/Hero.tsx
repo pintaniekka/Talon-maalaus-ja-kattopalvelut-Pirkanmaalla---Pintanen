@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { Building2 } from "@/components/icons/BrandIcons";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 
 const heroBase = "/images/Eerik-maalaa/Eerik-maalaa-kattoa";
@@ -21,7 +20,7 @@ const Hero = () => {
           <div className="inline-flex items-center gap-3 mb-6 md:mb-8">
             <span className="h-1 w-12 bg-accent rounded-full" aria-hidden="true" />
             <span className="text-accent-ink font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm">
-              Pirkanmaan paikallinen perheyritys
+              Perheyritys Tampereelta
             </span>
           </div>
 
@@ -108,25 +107,10 @@ const Hero = () => {
             aria-hidden="true"
           />
 
-          {/* Floating badge */}
-          <div className="absolute bottom-4 right-4 lg:bottom-10 lg:right-10 bg-roof-red text-roof-red-foreground p-4 lg:p-6 rounded-2xl lg:rounded-3xl shadow-2xl rotate-2 max-w-[210px] lg:max-w-[260px]">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 lg:w-11 lg:h-11 bg-white/20 rounded-full shrink-0 flex items-center justify-center">
-                <Building2 className="w-5 h-5 lg:w-6 lg:h-6" />
-              </div>
-              <div>
-                <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">
-                  Yrittäjät itse paikalla
-                </p>
-                <p className="text-sm lg:text-base font-heading font-extrabold leading-tight mb-1">
-                  Eerik &amp; Eemil vastaavat jäljestä.
-                </p>
-                <p className="hidden sm:block text-xs text-white/80 font-sans">
-                  Ei välikäsiä, vain luotettavaa perheyrityksen laatua.
-                </p>
-              </div>
-            </div>
-          </div>
+          {/* Pieni valkoinen chip kuvan alareunassa (tarkastus 12.10.2026, T2): ei kallistettua tarraa. */}
+          <p className="absolute bottom-4 right-4 lg:bottom-8 lg:right-8 inline-flex items-center rounded-full bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-md">
+            Eerik ja Eemil tekevät työn itse.
+          </p>
         </div>
       </div>
     </section>

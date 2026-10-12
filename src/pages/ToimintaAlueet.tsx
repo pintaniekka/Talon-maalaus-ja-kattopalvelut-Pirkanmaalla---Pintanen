@@ -2,7 +2,6 @@ import { ChevronRight } from "lucide-react";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
-import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import ServiceContactSection from '@/components/ServiceContactSection';
 import SEO from '@/components/SEO';
 import { HERO_BASE, staticSeo } from "@/data/seo";
@@ -33,8 +32,7 @@ const ToimintaAlueet = () => {
         breadcrumbs={[{ name: "Toiminta-alueet" }]}
       />
 
-      <ToimintaAlueetBanner />
-
+      {/* Banneri poistettu (tarkastus 12.10.2026): Paikkakunnat-ruudukko alla riittää. */}
 
       <section className="section-padding bg-background">
         <div className="section-container max-w-4xl">

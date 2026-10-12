@@ -1,8 +1,6 @@
 import type { Testimonial } from "@/data/testimonialsData";
 import { getCityBySlug } from "@/data/cityData";
 
-const avatarColors = ["#0f766e", "#ea580c", "#7c3aed", "#0369a1"];
-
 const GoogleG = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" aria-label="Google" role="img">
     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -24,25 +22,20 @@ const Stars = ({ stars }: { stars: number }) => (
 
 interface Props {
   review: Testimonial;
+  /** Ei enää käytössä (alkukirjainpallot poistettiin 12.10.2026); hyväksytään, jotta kutsujat eivät muutu. */
   index?: number;
 }
 
 /**
  * Yksi Google-arvostelu kokonaan näkyvissä (ei leikkausta eikä animaatiota). Teksti sanasta sanaan.
+ * Näytetään nimi, Google-merkki, tähdet ja teksti; ei alkukirjainpalloa.
  * Käytetään Kokemuksia-sivun ruudukossa ja kaupunkisivujen arvostelunostossa.
  */
-const ReviewCard = ({ review, index = 0 }: Props) => {
+const ReviewCard = ({ review }: Props) => {
   const city = review.city ? getCityBySlug(review.city) : undefined;
   return (
     <figure className="h-full rounded-2xl border border-border bg-card p-5 shadow-sm flex flex-col">
       <figcaption className="flex items-center gap-3 mb-2.5">
-        <span
-          className="w-10 h-10 rounded-full flex items-center justify-center text-white text-base font-medium flex-shrink-0"
-          style={{ backgroundColor: avatarColors[index % avatarColors.length] }}
-          aria-hidden="true"
-        >
-          {review.name[0]}
-        </span>
         <span className="flex-1 min-w-0 leading-tight">
           <span className="block font-bold text-foreground font-heading">{review.name}</span>
           {city && <span className="block text-xs text-muted-foreground">{city.name}</span>}

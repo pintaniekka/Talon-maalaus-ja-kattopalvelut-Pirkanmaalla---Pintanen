@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { allTestimonials, REVIEW_COUNT } from "@/data/testimonialsData";
+import { LUVUT } from "@/data/company";
 
 /**
  * Etusivun arvostelunosto: kolme Google-arvostelua Googlen korttien näköisinä.
  * Tekstit sanasta sanaan; päivämääriä ei näytetä, koska niitä ei ole tallessa.
- * Koko lista on karusellissa alempana ja sivulla /kokemuksia/.
+ * Ei alkukirjainpalloja (tarkastus 12.10.2026): tähdet, teksti, nimi ja Google-merkki.
+ * Koko lista on sivulla /kokemuksia/; etusivulla on vain tämä osio.
  */
 const picks = ["Juuso Heimonen", "Timo Leppänen", "Anna-Riitta Taipale"];
-const avatarColors = ["#0f766e", "#ea580c", "#7c3aed"];
 const reviews = picks
   .map((name) => allTestimonials.find((t) => t.name === name))
   .filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -51,19 +52,12 @@ const ReviewHighlights = () => (
         aria-label="Arvostelut, vieritettävä lista"
         tabIndex={0}
       >
-        {reviews.map((r, i) => (
+        {reviews.map((r) => (
           <figure
             key={r.name}
             className="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-auto rounded-2xl border border-border bg-card p-5 shadow-sm"
           >
             <figcaption className="flex items-center gap-3 mb-2.5">
-              <span
-                className="w-11 h-11 rounded-full flex items-center justify-center text-white text-lg font-medium flex-shrink-0"
-                style={{ backgroundColor: avatarColors[i % avatarColors.length] }}
-                aria-hidden="true"
-              >
-                {r.name[0]}
-              </span>
               <span className="font-bold text-foreground font-heading flex-1 leading-tight">{r.name}</span>
               <GoogleG />
             </figcaption>
@@ -76,9 +70,9 @@ const ReviewHighlights = () => (
         ))}
       </div>
       <p className="mt-3 text-sm text-muted-foreground md:text-right">
-        <strong className="text-foreground">5,0 / 5</strong> Google-arvosteluissa, {REVIEW_COUNT} arvostelua ·{" "}
+        <strong className="text-foreground">{LUVUT.googleArvio}</strong> Google-arvosteluissa ·{" "}
         <Link to="/kokemuksia/" className="text-accent-ink font-semibold underline underline-offset-2">
-          Lue kaikki kokemukset
+          Kaikki {REVIEW_COUNT} arvostelua
         </Link>
       </p>
     </div>

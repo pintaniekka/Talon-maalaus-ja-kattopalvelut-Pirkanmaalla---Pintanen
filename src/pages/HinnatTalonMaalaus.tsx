@@ -145,6 +145,10 @@ const HinnatTalonMaalaus = () => {
             <Link to="/artikkelit/kuinka-usein-puutalo-maalataan/" className="text-primary font-semibold hover:underline">
               kuinka usein puutalo pitää maalata
             </Link>
+            . Työn vaiheet kerromme sivulla{" "}
+            <Link to="/talon-maalaus-pirkanmaa/" className="text-primary font-semibold hover:underline">
+              talon maalaus Pirkanmaalla
+            </Link>
             .
           </p>
         </div>

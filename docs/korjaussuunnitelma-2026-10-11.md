@@ -133,6 +133,15 @@ Pieniä muutoksia: titlet, H1:n lisäsana ja linkkien ankkurit. Ei tekstien uude
 
 **Mittari:** `/tiilikaton-pinnoitus-tampere/` sijainti 45 → alle 15; "katon maalaus tampere" 55 → 30; "julkisivumaalaus tampere" 26 → alle 10; sivuja per haku 1,56 → 1,2.
 
+### Toteutus 12.10.2026
+
+Haara `claude/vaihe-3-sivuroolit`. Tehty:
+
+- **3A titlet ja H1:** aluesivut "Maalausliike ja kattopalvelut <Kunta>" (title, H1, eyebrow ja Service-schema). Pinnoituksen kaupunkisivut "Tiilikaton pinnoitus ja maalaus <Kunta> | Pintanen": hinta siirtyi pois titlestä (se on kuvauksessa), jotta "maalaus" mahtuu alle 60 merkin. Maalauksen kaupunkisivut saavat "ulkomaalaus ja julkisivumaalaus" -muodon, kun koko title on enintään 66 merkkiä (Tampere, Nokia, Forssa, Akaa, Kihniö, Urjala, Virrat); pidemmillä kuntanimillä jää "ulkomaalaus". Hintalaskuri "Hintalaskuri: tiilikaton pinnoitus ja talon maalaus". Kolme yli 160 merkin kuvausta lyhennetty.
+- **3B linkitys:** etusivun tekstiosiosta linkit "tiilikaton pinnoitus Tampere" ja "talon maalaus Tampere"; palvelusivuilta takaisin aluesivulle ankkurilla "Maalausliike ja kattopalvelut <Kunta>"; hubit → hintasivut ("tiilikaton pinnoituksen hinta", "talon maalauksen hinta") ja hintasivut → hubit ("tiilikaton pinnoitus Pirkanmaalla", "talon maalaus Pirkanmaalla"); footerin "Ulkomaalaus" → "Talon maalaus". Aluesivu ↔ palvelusivut oli jo täsmäankkureilla.
+- **Ei tehty:** puhdistussivujen linkit (Eerikin päätös: palvelu loppunut); artikkelilinkit kuntasivuille (artikkeleissa ei mainita kuntia); sivukohtainen "Päivitetty"-päivä gitistä (vaatii oman toteutuksen, siirretty myöhemmäksi).
+- Havainto vaiheeseen 4: pinnoituksen hintasivulla on lause "eikä kattoremontteja tehdä meillä" ("emme tee" -lause), korjataan 4A:n yhteydessä.
+
 ---
 
 ## Vaihe 4: Sisältö (tekstimuutokset datatiedostoihin, Eerikin ok)
@@ -299,6 +308,7 @@ Jos 3.11. ollaan alle puolivälissä, painopiste siirtyy arvosteluihin ja mainin
 - **Chatin kupla 25 s** (tehty vaiheessa 1). **Liidiportti pysyy.** **Kiitos-sivu** tehdään, jos siitä on hyötyä: päätetään GA4-datan jälkeen.
 - **Meistä-sivulle ei lisätä** perustamispäivää, vakuutuksia tai rekistereitä.
 - **Titlet "hinta 2027"** pysyvät.
+- **Pinnoituksen kaupunkisivujen title** (Eerik 12.10.): "Tiilikaton pinnoitus ja maalaus <Kunta> | Pintanen". Hinta vain kuvauksessa ja hintakorteissa.
 - **Katon puhdistus on loppunut.** Sivut poistetaan talven aikana (301 pinnoitussivuille). Niille ei lisätä linkkejä vaiheessa 3.
 - **GitHub:** gh-työkalu asennettu; push ja PR vasta Eerikin hyväksynnällä.
 
@@ -306,7 +316,7 @@ Jos 3.11. ollaan alle puolivälissä, painopiste siirtyy arvosteluihin ja mainin
 
 - Vaihe 1: jonossa olevat artikkelit noindex; FAQ "Pitääkö minun olla kotona?" palvelukohtaiseksi (maalaussivulla "seinät").
 - Vaihe 3: titlet alle 60 merkin (30 sivua), kuvaukset alle 160; sivukohtainen "Päivitetty"-päivä gitin viimeisestä muutoksesta.
-- Vaihe 4: llms.txt (link-tagi, FAQ-osio, rajauslause); arvosteluseinän rajaus etusivulle ja Kokemuksia-sivulle sekä Kokemuksia-sivu, jos Eerik hyväksyy (kysymys avoinna).
+- Vaihe 4: llms.txt (link-tagi, FAQ-osio, rajauslause). **Kokemuksia-sivua ei tehdä** (Eerik 11.10.: "ei tarvi"). Arvosteluseinän rajaus (30 arvostelun seinä vain etusivulle, kaupunkisivuilla vain paikkakunnan omat arvostelut) on vielä päättämättä: kysytään kerran vaiheen 4 esikatselun yhteydessä perusteluineen (keventää joka sivun HTML:ää noin 700 sanaa ja vähentää toistoa).
 - Vaihe 5: vendor-ui-paketin purku (recharts, cmdk, vaul, embla pois yhteispaketista); kuvien pakkaus laatuun 75.
 - Ei tehdä: puhdistussivujen uusiminen (palvelu loppunut); Meistä-faktat.
 

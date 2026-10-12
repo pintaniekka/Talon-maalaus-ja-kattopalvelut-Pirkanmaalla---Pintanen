@@ -64,6 +64,13 @@ const TalonMaalaus = () => {
               työn. Maalaamme omakotitalojen, paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja lähikunnissa.
             </p>
             <p>Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Siksi pesemme ja kaavimme huolella ennen maalausta ja suojaamme terassit ja ikkunat.</p>
+            <p>
+              Hintaesimerkit ja laskuri:{" "}
+              <Link to="/talon-maalaus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
+                talon maalauksen hinta
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </section>

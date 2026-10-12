@@ -100,7 +100,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Maalaus- ja kattopalvelut ${cityName}`,
+    name: `Maalausliike ja kattopalvelut ${cityName}`,
     provider: { "@id": "https://pintanen.fi/#yritys" },
     areaServed: { "@type": "City", name: cityName },
     description: seo.description,
@@ -116,10 +116,10 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       </Helmet>
 
       <PageHero
-        eyebrow={`Maalaus- ja kattopalvelut · ${cityName}`}
+        eyebrow={`Maalausliike ja kattopalvelut · ${cityName}`}
         title={
           <>
-            Maalaus- ja kattopalvelut <span className="text-accent-ink">{cityName}</span>
+            Maalausliike ja kattopalvelut <span className="text-accent-ink">{cityName}</span>
           </>
         }
         lead={

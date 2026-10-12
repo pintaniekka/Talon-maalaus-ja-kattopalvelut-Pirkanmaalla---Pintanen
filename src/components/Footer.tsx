@@ -126,7 +126,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/talon-maalaus-pirkanmaa/" className="hover:text-primary-foreground transition-colors">
-                  Ulkomaalaus
+                  Talon maalaus
                 </Link>
               </li>
               <li>

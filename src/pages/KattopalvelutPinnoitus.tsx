@@ -157,6 +157,13 @@ const KattopalvelutPinnoitus = () => {
               sitten pintamaali.
             </p>
             <p>Käytämme Nowocoatin kattomaaleja.</p>
+            <p>
+              Hintaesimerkit ja laskuri:{" "}
+              <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
+                tiilikaton pinnoituksen hinta
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </section>

@@ -52,7 +52,8 @@ const SEOTextSection = () => {
               <p>
                 Hinta on yleensä <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja annamme työlle{" "}
                 <strong className="text-foreground">5 vuoden takuun</strong>. Lue lisää:{" "}
-                <Link to="/tiilikaton-pinnoitus-pirkanmaa/" className="text-primary font-semibold hover:underline">tiilikaton pinnoitus Pirkanmaalla</Link>.
+                <Link to="/tiilikaton-pinnoitus-pirkanmaa/" className="text-primary font-semibold hover:underline">tiilikaton pinnoitus Pirkanmaalla</Link>{" "}
+                ja <Link to="/tiilikaton-pinnoitus-tampere/" className="text-primary font-semibold hover:underline">tiilikaton pinnoitus Tampere</Link>.
               </p>
             </div>
           </div>
@@ -77,7 +78,8 @@ const SEOTextSection = () => {
               <p>
                 Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja annamme työlle{" "}
                 <strong className="text-foreground">2 vuoden takuun</strong>. Lue lisää:{" "}
-                <Link to="/talon-maalaus-pirkanmaa/" className="text-primary font-semibold hover:underline">talon maalaus Pirkanmaalla</Link>.
+                <Link to="/talon-maalaus-pirkanmaa/" className="text-primary font-semibold hover:underline">talon maalaus Pirkanmaalla</Link>{" "}
+                ja <Link to="/talon-maalaus-tampere/" className="text-primary font-semibold hover:underline">talon maalaus Tampere</Link>.
               </p>
             </div>
           </div>

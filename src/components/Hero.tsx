@@ -30,10 +30,8 @@ const Hero = () => {
           </h1>
 
           <p className="hero-lead text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl leading-relaxed font-sans">
-            <strong className="text-foreground">Perheyritys</strong>, jossa{" "}
-            <strong className="text-foreground">yrittäjät tekevät työn itse</strong>:{" "}
-            <strong className="text-foreground">tiilikaton pinnoitukset</strong> ja{" "}
-            <strong className="text-foreground">talon maalaukset</strong> Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta.
+            <strong className="text-foreground">Eerik pinnoittaa tiilikatot ja Eemil maalaa talot</strong> Pirkanmaalla ja
+            lähikunnissa, noin tunnin säteellä Tampereelta. Arviokäynti on ilmainen.
           </p>
 
           <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4 sm:gap-6 mb-10 md:mb-12">

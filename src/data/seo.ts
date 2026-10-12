@@ -56,6 +56,7 @@ export const HERO_BASE = {
   meista: "eerik-tiilikatolla-tampere",
   toimintaAlueet: "keltainen-omakotitalo-julkisivumaalaus-jalkeen",
   referenssit: "vastamaalattu-tiilikatto-kattopinnoitus-jalkeen",
+  kokemuksia: "keltainen-talo-pinnoitettu-tiilikatto-kangasala",
 } as const;
 
 /** Kaupunkisivun hero-kuva: paikkakunnan oma kohde, jos sellainen on, muuten palvelun vakiokuva. */
@@ -76,6 +77,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/meista": cardHero(HERO_BASE.meista),
   "/toiminta-alueet": cardHero(HERO_BASE.toimintaAlueet),
   "/referenssit": cardHero(HERO_BASE.referenssit),
+  "/kokemuksia": cardHero(HERO_BASE.kokemuksia),
 };
 
 /** Preload-linkin attribuutit pääkuvalle. */
@@ -157,6 +159,11 @@ export const staticSeo: Record<string, RouteSeo> = {
     title: "Referenssit – kuvia omista kohteistamme",
     description:
       "Kuvia Pintasen töistä Pirkanmaalla ja lähikunnissa: tiilikattoja ennen ja jälkeen pinnoituksen sekä maalattuja taloja. Kuvat ovat omista kohteistamme.",
+  },
+  "/kokemuksia": {
+    title: "Asiakkaiden kokemuksia: kaikki Google-arvostelumme",
+    description:
+      "Kaikki Pintasen Google-arvostelut sanasta sanaan: tiilikaton pinnoitus ja talon maalaus Pirkanmaalla. Keskiarvo 5,0 / 5. Lue, mitä asiakkaat sanovat työstämme.",
   },
   "/toiminta-alueet": {
     title: "Toiminta-alueet – Pirkanmaa ja lähikunnat",

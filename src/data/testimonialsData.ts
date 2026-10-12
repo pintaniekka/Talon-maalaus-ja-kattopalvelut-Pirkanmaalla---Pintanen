@@ -237,3 +237,35 @@ export const getTestimonialsForCity = (
 /** Arvostelut, joiden kohde on tietyllä paikkakunnalla. */
 export const getTestimonialsByCity = (citySlug: string): Testimonial[] =>
   allTestimonials.filter((t) => t.city === citySlug);
+
+/** Arvostelujen määrä (näytetään Kokemuksia-sivulla ja arvostelunostoissa). */
+export const REVIEW_COUNT = allTestimonials.length;
+
+/**
+ * Kaupunkisivun arvostelunosto (12.10.2026): koko seinä näkyy vain etusivulla ja /kokemuksia/-sivulla,
+ * koska sama 28 arvostelun lohko joka sivulla teki sivuista Googlen silmissä samanlaisia.
+ * Tämä valitsee paikkakunnan slugin perusteella deterministisesti muutaman arvostelun palvelun
+ * kategoriasta ja jättää pois paikkakunnan omat arvostelut, jotka CityProjects näyttää jo.
+ */
+export const getTeaserTestimonials = (
+  citySlug: string,
+  category?: TestimonialCategory,
+  count = 2,
+): Testimonial[] => {
+  const pool = allTestimonials.filter(
+    (t) => t.city !== citySlug && (!category || t.category === category),
+  );
+  if (pool.length === 0) return [];
+
+  let offset = 0;
+  const seed = `${citySlug}-${category ?? "kaikki"}`;
+  for (let i = 0; i < seed.length; i++) {
+    offset = (offset + seed.charCodeAt(i)) % pool.length;
+  }
+
+  const picked: Testimonial[] = [];
+  for (let i = 0; i < Math.min(count, pool.length); i++) {
+    picked.push(pool[(offset + i) % pool.length]);
+  }
+  return picked;
+};

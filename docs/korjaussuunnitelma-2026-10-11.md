@@ -315,7 +315,7 @@ Jos 3.11. ollaan alle puolivälissä, painopiste siirtyy arvosteluihin ja mainin
 
 - Vaihe 1: jonossa olevat artikkelit noindex; FAQ "Pitääkö minun olla kotona?" palvelukohtaiseksi (maalaussivulla "seinät").
 - Vaihe 3: titlet alle 60 merkin (30 sivua), kuvaukset alle 160; sivukohtainen "Päivitetty"-päivä gitin viimeisestä muutoksesta.
-- Vaihe 4: llms.txt (link-tagi, FAQ-osio, rajauslause); arvosteluseinän rajaus etusivulle ja Kokemuksia-sivulle sekä Kokemuksia-sivu, jos Eerik hyväksyy (kysymys avoinna).
+- Vaihe 4: llms.txt (link-tagi, FAQ-osio, rajauslause). **Kokemuksia-sivua ei tehdä** (Eerik 11.10.: "ei tarvi"). Arvosteluseinän rajaus (30 arvostelun seinä vain etusivulle, kaupunkisivuilla vain paikkakunnan omat arvostelut) on vielä päättämättä: kysytään kerran vaiheen 4 esikatselun yhteydessä perusteluineen (keventää joka sivun HTML:ää noin 700 sanaa ja vähentää toistoa).
 - Vaihe 5: vendor-ui-paketin purku (recharts, cmdk, vaul, embla pois yhteispaketista); kuvien pakkaus laatuun 75.
 - Ei tehdä: puhdistussivujen uusiminen (palvelu loppunut); Meistä-faktat.
 

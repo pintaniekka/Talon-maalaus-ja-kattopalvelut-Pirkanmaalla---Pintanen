@@ -12,12 +12,18 @@ const bgBase = "hintalaskuri-tausta";
 const bgSrc = getResponsiveSrc(bgBase);
 const bgSrcSet = getResponsiveSrcSet(bgBase);
 
-const testimonials = [roofTestimonials[0], wallTestimonials[0]].filter(Boolean);
+/*
+ * Yksi katto- ja yksi seinäarvostelu. Sama "molemmat"-arvostelu on kummankin listan ensimmäinen,
+ * joten seinälistasta otetaan ensimmäinen, joka ei ole sama kuin kattolistan ensimmäinen (B1).
+ */
+const roofReview = roofTestimonials[0];
+const wallReview = wallTestimonials.find((t) => t.name !== roofReview?.name || t.text !== roofReview?.text);
+const testimonials = [roofReview, wallReview].filter((t): t is NonNullable<typeof t> => Boolean(t));
 
 const toService = (value: string | null): WizardService | null =>
   value === "pinnoitus" || value === "maalaus" ? value : null;
 
-/** /hintalaskuri: sivuston ainoa hintalaskuri etusivun chat-laskurin lisäksi. */
+/** /hintalaskuri: sivuston ainoa hintalaskuri etusivun laskurin lisäksi. */
 const Hintalaskuri = () => {
   const [params] = useSearchParams();
   const initialService = toService(params.get("palvelu"));
@@ -46,8 +52,7 @@ const Hintalaskuri = () => {
               Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa.
             </p>
             <p className="mt-4 text-base text-primary-foreground/80 leading-relaxed">
-              Katon arvio perustuu katon kokoon, jyrkkyyteen ja kuntoon. Talon arvio perustuu talon kokoon, kerroksiin ja pohjatöiden
-              määrään. Arvio on suuntaa antava. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen, kun olemme nähneet kohteen.
+              Laskuri kysyy katon tai talon koon ja kunnon ja antaa hinta-arvion. Tarkan hinnan saat, kun olemme käyneet paikalla.
             </p>
           </div>
 

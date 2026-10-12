@@ -107,12 +107,12 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/artikkelit": {
     title: "Artikkelit ja oppaat",
     description:
-      "Lue Pintasen oppaat tiilikaton pinnoituksesta ja talon maalauksesta. Käytännön neuvoja yrittäjiltä, jotka tekevät työn itse Pirkanmaalla.",
+      "Lue Pintasen oppaat tiilikaton pinnoituksesta ja talon maalauksesta. Kirjoittajat Eerik ja Eemil tekevät työt itse Pirkanmaalla.",
   },
   "/tarjouspyynto": {
     title: "Pyydä tarjous – ilmainen kuntotarkastus",
     description:
-      "Pyydä tarjous tiilikaton pinnoituksesta tai talon maalauksesta. Yrittäjä soittaa sinulle itse ja tulee ilmaiselle kuntotarkastukselle. Pintanen, Pirkanmaa.",
+      "Pyydä tarjous tiilikaton pinnoituksesta tai talon maalauksesta. Eerik tai Eemil soittaa sinulle ja tulee ilmaiselle arviokäynnille. Pintanen, Pirkanmaa.",
   },
   "/hintalaskuri": {
     title: "Hintalaskuri: tiilikaton pinnoitus ja talon maalaus",
@@ -179,7 +179,7 @@ export const staticSeo: Record<string, RouteSeo> = {
  */
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
   title: `Tiilikaton pinnoitus ja maalaus ${city.name} | Pintanen`,
-  description: `Tiilikaton pinnoitus ${city.cityIn}. Yrittäjä tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
+  description: `Tiilikaton pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
 });
 
 export const puhdistusCitySeo = (city: CityData): RouteSeo => ({

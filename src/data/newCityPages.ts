@@ -33,10 +33,10 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Lempäälässä Vanajaveden ja Pyhäjärven välissä",
     pinnoitusLocalHookText:
-      "Lempäälä on Tampereen eteläinen naapurikunta. Keskusta on kannaksella Vanajaveden ja Pyhäjärven välissä. Asutus jatkuu keskustasta yhtenäisenä Tampereen rajalle asti, esimerkiksi Kuljuun ja Sääksjärvelle. Lempäälässä on paljon melko uusia taloja: yli kolmasosa omakoti- ja paritaloista on rakennettu vuonna 2000 tai sen jälkeen. 2000-luvun alun tiilikatoissa tehdaspinta alkaa nyt kulua. Tulemme katsomaan kattosi ilmaiseksi ja kerromme, tarvitseeko se jo pinnoituksen.",
+      "Lempäälä on Tampereen eteläinen naapurikunta. Keskusta on kannaksella Vanajaveden ja Pyhäjärven välissä. Pinnoitamme tiilikattoja koko Lempäälässä, esimerkiksi Kuljussa ja Sääksjärvellä. Lempäälässä on paljon melko uusia taloja: yli kolmasosa omakoti- ja paritaloista on rakennettu vuonna 2000 tai sen jälkeen. 2000-luvun alun tiilikatoissa tehdaspinta alkaa nyt kulua. Tulemme katsomaan kattosi ilmaiseksi ja kerromme, tarvitseeko se jo pinnoituksen.",
     maalausLocalHookTitle: "Talon maalaus Lempäälässä: Kulju, Sääksjärvi, Hakkari ja keskusta",
     maalausLocalHookText:
-      "Lempäälä on Tampereen eteläinen naapurikunta, ja asutus jatkuu keskustasta yhtenäisenä Tampereen rajalle asti. Eemil maalaa taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa. Lempäälässä on 1 026 omakoti- ja paritaloa, jotka on rakennettu vuosina 2000–2009. Puutalo maalataan yleensä 10–15 vuoden välein. Jos sen ikäistä taloa ei ole vielä maalattu uudelleen, seinät kannattaa katsoa läpi. Arviokäynti on ilmainen.",
+      "Lempäälä on Tampereen eteläinen naapurikunta. Eemil maalaa taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa. Lempäälässä on 1 026 omakoti- ja paritaloa, jotka on rakennettu vuosina 2000–2009. Puutalo maalataan yleensä 10–15 vuoden välein. Jos sen ikäistä taloa ei ole vielä maalattu uudelleen, seinät kannattaa katsoa läpi. Arviokäynti on ilmainen.",
   },
   valkeakoski: {
     ...era(1),

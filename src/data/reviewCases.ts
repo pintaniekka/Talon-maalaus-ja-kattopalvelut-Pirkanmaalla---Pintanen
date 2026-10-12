@@ -19,14 +19,14 @@ export const reviewCases: ReviewCase[] = [
   {
     name: "Jukka Peurala",
     city: "tampere",
-    story: "Sade uhkasi, ja työ piti keskeyttää hetkeksi. Katosta tuli silti täydellinen, ja asiakas oli todella tyytyväinen.",
+    story: "Sade uhkasi, ja työ piti keskeyttää hetkeksi. Sateen jälkeen katto maalattiin loppuun.",
     before: "harmaa-tiilikatto-ennen-pinnoitusta-tampere",
     after: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-tampere",
   },
   {
     name: "Saarinen Seppo",
     city: "tampere",
-    story: "Katto oli todella kulunut. Kaksi reilua maalikerrosta teki siitä upean. Harjalle asennettiin myös harjatiiviste.",
+    story: "Katto oli todella kulunut. Se pestiin ja maalattiin kahteen kertaan. Harjalle asennettiin myös harjatiiviste.",
     image: "tummanharmaa-pinnoitettu-tiilikatto-lahikuva-tampere",
   },
   {

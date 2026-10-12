@@ -89,7 +89,7 @@ export const heroPreload = (hero: NonNullable<RouteSeo["hero"]>) => ({
 
 export const DEFAULT_TITLE = "Tiilikaton pinnoitus ja talon maalaus Pirkanmaa | Pintanen";
 export const DEFAULT_DESCRIPTION =
-  "Pintanen Oy pinnoittaa tiilikattoja ja maalaa taloja Pirkanmaalla ja lähikunnissa. Yrittäjät tekevät työn itse. Ilmainen arviokäynti ja kirjallinen takuu.";
+  "Pintanen Oy pinnoittaa tiilikattoja ja maalaa taloja Pirkanmaalla ja lähikunnissa. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti ja kirjallinen takuu.";
 
 /** Lisää "| Pintanen" otsikon loppuun, jos sitä ei vielä ole. */
 export const withBrand = (title?: string): string =>
@@ -205,7 +205,7 @@ export const maalausCitySeo = (city: CityData): RouteSeo => {
  */
 export const areaCitySeo = (city: CityData): RouteSeo => ({
   title: `Maalausliike ja kattopalvelut ${city.name} | Pintanen`,
-  description: `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Yrittäjät tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
+  description: `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
 });
 
 /** SEO-tiedot mille tahansa kanoniselle polulle (ilman loppukauttaviivaa). */

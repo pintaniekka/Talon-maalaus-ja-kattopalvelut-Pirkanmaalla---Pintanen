@@ -51,7 +51,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Suojaus",
-    text: "Suojaamme terassit, ikkunat ja pihan huolellisesti ennen työtä.",
+    text: "Suojaamme terassit, ikkunat ja pihan ennen työtä.",
   },
   {
     title: "Homepesu",
@@ -67,7 +67,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Pintamaali pensselillä",
-    text: "Maalaamme seinät pensselillä. Sateella emme maalaa.",
+    text: "Maalaamme seinät pensselillä. Sateella ei maalata.",
   },
   {
     title: "Lopputarkastus ja takuu",

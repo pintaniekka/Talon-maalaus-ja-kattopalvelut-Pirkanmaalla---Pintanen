@@ -6,7 +6,11 @@ import { KOTITALOUSVAHENNYS } from "@/data/company";
  * Kotitalousvähennys yhdellä lauseella (korjaus 9, V11). Esimerkkilaskelma poistettu:
  * sääntö kieltää laskuesimerkit, ja vanha esimerkki ei huomioinut omavastuuta.
  */
-const KotitalousVahennys = () => {
+export type VahennysVariant = "a" | "b" | "c" | "d";
+
+/** `defaultVariant` valitsee esikatselun ulkoasuvaihtoehdon; URL-parametri `?vahennys=a|b|c|d` ohittaa sen. */
+const KotitalousVahennys = ({ defaultVariant = "a" }: { defaultVariant?: VahennysVariant } = {}) => {
+  void defaultVariant;
   return (
     <section className="section-padding bg-accent-light">
       <div className="section-container">

@@ -104,7 +104,7 @@ Vaihe 1 on tuotannossa (PR #90 yhdistetty 11.10.2026; tuotannosta tarkistettu 14
 - [ ] Viennit (kohta 2 yllä): Sivut-raportista kolmen kattavuussyyn osoitelistat ja indeksoitujen sivujen lista, Linkit-raportin vienti, kuvakaappaus Sivustokartat- ja Core Web Vitals -raporteista, sekä Tulokset → Kysely "tiilikaton pinnoitus tampere" → Sivut-välilehti ja sama "talon maalaus tampere".
 - [ ] Omat haut jatkossa incognito-tilassa (kohta 3 yllä).
 
-Kun viennit ovat `docs/search-console/`-kansiossa, Claude lukee ne ja kirjaa lähtötason vaiheen 8 taulukkoon.
+Eerik vei raportit 12.10. (kattavuus, Tulokset 3 kk ja 5.–9.10., sivustokartat): ne ovat kansiossa `docs/search-console/` ja lähtötaso on kirjattu tiedostoon `docs/search-console/lahtotaso-2026-10-12.md` sekä vaiheen 8 taulukkoon. Kattavuusraportissa kahden tärkeimmän syyn vahvistus on tilassa "Epäonnistui" (käynnistetty ennen korjausta), joten **"Vahvista korjaus" pitää painaa uudelleen** vaiheen 1 julkaisun jälkeen. Indeksointipyynnöt ja Kysely → Sivut -vienti ovat vielä tekemättä.
 
 ---
 
@@ -255,13 +255,16 @@ Cloudflare Web Analytics on kunnossa (tarkistettu). Jäljellä:
 
 Search Console -vienti 20.10. (7.–17.10.) ja 3.11. (neljä viikkoa). Osan 4 luvun 8 taulukko on tavoitteet; tärkeimmät:
 
-| Mittari | Nyt | 20.10. | 3.11. |
-|---|---|---|---|
-| "Indeksoitu, ei hakemistossa" | 17 | alle 10 | 0 |
-| Etusivun sijainti | 15,6 | alle 10 | alle 8 |
-| "tiilikaton pinnoitus tampere" | 15,0 | 12 | alle 10 |
-| `/tiilikaton-pinnoitus-tampere/` | 45,5 | 25 | alle 15 |
-| Ei-brändiklikkauksia viikossa | 9 | 15 | 25 |
+| Mittari | Auditointi | Lähtötaso 9.10. | 20.10. | 3.11. |
+|---|---|---|---|---|
+| "Indeksoitu, ei hakemistossa" | 17 | 12 | alle 10 | 0 |
+| "Uudelleenohjauksen sisältävä sivu" | 56 | 62 | laskussa | alle 30 |
+| Etusivun sijainti | 15,6 | 19,8 | alle 10 | alle 8 |
+| "tiilikaton pinnoitus tampere" | 15,0 | 21,8 | 12 | alle 10 |
+| `/tiilikaton-pinnoitus-tampere/` | 45,5 | 60,5 | 25 | alle 15 |
+| Ei-brändiklikkauksia viikossa | 9 | noin 6–9 | 15 | 25 |
+
+Lähtötaso 9.10. on tiedostosta `docs/search-console/lahtotaso-2026-10-12.md` (viennit 12.10., tiedot 9.10. asti, ennen vaiheen 1 julkaisua). Viiden päivän otos on pieni, joten sijaintilukuja luetaan suuntana, ei tarkkana arvona.
 
 Jos 3.11. ollaan alle puolivälissä, painopiste siirtyy arvosteluihin ja mainintoihin (Urakkamaailma, finder, paikallislehti, Nowocoatin referenssi).
 

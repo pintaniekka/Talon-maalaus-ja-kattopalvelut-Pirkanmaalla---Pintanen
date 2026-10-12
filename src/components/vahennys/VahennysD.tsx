@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Percent } from "lucide-react";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
-import { KUUKAUSIERAT, VAHENNYS_ARTIKKELI, VAHENNYS_ERITTELY, VAHENNYS_OTSIKKO } from "./vahennysData";
+import { VAHENNYS_ARTIKKELI, VAHENNYS_ERITTELY, VAHENNYS_OTSIKKO } from "./vahennysData";
 
 /**
  * Vaihtoehto D (?vahennys=d): ei omaa osiota. Pieni valkoinen laatikko hintakorttien alle: kuvake,
- * lihavoitu lause, faktat ja "Lue lisää". Alla rivi kuukausieristä (sama lause kuin hintakorteissa).
+ * lihavoitu lause, faktat ja "Lue lisää".
  */
 const VahennysD = () => (
   <section className="bg-background py-8 md:py-10">
@@ -25,7 +25,6 @@ const VahennysD = () => (
           <span className="sr-only">: kotitalousvähennys katto- ja maalaustöissä</span>
         </Link>
       </div>
-      <p className="text-sm leading-normal text-muted-foreground">{KUUKAUSIERAT}</p>
     </div>
   </section>
 );

@@ -13,7 +13,6 @@ export const VAHENNYS_ARTIKKELI = "/artikkelit/kotitalousvahennys-katto-ja-maala
 export const VAHENNYS_VUODET = "2026–2027";
 
 /** Kuukausierät: sama lause kuin hintakorttien alla (src/components/pinnoitus/PinnoitusPricingCards.tsx). */
-export const KUUKAUSIERAT = "Työn voi maksaa myös kuukausierissä. Kerromme vaihtoehdoista arviokäynnillä.";
 
 /** Laatat (B) ja iso luku (C). Samat luvut kuin KOTITALOUSVAHENNYS-lauseessa; jos lause muuttuu, päivitä nämä. */
 export const VAHENNYS_LUVUT = [

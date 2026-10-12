@@ -6,3 +6,5 @@ Tänne tallennetaan Search Consolen viennit (ks. korjaussuunnitelman vaihe 2 ja 
 - `kattavuus-<pvm>/` – Sivut-raportti (kattavuus)
 - `tulokset-<jakso>/` – Tulokset-raportti
 - `sivustokartat-<pvm>.png` – Sivustokartat-raportti
+- `vahvistus-<pvm>/` – kattavuussyiden osoitelistat
+- `linkit-<pvm>/` – Linkit-raportti

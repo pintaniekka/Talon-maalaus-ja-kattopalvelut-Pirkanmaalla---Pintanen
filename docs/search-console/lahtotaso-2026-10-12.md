@@ -8,6 +8,10 @@ Tiedostot tässä kansiossa:
 - `tulokset-3kk-2026-07-10--2026-10-09/` – Tulokset-raportti, viimeiset 3 kuukautta
 - `tulokset-2026-10-05--2026-10-09/` – Tulokset-raportti, julkaisun jälkeiset 5 päivää
 - `sivustokartat-2026-10-12.png` – Sivustokartat-raportti
+- `vahvistus-2026-10-12/` – kattavuussyiden osoitelistat (uudelleenohjaus 62, ei hakemistossa 12, 404 3, havaittu 7)
+- `linkit-2026-10-12/` – Linkit-raportti: sisäisten linkkien kohdesivut ja ulkoisten linkkien näytteet
+- `tulokset-3kk-kysely-tiilikaton-pinnoitus-tampere/` ja `tulokset-3kk-kysely-talon-maalaus-tampere/` – Tulokset, Kysely-suodatin → Sivut
+- Core Web Vitals: "Ei tarpeeksi tietoja" (12.10.), ei kuvakaappausta
 
 ## Kattavuus (9.10.)
 
@@ -54,12 +58,42 @@ Huomiot:
 - Kattoremontti-haut ovat kolmen kuukauden datassa suurempi aihe kuin viikkodata näytti: 32 kyselyä ja 1 143 näyttökertaa ilman yhtään klikkausta. Vaiheen 4A perustelu vahvistuu.
 - Vielä puuttuu Tulokset-raportin suodatus Kysely = "tiilikaton pinnoitus tampere" → Sivut (ja sama "talon maalaus tampere"). Se kertoo, näkyykö haulla etusivu vai Tampere-sivu, ja ohjaa vaiheen 3 linkitystä. Voi viedä 20.10. viennin yhteydessä.
 
+## Kattavuussyiden osoitteet (viety 12.10.)
+
+**Uudelleenohjauksen sisältävä sivu, 62 osoitetta:** 42 on uusien sivujen kauttaviivattomia muotoja (`/tiilikaton-pinnoitus-pirkanmaa` → 308 → `/tiilikaton-pinnoitus-pirkanmaa/`), 16 vanhoja polkuja (`/alue/`, `/kattopalvelut/`, `/hinnat/`, `/talon-maalaus/<kunta>/`), 3 `http://`- ja `www`-muotoja ja 1 `/hintalaskuri?palvelu=pinnoitus`. Sivuston omat linkit ovat kaikki kauttaviivallisia (tarkistettu `dist/index.html`), joten kauttaviivattomat tulevat ulkoisista hakemistoista ja Googlen vanhoista tiedoista. Ne eivät ole virhe, mutta ne pitävät luvun noin 45:ssä: realistinen tavoite on, että 16 vanhaa polkua ja www-muodot putoavat pois, ei "alle 30".
+
+**Indeksoitu, ei tällä hetkellä hakemistossa, 12 osoitetta:** 6 on huhtikuussa haettuja kauttaviivattomia `maalauspalvelut-<kunta>`-muotoja (vanhentuneita, ohjautuvat nyt). 6 on kolme sivua kahdessa muodossa, jotka Google haki 10.10. ja jätti indeksoimatta: `/tietosuoja/`, `/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/` ja `/tiilikaton-pinnoitus-mantta-vilppula/`. Tekninen puoli on kunnossa (sitemapissa, esirenderöity, ei noindex), joten kyse on Googlen laatuarviosta: tietosuojasivu on tarkoituksella ohut, ja kaupunkisivu on 24 saman pohjan sivusta yksi. Tämä tukee vaiheen 4 ajatusta kaupunkikohtaisesta sisällöstä. Artikkeli kannattaa pyytää indeksoitavaksi uudelleen.
+
+**Ei löydy (404), 3 osoitetta:** `/tiilikaton-pinnoitus-kangasala` (haettu 3.10.), `/tiilikaton-pinnoitus-kihnio` (4.9.) ja `/artikkelit` (29.5.), kaikki ilman kauttaviivaa ja haettu ennen 5.10. julkaisua, jolloin sivuja ei vielä ollut. Nyt ne ohjautuvat kauttaviivalliseen sivuun. Vahvistus menee läpi itsestään.
+
+**Havaittu, toistaiseksi ei indeksoitu, 7 osoitetta:** `/artikkelit/`, `/artikkelit/kuinka-usein-puutalo-maalataan/` (julkaistu 4.10.), `/artikkelit/milloin-pinnoittaa-tiilikatto/` (24.5.), `/talon-maalaus-pirkkala/`, `/tiilikaton-pinnoitus-ikaalinen/`, `/tiilikaton-pinnoitus-kihnio/`, `/tiilikaton-pinnoitus-virrat/`. Kaikki ovat sitemapissa ja esirenderöityjä ilman noindexiä: meidän puolella ei ole estettä, Google ei ole vielä ehtinyt hakea niitä. Artikkelisivuille kannattaa pyytää indeksointia; kaupunkisivut tulevat ajallaan.
+
+## Mikä sivu näkyy Tampere-hauilla (3 kk)
+
+| Kysely | Sivu | Näyttökerrat | Sijainti |
+|---|---|---|---|
+| tiilikaton pinnoitus tampere | `/tiilikaton-pinnoitus-pirkanmaa/` | 282 | 41,5 |
+| | `/` | 262 | 13,3 |
+| | `/maalauspalvelut-tampere/` | 250 | 15,8 |
+| | `/tiilikaton-pinnoitus-tampere/` | 11 | 75,2 |
+| talon maalaus tampere | `/talon-maalaus-tampere/` | 243 | 52,7 |
+| | `/talon-maalaus-hinta-pirkanmaa/` | 157 | 52,0 |
+| | `/` | 74 | 6,4 |
+
+Pinnoituksen Tampere-sivu näkyy "tiilikaton pinnoitus tampere" -haulla käytännössä ei koskaan; etusivu ja yleissivu näkyvät sen sijaan sijoilla 13–16. Maalauksen Tampere-sivu näkyy eniten, mutta sijalla 53, kun etusivu on samalla haulla sijalla 6. Google ei siis pidä Tampere-sivuja hakujen parhaana vastauksena. Vaiheen 3 titlet ja täsmälinkitys kohdistuvat juuri tähän.
+
+## Linkit
+
+- **Sisäiset linkit (Googlen tiedot):** raportti listaa vain 19 kohdesivua, ja kärjessä ovat footerista linkitetyt yleissivut (56–57 linkkiä kukin). Tampere-palvelusivuja ei ole listalla lainkaan, vaikka esirenderöidyssä HTML:ssä etusivulta on 2 linkkiä `/tiilikaton-pinnoitus-tampere/`-sivulle ja yleissivulta 4. Googlen linkkitiedot ovat 5.10. edeltävältä ajalta; tarkistetaan 3.11. uudestaan.
+- **Ulkoiset linkit:** 16 näytelinkkiä, kaikki yrityshakemistoja (finder, fonecta, kauppalehti, infobel, profinder, bisne, luottoriskit, 16100.fi, kuntosudet). Ei yhtään sisällöllistä linkkiä. Vahvistaa auditoinnin johtopäätöksen ohuista ulkoisista signaaleista.
+- **Core Web Vitals:** "Ei tarpeeksi tietoja", eli kenttädataa ei vielä ole. Vaiheen 5 CLS-korjaus kannattaa tehdä ennen kuin sitä kertyy.
+
 ## Seurantataulukon lähtötaso
 
 | Mittari | Auditointi | Lähtötaso 9.10. | 20.10. tavoite | 3.11. tavoite |
 |---|---|---|---|---|
 | "Indeksoitu, ei hakemistossa" | 17 | 12 | alle 10 | 0 |
-| "Uudelleenohjauksen sisältävä sivu" | 56 | 62 | laskussa | alle 30 |
+| "Uudelleenohjauksen sisältävä sivu" | 56 | 62 | laskussa | noin 45 (vanhat polut pois; 42 kauttaviivatonta muotoa jää) |
 | Etusivun sijainti | 15,6 | 19,8 | alle 10 | alle 8 |
 | "tiilikaton pinnoitus tampere" | 15,0 | 21,8 | 12 | alle 10 |
 | `/tiilikaton-pinnoitus-tampere/` | 45,5 | 60,5 | 25 | alle 15 |

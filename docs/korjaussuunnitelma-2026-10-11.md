@@ -104,7 +104,7 @@ Vaihe 1 on tuotannossa (PR #90 yhdistetty 11.10.2026; tuotannosta tarkistettu 14
 - [ ] Viennit (kohta 2 yllä): Sivut-raportista kolmen kattavuussyyn osoitelistat ja indeksoitujen sivujen lista, Linkit-raportin vienti, kuvakaappaus Sivustokartat- ja Core Web Vitals -raporteista, sekä Tulokset → Kysely "tiilikaton pinnoitus tampere" → Sivut-välilehti ja sama "talon maalaus tampere".
 - [ ] Omat haut jatkossa incognito-tilassa (kohta 3 yllä).
 
-Eerik vei raportit 12.10. (kattavuus, Tulokset 3 kk ja 5.–9.10., sivustokartat): ne ovat kansiossa `docs/search-console/` ja lähtötaso on kirjattu tiedostoon `docs/search-console/lahtotaso-2026-10-12.md` sekä vaiheen 8 taulukkoon. Kattavuusraportissa kahden tärkeimmän syyn vahvistus on tilassa "Epäonnistui" (käynnistetty ennen korjausta), joten **"Vahvista korjaus" pitää painaa uudelleen** vaiheen 1 julkaisun jälkeen. Indeksointipyynnöt ja Kysely → Sivut -vienti ovat vielä tekemättä.
+Eerik vei raportit 12.10. (kattavuus, Tulokset 3 kk ja 5.–9.10., sivustokartat): ne ovat kansiossa `docs/search-console/` ja lähtötaso on kirjattu tiedostoon `docs/search-console/lahtotaso-2026-10-12.md` sekä vaiheen 8 taulukkoon. Kattavuusraportissa kahden tärkeimmän syyn vahvistus on tilassa "Epäonnistui" (käynnistetty ennen korjausta), joten **"Vahvista korjaus" pitää painaa uudelleen** vaiheen 1 julkaisun jälkeen. Kysely → Sivut -viennit, kattavuussyiden osoitelistat ja Linkit-raportti on viety samaan kansioon. Indeksointipyynnöt ovat vielä tekemättä; artikkelisivut (`/artikkelit/` ja kolme artikkelia) kannattaa lisätä pyyntölistaan, koska Google ei ole vielä hakenut tai indeksoinut niitä.
 
 ---
 
@@ -258,7 +258,7 @@ Search Console -vienti 20.10. (7.–17.10.) ja 3.11. (neljä viikkoa). Osan 4 lu
 | Mittari | Auditointi | Lähtötaso 9.10. | 20.10. | 3.11. |
 |---|---|---|---|---|
 | "Indeksoitu, ei hakemistossa" | 17 | 12 | alle 10 | 0 |
-| "Uudelleenohjauksen sisältävä sivu" | 56 | 62 | laskussa | alle 30 |
+| "Uudelleenohjauksen sisältävä sivu" | 56 | 62 | laskussa | noin 45 (42 on kauttaviivattomia muotoja, jotka jäävät) |
 | Etusivun sijainti | 15,6 | 19,8 | alle 10 | alle 8 |
 | "tiilikaton pinnoitus tampere" | 15,0 | 21,8 | 12 | alle 10 |
 | `/tiilikaton-pinnoitus-tampere/` | 45,5 | 60,5 | 25 | alle 15 |

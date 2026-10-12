@@ -60,8 +60,9 @@ const TalonMaalaus = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Ulkomaalaus, julkisivumaalaus ja huoltomaalaus</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Talon maalausta kutsutaan monella nimellä: ulkomaalaus, julkisivumaalaus tai huoltomaalaus. Me teemme kaikilla nimillä saman
-              työn. Maalaamme omakotitalojen, paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja lähikunnissa.
+              Talon maalausta kutsutaan monella nimellä: ulkomaalaus, julkisivumaalaus, huoltomaalaus tai puutalon maalaus. Me teemme
+              kaikilla nimillä saman työn. Maalaamme omakotitalojen, paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja
+              lähikunnissa. Mökin maalaus onnistuu myös kauempana Tampereelta, sillä matkat sisältyvät hintaan.
             </p>
             <p>Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Siksi pesemme ja kaavimme huolella ennen maalausta ja suojaamme terassit ja ikkunat.</p>
             <p>

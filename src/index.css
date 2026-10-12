@@ -56,8 +56,9 @@
        (brändin #38b6ff on 2,3:1). Raikkaampi kuin #0077cc (4,7:1), jota Eerik piti liian tummana. */
     --accent-strong: 203 100% 46%;
     --accent-light: 205 100% 96%; /* #ecf7ff */
-    /* Sininen tekstinä: vaalealla pohjalla #0091eb, tummalla pohjalla brändin kirkas sininen. */
-    --accent-ink: 203 100% 46%;
+    /* Sininen tekstinä: vaalealla pohjalla #007bc7 (4,5:1 valkoisella, vaihe 5C 12.10.2026; aiemmin #0091eb 3,4:1),
+       tummalla pohjalla brändin kirkas sininen. */
+    --accent-ink: 203 100% 39%;
 
     /* Header navy #0A192F & deep blue CTA #0038A8 */
     --navy: 222 64% 11%;
@@ -169,9 +170,28 @@
     scroll-behavior: smooth;
   }
 
+  /* Varafontit, joiden mitat on sovitettu Arialiin (capsize-metriikat), jotta teksti ei hypi, kun
+     web-fontti vaihtuu piirron jälkeen (vaihe 5A: CLS 0,135 pinnoitussivulla). */
+  @font-face {
+    font-family: 'Open Sans Fallback';
+    src: local('Arial');
+    size-adjust: 105.15%;
+    ascent-override: 101.65%;
+    descent-override: 27.86%;
+    line-gap-override: 0%;
+  }
+  @font-face {
+    font-family: 'Montserrat Fallback';
+    src: local('Arial');
+    size-adjust: 112.83%;
+    ascent-override: 85.79%;
+    descent-override: 22.25%;
+    line-gap-override: 0%;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', 'Open Sans Fallback', sans-serif;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -184,8 +204,14 @@
 
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     @apply font-bold tracking-tight;
+  }
+
+  /* Leipätekstin linkit erottuvat muutenkin kuin värillä (vaihe 5C). Nappimaiset linkit (rounded-xl) jäävät ennalleen. */
+  main p a:not([class*="rounded-"]) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
@@ -215,7 +241,7 @@
   .bg-secondary,
   .bg-muted,
   .bg-accent-light {
-    --accent-ink: 203 100% 46%;
+    --accent-ink: 203 100% 39%;
   }
 
   .btn-hero {

@@ -45,7 +45,12 @@ const ReviewHighlights = () => (
   <section className="py-6 md:py-8 bg-background" aria-label="Asiakkaiden arvosteluja">
     <div className="section-container max-w-6xl mx-auto">
       {/* Puhelimessa kortit vieritetään sivusuunnassa, jotta palvelut pysyvät lähellä. */}
-      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+      <div
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:overflow-visible md:pb-0"
+        role="region"
+        aria-label="Arvostelut, vieritettävä lista"
+        tabIndex={0}
+      >
         {reviews.map((r, i) => (
           <figure
             key={r.name}

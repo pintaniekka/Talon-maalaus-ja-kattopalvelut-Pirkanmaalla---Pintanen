@@ -64,11 +64,11 @@ export const articles: ArticleMeta[] = [
     seoTitle: "Kotitalousvähennys 2027 katto- ja maalaustöissä",
     description:
       "Kotitalousvähennys 2027: 40 % työn osuudesta, enintään 2 100 € henkilöltä. Lue, miten saat vähennyksen tiilikaton pinnoituksesta ja talon maalauksesta.",
-    lead: "Kun ostat tiilikaton pinnoituksen tai talon maalauksen yritykseltä, saat vuosina 2026 ja 2027 vähentää verotuksessa 40 % työn hinnasta. Vähennystä saa enintään 2 100 euroa vuodessa.",
+    lead: "Kun ostat tiilikaton pinnoituksen tai talon maalauksen yritykseltä, saat vuosina 2026 ja 2027 vähentää verotuksessa 40 % työn osuudesta. Vähennystä saa enintään 2 100 euroa vuodessa.",
     category: "raha",
     author: "eerik",
     publishedAt: "2026-09-30",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-10-12",
     readingMinutes: 5,
     heroImage: "keltainen-omakotitalo-julkisivumaalaus-jalkeen",
     heroAlt: "Keltainen omakotitalo julkisivumaalauksen jälkeen",
@@ -102,10 +102,10 @@ export const articles: ArticleMeta[] = [
   },
   {
     slug: "pinnoitus-vai-uusi-katto",
-    title: "Tiilikaton pinnoitus vai uusi katto: kumpi kannattaa?",
+    title: "Tiilikattoremontti vai pinnoitus: kumpi kannattaa?",
     description:
-      "Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää ja maksaa selvästi vähemmän kuin uusi katto. Lue, milloin katto pitää uusia.",
-    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa yleensä 2 850–7 000 euroa, selvästi vähemmän kuin uusi katto, ja pidentää katon käyttöikää jopa 15–20 vuotta.",
+      "Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää. Kattoremontti maksaa yleensä 15 000–30 000 €, pinnoitus 2 850–7 000 €. Lue, milloin katto pitää uusia.",
+    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa yleensä 2 850–7 000 euroa ja kattoremontti yleensä 15 000–30 000 euroa. Pinnoitus pidentää katon käyttöikää jopa 15–20 vuotta.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-10-13",

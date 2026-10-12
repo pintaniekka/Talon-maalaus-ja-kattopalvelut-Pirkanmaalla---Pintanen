@@ -20,7 +20,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Onko tiilikaton pinnoitus sama asia kuin tiilikaton maalaus?',
     answer:
-      'Kyllä, sillä tarkoitetaan samaa työtä. Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin. Uusi maalipinta pitää veden tiilen ulkopuolella.',
+      'Kyllä. Tiilikaton pinnoitus, tiilikaton maalaus ja katon maalaus tarkoittavat samaa työtä. Pesemme katon painepesulla ja maalaamme sen korkeapaineruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Ahtaat paikat, joihin ruisku ei yllä, maalaamme telalla tai käsin. Uusi maalipinta pitää veden tiilen ulkopuolella.',
   },
   {
     question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
@@ -35,6 +35,11 @@ export const pinnoitusFAQ: FAQItem[] = [
     question: 'Milloin tiilikatto pitää pinnoittaa?',
     answer:
       'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 10–15 vuotta vanha. Ajoissa tehty pinnoitus estää pakkasrapautumisen.',
+  },
+  {
+    question: 'Kannattaako tiilikaton pinnoitus?',
+    answer:
+      'Kannattaa, jos tiilen pinta on kulunut mutta aluskate ja rakenteet ovat kunnossa. Kulunut tiili imee vettä, ja talvella vesi jäätyy ja murentaa tiiltä sisältäpäin. Pinnoitus katkaisee tämän kierteen, ja katto kestää jopa 15–20 vuotta pidempään.',
   },
   {
     question: 'Kattoremontti vai pinnoitus?',
@@ -84,6 +89,20 @@ export const maalausFAQ: FAQItem[] = [
     answer:
       'Valitsemme maalin vanhan maalin ja puun kunnon mukaan. Yleensä käytämme vesiohenteista talomaalia, joskus öljymaalia. Kerromme valinnan tarjouksessa.',
   },
+  {
+    question: 'Milloin on paras aika maalata talo?',
+    answer:
+      'Maalauskausi on huhti–toukokuusta elo–syyskuuhun. Maalaamme, kun seinä on kuiva ja lämpötila on yli +5 °C. Paras sää on lämmin ja pilvinen pouta. Sateella ei maalata, ja siirretystä päivästä ei tule lisäkuluja.',
+  },
+  {
+    question: 'Maalaatteko myös mökkejä ja piharakennuksia?',
+    answer:
+      'Kyllä. Mökin maalaus ja piharakennusten maalaus tehdään samalla tavalla kuin talon: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Katto ja seinät samalla kertaa on edullisempi pakettihinta.',
+  },
+  {
+    question: 'Saako talon maalauksesta kotitalousvähennystä?',
+    answer: `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Erittelemme työn osuuden laskuun.`,
+  },
 ];
 
 export const generalFAQ: FAQItem[] = [
@@ -110,6 +129,11 @@ export const generalFAQ: FAQItem[] = [
     question: 'Paljonko tiilikaton pinnoitus tai talon maalaus maksaa?',
     answer:
       'Tiilikaton pinnoitus maksaa yleensä 2 850–7 000 €. Talon ulkomaalaus maksaa yleensä 3 500–11 000 €. Suuntaa antavan arvion saat hintalaskurista. Tarkan hinnan saat ilmaisen käynnin jälkeen.',
+  },
+  {
+    question: 'Kannattaako tiilikatto pinnoittaa vai uusia?',
+    answer:
+      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa ja vain tiilen pinta on kulunut. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Kerromme sen kuntotarkastuksessa suoraan. Pinnoitus maksaa yleensä 2 850–7 000 €, kattoremontti yleensä 15 000–30 000 €.',
   },
   {
     question: 'Pitääkö minun siirtää tavaroita pihalta?',

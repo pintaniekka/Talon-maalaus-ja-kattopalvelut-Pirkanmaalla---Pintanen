@@ -45,6 +45,10 @@ const faqItems = [
     question: "Mitä talon maalauksen hintaan kuuluu?",
     answer: "Hintaan kuuluu homepesu, irtoavan maalin kaavinta, terassien ja ikkunoiden suojaus, pohjamaali paljaisiin kohtiin, pintamaali pensselillä ja siivous. Ylimääräisiä kuluja ei tule.",
   },
+  {
+    question: "Miksi hinta annetaan koko talolle eikä neliölle?",
+    answer: "Hinta lasketaan talon mukaan: pinta-ala, kerrosluku, verhouksen kunto ja pesun tarve ratkaisevat. Siksi annamme hinnan arviokäynnin jälkeen kirjallisena, ja laskurista saat haarukan heti.",
+  },
   { question: "Kuinka kauan talon maalaus kestää?", answer: "Yleensä 3–7 päivää talon koon ja pohjatöiden määrän mukaan." },
   { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme seinät ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sovitut asiat ovat kunnossa." },
   { question: "Kuinka usein talo pitää maalata?", answer: "Yleensä 10–15 vuoden välein. Väli riippuu maalista ja säästä. Eteläseinä kuluu ensin." },
@@ -116,7 +120,7 @@ const HinnatTalonMaalaus = () => {
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={maalausPrices.includes}
-              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Maalaamme seinät pensselillä, ja saat työlle 2 vuoden kirjallisen takuun."
+              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Maalaamme seinät pensselillä, ja saat työlle 2 vuoden kirjallisen takuun. Hinnat sisältävät arvonlisäveron 25,5 %."
             />
           </div>
         </div>

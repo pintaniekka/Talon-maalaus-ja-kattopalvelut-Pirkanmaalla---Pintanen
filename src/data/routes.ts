@@ -13,6 +13,8 @@ import { articles, isPublished, getPublishedArticles } from "./articles";
 import { getRouteSeo, heroPreload } from "./seo";
 import { SITE_UPDATED, TOIMINTA_ALUE, KOTITALOUSVAHENNYS, TAKUU } from "./company";
 import { pinnoitusTyovaiheet, maalausTyovaiheet, PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
+import { generalFAQ, pinnoitusFAQ, maalausFAQ } from "./faqData";
+import { getProjectItems, type ProjectService } from "./projects";
 
 export interface SiteRoute {
   path: string;
@@ -171,7 +173,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
   return [
     "# Pintanen Oy",
     "",
-    `> Pintanen Oy on perheyritys, joka pinnoittaa tiilikattoja ja maalaa talojen ulkoseiniä. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Takana on yli 200 kohdetta: yli 130 pinnoitettua kattoa ja yli 80 maalattua taloa. Toiminta-alue on ${TOIMINTA_ALUE}. Pintanen on tamperelainen yritys.`,
+    `> Pintanen Oy on perheyritys, joka pinnoittaa tiilikattoja ja maalaa talojen ulkoseiniä. Veljekset Eerik ja Eemil Pitkänen tekevät työt itse. Takana on yli 200 kohdetta: yli 130 pinnoitettua kattoa ja yli 80 maalattua taloa. Toiminta-alue on ${TOIMINTA_ALUE}. Pintanen on tamperelainen yritys. Palvelut ovat tiilikaton pinnoitus (sama työ kuin tiilikaton maalaus) ja puutalon ulkomaalaus, myös mökit ja piharakennukset.`,
     "",
     "## Perustiedot",
     "",
@@ -214,6 +216,10 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     line("/tiilikaton-pinnoitus-hinta-pirkanmaa", "Tiilikaton pinnoituksen hinta"),
     line("/talon-maalaus-hinta-pirkanmaa", "Talon maalauksen hinta"),
     "",
+    "## Usein kysyttyä",
+    "",
+    ...[...generalFAQ, ...pinnoitusFAQ, ...maalausFAQ].map((f) => `- ${f.question} ${f.answer.replace(/<[^>]+>/g, "")}`),
+    "",
     "## Artikkelit",
     "",
     ...published.map((a) => `- [${a.title}](${url(articlePath(a.slug))}): ${a.lead}`),
@@ -243,6 +249,27 @@ const xmlEscape = (value: string) =>
  * Kuvasitemap: jokaisen kanonisen sivun pääkuva (sama kuva, jonka sivu oikeasti näyttää).
  * Generoidaan datasta, jotta osoitteet eivät vanhene, kun kuvia tai reittejä vaihdetaan.
  */
+/**
+ * Kaupunkisivun kohdekuvat kuvasitemappiin (vaihe 5B): sama kuva vain kerran per sivu, otsikkona kohteen kuvateksti.
+ * Pinnoitus- ja maalaussivuille palvelun omat kohteet, aluesivulle kaikki paikkakunnan kohteet.
+ */
+const projectImagesFor = (routePath: string): { base: string; title: string }[] => {
+  const m = routePath.match(/^\/(maalauspalvelut|tiilikaton-pinnoitus|talon-maalaus)-([a-z-]+)$/);
+  if (!m) return [];
+  const service: ProjectService | undefined = m[1] === "tiilikaton-pinnoitus" ? "pinnoitus" : m[1] === "talon-maalaus" ? "maalaus" : undefined;
+  const seen = new Set<string>();
+  const out: { base: string; title: string }[] = [];
+  for (const item of getProjectItems(m[2], service)) {
+    const bases = item.pair ? [`${item.pair}-ennen`, `${item.pair}-jalkeen`] : [item.image, item.before, item.after].filter((b): b is string => !!b);
+    for (const base of bases) {
+      if (seen.has(base)) continue;
+      seen.add(base);
+      out.push({ base, title: item.caption });
+    }
+  }
+  return out;
+};
+
 export const buildImageSitemapXml = (now: Date = new Date()): string => {
   const entries = getCanonicalRoutes(now)
     .map((r) => {
@@ -253,7 +280,13 @@ export const buildImageSitemapXml = (now: Date = new Date()): string => {
       if (!seo?.hero) return "";
       const loc = r.path === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${r.path}/`;
       const title = seo.title.replace(/\s*\|.*$/, "");
-      return `  <url>\n    <loc>${loc}</loc>\n    <image:image>\n      <image:loc>${xmlEscape(SITE_ORIGIN + heroPreload(seo.hero).href)}</image:loc>\n      <image:title>${xmlEscape(title)}</image:title>\n    </image:image>\n  </url>`;
+      const images = [
+        `    <image:image>\n      <image:loc>${xmlEscape(SITE_ORIGIN + heroPreload(seo.hero).href)}</image:loc>\n      <image:title>${xmlEscape(title)}</image:title>\n    </image:image>`,
+        ...projectImagesFor(r.path).map(
+          (img) => `    <image:image>\n      <image:loc>${xmlEscape(`${SITE_ORIGIN}/images/Pictures-1200/${img.base}-1200.webp`)}</image:loc>\n      <image:title>${xmlEscape(img.title)}</image:title>\n    </image:image>`,
+        ),
+      ];
+      return `  <url>\n    <loc>${loc}</loc>\n${images.join("\n")}\n  </url>`;
     })
     .filter(Boolean)
     .join("\n");

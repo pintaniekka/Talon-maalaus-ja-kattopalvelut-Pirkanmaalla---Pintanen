@@ -99,7 +99,7 @@ const HinnatKatonPuhdistus = () => {
         <div className="section-container">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl mx-auto">
             <div className="space-y-6 text-lg text-muted-foreground">
-              <p>Katon puhdistuksen hinta vaihtelee katon koon, likaisuuden ja katolle kertyneen sammalen tai muun kasvuston määrän mukaan.</p>
+              <p>Katon puhdistus sammaleesta maksaa meillä yleensä 800–2 500 €. Hinta vaihtelee katon koon, likaisuuden ja katolle kertyneen sammalen tai muun kasvuston määrän mukaan.</p>
               <p>Katon puhdistus, kun se tehdään oikein, parantaa katon ulkonäköä ja auttaa estämään ennenaikaista kulumista.</p>
               <p>Yksinkertainen kemiallinen käsittely ei yleensä riitä; sammaleen juuret ja lika on poistettava huolellisesti, jotta lopputulos kestää pitkään.</p>
             </div>

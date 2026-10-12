@@ -27,7 +27,7 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Vuosina 2026 ja 2027 saat vähentää 40 % yritykseltä ostetun työn hinnasta.</li>
+        <li>Vuosina 2026 ja 2027 saat vähentää 40 % yritykseltä ostetun työn osuudesta.</li>
         <li>Vähennystä saa enintään 2 100 euroa vuodessa. Pariskunta saa yhteensä 4 200 euroa.</li>
         <li>Omavastuu on 150 euroa vuodessa.</li>
         <li>Vähennyksen saa työstä. Maaleista ja matkakuluista sitä ei saa.</li>
@@ -35,14 +35,14 @@ const Body = () => (
     </KeyPoints>
 
     <p>
-      Kun ostat tiilikaton pinnoituksen tai talon maalauksen yritykseltä, saat osan työn hinnasta takaisin
+      Kun ostat tiilikaton pinnoituksen tai talon maalauksen yritykseltä, saat osan työn osuudesta takaisin
       verotuksessa. Tämä on kotitalousvähennys. Kerromme tässä, paljonko vähennys on vuonna 2027, mistä töistä sen
       saa ja miten sitä haetaan.
     </p>
 
     <h2>Paljonko kotitalousvähennys on vuonna 2027?</h2>
     <p>
-      Saat vähentää <strong>40 % työn hinnasta</strong>. Työn hintaan lasketaan mukaan arvonlisävero. Vähennystä
+      Saat vähentää <strong>40 % työn osuudesta</strong>. Työn osuuteen lasketaan mukaan arvonlisävero. Vähennystä
       saa enintään <strong>2 100 euroa vuodessa</strong> yhdeltä ihmiseltä. Omavastuu on 150 euroa vuodessa.
     </p>
     <p>Vuonna 2025 vähennys oli 35 % ja enintään 1 600 euroa. Nyt saat siis selvästi enemmän takaisin.</p>

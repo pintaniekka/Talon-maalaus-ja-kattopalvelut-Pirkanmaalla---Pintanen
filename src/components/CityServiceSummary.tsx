@@ -33,7 +33,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
     },
     {
       title: `Tiilikattoremontti vai pinnoitus ${cityIn}?`,
-      text: "Usein pinnoitus riittää. Jos aluskate ja katon rakenteet ovat kunnossa, kattoa ei tarvitse uusia. Tarkistamme aluskatteen käynnillä ja kerromme suoraan, kumpi kannattaa.",
+      text: "Usein pinnoitus riittää. Jos aluskate ja katon rakenteet ovat kunnossa, kattoa ei tarvitse uusia. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Kerromme sen kuntotarkastuksessa suoraan.",
       links: [{ to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Lue lisää pinnoituksesta" }],
     },
   ],

@@ -30,8 +30,8 @@ const Kokemuksia = () => {
         }
         lead={
           <>
-            Tällä sivulla ovat kaikki {REVIEW_COUNT} Google-arvosteluamme sanasta sanaan. Keskiarvo on{" "}
-            <strong className="text-foreground">{LUVUT.googleArvio}</strong>. Emme ole lyhentäneet tai muokanneet yhtään arvostelua.
+            Tällä sivulla ovat kaikki {REVIEW_COUNT} Google-arvosteluamme. Keskiarvo on{" "}
+            <strong className="text-foreground">{LUVUT.googleArvio}</strong>. Arvostelut ovat sanasta sanaan Googlesta.
           </>
         }
         primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}

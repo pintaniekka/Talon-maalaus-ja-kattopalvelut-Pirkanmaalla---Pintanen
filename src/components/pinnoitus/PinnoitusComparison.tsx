@@ -9,6 +9,7 @@ const ARTIKKELI_SLUG = "pinnoitus-vai-uusi-katto";
 /**
  * "Tiilikattoremontti vai pinnoitus?" (P1, korjaus 10). Vastaa suoraan hakuun
  * "tiilikattoremontti {kunta}". Ei prosentti- tai säästöväitteitä (V6): hinta haarukkana.
+ * Kattoremontin hinta 15 000–30 000 € on sallittu (lähteet docs/-kansiossa).
  */
 const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
   // Linkki artikkeliin vasta julkaisupäivästä: jonossa oleva artikkeli on noindex-kuori (osa 2, luku 6).
@@ -24,16 +25,12 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
                 Tiilikattoremontti vai pinnoitus{cityIn ? ` ${cityIn}` : ''}?
               </h2>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                <p>Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään.</p>
                 <p>
-                  Pinnoitus riittää, jos <strong className="text-foreground">aluskate ja rakenteet ovat kunnossa</strong>. Silloin
-                  tiilet pestään, rikkinäiset vaihdetaan ja katto maalataan ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa
-                  15–20 vuotta pidempään.
+                  Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Pinnoitus maksaa yleensä {PINNOITUS_HINTA}.
+                  Uusi katto maksaa yleensä 15 000–30 000 €.
                 </p>
-                <p>
-                  Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Pinnoitus maksaa yleensä{' '}
-                  <strong className="text-foreground">{PINNOITUS_HINTA}</strong>. Uusi katto maksaa yleensä moninkertaisesti enemmän.
-                </p>
-                <p>Tarkistamme aluskatteen ilmaisella käynnillä ja kerromme suoraan, kumpi kannattaa.</p>
+                <p>Katsomme aluskatteen ja läpiviennit arviokäynnillä. Jos pinnoitus ei riitä, sanomme sen.</p>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -42,13 +39,12 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
                   className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
                   style={{ backgroundColor: 'hsl(var(--accent-strong))' }}
                 >
-                  Pyydä ilmainen kuntotarkastus
+                  Pyydä ilmainen arviokäynti
                 </Link>
                 {artikkeliJulkaistu && (
                   <Link
                     to={`/artikkelit/${ARTIKKELI_SLUG}/`}
-                    className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-foreground transition-all hover:brightness-95"
-                    style={{ backgroundColor: 'hsl(36, 56%, 91%)' }}
+                    className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-ink border-2 border-accent transition-colors hover:bg-accent-light"
                   >
                     Lue: pinnoitus vai uusi katto?
                   </Link>

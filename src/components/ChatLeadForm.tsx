@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X, Send, Loader2, Check, RotateCcw } from 'lucide-react';
+import { X, Send, Loader2, RotateCcw } from 'lucide-react';
 import { getStorageUrl } from '@/lib/storage';
 import { submitContactForm } from '@/lib/contactForm';
 import { useToast } from '@/hooks/use-toast';
+import { VASTAUSLUPAUS } from '@/data/company';
 import FormPrivacyNote from '@/components/FormPrivacyNote';
 
 const eerikImage = getStorageUrl('Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp');
@@ -23,6 +24,16 @@ type Step =
   | { kind: 'textarea'; placeholder: string; next: string }
   | { kind: 'done' }
   | null;
+
+/**
+ * Chatin tekstit (tarkastus 12.10.2026, T44–T45, B2–B3): ei emojeja, ei huutomerkkejä, ei etäarviota
+ * (tarjous tehdään aina paikan päällä) eikä sanaa "kattohuolto". Yrityksestä sanotaan vain se,
+ * mikä on sivustolla muuallakin: maalausväli 10–15 vuotta, pinnoitus ajankohtainen noin 10–15 vuoden iässä.
+ */
+const GREETING = 'Haluatko tarjouksen talon maalauksesta tai katon pinnoituksesta?';
+const SERVICE_QUESTION = 'Arviokäynti on ilmainen. Mitä työtä se koskee?';
+const ASK_QUESTION = 'Mitä haluat kysyä?';
+const QUESTION_PLACEHOLDER = 'Kirjoita kysymyksesi tähän';
 
 // ── Typing indicator ───────────────────────────────────────────────────────
 const TypingIndicator = () => (
@@ -56,7 +67,6 @@ const ChatLeadForm = () => {
 
   // Lead data
   const [selectedPath, setSelectedPath] = useState<Path | null>(null);
-  const [arvioType, setArvioType] = useState('');
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
@@ -109,21 +119,20 @@ const ChatLeadForm = () => {
   const initialStep: Step = {
     kind: 'buttons',
     options: [
-      { label: 'Pyydä tarjous ✔️', value: 'tarjous' },
-      { label: 'Varaa ilmainen arviokäynti', value: 'arvio' },
+      { label: 'Pyydä tarjous', value: 'tarjous' },
+      { label: 'Pyydä ilmainen arviokäynti', value: 'arvio' },
       { label: 'Minulla on kysyttävää', value: 'kysymys' },
-      { label: 'Jätä soittopyyntö 📞', value: 'soitto' },
-      { label: 'Milloin maalaus on ajankohtaista?', value: 'maalaus_info' },
-      { label: 'Milloin kattohuolto on ajankohtainen?', value: 'katto_info' },
+      { label: 'Jätä soittopyyntö', value: 'soitto' },
+      { label: 'Milloin maalaus on ajankohtainen?', value: 'maalaus_info' },
+      { label: 'Milloin pinnoitus on ajankohtainen?', value: 'katto_info' },
     ],
   };
 
   // Reset chat to beginning
   const handleReset = () => {
-    setMessages([{ from: 'bot', text: 'Terve! 👋🏼 Oletko miettinyt talosi maalausta tai katon huoltoa?' }]);
+    setMessages([{ from: 'bot', text: GREETING }]);
     setCurrentStep(initialStep);
     setSelectedPath(null);
-    setArvioType('');
     setSelectedServices([]);
     setContactName('');
     setContactPhone('');
@@ -137,7 +146,7 @@ const ChatLeadForm = () => {
     setOpen(true);
     setBubbleVisible(false);
     if (messages.length === 0) {
-      setMessages([{ from: 'bot', text: 'Terve! 👋🏼 Oletko miettinyt talosi maalausta tai katon huoltoa?' }]);
+      setMessages([{ from: 'bot', text: GREETING }]);
       setCurrentStep(initialStep);
     }
   };
@@ -145,7 +154,7 @@ const ChatLeadForm = () => {
   // ── Checkbox + Contact shared step builders ──
   const serviceCheckboxStep: Step = {
     kind: 'checkboxes',
-    options: ['Talon maalaus', 'Tiilikaton pinnoitus', 'Katon puhdistus'],
+    options: ['Talon maalaus', 'Tiilikaton pinnoitus'],
     next: 'after_services',
   };
 
@@ -155,84 +164,70 @@ const ChatLeadForm = () => {
     next: 'submit',
   });
 
+  const questionStep: Step = { kind: 'textarea', placeholder: QUESTION_PLACEHOLDER, next: 'after_question' };
+
+  const infoFollowUp: Step = {
+    kind: 'buttons',
+    options: [
+      { label: 'Kyllä, pyydä arviokäynti', value: 'info_to_arvio' },
+      { label: 'Minulla on kysymys', value: 'info_to_kysymys' },
+    ],
+  };
+
   // ── Path handlers ────────────────────────────────────────────────────────
   const handleMainChoice = (value: string) => {
-    const labelMap: Record<string, string> = {
-      tarjous: 'Pyydä tarjous ✔️',
-      arvio: 'Varaa ilmainen arviokäynti',
-      kysymys: 'Minulla on kysyttävää',
-      soitto: 'Jätä soittopyyntö 📞',
-      maalaus_info: 'Milloin maalaus on ajankohtaista?',
-      katto_info: 'Milloin kattohuolto on ajankohtainen?',
-    };
-    setMessages(prev => [...prev, { from: 'user', text: labelMap[value] || value }]);
+    const label = initialStep.kind === 'buttons' ? initialStep.options.find(o => o.value === value)?.label : undefined;
+    setMessages(prev => [...prev, { from: 'user', text: label || value }]);
     setSelectedPath(value as Path);
 
     switch (value) {
       case 'tarjous':
-        botSay(
-          'Hienoa! Teemme mielellämme kilpailukykyisen tarjouksen. Sopisiko sinulle paremmin arviokäynti paikan päällä vai etäarvio?',
-          { kind: 'buttons', options: [{ label: 'Paikan päällä', value: 'paikanpaalla' }, { label: 'Etänä', value: 'etana' }] }
-        );
+        botSay('Tulemme ilmaiselle arviokäynnille ja teemme tarjouksen paikan päällä. Mihin haluat tarjouksen?', serviceCheckboxStep);
         break;
       case 'arvio':
-        botSay(
-          'Arviokäynti on loistava tapa aloittaa! ☀️ Katsotaan yhdessä paikat kuntoon ja saat samalla tarkan tarjouksen. Mitkä työt ovat mielessäsi?',
-          serviceCheckboxStep
-        );
+        botSay(SERVICE_QUESTION, serviceCheckboxStep);
         break;
       case 'kysymys':
-        botSay('Autamme mielellämme! Mitä haluaisit kysyä meiltä?', {
-          kind: 'textarea',
-          placeholder: 'Kirjoita kysymyksesi tähän...',
-          next: 'after_question',
-        });
+        botSay(ASK_QUESTION, questionStep);
         break;
       case 'soitto':
-        botSay('Totta kai! Jätä numerosi tähän, niin pirautamme sinulle mahdollisimman pian. ☎️', contactStep(['name', 'phone']));
+        botSay(`Jätä nimi ja puhelinnumero, niin soitamme sinulle. ${VASTAUSLUPAUS}`, contactStep(['name', 'phone']));
         break;
       case 'maalaus_info':
         botSay(
-          'Talon maalaus on paras tehdä ennakoiden. Kun maalipinta uusitaan ajoissa, vältytään kalliilta puuosien vaihdoilta ja talon arvo nousee välittömästi. ✨ Tehdäänkö tarkempi arvio sinun kohteellesi?',
-          { kind: 'buttons', options: [{ label: 'Kyllä, varaa arviokäynti', value: 'info_to_arvio' }, { label: 'Minulle heräsi kysymys', value: 'info_to_kysymys' }] }
+          'Talo maalataan yleensä 10–15 vuoden välein. Jos maali hilseilee, haalistuu tai jää käteen, on aika maalata. Haluatko, että tulemme katsomaan talon?',
+          infoFollowUp
         );
         break;
       case 'katto_info':
         botSay(
-          'Katto kannattaa huoltaa hyvissä ajoin ennen kuin sammal ja kosteus ehtivät haurastuttaa kattomateriaalia. Oikea-aikainen pesu ja pinnoitus pysäyttävät pakkasrapautumisen ja siirtävät kallista kattoremonttia kauas tulevaisuuteen. 🏠 Tehdäänkö katollesi tarkempi kuntokartoitus?',
-          { kind: 'buttons', options: [{ label: 'Kyllä, varaa arviokäynti', value: 'info_to_arvio' }, { label: 'Minulle heräsi kysymys', value: 'info_to_kysymys' }] }
+          'Pinnoitus on ajankohtainen noin 10–15 vuoden iässä. Kun tiilen pinta on kulunut, tiili imee vettä ja sammaloituu. Haluatko, että tulemme katsomaan katon?',
+          infoFollowUp
         );
         break;
     }
   };
 
   const handleSecondaryChoice = (value: string) => {
-    setMessages(prev => [...prev, { from: 'user', text: value === 'paikanpaalla' ? 'Paikan päällä' : value === 'etana' ? 'Etänä' : value === 'info_to_arvio' ? 'Kyllä, varaa arviokäynti' : 'Minulle heräsi kysymys' }]);
+    setMessages(prev => [...prev, { from: 'user', text: value === 'info_to_arvio' ? 'Kyllä, pyydä arviokäynti' : 'Minulla on kysymys' }]);
 
-    if (value === 'paikanpaalla' || value === 'etana') {
-      setArvioType(value);
-      botSay('Selvä juttu! Mitä palveluita tarjous koskisi? (Valitse kaikki sopivat)', serviceCheckboxStep);
-    } else if (value === 'info_to_arvio') {
-      botSay('Arviokäynti on loistava tapa aloittaa! ☀️ Mitkä työt ovat mielessäsi?', serviceCheckboxStep);
+    if (value === 'info_to_arvio') {
+      botSay(SERVICE_QUESTION, serviceCheckboxStep);
     } else if (value === 'info_to_kysymys') {
-      botSay('Autamme mielellämme! Mitä haluaisit kysyä meiltä?', {
-        kind: 'textarea',
-        placeholder: 'Kirjoita kysymyksesi tähän...',
-        next: 'after_question',
-      });
+      botSay(ASK_QUESTION, questionStep);
     }
   };
 
   const handleServicesSubmit = () => {
     if (selectedServices.length === 0) return;
     setMessages(prev => [...prev, { from: 'user', text: selectedServices.join(', ') }]);
-    botSay('Kiitos! Laitatko vielä yhteystietosi tähän, niin soitamme sinulle pian ja sovitaan yksityiskohdista?', contactStep(['name', 'phone']));
+    botSay('Jätä vielä nimi ja puhelinnumero, niin soitamme ja sovimme ajan.', contactStep(['name', 'phone']));
   };
 
   const handleQuestionSubmit = () => {
     if (!questionText.trim()) return;
     setMessages(prev => [...prev, { from: 'user', text: questionText.trim() }]);
-    botSay('Kiitos kysymyksestä! Miten haluat meidän palaavan asiaan?', {
+    botSay('Miten haluat vastauksen?', {
       kind: 'buttons',
       options: [{ label: 'Soittamalla', value: 'soittamalla' }, { label: 'Sähköpostilla', value: 'sahkopostilla' }],
     });
@@ -241,9 +236,9 @@ const ChatLeadForm = () => {
   const handleContactMethodChoice = (value: string) => {
     setMessages(prev => [...prev, { from: 'user', text: value === 'soittamalla' ? 'Soittamalla' : 'Sähköpostilla' }]);
     if (value === 'soittamalla') {
-      botSay('Selvä! Laitatko nimesi ja puhelinnumerosi?', contactStep(['name', 'phone']));
+      botSay('Jätä nimi ja puhelinnumero.', contactStep(['name', 'phone']));
     } else {
-      botSay('Selvä! Laitatko nimesi ja sähköpostisi?', contactStep(['name', 'email']));
+      botSay('Jätä nimi ja sähköposti.', contactStep(['name', 'email']));
     }
   };
 
@@ -263,7 +258,6 @@ const ChatLeadForm = () => {
 
     const details = [
       `Polku: ${pathLabels[selectedPath || ''] || selectedPath}`,
-      arvioType ? `Arviotyyppi: ${arvioType === 'paikanpaalla' ? 'Paikan päällä' : 'Etänä'}` : '',
       selectedServices.length ? `Palvelut: ${selectedServices.join(', ')}` : '',
       questionText ? `Kysymys: ${questionText}` : '',
     ].filter(Boolean).join('\n');
@@ -280,9 +274,9 @@ const ChatLeadForm = () => {
       );
       setMessages(prev => [...prev, { from: 'user', text: `${contactName}${contactPhone ? ', ' + contactPhone : ''}${contactEmail ? ', ' + contactEmail : ''}` }]);
       setCurrentStep({ kind: 'done' });
-      botSay('Iso kiitos! Tiedot vastaanotettu, olemme sinuun pian yhteydessä. 🛠️', { kind: 'done' });
+      botSay(`Kiitos. Tiedot tulivat perille. ${VASTAUSLUPAUS}`, { kind: 'done' });
     } catch {
-      toast({ title: 'Virhe', description: 'Lähetys epäonnistui. Yritä uudelleen.', variant: 'destructive' });
+      toast({ title: 'Lähetys ei onnistunut', description: 'Yritä uudelleen tai soita meille.', variant: 'destructive' });
     } finally {
       setIsSubmitting(false);
     }
@@ -292,12 +286,15 @@ const ChatLeadForm = () => {
   const handleButtonClick = (value: string) => {
     if (['tarjous', 'arvio', 'kysymys', 'soitto', 'maalaus_info', 'katto_info'].includes(value)) {
       handleMainChoice(value);
-    } else if (['paikanpaalla', 'etana', 'info_to_arvio', 'info_to_kysymys'].includes(value)) {
+    } else if (['info_to_arvio', 'info_to_kysymys'].includes(value)) {
       handleSecondaryChoice(value);
     } else if (['soittamalla', 'sahkopostilla'].includes(value)) {
       handleContactMethodChoice(value);
     }
   };
+
+  const inputClass =
+    'w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm focus:ring-2 focus:ring-accent outline-none';
 
   // ── Render ───────────────────────────────────────────────────────────────
   if (drawerOpen) return null;
@@ -318,7 +315,7 @@ const ChatLeadForm = () => {
                 onClick={handleOpen}
                 className="bg-white text-slate-800 text-sm rounded-2xl px-4 py-2.5 pr-7 shadow-lg max-w-[220px] text-left cursor-pointer hover:shadow-xl transition-shadow"
               >
-                Hei! 👋🏼 Kuinka voisin palvella tänään?
+                Pyydä tarjous tai kysy meiltä.
               </button>
               <button
                 onClick={dismissBubble}
@@ -373,7 +370,7 @@ const ChatLeadForm = () => {
             </div>
 
             {/* Messages */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto bg-[#ecf7ff] px-3 py-4 space-y-1" style={{ minHeight: 200 }}>
+            <div ref={scrollRef} className="flex-1 overflow-y-auto bg-accent-light px-3 py-4 space-y-1" style={{ minHeight: 200 }}>
               {messages.map((msg, i) =>
                 msg.from === 'bot' ? (
                   <div key={i} className="flex items-end gap-2 mb-3">
@@ -418,7 +415,7 @@ const ChatLeadForm = () => {
                             type="checkbox"
                             checked={selectedServices.includes(opt)}
                             onChange={() => setSelectedServices(prev => prev.includes(opt) ? prev.filter(s => s !== opt) : [...prev, opt])}
-                            className="w-4 h-4 accent-[#38b6ff] rounded"
+                            className="w-4 h-4 accent-accent-strong rounded"
                           />
                           <span className="text-slate-800 text-[13px]">{opt}</span>
                         </label>
@@ -439,7 +436,7 @@ const ChatLeadForm = () => {
                         value={questionText}
                         onChange={e => setQuestionText(e.target.value)}
                         placeholder={currentStep.placeholder} aria-label={currentStep.placeholder}
-                        className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm resize-none focus:ring-2 focus:ring-[#38b6ff] outline-none"
+                        className={`${inputClass} resize-none`}
                         rows={3}
                       />
                       <button
@@ -460,7 +457,7 @@ const ChatLeadForm = () => {
                           value={contactName}
                           onChange={e => setContactName(e.target.value)}
                           placeholder="Nimi" aria-label="Nimi"
-                          className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm focus:ring-2 focus:ring-[#38b6ff] outline-none"
+                          className={inputClass}
                         />
                       )}
                       {currentStep.fields.includes('phone') && (
@@ -469,7 +466,7 @@ const ChatLeadForm = () => {
                           value={contactPhone}
                           onChange={e => setContactPhone(e.target.value)}
                           placeholder="Puhelinnumero" aria-label="Puhelinnumero"
-                          className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm focus:ring-2 focus:ring-[#38b6ff] outline-none"
+                          className={inputClass}
                         />
                       )}
                       {currentStep.fields.includes('email') && (
@@ -478,7 +475,7 @@ const ChatLeadForm = () => {
                           value={contactEmail}
                           onChange={e => setContactEmail(e.target.value)}
                           placeholder="Sähköposti" aria-label="Sähköposti"
-                          className="w-full rounded-xl border-0 bg-white text-slate-800 text-[13px] px-3 py-2.5 shadow-sm focus:ring-2 focus:ring-[#38b6ff] outline-none"
+                          className={inputClass}
                         />
                       )}
                       <button
@@ -489,7 +486,7 @@ const ChatLeadForm = () => {
                         {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                         Lähetä
                       </button>
-                      <FormPrivacyNote variant="light" />
+                      <FormPrivacyNote />
                     </div>
                   )}
                 </div>

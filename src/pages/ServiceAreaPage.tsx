@@ -1,7 +1,6 @@
 import { Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ChevronRight } from "lucide-react";
-import { MapPin } from "@/components/icons/BrandIcons";
 import PageHero from "@/components/PageHero";
 import CityProjects from "@/components/CityProjects";
 import ReviewsTeaser from "@/components/ReviewsTeaser";
@@ -10,13 +9,13 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
 import ResponsiveImage from "@/components/ResponsiveImage";
-import { RoofTileIcon, RoofCleanIcon, PaintBrushIcon } from "@/components/ServiceIcons";
 import { getStorageUrl } from "@/lib/storage";
-import { getCityBySlug, hasPinnoitusPage, hasPuhdistusPage, hasMaalausPage } from "@/data/cityData";
+import { getCityBySlug, hasPinnoitusPage, hasMaalausPage } from "@/data/cityData";
 import { getAreaCityContent } from "@/data/areaCityContent";
 import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
+import { getTestimonialsByCity } from "@/data/testimonialsData";
 import { areaCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
-import { KOTITALOUSVAHENNYS, LUVUT } from "@/data/company";
+import { KOTITALOUSVAHENNYS, TAKUU } from "@/data/company";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
@@ -33,7 +32,7 @@ const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) 
   },
   {
     question: `Kuka tekee työn ${cityIn}?`,
-    answer: "Yrittäjät itse. Eerik pinnoittaa tiilikatot ja Eemil maalaa talot. Emme käytä alihankkijoita. Siksi tiedät aina, kuka pihallasi on, ja annamme työlle kirjallisen takuun: pinnoitukselle 5 vuotta, maalaukselle 2 vuotta.",
+    answer: "Eerik pinnoittaa tiilikatot ja Eemil maalaa talot. Teemme työn itse. Annamme työlle kirjallisen takuun: pinnoitukselle 5 vuotta, maalaukselle 2 vuotta.",
   },
   {
     question: "Mitä arviokäynnillä tapahtuu?",
@@ -41,13 +40,15 @@ const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) 
   },
   {
     question: "Saako työstä kotitalousvähennyksen?",
-    answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn osuuden laskuun.`,
+    answer: `Kyllä. ${KOTITALOUSVAHENNYS} Työn osuus on laskussa eriteltynä.`,
   },
 ];
 
 /**
  * Aluesivu /maalauspalvelut-{kunta}: kokoava sivu, jonka tehtävä on ohjata palvelusivuille
- * (korjaus 2). Palvelukortit heti heron alle (8.3); paikallinen teksti lyhyenä ja arkikielellä (S17–S18).
+ * (korjaus 2). Palvelukortit heti heron alle (8.3) valkoisina kortteina ilman liukuväriä
+ * (tarkastus 12.10.2026, luku 3); paikallinen teksti lyhyenä ja arkikielellä (S17–S18).
+ * Katon puhdistus on loppunut, joten sitä ei tarjota (B6–B7).
  */
 const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
   const cityData = getCityBySlug(citySlug);
@@ -58,10 +59,11 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
   const cityName = cityData.name;
   const cityIn = cityData.cityIn;
-  const cityGenitive = cityData.cityGenitive;
   const seo = areaCitySeo(cityData);
   const heroBase = cityHeroBase(citySlug, "alue");
   const ownPhoto = heroBase !== HERO_BASE.alue;
+  // Paikkakunnan omat arvostelut näkyvät kohdelohkossa; nosto muista arvosteluista vain, jos omia ei ole (8.2: yksi arvostelulohko).
+  const ownReviews = getTestimonialsByCity(citySlug);
 
   const pinnoitusHref = hasPinnoitusPage(citySlug) ? `/tiilikaton-pinnoitus-${citySlug}` : "/tiilikaton-pinnoitus-pirkanmaa";
   const maalausHref = hasMaalausPage(citySlug) ? `/talon-maalaus-${citySlug}` : "/talon-maalaus-pirkanmaa";
@@ -70,31 +72,21 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     {
       title: `Tiilikaton pinnoitus ${cityName}`,
       href: `${pinnoitusHref}/`,
-      description: `Pesemme katon painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta yleensä ${PINNOITUS_HINTA}.`,
-      warranty: "5 v takuu",
+      description: "Eerik pesee katon, vaihtaa rikkinäiset tiilet uusiin ja maalaa katon ruiskulla kahteen kertaan.",
+      price: PINNOITUS_HINTA,
+      warranty: TAKUU.pinnoitus,
+      duration: "2–4 päivää",
       baseName: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-      Icon: RoofTileIcon,
     },
     {
       title: `Talon maalaus ${cityName}`,
       href: `${maalausHref}/`,
-      description: `Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Hinta yleensä ${MAALAUS_HINTA}.`,
-      warranty: "2 v takuu",
+      description: "Eemil pesee seinät, kaapii irtoavan maalin, pohjamaalaa paljaat kohdat ja maalaa pintamaalin pensselillä.",
+      price: MAALAUS_HINTA,
+      warranty: TAKUU.maalaus,
+      duration: "3–7 päivää",
       baseName: "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
-      Icon: PaintBrushIcon,
     },
-    ...(hasPuhdistusPage(citySlug)
-      ? [
-          {
-            title: `Tiilikaton puhdistus ${cityName}`,
-            href: `/katon-puhdistus-${citySlug}/`,
-            description: "Sammal ja lika poistetaan mekaanisesti, ja katto saa kasvustontorjunta-aineen.",
-            warranty: "Ilmainen tarkastus",
-            baseName: "puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen",
-            Icon: RoofCleanIcon,
-          },
-        ]
-      : []),
   ];
 
   const serviceJsonLd = {
@@ -139,37 +131,46 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       <section className="pb-16 md:pb-24 bg-background">
         <div className="section-container">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3">Palvelut {cityIn}</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Etsitkö maalaria tai kattourakoitsijaa {cityIn}? Valitse palvelu, niin näet hinnan, työvaiheet ja paikkakunnan tiedot.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3">Tiilikaton pinnoitus ja talon maalaus {cityIn}</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Valitse palvelu, niin näet hinnan, työvaiheet ja paikkakunnan tiedot.</p>
           </div>
 
-          <div className={`grid gap-6 max-w-5xl mx-auto ${services.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
+          <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
             {services.map((service) => (
-              <Link key={service.title} to={service.href} className="block rounded-2xl overflow-hidden group relative h-full min-h-[320px]">
+              <Link
+                key={service.title}
+                to={service.href}
+                className="group bg-card rounded-2xl border border-border/50 shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-shadow"
+              >
                 <ResponsiveImage
                   baseName={service.baseName}
                   alt=""
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="w-full aspect-[4/3] object-cover"
+                  sizes="(max-width: 768px) 100vw, 480px"
                   width={1200}
-                  height={1600}
+                  height={900}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/20 group-hover:from-black/90 transition-all duration-300" />
-                <div className="relative z-10 flex flex-col justify-end h-full p-6">
-                  <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center mb-3">
-                    <service.Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{service.title}</h3>
-                  <p className="text-sm text-white/85 mb-4">{service.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-medium">
-                      {service.warranty}
-                    </span>
-                    <span className="flex items-center gap-1 text-white font-medium text-sm group-hover:gap-2 transition-all">
-                      Lue lisää
-                      <ChevronRight className="w-4 h-4" />
-                    </span>
-                  </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-bold text-foreground font-heading mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground mb-5 flex-1">{service.description}</p>
+                  <dl className="grid grid-cols-3 gap-3 text-sm mb-5">
+                    <div>
+                      <dt className="text-muted-foreground">Hinta yleensä</dt>
+                      <dd className="font-semibold text-foreground">{service.price}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-muted-foreground">Takuu</dt>
+                      <dd className="font-semibold text-foreground">{service.warranty}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-muted-foreground">Kesto</dt>
+                      <dd className="font-semibold text-foreground">{service.duration}</dd>
+                    </div>
+                  </dl>
+                  <span className="inline-flex items-center gap-1 font-semibold text-accent-ink group-hover:underline">
+                    Lue lisää
+                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                  </span>
                 </div>
               </Link>
             ))}
@@ -191,16 +192,10 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         <section className="section-padding bg-background">
           <div className="section-container">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Palvelemme koko {cityGenitive} alueella</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
-                Tulemme koko kuntaan, esimerkiksi näihin kyliin ja kaupunginosiin:
-              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Alueet, joilla käymme</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">Käymme koko kunnassa, esimerkiksi:</p>
 
               <div className="bg-card rounded-2xl p-6 md:p-8 shadow-sm border border-border/50 mb-10">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-accent-ink flex-shrink-0" />
-                  <span className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Kaupunginosat ja kylät</span>
-                </div>
                 <p className="text-base md:text-lg text-foreground leading-relaxed flex items-center justify-center flex-wrap gap-x-3 gap-y-2">
                   {neighborhoods.neighborhoods.map((n, idx) => (
                     <span key={n} className="inline-flex items-center gap-3">
@@ -213,8 +208,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
               <Link
                 to={`${pinnoitusHref}/`}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                style={{ backgroundColor: "hsl(38, 60%, 65%)", color: "hsl(215, 25%, 15%)" }}
+                className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
+                style={{ backgroundColor: "hsl(var(--accent-strong))" }}
               >
                 Tiilikaton pinnoitus {cityName}
               </Link>
@@ -225,30 +220,28 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
       <CityProjects citySlug={citySlug} cityIn={cityIn} />
 
-      {/* ══ KEITÄ ME OLEMME? ══ */}
+      {/* ══ EERIK JA EEMIL ══ */}
       <section className="section-padding bg-secondary">
         <div className="section-container max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-3 text-center font-heading">Keitä me olemme?</h2>
-          <p className="text-center text-muted-foreground mb-8 italic">Terveisiä meiltä yrittäjiltä</p>
-
-          <div className="flex justify-center gap-6 mb-8">
-            <img src={eerikImage} alt="Eerik Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-4 border-primary/20" loading="lazy" decoding="async" />
-            <img src={eemilImage} alt="Eemil Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-4 border-primary/20" loading="lazy" decoding="async" />
+          <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-center">
+            <div className="flex justify-center gap-4">
+              <img src={eerikImage} alt="Eerik Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" loading="lazy" decoding="async" />
+              <img src={eemilImage} alt="Eemil Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" loading="lazy" decoding="async" />
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-3 font-heading">Eerik ja Eemil tekevät työn</h2>
+              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                Eerik pinnoittaa katot, Eemil maalaa seinät. Käymme {cityIn} ilman matkakuluja.
+              </p>
+            </div>
           </div>
-
-          <p className="text-muted-foreground leading-relaxed text-center text-base md:text-lg">
-            Hei! Olemme Eerik ja Eemil, Pintasen yrittäjät. <strong className="text-foreground">Eerik pinnoittaa tiilikatot ja Eemil maalaa talot</strong>{" "}
-            itse alusta loppuun. Takana on {LUVUT.kokemusVuotta} vuotta työtä ja {LUVUT.kohteet} kohdetta: {LUVUT.pinnoitetutKatot} pinnoitettua kattoa ja {LUVUT.maalatutTalot} maalattua
-            taloa. Tiedät aina, kuka pihallasi on.
-          </p>
-          <p className="mt-4 font-semibold text-foreground text-center">— Eerik & Eemil, Pintanen Oy</p>
         </div>
       </section>
 
       <FAQSection items={getAreaFAQ(cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
 
-      <ReviewsTeaser citySlug={citySlug} />
-      <ServiceContactSection variant="general" cityIn={cityIn} />
+      {ownReviews.length === 0 && <ReviewsTeaser citySlug={citySlug} />}
+      <ServiceContactSection variant="general" />
 
       <ToimintaAlueetBanner activeCity={citySlug} />
     </div>

@@ -116,8 +116,8 @@ export const MaalausCityComparison = ({ cityIn }: CityProps) => (
               uudella maalilla seinä kestää taas vuosia.
             </p>
             <p>
-              Huoltomaalaus maksaa meillä yleensä {MAALAUS_HINTA}. Uusi ulkoverhous maksaa paljon enemmän. Katsomme seinien kunnon
-              arviokäynnillä {cityIn} ja kerromme suoraan, mitä ne tarvitsevat.
+              Huoltomaalaus maksaa meillä yleensä {MAALAUS_HINTA}. Uusi ulkoverhous maksaa paljon enemmän. Katsomme seinät
+              arviokäynnillä {cityIn}. Jos maalaus ei riitä, sanomme sen.
             </p>
           </div>
           <div className="mt-8">

@@ -25,7 +25,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
     },
     {
       title: `Hinta on yleensä ${PINNOITUS_HINTA}`,
-      text: "Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan kerromme, kun olemme nähneet katon.",
+      text: "Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Tarkan hinnan kerromme, kun olemme nähneet katon.",
       links: [
         { to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" },
         { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Katso hintaesimerkit" },
@@ -33,14 +33,14 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
     },
     {
       title: `Tiilikattoremontti vai pinnoitus ${cityIn}?`,
-      text: "Usein pinnoitus riittää. Jos aluskate ja katon rakenteet ovat kunnossa, kattoa ei tarvitse uusia. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Kerromme sen kuntotarkastuksessa suoraan.",
+      text: "Usein pinnoitus riittää. Jos aluskate ja katon rakenteet ovat kunnossa, kattoa ei tarvitse uusia. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Katsomme sen arviokäynnillä.",
       links: [{ to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Lue lisää pinnoituksesta" }],
     },
   ],
   maalaus: (cityIn) => [
     {
       title: `Mitä talon maalaus ${cityIn} maksaa?`,
-      text: `Omakotitalon ulkomaalaus maksaa meillä yleensä ${MAALAUS_HINTA}. Hinta riippuu talon koosta, kerroksista ja pohjatöiden määrästä. Työn osuudesta saat kotitalousvähennyksen.`,
+      text: `Omakotitalon ulkomaalaus maksaa meillä yleensä ${MAALAUS_HINTA}. Hinta riippuu talon koosta, kerroksista ja pohjatöiden määrästä.`,
       links: [
         { to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" },
         { to: "/talon-maalaus-hinta-pirkanmaa/", label: "Katso hintaesimerkit" },
@@ -53,7 +53,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
     },
     {
       title: "Huoltomaalaus vai uusi ulkoverhous?",
-      text: "Usein huoltomaalaus riittää. Jos puu on kovaa ja ehjää, laudoitusta ei tarvitse vaihtaa. Katsomme seinät arviokäynnillä ja kerromme suoraan, mitä ne tarvitsevat.",
+      text: "Usein huoltomaalaus riittää. Jos puu on kovaa ja ehjää, laudoitusta ei tarvitse vaihtaa. Katsomme seinät arviokäynnillä.",
       links: [{ to: "/talon-maalaus-pirkanmaa/", label: "Lue lisää talon maalauksesta" }],
     },
   ],

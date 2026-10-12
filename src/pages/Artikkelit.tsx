@@ -21,8 +21,7 @@ const Artikkelit = () => {
             Artikkelit ja oppaat
           </h1>
           <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
-            Käytännön tietoa tiilikaton pinnoituksesta, katon huollosta ja talon maalauksesta. Kirjoittajina työn
-            itse tekevät yrittäjät.
+            Tietoa tiilikaton pinnoituksesta ja talon maalauksesta. Kirjoittajat Eerik ja Eemil tekevät työt itse.
           </p>
         </header>
 

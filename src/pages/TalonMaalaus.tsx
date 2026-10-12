@@ -39,16 +39,15 @@ const TalonMaalaus = () => {
         }
         lead={
           <>
-            Maalaamme talojen ulkoseinät. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat kohdat ja
-            maalaamme pintamaalin pensselillä. Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>. Arviokäynti
-            on ilmainen.
+            Maalaamme puutalojen ulkoseinät. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Hinta on yleensä{" "}
+            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja takuu on 2 vuotta. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
         secondary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
         trust="maalaus"
         image={{ base: HERO_BASE.maalaus, alt: "Tummansininen puutalo ulkomaalauksen jälkeen" }}
-        badge={{ title: "Yrittäjä itse tikkailla", text: "Eemil maalaa ja vastaa jäljestä." }}
+        badge={{ title: "Eemil tekee työn", text: "Maalaa itse ja vastaa jäljestä." }}
         breadcrumbs={[{ name: "Talon maalaus" }]}
       />
 
@@ -60,11 +59,10 @@ const TalonMaalaus = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Ulkomaalaus, julkisivumaalaus ja huoltomaalaus</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Talon maalausta kutsutaan monella nimellä: ulkomaalaus, julkisivumaalaus, huoltomaalaus tai puutalon maalaus. Me teemme
-              kaikilla nimillä saman työn. Maalaamme omakotitalojen, paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja
-              lähikunnissa. Mökin maalaus onnistuu myös kauempana Tampereelta, sillä matkat sisältyvät hintaan.
+              Ulkomaalaus, julkisivumaalaus, huoltomaalaus ja puutalon maalaus tarkoittavat samaa työtä. Maalaamme omakotitalojen,
+              paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja lähikunnissa. Mökin maalaus onnistuu myös kauempana Tampereelta,
+              sillä matkat sisältyvät hintaan.
             </p>
-            <p>Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Siksi pesemme ja kaavimme huolella ennen maalausta ja suojaamme terassit ja ikkunat.</p>
             <p>
               Hintaesimerkit ja laskuri:{" "}
               <Link to="/talon-maalaus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">

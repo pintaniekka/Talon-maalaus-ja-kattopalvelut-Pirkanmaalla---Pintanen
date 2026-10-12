@@ -17,6 +17,7 @@ import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
 import { pinnoitusPrices } from "@/data/prices";
 import { pinnoitusLyhyesti, PINNOITUS_HINTA } from "@/data/tyovaiheet";
+import { getTestimonialsByCity } from "@/data/testimonialsData";
 
 /**
  * Tiilikaton pinnoituksen kaupunkisivu. Järjestys (auditointi 8.3): hero → Lyhyesti → paikallinen
@@ -50,19 +51,18 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         }
         lead={
           <>
-            Pinnoitamme tiilikattoja {cityData.cityIn}. Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme
-            katon ruiskulla kahteen kertaan. Hinta on yleensä <strong className="text-foreground">{PINNOITUS_HINTA}</strong>. Tulemme
-            katsomaan kattosi ilmaiseksi.
+            Pinnoitamme tiilikattoja {cityData.cityIn}. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on yleensä{" "}
+            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja takuu on 5 vuotta. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
-        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
         trust="pinnoitus"
         image={{
           base: heroBase,
           alt: ownPhoto ? `Pinnoittamamme tiilikatto ${cityData.cityIn}` : "Kirkkaan punainen tiilikatto pinnoituksen jälkeen",
         }}
-        badge={{ title: "Yrittäjä itse katolla", text: "Eerik tekee työn itse." }}
+        badge={{ title: "Eerik tekee työn", text: "Pinnoittaa katon itse ja vastaa jäljestä." }}
         breadcrumbs={crumbs}
       />
 
@@ -88,8 +88,8 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name, cityData.cityIn)]}
         title={`Usein kysyttyä tiilikaton pinnoituksesta ${cityData.cityIn}`}
       />
-      <ReviewsTeaser citySlug={cityData.slug} category="katto" />
-      <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
+      {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
+      <ServiceContactSection variant="katto" />
       <CityNeighborLinks city={cityData} service="pinnoitus" />
     </div>
   );

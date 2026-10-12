@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { Building2 } from "@/components/icons/BrandIcons";
 import Breadcrumbs, { type Crumb } from "@/components/Breadcrumbs";
 import { GOOGLE_PROFILE_URL, LUVUT, SITE_UPDATED, paivaFi } from "@/data/company";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
@@ -9,6 +8,7 @@ import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 /**
  * Alasivujen hero etusivun mallilla (auditoinnin korjaus 1): valkoinen kortti vaalealla pohjalla,
  * vasemmalle tasattu H1, keltainen pääpainike, luottamusrivi kortin sisällä ja kuva oikealla.
+ * Kuvan päällä on pieni valkoinen chip ilman kallistusta (tarkastus 12.10.2026: ei punaista vinotarraa).
  * Ei sisääntuloanimaatiota: H1 ja ingressi näkyvät heti, myös ilman JavaScriptiä.
  */
 
@@ -30,7 +30,7 @@ export const trustFor = (variant: TrustVariant): TrustItem[] => {
         google,
         { value: LUVUT.pinnoitetutKatot, label: "Pinnoitettua kattoa" },
         { value: "5 v", label: "Takuu työlle" },
-        { value: "0 €", label: "Kuntotarkastus", tone: "blue" },
+        { value: "0 €", label: "Arviokäynti", tone: "blue" },
       ];
     case "maalaus":
       return [
@@ -82,7 +82,7 @@ const toneClass: Record<NonNullable<TrustItem["tone"]>, string> = {
   default: "text-foreground",
 };
 
-const defaultBadge = { title: "Yrittäjät itse paikalla", text: "Eerik & Eemil vastaavat jäljestä." };
+const defaultBadge = { title: "Perheyritys Tampereelta", text: "Eerik ja Eemil tekevät työn itse." };
 
 const PageHero = ({
   eyebrow,
@@ -196,16 +196,9 @@ const PageHero = ({
             aria-hidden="true"
           />
           {badge && (
-            <div className="absolute bottom-4 right-4 lg:bottom-8 lg:right-8 bg-roof-red text-roof-red-foreground p-4 lg:p-5 rounded-2xl lg:rounded-3xl shadow-2xl rotate-2 max-w-[210px] lg:max-w-[250px]">
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 bg-white/20 rounded-full shrink-0 flex items-center justify-center">
-                  <Building2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">{badge.title}</p>
-                  <p className="text-sm font-heading font-extrabold leading-tight">{badge.text}</p>
-                </div>
-              </div>
+            <div className="absolute bottom-4 right-4 lg:bottom-6 lg:right-6 bg-card text-foreground px-4 py-3 rounded-xl shadow-lg max-w-[230px]">
+              <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-muted-foreground mb-1">{badge.title}</p>
+              <p className="text-sm font-heading font-extrabold leading-tight">{badge.text}</p>
             </div>
           )}
         </div>

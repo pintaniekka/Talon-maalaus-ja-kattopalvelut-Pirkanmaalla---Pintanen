@@ -32,9 +32,9 @@ const people = {
   },
 };
 
-const steps = ["Soitamme sinulle ja sovimme käynnin.", "Tulemme ilmaiselle kuntotarkastukselle.", "Saat kirjallisen tarjouksen."];
+const steps = ["Soitamme sinulle ja sovimme käynnin.", "Tulemme ilmaiselle arviokäynnille.", "Saat kirjallisen tarjouksen."];
 
-const paramToService: Record<string, QuoteService> = { pinnoitus: "tiilikatto", maalaus: "ulkomaalaus", puhdistus: "puhdistus" };
+const paramToService: Record<string, QuoteService> = { pinnoitus: "tiilikatto", maalaus: "ulkomaalaus" };
 
 /** Lyhyt FAQ lomakkeen alle (P4). Ei schemaa: sivu on lomake, ei sisältösivu. */
 const tarjousFaq = [
@@ -59,7 +59,7 @@ const Tarjouspyynto = () => {
   const [services, setServices] = useState<QuoteService[]>(initial);
   const onServicesChange = useCallback((s: QuoteService[]) => setServices(s), []);
 
-  const roof = services.includes("tiilikatto") || services.includes("puhdistus");
+  const roof = services.includes("tiilikatto");
   const wall = services.includes("ulkomaalaus");
   const callers = roof && !wall ? [people.eerik] : wall && !roof ? [people.eemil] : [people.eerik, people.eemil];
   const callerName = callers.length === 1 ? callers[0].first : undefined;
@@ -76,7 +76,7 @@ const Tarjouspyynto = () => {
           <div className="max-w-2xl mx-auto text-center text-primary-foreground mb-8">
             <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary-foreground">Pyydä tarjous</h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 leading-relaxed">
-              Kerro, mitä tarvitset. Me yrittäjät soitamme sinulle itse ja tulemme ilmaiselle kuntotarkastukselle.
+              Kerro, mitä tarvitset. Soitamme sinulle ja tulemme ilmaiselle arviokäynnille.
             </p>
           </div>
 

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Paintbrush, Ruler, Building2, Layers, Droplets } from "@/components/icons/BrandIcons";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -21,11 +20,11 @@ import { KOTITALOUSVAHENNYS } from "@/data/company";
 const general = fmtRange(maalausPrices.general.min, maalausPrices.general.max);
 
 const priceFactors = [
-  { icon: Layers, title: "Pohjatyöt", description: "Hilseilevä tai vaurioitunut pinta vaatii enemmän pesua ja kaavintaa." },
-  { icon: Ruler, title: "Talon pinta-ala", description: "Isoon taloon kuluu enemmän maalia ja työtä." },
-  { icon: Building2, title: "Talon korkeus", description: "Korkea talo vaatii enemmän telineitä tai nostimen." },
-  { icon: Paintbrush, title: "Käytettävä maali", description: "Eri maalit eroavat hinnaltaan ja kestoltaan." },
-  { icon: Droplets, title: "Kuivuminen", description: "Pesun ja maalikerrosten välissä seinän pitää kuivua. Sää vaikuttaa aikatauluun." },
+  { title: "Pohjatyöt", description: "Hilseilevä tai vaurioitunut pinta vaatii enemmän pesua ja kaavintaa." },
+  { title: "Talon pinta-ala", description: "Isoon taloon kuluu enemmän maalia ja työtä." },
+  { title: "Talon korkeus", description: "Korkea talo vaatii enemmän telineitä tai nostimen." },
+  { title: "Käytettävä maali", description: "Eri maalit eroavat hinnaltaan ja kestoltaan." },
+  { title: "Kuivuminen", description: "Pesun ja maalikerrosten välissä seinän pitää kuivua. Sää vaikuttaa aikatauluun." },
 ];
 
 const offerChecklist = [
@@ -40,10 +39,6 @@ const faqItems = [
   {
     question: "Paljonko talon maalaus maksaa?",
     answer: `Omakotitalon ulkomaalaus maksaa meillä yleensä ${general}. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Laskurilla saat suuntaa antavan arvion. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.`,
-  },
-  {
-    question: "Mitä talon maalauksen hintaan kuuluu?",
-    answer: "Hintaan kuuluu homepesu, irtoavan maalin kaavinta, terassien ja ikkunoiden suojaus, pohjamaali paljaisiin kohtiin, pintamaali pensselillä ja siivous. Ylimääräisiä kuluja ei tule.",
   },
   {
     question: "Miksi hinta annetaan koko talolle eikä neliölle?",
@@ -98,8 +93,7 @@ const HinnatTalonMaalaus = () => {
         lead={
           <>
             Omakotitalon ulkomaalaus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu talon
-            koosta, korkeudesta ja pohjatöiden määrästä. Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan saat, kun käymme
-            katsomassa talon. Käynti on ilmainen.
+            koosta, korkeudesta ja pohjatöiden määrästä. Tarkan hinnan saat, kun käymme katsomassa talon. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta laskurilla" }}
@@ -111,6 +105,7 @@ const HinnatTalonMaalaus = () => {
       />
 
       <MaalausPricingCards cityName="Pirkanmaa" calculatorHref="/hintalaskuri/?palvelu=maalaus" calculatorLabel="Laske oman talosi hinta" />
+      <KotitalousVahennys defaultVariant="d" />
 
       <CalculatorCta service="maalaus" />
 
@@ -132,8 +127,6 @@ const HinnatTalonMaalaus = () => {
           <PriceFactors factors={priceFactors} />
         </div>
       </section>
-
-      <KotitalousVahennys />
 
       <MaalausComparison />
 

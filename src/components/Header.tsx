@@ -3,7 +3,7 @@ import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Phone } from "@/components/icons/BrandIcons";
+import { Phone, Mail } from "@/components/icons/BrandIcons";
 import { getStorageUrl } from "@/lib/storage";
 import OptimizedImage from "./OptimizedImage";
 import WhatsAppIcon from "./WhatsAppIcon";
@@ -23,7 +23,6 @@ const Header = () => {
       href: "/tiilikaton-pinnoitus-pirkanmaa/",
       dropdown: [
         { label: "Tiilikaton pinnoitus", href: "/tiilikaton-pinnoitus-pirkanmaa/" },
-        { label: "Katon puhdistus", href: "/katon-puhdistus-pirkanmaa/" },
         { label: "Talon maalaus", href: "/talon-maalaus-pirkanmaa/" },
       ],
     },
@@ -33,7 +32,6 @@ const Header = () => {
       dropdown: [
         { label: "Hintalaskuri", href: "/hintalaskuri/" },
         { label: "Tiilikaton pinnoitus hinta", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/" },
-        { label: "Katon puhdistus hinta", href: "/katon-puhdistus-hinta-pirkanmaa/" },
         { label: "Talon maalaus hinta", href: "/talon-maalaus-hinta-pirkanmaa/" },
       ],
     },
@@ -131,11 +129,12 @@ const Header = () => {
             </span>
             <span className="font-bold tracking-tight text-white/90 group-hover:text-paint-yellow transition-colors">040 964 0066</span>
           </a>
-          <div className="flex items-center gap-6">
-            <span className="italic font-medium text-white/70">
-              Pirkanmaan luotettava perheyritys – Laatua kotiisi
+          <a href="mailto:myynti@pintanen.fi" className="flex items-center gap-2 group transition-colors">
+            <span className="bg-accent p-1 rounded group-hover:bg-paint-yellow transition-colors">
+              <Mail className="w-3.5 h-3.5 text-accent-foreground group-hover:text-navy" />
             </span>
-          </div>
+            <span className="font-bold tracking-tight text-white/90 group-hover:text-paint-yellow transition-colors">myynti@pintanen.fi</span>
+          </a>
         </div>
       </div>
 
@@ -279,8 +278,8 @@ const Header = () => {
       </div>
       </div>
 
-      {/* Gradient accent strip */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-accent via-paint-yellow to-accent" aria-hidden="true" />
+      {/* Yksivärinen keltainen raita (tarkastus 12.10.2026: ei kolmiväristä liukuväriä) */}
+      <div className="h-1 w-full bg-paint-yellow" aria-hidden="true" />
 
       {/* Mobile Menu */}
       <AnimatePresence>

@@ -120,11 +120,6 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/katon-puhdistus-pirkanmaa/" className="hover:text-primary-foreground transition-colors">
-                  Katon puhdistus
-                </Link>
-              </li>
-              <li>
                 <Link to="/talon-maalaus-pirkanmaa/" className="hover:text-primary-foreground transition-colors">
                   Talon maalaus
                 </Link>
@@ -210,7 +205,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/60">
           <p>
-            © {new Date().getFullYear()} Pintanen Oy. Kaikki oikeudet pidätetään.{" "}
+            © {new Date().getFullYear()} Pintanen Oy{" · "}
             <Link to="/tietosuoja/" className="underline underline-offset-2 hover:text-primary-foreground transition-colors">
               Tietosuojaseloste
             </Link>

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Ruler, Mountain, Layers, Building2, Wrench as WrenchIcon } from "@/components/icons/BrandIcons";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -20,11 +19,11 @@ import { KOTITALOUSVAHENNYS } from "@/data/company";
 const general = fmtRange(pinnoitusPrices.general.min, pinnoitusPrices.general.max);
 
 const priceFactors = [
-  { icon: Ruler, title: "Katon koko", description: "Isoon kattoon kuluu enemmän maalia ja työtä. Neliöhinta kuitenkin laskee, kun katto kasvaa." },
-  { icon: Mountain, title: "Katon jyrkkyys", description: "Jyrkällä katolla työ on hitaampaa ja turvavälineitä tarvitaan enemmän." },
-  { icon: Layers, title: "Katon muoto", description: "Harjat, jiirit ja läpiviennit lisäävät työtä." },
-  { icon: Building2, title: "Talon korkeus", description: "Korkea talo tarvitsee pidemmät telineet." },
-  { icon: WrenchIcon, title: "Tiilien kunto", description: "Jos tiiliä on paljon rikki, niiden vaihtamiseen menee aikaa." },
+  { title: "Katon koko", description: "Isoon kattoon kuluu enemmän maalia ja työtä. Neliöhinta kuitenkin laskee, kun katto kasvaa." },
+  { title: "Katon jyrkkyys", description: "Jyrkällä katolla työ on hitaampaa ja turvavälineitä tarvitaan enemmän." },
+  { title: "Katon muoto", description: "Harjat, jiirit ja läpiviennit lisäävät työtä." },
+  { title: "Talon korkeus", description: "Korkea talo tarvitsee pidemmät telineet." },
+  { title: "Tiilien kunto", description: "Jos tiiliä on paljon rikki, niiden vaihtamiseen menee aikaa." },
 ];
 
 const offerChecklist = [
@@ -38,15 +37,11 @@ const offerChecklist = [
 const faqItems = [
   {
     question: "Paljonko tiilikaton pinnoitus maksaa?",
-    answer: `Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä ${general}. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Laskurilla saat suuntaa antavan arvion. Tarkan hinnan saat ilmaisen kuntotarkastuksen jälkeen.`,
+    answer: `Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä ${general}. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Laskurilla saat suuntaa antavan arvion. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.`,
   },
+  { question: "Kuinka monta päivää työ kestää?", answer: "Työ kestää yleensä 2–4 päivää katon koon mukaan." },
   {
-    question: "Mitä tiilikaton pinnoituksen hintaan kuuluu?",
-    answer: "Hintaan kuuluu katon pesu painepesulla, rikkinäisten tiilien vaihto uusiin, pohjamaali ja pintamaali ruiskulla sekä siivous. Ahtaat paikat maalaamme telalla tai käsin. Ylimääräisiä kuluja ei tule.",
-  },
-  { question: "Kuinka kauan pinnoitus kestää?", answer: "Työ kestää yleensä 2–4 päivää katon koon mukaan." },
-  {
-    question: "Kuinka pitkään pinnoitus kestää käytössä?",
+    question: "Kuinka pitkään pinnoitettu katto kestää?",
     answer: "Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Kesto riippuu säästä ja katon kunnosta.",
   },
   {
@@ -55,7 +50,7 @@ const faqItems = [
   },
   {
     question: "Paljonko katon huoltomaalaus maksaa?",
-    answer: `Katon huoltomaalaus on sama työ kuin tiilikaton pinnoitus: pesu, rikkinäisten tiilien vaihto ja maalaus korkeapaineruiskulla kahteen kertaan. Hinta on yleensä ${general}.`,
+    answer: `Katon huoltomaalaus on sama työ kuin tiilikaton pinnoitus. Hinta on yleensä ${general}.`,
   },
   {
     question: "Pinnoitatteko Ormax-tiilikattoja?",
@@ -63,7 +58,7 @@ const faqItems = [
   },
   {
     question: "Voiko pinnoituksen tehdä, jos tiiliä on rikki?",
-    answer: "Yksittäiset rikkinäiset tiilet vaihdetaan uusiin. Laajat rakenteelliset vauriot edellyttävät muuta ratkaisua.",
+    answer: "Yksittäiset rikkinäiset tiilet vaihdetaan uusiin. Rakenteiden vaurioita pinnoitus ei korjaa.",
   },
   { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme katon ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sähkö ja vesipiste ovat käytettävissä." },
   {
@@ -112,12 +107,12 @@ const HinnatTiilikalonPinnoitus = () => {
         lead={
           <>
             Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu
-            katon koosta, jyrkkyydestä, muodosta ja tiilien kunnosta. Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan saat, kun
-            käymme katsomassa katon. Käynti on ilmainen.
+            katon koosta, jyrkkyydestä, muodosta ja tiilien kunnosta. Tarkan hinnan saat, kun käymme katsomassa katon. Arviokäynti on
+            ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta laskurilla" }}
-        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
         trust="pinnoitus"
         image={{ base: HERO_BASE.pinnoitusHinta, alt: "Tiilikaton pesu ja sammaleenpoisto käynnissä" }}
         badge={null}
@@ -126,6 +121,7 @@ const HinnatTiilikalonPinnoitus = () => {
 
       {/* Hintaesimerkit: samat kortit kuin palvelu- ja kaupunkisivuilla */}
       <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" calculatorHref="/hintalaskuri/?palvelu=pinnoitus" calculatorLabel="Laske oman kattosi hinta" />
+      <KotitalousVahennys defaultVariant="d" />
 
       <CalculatorCta service="pinnoitus" />
 
@@ -136,7 +132,7 @@ const HinnatTiilikalonPinnoitus = () => {
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={pinnoitusPrices.includes}
-              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Ennen tarjousta tarkistamme tiilet, aluskatteen ja läpiviennit. Katto maalataan korkeapaineruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Saat työlle 5 vuoden kirjallisen takuun. Hinnat sisältävät arvonlisäveron 25,5 %."
+              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Ennen tarjousta tarkistamme tiilet, aluskatteen ja läpiviennit. Saat työlle 5 vuoden kirjallisen takuun. Hinnat sisältävät arvonlisäveron 25,5 %."
             />
           </div>
         </div>
@@ -150,17 +146,15 @@ const HinnatTiilikalonPinnoitus = () => {
         </div>
       </section>
 
-      <KotitalousVahennys />
-
       {/* Pinnoitus vai uusi katto */}
       <section className="section-padding bg-secondary">
         <div className="section-container max-w-4xl mx-auto">
           <PriceSectionHeading
             title="Kannattaako pinnoitus vai uusi katto?"
-            intro="Pinnoitus riittää, jos aluskate ja katon rakenteet ovat kunnossa. Rakenteiden vaurioita pinnoitus ei korjaa. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Kerromme sen kuntotarkastuksessa suoraan. Pienet aluskatteen korjaukset teemme pinnoituksen yhteydessä."
+            intro="Pinnoitus riittää, jos aluskate ja katon rakenteet ovat kunnossa. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Pienet aluskatteen korjaukset teemme pinnoituksen yhteydessä."
           />
           <CompareCards
-            left={{ title: "Tiilikaton pinnoitus", price: general, note: "Suojaa ja uudistaa katon edullisesti" }}
+            left={{ title: "Tiilikaton pinnoitus", price: general, note: "Pesu, uudet tiilet rikkinäisten tilalle ja kaksi kerrosta maalia" }}
             right={{ title: "Kattoremontti", price: "15 000–30 000 €", note: "Koko katon uusiminen rakenteista lähtien" }}
           />
           <p className="text-center mt-8 text-muted-foreground">

@@ -13,7 +13,8 @@ const SEOTextSection = () => {
       <div className="section-container max-w-6xl mx-auto space-y-16">
         <div className="max-w-4xl mx-auto">
           <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-6">Maalausliike ja kattomaalari Pirkanmaalla</h2>
-          <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
+          {/* Kaksi palstaa työpöydällä (tarkastus 12.10.2026): tekstiseinä ei ole yhtä raskas lukea. */}
+          <div className="md:columns-2 md:gap-10 text-foreground/80 leading-relaxed text-base [&>p]:mb-5 [&>p]:break-inside-avoid">
             <p>
               <strong className="text-foreground">Pintanen Oy</strong> on perheyritys, jonka perustivat veljekset Eerik ja Eemil Pitkänen.
               Pinnoitamme tiilikattoja ja maalaamme talojen ulkoseiniä omakotitaloihin, paritaloihin ja mökkeihin. Teemme työn itse, annamme
@@ -73,7 +74,7 @@ const SEOTextSection = () => {
             <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
               <p>
                 Maali suojaa puuta sateelta ja auringolta. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat
-                kohdat ja maalaamme pintamaalin pensselillä. Suojaamme terassit ja ikkunat huolellisesti.
+                kohdat ja maalaamme pintamaalin pensselillä. Suojaamme terassit ja ikkunat.
               </p>
               <p>
                 Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja annamme työlle{" "}

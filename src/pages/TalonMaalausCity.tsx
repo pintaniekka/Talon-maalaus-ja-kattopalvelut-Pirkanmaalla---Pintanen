@@ -18,6 +18,7 @@ import { getMaalausCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
 import { maalausPrices } from "@/data/prices";
 import { maalausLyhyesti, MAALAUS_HINTA } from "@/data/tyovaiheet";
+import { getTestimonialsByCity } from "@/data/testimonialsData";
 
 /**
  * Talon maalauksen kaupunkisivu. Sama tiivistetty järjestys kuin pinnoituksen kaupunkisivulla.
@@ -50,16 +51,15 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         }
         lead={
           <>
-            Maalaamme taloja {cityData.cityIn}. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat kohdat ja
-            maalaamme pintamaalin pensselillä. Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>. Arviokäynti
-            on ilmainen.
+            Maalaamme puutaloja {cityData.cityIn}. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Hinta on yleensä{" "}
+            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja takuu on 2 vuotta. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
         secondary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
         trust="maalaus"
         image={{ base: heroBase, alt: ownPhoto ? `Maalaamamme talo ${cityData.cityIn}` : "Tummansininen puutalo ulkomaalauksen jälkeen" }}
-        badge={{ title: "Yrittäjä itse tikkailla", text: "Eemil maalaa ja vastaa jäljestä." }}
+        badge={{ title: "Eemil tekee työn", text: "Maalaa itse ja vastaa jäljestä." }}
         breadcrumbs={crumbs}
       />
 
@@ -86,8 +86,8 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}
       />
-      <ReviewsTeaser citySlug={cityData.slug} category="seina" />
-      <ServiceContactSection variant="maalaus" cityName={cityName} cityGenitive={cityData.cityGenitive} />
+      {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}
+      <ServiceContactSection variant="maalaus" />
       <CityNeighborLinks city={cityData} service="maalaus" />
     </div>
   );

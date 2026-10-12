@@ -1,22 +1,14 @@
-import { Check } from "lucide-react";
-import { Award, Users, Target } from "@/components/icons/BrandIcons";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import SEO from "@/components/SEO";
 import { generalFAQ } from "@/data/faqData";
 import { HERO_BASE, staticSeo } from "@/data/seo";
-import { LUVUT, TAKUU, TOIMINTA_ALUE } from "@/data/company";
+import { LUVUT, TAKUU, TOIMINTA_ALUE, VASTAUSLUPAUS } from "@/data/company";
 import { getStorageUrl } from "@/lib/storage";
 
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
 const eemilImage = getStorageUrl("Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp");
-
-const values = [
-  { icon: Award, title: "Laatu", description: "Pohjatyöt tehdään kunnolla. Siksi maali kestää." },
-  { icon: Users, title: "Suora puhe", description: "Kerromme suoraan, mitä katto tai seinä tarvitsee ja mitä ei." },
-  { icon: Target, title: "Luotettavuus", description: "Pidämme kiinni sovitusta hinnasta ja aikataulusta." },
-];
 
 /** Yksi lukusarja koko sivustolle (V23, korjaus 8). */
 const facts = [
@@ -37,7 +29,8 @@ const faktalaatikko = [
 
 /**
  * Meistä. Yksi totuus yrityksestä (korjaus 8): tamperelainen yritys (Eerikin päätös 5.10. ja 11.10.2026: muuta kotipaikkaa ei mainita), työt Pirkanmaalla ja Kanta-Hämeessä,
- * vain ulkotyöt omakotitaloihin, paritaloihin ja mökkeihin. Tekstit lyhennetty (S27–S29).
+ * vain ulkotyöt omakotitaloihin, paritaloihin ja mökkeihin. Tekstit lyhennetty (S27–S29). Arvomme-kolmikko poistettu ja
+ * ruksilista muutettu kappaleeksi (tarkastus 12.10.2026, T33–T35).
  */
 const Meista = () => {
   const crumbs = [{ name: "Meistä" }];
@@ -71,17 +64,10 @@ const Meista = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Mikä on Pintanen?</h2>
             <div className="space-y-4 text-muted-foreground text-lg">
               <p>
-                Pintanen on nuori tamperelainen perheyritys. Teemme töitä Pirkanmaalla ja Kanta-Hämeessä. Yritys on uusi, mutta
-                olemme molemmat tehneet tätä työtä yli viisi vuotta.
+                Me olemme veljekset Eerik ja Eemil. Eerik teki kattoja ja Eemil seiniä. Perustimme yhteisen firman Tampereelle. Firma on
+                uusi, mutta olemme molemmat tehneet tätä työtä yli viisi vuotta.
               </p>
-              <p>
-                Me olemme veljekset <strong className="text-foreground">Eerik ja Eemil</strong>. Eerik hoitaa tiilikatot ja Eemil seinät. Kun katto-
-                ja seinäosaaminen yhdistyivät, syntyi Pintanen.
-              </p>
-              <p>
-                Meillä ei ole välikäsiä eikä toimistoa. Siksi hinta on kohtuullinen ja tiedät aina, kuka työn tekee. Sama henkilö, joka antaa
-                tarjouksen, tulee myös tekemään työn.
-              </p>
+              <p>Meillä ei ole toimistoa. Soitat suoraan Eerikille tai Eemilille.</p>
             </div>
           </div>
         </div>
@@ -131,45 +117,13 @@ const Meista = () => {
 
       <section className="section-padding bg-secondary">
         <div className="section-container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Arvomme</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {values.map((value) => (
-              <div key={value.title} className="card-elevated text-center bg-card">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="font-bold text-foreground mb-2">{value.title}</h3>
-                <p className="text-sm text-muted-foreground">{value.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding bg-background">
-        <div className="section-container">
           <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-6">Miksi tilata meiltä?</h2>
-              <div className="space-y-3">
-                {[
-                  "Yrittäjät tekevät työn itse",
-                  "Kirjallinen takuu kaikille töille",
-                  "Ilmainen arviokäynti",
-                  "Kiinteä hinta tarjouksessa",
-                  "Nopea vastaus yhteydenottoihin",
-                  "Siivoamme aina jälkemme",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-3 p-3 bg-card rounded-xl">
-                    <div className="w-6 h-6 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-accent-ink" />
-                    </div>
-                    <span className="text-foreground">{item}</span>
-                  </div>
-                ))}
-              </div>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Eerik ja Eemil tekevät työn itse. Arviokäynti on ilmainen, ja tarjouksessa on kiinteä hinta. Työlle annamme kirjallisen
+                takuun. {VASTAUSLUPAUS} Lopuksi siivoamme jälkemme.
+              </p>
             </div>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-6">Faktat</h2>

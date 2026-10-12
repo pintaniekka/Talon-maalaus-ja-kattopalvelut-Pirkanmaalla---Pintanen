@@ -3,13 +3,13 @@ import ReviewCard from "@/components/ReviewCard";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
 import { HERO_BASE, staticSeo } from "@/data/seo";
-import { allTestimonials, REVIEW_COUNT, type TestimonialCategory } from "@/data/testimonialsData";
+import { allTestimonials, matchesCategory, REVIEW_COUNT, type TestimonialCategory } from "@/data/testimonialsData";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 
+/** Kaksi ryhmää Eerikin luokittelulla (12.10.2026). Ei "muut"-ryhmää: jokainen arvostelu kuuluu kattoon, seiniin tai molempiin. */
 const groups: { category: TestimonialCategory; title: string; intro: string }[] = [
-  { category: "katto", title: "Tiilikaton pinnoitus", intro: "Nämä asiakkaat teettivät meillä tiilikaton pinnoituksen. Eerik teki työn itse." },
-  { category: "seina", title: "Talon maalaus", intro: "Nämä asiakkaat teettivät meillä talon ulkomaalauksen. Eemil maalasi itse." },
-  { category: "yleinen", title: "Muut arvostelut", intro: "Arvosteluja, joissa työtä ei ole eritelty." },
+  { category: "katto", title: "Tiilikaton pinnoitus", intro: "Nämä asiakkaat teettivät meillä tiilikaton pinnoituksen. Osalla maalasimme samalla myös seinät." },
+  { category: "seina", title: "Talon maalaus", intro: "Nämä asiakkaat teettivät meillä talon ulkomaalauksen. Osalla pinnoitimme samalla myös katon." },
 ];
 
 const crumbs = [{ name: "Kokemuksia" }];
@@ -42,7 +42,7 @@ const Kokemuksia = () => {
       />
 
       {groups.map((g, gi) => {
-        const reviews = allTestimonials.filter((t) => t.category === g.category);
+        const reviews = allTestimonials.filter((t) => matchesCategory(t, g.category));
         if (reviews.length === 0) return null;
         return (
           <section key={g.category} className={`section-padding ${gi % 2 === 1 ? "bg-secondary" : "bg-background"}`}>

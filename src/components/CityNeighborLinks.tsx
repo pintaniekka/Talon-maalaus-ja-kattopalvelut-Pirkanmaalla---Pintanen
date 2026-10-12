@@ -61,12 +61,13 @@ const CityNeighborLinks = ({ city, service }: { city: CityData; service: Service
               Katso myös:{" "}
               <Link to={c.other.href(city.slug)} className="text-accent-ink underline font-medium">
                 {c.other.label(city)}
-              </Link>{" "}
-              ja{" "}
+              </Link>
+              .{" "}
             </>
           )}
+          Kaikki palvelumme {city.cityIn}:{" "}
           <Link to={`/maalauspalvelut-${city.slug}/`} className="text-accent-ink underline font-medium">
-            {c.other.has(city.slug) ? "kaikki palvelumme" : "Kaikki palvelumme"} {city.cityIn}
+            Maalausliike ja kattopalvelut {city.name}
           </Link>
           .
         </p>

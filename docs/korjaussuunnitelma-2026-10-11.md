@@ -133,6 +133,15 @@ Pieniä muutoksia: titlet, H1:n lisäsana ja linkkien ankkurit. Ei tekstien uude
 
 **Mittari:** `/tiilikaton-pinnoitus-tampere/` sijainti 45 → alle 15; "katon maalaus tampere" 55 → 30; "julkisivumaalaus tampere" 26 → alle 10; sivuja per haku 1,56 → 1,2.
 
+### Toteutus 12.10.2026
+
+Haara `claude/vaihe-3-sivuroolit`. Tehty:
+
+- **3A titlet ja H1:** aluesivut "Maalausliike ja kattopalvelut <Kunta>" (title, H1, eyebrow ja Service-schema). Pinnoituksen kaupunkisivut "Tiilikaton pinnoitus ja maalaus <Kunta> | Pintanen": hinta siirtyi pois titlestä (se on kuvauksessa), jotta "maalaus" mahtuu alle 60 merkin. Maalauksen kaupunkisivut saavat "ulkomaalaus ja julkisivumaalaus" -muodon, kun koko title on enintään 66 merkkiä (Tampere, Nokia, Forssa, Akaa, Kihniö, Urjala, Virrat); pidemmillä kuntanimillä jää "ulkomaalaus". Hintalaskuri "Hintalaskuri: tiilikaton pinnoitus ja talon maalaus". Kolme yli 160 merkin kuvausta lyhennetty.
+- **3B linkitys:** etusivun tekstiosiosta linkit "tiilikaton pinnoitus Tampere" ja "talon maalaus Tampere"; palvelusivuilta takaisin aluesivulle ankkurilla "Maalausliike ja kattopalvelut <Kunta>"; hubit → hintasivut ("tiilikaton pinnoituksen hinta", "talon maalauksen hinta") ja hintasivut → hubit ("tiilikaton pinnoitus Pirkanmaalla", "talon maalaus Pirkanmaalla"); footerin "Ulkomaalaus" → "Talon maalaus". Aluesivu ↔ palvelusivut oli jo täsmäankkureilla.
+- **Ei tehty:** puhdistussivujen linkit (Eerikin päätös: palvelu loppunut); artikkelilinkit kuntasivuille (artikkeleissa ei mainita kuntia); sivukohtainen "Päivitetty"-päivä gitistä (vaatii oman toteutuksen, siirretty myöhemmäksi).
+- Havainto vaiheeseen 4: pinnoituksen hintasivulla on lause "eikä kattoremontteja tehdä meillä" ("emme tee" -lause), korjataan 4A:n yhteydessä.
+
 ---
 
 ## Vaihe 4: Sisältö (tekstimuutokset datatiedostoihin, Eerikin ok)

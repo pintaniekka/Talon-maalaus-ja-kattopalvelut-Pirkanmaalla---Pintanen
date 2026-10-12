@@ -156,6 +156,10 @@ const HinnatTiilikalonPinnoitus = () => {
             <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto/" className="text-primary font-semibold hover:underline">
               milloin tiilikatto pitää pinnoittaa
             </Link>
+            . Työn vaiheet kerromme sivulla{" "}
+            <Link to="/tiilikaton-pinnoitus-pirkanmaa/" className="text-primary font-semibold hover:underline">
+              tiilikaton pinnoitus Pirkanmaalla
+            </Link>
             .
           </p>
         </div>

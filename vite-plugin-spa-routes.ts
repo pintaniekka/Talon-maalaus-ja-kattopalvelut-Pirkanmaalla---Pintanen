@@ -71,6 +71,22 @@ export const applySeo = (html: string, routePath: string, seo: RouteSeo): string
 const EMPTY_ROOT = '<div id="root"></div>';
 
 /**
+ * Fonttien preload (vaihe 5A, CLS): neljä käytettyä woff2-tiedostoa (Open Sans 400/600, Montserrat 700/800)
+ * löytyvät dist/assets-kansiosta hash-nimillä vasta buildin jälkeen. Palauttaa link-tagit tai tyhjän.
+ */
+export const fontPreloadTags = (distDir: string): string => {
+  const assetsDir = path.join(distDir, "assets");
+  if (!fs.existsSync(assetsDir)) return "";
+  const wanted = /^(open-sans-latin-(400|600)-normal|montserrat-latin-(700|800)-normal)\.[\w-]+\.woff2$/;
+  return fs
+    .readdirSync(assetsDir)
+    .filter((f) => wanted.test(f))
+    .sort()
+    .map((f) => `<link rel="preload" as="font" type="font/woff2" href="/assets/${f}" crossorigin />`)
+    .join("\n    ");
+};
+
+/**
  * Jonossa oleva artikkeli: hakemisto luodaan, mutta sivu on noindex eikä sillä ole
  * canonicalia ennen julkaisupäivää, jottei Google indeksoi tyhjää kuorta.
  */
@@ -124,7 +140,11 @@ export default function spaRoutes() {
 
       if (!fs.existsSync(indexPath)) return;
 
-      const baseHtml = applyAreaServed(fs.readFileSync(indexPath, "utf-8"));
+      const fontTags = fontPreloadTags(distDir);
+      const baseHtml = applyAreaServed(fs.readFileSync(indexPath, "utf-8")).replace(
+        "</title>",
+        () => `</title>${fontTags ? `\n    ${fontTags}` : ""}`,
+      );
       const subpageHtml = baseHtml.replace(HOME_ONLY_TAG, "");
       const routes = getAllRoutePaths();
       let withSeo = 0;

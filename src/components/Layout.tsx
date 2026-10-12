@@ -29,9 +29,15 @@ const Layout = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
+      <a
+        href="#sisalto"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-card focus:text-foreground focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        Siirry sisältöön
+      </a>
       <Header />
       {/* Puhelimella footerin viimeinen rivi jäisi kiinteän alapalkin alle ilman alatäytettä. */}
-      <main className={`flex-1 ${lomakesivu ? "" : "pb-[5.25rem] lg:pb-0"}`}>
+      <main id="sisalto" tabIndex={-1} className={`flex-1 outline-none ${lomakesivu ? "" : "pb-[5.25rem] lg:pb-0"}`}>
         <Outlet />
       </main>
       <Footer />

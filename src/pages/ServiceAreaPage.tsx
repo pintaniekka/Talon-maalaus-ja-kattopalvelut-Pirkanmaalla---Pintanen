@@ -140,7 +140,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         <div className="section-container">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3">Palvelut {cityIn}</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Valitse palvelu, niin näet hinnan, työvaiheet ja paikkakunnan tiedot.</p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Etsitkö maalaria tai kattourakoitsijaa {cityIn}? Valitse palvelu, niin näet hinnan, työvaiheet ja paikkakunnan tiedot.</p>
           </div>
 
           <div className={`grid gap-6 max-w-5xl mx-auto ${services.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>

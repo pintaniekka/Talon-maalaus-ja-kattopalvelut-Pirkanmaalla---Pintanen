@@ -47,7 +47,19 @@ const faqItems = [
   { question: "Kuinka kauan pinnoitus kestää?", answer: "Työ kestää yleensä 2–4 päivää katon koon mukaan." },
   {
     question: "Kuinka pitkään pinnoitus kestää käytössä?",
-    answer: "Katto saa pinnoituksesta jopa 15–20 vuotta lisää ikää. Kesto riippuu säästä ja katon kunnosta.",
+    answer: "Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Kesto riippuu säästä ja katon kunnosta.",
+  },
+  {
+    question: "Paljonko tiilikaton pinnoitus maksaa neliöltä?",
+    answer: `Neliöhinta on alkaen 15 €/m². Neliöhinta laskee, kun katto kasvaa, ja siihen vaikuttavat myös jyrkkyys ja tiilien kunto. Omakotitalon katto maksaa yleensä ${general}.`,
+  },
+  {
+    question: "Paljonko katon huoltomaalaus maksaa?",
+    answer: `Katon huoltomaalaus on sama työ kuin tiilikaton pinnoitus: pesu, rikkinäisten tiilien vaihto ja maalaus korkeapaineruiskulla kahteen kertaan. Hinta on yleensä ${general}.`,
+  },
+  {
+    question: "Pinnoitatteko Ormax-tiilikattoja?",
+    answer: "Kyllä. Ormax on yleisin 2000-luvun kattotiili, ja vanhemmissa katoissa on monia eri tiiliprofiileja. Työ ja hinta ovat samat tiilen merkistä riippumatta.",
   },
   {
     question: "Voiko pinnoituksen tehdä, jos tiiliä on rikki?",
@@ -124,7 +136,7 @@ const HinnatTiilikalonPinnoitus = () => {
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={pinnoitusPrices.includes}
-              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Ennen tarjousta tarkistamme tiilet, aluskatteen ja läpiviennit. Katto maalataan ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Saat työlle 5 vuoden kirjallisen takuun."
+              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Ennen tarjousta tarkistamme tiilet, aluskatteen ja läpiviennit. Katto maalataan korkeapaineruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali. Saat työlle 5 vuoden kirjallisen takuun. Hinnat sisältävät arvonlisäveron 25,5 %."
             />
           </div>
         </div>
@@ -145,7 +157,7 @@ const HinnatTiilikalonPinnoitus = () => {
         <div className="section-container max-w-4xl mx-auto">
           <PriceSectionHeading
             title="Kannattaako pinnoitus vai uusi katto?"
-            intro="Pinnoitus riittää, jos aluskate ja katon rakenteet ovat kunnossa. Rakenteiden vaurioita pinnoitus ei korjaa, eikä kattoremontteja tehdä meillä. Pienet aluskatteen korjaukset teemme pinnoituksen yhteydessä."
+            intro="Pinnoitus riittää, jos aluskate ja katon rakenteet ovat kunnossa. Rakenteiden vaurioita pinnoitus ei korjaa. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Kerromme sen kuntotarkastuksessa suoraan. Pienet aluskatteen korjaukset teemme pinnoituksen yhteydessä."
           />
           <CompareCards
             left={{ title: "Tiilikaton pinnoitus", price: general, note: "Suojaa ja uudistaa katon edullisesti" }}

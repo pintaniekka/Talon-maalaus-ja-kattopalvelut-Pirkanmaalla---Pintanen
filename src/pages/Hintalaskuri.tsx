@@ -57,7 +57,7 @@ const Hintalaskuri = () => {
             <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mt-10">
               {testimonials.map((t) => (
                 <figure key={t.name} className="bg-primary/70 rounded-2xl p-5 text-primary-foreground">
-                  <div className="flex gap-0.5 mb-2" aria-label={`${t.stars} tähteä`}>
+                  <div className="flex gap-0.5 mb-2" role="img" aria-label={`${t.stars} tähteä viidestä`}>
                     {Array.from({ length: t.stars }).map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-paint-yellow text-paint-yellow" />
                     ))}

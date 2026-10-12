@@ -80,8 +80,9 @@ const Tietosuoja = () => (
           palveluntarjoajia, jotka käsittelevät tietoja puolestamme:
         </p>
         <ul className="list-disc pl-6 space-y-1">
-          <li>sähköpostin välityspalvelu, jolla lomakkeen tiedot toimitetaan myyntiimme</li>
-          <li>asiakashallintajärjestelmämme, johon tarjouspyynnöt tallennetaan käsittelyä varten</li>
+          <li>sähköpostin välityspalvelu (Resend, Yhdysvallat; sertifioitu EU:n ja Yhdysvaltojen tietosuojakehyksessä, Data Privacy Framework), jolla lomakkeen tiedot toimitetaan myyntiimme</li>
+          <li>asiakashallintajärjestelmämme, johon tarjouspyynnöt tallennetaan käsittelyä varten (tietokantapalvelu Supabase)</li>
+          <li>WhatsApp (Meta Platforms Ireland Limited), jos otat yhteyttä WhatsApp-viestillä; viesti kulkee WhatsAppin omien ehtojen mukaan</li>
           <li>sivuston julkaisualustan, lomakkeiden käsittelyn ja sisällönjakeluverkon palveluntarjoaja (Cloudflare)</li>
           <li>kävijätilastojen palveluntarjoaja (Google Analytics, Google Ireland Limited), jos olet hyväksynyt analytiikkaevästeet</li>
         </ul>

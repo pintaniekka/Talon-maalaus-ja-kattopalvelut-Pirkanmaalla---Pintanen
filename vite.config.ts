@@ -36,11 +36,9 @@ export default defineConfig(() => ({
             '@radix-ui/react-tabs',
             '@radix-ui/react-toast',
             '@radix-ui/react-tooltip',
-            'recharts',
-            'cmdk',
-            'vaul',
-            'embla-carousel-react',
           ],
+          // recharts, cmdk, vaul ja embla eivät ole vendor-ui-paketissa (vaihe 5, 12.10.2026): käyttämättöminä
+          // ne karsiutuvat kokonaan, käytettyinä ne latautuvat vain sivulla, joka niitä tarvitsee.
         },
       },
     },

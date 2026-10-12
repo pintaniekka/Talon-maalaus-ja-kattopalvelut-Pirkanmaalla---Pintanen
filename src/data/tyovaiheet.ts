@@ -79,7 +79,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
 export const pinnoitusLyhyesti = (cityIn?: string): string[] => [
   `Pinnoitamme tiilikattoja ${cityIn ?? "Pirkanmaalla ja lähikunnissa"}.`,
   "Pesemme katon painepesulla ja vaihdamme rikkinäiset tiilet uusiin.",
-  "Maalaamme katon ruiskulla kahteen kertaan: pohjamaali ja pintamaali. Ahtaat paikat telalla tai käsin.",
+  "Maalaamme katon korkeapaineruiskulla kahteen kertaan: pohjamaali ja pintamaali. Ahtaat paikat telalla tai käsin.",
   "Työ kestää yleensä 2–4 päivää, ja työllä on 5 vuoden takuu.",
   `Hinta on yleensä ${PINNOITUS_HINTA}. Työn osuudesta saat kotitalousvähennyksen.`,
   "Kuntotarkastus on ilmainen.",

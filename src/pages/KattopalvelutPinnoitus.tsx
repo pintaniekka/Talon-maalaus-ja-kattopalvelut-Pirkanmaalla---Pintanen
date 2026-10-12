@@ -54,7 +54,7 @@ const KattopalvelutPinnoitus = () => {
         }
         lead={
           <>
-            Pesemme tiilikaton painepesulla ja maalaamme sen ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on
+            Pesemme tiilikaton painepesulla ja maalaamme sen korkeapaineruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on
             yleensä <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja annamme työlle 5 vuoden takuun. Tulemme katsomaan
             kattosi ilmaiseksi.
           </>
@@ -152,9 +152,9 @@ const KattopalvelutPinnoitus = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Tiilikaton maalaus ja pinnoitus ovat sama asia</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Joku hakee tietoa tiilikaton maalauksesta, toinen tiilikaton pinnoituksesta. Nämä kaksi tarkoittavat samaa asiaa: pesemme
-              katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan. Ensin tulee pohjamaali,
-              sitten pintamaali.
+              Joku hakee tietoa tiilikaton maalauksesta tai katon maalauksesta, toinen tiilikaton pinnoituksesta. Nämä tarkoittavat samaa
+              asiaa: pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon korkeapaineruiskulla kahteen kertaan.
+              Ensin tulee pohjamaali, sitten pintamaali.
             </p>
             <p>Käytämme Nowocoatin kattomaaleja.</p>
             <p>

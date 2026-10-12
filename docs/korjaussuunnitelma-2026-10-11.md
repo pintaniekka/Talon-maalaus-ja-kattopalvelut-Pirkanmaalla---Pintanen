@@ -190,6 +190,15 @@ Ei vastata: "peltikaton pinnoitus" (ei markkinoida, ei "emme tee" -lausetta).
 
 Osan 2 skripti `ristiriidat.mjs` kannattaa tuoda repoon testiksi, jos se on tallessa (**kysymys 12**).
 
+### Toteutus 12.10.2026 (haara `claude/vaihe-4-sisalto`, Eerik: "tee kaikki vaiheet esikatseluun")
+
+- 4A: artikkelin otsikko "Tiilikattoremontti vai pinnoitus: kumpi kannattaa?", kattoremontin hinta 15 000–30 000 € artikkeliin, hintasivulle ja yhteiseen UKK:hon lähteineen (`docs/sisallon-lahteet-2026-10-12.md`); Eerikin kattoremontti-lause kaupunkisivujen korttiin, hintasivulle ja UKK:hon; hintasivun "eikä kattoremontteja tehdä meillä" poistettu. UKK "Kannattaako tiilikatto pinnoittaa vai uusia?" yhteiseen FAQ:hin.
+- 4B: "katon maalaus" ja "korkeapaineruiskulla" pinnoituksen palvelusivulle, Lyhyesti-laatikkoon ja UKK:hon; "puutalon maalaus" ja "mökin maalaus" maalaussivulle ja UKK:hon; "maalaria" aluesivujen palveluosioon. "Kattohuolto" ei käytössä.
+- 4C: UKK:t lisätty: hinta kohteelle eikä neliölle (maalauksen hintasivu), kannattaako pinnoitus (pinnoituksen hub), kotitalousvähennys ja paras maalausaika ja mökit (maalaussivut), huoltomaalauksen hinta, Ormax ja alkaen 15 €/m² (pinnoituksen hintasivu, testi sallii vain tämän muodon), puhdistuksen hintavirke 800–2 500 € (puhdistuksen hintasivu). ALV-lause "Hinnat sisältävät arvonlisäveron 25,5 %" pinnoituksen ja maalauksen hintasivuille hintakorttien ulkopuolelle.
+- 4D: "lisää ikää" → "kestää jopa 15–20 vuotta pidempään"; "työn hinnasta" → "työn osuudesta" (kotitalousvähennysartikkeli, päivitetty 12.10.).
+- llms.txt: `<link rel="alternate" type="text/plain">` index.html:ään, rajauslause johdantoon, osio "Usein kysyttyä" (yhteinen, pinnoitus- ja maalaus-UKK).
+- 4E: artikkelijono ennallaan; ensimmäinen artikkeli julkaistaan 13.10. uudella otsikolla.
+
 ### 4E. Artikkelijono
 
 Jonossa: 13.10. Pinnoitus vai uusi katto, 20.10. Tiilikaton pinnoituksen työvaiheet, 27.10. Huoltomaalaus vai uusi ulkoverhous, 3.11. Voiko tiilikaton pinnoittaa itse, 10.11. Tiilikaton puhdistus itse vai ammattilainen. Osa 3 ehdottaa lisäkappaleita artikkeliin "Kuinka usein puutalo maalataan" (talon maalaaminen itse: hinta ja voiko). Lummecolla on kymmeniä artikkeleita; tahti yksi viikossa on CLAUDE.md:n mukainen, ja jono riittää marraskuun puoliväliin. Seuraavat aiheet kannattaa päättää erikseen.
@@ -219,6 +228,12 @@ Syy: neljä web-fonttia (Open Sans 400/600, Montserrat 700/800) vaihtuvat piirro
 4. "Siirry sisältöön" -linkki.
 5. Vaakagalleria näppäimistöllä tavoitettavaksi (`tabindex="0"`, `role="region"`).
 6. `<div aria-label="5 tähteä">` → `role="img"`.
+
+### Toteutus 12.10.2026 (sama haara kuin vaihe 4)
+
+- 5A: `<link rel="preload" as="font">` neljälle woff2-tiedostolle (plugin lukee hash-nimet dist/assets-kansiosta), varafontit "Open Sans Fallback" ja "Montserrat Fallback" Arialista capsize-metriikoilla (size-adjust 105,15 % / 112,83 %). CLS tarkistetaan PageSpeedilla esikatselusta.
+- 5B: kuvasitemappiin kaupunkisivujen kohdekuvat kuvatekstein; `scripts/pakkaa_kuvat.py` pakkaisi WebP-kuvat laatuun 75, mutta kuiva ajo 12.10. ei löytänyt yhtään kuvaa, joka pienenisi 10 %: kuvat ovat jo pakattu (25,4 MB yhteensä), joten kuvia ei muutettu. Heron `sizes` tarkistettu (34vw on oikein). Käyttämättömiä kuvia ei poisteta.
+- 5C: `inert` arvosteluseinän kopioihin, `--accent-ink` #0091eb → #007bc7 (4,5:1 valkoisella), leipätekstin linkit alleviivattu (`main p a`), "Siirry sisältöön" -linkki, vieritettävät arvostelulistat näppäimistöllä (`role="region"`, `tabindex="0"`), tähtirivi `role="img"`. vendor-ui-paketista pois recharts, cmdk, vaul ja embla.
 
 ### 5D. Ei tehdä nyt
 
@@ -257,6 +272,10 @@ Cloudflare Web Analytics on kunnossa (tarkistettu). Jäljellä:
 5. **Resendin lokien säilytys:** Eerik tarkistaa Resendin asetuksista.
 6. **Toinen vastaanottaja** liideille (kopio Eerikin omaan osoitteeseen): **kysymys 14.**
 7. **Pyyntörajoitus** `/api/contact`-polulle Cloudflaren WAF-säännöllä (5/min/IP): Eerik tekee Cloudflaren hallinnassa.
+
+### Toteutus 12.10.2026 (sama haara kuin vaihe 4)
+
+- Kohta 3 ja 4: selosteen käsittelijälistaan Resend (Yhdysvallat, DPF-sertifiointi tarkistettu 13.3.2025 changelogista), Supabase (CRM:n tietokanta) ja WhatsApp (Meta Platforms Ireland Limited). Kohta 1: kahden vuoden lupaus pysyy (Eerikin päätös). Kohdat 2, 5 ja 7 ovat Eerikin omia toimia CRM:ssä, Resendissä ja Cloudflaressa; kohta 6 ei tarvita.
 
 ---
 

@@ -15,7 +15,7 @@ const faq = [
   {
     question: "Paljonko pinnoitus maksaa uuteen kattoon verrattuna?",
     answer:
-      "Pinnoitus maksaa selvästi vähemmän kuin uusi katto. Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–7 000 euroa.",
+      "Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–7 000 euroa. Kattoremontti maksaa kattourakoitsijoiden hintasivujen mukaan yleensä 15 000–30 000 euroa.",
   },
   {
     question: "Kuinka monta vuotta pinnoitus antaa katolle lisää?",
@@ -28,7 +28,7 @@ const Body = () => (
     <KeyPoints>
       <ul>
         <li>Jos aluskate ja puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia.</li>
-        <li>Pinnoitus maksaa yleensä 2 850–7 000 euroa, selvästi vähemmän kuin uusi katto.</li>
+        <li>Pinnoitus maksaa yleensä 2 850–7 000 euroa, kattoremontti yleensä 15 000–30 000 euroa.</li>
         <li>Pinnoitus pidentää katon käyttöikää jopa 15–20 vuotta.</li>
         <li>Rakenteiden vaurioita pinnoitus ei korjaa.</li>
       </ul>
@@ -86,10 +86,11 @@ const Body = () => (
       suoraan emmekä suosittele pinnoitusta.
     </p>
 
-    <h2>Paljonko pinnoitus maksaa verrattuna uuteen kattoon?</h2>
+    <h2>Paljonko tiilikattoremontti maksaa verrattuna pinnoitukseen?</h2>
     <p>
-      Kattoremontin hinta vaihtelee paljon. Pieni korjaus voi maksaa noin tuhat euroa ja koko katon uusiminen
-      kymmeniä tuhansia euroja. Hintaan vaikuttavat katon koko, kaltevuus ja materiaali.
+      Omakotitalon kattoremontti maksaa yleensä 15 000–30 000 euroa. Kattourakoitsijoiden omilla hintasivuilla tiilikaton
+      uusimisen hinta on 18 000–30 000 euroa, ja isot rakenteiden korjaukset nostavat hintaa siitä. Hintaan vaikuttavat katon
+      koko, kaltevuus, materiaali ja rakenteiden kunto.
     </p>
     <p>
       Pinnoitus maksaa yleensä selvästi vähemmän kuin uusi katto. Omakotitalon tiilikaton pinnoitus maksaa meillä
@@ -113,7 +114,9 @@ const Body = () => (
     <Sources
       items={[
         { label: "K-Rauta: Tiilikaton asennus", url: "https://www.k-rauta.fi/inspiraatio-ja-ohjeet/rakentaminen/tiilikaton-asennus" },
-        { label: "Summarum: Kattoremontti", url: "https://www.summarum.fi/lainaa/remonttilaina/kattoremontti/" },
+        { label: "Laatukoti: Kattoremontin hinta (15.5.2025)", url: "https://laatukoti.fi/kattoremontti/kattoremontin-hinta/" },
+        { label: "Kattokeskus: Kattoremontin hinta 2026", url: "https://kattokeskus.fi/kattoremontin-hinta/" },
+        { label: "Saneerauspojat: Kattoremontin hintaopas 2026", url: "https://www.saneerauspojat.fi/kattoremontin-hintaopas-2026/" },
       ]}
     />
   </>

@@ -168,6 +168,9 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
         onScroll={handleScroll}
         className="marquee-viewport relative overflow-hidden"
         style={reducedMotion ? { scrollSnapType: "x proximity" } : undefined}
+        role="region"
+        aria-label="Arvostelut, vieritettävä lista"
+        tabIndex={0}
       >
         <div
           className={reducedMotion ? "flex w-max" : "flex w-max animate-marquee"}
@@ -175,7 +178,8 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
         >
           {items.map(({ t, hidden }, i) =>
             hidden ? (
-              <div key={i} aria-hidden="true">
+              // inert: kopioiden "Lue lisää"-napit eivät saa fokusta (axe: fokusoitava sisältö aria-hidden-säiliössä).
+              <div key={i} aria-hidden="true" {...({ inert: "" } as Record<string, string>)}>
                 <TestimonialCard {...t} />
               </div>
             ) : (

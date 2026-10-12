@@ -58,7 +58,7 @@ const faqItems = [
   },
   {
     question: "Voiko pinnoituksen tehdä, jos tiiliä on rikki?",
-    answer: "Yksittäiset rikkinäiset tiilet vaihdetaan uusiin. Rakenteiden vaurioita pinnoitus ei korjaa.",
+    answer: "Yksittäiset rikkinäiset tiilet vaihdetaan uusiin. Jos sinulla on varatiiliä, käytämme niitä. Muuten voit hankkia tiilet itse, tai me haemme ne sovittua lisähintaa vastaan. Rakenteiden vaurioita pinnoitus ei korjaa.",
   },
   { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme katon ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sähkö ja vesipiste ovat käytettävissä." },
   {

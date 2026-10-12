@@ -18,12 +18,8 @@ const MiksiPintanen = () => {
                 hinnan ja hoidamme työn alusta loppuun. Ei välikäsiä.
               </p>
               <p>
-                Eerik pinnoittaa tiilikatot: pesu painepesulla ja maalaus ruiskulla kahteen kertaan. Eemil maalaa talojen ulkoseinät:
-                homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.
-              </p>
-              <p>
-                Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt {TOIMINTA_ALUE}. Arviokäynti on ilmainen. Pinnoitukselle annamme 5
-                vuoden ja maalaukselle 2 vuoden takuun.
+                Eerik pinnoittaa tiilikatot ja Eemil maalaa talojen ulkoseinät. Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt{" "}
+                {TOIMINTA_ALUE}. Takuu: pinnoitus 5 vuotta, maalaus 2 vuotta.
               </p>
               <p className="font-semibold text-primary">– Eerik &amp; Eemil</p>
             </div>

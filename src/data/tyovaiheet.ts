@@ -81,8 +81,8 @@ export const pinnoitusLyhyesti = (cityIn?: string): string[] => [
   "Pesemme katon painepesulla ja vaihdamme rikkinäiset tiilet uusiin.",
   "Maalaamme katon korkeapaineruiskulla kahteen kertaan: pohjamaali ja pintamaali. Ahtaat paikat telalla tai käsin.",
   "Työ kestää yleensä 2–4 päivää, ja työllä on 5 vuoden takuu.",
-  `Hinta on yleensä ${PINNOITUS_HINTA}. Työn osuudesta saat kotitalousvähennyksen.`,
-  "Kuntotarkastus on ilmainen.",
+  `Hinta on yleensä ${PINNOITUS_HINTA}.`,
+  "Arviokäynti on ilmainen.",
 ];
 
 /** "Lyhyesti"-laatikon lauseet maalaukselle (P9). */
@@ -91,7 +91,7 @@ export const maalausLyhyesti = (cityIn?: string): string[] => [
   "Pesemme seinät homepesuaineella ja kaavimme irtoavan maalin.",
   "Pohjamaalaamme paljaat kohdat ja maalaamme pintamaalin pensselillä.",
   "Työ kestää yleensä 3–7 päivää. Takuu on 2 vuotta.",
-  `Hinta on yleensä ${MAALAUS_HINTA}. Työn osuudesta saat kotitalousvähennyksen.`,
+  `Hinta on yleensä ${MAALAUS_HINTA}.`,
   "Arviokäynti on ilmainen.",
 ];
 

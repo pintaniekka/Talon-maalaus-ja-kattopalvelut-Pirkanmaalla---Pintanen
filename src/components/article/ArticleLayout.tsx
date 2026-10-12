@@ -29,7 +29,7 @@ const slugify = (text: string) =>
 const closingNotes: Record<ArticleMeta["category"], ReactNode> = {
   katto: (
     <>
-      Haluatko tietää oman kattosi kunnon? Teemme Pirkanmaalla maksuttoman arviokäynnin ja kerromme suoraan,
+      Haluatko tietää oman kattosi kunnon? Teemme Pirkanmaalla ilmaisen arviokäynnin ja sanomme,
       kannattaako työ tehdä nyt vai vasta myöhemmin. Lue lisää{" "}
       <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoituksesta</Link>, katso{" "}
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">hintaesimerkit</Link> tai soita{" "}
@@ -38,7 +38,7 @@ const closingNotes: Record<ArticleMeta["category"], ReactNode> = {
   ),
   maalaus: (
     <>
-      Mietitkö oman talosi maalausta? Teemme Pirkanmaalla maksuttoman arviokäynnin ja kerromme suoraan, mitä
+      Mietitkö oman talosi maalausta? Teemme Pirkanmaalla ilmaisen arviokäynnin ja sanomme, mitä
       pinta tarvitsee. Lue lisää <Link to="/talon-maalaus-pirkanmaa/">talon maalauksesta</Link>, katso{" "}
       <Link to="/talon-maalaus-hinta-pirkanmaa/">hintaesimerkit</Link> tai soita{" "}
       <a href="tel:+358401642233">040 164 2233</a>.
@@ -46,7 +46,7 @@ const closingNotes: Record<ArticleMeta["category"], ReactNode> = {
   ),
   raha: (
     <>
-      Tarkan hinnan omalle kohteellesi saat maksuttomalla arviokäynnillä Pirkanmaalla. Suuntaa antavan arvion voit
+      Tarkan hinnan omalle kohteellesi saat ilmaisella arviokäynnillä Pirkanmaalla. Suuntaa antavan arvion voit
       laskea itse <Link to="/hintalaskuri/">hintalaskurilla</Link>, tai voit soittaa numeroon{" "}
       <a href="tel:+358409640066">040 964 0066</a>.
     </>

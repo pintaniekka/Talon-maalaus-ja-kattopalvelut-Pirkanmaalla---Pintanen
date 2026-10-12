@@ -308,6 +308,7 @@ Jos 3.11. ollaan alle puolivälissä, painopiste siirtyy arvosteluihin ja mainin
 - **Chatin kupla 25 s** (tehty vaiheessa 1). **Liidiportti pysyy.** **Kiitos-sivu** tehdään, jos siitä on hyötyä: päätetään GA4-datan jälkeen.
 - **Meistä-sivulle ei lisätä** perustamispäivää, vakuutuksia tai rekistereitä.
 - **Titlet "hinta 2027"** pysyvät.
+- **Pinnoituksen kaupunkisivujen title** (Eerik 12.10.): "Tiilikaton pinnoitus ja maalaus <Kunta> | Pintanen". Hinta vain kuvauksessa ja hintakorteissa.
 - **Katon puhdistus on loppunut.** Sivut poistetaan talven aikana (301 pinnoitussivuille). Niille ei lisätä linkkejä vaiheessa 3.
 - **GitHub:** gh-työkalu asennettu; push ja PR vasta Eerikin hyväksynnällä.
 

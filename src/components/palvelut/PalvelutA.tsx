@@ -20,7 +20,7 @@ const kuvaukset: Record<PalveluKey, string> = {
 
 const Fakta = ({ value, label, divider = false }: { value: string; label: string; divider?: boolean }) => (
   <div className={`flex flex-col gap-1 ${divider ? "sm:border-l sm:border-border sm:pl-5" : ""}`}>
-    <span className="font-heading text-xl font-extrabold leading-none text-foreground md:text-2xl">{value}</span>
+    <span className="whitespace-nowrap font-heading text-lg font-extrabold leading-none text-foreground md:text-xl">{value}</span>
     <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
   </div>
 );
@@ -78,7 +78,7 @@ const PalvelutA = () => (
             <div className="flex flex-1 flex-col gap-4 p-6 md:px-8 md:pb-8 md:pt-7">
               <h3 className="font-heading text-2xl font-extrabold leading-[1.15] text-foreground md:text-[26px]">{p.title}</h3>
               <p className="text-base leading-relaxed text-muted-foreground">{kuvaukset[p.key]}</p>
-              <div className="mt-auto flex flex-wrap gap-x-6 gap-y-4 rounded-2xl bg-accent-light/70 px-5 py-4 sm:grid sm:grid-cols-[1.5fr_1fr_1fr] sm:gap-0">
+              <div className="mt-auto flex flex-wrap gap-x-6 gap-y-4 rounded-2xl bg-accent-light/70 px-5 py-4 sm:grid sm:grid-cols-[auto_auto_auto] sm:justify-between sm:gap-0">
                 <Fakta value={p.hinta} label="Hinta yleensä" />
                 <Fakta value={p.takuu} label="Takuu" divider />
                 <Fakta value={p.kesto} label="Kesto" divider />

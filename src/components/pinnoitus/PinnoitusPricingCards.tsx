@@ -48,7 +48,7 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
                 {/* Hinta ilman alennusvaikutelmaa (Eerik 13.10.2026): haarukka isolla, vähennyksen jälkeinen hinta rauhallisesti alla. */}
                 <div className="mb-5">
                   <p className="text-2xl md:text-3xl font-bold text-accent-ink leading-tight">{fmtCardRange(card)}</p>
-                  <p className="text-sm text-muted-foreground mt-1.5">Kotitalousvähennyksen jälkeen {fmtCardAfter(card)}</p>
+                  <p className="text-sm text-muted-foreground mt-1.5">Kotitalousvähennyksen jälkeen <span className="whitespace-nowrap">{fmtCardAfter(card)}</span></p>
                 </div>
 
                 <ul className="space-y-2.5 mb-5 flex-1">

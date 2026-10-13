@@ -87,7 +87,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}
       />
       {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}
-      <ServiceContactSection variant="maalaus" />
+      <ServiceContactSection variant="maalaus" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
       <CityNeighborLinks city={cityData} service="maalaus" />
     </div>
   );

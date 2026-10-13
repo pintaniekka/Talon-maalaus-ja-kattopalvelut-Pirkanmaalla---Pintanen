@@ -241,7 +241,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       <FAQSection items={getAreaFAQ(cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
 
       {ownReviews.length === 0 && <ReviewsTeaser citySlug={citySlug} />}
-      <ServiceContactSection variant="general" />
+      <ServiceContactSection variant="general" cityIn={cityIn} />
 
       <ToimintaAlueetBanner activeCity={citySlug} />
     </div>

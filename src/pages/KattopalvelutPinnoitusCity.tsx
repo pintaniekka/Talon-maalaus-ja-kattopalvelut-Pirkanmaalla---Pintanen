@@ -97,7 +97,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         title={`Usein kysyttyä tiilikaton pinnoituksesta ${cityData.cityIn}`}
       />
       {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
-      <ServiceContactSection variant="katto" />
+      <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
       <CityNeighborLinks city={cityData} service="pinnoitus" />
     </div>
   );

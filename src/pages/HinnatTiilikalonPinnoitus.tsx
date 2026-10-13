@@ -22,7 +22,7 @@ const priceFactors = [
   { title: "Katon koko", description: "Isoon kattoon kuluu enemmän maalia ja työtä. Neliöhinta kuitenkin laskee, kun katto kasvaa." },
   { title: "Katon jyrkkyys", description: "Jyrkällä katolla työ on hitaampaa ja turvavälineitä tarvitaan enemmän." },
   { title: "Katon muoto", description: "Harjat, jiirit ja läpiviennit lisäävät työtä." },
-  { title: "Talon korkeus", description: "Korkea talo tarvitsee pidemmät telineet." },
+  { title: "Talon korkeus", description: "Jyrkällä tai korkealla katolla työ on hitaampaa." },
   { title: "Tiilien kunto", description: "Jos tiiliä on paljon rikki, niiden vaihtamiseen menee aikaa." },
 ];
 
@@ -132,7 +132,7 @@ const HinnatTiilikalonPinnoitus = () => {
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={pinnoitusPrices.includes}
-              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Ennen tarjousta tarkistamme tiilet, aluskatteen ja läpiviennit. Saat työlle 5 vuoden kirjallisen takuun. Hinnat sisältävät arvonlisäveron 25,5 %."
+              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Ennen tarjousta tarkistamme katon, aluskatteen ja ympäristön. Saat työlle 5 vuoden kirjallisen takuun. Hinnat sisältävät arvonlisäveron 25,5 %."
             />
           </div>
         </div>

@@ -19,7 +19,7 @@ export const reviewCases: ReviewCase[] = [
   {
     name: "Jukka Peurala",
     city: "tampere",
-    story: "Sade uhkasi, ja työ piti keskeyttää hetkeksi. Sateen jälkeen katto maalattiin loppuun.",
+    story: "Sade uhkasi, ja työ piti keskeyttää hetkeksi. Sateen jälkeen katto maalattiin loppuun. Katosta tuli kuin uusi.",
     before: "harmaa-tiilikatto-ennen-pinnoitusta-tampere",
     after: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-tampere",
   },

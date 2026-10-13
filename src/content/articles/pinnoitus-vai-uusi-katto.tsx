@@ -82,7 +82,7 @@ const Body = () => (
       <li>tiiliä on rikki niin paljon, ettei niitä kannata vaihtaa.</li>
     </ul>
     <p>
-      Siksi tarkistamme ennen tarjousta aina myös aluskatteen ja läpiviennit. Jos vauriot ovat isoja, sanomme sen
+      Siksi tarkistamme ennen tarjousta aina katon, aluskatteen ja ympäristön. Jos vauriot ovat isoja, sanomme sen
       suoraan emmekä suosittele pinnoitusta.
     </p>
 

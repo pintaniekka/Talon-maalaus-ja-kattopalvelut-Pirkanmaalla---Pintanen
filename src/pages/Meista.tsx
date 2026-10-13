@@ -10,12 +10,12 @@ import { getStorageUrl } from "@/lib/storage";
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
 const eemilImage = getStorageUrl("Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp");
 
-/** Yksi lukusarja koko sivustolle (V23, korjaus 8). */
+/** Yksi lukusarja koko sivustolle (V23, korjaus 8). Eerik 13.10.2026: 130 + 80 riittää, ei erikseen 200; arvosana on jo herossa. */
 const facts = [
-  { number: LUVUT.kohteet, label: "kohdetta" },
   { number: LUVUT.pinnoitetutKatot, label: "pinnoitettua kattoa" },
   { number: LUVUT.maalatutTalot, label: "maalattua taloa" },
-  { number: "2–5 v", label: "takuu työlle" },
+  { number: `${LUVUT.kokemusVuotta} vuotta`, label: "kokemusta molemmilla" },
+  { number: "5 v / 2 v", label: "takuu: katto / seinät" },
 ];
 
 const faktalaatikko = [
@@ -48,7 +48,7 @@ const Meista = () => {
         lead={
           <>
             Pintanen on perheyritys, joka toimii Pirkanmaalla ja Kanta-Hämeessä. <strong className="text-foreground">Eerik pinnoittaa tiilikatot</strong>{" "}
-            ja <strong className="text-foreground">Eemil maalaa talot</strong>. Ei välikäsiä eikä alihankkijoita.
+            ja <strong className="text-foreground">Eemil maalaa talot</strong>. Ei välikäsiä.
           </>
         }
         primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
@@ -64,10 +64,10 @@ const Meista = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Mikä on Pintanen?</h2>
             <div className="space-y-4 text-muted-foreground text-lg">
               <p>
-                Me olemme veljekset Eerik ja Eemil. Eerik teki kattoja ja Eemil seiniä. Perustimme yhteisen firman Tampereelle. Firma on
+                Me olemme veljekset Eerik ja Eemil. Eerik teki kattoja ja Eemil seiniä. Perustimme yhteisen yrityksen Tampereelle. Yritys on
                 uusi, mutta olemme molemmat tehneet tätä työtä yli viisi vuotta.
               </p>
-              <p>Meillä ei ole toimistoa. Soitat suoraan Eerikille tai Eemilille.</p>
+              <p>Meillä ei ole välikäsiä eikä raskasta kulurakennetta. Soitat suoraan Eerikille tai Eemilille.</p>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@ const Meista = () => {
                 <h3 className="text-xl font-bold text-foreground mb-2">Eemil maalaa talojen ulkoseinät</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Eemil pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat kohdat ja maalaa pintamaalin pensselillä.
-                  Takuu on 2 vuotta.
+                  Seinillä on aina kaksi maalaria: Eemil ja hänen vakituinen työparinsa. Eemil vastaa työstä alusta loppuun. Takuu on 2 vuotta.
                 </p>
               </div>
             </div>

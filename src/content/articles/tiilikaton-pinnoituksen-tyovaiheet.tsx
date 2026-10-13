@@ -40,8 +40,8 @@ const Body = () => (
 
     <h2>1. Ilmainen kuntotarkastus ja tarjous</h2>
     <p>
-      Tulemme ensin katsomaan katon. Käynti on ilmainen. Tarkistamme tiilet ja aina myös aluskatteen ja
-      läpiviennit. Pienet aluskatteen vauriot korjaamme pinnoituksen yhteydessä. Jos vauriot ovat isoja, kerromme sen
+      Tulemme ensin katsomaan katon. Käynti on ilmainen. Tarkistamme katon, aluskatteen ja ympäristön.
+      Pienet aluskatteen vauriot korjaamme pinnoituksen yhteydessä. Jos vauriot ovat isoja, kerromme sen
       suoraan. Käynnin jälkeen saat tarjouksen.
     </p>
 
@@ -99,7 +99,7 @@ const Body = () => (
       <li>Työn aikana sinun ei ole pakko olla kotona, mutta olet tervetullut katsomaan.</li>
     </ul>
     <p>
-      Tuomme telineet, nostimet ja turvavarusteet mukanamme. Hinnoista kerromme artikkelissa{" "}
+      Katolla työskentelemme turvavaljaissa ja tuomme varusteet mukanamme. Hinnoista kerromme artikkelissa{" "}
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link>. Lue lisää
       palvelusta sivulta <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>

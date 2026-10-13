@@ -91,7 +91,7 @@ export const maalausFAQ: FAQItem[] = [
   {
     question: 'Mitä maalia käytätte?',
     answer:
-      'Valitsemme maalin vanhan maalin ja puun kunnon mukaan. Yleensä käytämme vesiohenteista talomaalia, joskus öljymaalia. Kerromme valinnan tarjouksessa.',
+      'Käytämme pääsääntöisesti Tikkurilan ulkomaaleja. Valitsemme maalin vanhan maalin ja puun kunnon mukaan: yleensä vesiohenteinen talomaali, joskus öljymaali. Kerromme valinnan tarjouksessa.',
   },
   {
     question: 'Milloin on paras aika maalata talo?',
@@ -126,7 +126,7 @@ export const generalFAQ: FAQItem[] = [
   },
   {
     question: 'Tuotteko telineet ja nostimet?',
-    answer: 'Kyllä. Tuomme telineet, nostimet ja turvavaljaat itse. Sinun ei tarvitse vuokrata mitään.',
+    answer: 'Kyllä. Katolla työskentelemme valjailla. Seinillä käytämme telineitä ja usein nostinta. Tuomme kaiken itse, sinun ei tarvitse vuokrata mitään.',
   },
   {
     question: 'Paljonko tiilikaton pinnoitus tai talon maalaus maksaa?',

@@ -18,11 +18,11 @@ export const getLocalCityFaq = (city: CityData, service: ProjectService): FAQIte
     service === "pinnoitus"
       ? {
           question: `Teettekö tiilikaton pinnoituksia ${city.cityIn}?`,
-          answer: `Kyllä. Tulemme ${city.cityTo} katsomaan katon ilmaiseksi, ja saat tarjouksen käynnin jälkeen. Matkasta ei tule lisäkulua.${kuvat}`,
+          answer: `Kyllä. Tulemme ${city.cityTo} katsomaan katon ilmaiseksi, ja saat tarjouksen käynnin jälkeen.${kuvat}`,
         }
       : {
           question: `Teettekö talon maalauksia ${city.cityIn}?`,
-          answer: `Kyllä. Eemil tulee ${city.cityTo} katsomaan talon ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen. Matkasta ei tule lisäkulua.${kuvat}`,
+          answer: `Kyllä. Eemil tulee ${city.cityTo} katsomaan talon ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.${kuvat}`,
         };
   return [paikkakunta, ...yleisetKysymykset(service)];
 };
@@ -31,7 +31,7 @@ export const getLocalCityFaq = (city: CityData, service: ProjectService): FAQIte
  * Eerikin vastaukset 7.10.2026 muotoiltuna. Samat kaikilla paikkakunnilla.
  * Kotona olemisesta (Eerik 7.10.2026): arviokäynnillä pitää olla, tarjous tehdään paikan päällä; työn aikana mieluummin kotona.
  * Karsittu 12.10.2026 (tarkastus): kaupunkisivun UKK on yhdessä faqData.ts:n kanssa enintään 10 kysymystä.
- * Yhteydenoton ajankohta, käynnin nopeus ja kausi ovat yhdessä vastauksessa; matkakulu on paikkakuntakysymyksessä.
+ * Yhteydenoton ajankohta, käynnin nopeus ja kausi ovat yhdessä vastauksessa. Matkakuluista ei sanota mitään (Eerik 13.10.2026).
  */
 const yleisetKysymykset = (service: ProjectService): FAQItem[] => {
   const katto = service === "pinnoitus";

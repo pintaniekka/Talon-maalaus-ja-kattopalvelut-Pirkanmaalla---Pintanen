@@ -29,6 +29,7 @@ const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
                 Olen Eemil. Maalaan talot {paikka} itse alusta loppuun. Olen tehnyt tätä työtä yli viisi vuotta ja maalannut{' '}
                 {LUVUT.maalatutTalot} taloa.
               </p>
+              <p>Seinillä meitä on aina kaksi: minä ja vakituinen työparini. Vastaan työstä alusta loppuun.</p>
               <p>Jos maalin alta löytyy lahoa, kerron siitä sinulle ennen kuin jatkan työtä. Annan työlle 2 vuoden kirjallisen takuun.</p>
             </div>
           </div>

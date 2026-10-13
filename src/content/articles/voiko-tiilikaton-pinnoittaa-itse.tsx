@@ -82,8 +82,8 @@ const Body = () => (
 
     <h2>Onko tiilikaton maalaaminen itse turvallista?</h2>
     <p>
-      Märkä tiilikatto on liukas, ja työ kestää monta päivää. Katolla ei pidä olla ilman turvavarusteita. Me tuomme
-      mukanamme telineet, nostimet ja turvavaljaat.
+      Märkä tiilikatto on liukas, ja työ kestää monta päivää. Katolla ei pidä olla ilman turvavarusteita. Me
+      työskentelemme katolla turvavaljaissa ja tuomme varusteet mukanamme.
     </p>
 
     <h2>Paljonko itse tekemällä säästää?</h2>

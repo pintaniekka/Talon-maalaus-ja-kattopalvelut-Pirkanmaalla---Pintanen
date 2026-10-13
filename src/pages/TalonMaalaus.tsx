@@ -92,7 +92,7 @@ const TalonMaalaus = () => {
       <section className="py-12 md:py-16 bg-background">
         <div className="section-container max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">Talon maalaus paikkakunnittain</h2>
-          <p className="text-muted-foreground mb-6">Maalaamme taloja Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta. Katso oman paikkakuntasi sivu:</p>
+          <p className="text-muted-foreground mb-6">Maalaamme taloja Pirkanmaalla ja lähikunnissa. Katso oman paikkakuntasi sivu:</p>
           <ul className="flex flex-wrap justify-center gap-3">
             {cityLinks.map((c) => (
               <li key={c.slug}>

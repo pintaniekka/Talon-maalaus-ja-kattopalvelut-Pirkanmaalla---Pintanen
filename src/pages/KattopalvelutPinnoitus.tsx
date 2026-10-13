@@ -173,7 +173,7 @@ const KattopalvelutPinnoitus = () => {
         <div className="section-container max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">Tiilikaton pinnoitus paikkakunnittain</h2>
           <p className="text-muted-foreground mb-6">
-            Pinnoitamme tiilikattoja Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta. Katso oman paikkakuntasi sivu:
+            Pinnoitamme tiilikattoja Pirkanmaalla ja lähikunnissa. Katso oman paikkakuntasi sivu:
           </p>
           <ul className="flex flex-wrap justify-center gap-3">
             {cityLinks.map((c) => (

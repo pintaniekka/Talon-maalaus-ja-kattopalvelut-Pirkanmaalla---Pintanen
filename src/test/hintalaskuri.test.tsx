@@ -187,7 +187,7 @@ describe("etusivun hintalaskuri (ChatPriceCalculator)", () => {
 });
 
 describe("/hintalaskuri-sivu", () => {
-  it("näyttää kaksi eri arvostelua (B1) ja uuden johdannon (T39)", () => {
+  it("näyttää neljä eri arvostelua (B1) ja uuden johdannon (T39)", () => {
     render(
       <HelmetProvider>
         <MemoryRouter future={future} initialEntries={["/hintalaskuri/"]}>
@@ -196,8 +196,8 @@ describe("/hintalaskuri-sivu", () => {
       </HelmetProvider>,
     );
     const captions = screen.getAllByText(/· Google-arvostelu$/).map((el) => el.textContent?.replace(/ · Google-arvostelu$/, ""));
-    expect(captions).toHaveLength(2);
-    expect(new Set(captions).size).toBe(2);
+    expect(captions).toHaveLength(4);
+    expect(new Set(captions).size).toBe(4);
     expect(screen.getByText("Laskuri kysyy katon tai talon koon ja kunnon ja antaa hinta-arvion. Tarkan hinnan saat, kun olemme käyneet paikalla.")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2, name: "Mitä haluat laskea?" })).toBeInTheDocument();
   });

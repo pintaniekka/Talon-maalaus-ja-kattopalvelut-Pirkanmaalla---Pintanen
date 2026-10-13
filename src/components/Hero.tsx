@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import PintanenMark from "@/components/icons/PintanenMark";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 
 const heroBase = "/images/Eerik-maalaa/Eerik-maalaa-kattoa";
@@ -12,7 +13,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="hero-critical relative bg-background px-4 pt-28 pb-12 md:px-8 md:pt-32 md:pb-16 flex items-center justify-center"
+      className="hero-critical relative bg-background px-4 pt-28 pb-12 md:px-8 md:pt-32 md:pb-16 xl:pt-40 flex items-center justify-center"
     >
       <div className="relative w-full max-w-[1500px] overflow-hidden rounded-[2.5rem] bg-card shadow-2xl flex flex-col lg:flex-row">
         {/* Content Side */}
@@ -105,10 +106,22 @@ const Hero = () => {
             aria-hidden="true"
           />
 
-          {/* Pieni valkoinen chip kuvan alareunassa (tarkastus 12.10.2026, T2): ei kallistettua tarraa. */}
-          <p className="absolute bottom-4 right-4 lg:bottom-8 lg:right-8 inline-flex items-center rounded-full bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-md">
-            Eerik ja Eemil tekevät työn itse.
-          </p>
+          {/* Punainen, hieman kallistettu tarra (Eerik 13.10.2026: tarrat takaisin). Kuvake on Pintasen oma merkki. */}
+          <div className="absolute bottom-4 right-4 lg:bottom-10 lg:right-10 bg-roof-red text-roof-red-foreground p-4 lg:p-6 rounded-2xl lg:rounded-3xl shadow-2xl rotate-2 max-w-[210px] lg:max-w-[260px]">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 lg:w-11 lg:h-11 bg-white rounded-full shrink-0 flex items-center justify-center text-roof-red">
+                <PintanenMark className="w-6 h-6 lg:w-7 lg:h-7" />
+              </div>
+              <div>
+                <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">
+                  Yrittäjät itse paikalla
+                </p>
+                <p className="text-sm lg:text-base font-heading font-extrabold leading-tight">
+                  Eerik ja Eemil tekevät työn itse.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

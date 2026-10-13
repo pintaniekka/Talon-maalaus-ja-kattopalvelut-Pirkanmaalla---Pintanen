@@ -11,9 +11,9 @@ import { TAKUU, YHTEYSTIEDOT } from "@/data/company";
 /** Kestot samoin kuin "Lyhyesti"-laatikoissa (src/data/tyovaiheet.ts) ja hintasivujen UKK:ssa. */
 export const KESTO = { pinnoitus: "2–4 päivää", maalaus: "3–7 päivää" } as const;
 
-/** Osion johdanto (T6). */
+/** Osion johdanto (T6; Eerik 13.10.2026: "Pirkanmaalla ja lähikunnissa" on selvempi kuin "tunnin säteellä"). */
 export const PALVELUT_INTRO =
-  "Eerik pinnoittaa tiilikatot ja Eemil maalaa talot. Toimimme noin tunnin säteellä Tampereelta. Arviokäynti on ilmainen.";
+  "Eerik pinnoittaa tiilikatot ja Eemil maalaa talot Pirkanmaalla ja lähikunnissa. Arviokäynti on ilmainen.";
 
 /** Katto ja seinät samalla kertaa = edullisempi pakettihinta (UKK:n pohja). */
 export const PAKETTI_KYSYMYS = "Katto ja seinät samalla kertaa?";

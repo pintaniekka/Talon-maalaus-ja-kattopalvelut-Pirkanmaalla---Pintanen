@@ -1,7 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import OptimizedImage from "./OptimizedImage";
 
-
 interface BeforeAfterSliderProps {
   beforeImage: string;
   afterImage: string;
@@ -11,6 +10,14 @@ interface BeforeAfterSliderProps {
   beforeSrcSet?: string;
   afterSrcSet?: string;
 }
+
+/**
+ * Jakoviivan kallistus asteina (Eerik 13.10.2026: pieni kallistus, jotta liukusäädin ei näytä
+ * samalta kuin kaikilla muilla sivustoilla). Ennen-kuva leikataan vinolla monikulmiolla ja viiva
+ * käännetään samaan kulmaan; kahva pysyy pystyssä keskellä.
+ */
+const TILT_DEG = 7;
+const TILT = Math.tan((TILT_DEG * Math.PI) / 180);
 
 const BeforeAfterSlider = ({
   beforeImage,
@@ -23,29 +30,34 @@ const BeforeAfterSlider = ({
 }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  /** Vinon viivan vaakasiirtymä ylä- ja alareunassa pikseleinä (puolet korkeudesta × tan 7°). */
+  const [tiltOffset, setTiltOffset] = useState(0);
   const didDrag = useRef(false);
-
-  const handleMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-    didDrag.current = true;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.touches[0].clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    setSliderPosition(percentage);
-  }, [isDragging]);
-
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const positionFromClientX = useCallback((clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setSliderPosition(Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100)));
+  }, []);
+
+  const handleMove = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      if (!isDragging) return;
+      didDrag.current = true;
+      positionFromClientX(e.touches[0].clientX);
+    },
+    [isDragging, positionFromClientX],
+  );
 
   // Hiirellä vedettäessä seurataan koko ikkunaa: ote ei irtoa, vaikka osoitin
   // karkaa kortin ulkopuolelle. Kosketus toimii elementin omilla tapahtumilla.
   useEffect(() => {
     if (!isDragging) return;
     const onMove = (e: MouseEvent) => {
-      const el = containerRef.current;
-      if (!el) return;
       didDrag.current = true;
-      const rect = el.getBoundingClientRect();
-      setSliderPosition(Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)));
+      positionFromClientX(e.clientX);
     };
     const onUp = () => setIsDragging(false);
     window.addEventListener("mousemove", onMove);
@@ -54,7 +66,19 @@ const BeforeAfterSlider = ({
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
     };
-  }, [isDragging]);
+  }, [isDragging, positionFromClientX]);
+
+  // Kallistuksen siirtymä riippuu kortin korkeudesta, joten se mitataan ja päivitetään koon muuttuessa.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const measure = () => setTiltOffset((el.getBoundingClientRect().height / 2) * TILT);
+    measure();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handlePointerDown = useCallback(() => {
     setIsDragging(true);
@@ -73,9 +97,29 @@ const BeforeAfterSlider = ({
     }
   }, []);
 
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    const step = e.shiftKey ? 10 : 2;
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+      e.preventDefault();
+      setSliderPosition((p) => Math.max(0, p - step));
+    } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+      e.preventDefault();
+      setSliderPosition((p) => Math.min(100, p + step));
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setSliderPosition(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setSliderPosition(100);
+    }
+  }, []);
+
+  // Ennen-kuva näkyy vinon viivan vasemmalla puolella: yläreunassa viiva on hieman oikeampana kuin alareunassa.
+  const clipPath = `polygon(0 0, calc(${sliderPosition}% + ${tiltOffset}px) 0, calc(${sliderPosition}% - ${tiltOffset}px) 100%, 0 100%)`;
+
   return (
     <div
-      className="relative w-full rounded-xl overflow-hidden cursor-ew-resize select-none touch-pan-y bg-muted min-h-[260px] sm:min-h-0"
+      className="relative w-full rounded-2xl overflow-hidden cursor-ew-resize select-none touch-pan-y bg-muted min-h-[260px] sm:min-h-0 shadow-lg"
       style={{ aspectRatio }}
       ref={containerRef}
       onMouseDown={(e) => {
@@ -95,10 +139,7 @@ const BeforeAfterSlider = ({
         draggable={false}
       />
 
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-      >
+      <div className="absolute inset-0 overflow-hidden" style={{ clipPath }}>
         <OptimizedImage
           src={beforeImage}
           srcSet={beforeSrcSet}
@@ -108,22 +149,36 @@ const BeforeAfterSlider = ({
         />
       </div>
 
+      {/* Vino jakoviiva: keltainen, jotta se erottuu sekä sammaleisesta että maalatusta pinnasta. */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-primary-foreground/80"
-        style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
+        className="absolute -top-[5%] -bottom-[5%] w-[3px] bg-paint-yellow shadow-[0_0_0_1px_rgba(10,25,47,0.25)] pointer-events-none"
+        style={{ left: `${sliderPosition}%`, transform: `translateX(-50%) rotate(${TILT_DEG}deg)` }}
+        aria-hidden="true"
+      />
+
+      {/* Kahva: keltainen ympyrä ja tummansiniset nuolet. Näppäimistöllä nuolinäppäimet siirtävät viivaa. */}
+      <div
+        role="slider"
+        tabIndex={0}
+        aria-label="Vertaa ennen ja jälkeen"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(sliderPosition)}
+        aria-valuetext={`Ennen-kuvaa näkyy ${Math.round(sliderPosition)} prosenttia`}
+        onKeyDown={handleKeyDown}
+        className="absolute top-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-paint-yellow text-navy shadow-xl ring-4 ring-white/80 flex items-center justify-center gap-1 focus-visible:outline-none focus-visible:ring-navy"
+        style={{ left: `${sliderPosition}%` }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary-foreground shadow-lg flex items-center justify-center">
-          <div className="flex gap-0.5">
-            <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[6px] border-r-primary" />
-            <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[6px] border-l-primary" />
-          </div>
-        </div>
+        <svg width="22" height="12" viewBox="0 0 22 12" fill="currentColor" aria-hidden="true">
+          <path d="M7 0 1 6l6 6V0Z" />
+          <path d="m15 0 6 6-6 6V0Z" />
+        </svg>
       </div>
 
-      <div className="absolute top-3 left-3 px-3 py-1 rounded-md bg-foreground/70 text-primary-foreground font-semibold text-xs">
+      <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-navy/85 text-navy-foreground font-heading font-extrabold uppercase tracking-[0.14em] text-[11px]">
         Ennen
       </div>
-      <div className="absolute top-3 right-3 px-3 py-1 rounded-md bg-accent-strong/90 text-accent-foreground font-semibold text-xs">
+      <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-paint-yellow text-paint-yellow-foreground font-heading font-extrabold uppercase tracking-[0.14em] text-[11px] shadow-md">
         Jälkeen
       </div>
     </div>

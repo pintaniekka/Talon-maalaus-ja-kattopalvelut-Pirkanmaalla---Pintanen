@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Send, Check, Loader2 } from "lucide-react";
 import { Phone, Mail, User } from "@/components/icons/BrandIcons";
+import PintanenMark from "@/components/icons/PintanenMark";
 import { toast } from '@/hooks/use-toast';
 import { getStorageUrl } from '@/lib/storage';
 import { VASTAUSLUPAUS } from '@/data/company';
@@ -13,6 +14,10 @@ type ContactVariant = 'katto' | 'maalaus' | 'general';
 
 interface ServiceContactSectionProps {
   variant?: ContactVariant;
+  /** Paikkakunta otsikkoon (hakukoneille): "Ota yhteyttä Tampereella" tms. Ilman näitä "Ota yhteyttä". */
+  cityName?: string;
+  cityGenitive?: string;
+  cityIn?: string;
 }
 
 const contactPersons = {
@@ -87,9 +92,10 @@ const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
 
 /**
  * Sivun lopun yhteydenotto: valkoinen lomakekortti ja yrittäjien kortit (tarkastus 12.10.2026, luku 3).
- * Otsikko on sama joka sivulla; paikkakunta ei kuulu otsikkoon (T27).
+ * Paikkakuntasivuilla otsikossa on paikkakunta (Eerik 13.10.2026: takaisin hakukoneita varten);
+ * lomakekortin otsikon vieressä on Pintasen oma merkki.
  */
-const ServiceContactSection = ({ variant = 'general' }: ServiceContactSectionProps) => {
+const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, cityIn }: ServiceContactSectionProps) => {
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -148,6 +154,14 @@ const ServiceContactSection = ({ variant = 'general' }: ServiceContactSectionPro
     }
   };
 
+  const title = cityIn
+    ? `Ota yhteyttä ${cityIn}`
+    : cityGenitive
+    ? `Yhteystiedot ${cityGenitive} alueella`
+    : cityName
+    ? `Yhteystiedot – ${cityName}`
+    : 'Ota yhteyttä';
+
   // General → both Eerik & Eemil. Service-specific → only relevant person.
   const persons = variant === 'general'
     ? [contactPersons.katto, contactPersons.maalaus]
@@ -160,7 +174,7 @@ const ServiceContactSection = ({ variant = 'general' }: ServiceContactSectionPro
     <section id="yhteystiedot" className="section-padding bg-background">
       <div className="section-container">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="heading-style text-3xl md:text-4xl text-foreground mb-4">Ota yhteyttä</h2>
+          <h2 className="heading-style text-3xl md:text-4xl text-foreground mb-4">{title}</h2>
           <p className="text-muted-foreground text-lg">{VASTAUSLUPAUS}</p>
         </div>
 
@@ -171,7 +185,12 @@ const ServiceContactSection = ({ variant = 'general' }: ServiceContactSectionPro
               onSubmit={handleSubmit}
               className="bg-card rounded-2xl p-8 md:p-10 shadow-md border border-border w-full max-w-md h-full flex flex-col"
             >
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 font-heading">Pyydä ilmainen arviokäynti</h3>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent-ink" aria-hidden="true">
+                  <PintanenMark className="h-6 w-6" />
+                </span>
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading">Pyydä ilmainen arviokäynti</h3>
+              </div>
 
               <div className="space-y-4 flex flex-col flex-1">
                 <div className="relative">

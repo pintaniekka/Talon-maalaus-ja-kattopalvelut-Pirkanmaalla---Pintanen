@@ -10,6 +10,19 @@ import WhatsAppIcon from "./WhatsAppIcon";
 
 const logoUrl = getStorageUrl("Pintanen-logo.png");
 
+/**
+ * Keltainen palkki navigaation alla (Eerik 13.10.2026: ohut raita → palkki, jossa on teksti).
+ * Yksi lyhyt lause ja linkki tarjouspyyntöön. Palkki on aina yhden rivin korkuinen (28 px):
+ * puhelimessa näytetään lyhyempi lause, jotta otsikko ei jää palkin alle. Vaihda tekstit tästä.
+ */
+const KAUSIPALKKI = {
+  teksti: "Täytämme nyt kalenteria ensi kauden parhaille maalausajoille.",
+  linkki: "Pyydä ilmainen arviokäynti",
+  /** Puhelimessa koko rivi on linkki. */
+  lyhyt: "Ensi kauden maalausajat täyttyvät – pyydä arviokäynti",
+  to: "/tarjouspyynto/",
+} as const;
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -278,8 +291,18 @@ const Header = () => {
       </div>
       </div>
 
-      {/* Yksivärinen keltainen raita (tarkastus 12.10.2026: ei kolmiväristä liukuväriä) */}
-      <div className="h-1 w-full bg-paint-yellow" aria-hidden="true" />
+      {/* Keltainen kausipalkki (28 px): korvaa ohuen raidan. Työpöydällä lause + linkki, puhelimessa lyhyt linkkirivi. */}
+      <div className="w-full bg-paint-yellow text-paint-yellow-foreground">
+        <p className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto h-7 flex items-center justify-center gap-x-2 text-[13px] sm:text-sm leading-7 font-semibold whitespace-nowrap overflow-hidden">
+          <span className="hidden sm:inline truncate">{KAUSIPALKKI.teksti}</span>
+          <Link to={KAUSIPALKKI.to} className="hidden sm:inline font-extrabold underline underline-offset-4 decoration-2 hover:decoration-navy">
+            {KAUSIPALKKI.linkki}
+          </Link>
+          <Link to={KAUSIPALKKI.to} className="sm:hidden truncate font-extrabold underline underline-offset-4 decoration-2">
+            {KAUSIPALKKI.lyhyt}
+          </Link>
+        </p>
+      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>

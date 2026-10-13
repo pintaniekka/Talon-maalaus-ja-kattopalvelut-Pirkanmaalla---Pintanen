@@ -1,14 +1,16 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import PintanenMark from "@/components/icons/PintanenMark";
 import Breadcrumbs, { type Crumb } from "@/components/Breadcrumbs";
-import { GOOGLE_PROFILE_URL, LUVUT, SITE_UPDATED, paivaFi } from "@/data/company";
+import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 /**
  * Alasivujen hero etusivun mallilla (auditoinnin korjaus 1): valkoinen kortti vaalealla pohjalla,
  * vasemmalle tasattu H1, keltainen pääpainike, luottamusrivi kortin sisällä ja kuva oikealla.
- * Kuvan päällä on pieni valkoinen chip ilman kallistusta (tarkastus 12.10.2026: ei punaista vinotarraa).
+ * Kuvan päällä on punainen, hieman kallistettu tarra Pintasen omalla merkillä (Eerik 13.10.2026: tarrat takaisin).
+ * "Päivitetty pp.kk.vvvv" -riviä ei näytetä (Eerik 13.10.2026).
  * Ei sisääntuloanimaatiota: H1 ja ingressi näkyvät heti, myös ilman JavaScriptiä.
  */
 
@@ -71,8 +73,6 @@ interface PageHeroProps {
   image: PageHeroImage;
   badge?: { title: string; text: string } | null;
   breadcrumbs?: Crumb[];
-  /** Näytetäänkö "Päivitetty pp.kk.vvvv" (P5). Oletus true. */
-  updated?: boolean;
   children?: ReactNode;
 }
 
@@ -94,7 +94,6 @@ const PageHero = ({
   image,
   badge = defaultBadge,
   breadcrumbs,
-  updated = true,
   children,
 }: PageHeroProps) => {
   const trustItems = Array.isArray(trust) ? trust : trustFor(trust);
@@ -102,7 +101,7 @@ const PageHero = ({
   const srcSet = image.srcSet ?? (image.base ? getResponsiveSrcSet(image.base) : undefined);
 
   return (
-    <section className="hero-critical relative bg-background px-4 pt-24 pb-10 md:px-8 md:pt-28 md:pb-14 xl:pt-36 flex flex-col items-center">
+    <section className="hero-critical relative bg-background px-4 pt-24 pb-10 md:px-8 md:pt-28 md:pb-14 xl:pt-40 flex flex-col items-center">
       {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="w-full max-w-[1500px] mb-4" />}
       <div className="relative w-full max-w-[1500px] overflow-hidden rounded-[2.5rem] bg-card shadow-2xl flex flex-col lg:flex-row">
         <div className="relative z-10 w-full lg:w-2/3 p-8 md:p-12 lg:px-16 lg:py-14 xl:px-20 flex flex-col justify-center bg-card">
@@ -169,12 +168,6 @@ const PageHero = ({
               );
             })}
           </div>
-
-          {updated && (
-            <p className="mt-5 text-xs text-muted-foreground">
-              Päivitetty <time dateTime={SITE_UPDATED}>{paivaFi(SITE_UPDATED)}</time>
-            </p>
-          )}
         </div>
 
         <div className="relative w-full lg:w-1/3 min-h-[260px] md:min-h-[340px] lg:min-h-full overflow-hidden bg-muted">
@@ -196,9 +189,16 @@ const PageHero = ({
             aria-hidden="true"
           />
           {badge && (
-            <div className="absolute bottom-4 right-4 lg:bottom-6 lg:right-6 bg-card text-foreground px-4 py-3 rounded-xl shadow-lg max-w-[230px]">
-              <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-muted-foreground mb-1">{badge.title}</p>
-              <p className="text-sm font-heading font-extrabold leading-tight">{badge.text}</p>
+            <div className="absolute bottom-4 right-4 lg:bottom-8 lg:right-8 bg-roof-red text-roof-red-foreground p-4 lg:p-5 rounded-2xl lg:rounded-3xl shadow-2xl rotate-2 max-w-[210px] lg:max-w-[250px]">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 bg-white rounded-full shrink-0 flex items-center justify-center text-roof-red">
+                  <PintanenMark className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">{badge.title}</p>
+                  <p className="text-sm font-heading font-extrabold leading-tight">{badge.text}</p>
+                </div>
+              </div>
             </div>
           )}
         </div>

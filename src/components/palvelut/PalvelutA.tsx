@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import {
-  BTN_OUTLINE,
   BTN_YELLOW,
   LINK_ARROW,
   LINKIT,
@@ -20,18 +19,19 @@ const kuvaukset: Record<PalveluKey, string> = {
 };
 
 const Fakta = ({ value, label, divider = false }: { value: string; label: string; divider?: boolean }) => (
-  <div className={`flex flex-col gap-0.5 ${divider ? "sm:border-l sm:border-border sm:pl-4" : ""}`}>
-    <span className="font-heading font-extrabold text-[17px] leading-tight text-foreground">{value}</span>
+  <div className={`flex flex-col gap-1 ${divider ? "sm:border-l sm:border-border sm:pl-5" : ""}`}>
+    <span className="font-heading text-xl font-extrabold leading-none text-foreground md:text-2xl">{value}</span>
     <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
   </div>
 );
 
 /**
- * Vaihtoehto A (?palvelut=a): kaksi valkoista korttia, kuva ylhäällä ilman liukuväriä, tekijä-chip,
- * kolme faktaa (hinta, takuu, kesto), keltainen "Laske hinta" ja "Lue lisää". Alla pakettihintapalkki.
+ * Vaihtoehto A (?palvelut=a), hiottu 13.10.2026 Eerikin palautteen mukaan ("A on raikkain, mutta vaatii parannusta"):
+ * vaaleansininen osio ja valkoiset kortit, tekijän nimi valkoisena pillerinä kuvan päällä, isommat faktaluvut
+ * (hinta, takuu, kesto) ja alla tummansininen pakettihintapalkki hintasivun laskurinoston tyyliin.
  */
 const PalvelutA = () => (
-  <section id="palvelut" className="section-padding bg-background">
+  <section id="palvelut" className="section-padding bg-accent-light">
     <div className="section-container max-w-6xl">
       <div className="mb-9 grid gap-4 md:grid-cols-2 md:items-end md:gap-12">
         <div className="flex flex-col gap-4">
@@ -48,31 +48,37 @@ const PalvelutA = () => (
 
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         {palvelut.map((p) => (
-          <article key={p.key} className="flex flex-col overflow-hidden rounded-3xl bg-card shadow-[0_10px_30px_rgba(10,25,47,0.08)]">
-            <ResponsiveImage
-              baseName={p.imageBase}
-              alt={p.imageAlt}
-              className="block h-[220px] w-full object-cover sm:h-[260px] lg:h-[250px]"
-              sizes="(max-width: 1023px) 100vw, 560px"
-              width={p.imageWidth}
-              height={p.imageHeight}
-            />
-            <div className="flex flex-col gap-4 p-6 md:px-8 md:pb-8 md:pt-7">
-              <div className="flex items-center gap-2.5">
+          <article
+            key={p.key}
+            className="flex flex-col overflow-hidden rounded-3xl bg-card shadow-[0_14px_40px_rgba(10,25,47,0.10)] ring-1 ring-navy/5"
+          >
+            <div className="relative">
+              <ResponsiveImage
+                baseName={p.imageBase}
+                alt={p.imageAlt}
+                className="block h-[220px] w-full object-cover sm:h-[260px] lg:h-[250px]"
+                sizes="(max-width: 1023px) 100vw, 560px"
+                width={p.imageWidth}
+                height={p.imageHeight}
+              />
+              {/* Tekijä valkoisena pillerinä kuvan päällä: näyttää tarralta, ei tekstiriviltä. */}
+              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2.5 rounded-full bg-card py-1.5 pl-1.5 pr-4 shadow-lg">
                 <img
                   src={p.tekija.image}
                   alt=""
                   width={32}
                   height={32}
-                  className="h-8 w-8 rounded-full object-cover"
+                  className="h-8 w-8 rounded-full object-cover ring-2 ring-accent-light"
                   loading="lazy"
                   decoding="async"
                 />
-                <span className="text-[13px] font-semibold text-muted-foreground">{p.tekija.first} tekee työn</span>
+                <span className="text-[13px] font-bold text-foreground">{p.tekija.first} tekee työn</span>
               </div>
+            </div>
+            <div className="flex flex-1 flex-col gap-4 p-6 md:px-8 md:pb-8 md:pt-7">
               <h3 className="font-heading text-2xl font-extrabold leading-[1.15] text-foreground md:text-[26px]">{p.title}</h3>
               <p className="text-base leading-relaxed text-muted-foreground">{kuvaukset[p.key]}</p>
-              <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-border pt-4 sm:grid sm:grid-cols-[1.4fr_1fr_1fr] sm:gap-0">
+              <div className="mt-auto flex flex-wrap gap-x-6 gap-y-4 rounded-2xl bg-accent-light/70 px-5 py-4 sm:grid sm:grid-cols-[1.5fr_1fr_1fr] sm:gap-0">
                 <Fakta value={p.hinta} label="Hinta yleensä" />
                 <Fakta value={p.takuu} label="Takuu" divider />
                 <Fakta value={p.kesto} label="Kesto" divider />
@@ -92,12 +98,18 @@ const PalvelutA = () => (
         ))}
       </div>
 
-      <div className="mt-8 flex flex-col gap-4 rounded-2xl bg-accent-light px-6 py-5 sm:flex-row sm:items-center sm:justify-between md:px-7">
-        <p className="text-base leading-snug text-foreground">
-          <strong className="font-bold">{PAKETTI_KYSYMYS}</strong> {PAKETTI_VASTAUS}
-        </p>
-        <Link to={LINKIT.tarjouspyynto} className={`${BTN_OUTLINE} self-start sm:self-auto`}>
+      {/* Pakettihinta tummansinisenä palkkina (vrt. hintasivun "Laske oman kattosi hinta minuutissa"). */}
+      <div className="mt-8 flex flex-col gap-5 overflow-hidden rounded-3xl bg-navy px-6 py-6 text-navy-foreground shadow-xl sm:flex-row sm:items-center sm:justify-between md:px-9 md:py-7">
+        <div className="flex flex-col gap-1">
+          <p className="font-heading text-xl font-extrabold leading-tight md:text-2xl">{PAKETTI_KYSYMYS}</p>
+          <p className="text-base text-white/80">{PAKETTI_VASTAUS} Sovitaan siitä arviokäynnillä.</p>
+        </div>
+        <Link
+          to={LINKIT.tarjouspyynto}
+          className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-2xl bg-paint-yellow px-7 py-4 font-heading text-base font-extrabold text-paint-yellow-foreground shadow-lg shadow-paint-yellow/30 transition-all hover:scale-[1.03] hover:bg-paint-yellow-hover sm:self-auto"
+        >
           Pyydä ilmainen arviokäynti
+          <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </Link>
       </div>
     </div>

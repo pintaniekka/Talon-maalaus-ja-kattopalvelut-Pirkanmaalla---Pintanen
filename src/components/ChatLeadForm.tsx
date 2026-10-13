@@ -26,14 +26,15 @@ type Step =
   | null;
 
 /**
- * Chatin tekstit (tarkastus 12.10.2026, T44–T45, B2–B3): ei emojeja, ei huutomerkkejä, ei etäarviota
- * (tarjous tehdään aina paikan päällä) eikä sanaa "kattohuolto". Yrityksestä sanotaan vain se,
+ * Chatin tekstit (Eerik 13.10.2026: "chat bot saa olla lempeämpi", emojit ovat chatissa ok).
+ * Ei etäarviota (tarjous tehdään aina paikan päällä) eikä sanaa "kattohuolto". Yrityksestä sanotaan vain se,
  * mikä on sivustolla muuallakin: maalausväli 10–15 vuotta, pinnoitus ajankohtainen noin 10–15 vuoden iässä.
  */
-const GREETING = 'Haluatko tarjouksen talon maalauksesta tai katon pinnoituksesta?';
-const SERVICE_QUESTION = 'Arviokäynti on ilmainen. Mitä työtä se koskee?';
-const ASK_QUESTION = 'Mitä haluat kysyä?';
+const GREETING = 'Moikka! 👋 Haluatko tarjouksen talon maalauksesta tai katon pinnoituksesta? Voit myös kysyä mitä vain.';
+const SERVICE_QUESTION = 'Arviokäynti on ilmainen ☀️ Mitä työtä se koskee?';
+const ASK_QUESTION = 'Kysy vaan, autan mielelläni 🙂 Mitä haluat tietää?';
 const QUESTION_PLACEHOLDER = 'Kirjoita kysymyksesi tähän';
+const BUBBLE_TEXT = 'Moi! 👋 Pyydä tarjous tai kysy meiltä.';
 
 // ── Typing indicator ───────────────────────────────────────────────────────
 const TypingIndicator = () => (
@@ -182,7 +183,7 @@ const ChatLeadForm = () => {
 
     switch (value) {
       case 'tarjous':
-        botSay('Tulemme ilmaiselle arviokäynnille ja teemme tarjouksen paikan päällä. Mihin haluat tarjouksen?', serviceCheckboxStep);
+        botSay('Hienoa! 🛠️ Tulemme ilmaiselle arviokäynnille ja teemme tarjouksen paikan päällä. Mihin haluat tarjouksen?', serviceCheckboxStep);
         break;
       case 'arvio':
         botSay(SERVICE_QUESTION, serviceCheckboxStep);
@@ -191,17 +192,17 @@ const ChatLeadForm = () => {
         botSay(ASK_QUESTION, questionStep);
         break;
       case 'soitto':
-        botSay(`Jätä nimi ja puhelinnumero, niin soitamme sinulle. ${VASTAUSLUPAUS}`, contactStep(['name', 'phone']));
+        botSay(`Jätä nimi ja puhelinnumero, niin soitamme sinulle 📞 ${VASTAUSLUPAUS}`, contactStep(['name', 'phone']));
         break;
       case 'maalaus_info':
         botSay(
-          'Talo maalataan yleensä 10–15 vuoden välein. Jos maali hilseilee, haalistuu tai jää käteen, on aika maalata. Haluatko, että tulemme katsomaan talon?',
+          'Talo maalataan yleensä 10–15 vuoden välein. Jos maali hilseilee, haalistuu tai jää käteen, on aika maalata. 🎨 Haluatko, että tulemme katsomaan talon? Käynti on ilmainen.',
           infoFollowUp
         );
         break;
       case 'katto_info':
         botSay(
-          'Pinnoitus on ajankohtainen noin 10–15 vuoden iässä. Kun tiilen pinta on kulunut, tiili imee vettä ja sammaloituu. Haluatko, että tulemme katsomaan katon?',
+          'Pinnoitus on ajankohtainen noin 10–15 vuoden iässä. Kun tiilen pinta on kulunut, tiili imee vettä ja sammaloituu. 🏠 Haluatko, että tulemme katsomaan katon? Käynti on ilmainen.',
           infoFollowUp
         );
         break;
@@ -221,13 +222,13 @@ const ChatLeadForm = () => {
   const handleServicesSubmit = () => {
     if (selectedServices.length === 0) return;
     setMessages(prev => [...prev, { from: 'user', text: selectedServices.join(', ') }]);
-    botSay('Jätä vielä nimi ja puhelinnumero, niin soitamme ja sovimme ajan.', contactStep(['name', 'phone']));
+    botSay('Kiitos! Jätä vielä nimi ja puhelinnumero, niin soitamme ja sovimme ajan 📅', contactStep(['name', 'phone']));
   };
 
   const handleQuestionSubmit = () => {
     if (!questionText.trim()) return;
     setMessages(prev => [...prev, { from: 'user', text: questionText.trim() }]);
-    botSay('Miten haluat vastauksen?', {
+    botSay('Kiitos kysymyksestä! Miten haluat vastauksen?', {
       kind: 'buttons',
       options: [{ label: 'Soittamalla', value: 'soittamalla' }, { label: 'Sähköpostilla', value: 'sahkopostilla' }],
     });
@@ -236,9 +237,9 @@ const ChatLeadForm = () => {
   const handleContactMethodChoice = (value: string) => {
     setMessages(prev => [...prev, { from: 'user', text: value === 'soittamalla' ? 'Soittamalla' : 'Sähköpostilla' }]);
     if (value === 'soittamalla') {
-      botSay('Jätä nimi ja puhelinnumero.', contactStep(['name', 'phone']));
+      botSay('Jätä nimi ja puhelinnumero, niin soitamme sinulle.', contactStep(['name', 'phone']));
     } else {
-      botSay('Jätä nimi ja sähköposti.', contactStep(['name', 'email']));
+      botSay('Jätä nimi ja sähköposti, niin vastaamme sinulle.', contactStep(['name', 'email']));
     }
   };
 
@@ -274,7 +275,8 @@ const ChatLeadForm = () => {
       );
       setMessages(prev => [...prev, { from: 'user', text: `${contactName}${contactPhone ? ', ' + contactPhone : ''}${contactEmail ? ', ' + contactEmail : ''}` }]);
       setCurrentStep({ kind: 'done' });
-      botSay(`Kiitos. Tiedot tulivat perille. ${VASTAUSLUPAUS}`, { kind: 'done' });
+      const firstName = contactName.trim().split(/\s+/)[0];
+      botSay(`Kiitos ${firstName}! 🙌 Tiedot tulivat perille. ${VASTAUSLUPAUS}`, { kind: 'done' });
     } catch {
       toast({ title: 'Lähetys ei onnistunut', description: 'Yritä uudelleen tai soita meille.', variant: 'destructive' });
     } finally {
@@ -315,7 +317,7 @@ const ChatLeadForm = () => {
                 onClick={handleOpen}
                 className="bg-white text-slate-800 text-sm rounded-2xl px-4 py-2.5 pr-7 shadow-lg max-w-[220px] text-left cursor-pointer hover:shadow-xl transition-shadow"
               >
-                Pyydä tarjous tai kysy meiltä.
+                {BUBBLE_TEXT}
               </button>
               <button
                 onClick={dismissBubble}

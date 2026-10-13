@@ -66,7 +66,7 @@ const KattopalvelutPinnoitus = () => {
         breadcrumbs={[{ name: "Tiilikaton pinnoitus" }]}
       />
 
-      <Lyhyesti items={pinnoitusLyhyesti()} />
+      <Lyhyesti content={pinnoitusLyhyesti} />
 
       {/* ═══ MIKSI AJOISSA ═══ */}
       <section className="section-padding bg-accent-light">

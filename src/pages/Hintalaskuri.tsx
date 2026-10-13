@@ -4,7 +4,7 @@ import SEO from "@/components/SEO";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import PriceWizard, { type WizardService } from "@/components/laskuri/PriceWizard";
 import { staticSeo } from "@/data/seo";
-import { roofTestimonials, wallTestimonials } from "@/data/testimonialsData";
+import { getRoofAndWallTestimonials } from "@/data/testimonialsData";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 /* Valmiiksi sumennettu taustakuva (Nokian tummanharmaa katto): CSS-blur raskaalla kuvalla nykii selatessa. */
@@ -12,13 +12,8 @@ const bgBase = "hintalaskuri-tausta";
 const bgSrc = getResponsiveSrc(bgBase);
 const bgSrcSet = getResponsiveSrcSet(bgBase);
 
-/*
- * Yksi katto- ja yksi seinäarvostelu. Sama "molemmat"-arvostelu on kummankin listan ensimmäinen,
- * joten seinälistasta otetaan ensimmäinen, joka ei ole sama kuin kattolistan ensimmäinen (B1).
- */
-const roofReview = roofTestimonials[0];
-const wallReview = wallTestimonials.find((t) => t.name !== roofReview?.name || t.text !== roofReview?.text);
-const testimonials = [roofReview, wallReview].filter((t): t is NonNullable<typeof t> => Boolean(t));
+/* Kaksi kattoarvostelua ja kaksi seinäarvostelua, ei samaa kahdesti (Eerik 13.10.2026: neljä, ei kaksi). */
+const testimonials = getRoofAndWallTestimonials(2, 0);
 
 const toService = (value: string | null): WizardService | null =>
   value === "pinnoitus" || value === "maalaus" ? value : null;
@@ -59,7 +54,7 @@ const Hintalaskuri = () => {
           <PriceWizard initialService={initialService} />
 
           {testimonials.length > 0 && (
-            <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mt-10">
+            <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto mt-10">
               {testimonials.map((t) => (
                 <figure key={t.name} className="bg-primary/70 rounded-2xl p-5 text-primary-foreground">
                   <div className="flex gap-0.5 mb-2" role="img" aria-label={`${t.stars} tähteä viidestä`}>

@@ -1,6 +1,7 @@
 import { useParams, Navigate } from "react-router-dom";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
+import ProcessList from "@/components/ProcessList";
 import CityProjects from "@/components/CityProjects";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
@@ -16,13 +17,13 @@ import { getLocalCityFaq } from "@/data/cityFaq";
 import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
 import { pinnoitusPrices } from "@/data/prices";
-import { pinnoitusLyhyesti, PINNOITUS_HINTA } from "@/data/tyovaiheet";
+import { pinnoitusLyhyesti, pinnoitusTyovaiheet, PINNOITUS_HINTA } from "@/data/tyovaiheet";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 
 /**
- * Tiilikaton pinnoituksen kaupunkisivu. Järjestys (auditointi 8.3): hero → Lyhyesti → paikallinen
- * teksti → talokanta → kohteet → työvaiheet avoimena → kattoremontti vai pinnoitus → hinta →
- * kotitalousvähennys → yrittäjä → FAQ (paikalliset kysymykset ensin) → yhteydenotto → naapurikunnat.
+ * Tiilikaton pinnoituksen kaupunkisivu. Järjestys: hero → Lyhyesti → paikallinen teksti → työvaiheet
+ * avoimena (Eerik 13.10.2026: sama lista kuin pääsivulla) → kohteet → hinta ja vertailu → talokanta →
+ * yrittäjä → FAQ (paikalliset kysymykset ensin) → arvostelut → yhteydenotto → naapurikunnat.
  * Pois jätetty: arvostelukaruselli, erillinen rahoituslohko ja Toiminta-alueet-palkki (korjaus 6).
  */
 const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string }) => {
@@ -66,7 +67,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         breadcrumbs={crumbs}
       />
 
-      <Lyhyesti items={pinnoitusLyhyesti(cityData.cityIn)} />
+      <Lyhyesti content={pinnoitusLyhyesti} />
 
       {cityData.pinnoitusLocalHookTitle && cityData.pinnoitusLocalHookText && (
         <section className="section-padding bg-card">
@@ -78,6 +79,13 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
           </div>
         </section>
       )}
+
+      <ProcessList
+        title="Näin tiilikaton pinnoitus etenee"
+        intro="Omakotitalon katto valmistuu yleensä 2–4 työpäivässä. Pesun ja maalauksen välissä katto saa kuivua."
+        steps={pinnoitusTyovaiheet}
+        cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
+      />
 
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" featureFirst />
       <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />

@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { ChevronDown } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -17,6 +17,8 @@ interface FAQSectionProps {
  * Usein kysytyt kysymykset natiivilla <details>-elementillä: vastaukset ovat HTML:ssä myös
  * suljettuina (korjaus 5, V12), eikä avaaminen tarvitse JavaScriptiä. FAQPage-schema tuotetaan
  * samasta listasta, joten näkyvä teksti ja schema vastaavat toisiaan.
+ * Ulkoasu (Eerik 13.10.2026): yksi kapea lista ohuilla viivoilla ilman laatikoita, kysymys
+ * otsikkofontilla, plus-merkki kääntyy ristiksi kun vastaus on auki.
  */
 const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
   const jsonLd = {
@@ -35,26 +37,31 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
       <section className="py-16 md:py-24" style={{ backgroundColor: 'hsl(var(--faq-bg))' }}>
-        <div className="section-container max-w-[900px] mx-auto">
-          <h2 className="heading-style text-3xl md:text-4xl mb-10 text-center tracking-wide" style={{ color: 'hsl(var(--heading-navy))' }}>
+        <div className="section-container max-w-[820px] mx-auto">
+          <h2 className="heading-style text-3xl md:text-4xl mb-8 md:mb-12 text-center" style={{ color: 'hsl(var(--heading-navy))' }}>
             {title || 'Usein kysytyt kysymykset'}
           </h2>
-          <div className="space-y-3.5">
+          <div className="border-t border-[hsl(var(--heading-navy)/0.15)]">
             {items.map((item, index) => (
               <details
                 key={index}
                 open={index < openCount}
-                className="group border border-gray-200 rounded-[10px] bg-white shadow-none transition-colors duration-200 hover:bg-[hsl(var(--faq-hover))] open:bg-white"
+                className="group border-b border-[hsl(var(--heading-navy)/0.15)]"
               >
                 <summary
-                  className="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 text-left [&::-webkit-details-marker]:hidden"
+                  className="flex items-start justify-between gap-5 cursor-pointer list-none py-5 md:py-6 -mx-3 px-3 rounded-lg text-left transition-colors duration-200 hover:bg-[hsl(var(--heading-navy)/0.04)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--heading-navy)/0.4)] [&::-webkit-details-marker]:hidden"
                   style={{ color: 'hsl(var(--heading-navy))' }}
                 >
-                  <h3 className="text-lg font-semibold font-sans tracking-normal">{item.question}</h3>
-                  <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+                  <h3 className="font-heading text-lg md:text-xl font-bold leading-snug">{item.question}</h3>
+                  <span
+                    className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-[hsl(var(--heading-navy)/0.3)] transition-transform duration-300 group-open:rotate-45 motion-reduce:transition-none"
+                    aria-hidden="true"
+                  >
+                    <Plus className="h-4 w-4" strokeWidth={2.25} />
+                  </span>
                 </summary>
                 <div
-                  className="px-6 pb-5 text-base leading-relaxed text-[#333] [&_strong]:font-semibold [&_a]:underline"
+                  className="pb-6 md:pb-7 pr-0 md:pr-12 text-base md:text-[17px] leading-relaxed text-[#333] [&_strong]:font-semibold [&_a]:underline [&_a]:underline-offset-2 [&_p+p]:mt-3"
                   dangerouslySetInnerHTML={{ __html: item.answer }}
                 />
               </details>

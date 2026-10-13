@@ -5,6 +5,12 @@ const defaultTestimonials: Testimonial[] = allTestimonials;
 
 const LONG_TEXT_THRESHOLD = 180;
 
+const getInitials = (name: string) => {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
 const StarIcon = ({ filled }: { filled: boolean }) => (
   <svg width="16" height="16" viewBox="0 0 20 20" fill={filled ? "#FBBF24" : "#D1D5DB"} aria-hidden="true">
     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.176 0l-3.37 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.063 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z" />
@@ -20,14 +26,17 @@ const GoogleIcon = () => (
   </svg>
 );
 
-/** Yksi arvostelu karusellissa: nimi, tähdet, teksti ja Google-merkki. Ei alkukirjainpalloa (12.10.2026). */
+/** Yksi arvostelu karusellissa: nimikirjaimet, nimi, tähdet, teksti ja Google-merkki. */
 export const TestimonialCard = ({ name, stars, text }: { name: string; stars: number; text: string }) => {
   const isLong = text.length > LONG_TEXT_THRESHOLD;
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div className="flex-shrink-0 w-[300px] sm:w-[340px] self-start bg-card rounded-xl p-5 shadow-sm border border-border/50 mx-2 [scroll-snap-align:center]">
-      <div className="mb-2">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-semibold font-heading" aria-hidden="true">
+          {getInitials(name)}
+        </div>
         <span className="font-semibold text-sm text-foreground font-heading">{name}</span>
       </div>
       <div className="flex gap-0.5 mb-2" role="img" aria-label={`${stars} tähteä viidestä`}>

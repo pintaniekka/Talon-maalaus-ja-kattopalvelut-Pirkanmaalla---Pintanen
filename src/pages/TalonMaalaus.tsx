@@ -51,7 +51,7 @@ const TalonMaalaus = () => {
         breadcrumbs={[{ name: "Talon maalaus" }]}
       />
 
-      <Lyhyesti items={maalausLyhyesti()} />
+      <Lyhyesti content={maalausLyhyesti} />
 
       {/* Ulkomaalaus ja julkisivumaalaus näkyvään tekstiin (korjaus 2) */}
       <section className="section-padding bg-background">

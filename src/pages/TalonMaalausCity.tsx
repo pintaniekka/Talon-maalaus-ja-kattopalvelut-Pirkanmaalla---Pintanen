@@ -63,7 +63,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         breadcrumbs={crumbs}
       />
 
-      <Lyhyesti items={maalausLyhyesti(cityData.cityIn)} />
+      <Lyhyesti content={maalausLyhyesti} />
 
       <section className="section-padding bg-card">
         <div className="section-container">

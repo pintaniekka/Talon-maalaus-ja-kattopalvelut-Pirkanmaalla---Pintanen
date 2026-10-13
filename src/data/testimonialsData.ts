@@ -244,31 +244,56 @@ export const getTestimonialsByCity = (citySlug: string): Testimonial[] =>
 /** Arvostelujen määrä (näytetään Kokemuksia-sivulla ja arvostelunostoissa). */
 export const REVIEW_COUNT = allTestimonials.length;
 
+const sameReview = (a: Testimonial, b: Testimonial) => a.name === b.name && a.text === b.text;
+
 /**
- * Kaupunkisivun arvostelunosto (12.10.2026): koko seinä näkyy vain etusivulla ja /kokemuksia/-sivulla,
- * koska sama 28 arvostelun lohko joka sivulla teki sivuista Googlen silmissä samanlaisia.
- * Tämä valitsee paikkakunnan slugin perusteella deterministisesti muutaman arvostelun palvelun
- * kategoriasta ja jättää pois paikkakunnan omat arvostelut, jotka CityProjects näyttää jo.
+ * Kaupunkisivun arvostelunosto (Eerik 13.10.2026: neljä arvostelua, eri sivuilla eri arvostelut).
+ * Koko seinä näkyy vain etusivulla ja /kokemuksia/-sivulla. Paikkakunnan omat arvostelut tulevat ensin,
+ * sitten palvelun kategorian arvosteluja kohdasta, jonka paikkakunnan slug määrää (sama sivu → aina
+ * samat arvostelut, naapurikunnat → eri yhdistelmä). Kattosivuilla vain katto- ja "molemmat"-arvostelut,
+ * seinäsivuilla vain seinä- ja "molemmat"-arvostelut.
  */
 export const getTeaserTestimonials = (
   citySlug: string,
   category?: TestimonialCategory,
-  count = 2,
+  count = 4,
 ): Testimonial[] => {
-  const pool = allTestimonials.filter(
-    (t) => t.city !== citySlug && (!category || matchesCategory(t, category)),
-  );
-  if (pool.length === 0) return [];
+  const inCategory = (t: Testimonial) => !category || matchesCategory(t, category);
+  const own = allTestimonials.filter((t) => t.city === citySlug && inCategory(t));
+  const pool = allTestimonials.filter((t) => t.city !== citySlug && inCategory(t));
+
+  const picked: Testimonial[] = own.slice(0, count);
+  if (pool.length === 0 || picked.length >= count) return picked;
 
   let offset = 0;
   const seed = `${citySlug}-${category ?? "kaikki"}`;
   for (let i = 0; i < seed.length; i++) {
-    offset = (offset + seed.charCodeAt(i)) % pool.length;
+    offset = (offset + seed.charCodeAt(i) * (i + 1)) % pool.length;
   }
 
-  const picked: Testimonial[] = [];
-  for (let i = 0; i < Math.min(count, pool.length); i++) {
-    picked.push(pool[(offset + i) % pool.length]);
+  for (let i = 0; i < pool.length && picked.length < count; i++) {
+    const candidate = pool[(offset + i) % pool.length];
+    if (!picked.some((t) => sameReview(t, candidate))) picked.push(candidate);
   }
+  return picked;
+};
+
+/**
+ * Lomakesivujen arvostelut (hintalaskuri, tarjouspyyntö): kaksi kattoarvostelua ja kaksi seinäarvostelua,
+ * ei samaa arvostelua kahdesti. `offset` siirtää valintaa, jotta eri sivuilla on eri arvostelut.
+ */
+export const getRoofAndWallTestimonials = (perCategory = 2, offset = 0): Testimonial[] => {
+  const picked: Testimonial[] = [];
+  const take = (list: Testimonial[]) => {
+    let taken = 0;
+    for (let i = 0; i < list.length && taken < perCategory; i++) {
+      const candidate = list[(offset + i) % list.length];
+      if (picked.some((t) => sameReview(t, candidate))) continue;
+      picked.push(candidate);
+      taken++;
+    }
+  };
+  take(roofTestimonials.filter((t) => t.category === "katto"));
+  take(wallTestimonials.filter((t) => t.category === "seina"));
   return picked;
 };

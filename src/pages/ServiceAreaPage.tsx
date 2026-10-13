@@ -36,7 +36,7 @@ const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) 
   },
   {
     question: "Mitä arviokäynnillä tapahtuu?",
-    answer: "Tulemme katsomaan kohteen ilmaiseksi. Katolla tarkistamme tiilet, aluskatteen ja läpiviennit. Seinillä katsomme maalin kunnon ja pohjatöiden määrän. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
+    answer: "Tulemme katsomaan kohteen ilmaiseksi. Katolla tarkistamme katon, aluskatteen ja ympäristön. Seinillä katsomme maalin kunnon ja pohjatöiden määrän. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
   },
   {
     question: "Saako työstä kotitalousvähennyksen?",
@@ -192,7 +192,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         <section className="section-padding bg-background">
           <div className="section-container">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Alueet, joilla käymme</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Käymme näillä alueilla</h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">Käymme koko kunnassa, esimerkiksi:</p>
 
               <div className="bg-card rounded-2xl p-6 md:p-8 shadow-sm border border-border/50 mb-10">
@@ -231,7 +231,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-3 font-heading">Eerik ja Eemil tekevät työn</h2>
               <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                Eerik pinnoittaa katot, Eemil maalaa seinät. Käymme {cityIn} ilman matkakuluja.
+                Eerik pinnoittaa katot, Eemil maalaa seinät. Tulemme katsomaan kohteen {cityIn} ilmaiseksi.
               </p>
             </div>
           </div>

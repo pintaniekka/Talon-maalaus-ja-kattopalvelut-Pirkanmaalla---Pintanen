@@ -5,10 +5,11 @@ import { LUVUT } from "@/data/company";
 /**
  * Etusivun arvostelunosto: kolme Google-arvostelua Googlen korttien näköisinä.
  * Tekstit sanasta sanaan; päivämääriä ei näytetä, koska niitä ei ole tallessa.
- * Ei alkukirjainpalloja (tarkastus 12.10.2026): tähdet, teksti, nimi ja Google-merkki.
+ * Alkukirjainpallo on profiilikuvan tilalla (Eerik 13.10.2026): pallo, nimi, Google-merkki, tähdet ja teksti.
  * Koko lista on sivulla /kokemuksia/; etusivulla on vain tämä osio.
  */
 const picks = ["Juuso Heimonen", "Timo Leppänen", "Anna-Riitta Taipale"];
+const avatarColors = ["#0f766e", "#ea580c", "#7c3aed"];
 const reviews = picks
   .map((name) => allTestimonials.find((t) => t.name === name))
   .filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -52,12 +53,19 @@ const ReviewHighlights = () => (
         aria-label="Arvostelut, vieritettävä lista"
         tabIndex={0}
       >
-        {reviews.map((r) => (
+        {reviews.map((r, i) => (
           <figure
             key={r.name}
             className="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-auto rounded-2xl border border-border bg-card p-5 shadow-sm"
           >
             <figcaption className="flex items-center gap-3 mb-2.5">
+              <span
+                className="w-11 h-11 rounded-full flex items-center justify-center text-white text-lg font-medium flex-shrink-0"
+                style={{ backgroundColor: avatarColors[i % avatarColors.length] }}
+                aria-hidden="true"
+              >
+                {r.name[0].toUpperCase()}
+              </span>
               <span className="font-bold text-foreground font-heading flex-1 leading-tight">{r.name}</span>
               <GoogleG />
             </figcaption>

@@ -11,18 +11,13 @@ interface Card {
 }
 
 /**
- * Kaupunkisivun tiivis yhteenveto: työn kulku, hinta ja vertailu kolmena korttina.
- * Pitkät versiot (työvaiheet, hintakortit, vertailu) ovat palvelun pääsivulla ja hintasivulla,
- * joihin kortit linkittävät. Näin kaupunkisivu ei toista pääsivun tekstiä (päällekkäisyys 5.10.2026:
- * pinnoitus 66 %, maalaus 50 %).
+ * Kaupunkisivun tiivis yhteenveto: hinta ja vertailu (pinnoitus, kaksi korttia) tai hinta, työn kulku ja
+ * vertailu (maalaus, kolme korttia). Pinnoituksen kaupunkisivulla työvaiheet ovat omana listanaan
+ * (ProcessList, Eerik 13.10.2026), joten työn kulkua ei toisteta tässä. Pitkät versiot (hintakortit,
+ * vertailu) ovat palvelun pääsivulla ja hintasivulla, joihin kortit linkittävät.
  */
 const cards: Record<Service, (cityIn: string) => Card[]> = {
   pinnoitus: (cityIn) => [
-    {
-      title: "Katto valmistuu 2–4 päivässä",
-      text: "Tulemme ensin katsomaan katon, ja saat tarjouksen. Sitten pesemme katon ja vaihdamme rikkinäiset tiilet uusiin. Lopuksi maalaamme katon ruiskulla kahteen kertaan. Saat työlle 5 vuoden kirjallisen takuun.",
-      links: [{ to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Katso kaikki työvaiheet" }],
-    },
     {
       title: `Hinta on yleensä ${PINNOITUS_HINTA}`,
       text: "Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Tarkan hinnan kerromme, kun olemme nähneet katon.",
@@ -60,16 +55,18 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
 };
 
 const headings: Record<Service, (cityIn: string) => string> = {
-  pinnoitus: (cityIn) => `Työ, hinta ja takuu ${cityIn}`,
+  pinnoitus: (cityIn) => `Hinta ja vaihtoehdot ${cityIn}`,
   maalaus: (cityIn) => `Hinta, työn kulku ja takuu ${cityIn}`,
 };
 
-const CityServiceSummary = ({ service, cityIn }: { service: Service; cityIn: string }) => (
+const CityServiceSummary = ({ service, cityIn }: { service: Service; cityIn: string }) => {
+  const items = cards[service](cityIn);
+  return (
   <section className="section-padding bg-secondary">
     <div className="section-container">
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-10 text-center font-heading">{headings[service](cityIn)}</h2>
-      <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {cards[service](cityIn).map((card) => (
+      <div className={`grid gap-6 mx-auto ${items.length === 2 ? "md:grid-cols-2 max-w-4xl" : "md:grid-cols-3 max-w-6xl"}`}>
+        {items.map((card) => (
           <article key={card.title} className="bg-card rounded-2xl border border-border/50 shadow-sm p-6 flex flex-col">
             <h3 className="text-xl font-bold text-foreground font-heading mb-3 leading-snug">{card.title}</h3>
             <p className="text-muted-foreground leading-relaxed flex-1">{card.text}</p>
@@ -86,6 +83,7 @@ const CityServiceSummary = ({ service, cityIn }: { service: Service; cityIn: str
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default CityServiceSummary;

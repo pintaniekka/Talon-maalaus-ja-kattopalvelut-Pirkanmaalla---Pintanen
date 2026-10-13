@@ -6,7 +6,7 @@ import SEO from "@/components/SEO";
 import QuoteWizard, { type QuoteService } from "@/components/tarjous/QuoteWizard";
 import { GOOGLE_PROFILE_URL, VASTAUSLUPAUS } from "@/data/company";
 import { staticSeo } from "@/data/seo";
-import { allTestimonials } from "@/data/testimonialsData";
+import { getRoofAndWallTestimonials } from "@/data/testimonialsData";
 import { getResponsiveSrc, getResponsiveSrcSet, getStorageUrl } from "@/lib/storage";
 
 const bgBase = "hintalaskuri-tausta";
@@ -43,11 +43,8 @@ const tarjousFaq = [
   { q: "Mitä arviokäynnillä tapahtuu?", a: "Katsomme kohteen, mittaamme ja tarkistamme kunnon. Saat kirjallisen tarjouksen, jossa on kiinteä hinta." },
 ];
 
-const reviews = [
-  allTestimonials.find((t) => t.category === "katto"),
-  allTestimonials.find((t) => t.category === "seina"),
-  allTestimonials.find((t) => t.category === "yleinen"),
-].filter((t): t is NonNullable<typeof t> => Boolean(t));
+/* Kaksi kattoarvostelua ja kaksi seinäarvostelua; eri arvostelut kuin hintalaskurisivulla (siirto 2). */
+const reviews = getRoofAndWallTestimonials(2, 2);
 
 /** /tarjouspyynto: oma sivu tarjouspyynnölle. Näyttää valinnan mukaan, kumpi veljeksistä soittaa. */
 const Tarjouspyynto = () => {
@@ -140,7 +137,7 @@ const Tarjouspyynto = () => {
               </span>
               5,0 / 5 Google-arvostelut
             </a>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               {reviews.map((t) => (
                 <figure key={t.name} className="bg-primary/70 rounded-2xl p-5 text-primary-foreground">
                   <blockquote className="text-sm leading-relaxed text-primary-foreground/90">"{t.text}"</blockquote>

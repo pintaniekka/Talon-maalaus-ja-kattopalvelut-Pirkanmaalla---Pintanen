@@ -135,7 +135,7 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/meista": {
     title: "Meistä: veljekset Eerik ja Eemil tekevät työn itse",
     description:
-      "Pintanen Oy on nuori perheyritys. Eerik pinnoittaa tiilikattoja ja Eemil maalaa taloja Pirkanmaalla ja Kanta-Hämeessä. Ei välikäsiä, kirjallinen takuu.",
+      "Pintanen Oy on nuori perheyritys. Eerik pinnoittaa tiilikattoja ja Eemil maalaa taloja Pirkanmaalla ja lähikunnissa. Ei välikäsiä, kirjallinen takuu.",
   },
   "/tiilikaton-pinnoitus-pirkanmaa": {
     title: "Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Pintanen",

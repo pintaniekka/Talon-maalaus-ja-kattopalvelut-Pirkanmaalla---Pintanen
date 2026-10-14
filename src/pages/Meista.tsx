@@ -50,7 +50,7 @@ const Meista = () => {
         }
         lead={
           <>
-            Pintanen on perheyritys, joka toimii Pirkanmaalla ja Kanta-Hämeessä. <strong className="text-foreground">Eerik pinnoittaa tiilikatot</strong>{" "}
+            Pintanen on perheyritys, joka toimii Pirkanmaalla ja lähikunnissa. <strong className="text-foreground">Eerik pinnoittaa tiilikatot</strong>{" "}
             ja <strong className="text-foreground">Eemil maalaa talot</strong>. Ei välikäsiä.
           </>
         }

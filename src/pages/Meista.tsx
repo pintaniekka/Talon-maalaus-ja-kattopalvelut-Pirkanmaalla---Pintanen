@@ -67,8 +67,8 @@ const Meista = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Mikä on Pintanen?</h2>
             <div className="space-y-4 text-muted-foreground text-lg">
               <p>
-                Me olemme veljekset Eerik ja Eemil. Eerik teki kattoja ja Eemil seiniä. Perustimme yhteisen yrityksen Tampereelle. Eerik
-                aloitti kattotyöt 2022 ja perusti Pintanen Oy:n 2025.
+                Me olemme veljekset Eerik ja Eemil. Eerik aloitti kattotyöt 2022 ja perusti Pintanen Oy:n Tampereelle 2025. Eemil hoitaa
+                seinäpuolen itsenäisesti.
               </p>
               <p>Meillä ei ole välikäsiä eikä raskasta kulurakennetta. Soitat suoraan Eerikille tai Eemilille.</p>
             </div>

@@ -75,6 +75,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/katon-puhdistus-hinta-pirkanmaa": fullHero(HERO_BASE.puhdistus),
   "/talon-maalaus-hinta-pirkanmaa": cardHero(HERO_BASE.maalausHinta),
   "/meista": cardHero(HERO_BASE.meista),
+  "/yhteystiedot": cardHero(HERO_BASE.meista),
   "/toiminta-alueet": cardHero(HERO_BASE.toimintaAlueet),
   "/referenssit": cardHero(HERO_BASE.referenssit),
   "/kokemuksia": cardHero(HERO_BASE.kokemuksia),
@@ -136,6 +137,11 @@ export const staticSeo: Record<string, RouteSeo> = {
     title: "Meistä: veljekset Eerik ja Eemil tekevät työn itse",
     description:
       "Pintanen Oy on nuori perheyritys. Eerik pinnoittaa tiilikattoja ja Eemil maalaa taloja Pirkanmaalla ja lähikunnissa. Ei välikäsiä, kirjallinen takuu.",
+  },
+  "/yhteystiedot": {
+    title: "Yhteystiedot – soita Eerikille tai Eemilille",
+    description:
+      "Pintanen Oy:n yhteystiedot: Eerik Pitkänen 040 964 0066 (tiilikatot) ja Eemil Pitkänen 040 164 2233 (talon maalaus). Tampere, Pirkanmaa ja lähikunnat. Arviokäynti on ilmainen.",
   },
   "/tiilikaton-pinnoitus-pirkanmaa": {
     title: "Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Pintanen",

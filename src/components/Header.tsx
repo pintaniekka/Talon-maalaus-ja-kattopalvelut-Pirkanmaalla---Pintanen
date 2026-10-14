@@ -16,6 +16,8 @@ const logoUrl = getStorageUrl("Pintanen-logo.png");
  * Palkki näkyy työpöydällä (xl) ja painuu piiloon alas skrollattaessa, kuten yhteystietopalkki ennen.
  * Pienemmillä näytöillä palkkia ei näytetä, jotta otsikko ei jää sen alle. Vaihda tekstit tästä.
  */
+type NavItem = { label: string; href: string; dropdown?: { label: string; href: string }[] };
+
 const KAUSIPALKKI = {
   teksti: "Täytämme nyt kalenteria ensi kauden parhaille maalausajoille.",
   linkki: "Pyydä ilmainen arviokäynti",
@@ -29,27 +31,30 @@ const Header = () => {
   const isHoverLocked = useRef(false);
   const location = useLocation();
 
-  const navItems = [
+  // Valikko (Eerik 14.10.2026): palvelut omina kohtinaan, joiden alla Lue lisää / Hintalaskuri / Hinnat.
+  const navItems: NavItem[] = [
     {
-      label: "Palvelut",
+      label: "Tiilikaton pinnoitus",
       href: "/tiilikaton-pinnoitus-pirkanmaa/",
       dropdown: [
-        { label: "Tiilikaton pinnoitus", href: "/tiilikaton-pinnoitus-pirkanmaa/" },
-        { label: "Talon maalaus", href: "/talon-maalaus-pirkanmaa/" },
+        { label: "Lue lisää", href: "/tiilikaton-pinnoitus-pirkanmaa/" },
+        { label: "Hintalaskuri", href: "/hintalaskuri/" },
+        { label: "Hinnat", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/" },
       ],
     },
     {
-      label: "Hinnat & Laskuri",
-      href: "/hintalaskuri/",
+      label: "Talon maalaus",
+      href: "/talon-maalaus-pirkanmaa/",
       dropdown: [
+        { label: "Lue lisää", href: "/talon-maalaus-pirkanmaa/" },
         { label: "Hintalaskuri", href: "/hintalaskuri/" },
-        { label: "Tiilikaton pinnoitus hinta", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/" },
-        { label: "Talon maalaus hinta", href: "/talon-maalaus-hinta-pirkanmaa/" },
+        { label: "Hinnat", href: "/talon-maalaus-hinta-pirkanmaa/" },
       ],
     },
     { label: "Referenssit", href: "/referenssit/" },
     { label: "Artikkelit", href: "/artikkelit/" },
-    { label: "Tutustu meihin", href: "/meista/" },
+    { label: "Meistä", href: "/meista/" },
+    { label: "Yhteystiedot", href: "/yhteystiedot/" },
   ];
 
   function closeNavigationMenus(event?: MouseEvent<HTMLElement>) {
@@ -132,12 +137,12 @@ const Header = () => {
     >
       {/* Keltainen kausipalkki: puhelinnumero ja kauden lause. Painuu piiloon alas skrollattaessa. */}
       <div
-        className={`hidden xl:block bg-paint-yellow text-paint-yellow-foreground overflow-hidden transition-[max-height] duration-300 motion-reduce:transition-none ${isScrolled ? "max-h-0" : "max-h-12"}`}
+        className={`hidden xl:block bg-paint-yellow text-paint-yellow-foreground overflow-hidden transition-[max-height] duration-300 motion-reduce:transition-none ${isScrolled ? "max-h-0" : "max-h-8"}`}
       >
-        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full h-9 flex items-center justify-between gap-6 text-sm whitespace-nowrap">
+        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full h-7 flex items-center justify-between gap-6 text-[13px] leading-none whitespace-nowrap">
           <a href="tel:+358409640066" className="flex shrink-0 items-center gap-2 group">
-            <span className="bg-navy p-1 rounded transition-colors group-hover:bg-accent-strong">
-              <Phone className="w-3.5 h-3.5 text-white" />
+            <span className="bg-navy p-[3px] rounded transition-colors group-hover:bg-accent-strong">
+              <Phone className="w-3 h-3 text-white" />
             </span>
             <span className="font-bold tracking-tight group-hover:underline underline-offset-4 decoration-2">040 964 0066</span>
           </a>
@@ -204,7 +209,7 @@ const Header = () => {
 
           <nav
             aria-label="Päänavigaatio"
-            className="flex items-center gap-4 lg:gap-6 flex-1 justify-end mr-4"
+            className="flex items-center gap-5 2xl:gap-7 flex-1 justify-end mr-5"
           >
             {navItems.map((item) => {
               if (!item.dropdown) {
@@ -228,18 +233,26 @@ const Header = () => {
                   onMouseLeave={handleDesktopDropdownClose}
                 >
                   <div className="flex items-center gap-1 py-7 -my-7">
+                    {/* Otsikko on linkki palvelusivulle; alavalikko avautuu hiirellä ja nuolinapista. */}
+                    <Link
+                      to={item.href}
+                      onClick={handleNavigationLinkClick}
+                      className={`font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent-ink ${location.pathname.replace(/\/+$/, "") === item.href.replace(/\/+$/, "") ? "text-accent-ink" : ""}`}
+                    >
+                      {item.label}
+                    </Link>
                     <button
                       type="button"
                       onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                       aria-expanded={openDropdown === item.label}
                       aria-haspopup="true"
-                      className="font-bold text-sm uppercase tracking-wide transition-colors duration-200 text-white/90 hover:text-accent-ink"
+                      aria-label={`${item.label}: avaa alavalikko`}
+                      className="rounded-sm text-white/50 hover:text-accent-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >
-                      {item.label}
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${openDropdown === item.label ? "rotate-180" : ""}`}
+                      />
                     </button>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 text-white/50 ${openDropdown === item.label ? "rotate-180" : ""}`}
-                    />
                   </div>
 
                   <AnimatePresence>
@@ -272,18 +285,16 @@ const Header = () => {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 shrink-0">
             <a
-              href="https://wa.me/358409640066"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 text-green-400 hover:scale-110 transition-transform"
+              href="tel:+358409640066"
+              className="flex items-center gap-2 px-5 py-3 rounded-full font-extrabold text-xs uppercase tracking-[0.1em] border border-white/25 text-white transition-all duration-300 hover:border-white/60 hover:bg-white/5 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
             >
-              <WhatsAppIcon className="w-5 h-5" />
+              <Phone className="w-3.5 h-3.5 text-paint-yellow" />
+              Soita
             </a>
             <Link
-              className="flex items-center gap-2 px-7 py-3 rounded-full font-extrabold text-xs uppercase tracking-[0.1em] transition-all duration-300 bg-accent-strong text-accent-foreground shadow-lg shadow-accent/40 hover:bg-accent-strong/90 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+              className="flex items-center gap-2 px-6 py-3 rounded-full font-extrabold text-xs uppercase tracking-[0.1em] transition-all duration-300 bg-accent-strong text-accent-foreground shadow-lg shadow-accent/40 hover:bg-accent-strong/90 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
               to="/tarjouspyynto/"
             >
               Pyydä tarjous
@@ -293,8 +304,8 @@ const Header = () => {
       </div>
       </div>
 
-      {/* Yksivärinen keltainen raita (tarkastus 12.10.2026: ei kolmiväristä liukuväriä) */}
-      <div className="h-1 w-full bg-paint-yellow" aria-hidden="true" />
+      {/* Värillinen raita kuten tuotannossa (Eerik 14.10.2026: sininen–keltainen–sininen liukuväri takaisin) */}
+      <div className="h-1.5 w-full bg-gradient-to-r from-accent via-paint-yellow to-accent" aria-hidden="true" />
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -323,14 +334,13 @@ const Header = () => {
                 return (
                   <div key={item.label}>
                     <div className="flex items-center">
-                      <button
-                        type="button"
-                        onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                        aria-expanded={openDropdown === item.label}
+                      <Link
+                        to={item.href}
+                        onClick={closeNavigationMenus}
                         className="flex-1 text-left py-3 px-4 text-white/90 font-medium hover:bg-white/5 hover:text-accent-ink rounded-lg transition-colors"
                       >
                         {item.label}
-                      </button>
+                      </Link>
                       <button
                         type="button"
                         aria-label={`${item.label}: avaa alavalikko`}
@@ -366,13 +376,22 @@ const Header = () => {
                   </div>
                 );
               })}
-              <Link
-                to="/tarjouspyynto/"
-                onClick={closeNavigationMenus}
-                className="mt-2 flex items-center justify-center gap-2 py-3 px-4 bg-accent-strong text-accent-foreground rounded-xl font-bold uppercase text-sm tracking-wider"
-              >
-                Pyydä tarjous
-              </Link>
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <a
+                  href="tel:+358409640066"
+                  className="flex items-center justify-center gap-2 py-3 px-4 border border-white/25 text-white rounded-xl font-bold uppercase text-sm tracking-wider"
+                >
+                  <Phone className="w-4 h-4 text-paint-yellow" />
+                  Soita
+                </a>
+                <Link
+                  to="/tarjouspyynto/"
+                  onClick={closeNavigationMenus}
+                  className="flex items-center justify-center gap-2 py-3 px-4 bg-accent-strong text-accent-foreground rounded-xl font-bold uppercase text-sm tracking-wider"
+                >
+                  Pyydä tarjous
+                </Link>
+              </div>
             </nav>
           </motion.div>
         )}

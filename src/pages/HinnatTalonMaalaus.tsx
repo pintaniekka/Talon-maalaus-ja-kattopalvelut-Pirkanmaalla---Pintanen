@@ -105,7 +105,7 @@ const HinnatTalonMaalaus = () => {
       />
 
       <MaalausPricingCards cityName="Pirkanmaa" calculatorHref="/hintalaskuri/?palvelu=maalaus" calculatorLabel="Laske oman talosi hinta" />
-      <KotitalousVahennys defaultVariant="d" />
+      <KotitalousVahennys />
 
       <CalculatorCta service="maalaus" />
 

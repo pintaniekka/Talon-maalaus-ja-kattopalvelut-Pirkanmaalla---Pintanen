@@ -26,6 +26,7 @@ const HinnatTiilikalonPinnoitus = lazyWithRetry(() => import("./pages/HinnatTiil
 const HinnatKatonPuhdistus = lazyWithRetry(() => import("./pages/HinnatKatonPuhdistus"));
 const HinnatTalonMaalaus = lazyWithRetry(() => import("./pages/HinnatTalonMaalaus"));
 const Meista = lazyWithRetry(() => import("./pages/Meista"));
+const Yhteystiedot = lazyWithRetry(() => import("./pages/Yhteystiedot"));
 const Artikkelit = lazyWithRetry(() => import("./pages/Artikkelit"));
 const Artikkeli = lazyWithRetry(() => import("./pages/Artikkeli"));
 const Tietosuoja = lazyWithRetry(() => import("./pages/Tietosuoja"));
@@ -72,6 +73,7 @@ export const AppContent = ({
               <Route path="/referenssit" element={<Referenssit />} />
               <Route path="/kokemuksia" element={<Kokemuksia />} />
               <Route path="/meista" element={<Meista />} />
+              <Route path="/yhteystiedot" element={<Yhteystiedot />} />
               <Route path="/artikkelit" element={<Artikkelit />} />
               <Route path="/artikkelit/:slug" element={<Artikkeli />} />
               <Route path="/tietosuoja" element={<Tietosuoja />} />

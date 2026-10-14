@@ -155,6 +155,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/yhteystiedot/" className="hover:text-primary-foreground transition-colors">
+                  Yhteystiedot
+                </Link>
+              </li>
+              <li>
                 <Link to="/artikkelit/" className="hover:text-primary-foreground transition-colors">
                   Artikkelit
                 </Link>

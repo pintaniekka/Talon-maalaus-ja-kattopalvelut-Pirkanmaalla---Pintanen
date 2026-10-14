@@ -40,6 +40,7 @@ export const staticRoutes: SiteRoute[] = [
   { path: "/referenssit", priority: 0.8, changefreq: "monthly" },
   { path: "/kokemuksia", priority: 0.7, changefreq: "monthly" },
   { path: "/meista", priority: 0.7, changefreq: "monthly" },
+  { path: "/yhteystiedot", priority: 0.7, changefreq: "monthly" },
   { path: "/artikkelit", priority: 0.7, changefreq: "weekly" },
   { path: "/tietosuoja", priority: 0.2, changefreq: "yearly" },
 ];
@@ -227,6 +228,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "## Yritys",
     "",
     line("/meista", "Tietoa yrityksestä"),
+    line("/yhteystiedot", "Yhteystiedot"),
     line("/referenssit", "Referenssit"),
     line("/kokemuksia", "Asiakkaiden kokemuksia"),
     line("/toiminta-alueet", "Toiminta-alueet"),

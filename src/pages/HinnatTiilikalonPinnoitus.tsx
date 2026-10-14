@@ -121,7 +121,7 @@ const HinnatTiilikalonPinnoitus = () => {
 
       {/* Hintaesimerkit: samat kortit kuin palvelu- ja kaupunkisivuilla */}
       <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" calculatorHref="/hintalaskuri/?palvelu=pinnoitus" calculatorLabel="Laske oman kattosi hinta" />
-      <KotitalousVahennys defaultVariant="d" />
+      <KotitalousVahennys />
 
       <CalculatorCta service="pinnoitus" />
 

@@ -149,14 +149,14 @@ const BeforeAfterSlider = ({
         />
       </div>
 
-      {/* Vino jakoviiva: sivuston sininen (Eerik 14.10.2026), valkoinen reunus erottaa sen kuvasta. */}
+      {/* Vino jakoviiva: vaaleansininen ilman ääriviivaa (Eerik 14.10.2026). */}
       <div
-        className="absolute -top-[5%] -bottom-[5%] w-[3px] bg-accent-strong shadow-[0_0_0_1px_rgba(255,255,255,0.7)] pointer-events-none"
+        className="absolute -top-[5%] -bottom-[5%] w-[3px] bg-accent pointer-events-none"
         style={{ left: `${sliderPosition}%`, transform: `translateX(-50%) rotate(${TILT_DEG}deg)` }}
         aria-hidden="true"
       />
 
-      {/* Kahva: sininen ympyrä ja valkoiset nuolet. Näppäimistöllä nuolinäppäimet siirtävät viivaa. */}
+      {/* Kahva: pehmeä vaaleansininen pallo ja ohuet nuolet. Näppäimistöllä nuolinäppäimet siirtävät viivaa. */}
       <div
         role="slider"
         tabIndex={0}
@@ -166,12 +166,12 @@ const BeforeAfterSlider = ({
         aria-valuenow={Math.round(sliderPosition)}
         aria-valuetext={`Ennen-kuvaa näkyy ${Math.round(sliderPosition)} prosenttia`}
         onKeyDown={handleKeyDown}
-        className="absolute top-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-strong text-white shadow-xl ring-4 ring-white/80 flex items-center justify-center gap-1 focus-visible:outline-none focus-visible:ring-accent-ink"
+        className="absolute top-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent text-white shadow-[0_6px_18px_rgba(0,0,0,0.28)] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
         style={{ left: `${sliderPosition}%` }}
       >
-        <svg width="22" height="12" viewBox="0 0 22 12" fill="currentColor" aria-hidden="true">
-          <path d="M7 0 1 6l6 6V0Z" />
-          <path d="m15 0 6 6-6 6V0Z" />
+        <svg width="26" height="14" viewBox="0 0 26 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M9 1 3 7l6 6" />
+          <path d="m17 1 6 6-6 6" />
         </svg>
       </div>
 

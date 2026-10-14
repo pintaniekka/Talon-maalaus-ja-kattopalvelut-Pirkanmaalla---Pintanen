@@ -21,7 +21,7 @@ export interface SiteRoute {
   /** Sitemap-prioriteetti 0–1. */
   priority: number;
   changefreq: "weekly" | "monthly" | "yearly";
-  /** Viimeisin muutos YYYY-MM-DD. Artikkeleilla oma päivä, muilla sivuston yhteinen tarkistuspäivä (SITE_UPDATED). */
+  /** Viimeisin muutos YYYY-MM-DD. Artikkeleilla oma päivä, muilla oletus SITE_UPDATED; build korvaa sen sisällön muutospäivällä (src/data/lastmod.json). */
   lastmod?: string;
 }
 
@@ -29,16 +29,17 @@ export interface SiteRoute {
 export const staticRoutes: SiteRoute[] = [
   { path: "/", priority: 1.0, changefreq: "weekly" },
   { path: "/tiilikaton-pinnoitus-pirkanmaa", priority: 0.9, changefreq: "monthly" },
-  { path: "/katon-puhdistus-pirkanmaa", priority: 0.9, changefreq: "monthly" },
+  // Katon puhdistus on loppunut (Eerik 11.10.2026): sivut poistuvat talvella, matala prioriteetti.
+  { path: "/katon-puhdistus-pirkanmaa", priority: 0.3, changefreq: "yearly" },
   { path: "/talon-maalaus-pirkanmaa", priority: 0.9, changefreq: "monthly" },
   { path: "/hintalaskuri", priority: 0.9, changefreq: "monthly" },
   { path: "/tarjouspyynto", priority: 0.9, changefreq: "monthly" },
   { path: "/tiilikaton-pinnoitus-hinta-pirkanmaa", priority: 0.8, changefreq: "monthly" },
-  { path: "/katon-puhdistus-hinta-pirkanmaa", priority: 0.8, changefreq: "monthly" },
+  { path: "/katon-puhdistus-hinta-pirkanmaa", priority: 0.3, changefreq: "yearly" },
   { path: "/talon-maalaus-hinta-pirkanmaa", priority: 0.8, changefreq: "monthly" },
   { path: "/toiminta-alueet", priority: 0.7, changefreq: "monthly" },
   { path: "/referenssit", priority: 0.8, changefreq: "monthly" },
-  { path: "/kokemuksia", priority: 0.7, changefreq: "monthly" },
+  { path: "/kokemuksia", priority: 0.8, changefreq: "monthly" },
   { path: "/meista", priority: 0.7, changefreq: "monthly" },
   { path: "/yhteystiedot", priority: 0.7, changefreq: "monthly" },
   { path: "/artikkelit", priority: 0.7, changefreq: "weekly" },
@@ -53,7 +54,7 @@ export const cityRoutes: SiteRoute[] = [
     changefreq: "monthly" as const,
   })),
   ...pinnoitusCities.map((c) => ({ path: `/tiilikaton-pinnoitus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
-  ...puhdistusCities.map((c) => ({ path: `/katon-puhdistus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
+  ...puhdistusCities.map((c) => ({ path: `/katon-puhdistus-${c.slug}`, priority: 0.3, changefreq: "yearly" as const })),
   ...maalausCities.map((c) => ({ path: `/talon-maalaus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
 ];
 
@@ -142,11 +143,18 @@ export const getAllRoutePaths = (): string[] => [
 export const SITE_ORIGIN = "https://pintanen.fi";
 
 /** Sitemap.xml kanonisista reiteistä. Osoitteet päättyvät kauttaviivaan kuten canonical-tagit (SEO.tsx). */
-export const buildSitemapXml = (now: Date = new Date()): string => {
+/**
+ * `lastmods`: build-aikana lasketut sivukohtaiset päivät (vite-plugin-spa-routes.ts, sisällön tiiviste).
+ * Artikkeleilla käytetään uudempaa: käsin asetettu updatedAt tai sisällön muutospäivä.
+ */
+export const buildSitemapXml = (now: Date = new Date(), lastmods: Record<string, string> = {}): string => {
   const urls = getCanonicalRoutes(now)
     .map((r) => {
       const loc = r.path === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${r.path}/`;
-      const lastmod = r.lastmod ? `\n    <lastmod>${r.lastmod}</lastmod>` : "";
+      const tracked = lastmods[r.path];
+      const isArticle = r.path.startsWith("/artikkelit/");
+      const date = tracked && (!isArticle || !r.lastmod || tracked > r.lastmod) ? tracked : r.lastmod;
+      const lastmod = date ? `\n    <lastmod>${date}</lastmod>` : "";
       return `  <url>\n    <loc>${loc}</loc>${lastmod}\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority.toFixed(1)}</priority>\n  </url>`;
     })
     .join("\n");

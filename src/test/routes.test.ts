@@ -173,3 +173,32 @@ describe("sisäiset linkit", () => {
     expect(broken).toEqual([]);
   });
 });
+
+describe("sivukohtainen lastmod (sisällön tiiviste)", () => {
+  it("buildSitemapXml käyttää build-aikana laskettua päivää, artikkeleilla uudempaa", () => {
+    const xml = buildSitemapXml(new Date(), { "/meista": "2026-10-14", "/artikkelit/milloin-pinnoittaa-tiilikatto": "2020-01-01" });
+    expect(xml).toMatch(/meista\/<\/loc>\s*<lastmod>2026-10-14<\/lastmod>/);
+    // Artikkelin oma updatedAt/publishedAt on uudempi kuin tiivisteen päivä: se säilyy.
+    expect(xml).not.toMatch(/milloin-pinnoittaa-tiilikatto\/<\/loc>\s*<lastmod>2020-01-01/);
+  });
+
+  it("lastmod.json on kelvollinen: polut ovat kanonisia, päivät YYYY-MM-DD ja korkeintaan tänään", () => {
+    const manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../data/lastmod.json"), "utf-8")) as Record<string, { hash: string; lastmod: string }>;
+    const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Helsinki" }).format(new Date());
+    for (const [route, entry] of Object.entries(manifest)) {
+      expect(canonicalPaths.has(route), `${route} ei ole kanoninen reitti`).toBe(true);
+      expect(entry.hash).toMatch(/^[0-9a-f]{16}$/);
+      expect(entry.lastmod).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(entry.lastmod <= today).toBe(true);
+    }
+  });
+
+  it("katon puhdistus -sivut ovat matalalla prioriteetilla (palvelu loppunut)", () => {
+    for (const r of canonicalRoutes) {
+      if (r.path.startsWith("/katon-puhdistus")) {
+        expect(r.priority).toBeLessThanOrEqual(0.3);
+        expect(r.changefreq).toBe("yearly");
+      }
+    }
+  });
+});

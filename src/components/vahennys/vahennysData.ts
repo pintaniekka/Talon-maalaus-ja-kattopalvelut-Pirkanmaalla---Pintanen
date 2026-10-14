@@ -1,8 +1,8 @@
 /**
- * Kotitalousvähennys-palikan yhteiset tekstit vaihtoehdoille A–D (tarkastus 12.10.2026, luku 4).
- * Luvut tulevat lauseesta KOTITALOUSVAHENNYS (src/data/company.ts); tässä on vain otsikko, linkki ja
- * laattojen jako. Lause "Erittelemme työn osuuden laskuun, joten vähennyksen hakeminen on helppoa"
- * on korvattu (T48).
+ * Kotitalousvähennys-palikan yhteiset tekstit vaihtoehdoille A–E (tarkastus 12.10.2026, luku 4).
+ * Luvut tulevat lauseesta KOTITALOUSVAHENNYS (src/data/company.ts); tässä on otsikko, linkki,
+ * laattojen jako ja sama sääntö lukuina esimerkkilaskelmaa varten. Lause "Erittelemme työn osuuden
+ * laskuun, joten vähennyksen hakeminen on helppoa" on korvattu (T48).
  */
 export const VAHENNYS_OTSIKKO = "Työn osuudesta saat kotitalousvähennyksen";
 
@@ -11,6 +11,12 @@ export const VAHENNYS_ERITTELY = "Työn osuus on laskussa eriteltynä.";
 export const VAHENNYS_ARTIKKELI = "/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/";
 
 export const VAHENNYS_VUODET = "2026–2027";
+
+/**
+ * Sääntö lukuina (sama kuin KOTITALOUSVAHENNYS-lauseessa ja artikkelissa kotitalousvahennys-katto-ja-maalaustyot):
+ * 40 % työn osuudesta, omavastuu 150 €, enintään 2 100 € yhdeltä ihmiseltä vuodessa. Jos lause muuttuu, päivitä nämä.
+ */
+export const VAHENNYS_SAANTO = { osuus: 0.4, omavastuu: 150, enimmaismaara: 2100 } as const;
 
 /** Kuukausierät: sama lause kuin hintakorttien alla (src/components/pinnoitus/PinnoitusPricingCards.tsx). */
 

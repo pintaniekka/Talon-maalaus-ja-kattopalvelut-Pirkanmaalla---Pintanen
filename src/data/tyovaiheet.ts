@@ -81,7 +81,7 @@ export interface LyhyestiFakta {
 }
 
 export interface LyhyestiSisalto {
-  /** Neljä merkittyä faktaa: hinta, kesto, takuu, arviokäynti. */
+  /** Neljä merkittyä faktaa: hinta, kesto, pesu, maalaus. Takuu ja arviokäynti ovat jo herossa (Eerik 14.10.2026). */
   facts: LyhyestiFakta[];
   /** Yksi lyhyt lisätieto, joka ei toista työvaiheita (ne ovat heron johdannossa ja työvaihelistassa). */
   note: string;
@@ -92,8 +92,8 @@ export const pinnoitusLyhyesti: LyhyestiSisalto = {
   facts: [
     { label: "Hinta yleensä", value: PINNOITUS_HINTA },
     { label: "Kesto", value: "2–4 päivää" },
-    { label: "Takuu", value: "5 vuotta" },
-    { label: "Arviokäynti", value: "Ilmainen" },
+    { label: "Pesu", value: "Painepesu + torjunta-aine" },
+    { label: "Maalaus", value: "Kahteen kertaan ruiskulla" },
   ],
   note: "Pinnoitus ja maalaus tarkoittavat samaa työtä. Maali on Nowocoat.",
 };
@@ -103,8 +103,8 @@ export const maalausLyhyesti: LyhyestiSisalto = {
   facts: [
     { label: "Hinta yleensä", value: MAALAUS_HINTA },
     { label: "Kesto", value: "3–7 päivää" },
-    { label: "Takuu", value: "2 vuotta" },
-    { label: "Arviokäynti", value: "Ilmainen" },
+    { label: "Pesu", value: "Homepesu harjoilla" },
+    { label: "Maalaus", value: "Pohjamaali ja pintamaali pensselillä" },
   ],
   note: "Maali on pääsääntöisesti Tikkurila.",
 };

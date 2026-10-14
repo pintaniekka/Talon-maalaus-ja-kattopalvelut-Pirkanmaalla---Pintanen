@@ -1,8 +1,10 @@
 import type { LyhyestiSisalto } from "@/data/tyovaiheet";
+import { cn } from "@/lib/utils";
 
 /**
  * "Lyhyesti"-nauha heron alle (Eerik 13.10.2026): neljä merkittyä faktaa rivissä (puhelimessa 2 × 2),
  * ohuet viivat välissä ja yksi lyhyt lisätieto. Ei tarkistuslistaa eikä laatikkoa, ei työvaiheiden toistoa.
+ * Pitkät arvot (pesu- ja maalaustapa, Eerik 14.10.2026) näytetään pienemmällä, jotta nauha pysyy neljässä sarakkeessa.
  * Pieni "Lyhyesti"-otsikko jää tekoälyhakua varten. Ei animaatiota: teksti on HTML:ssä heti.
  */
 const Lyhyesti = ({ content, title = "Lyhyesti" }: { content: LyhyestiSisalto; title?: string }) => (
@@ -19,7 +21,14 @@ const Lyhyesti = ({ content, title = "Lyhyesti" }: { content: LyhyestiSisalto; t
               className="border-border even:border-l even:pl-4 md:[&:not(:first-child)]:border-l md:[&:not(:first-child)]:pl-5 md:[&:not(:last-child)]:pr-5"
             >
               <dt className="text-sm text-muted-foreground">{fact.label}</dt>
-              <dd className="mt-0.5 font-heading text-xl font-extrabold leading-tight text-foreground md:text-2xl">{fact.value}</dd>
+              <dd
+                className={cn(
+                  "mt-0.5 font-heading font-extrabold leading-tight text-foreground",
+                  fact.value.length > 16 ? "text-base md:text-lg" : "text-xl md:text-2xl",
+                )}
+              >
+                {fact.value}
+              </dd>
             </div>
           ))}
         </dl>

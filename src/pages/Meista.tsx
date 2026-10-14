@@ -10,11 +10,14 @@ import { getStorageUrl } from "@/lib/storage";
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
 const eemilImage = getStorageUrl("Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp");
 
-/** Yksi lukusarja koko sivustolle (V23, korjaus 8). Eerik 13.10.2026: 130 + 80 riittää, ei erikseen 200; arvosana on jo herossa. */
+/**
+ * Yksi lukusarja koko sivustolle (V23, korjaus 8). Eerik 13.10.2026: 130 + 80 riittää, ei erikseen 200; arvosana on jo herossa.
+ * Eerik 14.10.2026: "yli 5 vuotta kokemusta" korvattu kattomäärällä kesässä (Eerik aloitti kattotyöt 2022).
+ */
 const facts = [
   { number: LUVUT.pinnoitetutKatot, label: "pinnoitettua kattoa" },
   { number: LUVUT.maalatutTalot, label: "maalattua taloa" },
-  { number: `${LUVUT.kokemusVuotta} vuotta`, label: "kokemusta molemmilla" },
+  { number: "30–40", label: "kattoa kesässä" },
   { number: "5 v / 2 v", label: "takuu: katto / seinät" },
 ];
 
@@ -64,8 +67,8 @@ const Meista = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Mikä on Pintanen?</h2>
             <div className="space-y-4 text-muted-foreground text-lg">
               <p>
-                Me olemme veljekset Eerik ja Eemil. Eerik teki kattoja ja Eemil seiniä. Perustimme yhteisen yrityksen Tampereelle. Yritys on
-                uusi, mutta olemme molemmat tehneet tätä työtä yli viisi vuotta.
+                Me olemme veljekset Eerik ja Eemil. Eerik teki kattoja ja Eemil seiniä. Perustimme yhteisen yrityksen Tampereelle. Eerik
+                aloitti kattotyöt 2022 ja perusti Pintanen Oy:n 2025.
               </p>
               <p>Meillä ei ole välikäsiä eikä raskasta kulurakennetta. Soitat suoraan Eerikille tai Eemilille.</p>
             </div>
@@ -82,16 +85,17 @@ const Meista = () => {
                 <img src={eerikImage} alt="Eerik Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" loading="lazy" decoding="async" />
                 <h3 className="text-xl font-bold text-foreground mb-2">Eerik pinnoittaa tiilikatot</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Eerik pesee katon painepesulla, vaihtaa rikkinäiset tiilet uusiin ja maalaa katon ruiskulla kahteen kertaan. Ahtaat paikat
-                  hän maalaa telalla tai käsin. Takuu on 5 vuotta.
+                  Pesen ja maalaan kattoja kesäkaudet, noin 30–40 kattoa kesässä. Talvet kuluvat koulun penkillä ja urakoita myydessä.
+                  Aloitin kattotyöt 2022 toisen yrityksen työntekijänä ja perustin Pintanen Oy:n 2025. Kattokaluston olen hankkinut itse,
+                  ja se on yrityksen omaa. Vakuutukset ja työturvallisuuskortti ovat kunnossa.
                 </p>
               </div>
               <div className="bg-card rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm">
                 <img src={eemilImage} alt="Eemil Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" loading="lazy" decoding="async" />
                 <h3 className="text-xl font-bold text-foreground mb-2">Eemil maalaa talojen ulkoseinät</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Eemil pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat kohdat ja maalaa pintamaalin pensselillä.
-                  Seinillä on aina kaksi maalaria: Eemil ja hänen maalausparinsa. Eemil vastaa työstä alusta loppuun. Takuu on 2 vuotta.
+                  Maalaan kaikki Pintasen talot, aina maalausparini kanssa. Aloitin maalauksen muualla, ja pian taito riitti yrittämiseen.
+                  Talvella opiskelen ja valmistaudun seuraavaan kesään. Seinäkalusto on omaa. Vakuutukset ja rekisterit ovat kunnossa.
                 </p>
               </div>
             </div>

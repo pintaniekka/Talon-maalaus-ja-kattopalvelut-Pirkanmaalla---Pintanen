@@ -1,48 +1,44 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
-import { VAHENNYS_ARTIKKELI, VAHENNYS_ERITTELY, VAHENNYS_LINK_ARROW, VAHENNYS_OTSIKKO } from "./vahennysData";
+import { fmtEur } from "@/data/prices";
+import { VAHENNYS_ARTIKKELI, VAHENNYS_ERITTELY, VAHENNYS_LINK_ARROW, VAHENNYS_OTSIKKO, VAHENNYS_SAANTO } from "./vahennysData";
 
 /**
- * Esimerkkilaskelmat (Eerik 13.10.2026: "esimerkkilaskelma 5000 urakalle, josta 1000 materiaalia").
- * Sääntö on sama kuin artikkelissa kotitalousvahennys-katto-ja-maalaustyot: vähennys = 40 % työn
- * osuudesta − 150 € omavastuu, enintään 2 100 € yhdeltä ihmiseltä vuodessa; pariskunta voi jakaa
- * vähennyksen ja saada yhteensä 4 200 €. Luvut lasketaan tässä, jotta taulukko ja sääntö eivät eroa.
+ * Yksi esimerkkilaskelma (Eerik 14.10.2026: "Yksi esimerkki riittää. Urakkahinta 4000, työ 1000"):
+ * urakka 4 000 €, josta materiaalit 1 000 € ja työn osuus 3 000 €. Luvut lasketaan säännöstä
+ * (VAHENNYS_SAANTO), jotta teoria ja esimerkki eivät eroa toisistaan.
  */
-const OSUUS = 0.4;
-const OMAVASTUU = 150;
-const ENIMMAISMAARA = 2100;
+const ESIMERKKI = { urakka: 4000, materiaalit: 1000 } as const;
 
-const esimerkit = [
-  { urakka: 5000, materiaalit: 1000 },
-  { urakka: 4000, materiaalit: 800 },
-  { urakka: 8000, materiaalit: 1500 },
-] as const;
+const { osuus, omavastuu, enimmaismaara } = VAHENNYS_SAANTO;
+const tyo = ESIMERKKI.urakka - ESIMERKKI.materiaalit;
+const osuusTyosta = Math.round(tyo * osuus);
+const vahennys = Math.min(osuusTyosta - omavastuu, enimmaismaara);
+const prosentti = Math.round(osuus * 100);
 
-const eur = (n: number) => `${n.toLocaleString("fi-FI")} €`;
-
-const laske = ({ urakka, materiaalit }: { urakka: number; materiaalit: number }) => {
-  const tyo = urakka - materiaalit;
-  const ennenKattoa = tyo * OSUUS - OMAVASTUU;
-  return { urakka, materiaalit, tyo, vahennys: Math.min(ennenKattoa, ENIMMAISMAARA), katossa: ennenKattoa > ENIMMAISMAARA };
-};
-
-const rivit = esimerkit.map(laske);
+const rivit: { label: string; value: string; muted?: boolean }[] = [
+  { label: "Urakkahinta", value: fmtEur(ESIMERKKI.urakka) },
+  { label: "Materiaalit", value: fmtEur(ESIMERKKI.materiaalit), muted: true },
+  { label: "Työn osuus", value: fmtEur(tyo) },
+  { label: `${prosentti} % työstä`, value: fmtEur(osuusTyosta) },
+  { label: "Omavastuu", value: `−${fmtEur(omavastuu)}`, muted: true },
+];
 
 /**
- * Vaihtoehto E (?vahennys=e): sääntölause ja pieni esimerkkitaulukko (urakka / työn osuus / vähennys).
+ * Vaihtoehto E (?vahennys=e): vasemmalla muutaman lauseen teoria, oikealla yksi esimerkkilaskelma.
  */
 const VahennysE = () => (
   <section className="bg-card py-10 md:py-12">
     <div className="section-container max-w-5xl">
-      <div className="grid gap-6 rounded-3xl bg-accent-light p-6 md:grid-cols-[1.1fr_1fr] md:gap-10 md:p-8">
+      <div className="grid gap-6 rounded-3xl bg-accent-light p-6 md:grid-cols-[1.15fr_1fr] md:gap-10 md:p-8">
         <div className="flex flex-col gap-3">
           <h2 className="font-heading text-xl font-extrabold leading-tight text-foreground md:text-2xl">{VAHENNYS_OTSIKKO}.</h2>
           <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
             {KOTITALOUSVAHENNYS} {VAHENNYS_ERITTELY}
           </p>
           <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
-            Vähennys on jokaisen oma: pariskunta voi jakaa sen ja saada yhteensä {eur(2 * ENIMMAISMAARA)}.
+            Vähennys on jokaisen oma: pariskunta voi jakaa sen ja saada yhteensä {fmtEur(2 * enimmaismaara)}.
           </p>
           <Link to={VAHENNYS_ARTIKKELI} className={`${VAHENNYS_LINK_ARROW} mt-1`}>
             Lue lisää
@@ -52,32 +48,22 @@ const VahennysE = () => (
         </div>
 
         <div className="flex flex-col gap-2">
-          <table className="w-full overflow-hidden rounded-2xl bg-card text-[15px] shadow-sm">
-            <caption className="sr-only">Esimerkkejä kotitalousvähennyksestä</caption>
-            <thead>
-              <tr className="text-left text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
-                <th scope="col" className="px-4 py-3 font-bold">Urakka</th>
-                <th scope="col" className="px-4 py-3 font-bold">Työn osuus</th>
-                <th scope="col" className="px-4 py-3 text-right font-bold">Vähennys</th>
-              </tr>
-            </thead>
-            <tbody>
+          <div className="rounded-2xl bg-card p-5 shadow-sm md:p-6">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Esimerkki</p>
+            <dl className="text-[15px]">
               {rivit.map((r) => (
-                <tr key={r.urakka} className="border-t border-border">
-                  <td className="px-4 py-3 text-foreground">
-                    {eur(r.urakka)}
-                    <span className="block text-xs text-muted-foreground">josta materiaalit {eur(r.materiaalit)}</span>
-                  </td>
-                  <td className="px-4 py-3 text-foreground">{eur(r.tyo)}</td>
-                  <td className="px-4 py-3 text-right font-heading font-extrabold text-accent-ink">
-                    {eur(r.vahennys)}
-                    {r.katossa && <span className="block text-xs font-sans font-normal text-muted-foreground">enimmäismäärä yhdelle</span>}
-                  </td>
-                </tr>
+                <div key={r.label} className="flex items-baseline justify-between gap-4 border-b border-border py-2">
+                  <dt className={r.muted ? "text-muted-foreground" : "text-foreground"}>{r.label}</dt>
+                  <dd className={`tabular-nums ${r.muted ? "text-muted-foreground" : "font-semibold text-foreground"}`}>{r.value}</dd>
+                </div>
               ))}
-            </tbody>
-          </table>
-          <p className="px-1 text-xs text-muted-foreground">Luvut ovat esimerkkejä; vähennys tehdään verotuksessa.</p>
+              <div className="flex items-baseline justify-between gap-4 pt-3">
+                <dt className="font-heading font-extrabold text-foreground">Kotitalousvähennys</dt>
+                <dd className="font-heading text-xl font-extrabold tabular-nums text-accent-ink md:text-2xl">{fmtEur(vahennys)}</dd>
+              </div>
+            </dl>
+          </div>
+          <p className="px-1 text-xs text-muted-foreground">Luvut ovat esimerkki; vähennys tehdään verotuksessa.</p>
         </div>
       </div>
     </div>

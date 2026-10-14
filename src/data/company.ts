@@ -7,7 +7,7 @@
 export const GOOGLE_PROFILE_URL = "https://share.google/tvbQXxG02Gp0nXOJQ";
 
 /** Sivuston sisällön viimeisin tarkistuspäivä (näkyvä "Päivitetty"-rivi ja sitemapin lastmod). */
-export const SITE_UPDATED = "2026-10-05";
+export const SITE_UPDATED = "2026-10-14";
 
 /** "2026-10-05" -> "5.10.2026" */
 export const paivaFi = (iso: string): string => {

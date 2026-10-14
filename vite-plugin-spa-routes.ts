@@ -13,9 +13,13 @@
  *  6. Kirjoittaa dist/_redirects-tiedoston: vanhat osoitteet 301:llä suoraan kanoniseen
  *     sivuun molemmissa muodoissa (ilman ja kauttaviivalla), public/_redirects loppuun.
  *  7. Merkitsee jonossa olevat (vielä julkaisemattomat) artikkelit noindexiksi.
+ *  8. Sivukohtainen lastmod: jokaisen esirenderöidyn sivun sisällöstä lasketaan tiiviste ja
+ *     verrataan tiedostoon src/data/lastmod.json. Jos sisältö muuttui, sivun lastmod on
+ *     build-päivä; muuten vanha päivä säilyy. Tiedosto päivittyy buildissa: committaa se.
  */
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
 import type { ViteDevServer } from "vite";
 import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt, buildRedirectsFile } from "./src/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
@@ -115,19 +119,48 @@ type Prerender = (url: string) => Promise<{ html: string; headScripts: string }>
  * Esirenderöi sivun sisällön #root-elementtiin. Jos esirenderöinti epäonnistuu,
  * palautetaan HTML muuttumattomana: sivu toimii silloin kuten ennenkin (selainrenderöinti).
  */
-const injectPrerender = async (html: string, route: string, prerender: Prerender | null, failed: string[]) => {
-  if (!prerender) return html;
+const injectPrerender = async (
+  html: string,
+  route: string,
+  prerender: Prerender | null,
+  failed: string[],
+): Promise<{ html: string; body: string | null }> => {
+  if (!prerender) return { html, body: null };
   try {
     const { html: body, headScripts } = await prerender(route);
     if (!body.includes("<h1")) throw new Error("ei h1-otsikkoa");
     if (!html.includes(EMPTY_ROOT)) throw new Error("index.html: tyhjää #root-elementtiä ei löytynyt");
-    return html
-      .replace(EMPTY_ROOT, () => `<div id="root">${body}</div>`)
-      .replace("</head>", () => `${headScripts ? `    ${headScripts}\n  ` : ""}</head>`);
+    return {
+      html: html
+        .replace(EMPTY_ROOT, () => `<div id="root">${body}</div>`)
+        .replace("</head>", () => `${headScripts ? `    ${headScripts}\n  ` : ""}</head>`),
+      body,
+    };
   } catch (error) {
     failed.push(`${route}: ${error instanceof Error ? error.message : String(error)}`);
-    return html;
+    return { html, body: null };
   }
+};
+
+/** Sivukohtaiset lastmod-päivät sisällön tiivisteen perusteella (src/data/lastmod.json). */
+type LastmodManifest = Record<string, { hash: string; lastmod: string }>;
+const LASTMOD_FILE = path.resolve("src/data/lastmod.json");
+
+const readLastmod = (): LastmodManifest =>
+  fs.existsSync(LASTMOD_FILE) ? (JSON.parse(fs.readFileSync(LASTMOD_FILE, "utf-8")) as LastmodManifest) : {};
+
+const todayInFinland = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Helsinki" }).format(new Date());
+
+/** Palauttaa sivun lastmodin: build-päivä, jos esirenderöity sisältö muuttui; muuten tallennettu päivä. */
+export const trackLastmod = (manifest: LastmodManifest, route: string, body: string, today = todayInFinland()): string => {
+  // Vain <main>: headerin ja footerin muutos ei ole sivun sisällön muutos. Reactin tunnisteet eivät ole sisältöä.
+  const main = body.match(/<main[\s\S]*?<\/main>/)?.[0] ?? body;
+  const normalized = main.replace(/\s(?:id|for|aria-describedby|aria-labelledby|aria-controls)="[^"]*"/g, "");
+  const hash = crypto.createHash("sha1").update(normalized).digest("hex").slice(0, 16);
+  const prev = manifest[route];
+  if (prev && prev.hash === hash) return prev.lastmod;
+  manifest[route] = { hash, lastmod: today };
+  return today;
 };
 
 export default function spaRoutes() {
@@ -183,11 +216,16 @@ export default function spaRoutes() {
       }
 
       // Etusivu: canonical ja og:url mukaan staattiseen HTML:ään.
+      const manifest = readLastmod();
+      const lastmods: Record<string, string> = {};
       const homeSeo = getRouteSeo("/");
       if (homeSeo) {
-        const homeHtml = await injectPrerender(applySeo(baseHtml, "/", homeSeo), "/", prerender, failed);
-        if (!homeHtml.includes(EMPTY_ROOT)) prerendered++;
-        fs.writeFileSync(indexPath, homeHtml, "utf-8");
+        const home = await injectPrerender(applySeo(baseHtml, "/", homeSeo), "/", prerender, failed);
+        if (home.body) {
+          prerendered++;
+          lastmods["/"] = trackLastmod(manifest, "/", home.body);
+        }
+        fs.writeFileSync(indexPath, home.html, "utf-8");
       }
 
       for (const route of routes) {
@@ -197,9 +235,14 @@ export default function spaRoutes() {
         let html = seo ? applySeo(subpageHtml, route, seo) : subpageHtml;
         if (seo) {
           // Vain julkiset sivut esirenderöidään; jonossa oleva artikkeli jää noindex-kuoreksi.
-          if (publicPaths.has(route)) html = await injectPrerender(html, route, prerender, failed);
-          else html = applyNoindex(html);
-          if (!html.includes(EMPTY_ROOT)) prerendered++;
+          if (publicPaths.has(route)) {
+            const page = await injectPrerender(html, route, prerender, failed);
+            html = page.html;
+            if (page.body) {
+              prerendered++;
+              lastmods[route] = trackLastmod(manifest, route, page.body);
+            }
+          } else html = applyNoindex(html);
           withSeo++;
         }
         fs.writeFileSync(path.join(dir, "index.html"), html, "utf-8");
@@ -216,7 +259,13 @@ export default function spaRoutes() {
       const notFoundHtml = subpageHtml
         .replace(/<title>[\s\S]*?<\/title>/, `<title>Sivua ei löytynyt | Pintanen</title>\n    <meta name="robots" content="noindex" />`);
       fs.writeFileSync(path.join(distDir, "404.html"), notFoundHtml, "utf-8");
-      fs.writeFileSync(path.join(distDir, "sitemap.xml"), buildSitemapXml(), "utf-8");
+      // Manifestista poistetaan sivut, joita ei enää ole, ja se tallennetaan repoon committattavaksi.
+      if (prerendered > 0) {
+        for (const key of Object.keys(manifest)) if (!(key in lastmods)) delete manifest[key];
+        const sorted = Object.fromEntries(Object.keys(manifest).sort().map((k) => [k, manifest[k]]));
+        fs.writeFileSync(LASTMOD_FILE, `${JSON.stringify(sorted, null, 2)}\n`, "utf-8");
+      }
+      fs.writeFileSync(path.join(distDir, "sitemap.xml"), buildSitemapXml(new Date(), lastmods), "utf-8");
       fs.writeFileSync(path.join(distDir, "image-sitemap.xml"), buildImageSitemapXml(), "utf-8");
       fs.writeFileSync(path.join(distDir, "llms.txt"), buildLlmsTxt(), "utf-8");
 

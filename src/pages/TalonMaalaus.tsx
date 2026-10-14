@@ -60,8 +60,7 @@ const TalonMaalaus = () => {
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
               Ulkomaalaus, julkisivumaalaus, huoltomaalaus ja puutalon maalaus tarkoittavat samaa työtä. Maalaamme omakotitalojen,
-              paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja lähikunnissa. Mökin maalaus onnistuu myös kauempana Tampereelta,
-              sillä matkat sisältyvät hintaan.
+              paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja lähikunnissa. Talon maalaus onnistuu myös kauempana Tampereelta.
             </p>
             <p>
               Hintaesimerkit ja laskuri:{" "}

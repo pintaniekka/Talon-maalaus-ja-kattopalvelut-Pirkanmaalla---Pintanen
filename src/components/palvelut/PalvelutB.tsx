@@ -46,6 +46,7 @@ const PalvelutB = () => (
                 sizes="(max-width: 767px) 100vw, 50vw"
                 width={p.imageWidth}
                 height={p.imageHeight}
+                style={p.imagePosition ? { objectPosition: p.imagePosition } : undefined}
               />
               <div className="flex flex-col gap-4">
                 <span className="font-heading text-[13px] font-bold uppercase tracking-[0.16em] text-muted-foreground">

@@ -60,6 +60,8 @@ export interface Palvelu {
   imageAlt: string;
   imageWidth: number;
   imageHeight: number;
+  /** CSS object-position: mihin kohtaan pystykuva rajataan kortin vaakamuodossa. */
+  imagePosition?: string;
   /** "2 850–7 000 €" */
   hinta: string;
   /** "5 vuotta" */
@@ -81,10 +83,11 @@ export const palvelut: Palvelu[] = [
     key: "pinnoitus",
     title: "Tiilikaton pinnoitus",
     href: "/tiilikaton-pinnoitus-pirkanmaa/",
-    imageBase: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-    imageAlt: "Punainen tiilikatto pinnoituksen jälkeen",
+    // Eerik 14.10.2026: pinnoituskorttiin punainen katto.
+    imageBase: "vihrea-talo-pinnoitettu-punainen-tiilikatto",
+    imageAlt: "Vihreä puutalo, jonka punainen tiilikatto on juuri pinnoitettu",
     imageWidth: 1200,
-    imageHeight: 1600,
+    imageHeight: 900,
     hinta: PINNOITUS_HINTA,
     takuu: TAKUU.pinnoitus,
     takuuLyhyt: lyhytTakuu(TAKUU.pinnoitus),
@@ -96,8 +99,8 @@ export const palvelut: Palvelu[] = [
     key: "maalaus",
     title: "Talon maalaus",
     href: "/talon-maalaus-pirkanmaa/",
-    imageBase: "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
-    imageAlt: "Vaalea puutalo ulkomaalauksen jälkeen",
+    imageBase: "puutalon-katon-ja-seinien-maalaus-tampere",
+    imageAlt: "Vastamaalattu vaalea puutalo Tampereella",
     imageWidth: 1200,
     imageHeight: 900,
     hinta: MAALAUS_HINTA,

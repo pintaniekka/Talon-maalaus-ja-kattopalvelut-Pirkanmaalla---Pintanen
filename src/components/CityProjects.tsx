@@ -16,10 +16,10 @@ interface CityProjectsProps {
   featureFirst?: boolean;
 }
 
-const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
-  pinnoitus: (cityIn) => `Tiilikaton pinnoituksia ${cityIn}`,
-  maalaus: (cityIn) => `Talon maalauksia ${cityIn}`,
-  all: (cityIn) => `Kohteitamme ${cityIn}`,
+const headings: Record<ProjectService | "all", (place: string) => string> = {
+  pinnoitus: (place) => `Tiilikaton pinnoituksia ${place}`,
+  maalaus: (place) => `Talon maalauksia ${place}`,
+  all: (place) => `Kohteitamme ${place}`,
 };
 
 /**
@@ -30,7 +30,7 @@ const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
  */
 const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsProps) => {
   const cases = getReviewCases(citySlug);
-  const { items, hasNearby } = getProjectItemsWithNearby(citySlug, service, reviewCaseImages(citySlug));
+  const { items, hasNearby, hasOwn } = getProjectItemsWithNearby(citySlug, service, reviewCaseImages(citySlug));
   const story = getCityStory(citySlug, service);
   const reviews = getTestimonialsByCity(citySlug);
   if (items.length === 0 && cases.length === 0 && reviews.length === 0) return null;
@@ -40,13 +40,13 @@ const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsP
       <div className="section-container">
         <div className="max-w-3xl mx-auto text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading mb-3">
-            {headings[service ?? "all"](cityIn)}
-            {hasNearby && " ja muualla Pirkanmaalla"}
+            {hasOwn ? headings[service ?? "all"](cityIn) : headings[service ?? "all"]("muualla Pirkanmaalla")}
+            {hasOwn && hasNearby && " ja muualla Pirkanmaalla"}
           </h2>
           {story ? (
             <p className="text-base md:text-lg text-foreground leading-relaxed">{story.text}</p>
           ) : (
-            <p className="text-muted-foreground">Kuvat ovat omista kohteistamme.</p>
+            <p className="text-muted-foreground">{hasOwn ? "Kuvat ovat omista kohteistamme." : `Kuvat ovat omista kohteistamme lähikunnista. Teemme samat työt myös ${cityIn}.`}</p>
           )}
         </div>
         {items.length > 0 && <ProjectGrid items={items} featureFirst={featureFirst && items.length >= 3} />}

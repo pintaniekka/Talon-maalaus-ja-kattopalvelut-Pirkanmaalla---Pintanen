@@ -19,7 +19,7 @@ const MaalausComparison = () => {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Huoltomaalaus vai uusi ulkoverhous?</h2>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                <p>Jos puu on kovaa eikä laho, huoltomaalaus riittää, eikä laudoitusta tarvitse vaihtaa.</p>
+                <p>Usein huoltomaalaus riittää. Hyvillä pohjatöillä ja uudella maalilla seinä kestää taas vuosia.</p>
                 <p>
                   Huoltomaalaus maksaa meillä yleensä {MAALAUS_HINTA}. Uusi ulkoverhous maksaa paljon enemmän. Katsomme seinät
                   arviokäynnillä. Jos maalaus ei riitä, sanomme sen.

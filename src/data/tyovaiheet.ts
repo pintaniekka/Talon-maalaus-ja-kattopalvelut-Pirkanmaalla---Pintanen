@@ -51,7 +51,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Suojaus",
-    text: "Suojaamme terassit, ikkunat ja pihan ennen työtä.",
+    text: "Suojaamme terassit ja ympäristön ennen työtä.",
   },
   {
     title: "Homepesu",

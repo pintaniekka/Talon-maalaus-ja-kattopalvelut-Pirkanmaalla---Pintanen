@@ -457,7 +457,7 @@ const ChatPriceCalculator = () => {
   }, [messages, isTyping, scrollToBottom]);
 
   return (
-    <section id="hintalaskuri" ref={sectionRef} aria-labelledby={headingId} className="section-padding bg-accent-light scroll-mt-24">
+    <section id="hintalaskuri" ref={sectionRef} aria-labelledby={headingId} className="section-padding bg-background scroll-mt-24">
       <style>{`
         @keyframes chatBounce {
           0%, 60%, 100% { transform: translateY(0); }

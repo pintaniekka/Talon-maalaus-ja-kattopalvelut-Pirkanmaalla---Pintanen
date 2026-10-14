@@ -221,7 +221,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       <CityProjects citySlug={citySlug} cityIn={cityIn} />
 
       {/* ══ EERIK JA EEMIL ══ */}
-      <section className="section-padding bg-secondary">
+      <section className="section-padding bg-accent-light">
         <div className="section-container max-w-4xl mx-auto">
           <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-center">
             <div className="flex justify-center gap-4">

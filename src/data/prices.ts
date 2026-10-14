@@ -50,7 +50,7 @@ export const maalausPrices = {
     { size: "1,5-kerroksinen talo", label: "Yleisin talon koko", duration: "3–5 työpäivää", normalMin: 5000, normalMax: 8000, afterFrom: 3400, featured: true },
     { size: "2-kerroksinen talo", label: "Suuret omakotitalot", duration: "4–8 työpäivää", normalMin: 7000, normalMax: 11000, afterFrom: 4760, featured: false },
   ] as PriceCard[],
-  includes: ["Homepesu", "Irtoavan maalin kaavinta", "Terassien ja ikkunoiden suojaus", "Pohjamaali paljaisiin kohtiin", "Pintamaali pensselillä", "Työmaan siivous"],
+  includes: ["Homepesu", "Irtoavan maalin kaavinta", "Terassien ja ympäristön suojaus", "Pohjamaali paljaisiin kohtiin", "Pintamaali pensselillä", "Työmaan siivous"],
 };
 
 export const puhdistusPrices = {

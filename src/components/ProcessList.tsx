@@ -16,7 +16,7 @@ interface ProcessListProps {
  * jonka viimeinen rivi jää vajaaksi). Sama ulkoasu kuin maalauksen kaupunkisivun merkkilistalla.
  */
 const ProcessList = ({ title, intro, steps, cta, id }: ProcessListProps) => (
-  <section id={id} className="section-padding bg-secondary">
+  <section id={id} className="section-padding bg-background">
     <div className="section-container max-w-3xl mx-auto">
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">{title}</h2>

@@ -45,7 +45,7 @@ const Kokemuksia = () => {
         const reviews = allTestimonials.filter((t) => matchesCategory(t, g.category));
         if (reviews.length === 0) return null;
         return (
-          <section key={g.category} className={`section-padding ${gi % 2 === 1 ? "bg-secondary" : "bg-background"}`}>
+          <section key={g.category} className={`section-padding ${gi % 2 === 1 ? "bg-accent-light" : "bg-background"}`}>
             <div className="section-container max-w-6xl mx-auto">
               <div className="max-w-3xl mx-auto text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3 font-heading">{g.title}</h2>

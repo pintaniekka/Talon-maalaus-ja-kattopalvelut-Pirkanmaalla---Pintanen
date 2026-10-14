@@ -60,7 +60,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service }: CityHousingFactsProps) 
   const c = copy[service];
 
   return (
-    <section className="section-padding bg-secondary">
+    <section className="section-padding bg-background">
       <div className="section-container">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>

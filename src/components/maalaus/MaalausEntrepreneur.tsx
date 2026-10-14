@@ -10,7 +10,7 @@ const eemilImage = getStorageUrl('Pictures-200/Eemil-Pitkanen-talon-maalaus-pint
 const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
   const paikka = cityIn ? `${cityIn} ja muualla Pirkanmaalla` : 'Pirkanmaalla ja lähikunnissa';
   return (
-    <section className="section-padding bg-secondary">
+    <section className="section-padding bg-accent-light">
       <div className="section-container">
         <div className="max-w-4xl mx-auto grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-start">
           <img

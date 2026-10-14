@@ -62,7 +62,7 @@ const headings: Record<Service, (cityIn: string) => string> = {
 const CityServiceSummary = ({ service, cityIn }: { service: Service; cityIn: string }) => {
   const items = cards[service](cityIn);
   return (
-  <section className="section-padding bg-secondary">
+  <section className="section-padding bg-background">
     <div className="section-container">
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-10 text-center font-heading">{headings[service](cityIn)}</h2>
       <div className={`grid gap-6 mx-auto ${items.length === 2 ? "md:grid-cols-2 max-w-4xl" : "md:grid-cols-3 max-w-6xl"}`}>

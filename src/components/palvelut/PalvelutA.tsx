@@ -10,10 +10,10 @@ import {
   type PalveluKey,
 } from "./palvelutData";
 
-/** Kortin kuvaus: sama työ kuin palvelusivuilla. Suojaus: terassit ja ikkunat (src/data/prices.ts, includes). */
+/** Kortin kuvaus: sama työ kuin palvelusivuilla. Suojaus: terassit ja ympäristö (src/data/prices.ts, includes). */
 const kuvaukset: Record<PalveluKey, string> = {
   pinnoitus: "Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet ja maalaamme katon ruiskulla kahteen kertaan.",
-  maalaus: "Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Terassit ja ikkunat suojataan.",
+  maalaus: "Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Terassit ja ympäristö suojataan.",
 };
 
 const Fakta = ({ value, label, divider = false }: { value: string; label: string; divider?: boolean }) => (

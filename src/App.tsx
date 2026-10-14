@@ -5,15 +5,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
-import { allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./data/cityData";
+import { allCities, maalausCities, pinnoitusCities } from "./data/cityData";
 import { legacyRedirects } from "./data/routes";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Lazy-loaded subpages
 const KattopalvelutPinnoitus = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitus"));
-const KattopalvelutPuhdistus = lazyWithRetry(() => import("./pages/KattopalvelutPuhdistus"));
 const KattopalvelutPinnoitusCity = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitusCity"));
-const KattopalvelutPuhdistusCity = lazyWithRetry(() => import("./pages/KattopalvelutPuhdistusCity"));
 const TalonMaalaus = lazyWithRetry(() => import("./pages/TalonMaalaus"));
 const TalonMaalausCity = lazyWithRetry(() => import("./pages/TalonMaalausCity"));
 const ToimintaAlueet = lazyWithRetry(() => import("./pages/ToimintaAlueet"));
@@ -23,7 +21,6 @@ const Kokemuksia = lazyWithRetry(() => import("./pages/Kokemuksia"));
 const Hintalaskuri = lazyWithRetry(() => import("./pages/Hintalaskuri"));
 const Tarjouspyynto = lazyWithRetry(() => import("./pages/Tarjouspyynto"));
 const HinnatTiilikalonPinnoitus = lazyWithRetry(() => import("./pages/HinnatTiilikalonPinnoitus"));
-const HinnatKatonPuhdistus = lazyWithRetry(() => import("./pages/HinnatKatonPuhdistus"));
 const HinnatTalonMaalaus = lazyWithRetry(() => import("./pages/HinnatTalonMaalaus"));
 const Meista = lazyWithRetry(() => import("./pages/Meista"));
 const Yhteystiedot = lazyWithRetry(() => import("./pages/Yhteystiedot"));
@@ -62,12 +59,10 @@ export const AppContent = ({
 
               {/* ── New primary routes ── */}
               <Route path="/tiilikaton-pinnoitus-pirkanmaa" element={<KattopalvelutPinnoitus />} />
-              <Route path="/katon-puhdistus-pirkanmaa" element={<KattopalvelutPuhdistus />} />
               <Route path="/talon-maalaus-pirkanmaa" element={<TalonMaalaus />} />
               <Route path="/hintalaskuri" element={<Hintalaskuri />} />
               <Route path="/tarjouspyynto" element={<Tarjouspyynto />} />
               <Route path="/tiilikaton-pinnoitus-hinta-pirkanmaa" element={<HinnatTiilikalonPinnoitus />} />
-              <Route path="/katon-puhdistus-hinta-pirkanmaa" element={<HinnatKatonPuhdistus />} />
               <Route path="/talon-maalaus-hinta-pirkanmaa" element={<HinnatTalonMaalaus />} />
               <Route path="/toiminta-alueet" element={<ToimintaAlueet />} />
               <Route path="/referenssit" element={<Referenssit />} />
@@ -81,9 +76,6 @@ export const AppContent = ({
               {/* ── Kaupunkikohtaiset palvelusivut (listat: src/data/cityData.ts) ── */}
               {pinnoitusCities.map(city => (
                 <Route key={`pin-${city.slug}`} path={`/tiilikaton-pinnoitus-${city.slug}`} element={<KattopalvelutPinnoitusCity citySlug={city.slug} />} />
-              ))}
-              {puhdistusCities.map(city => (
-                <Route key={`puh-${city.slug}`} path={`/katon-puhdistus-${city.slug}`} element={<KattopalvelutPuhdistusCity citySlug={city.slug} />} />
               ))}
               {maalausCities.map(city => (
                 <Route key={`maal-${city.slug}`} path={`/talon-maalaus-${city.slug}`} element={<TalonMaalausCity citySlug={city.slug} />} />

@@ -59,7 +59,7 @@ const Body = () => (
     <p>
       Sammal tarttuu vain huokoiseen ja kosteaan pintaan. Jos katto puhdistettiin muutama vuosi sitten ja se on
       taas vihreä, tiilen pinta pidättää jo kosteutta. Silloin{" "}
-      <Link to="/katon-puhdistus-pirkanmaa/">katon puhdistus</Link> auttaa vain hetkeksi. Pysyvämpi ratkaisu on uusi
+      katon puhdistus auttaa vain hetkeksi. Pysyvämpi ratkaisu on uusi
       pinnoite, joka tekee pinnasta vettä hylkivän.
     </p>
     <Figure

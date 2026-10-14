@@ -29,13 +29,10 @@ export interface SiteRoute {
 export const staticRoutes: SiteRoute[] = [
   { path: "/", priority: 1.0, changefreq: "weekly" },
   { path: "/tiilikaton-pinnoitus-pirkanmaa", priority: 0.9, changefreq: "monthly" },
-  // Katon puhdistus on loppunut (Eerik 11.10.2026): sivut poistuvat talvella, matala prioriteetti.
-  { path: "/katon-puhdistus-pirkanmaa", priority: 0.3, changefreq: "yearly" },
   { path: "/talon-maalaus-pirkanmaa", priority: 0.9, changefreq: "monthly" },
   { path: "/hintalaskuri", priority: 0.9, changefreq: "monthly" },
   { path: "/tarjouspyynto", priority: 0.9, changefreq: "monthly" },
   { path: "/tiilikaton-pinnoitus-hinta-pirkanmaa", priority: 0.8, changefreq: "monthly" },
-  { path: "/katon-puhdistus-hinta-pirkanmaa", priority: 0.3, changefreq: "yearly" },
   { path: "/talon-maalaus-hinta-pirkanmaa", priority: 0.8, changefreq: "monthly" },
   { path: "/toiminta-alueet", priority: 0.7, changefreq: "monthly" },
   { path: "/referenssit", priority: 0.8, changefreq: "monthly" },
@@ -54,7 +51,6 @@ export const cityRoutes: SiteRoute[] = [
     changefreq: "monthly" as const,
   })),
   ...pinnoitusCities.map((c) => ({ path: `/tiilikaton-pinnoitus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
-  ...puhdistusCities.map((c) => ({ path: `/katon-puhdistus-${c.slug}`, priority: 0.3, changefreq: "yearly" as const })),
   ...maalausCities.map((c) => ({ path: `/talon-maalaus-${c.slug}`, priority: 0.7, changefreq: "monthly" as const })),
 ];
 
@@ -96,17 +92,21 @@ export interface LegacyRedirect {
  */
 export const legacyRedirects: LegacyRedirect[] = [
   { from: "/kattopalvelut/pinnoitus", to: "/tiilikaton-pinnoitus-pirkanmaa" },
-  { from: "/kattopalvelut/puhdistus", to: "/katon-puhdistus-pirkanmaa" },
+  { from: "/kattopalvelut/puhdistus", to: "/tiilikaton-pinnoitus-pirkanmaa" },
   { from: "/talon-maalaus", to: "/talon-maalaus-pirkanmaa" },
   { from: "/hinnat", to: "/hintalaskuri" },
   { from: "/maalauspalvelut-hinta-pirkanmaa", to: "/hintalaskuri" },
   { from: "/hinnat/tiilikaton-pinnoitus", to: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
-  { from: "/hinnat/katon-puhdistus", to: "/katon-puhdistus-hinta-pirkanmaa" },
+  { from: "/hinnat/katon-puhdistus", to: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
   { from: "/hinnat/talon-maalaus", to: "/talon-maalaus-hinta-pirkanmaa" },
   { from: "/artikkelit/tiilikaton-pinnoituksen-hinta", to: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
   ...allCities.map((c) => ({ from: `/alue/${c.slug}`, to: `/maalauspalvelut-${c.slug}` })),
   ...fullServiceCities.map((c) => ({ from: `/kattopalvelut/pinnoitus/${c.slug}`, to: `/tiilikaton-pinnoitus-${c.slug}` })),
-  ...fullServiceCities.map((c) => ({ from: `/kattopalvelut/puhdistus/${c.slug}`, to: `/katon-puhdistus-${c.slug}` })),
+  ...fullServiceCities.map((c) => ({ from: `/kattopalvelut/puhdistus/${c.slug}`, to: `/tiilikaton-pinnoitus-${c.slug}` })),
+  // Katon puhdistus on loppunut (Eerik 11.10.2026): puhdistussivut ohjataan saman paikkakunnan pinnoitussivulle.
+  { from: "/katon-puhdistus-pirkanmaa", to: "/tiilikaton-pinnoitus-pirkanmaa" },
+  { from: "/katon-puhdistus-hinta-pirkanmaa", to: "/tiilikaton-pinnoitus-hinta-pirkanmaa" },
+  ...puhdistusCities.map((c) => ({ from: `/katon-puhdistus-${c.slug}`, to: `/tiilikaton-pinnoitus-${c.slug}` })),
   ...maalausCities.map((c) => ({ from: `/talon-maalaus/${c.slug}`, to: `/talon-maalaus-${c.slug}` })),
 ];
 
@@ -216,7 +216,6 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     line("/tiilikaton-pinnoitus-pirkanmaa", "Tiilikaton pinnoitus Pirkanmaalla"),
     line("/talon-maalaus-pirkanmaa", "Talon maalaus Pirkanmaalla"),
-    line("/katon-puhdistus-pirkanmaa", "Tiilikaton puhdistus Pirkanmaalla"),
     "",
     "## Hinnat ja hintalaskurit",
     "",

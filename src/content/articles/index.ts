@@ -9,7 +9,6 @@ export const articleBodies: Record<string, LazyExoticComponent<ComponentType>> =
   "milloin-pinnoittaa-tiilikatto": lazyWithRetry(() => import("./milloin-pinnoittaa-tiilikatto")),
   "kotitalousvahennys-katto-ja-maalaustyot": lazyWithRetry(() => import("./kotitalousvahennys-katto-ja-maalaustyot")),
   "kuinka-usein-puutalo-maalataan": lazyWithRetry(() => import("./kuinka-usein-puutalo-maalataan")),
-  "tiilikaton-puhdistus-itse-vai-ammattilainen": lazyWithRetry(() => import("./tiilikaton-puhdistus-itse-vai-ammattilainen")),
   "pinnoitus-vai-uusi-katto": lazyWithRetry(() => import("./pinnoitus-vai-uusi-katto")),
   "tiilikaton-pinnoituksen-tyovaiheet": lazyWithRetry(() => import("./tiilikaton-pinnoituksen-tyovaiheet")),
   "huoltomaalaus-vai-uusi-ulkoverhous": lazyWithRetry(() => import("./huoltomaalaus-vai-uusi-ulkoverhous")),

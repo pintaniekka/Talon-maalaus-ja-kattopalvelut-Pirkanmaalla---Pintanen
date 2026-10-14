@@ -62,6 +62,7 @@ const PalvelutA = () => (
                 sizes="(max-width: 1023px) 100vw, 560px"
                 width={p.imageWidth}
                 height={p.imageHeight}
+                style={p.imagePosition ? { objectPosition: p.imagePosition } : undefined}
               />
               {/* Kiilto: vino, läpikuultava valkoinen raita pyyhkäisee kuvan yli hiiren päällä. */}
               <span

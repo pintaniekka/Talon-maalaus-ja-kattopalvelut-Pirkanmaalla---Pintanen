@@ -4,7 +4,7 @@ import { ArrowLeft, Check, Loader2 } from "lucide-react";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import CityCombobox from "@/components/CityCombobox";
 import PhoneInput from "@/components/PhoneInput";
-import FormPrivacyNote from "@/components/FormPrivacyNote";
+import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
 import { trackEvent } from "@/lib/analytics";
@@ -13,23 +13,27 @@ import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from
 
 export type WizardService = "pinnoitus" | "maalaus";
 
-interface Option {
+export interface CalculatorOption {
   label: string;
   value: string;
   hint?: string;
 }
 
-interface Question {
+export interface CalculatorQuestion {
   key: string;
   title: string;
   help?: string;
   kind: "number" | "options";
   placeholder?: string;
-  options?: Option[];
+  options?: CalculatorOption[];
 }
 
-/* Samat kysymykset ja vastausvaihtoehdot kuin etusivun chat-laskurissa. */
-const questions: Record<WizardService, Question[]> = {
+/*
+ * Laskurien kysymykset ja vastausvaihtoehdot yhdessä paikassa: tämä sivu (/hintalaskuri) kysyy ne
+ * vaihe kerrallaan ja etusivun laskuri (ChatPriceCalculator) yhtenä lomakkeena.
+ */
+// eslint-disable-next-line react-refresh/only-export-components -- jaettu data etusivun laskurille
+export const calculatorQuestions: Record<WizardService, CalculatorQuestion[]> = {
   pinnoitus: [
     { key: "squareMeters", title: "Kuinka suuri katto on?", help: "Arvio riittää. Katto on suurempi kuin talon pohja.", kind: "number", placeholder: "esim. 200" },
     {
@@ -107,15 +111,18 @@ const questions: Record<WizardService, Question[]> = {
   ],
 };
 
-const serviceOptions: { value: WizardService; label: string; imageBase: string }[] = [
+// eslint-disable-next-line react-refresh/only-export-components -- jaettu data etusivun laskurille
+export const calculatorServices: { value: WizardService; label: string; imageBase: string }[] = [
   { value: "pinnoitus", label: "Tiilikaton pinnoitus", imageBase: "puhdas-tiilenpunainen-tiilikatto-suojakasittelyn-jalkeen" },
   { value: "maalaus", label: "Talon maalaus", imageBase: "moderni-tumma-puutalo-julkisivumaalaus-valmis" },
 ];
 
-const labelOf = (q: Question, value: string) => q.options?.find((o) => o.value === value)?.label ?? value;
+const labelOf = (q: CalculatorQuestion, value: string) => q.options?.find((o) => o.value === value)?.label ?? value;
 
-const buildDetails = (service: WizardService, answers: Record<string, string>, city: string) => {
-  const parts = questions[service].map((q) => {
+/** Laskurin vastaukset yhdeksi riviksi myynnin sähköpostiin ja CRM:ään. */
+// eslint-disable-next-line react-refresh/only-export-components -- jaettu etusivun laskurille
+export const buildCalculatorDetails = (service: WizardService, answers: Record<string, string>, city: string) => {
+  const parts = calculatorQuestions[service].map((q) => {
     const v = answers[q.key] ?? "-";
     if (q.kind === "number") return `${service === "pinnoitus" ? "Katon koko" : "Pohjaneliöt"}: ${v} m²`;
     const names: Record<string, string> = { brokenTiles: "Rikkinäiset tiilet", underlayment: "Aluskate", slope: "Jyrkkyys", utilities: "Vesi/sähkö", stories: "Kerrokset", peeling: "Hilseily" };
@@ -131,7 +138,7 @@ interface PriceWizardProps {
 
 /**
  * Hintalaskuri: palvelu → kysymykset → kaupunki → yhteystiedot → hinta-arvio.
- * Hinta näytetään yhteystietojen jälkeen samoin kuin chat-laskurissa, ja tiedot lähtevät myyntiin ja CRM:ään.
+ * Hinta näytetään yhteystietojen jälkeen samoin kuin etusivun laskurissa, ja tiedot lähtevät myyntiin ja CRM:ään.
  */
 const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const { toast } = useToast();
@@ -142,12 +149,13 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const [city, setCity] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot
   const [phoneError, setPhoneError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
 
-  const qs = service ? questions[service] : [];
+  const qs = service ? calculatorQuestions[service] : [];
   const totalSteps = qs.length + 2;
   const stepNumber = Math.min(index + 1, totalSteps);
   const current = index < qs.length ? qs[index] : null;
@@ -215,7 +223,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     setPhoneError(false);
     setSubmitting(true);
     const priceStr = formatPriceRange(price);
-    const details = buildDetails(service, answers, city);
+    const details = buildCalculatorDetails(service, answers, city);
     try {
       await submitContactForm({
         name: name.trim(),
@@ -225,6 +233,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
         message: `Hintalaskuri: ${details}`,
         priceEstimate: priceStr,
         calculatorDetails: details,
+        website,
       },
         "hintalaskuri"
       );
@@ -246,11 +255,10 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-5">
             <Check className="w-7 h-7 text-accent-ink" />
           </div>
-          <p className="text-muted-foreground mb-2">Alustava hinta-arvio</p>
+          <p className="text-muted-foreground mb-2">Hinta-arvio</p>
           <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>
           <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
-            Kiitos, {name.trim()}! Tämä on suuntaa antava arvio. Olemme sinuun pian yhteydessä ja sovimme ilmaisen
-            arviokäynnin, jonka jälkeen saat tarkan hinnan.
+            Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.
           </p>
         </div>
       ) : !service ? (
@@ -258,7 +266,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-2 text-center">Mitä haluat laskea?</h2>
           <p className="text-muted-foreground text-center mb-8">Valitse palvelu. Laskeminen vie noin minuutin.</p>
           <div className="grid sm:grid-cols-2 gap-4">
-            {serviceOptions.map((opt) => (
+            {calculatorServices.map((opt) => (
               <button
                 key={opt.value}
                 type="button"
@@ -332,9 +340,9 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
 
               {atCity && (
                 <>
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-2">Missä kohde sijaitsee?</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-2">Millä paikkakunnalla kohde on?</h2>
                   <p className="text-muted-foreground mb-6">
-                    {answers.utilities === "ei" ? "Ilman vettä ja sähköä sovimme käytännöt paikan päällä. Kerro vielä, missä kohde on." : "Toimimme Pirkanmaalla ja Kanta-Hämeessä."}
+                    {answers.utilities === "ei" ? "Ilman vettä ja sähköä sovimme käytännöt paikan päällä." : "Toimimme Pirkanmaalla ja Kanta-Hämeessä."}
                   </p>
                   <CityCombobox value={city} onChange={setCity} placeholder="Valitse kunta" />
                   <button type="button" onClick={() => setIndex((i) => i + 1)} className="btn-hero !py-4 !text-base w-full mt-6">
@@ -346,7 +354,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
               {atContact && (
                 <>
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-2">Viimeinen vaihe</h2>
-                  <p className="text-muted-foreground mb-6">Näet hinta-arvion heti, kun jätät nimesi ja puhelinnumerosi. Palaamme asiaan ja sovimme ilmaisen arviokäynnin.</p>
+                  <p className="text-muted-foreground mb-6">Jätä vielä nimi ja puhelinnumero, niin näytämme arvion.</p>
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -364,6 +372,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                       className="w-full rounded-xl border border-border bg-background px-5 py-4 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                     />
                     <PhoneInput value={phone} onChange={setPhone} hasError={phoneError} errorMessage={PHONE_ERROR_MESSAGE} ariaLabel="Puhelinnumero" />
+                    <HoneypotField value={website} onChange={setWebsite} />
                     <button type="submit" disabled={submitting} className="btn-hero !py-4 !text-base w-full disabled:opacity-60">
                       {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Näytä hinta-arvio"}
                     </button>

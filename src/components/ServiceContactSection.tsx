@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Send, Check, Loader2 } from "lucide-react";
 import { Phone, Mail, User } from "@/components/icons/BrandIcons";
+import PintanenMark from "@/components/icons/PintanenMark";
 import { toast } from '@/hooks/use-toast';
 import { getStorageUrl } from '@/lib/storage';
 import { VASTAUSLUPAUS } from '@/data/company';
@@ -13,13 +14,11 @@ type ContactVariant = 'katto' | 'maalaus' | 'general';
 
 interface ServiceContactSectionProps {
   variant?: ContactVariant;
+  /** Paikkakunta otsikkoon (hakukoneille): "Ota yhteyttä Tampereella" tms. Ilman näitä "Ota yhteyttä". */
   cityName?: string;
   cityGenitive?: string;
   cityIn?: string;
 }
-
-const FORM_BG = '#006ead';
-const logoUrl = getStorageUrl('Pintanen-logo.png');
 
 const contactPersons = {
   katto: {
@@ -91,6 +90,11 @@ const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
   </div>
 );
 
+/**
+ * Sivun lopun yhteydenotto: valkoinen lomakekortti ja yrittäjien kortit (tarkastus 12.10.2026, luku 3).
+ * Paikkakuntasivuilla otsikossa on paikkakunta (Eerik 13.10.2026: takaisin hakukoneita varten);
+ * lomakekortin otsikon vieressä on Pintasen oma merkki.
+ */
 const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, cityIn }: ServiceContactSectionProps) => {
   const [formState, setFormState] = useState({
     name: '',
@@ -138,7 +142,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
       await submitContactForm({ ...rest, service: services.join(', ') }, "sivun lopun lomake");
       setIsSubmitted(true);
       setFormState({ name: '', email: '', phone: '', services: [], message: '', website: '' });
-      toast({ title: 'Viesti lähetetty!', description: VASTAUSLUPAUS });
+      toast({ title: 'Kiitos, viesti lähetetty', description: VASTAUSLUPAUS });
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err: unknown) {
       console.error('Form submission error:', err);
@@ -163,42 +167,30 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
     ? [contactPersons.katto, contactPersons.maalaus]
     : [contactPersons[variant]];
 
-  const inputClass = 'w-full px-4 py-3 rounded-xl bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/60 border-0';
+  const inputClass =
+    'w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent';
 
   return (
     <section id="yhteystiedot" className="section-padding bg-background">
       <div className="section-container">
-        <div className="text-center max-w-2xl mx-auto mb-12"
-        >
+        <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="heading-style text-3xl md:text-4xl text-foreground mb-4">{title}</h2>
-          <p className="text-muted-foreground text-lg">
-            Pyydä <strong className="text-foreground">ilmainen arviokäynti</strong>. {VASTAUSLUPAUS}
-          </p>
+          <p className="text-muted-foreground text-lg">{VASTAUSLUPAUS}</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto lg:items-stretch">
           {/* Form (left) */}
-          <div className="h-full flex justify-center"
-          >
+          <div className="h-full flex justify-center">
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl p-8 md:p-10 shadow-xl text-white w-full max-w-md h-full flex flex-col"
-              style={{ backgroundColor: FORM_BG }}
+              className="bg-card rounded-2xl p-8 md:p-10 shadow-md border border-border w-full max-w-md h-full flex flex-col"
             >
-              <div className="flex justify-center mb-4">
-                <img
-                  src={logoUrl}
-                  alt="Pintanen"
-                  width={160}
-                  height={64}
-                  className="h-14 md:h-16 w-auto"
-                  loading="lazy"
-                  decoding="async"
-                />
+              <div className="flex items-center gap-3 mb-6">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent-ink" aria-hidden="true">
+                  <PintanenMark className="h-6 w-6" />
+                </span>
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading">Pyydä ilmainen arviokäynti</h3>
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-center mb-6 font-heading">
-                Kutsu meidät maksuttomalle arviokäynnille!
-              </h3>
 
               <div className="space-y-4 flex flex-col flex-1">
                 <div className="relative">
@@ -219,7 +211,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                     type="tel"
                     value={formState.phone}
                     onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                    className={`${inputClass} pl-10 ${phoneInvalid ? 'ring-2 ring-red-300' : ''}`}
+                    className={`${inputClass} pl-10 ${phoneInvalid ? 'ring-2 ring-destructive' : ''}`}
                     placeholder="Puhelinnumero" aria-label="Puhelinnumero"
                     aria-invalid={phoneInvalid || undefined}
                     aria-describedby={error ? 'contact-form-error' : undefined}
@@ -238,19 +230,18 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold mb-2 mt-2">Haluan tarjouksen:</label>
+                  <p className="block text-sm font-semibold text-foreground mb-2 mt-2">Mihin haluat tarjouksen?</p>
                   <div className="space-y-2">
                     {[
                       { value: 'tiilikatto', label: 'Tiilikaton pinnoitus' },
-                      { value: 'puhdistus', label: 'Katon puhdistus' },
                       { value: 'ulkomaalaus', label: 'Talon maalaus' },
                     ].map((opt) => (
-                      <label key={opt.value} className="flex items-center gap-3 cursor-pointer text-sm">
+                      <label key={opt.value} className="flex items-center gap-3 cursor-pointer text-sm text-foreground">
                         <input
                           type="checkbox"
                           checked={formState.services.includes(opt.value)}
                           onChange={() => toggleService(opt.value)}
-                          className="w-4 h-4 rounded border-white/40 accent-white"
+                          className="w-4 h-4 rounded border-border accent-accent-strong"
                         />
                         <span>{opt.label}</span>
                       </label>
@@ -267,10 +258,10 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                 />
 
                 <HoneypotField value={formState.website} onChange={(v) => setFormState({ ...formState, website: v })} />
-                <FormPrivacyNote variant="light" />
+                <FormPrivacyNote />
 
                 {error && (
-                  <p id="contact-form-error" role="alert" className="rounded-xl bg-white/15 px-4 py-3 text-sm font-semibold">
+                  <p id="contact-form-error" role="alert" className="rounded-xl bg-destructive/10 px-4 py-3 text-sm font-semibold text-destructive">
                     {error}
                   </p>
                 )}
@@ -278,18 +269,14 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                 <button
                   type="submit"
                   disabled={isSubmitted || isLoading}
-                  className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold tracking-wide uppercase transition-all border-2 mt-auto ${
-                    isSubmitted
-                      ? 'bg-green-500 border-green-500 text-white'
-                      : 'bg-transparent border-white text-white hover:bg-white/10'
-                  }`}
+                  className="btn-hero w-full !py-4 !text-base mt-auto disabled:opacity-70 disabled:hover:scale-100"
                 >
                   {isSubmitted ? (
-                    <><Check className="w-5 h-5" /> Lähetetty!</>
+                    <><Check className="w-5 h-5" /> Lähetetty</>
                   ) : isLoading ? (
-                    <><Loader2 className="w-5 h-5 animate-spin" /> Lähetetään...</>
+                    <><Loader2 className="w-5 h-5 animate-spin" /> Lähetetään…</>
                   ) : (
-                    <><Send className="w-5 h-5" /> Kutsu arviokäynnille</>
+                    <><Send className="w-5 h-5" /> Lähetä</>
                   )}
                 </button>
               </div>
@@ -297,8 +284,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
           </div>
 
           {/* Persons (right) — stacked, top & bottom edges align with form */}
-          <div className={`flex flex-col gap-6 h-full ${persons.length > 1 ? 'lg:justify-between' : 'lg:justify-center'}`}
-          >
+          <div className={`flex flex-col gap-6 h-full ${persons.length > 1 ? 'lg:justify-between' : 'lg:justify-center'}`}>
             {persons.map((person) => (
               <PersonCard key={person.name} person={person} />
             ))}

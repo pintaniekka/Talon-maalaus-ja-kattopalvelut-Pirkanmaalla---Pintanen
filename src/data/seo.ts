@@ -75,6 +75,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/katon-puhdistus-hinta-pirkanmaa": fullHero(HERO_BASE.puhdistus),
   "/talon-maalaus-hinta-pirkanmaa": cardHero(HERO_BASE.maalausHinta),
   "/meista": cardHero(HERO_BASE.meista),
+  "/yhteystiedot": cardHero(HERO_BASE.meista),
   "/toiminta-alueet": cardHero(HERO_BASE.toimintaAlueet),
   "/referenssit": cardHero(HERO_BASE.referenssit),
   "/kokemuksia": cardHero(HERO_BASE.kokemuksia),
@@ -89,7 +90,7 @@ export const heroPreload = (hero: NonNullable<RouteSeo["hero"]>) => ({
 
 export const DEFAULT_TITLE = "Tiilikaton pinnoitus ja talon maalaus Pirkanmaa | Pintanen";
 export const DEFAULT_DESCRIPTION =
-  "Pintanen Oy pinnoittaa tiilikattoja ja maalaa taloja Pirkanmaalla ja lähikunnissa. Yrittäjät tekevät työn itse. Ilmainen arviokäynti ja kirjallinen takuu.";
+  "Pintanen Oy pinnoittaa tiilikattoja ja maalaa taloja Pirkanmaalla ja lähikunnissa. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti ja kirjallinen takuu.";
 
 /** Lisää "| Pintanen" otsikon loppuun, jos sitä ei vielä ole. */
 export const withBrand = (title?: string): string =>
@@ -107,12 +108,12 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/artikkelit": {
     title: "Artikkelit ja oppaat",
     description:
-      "Lue Pintasen oppaat tiilikaton pinnoituksesta ja talon maalauksesta. Käytännön neuvoja yrittäjiltä, jotka tekevät työn itse Pirkanmaalla.",
+      "Lue Pintasen oppaat tiilikaton pinnoituksesta ja talon maalauksesta. Kirjoittajat Eerik ja Eemil tekevät työt itse Pirkanmaalla.",
   },
   "/tarjouspyynto": {
     title: "Pyydä tarjous – ilmainen kuntotarkastus",
     description:
-      "Pyydä tarjous tiilikaton pinnoituksesta tai talon maalauksesta. Yrittäjä soittaa sinulle itse ja tulee ilmaiselle kuntotarkastukselle. Pintanen, Pirkanmaa.",
+      "Pyydä tarjous tiilikaton pinnoituksesta tai talon maalauksesta. Eerik tai Eemil soittaa sinulle ja tulee ilmaiselle arviokäynnille. Pintanen, Pirkanmaa.",
   },
   "/hintalaskuri": {
     title: "Hintalaskuri: tiilikaton pinnoitus ja talon maalaus",
@@ -135,7 +136,12 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/meista": {
     title: "Meistä: veljekset Eerik ja Eemil tekevät työn itse",
     description:
-      "Pintanen Oy on nuori perheyritys. Eerik pinnoittaa tiilikattoja ja Eemil maalaa taloja Pirkanmaalla ja Kanta-Hämeessä. Ei välikäsiä, kirjallinen takuu.",
+      "Pintanen Oy on nuori perheyritys. Eerik pinnoittaa tiilikattoja ja Eemil maalaa taloja Pirkanmaalla ja lähikunnissa. Ei välikäsiä, kirjallinen takuu.",
+  },
+  "/yhteystiedot": {
+    title: "Yhteystiedot – soita Eerikille tai Eemilille",
+    description:
+      "Pintanen Oy:n yhteystiedot: Eerik Pitkänen 040 964 0066 (tiilikatot) ja Eemil Pitkänen 040 164 2233 (talon maalaus). Tampere, Pirkanmaa ja lähikunnat. Arviokäynti on ilmainen.",
   },
   "/tiilikaton-pinnoitus-pirkanmaa": {
     title: "Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Pintanen",
@@ -179,7 +185,7 @@ export const staticSeo: Record<string, RouteSeo> = {
  */
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
   title: `Tiilikaton pinnoitus ja maalaus ${city.name} | Pintanen`,
-  description: `Tiilikaton pinnoitus ${city.cityIn}. Yrittäjä tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
+  description: `Tiilikaton pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
 });
 
 export const puhdistusCitySeo = (city: CityData): RouteSeo => ({
@@ -205,7 +211,7 @@ export const maalausCitySeo = (city: CityData): RouteSeo => {
  */
 export const areaCitySeo = (city: CityData): RouteSeo => ({
   title: `Maalausliike ja kattopalvelut ${city.name} | Pintanen`,
-  description: `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Yrittäjät tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
+  description: `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
 });
 
 /** SEO-tiedot mille tahansa kanoniselle polulle (ilman loppukauttaviivaa). */

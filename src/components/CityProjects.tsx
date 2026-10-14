@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import ProjectGrid from "@/components/ProjectGrid";
 import { getProjectItemsWithNearby, type ProjectService } from "@/data/projects";
 import { getCityStory } from "@/data/cityStories";
-import { getTestimonialsByCity } from "@/data/testimonialsData";
+import { getTestimonialsByCity, REVIEW_COUNT } from "@/data/testimonialsData";
+import { LUVUT } from "@/data/company";
 import { TestimonialCard } from "@/components/TestimonialsMarquee";
 import CityReviewCard from "@/components/CityReviewCard";
 import { getReviewCases, reviewCaseImages } from "@/data/reviewCases";
@@ -21,15 +23,17 @@ const headings: Record<ProjectService | "all", (cityIn: string) => string> = {
 };
 
 /**
- * Kohdelohko: oman paikkakunnan oikeat kohteet. Ei näy, jos paikkakunnalta ei ole kuvia.
- * Jos omia kohteita on alle kolme, rivi täytetään muun Pirkanmaan kohteilla ja otsikko kertoo sen.
+ * Kohdelohko: oman paikkakunnan oikeat kohteet ja paikkakunnan omat arvostelut. Ei näy, jos
+ * paikkakunnalta ei ole kuvia eikä arvosteluja. Jos omia kohteita on alle kolme, rivi täytetään muun
+ * Pirkanmaan kohteilla ja otsikko kertoo sen. Kun paikkakunnalla on omia arvosteluja, tämä on sivun
+ * ainoa arvostelulohko (tarkastus 12.10.2026, 8.2), joten arvosanarivi ja linkki kaikkiin ovat tässä.
  */
 const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsProps) => {
   const cases = getReviewCases(citySlug);
   const { items, hasNearby } = getProjectItemsWithNearby(citySlug, service, reviewCaseImages(citySlug));
   const story = getCityStory(citySlug, service);
   const reviews = getTestimonialsByCity(citySlug);
-  if (items.length === 0 && cases.length === 0) return null;
+  if (items.length === 0 && cases.length === 0 && reviews.length === 0) return null;
 
   return (
     <section className="py-16 md:py-20 bg-background">
@@ -61,6 +65,13 @@ const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsP
                 );
               })}
             </div>
+            <p className="mt-6 text-center text-muted-foreground">
+              <strong className="text-foreground">{LUVUT.googleArvio}</strong> Google-arvosteluissa, {REVIEW_COUNT} arvostelua.{" "}
+              <Link to="/kokemuksia/" className="text-primary font-semibold hover:underline">
+                Lue kaikki asiakkaiden kokemukset
+              </Link>
+              .
+            </p>
           </div>
         )}
       </div>

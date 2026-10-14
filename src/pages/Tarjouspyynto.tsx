@@ -6,7 +6,7 @@ import SEO from "@/components/SEO";
 import QuoteWizard, { type QuoteService } from "@/components/tarjous/QuoteWizard";
 import { GOOGLE_PROFILE_URL, VASTAUSLUPAUS } from "@/data/company";
 import { staticSeo } from "@/data/seo";
-import { allTestimonials } from "@/data/testimonialsData";
+import { getRoofAndWallTestimonials } from "@/data/testimonialsData";
 import { getResponsiveSrc, getResponsiveSrcSet, getStorageUrl } from "@/lib/storage";
 
 const bgBase = "hintalaskuri-tausta";
@@ -32,9 +32,9 @@ const people = {
   },
 };
 
-const steps = ["Soitamme sinulle ja sovimme käynnin.", "Tulemme ilmaiselle kuntotarkastukselle.", "Saat kirjallisen tarjouksen."];
+const steps = ["Soitamme sinulle ja sovimme käynnin.", "Tulemme ilmaiselle arviokäynnille.", "Saat kirjallisen tarjouksen."];
 
-const paramToService: Record<string, QuoteService> = { pinnoitus: "tiilikatto", maalaus: "ulkomaalaus", puhdistus: "puhdistus" };
+const paramToService: Record<string, QuoteService> = { pinnoitus: "tiilikatto", maalaus: "ulkomaalaus" };
 
 /** Lyhyt FAQ lomakkeen alle (P4). Ei schemaa: sivu on lomake, ei sisältösivu. */
 const tarjousFaq = [
@@ -43,11 +43,8 @@ const tarjousFaq = [
   { q: "Mitä arviokäynnillä tapahtuu?", a: "Katsomme kohteen, mittaamme ja tarkistamme kunnon. Saat kirjallisen tarjouksen, jossa on kiinteä hinta." },
 ];
 
-const reviews = [
-  allTestimonials.find((t) => t.category === "katto"),
-  allTestimonials.find((t) => t.category === "seina"),
-  allTestimonials.find((t) => t.category === "yleinen"),
-].filter((t): t is NonNullable<typeof t> => Boolean(t));
+/* Kaksi kattoarvostelua ja kaksi seinäarvostelua; eri arvostelut kuin hintalaskurisivulla (siirto 2). */
+const reviews = getRoofAndWallTestimonials(2, 2);
 
 /** /tarjouspyynto: oma sivu tarjouspyynnölle. Näyttää valinnan mukaan, kumpi veljeksistä soittaa. */
 const Tarjouspyynto = () => {
@@ -59,7 +56,7 @@ const Tarjouspyynto = () => {
   const [services, setServices] = useState<QuoteService[]>(initial);
   const onServicesChange = useCallback((s: QuoteService[]) => setServices(s), []);
 
-  const roof = services.includes("tiilikatto") || services.includes("puhdistus");
+  const roof = services.includes("tiilikatto");
   const wall = services.includes("ulkomaalaus");
   const callers = roof && !wall ? [people.eerik] : wall && !roof ? [people.eemil] : [people.eerik, people.eemil];
   const callerName = callers.length === 1 ? callers[0].first : undefined;
@@ -76,7 +73,7 @@ const Tarjouspyynto = () => {
           <div className="max-w-2xl mx-auto text-center text-primary-foreground mb-8">
             <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary-foreground">Pyydä tarjous</h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 leading-relaxed">
-              Kerro, mitä tarvitset. Me yrittäjät soitamme sinulle itse ja tulemme ilmaiselle kuntotarkastukselle.
+              Kerro, mitä tarvitset. Soitamme sinulle ja tulemme ilmaiselle arviokäynnille.
             </p>
           </div>
 
@@ -140,7 +137,7 @@ const Tarjouspyynto = () => {
               </span>
               5,0 / 5 Google-arvostelut
             </a>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               {reviews.map((t) => (
                 <figure key={t.name} className="bg-primary/70 rounded-2xl p-5 text-primary-foreground">
                   <blockquote className="text-sm leading-relaxed text-primary-foreground/90">"{t.text}"</blockquote>

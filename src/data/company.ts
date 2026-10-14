@@ -26,8 +26,8 @@ export const LUVUT = {
 
 export const TAKUU = { pinnoitus: "5 vuotta", maalaus: "2 vuotta" } as const;
 
-/** Toiminta-alue samassa muodossa joka sivulla (P16). */
-export const TOIMINTA_ALUE = "Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta";
+/** Toiminta-alue samassa muodossa joka sivulla (P16). Eerik 13.10.2026: ei ajomatkoja tai säteitä tähän. */
+export const TOIMINTA_ALUE = "Pirkanmaalla ja lähikunnissa";
 
 /** Vastausaikalupaus (S34). */
 export const VASTAUSLUPAUS = "Vastaamme viimeistään seuraavana arkipäivänä.";

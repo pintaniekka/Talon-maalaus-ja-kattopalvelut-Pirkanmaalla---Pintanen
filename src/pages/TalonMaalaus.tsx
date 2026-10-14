@@ -39,20 +39,19 @@ const TalonMaalaus = () => {
         }
         lead={
           <>
-            Maalaamme talojen ulkoseinät. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat kohdat ja
-            maalaamme pintamaalin pensselillä. Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>. Arviokäynti
-            on ilmainen.
+            Maalaamme puutalojen ulkoseinät. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Hinta on yleensä{" "}
+            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja takuu on 2 vuotta. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
         secondary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
         trust="maalaus"
         image={{ base: HERO_BASE.maalaus, alt: "Tummansininen puutalo ulkomaalauksen jälkeen" }}
-        badge={{ title: "Yrittäjä itse tikkailla", text: "Eemil maalaa ja vastaa jäljestä." }}
+        badge={{ title: "Eemil ja hänen maalausparinsa", text: "Maalaavat talon itse ja vastaavat jäljestä." }}
         breadcrumbs={[{ name: "Talon maalaus" }]}
       />
 
-      <Lyhyesti items={maalausLyhyesti()} />
+      <Lyhyesti content={maalausLyhyesti} />
 
       {/* Ulkomaalaus ja julkisivumaalaus näkyvään tekstiin (korjaus 2) */}
       <section className="section-padding bg-background">
@@ -60,11 +59,10 @@ const TalonMaalaus = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Ulkomaalaus, julkisivumaalaus ja huoltomaalaus</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Talon maalausta kutsutaan monella nimellä: ulkomaalaus, julkisivumaalaus, huoltomaalaus tai puutalon maalaus. Me teemme
-              kaikilla nimillä saman työn. Maalaamme omakotitalojen, paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja
-              lähikunnissa. Mökin maalaus onnistuu myös kauempana Tampereelta, sillä matkat sisältyvät hintaan.
+              Ulkomaalaus, julkisivumaalaus, huoltomaalaus ja puutalon maalaus tarkoittavat samaa työtä. Maalaamme omakotitalojen,
+              paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja lähikunnissa. Mökin maalaus onnistuu myös kauempana Tampereelta,
+              sillä matkat sisältyvät hintaan.
             </p>
-            <p>Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Siksi pesemme ja kaavimme huolella ennen maalausta ja suojaamme terassit ja ikkunat.</p>
             <p>
               Hintaesimerkit ja laskuri:{" "}
               <Link to="/talon-maalaus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
@@ -94,7 +92,7 @@ const TalonMaalaus = () => {
       <section className="py-12 md:py-16 bg-background">
         <div className="section-container max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">Talon maalaus paikkakunnittain</h2>
-          <p className="text-muted-foreground mb-6">Maalaamme taloja Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta. Katso oman paikkakuntasi sivu:</p>
+          <p className="text-muted-foreground mb-6">Maalaamme taloja Pirkanmaalla ja lähikunnissa. Katso oman paikkakuntasi sivu:</p>
           <ul className="flex flex-wrap justify-center gap-3">
             {cityLinks.map((c) => (
               <li key={c.slug}>

@@ -1,7 +1,5 @@
 import type { CityData } from "./cityData";
 import { getProjectItems, type ProjectService } from "./projects";
-import { housingFactsText } from "./cityHousingText";
-import { HOUSING_STATS_SOURCE_LABEL } from "./cityHousingStats";
 
 interface FAQItem {
   question: string;
@@ -11,73 +9,45 @@ interface FAQItem {
 /**
  * Paikkakunnan omat kysymykset kaupunkisivun usein kysyttyihin.
  * Kohdelause näytetään vain, jos paikkakunnalta on oikea kohde tiedostossa projects.ts.
+ * Talokannan luvut ovat sivun omassa osiossa (CityHousingFacts), eivät enää UKK:ssa (tarkastus 12.10.2026).
  */
 export const getLocalCityFaq = (city: CityData, service: ProjectService): FAQItem[] => {
   const hasProject = getProjectItems(city.slug, service).length > 0;
-  const items: FAQItem[] = [];
-
-  if (service === "pinnoitus") {
-    items.push({
-      question: `Teettekö tiilikaton pinnoituksia ${city.cityIn}?`,
-      answer:
-        `Kyllä teemme. ${city.name} kuuluu toiminta-alueeseemme. Tulemme katsomaan katon ilmaiseksi, ja saat tarjouksen käynnin jälkeen.` +
-        (hasProject ? " Kuvia kohteistamme on tällä sivulla." : ""),
-    });
-  } else {
-    items.push({
-      question: `Teettekö talon maalauksia ${city.cityIn}?`,
-      answer:
-        `Kyllä teemme. ${city.name} kuuluu toiminta-alueeseemme. Eemil tulee katsomaan talon ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.` +
-        (hasProject ? " Kuvia kohteistamme on tällä sivulla." : ""),
-    });
-  }
-
-  items.push(...yleisetKysymykset(city, service));
-
-  const facts = housingFactsText(city.slug, city.cityIn, service);
-  if (facts) {
-    items.push({
-      question: `Kuinka paljon omakotitaloja ${city.cityIn} on?`,
-      answer: `${facts} Lähde: ${HOUSING_STATS_SOURCE_LABEL}.`,
-    });
-  }
-  return items;
+  const kuvat = hasProject ? " Kuvia kohteistamme on tällä sivulla." : "";
+  const paikkakunta: FAQItem =
+    service === "pinnoitus"
+      ? {
+          question: `Teettekö tiilikaton pinnoituksia ${city.cityIn}?`,
+          answer: `Kyllä. Tulemme ${city.cityTo} katsomaan katon ilmaiseksi, ja saat tarjouksen käynnin jälkeen.${kuvat}`,
+        }
+      : {
+          question: `Teettekö talon maalauksia ${city.cityIn}?`,
+          answer: `Kyllä. Eemil tulee ${city.cityTo} katsomaan talon ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.${kuvat}`,
+        };
+  return [paikkakunta, ...yleisetKysymykset(service)];
 };
 
 /**
- * Eerikin vastaukset 7.10.2026 muotoiltuna. Samat kaikilla paikkakunnilla; paikkakunnan nimi lauseessa.
- * Kotona olemisesta (Eerik 7.10.2026): arviokäynnillä pitää olla, etätarjousta ei tehdä; työn aikana mieluummin kotona.
+ * Eerikin vastaukset 7.10.2026 muotoiltuna. Samat kaikilla paikkakunnilla.
+ * Kotona olemisesta (Eerik 7.10.2026): arviokäynnillä pitää olla, tarjous tehdään paikan päällä; työn aikana mieluummin kotona.
+ * Karsittu 12.10.2026 (tarkastus): kaupunkisivun UKK on yhdessä faqData.ts:n kanssa enintään 10 kysymystä.
+ * Yhteydenoton ajankohta, käynnin nopeus ja kausi ovat yhdessä vastauksessa. Matkakuluista ei sanota mitään (Eerik 13.10.2026).
  */
-const yleisetKysymykset = (city: CityData, service: ProjectService): FAQItem[] => {
+const yleisetKysymykset = (service: ProjectService): FAQItem[] => {
   const katto = service === "pinnoitus";
-  const items: FAQItem[] = [
-    {
-      question: `Tuleeko matkasta lisäkulua ${city.cityIn}?`,
-      answer: `Ei tule. ${city.name} kuuluu toiminta-alueeseemme, ja hinta on sama koko alueella.`,
-    },
-    {
-      question: "Kuinka nopeasti pääsette katsomaan kohteen?",
-      answer: "Yleensä samalla viikolla, kun otat yhteyttä. Käynti on ilmainen, ja sen voi sopia myös illaksi tai viikonlopuksi.",
-    },
+  return [
     {
       question: "Milloin kannattaa ottaa yhteyttä?",
-      answer: "Mitä aikaisemmin, sitä parempi. Kesän työt täyttyvät pitkälti jo keväällä. Jos otat yhteyttä kesällä, työ menee yleensä loppukesään.",
-    },
-    {
-      question: "Milloin teette töitä?",
-      answer: "Kausi alkaa yleensä huhti–toukokuussa ja päättyy elo–syyskuussa. Teemme kattoja ja seiniä samaan aikaan.",
+      answer:
+        "Mitä aikaisemmin, sitä parempi. Kesän työt täyttyvät pitkälti jo keväällä, ja kesällä tilattu työ menee yleensä loppukesään. Kausi on huhti–toukokuusta elo–syyskuuhun. Katsomaan pääsemme yleensä samalla viikolla, myös illalla tai viikonloppuna.",
     },
     {
       question: "Pitääkö minun olla kotona?",
-      answer: `Arviokäynnillä kyllä. Käymme ${katto ? "katon" : "seinät"} ja tarjouksen läpi yhdessä paikan päällä, emmekä tee tarjousta etänä. Työn aikana on mukava, jos olet kotona, mutta pakollista se ei ole.`,
+      answer: `Arviokäynnillä kyllä. Tarjous tehdään aina paikan päällä, ja käymme ${katto ? "katon" : "seinät"} ja tarjouksen läpi yhdessä. Työn aikana on mukava, jos olet kotona, mutta pakollista se ei ole.`,
     },
     {
       question: "Mitä tapahtuu, jos kesken työn sataa?",
       answer: "Korjaamme kaikki sateen aiheuttamat jäljet ilman lisähintaa. Vastaamme siitä, että lopputulos on hyvä.",
-    },
-    {
-      question: "Voiko katon ja seinät tehdä samalla kertaa?",
-      answer: "Kyllä. Kun teemme sekä katon että seinät, saat edullisemman pakettihinnan.",
     },
     {
       question: "Teettekö myös kesämökkejä ja piharakennuksia?",
@@ -85,20 +55,7 @@ const yleisetKysymykset = (city: CityData, service: ProjectService): FAQItem[] =
     },
     {
       question: "Miten takuu toimii?",
-      answer: `Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen takuun puitteissa. ${katto ? "Tiilikaton pinnoituksella on 5 vuoden kirjallinen takuu." : "Talon maalauksella on 2 vuoden takuu."}`,
+      answer: `Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen takuulla. ${katto ? "Tiilikaton pinnoituksella on 5 vuoden kirjallinen takuu." : "Talon maalauksella on 2 vuoden takuu."}`,
     },
   ];
-  if (katto) {
-    items.splice(5, 0,
-      {
-        question: "Mistä vaihtotiilet tulevat?",
-        answer: "Jos sinulla on varatiiliä, käytämme niitä. Muuten voit hankkia tiilet itse, tai me haemme ne sovittua lisähintaa vastaan.",
-      },
-      {
-        question: "Voiko katon värin vaihtaa pinnoituksessa?",
-        answer: "Kyllä voi. Nowocoatin kattomaaleissa on laaja värivalikoima, joten katto voi saada pinnoituksessa myös uuden värin.",
-      },
-    );
-  }
-  return items;
 };

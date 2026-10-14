@@ -2,8 +2,8 @@ import { ChevronRight } from "lucide-react";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
-import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import ServiceContactSection from '@/components/ServiceContactSection';
+import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import SEO from '@/components/SEO';
 import { HERO_BASE, staticSeo } from "@/data/seo";
 import { TOIMINTA_ALUE } from "@/data/company";
@@ -35,7 +35,6 @@ const ToimintaAlueet = () => {
 
       <ToimintaAlueetBanner />
 
-
       <section className="section-padding bg-background">
         <div className="section-container max-w-4xl">
           <div className="text-base md:text-lg text-muted-foreground mb-12 space-y-4">
@@ -44,10 +43,7 @@ const ToimintaAlueet = () => {
               Pinnoitamme tiilikattoja ja maalaamme taloja {TOIMINTA_ALUE}. Suurin osa asiakkaistamme on Tampereella ja sen naapurikunnissa.
               Käymme myös Kanta-Hämeessä Hämeenlinnassa ja Forssassa sekä Huittisissa.
             </p>
-            <p>
-              Jos et ole varma, kuuluuko paikkakuntasi toiminta-alueeseemme, ota yhteyttä. Kerromme nopeasti, onnistuuko kohteesi, ja sovimme
-              tarvittaessa ilmaisen arviokäynnin.
-            </p>
+            <p>Jos paikkakuntaasi ei ole listassa, soita. Kerromme heti, teemmekö siellä asti.</p>
           </div>
 
           <div className="mb-12">

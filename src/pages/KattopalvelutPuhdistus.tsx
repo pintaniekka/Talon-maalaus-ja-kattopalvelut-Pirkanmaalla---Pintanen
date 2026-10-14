@@ -125,7 +125,7 @@ const KattopalvelutPuhdistus = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Milloin kannattaa puhdistuttaa katto?</h2>
             <div className="text-lg text-muted-foreground space-y-4">
               <p><strong className="text-foreground">Sammalta tai muuta kasvustoa katolla?</strong> Jo pienikin määrä sammalta kannattaa poistaa ennen kuin se aiheuttaa vahinkoa koko katolla.</p>
-              <p><strong className="text-foreground">Aikaa edellisestä puhdistuksessta?</strong> Säännöllinen puhdistus pitää katon hyvässä kunnossa ja estää kalliimmat korjaukset tulevaisuudessa.</p>
+              <p><strong className="text-foreground">Aikaa edellisestä puhdistuksesta?</strong> Säännöllinen puhdistus pitää katon hyvässä kunnossa ja estää kalliimmat korjaukset tulevaisuudessa.</p>
               <p><strong className="text-foreground">Myyntiä varten?</strong> Puhdas katto nostaa kiinteistön ensivaikutelmaa ja voi lisätä myyntiarvoa.</p>
             </div>
           </motion.div>

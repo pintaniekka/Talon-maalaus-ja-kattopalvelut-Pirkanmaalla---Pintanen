@@ -8,12 +8,12 @@ import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
 import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 
-export type QuoteService = "tiilikatto" | "ulkomaalaus" | "puhdistus" | "muu";
+export type QuoteService = "tiilikatto" | "ulkomaalaus" | "muu";
 
+/** Katon puhdistus on loppunut (12.10.2026), joten sitä ei voi enää valita. */
 const serviceOptions: { value: QuoteService; label: string }[] = [
   { value: "tiilikatto", label: "Tiilikaton pinnoitus" },
   { value: "ulkomaalaus", label: "Talon maalaus" },
-  { value: "puhdistus", label: "Katon puhdistus" },
   { value: "muu", label: "Jokin muu" },
 ];
 
@@ -101,7 +101,7 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
         <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-3">Kiitos, {name.trim()}!</h2>
         <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
           Tarjouspyyntösi on perillä. {callerName ? `${callerName} soittaa` : "Soitamme"} sinulle pian, ja sovimme ilmaisen
-          kuntotarkastuksen.
+          arviokäynnin.
         </p>
       </div>
     );

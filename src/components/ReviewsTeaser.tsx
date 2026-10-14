@@ -10,11 +10,12 @@ interface Props {
 }
 
 /**
- * Kaupunkisivun arvostelunosto (Eerik 12.10.2026): koko arvosteluseinä näkyy vain etusivulla ja
- * /kokemuksia/-sivulla. Tässä on kaksi paikkakunnan mukaan valittua arvostelua ja linkki kaikkiin.
+ * Kaupunkisivun arvostelunosto: koko arvosteluseinä näkyy vain etusivulla ja /kokemuksia/-sivulla.
+ * Tässä on neljä paikkakunnan ja palvelun mukaan valittua arvostelua (Eerik 13.10.2026: kaksi näytti
+ * kömpelöltä) kahdessa rivissä ja linkki kaikkiin.
  */
 const ReviewsTeaser = ({ citySlug, category }: Props) => {
-  const reviews = getTeaserTestimonials(citySlug, category, 2);
+  const reviews = getTeaserTestimonials(citySlug, category, 4);
   if (reviews.length === 0) return null;
 
   return (
@@ -23,7 +24,7 @@ const ReviewsTeaser = ({ citySlug, category }: Props) => {
         <h2 className="heading-style text-2xl md:text-3xl text-accent-ink text-center mb-8">Mitä asiakkaat sanovat meistä?</h2>
         <div className="grid sm:grid-cols-2 gap-5">
           {reviews.map((r, i) => (
-            <ReviewCard key={r.name} review={r} index={i} />
+            <ReviewCard key={`${r.name}-${i}`} review={r} index={i} />
           ))}
         </div>
         <p className="mt-6 text-center text-muted-foreground">

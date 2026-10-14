@@ -18,7 +18,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "tampere",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Tampereella",
     alueLocalHookText:
-      "Tampere on Näsijärven ja Pyhäjärven välissä. Veden lähellä katto ja seinät pysyvät sateen jälkeen pitkään kosteina. Siksi tiilikatto sammaloituu ja maali kuluu nopeammin. Pinnoitamme kattoja ja maalaamme taloja koko Tampereella, esimerkiksi Hervannassa, Pispalassa, Lielahdessa ja Linnainmaalla. Käynti on ilmainen.",
+      "Tampere on kotikaupunkimme, ja suurin osa kohteistamme on täällä ja naapurikunnissa. Tampere on Näsijärven ja Pyhäjärven välissä. Veden lähellä katto ja seinät pysyvät sateen jälkeen pitkään kosteina. Siksi tiilikatto sammaloituu ja maali kuluu nopeammin. Pinnoitamme kattoja ja maalaamme taloja koko Tampereella, esimerkiksi Hervannassa, Pispalassa, Lielahdessa ja Linnainmaalla. Käynti on ilmainen.",
   },
   {
     slug: "sastamala",

@@ -54,20 +54,19 @@ const KattopalvelutPinnoitus = () => {
         }
         lead={
           <>
-            Pesemme tiilikaton painepesulla ja maalaamme sen korkeapaineruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on
-            yleensä <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja annamme työlle 5 vuoden takuun. Tulemme katsomaan
-            kattosi ilmaiseksi.
+            Kulunutta tiilikattoa ei yleensä tarvitse uusia. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on yleensä{" "}
+            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja takuu on 5 vuotta. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
-        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
         trust="pinnoitus"
         image={{ base: HERO_BASE.pinnoitus, alt: "Kirkkaan punainen tiilikatto pinnoituksen jälkeen" }}
-        badge={{ title: "Yrittäjä itse katolla", text: "Eerik tekee työn itse." }}
+        badge={{ title: "Eerik tekee työn", text: "Pinnoittaa katon itse ja vastaa jäljestä." }}
         breadcrumbs={[{ name: "Tiilikaton pinnoitus" }]}
       />
 
-      <Lyhyesti items={pinnoitusLyhyesti()} />
+      <Lyhyesti content={pinnoitusLyhyesti} />
 
       {/* ═══ MIKSI AJOISSA ═══ */}
       <section className="section-padding bg-accent-light">
@@ -97,7 +96,7 @@ const KattopalvelutPinnoitus = () => {
                 <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Pakkasrapautuminen rikkoo kuluneen tiilen</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Suomen talvessa tiili jäätyy ja sulaa kymmeniä kertoja. Kun vesi on imeytynyt tiileen, jää laajenee ja murentaa
-                  tiiltä sisältäpäin. Tiili halkeilee, ja lopulta vesi pääsee aluskatteelle. Pinnoitus katkaisee tämän kierteen.
+                  tiiltä sisältäpäin. Tiili halkeilee, ja lopulta vesi pääsee aluskatteelle. Pinnoituksen jälkeen tiili ei ime vettä, eikä sammal saa otetta.
                 </p>
               </div>
 
@@ -105,15 +104,14 @@ const KattopalvelutPinnoitus = () => {
                 <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">Pesu ei riitä, jos tiilen pinta on kulunut</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Sammal ja jäkälä pitävät katon märkänä. Pesu poistaa kasvuston, mutta kulunut pinta imee vettä, vaikka katto olisi
-                  juuri pesty. Siksi pesemme katon ja maalaamme sen ruiskulla kahteen kertaan. Ahtaat paikat, joihin ruisku ei yllä,
-                  maalaamme telalla tai käsin.
+                  juuri pesty. Kulunut pinta pitää maalata.
                 </p>
               </div>
 
               <div>
                 <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                   <Search className="w-5 h-5 text-accent-ink" />
-                  Huomaatko nämä merkit katollasi?
+                  Merkit, että katto pitää pinnoittaa
                 </h4>
                 <ul className="space-y-3">
                   {warningSigns.map((w) => (
@@ -132,7 +130,7 @@ const KattopalvelutPinnoitus = () => {
                 className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
                 style={{ backgroundColor: "hsl(var(--accent-strong))" }}
               >
-                Pyydä ilmainen kuntotarkastus
+                Pyydä ilmainen arviokäynti
               </Link>
             </div>
           </div>
@@ -143,20 +141,15 @@ const KattopalvelutPinnoitus = () => {
         title="Näin tiilikaton pinnoitus etenee"
         intro="Omakotitalon katto valmistuu yleensä 2–4 työpäivässä. Pesun ja maalauksen välissä katto saa kuivua."
         steps={pinnoitusTyovaiheet}
-        cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
+        cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
       />
 
       {/* ═══ TIILIKATON MAALAUS = PINNOITUS (P2) ═══ */}
       <section className="section-padding bg-background">
         <div className="section-container max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Tiilikaton maalaus ja pinnoitus ovat sama asia</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Tiilikaton maalaus ja pinnoitus</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-            <p>
-              Joku hakee tietoa tiilikaton maalauksesta tai katon maalauksesta, toinen tiilikaton pinnoituksesta. Nämä tarkoittavat samaa
-              asiaa: pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon korkeapaineruiskulla kahteen kertaan.
-              Ensin tulee pohjamaali, sitten pintamaali.
-            </p>
-            <p>Käytämme Nowocoatin kattomaaleja.</p>
+            <p>Tiilikaton maalaus ja pinnoitus tarkoittavat samaa työtä. Me käytämme molempia sanoja.</p>
             <p>
               Hintaesimerkit ja laskuri:{" "}
               <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
@@ -180,7 +173,7 @@ const KattopalvelutPinnoitus = () => {
         <div className="section-container max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">Tiilikaton pinnoitus paikkakunnittain</h2>
           <p className="text-muted-foreground mb-6">
-            Pinnoitamme tiilikattoja Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta. Katso oman paikkakuntasi sivu:
+            Pinnoitamme tiilikattoja Pirkanmaalla ja lähikunnissa. Katso oman paikkakuntasi sivu:
           </p>
           <ul className="flex flex-wrap justify-center gap-3">
             {cityLinks.map((c) => (

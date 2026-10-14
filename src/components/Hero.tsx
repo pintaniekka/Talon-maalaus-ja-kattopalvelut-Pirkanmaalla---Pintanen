@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { Building2 } from "@/components/icons/BrandIcons";
+import PintanenMark from "@/components/icons/PintanenMark";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 
 const heroBase = "/images/Eerik-maalaa/Eerik-maalaa-kattoa";
@@ -21,7 +21,7 @@ const Hero = () => {
           <div className="inline-flex items-center gap-3 mb-6 md:mb-8">
             <span className="h-1 w-12 bg-accent rounded-full" aria-hidden="true" />
             <span className="text-accent-ink font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm">
-              Pirkanmaan paikallinen perheyritys
+              Perheyritys Tampereelta
             </span>
           </div>
 
@@ -31,10 +31,8 @@ const Hero = () => {
           </h1>
 
           <p className="hero-lead text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 max-w-2xl leading-relaxed font-sans">
-            <strong className="text-foreground">Perheyritys</strong>, jossa{" "}
-            <strong className="text-foreground">yrittäjät tekevät työn itse</strong>:{" "}
-            <strong className="text-foreground">tiilikaton pinnoitukset</strong> ja{" "}
-            <strong className="text-foreground">talon maalaukset</strong> Pirkanmaalla ja lähikunnissa noin tunnin säteellä Tampereelta.
+            <strong className="text-foreground">Eerik pinnoittaa tiilikatot ja Eemil maalaa talot</strong> Pirkanmaalla ja
+            lähikunnissa. Arviokäynti on ilmainen.
           </p>
 
           <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4 sm:gap-6 mb-10 md:mb-12">
@@ -108,21 +106,18 @@ const Hero = () => {
             aria-hidden="true"
           />
 
-          {/* Floating badge */}
+          {/* Punainen, hieman kallistettu tarra (Eerik 13.10.2026: tarrat takaisin). Kuvake on Pintasen oma merkki. */}
           <div className="absolute bottom-4 right-4 lg:bottom-10 lg:right-10 bg-roof-red text-roof-red-foreground p-4 lg:p-6 rounded-2xl lg:rounded-3xl shadow-2xl rotate-2 max-w-[210px] lg:max-w-[260px]">
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 lg:w-11 lg:h-11 bg-white/20 rounded-full shrink-0 flex items-center justify-center">
-                <Building2 className="w-5 h-5 lg:w-6 lg:h-6" />
+              <div className="w-9 h-9 lg:w-11 lg:h-11 bg-white rounded-full shrink-0 flex items-center justify-center text-roof-red">
+                <PintanenMark className="w-6 h-6 lg:w-7 lg:h-7" />
               </div>
               <div>
                 <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">
                   Yrittäjät itse paikalla
                 </p>
-                <p className="text-sm lg:text-base font-heading font-extrabold leading-tight mb-1">
-                  Eerik &amp; Eemil vastaavat jäljestä.
-                </p>
-                <p className="hidden sm:block text-xs text-white/80 font-sans">
-                  Ei välikäsiä, vain luotettavaa perheyrityksen laatua.
+                <p className="text-sm lg:text-base font-heading font-extrabold leading-tight">
+                  Eerik ja Eemil tekevät työn itse.
                 </p>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Check } from "lucide-react";
 
 /** Osion otsikko ja ingressi samalla tyylillä kaikilla hintasivuilla. */
@@ -28,24 +28,20 @@ export const PriceIncludes = ({ title, items, note }: { title: string; items: st
 );
 
 export interface PriceFactor {
-  icon: ComponentType<{ className?: string }>;
   title: string;
   description: string;
 }
 
-/** Korttirivi "mistä hinta syntyy". */
+/** "Mistä hinta syntyy": kaksipalstainen lista ilman ikoneita (tarkastus 12.10.2026, luku 3). */
 export const PriceFactors = ({ factors }: { factors: PriceFactor[] }) => (
-  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <dl className="grid sm:grid-cols-2 gap-x-10 gap-y-6 max-w-3xl mx-auto">
     {factors.map((factor) => (
-      <div key={factor.title} className="card-elevated">
-        <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-          <factor.icon className="w-6 h-6 text-primary" />
-        </div>
-        <h3 className="font-bold text-foreground mb-2">{factor.title}</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">{factor.description}</p>
+      <div key={factor.title} className="border-l-2 border-accent pl-4">
+        <dt className="font-bold text-foreground mb-1">{factor.title}</dt>
+        <dd className="text-muted-foreground leading-relaxed">{factor.description}</dd>
       </div>
     ))}
-  </div>
+  </dl>
 );
 
 /** Numeroitu tarkistuslista, esim. "mitä tarjouksesta kannattaa katsoa". */

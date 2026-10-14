@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { submitContactForm, formErrorMessage } from "@/lib/contactForm";
 import { isValidFinnishMobile, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
+import { VASTAUSLUPAUS } from "@/data/company";
 
 // Global open trigger – allows any component to open the drawer
 let globalOpenFn: (() => void) | null = null;
@@ -98,7 +99,7 @@ const DesktopQuoteDrawer = () => {
       );
       setIsSubmitted(true);
       setForm({ name: "", phone: "", address: "", postalCode: "", city: "", message: "", website: "" });
-      toast({ title: "Kiitos! Olemme sinuun yhteydessä pian." });
+      toast({ title: "Kiitos, viesti lähetetty", description: VASTAUSLUPAUS });
     } catch (err: unknown) {
       toast({ title: "Lähetys ei onnistunut", description: formErrorMessage(err), variant: "destructive" });
     } finally {
@@ -128,7 +129,7 @@ const DesktopQuoteDrawer = () => {
       <button
         onClick={handleOpen}
         data-track="tarjouspyynto"
-        aria-label="Tilaa maksuton arviokäynti"
+        aria-label="Pyydä ilmainen arviokäynti"
         className="hidden lg:flex fixed right-0 top-1/2 -translate-y-1/2 z-[60] items-center justify-center cursor-pointer group"
         style={{ writingMode: "vertical-rl" }}
       >
@@ -136,7 +137,7 @@ const DesktopQuoteDrawer = () => {
           className="flex items-center gap-2 px-3 py-6 rounded-l-xl text-accent-foreground font-semibold text-sm tracking-wide shadow-md transition-all duration-200 group-hover:px-4 group-hover:shadow-lg"
           style={{ backgroundColor: "hsl(var(--accent-strong))" }}
         >
-          Tilaa maksuton arviokäynti
+          Pyydä ilmainen arviokäynti
         </span>
       </button>
 
@@ -166,17 +167,16 @@ const DesktopQuoteDrawer = () => {
               aria-label="Pyydä arviokäynti"
               className="fixed z-[80] flex flex-col shadow-xl
                 bottom-0 left-0 right-0 max-h-[90dvh] rounded-t-2xl
-                lg:top-0 lg:bottom-0 lg:left-auto lg:right-0 lg:w-[380px] lg:max-w-[90vw] lg:max-h-none lg:rounded-t-none"
-              style={{ backgroundColor: "#f2e8d8" }}
+                lg:top-0 lg:bottom-0 lg:left-auto lg:right-0 lg:w-[380px] lg:max-w-[90vw] lg:max-h-none lg:rounded-t-none bg-card"
             >
               {/* Header */}
               <div className="flex items-start justify-between px-5 pt-5 pb-2 lg:px-6 lg:pt-6">
                 <div className="flex-1 pr-4">
                   <h2 className="text-lg font-bold text-foreground leading-snug">
-                    Pyydä meidät maksuttomalle arviokäynnille!
+                    Pyydä ilmainen arviokäynti
                   </h2>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Jätä tähän yhteystietosi, niin palaamme asiaan
+                    Jätä yhteystietosi. {VASTAUSLUPAUS}
                   </p>
                 </div>
                 <button

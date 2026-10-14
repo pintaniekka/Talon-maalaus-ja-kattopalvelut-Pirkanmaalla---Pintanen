@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import Hero from "@/components/Hero";
-import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import ReviewHighlights from "@/components/ReviewHighlights";
 import Services from "@/components/Services";
 import MiksiPintanen from "@/components/MiksiPintanen";
@@ -17,6 +16,11 @@ const ChatPriceCalculator = lazyWithRetry(() => import("@/components/ChatPriceCa
 const Gallery = lazyWithRetry(() => import("@/components/Gallery"));
 const SEOTextSection = lazyWithRetry(() => import("@/components/SEOTextSection"));
 
+/**
+ * Etusivu. Arvosteluja on yksi osio (ReviewHighlights, kolme korttia ja linkki kaikkiin);
+ * 28 kortin seinä poistettiin 12.10.2026 (tarkastus, kohta 3). Palvelut- ja kotitalousvähennys-
+ * osioissa on esikatselun vaihtoehdot `?palvelut=a|b|c|d` ja `?vahennys=a|b|c|d`.
+ */
 const Index = () => {
   return (
     <>
@@ -28,9 +32,7 @@ const Index = () => {
         <ChatPriceCalculator />
       </Suspense>
       <MiksiPintanen />
-      <TestimonialsMarquee title="Lisää asiakkaiden arvosteluja" />
-  <Suspense fallback={<div className="section-padding" aria-hidden="true" />}>
-
+      <Suspense fallback={<div className="section-padding" aria-hidden="true" />}>
         <Gallery />
       </Suspense>
       <FAQSection items={generalFAQ} />

@@ -1,5 +1,5 @@
 /**
- * Työvaiheet ja "Lyhyesti"-faktat yhdessä paikassa. Samat tekstit näkyvät palvelusivuilla,
+ * Työvaiheet ja "Lyhyesti"-nauhan faktat yhdessä paikassa. Samat tekstit näkyvät palvelusivuilla,
  * kaupunkisivuilla ja llms.txt:ssä, joten työ kuvataan kaikkialla samalla tavalla.
  * Sanasto: katto = pesu painepesulla, rikkinäiset tiilet uusiin, maalaus ruiskulla kahteen kertaan
  * (pohjamaali + pintamaali), ahtaat paikat telalla tai käsin. Talo = homepesu, kaavinta,
@@ -20,7 +20,7 @@ export const MAALAUS_HINTA = fmtRange(maalausPrices.general.min, maalausPrices.g
 export const pinnoitusTyovaiheet: Tyovaihe[] = [
   {
     title: "Ilmainen kuntotarkastus",
-    text: "Tulemme katsomaan katon. Tarkistamme tiilet, aluskatteen ja läpiviennit. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
+    text: "Tulemme katsomaan katon. Tarkistamme katon, aluskatteen ja ympäristön. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
   },
   {
     title: "Suojaus",
@@ -51,7 +51,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Suojaus",
-    text: "Suojaamme terassit, ikkunat ja pihan huolellisesti ennen työtä.",
+    text: "Suojaamme terassit, ikkunat ja pihan ennen työtä.",
   },
   {
     title: "Homepesu",
@@ -67,7 +67,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Pintamaali pensselillä",
-    text: "Maalaamme seinät pensselillä. Sateella emme maalaa.",
+    text: "Maalaamme seinät pensselillä. Sateella ei maalata.",
   },
   {
     title: "Lopputarkastus ja takuu",
@@ -75,23 +75,36 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
 ];
 
-/** "Lyhyesti"-laatikon lauseet (P8). Paikkakunta lisätään ensimmäiseen lauseeseen, jos annettu. */
-export const pinnoitusLyhyesti = (cityIn?: string): string[] => [
-  `Pinnoitamme tiilikattoja ${cityIn ?? "Pirkanmaalla ja lähikunnissa"}.`,
-  "Pesemme katon painepesulla ja vaihdamme rikkinäiset tiilet uusiin.",
-  "Maalaamme katon korkeapaineruiskulla kahteen kertaan: pohjamaali ja pintamaali. Ahtaat paikat telalla tai käsin.",
-  "Työ kestää yleensä 2–4 päivää, ja työllä on 5 vuoden takuu.",
-  `Hinta on yleensä ${PINNOITUS_HINTA}. Työn osuudesta saat kotitalousvähennyksen.`,
-  "Kuntotarkastus on ilmainen.",
-];
+export interface LyhyestiFakta {
+  label: string;
+  value: string;
+}
 
-/** "Lyhyesti"-laatikon lauseet maalaukselle (P9). */
-export const maalausLyhyesti = (cityIn?: string): string[] => [
-  `Maalaamme talojen ulkoseinät ${cityIn ?? "Pirkanmaalla ja lähikunnissa"}.`,
-  "Pesemme seinät homepesuaineella ja kaavimme irtoavan maalin.",
-  "Pohjamaalaamme paljaat kohdat ja maalaamme pintamaalin pensselillä.",
-  "Työ kestää yleensä 3–7 päivää. Takuu on 2 vuotta.",
-  `Hinta on yleensä ${MAALAUS_HINTA}. Työn osuudesta saat kotitalousvähennyksen.`,
-  "Arviokäynti on ilmainen.",
-];
+export interface LyhyestiSisalto {
+  /** Neljä merkittyä faktaa: hinta, kesto, pesu, maalaus. Takuu ja arviokäynti ovat jo herossa (Eerik 14.10.2026). */
+  facts: LyhyestiFakta[];
+  /** Yksi lyhyt lisätieto, joka ei toista työvaiheita (ne ovat heron johdannossa ja työvaihelistassa). */
+  note: string;
+}
 
+/** "Lyhyesti"-nauhan sisältö tiilikaton pinnoitukselle (Eerik 13.10.2026: ei tarkistuslistaa, ei toistoa). */
+export const pinnoitusLyhyesti: LyhyestiSisalto = {
+  facts: [
+    { label: "Hinta yleensä", value: PINNOITUS_HINTA },
+    { label: "Kesto", value: "2–4 päivää" },
+    { label: "Pesu", value: "Painepesu + torjunta-aine" },
+    { label: "Maalaus", value: "Kahteen kertaan ruiskulla" },
+  ],
+  note: "Pinnoitus ja maalaus tarkoittavat samaa työtä. Maali on Nowocoat.",
+};
+
+/** "Lyhyesti"-nauhan sisältö talon maalaukselle. */
+export const maalausLyhyesti: LyhyestiSisalto = {
+  facts: [
+    { label: "Hinta yleensä", value: MAALAUS_HINTA },
+    { label: "Kesto", value: "3–7 päivää" },
+    { label: "Pesu", value: "Homepesu harjoilla" },
+    { label: "Maalaus", value: "Pohjamaali ja pintamaali pensselillä" },
+  ],
+  note: "Maali on pääsääntöisesti Tikkurila.",
+};

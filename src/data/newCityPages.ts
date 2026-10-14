@@ -51,7 +51,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Akaassa: Toijala, Viiala ja Kylmäkoski",
     pinnoitusLocalHookText:
-      "Akaa syntyi vuonna 2007, kun Toijala ja Viiala yhdistyivät. Kylmäkoski liittyi kaupunkiin vuonna 2011. Pinnoitamme tiilikattoja kaikissa kolmessa taajamassa ja niiden ympäristössä. Toijalasta on Tampereelle noin 41 kilometriä. Tulemme ensin katsomaan kattosi, ja käynti on ilmainen. Katsomme tiilet, aluskatteen ja läpiviennit. Sen jälkeen kerromme suoraan, riittääkö pinnoitus.",
+      "Akaa syntyi vuonna 2007, kun Toijala ja Viiala yhdistyivät. Kylmäkoski liittyi kaupunkiin vuonna 2011. Pinnoitamme tiilikattoja kaikissa kolmessa taajamassa ja niiden ympäristössä. Toijalasta on Tampereelle noin 41 kilometriä. Tulemme ensin katsomaan kattosi, ja käynti on ilmainen. Katsomme katon, aluskatteen ja ympäristön. Sen jälkeen kerromme suoraan, riittääkö pinnoitus.",
     maalausLocalHookTitle: "Puutalon maalaus Toijalassa, Viialassa ja Kylmäkoskella",
     maalausLocalHookText:
       "Akaassa on paljon vanhoja taloja. Kaupungin 4 998 omakoti- ja paritalosta 2 179 on rakennettu ennen vuotta 1960. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja Toijalassa, Viialassa ja Kylmäkoskella. Hän pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat puukohdat ja maalaa pintamaalin pensselillä. Arviokäynti on ilmainen.",
@@ -134,7 +134,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Urjalassa valtatie 9:n varrella",
     pinnoitusLocalHookText:
-      "Urjala on valtatie 9:n varrella, ja Tampereelle on matkaa 60 kilometriä. Kunnan ainoa taajama on kirkonkylä, ja yli puolet asukkaista asuu sen ulkopuolella. Pinnoitamme tiilikattoja kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa. Tulemme ensin katsomaan kattosi, ja käynti on ilmainen. Katsomme tiilet, aluskatteen ja läpiviennit. Sen jälkeen kerromme suoraan, riittääkö pinnoitus.",
+      "Urjala on valtatie 9:n varrella, ja Tampereelle on matkaa 60 kilometriä. Kunnan ainoa taajama on kirkonkylä, ja yli puolet asukkaista asuu sen ulkopuolella. Pinnoitamme tiilikattoja kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa. Tulemme ensin katsomaan kattosi, ja käynti on ilmainen. Katsomme katon, aluskatteen ja ympäristön. Sen jälkeen kerromme suoraan, riittääkö pinnoitus.",
     maalausLocalHookTitle: "Talon maalaus Urjalassa: toiminta-alueemme vanhimmat talot",
     maalausLocalHookText:
       "Urjalassa on 2 216 omakoti- ja paritaloa, ja niistä 1 237 on rakennettu ennen vuotta 1960. Osuus on suurempi kuin missään muussa toiminta-alueemme kunnassa. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja Urjalan kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa. Arviokäynti on ilmainen.",

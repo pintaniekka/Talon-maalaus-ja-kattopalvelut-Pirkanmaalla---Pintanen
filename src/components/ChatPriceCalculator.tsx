@@ -1,12 +1,14 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Loader2 } from 'lucide-react';
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
-import { submitContactForm } from '@/lib/contactForm';
-import FormPrivacyNote from '@/components/FormPrivacyNote';
+import { submitContactForm, formErrorMessage } from '@/lib/contactForm';
+import FormPrivacyNote, { HoneypotField } from '@/components/FormPrivacyNote';
 import { useToast } from '@/hooks/use-toast';
 import CityCombobox from '@/components/CityCombobox';
 import PhoneInput from '@/components/PhoneInput';
+import { YHTEYSTIEDOT } from '@/data/company';
+import { calculateWallPrice, calculateRoofPrice, formatPriceRange } from '@/lib/priceCalc';
 import {
   isValidFinnishMobile,
   formatToInternational,
@@ -14,11 +16,20 @@ import {
   PHONE_CHECKING_LABEL,
 } from '@/lib/phoneValidation';
 
+/**
+ * Etusivun chat-hintalaskuri (Eerik 13.10.2026: chat takaisin, "olen saanut siitä paljon kehuja").
+ * Kysymykset ja kaavat ovat samat kuin /hintalaskuri-sivun laskurissa (src/lib/priceCalc.ts).
+ * Liidiportti: nimi ja puhelinnumero kysytään ennen hinnan näyttämistä, ja tiedot lähtevät
+ * myyntiin ja CRM:ään submitContactForm-funktion kautta. Emojit ovat chatissa sallittuja.
+ */
 
 // ── Avatar ─────────────────────────────────────────────────────────────────
 const eerikImage = getStorageUrl('Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp');
 
-import { calculateWallPrice, calculateRoofPrice } from '@/lib/priceCalc';
+/** Botin "kirjoittaa…" -viive millisekunteina. */
+const TYPING_DELAY_MS = 1000;
+const MIN_M2 = 10;
+const MAX_M2 = 2000;
 
 // ── Types ──────────────────────────────────────────────────────────────────
 type ServicePath = 'maalaus' | 'pinnoitus' | null;
@@ -117,6 +128,7 @@ const ChatPriceCalculator = () => {
   const [cityInput, setCityInput] = useState('');
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
+  const [website, setWebsite] = useState(''); // honeypot – oikea käyttäjä ei täytä tätä
   const [phoneError, setPhoneError] = useState(false);
   const [isCheckingPhone, setIsCheckingPhone] = useState(false);
   const phoneCheckTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -125,13 +137,15 @@ const ChatPriceCalculator = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const hasAutoStarted = useRef(false);
   const { toast } = useToast();
+  const headingId = useId();
 
   // Collected data
   const dataRef = useRef<Record<string, string>>({});
 
   const scrollToBottom = useCallback(() => {
     setTimeout(() => {
-      scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
+      const el = scrollRef.current;
+      if (el && typeof el.scrollTo === 'function') el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
     }, 100);
   }, []);
 
@@ -144,7 +158,7 @@ const ChatPriceCalculator = () => {
         setMessages(prev => [...prev, { id: `bot-${Date.now()}-${Math.random()}`, from: 'bot', text }]);
         scrollToBottom();
         resolve();
-      }, 1000);
+      }, TYPING_DELAY_MS);
     });
   }, [scrollToBottom]);
 
@@ -157,8 +171,8 @@ const ChatPriceCalculator = () => {
   const startChat = useCallback(async () => {
     setChatStarted(true);
     setStepUI(null);
-    await addBotMessage('Moikka! 👋 Oletko miettinyt, mitä kotisi maalaus tai katon pinnoitus voisi maksaa? Kokeile helppoa laskuriamme.');
-    await addBotMessage('Aloitetaan! Kumpaa lähdetään laskemaan?');
+    await addBotMessage('Moikka! 👋 Mietitkö, mitä katon pinnoitus tai talon maalaus maksaisi? Lasketaan se yhdessä, vie noin minuutin.');
+    await addBotMessage('Kumpaa lähdetään laskemaan?');
     setStepUI({
       kind: 'image-options',
       options: [
@@ -175,11 +189,11 @@ const ChatPriceCalculator = () => {
     if (selectedPath === 'maalaus') {
       switch (step) {
         case 2:
-          await addBotMessage('Hienoa! Lähdetään liikkeelle talon koosta. Kuinka monta pohjaneliötä talossasi on suunnilleen? Pelkkä numero riittää.');
+          await addBotMessage('Hyvä valinta! 🏡 Kuinka monta pohjaneliötä talossa on suunnilleen? Pelkkä numero riittää.');
           setStepUI({ kind: 'number', placeholder: 'esim. 150', suffix: 'm²' });
           break;
         case 3:
-          await addBotMessage('Selvä homma. Entä kerrosten määrä?');
+          await addBotMessage('Selvä. Entä montako kerrosta talossa on?');
           setStepUI({ kind: 'options', options: [
             { label: '1 kerros', value: '1' },
             { label: '1,5 kerrosta', value: '1.5' },
@@ -187,7 +201,7 @@ const ChatPriceCalculator = () => {
           ] });
           break;
         case 4:
-          await addBotMessage('Missä kunnossa nykyinen maalipinta on? Onko havaittavissa hilseilyä tai lohkeilua?');
+          await addBotMessage('Missä kunnossa nykyinen maali on? Hilseileekö tai lohkeileeko se?');
           setStepUI({ kind: 'options', options: [
             { label: 'Ei ollenkaan', value: 'none' },
             { label: 'Vähän (1–2 seinällä)', value: '1-2' },
@@ -195,22 +209,22 @@ const ChatPriceCalculator = () => {
           ] });
           break;
         case 5:
-          await addBotMessage('Hyvä tietää. Varmistetaan vielä pari käytännön asiaa: onhan kohteessa saatavilla vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
+          await addBotMessage('Hyvä tietää. Vielä pari käytännön asiaa: löytyykö pihalta vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
           setStepUI({ kind: 'options', options: [
-            { label: 'Kyllä löytyy!', value: 'kylla' },
+            { label: 'Kyllä löytyy', value: 'kylla' },
             { label: 'Ei löydy', value: 'ei' },
           ] });
           break;
         case 6:
           if (dataRef.current.utilities === 'ei') {
-            await addBotMessage('Aivan, tästä täytyy keskustella tarkemmin paikan päällä. Missä päin kohde muuten sijaitsee (kaupunki)?');
+            await addBotMessage('Selvä, sovitaan käytännöt paikan päällä. Millä paikkakunnalla kohde on?');
           } else {
-            await addBotMessage('Mahtavaa! Missä päin kohde muuten sijaitsee (kaupunki)?');
+            await addBotMessage('Hienoa. Millä paikkakunnalla kohde on?');
           }
           setStepUI({ kind: 'city' });
           break;
         case 7:
-          await addBotMessage('Kiitos tiedoista! Laitan laskimen raksuttamaan... 🔢 Saisinko tähän väliin nimesi ja puhelinnumerosi, niin voimme palata asiaan tarkemmin?');
+          await addBotMessage('Kiitos! Laskin raksuttaa jo. 🔢 Jätä vielä nimi ja puhelinnumero, niin näytän arvion ja voimme palata asiaan.');
           setStepUI({ kind: 'contact' });
           break;
         default:
@@ -219,11 +233,11 @@ const ChatPriceCalculator = () => {
     } else if (selectedPath === 'pinnoitus') {
       switch (step) {
         case 2:
-          await addBotMessage('Hienoa! Lähdetään liikkeelle katon koosta. Mikä on katon arvioitu pinta-ala neliöissä? (Huom: katto on suurempi kuin talon pohja).');
+          await addBotMessage('Hyvä valinta! 🏠 Kuinka suuri katto on neliöinä? Katto on yleensä isompi kuin talon pohja, arvio riittää.');
           setStepUI({ kind: 'number', placeholder: 'esim. 200', suffix: 'm²' });
           break;
         case 3:
-          await addBotMessage('Miltä katon yleiskunto näyttää? Onko siellä rikkinäisiä tiiliä?');
+          await addBotMessage('Miltä katto näyttää? Onko siinä rikkinäisiä tiiliä?');
           setStepUI({ kind: 'options', options: [
             { label: 'Ei ole', value: 'ei' },
             { label: '1–5 rikkinäistä', value: '1-5' },
@@ -231,14 +245,14 @@ const ChatPriceCalculator = () => {
           ] });
           break;
         case 4:
-          await addBotMessage('Entä löytyykö tiilien alta ehjä aluskate?');
+          await addBotMessage('Entä onko tiilien alla ehjä aluskate?');
           setStepUI({ kind: 'options', options: [
             { label: 'Löytyy kyllä', value: 'kylla' },
             { label: 'En ole varma, parempi tulla tarkastamaan', value: 'epävarma' },
           ] });
           break;
         case 5:
-          await addBotMessage('Vielä yksi tärkeä kysymys: kuinka jyrkkä katto on?');
+          await addBotMessage('Vielä yksi tärkeä: kuinka jyrkkä katto on?');
           setStepUI({ kind: 'options', options: [
             { label: 'Loiva, melkein tasakatto', value: 'loiva' },
             { label: 'Normaali jyrkkyys, valjailla pärjää', value: 'normaali' },
@@ -246,22 +260,22 @@ const ChatPriceCalculator = () => {
           ] });
           break;
         case 6:
-          await addBotMessage('Varmistetaan vielä pari käytännön asiaa: onhan kohteessa saatavilla vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
+          await addBotMessage('Vielä pari käytännön asiaa: löytyykö pihalta vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
           setStepUI({ kind: 'options', options: [
-            { label: 'Kyllä löytyy!', value: 'kylla' },
+            { label: 'Kyllä löytyy', value: 'kylla' },
             { label: 'Ei löydy', value: 'ei' },
           ] });
           break;
         case 7:
           if (dataRef.current.utilities === 'ei') {
-            await addBotMessage('Aivan, tästä täytyy keskustella tarkemmin paikan päällä. Missä päin kohde sijaitsee?');
+            await addBotMessage('Selvä, sovitaan käytännöt paikan päällä. Millä paikkakunnalla kohde on?');
           } else {
-            await addBotMessage('Selvä juttu! Missä päin kohde sijaitsee?');
+            await addBotMessage('Hienoa. Millä paikkakunnalla kohde on?');
           }
           setStepUI({ kind: 'city' });
           break;
         case 8:
-          await addBotMessage('Kiitos! Laitan laskimen raksuttamaan... 🔢 Saisinko vielä nimesi ja puhelinnumerosi?');
+          await addBotMessage('Kiitos! Laskin raksuttaa jo. 🔢 Jätä vielä nimi ja puhelinnumero, niin näytän arvion.');
           setStepUI({ kind: 'contact' });
           break;
         default:
@@ -306,6 +320,15 @@ const ChatPriceCalculator = () => {
   const handleNumberSubmit = useCallback(async () => {
     const val = numberInput.trim();
     if (!val || isNaN(Number(val)) || Number(val) <= 0) return;
+    if (Number(val) < MIN_M2 || Number(val) > MAX_M2) {
+      addUserMessage(`${val} m²`);
+      setNumberInput('');
+      const ui = stepUI;
+      setStepUI(null);
+      await addBotMessage(`Hmm, tarkista vielä luku 🙂 Anna pinta-ala neliöinä väliltä ${MIN_M2}–${MAX_M2}, esimerkiksi 200.`);
+      setStepUI(ui);
+      return;
+    }
     addUserMessage(`${val} m²`);
     dataRef.current.squareMeters = val;
     setNumberInput('');
@@ -313,7 +336,7 @@ const ChatPriceCalculator = () => {
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
     await advanceFlow(nextStep, path);
-  }, [numberInput, addUserMessage, currentStep, path, advanceFlow]);
+  }, [numberInput, addUserMessage, addBotMessage, stepUI, currentStep, path, advanceFlow]);
 
   const handleTextSubmit = useCallback(async () => {
     const val = textInput.trim();
@@ -340,7 +363,7 @@ const ChatPriceCalculator = () => {
 
   const handleContactSubmit = useCallback(async () => {
     if (!contactName.trim() || !contactPhone.trim()) {
-      toast({ title: 'Täytä tiedot', description: 'Nimi ja puhelinnumero ovat pakollisia.', variant: 'destructive' });
+      toast({ title: 'Täytä tiedot', description: 'Nimi ja puhelinnumero tarvitaan, jotta voimme näyttää arvion.', variant: 'destructive' });
       return;
     }
 
@@ -368,47 +391,53 @@ const ChatPriceCalculator = () => {
     let details = '';
 
     if (path === 'maalaus') {
-      const p = calculateWallPrice(Number(d.squareMeters), d.stories, d.peeling);
-      priceStr = `${p.min.toLocaleString('fi-FI')} – ${p.max.toLocaleString('fi-FI')} €`;
+      priceStr = formatPriceRange(calculateWallPrice(Number(d.squareMeters), d.stories, d.peeling));
       const storyLabels: Record<string, string> = { '1': '1 kerros', '1.5': '1,5 kerrosta', '2': '2 kerrosta' };
       const peelingLabels: Record<string, string> = { none: 'Ei hilseilyä', '1-2': '1–2 seinällä', '3+': 'Yli 3 seinällä' };
-      details = `Pohjaneliöt: ${d.squareMeters} m², Kerrokset: ${storyLabels[d.stories] || d.stories}, Hilseily: ${peelingLabels[d.peeling] || d.peeling}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä' : 'Ei'}, Kaupunki: ${d.city || '-'}`;
+      details = `Pohjaneliöt: ${d.squareMeters} m², Kerrokset: ${storyLabels[d.stories] || d.stories}, Hilseily: ${peelingLabels[d.peeling] || d.peeling}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä löytyy' : 'Ei löydy'}, Kaupunki: ${d.city || '-'}`;
     } else {
-      const p = calculateRoofPrice(Number(d.squareMeters), d.slope);
-      priceStr = `${p.min.toLocaleString('fi-FI')} – ${p.max.toLocaleString('fi-FI')} €`;
+      priceStr = formatPriceRange(calculateRoofPrice(Number(d.squareMeters), d.slope));
       const brokenLabels: Record<string, string> = { ei: 'Ei rikkinäisiä', '1-5': '1–5 rikkinäistä', '5-20': '5–20 rikkinäistä' };
       const slopeLabels: Record<string, string> = { loiva: 'Loiva', normaali: 'Normaali', jyrkka: 'Todella jyrkkä' };
-      details = `Katon koko: ${d.squareMeters} m², Rikkinäiset tiilet: ${brokenLabels[d.brokenTiles] || d.brokenTiles}, Aluskate: ${d.underlayment === 'kylla' ? 'Löytyy' : 'Epävarma'}, Jyrkkyys: ${slopeLabels[d.slope] || d.slope}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä' : 'Ei'}, Kaupunki: ${d.city || '-'}`;
+      details = `Katon koko: ${d.squareMeters} m², Rikkinäiset tiilet: ${brokenLabels[d.brokenTiles] || d.brokenTiles}, Aluskate: ${d.underlayment === 'kylla' ? 'Löytyy' : 'Epävarma'}, Jyrkkyys: ${slopeLabels[d.slope] || d.slope}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä löytyy' : 'Ei löydy'}, Kaupunki: ${d.city || '-'}`;
     }
 
     try {
       await submitContactForm({
         name: contactName,
         phone: internationalPhone,
+        website,
         service: path === 'maalaus' ? 'ulkomaalaus' : 'tiilikatto',
         city: d.city || undefined,
-        message: `Chat-hintalaskuri: ${details}`,
+        message: `Chat-hintalaskuri (etusivu): ${details}`,
         priceEstimate: priceStr,
         calculatorDetails: details,
       },
         "etusivun chat-laskuri"
       );
 
-      const priceMsg = path === 'maalaus'
-        ? `Kiitos! 🎉 Alustava hinta-arvio maalaukselle on ${priceStr}. Tämä on tosiaan suuntaa antava arvio. Tulen mielelläni paikan päälle tekemään ilmaisen ja tarkan arvion!`
-        : `Kiitos! 🎉 Alustava hinta-arvio on ${priceStr}. Olemme sinuun pikaisesti yhteydessä!`;
-
-      await addBotMessage(priceMsg);
-    } catch {
-      toast({ title: 'Virhe', description: 'Jokin meni pieleen. Yritä uudelleen tai soita meille.', variant: 'destructive' });
+      const firstName = contactName.trim().split(/\s+/)[0];
+      const tyo = path === 'maalaus' ? 'maalaukselle' : 'pinnoitukselle';
+      await addBotMessage(
+        `Kiitos ${firstName}! 🎉 Alustava hinta-arvio ${tyo} on ${priceStr}. Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.`,
+      );
+    } catch (err) {
+      // Lomake ei väitä onnistuneensa: virhe kerrotaan chatissa ja yhteystietokentät jäävät näkyviin.
+      await addBotMessage(`Hups, lähetys ei onnistunut (${formErrorMessage(err)}). Kokeile uudelleen tai soita meille: ${YHTEYSTIEDOT.eerik.phone}.`);
+      setStepUI({ kind: 'contact' });
     } finally {
       setIsSubmitting(false);
     }
-  }, [contactName, contactPhone, path, addBotMessage, toast, addUserMessage]);
+  }, [contactName, contactPhone, website, path, addBotMessage, toast, addUserMessage]);
 
   // Auto-start on scroll into view
   useEffect(() => {
     if (!sectionRef.current || hasAutoStarted.current) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      hasAutoStarted.current = true;
+      startChat();
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasAutoStarted.current) {
@@ -428,7 +457,7 @@ const ChatPriceCalculator = () => {
   }, [messages, isTyping, scrollToBottom]);
 
   return (
-    <section ref={sectionRef} className="section-padding" style={{ backgroundColor: '#ecf7ff' }}>
+    <section id="hintalaskuri" ref={sectionRef} aria-labelledby={headingId} className="section-padding bg-accent-light scroll-mt-24">
       <style>{`
         @keyframes chatBounce {
           0%, 60%, 100% { transform: translateY(0); }
@@ -444,11 +473,11 @@ const ChatPriceCalculator = () => {
         >
           {/* Header */}
           <div className="text-center mb-6">
-            <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-3">
-              Laske tästä hinta-arvio maalaukselle
+            <h2 id={headingId} className="heading-style text-3xl md:text-4xl text-accent-ink mb-3">
+              Hintalaskuri
             </h2>
             <p className="text-foreground/80 text-base md:text-lg leading-relaxed">
-              Vastaa muutamaan kysymykseen ja saat <strong className="text-foreground">alustavan hinta-arvion</strong> heti.
+              Laske hinta-arvio katon pinnoitukselle tai talon maalaukselle. Vie noin minuutin.
             </p>
           </div>
 
@@ -469,8 +498,7 @@ const ChatPriceCalculator = () => {
             {/* Messages area */}
             <div
               ref={scrollRef}
-              className="px-4 py-4 min-h-[280px] max-h-[480px] overflow-y-auto"
-              style={{ backgroundColor: '#ecf7ff' }}
+              className="px-4 py-4 min-h-[280px] max-h-[480px] overflow-y-auto bg-accent-light"
             >
               <AnimatePresence>
                 {messages.map(msg =>
@@ -560,6 +588,7 @@ const ChatPriceCalculator = () => {
                     </div>
                     <button
                       type="submit"
+                      aria-label="Lähetä"
                       disabled={!numberInput.trim()}
                       className="px-4 py-2.5 bg-primary text-primary-foreground rounded-xl disabled:opacity-40 hover:bg-primary/90 transition-colors"
                     >
@@ -583,6 +612,7 @@ const ChatPriceCalculator = () => {
                     />
                     <button
                       type="submit"
+                      aria-label="Lähetä"
                       disabled={!textInput.trim()}
                       className="px-4 py-2.5 bg-primary text-primary-foreground rounded-xl disabled:opacity-40 hover:bg-primary/90 transition-colors"
                     >
@@ -603,6 +633,7 @@ const ChatPriceCalculator = () => {
                     </div>
                     <button
                       type="button"
+                      aria-label="Lähetä"
                       onClick={() => {
                         if (cityInput.trim()) {
                           handleCitySubmit(cityInput.trim());
@@ -618,7 +649,8 @@ const ChatPriceCalculator = () => {
                 )}
 
                 {stepUI.kind === 'contact' && (
-                  <div className="space-y-2">
+                  <div className="relative space-y-2">
+                    <HoneypotField value={website} onChange={setWebsite} />
                     <input
                       type="text"
                       value={contactName}
@@ -645,7 +677,7 @@ const ChatPriceCalculator = () => {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          Lasketaan...
+                          Lasketaan…
                         </>
                       ) : isCheckingPhone ? (
                         <>
@@ -659,7 +691,7 @@ const ChatPriceCalculator = () => {
                         </>
                       )}
                     </button>
-                    <FormPrivacyNote variant="light" />
+                    <FormPrivacyNote />
                   </div>
                 )}
               </div>

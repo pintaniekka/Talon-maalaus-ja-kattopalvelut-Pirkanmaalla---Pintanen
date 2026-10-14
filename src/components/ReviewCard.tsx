@@ -24,11 +24,13 @@ const Stars = ({ stars }: { stars: number }) => (
 
 interface Props {
   review: Testimonial;
+  /** Järjestysnumero: valitsee alkukirjainpallon värin. */
   index?: number;
 }
 
 /**
  * Yksi Google-arvostelu kokonaan näkyvissä (ei leikkausta eikä animaatiota). Teksti sanasta sanaan.
+ * Alkukirjainpallo on Googlen profiilikuvan tilalla (Eerik 13.10.2026: kuvia ei voi hakea, kirjain riittää).
  * Käytetään Kokemuksia-sivun ruudukossa ja kaupunkisivujen arvostelunostossa.
  */
 const ReviewCard = ({ review, index = 0 }: Props) => {
@@ -41,7 +43,7 @@ const ReviewCard = ({ review, index = 0 }: Props) => {
           style={{ backgroundColor: avatarColors[index % avatarColors.length] }}
           aria-hidden="true"
         >
-          {review.name[0]}
+          {review.name[0].toUpperCase()}
         </span>
         <span className="flex-1 min-w-0 leading-tight">
           <span className="block font-bold text-foreground font-heading">{review.name}</span>

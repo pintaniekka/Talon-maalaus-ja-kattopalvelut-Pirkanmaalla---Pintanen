@@ -8,9 +8,9 @@ const afterBase = "violetti-puutalo-varinvaihto-peittomaalaus-jalkeen";
 
 const warningSignsData = [
   { sign: 'Maali hilseilee tai lohkeilee', desc: 'Kosteus on päässyt maalin alle ja heikentänyt sen tartunnan puuhun.' },
-  { sign: 'Pinta liituuntuu tai haalistuu', desc: 'Maalipinta on hapettunut, eikä se enää hylje vettä tai likaa.' },
+  { sign: 'Pinta liituuntuu tai haalistuu', desc: 'Maali on kulunut, ja vesi imeytyy puuhun.' },
   { sign: 'Mustat pilkut seinässä', desc: (<>Pilkut ovat hometta tai likaa. Seinä <strong className="text-foreground">pestään homepesuaineella ennen maalausta</strong>.</>) },
-  { sign: 'Halkeamat paneelien päissä', desc: 'Puu on päässyt kastumaan ja kuivumaan toistuvasti, mikä on rikkonut puun rakenteen.' },
+  { sign: 'Halkeamat paneelien päissä', desc: 'Puu on harmaantunut ja säröillä.' },
 ];
 
 const MaalausProblemSection = () => {
@@ -47,7 +47,7 @@ const MaalausProblemSection = () => {
                 Maali pitää veden pois puusta
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Syksyn viistosade ja talven kostea ilma kastelevat suojaamattoman puun. Märkä puu <strong className="text-foreground">laajenee ja kutistuu</strong>, ja laudat halkeilevat. Jatkuva kosteus on myös hyvä kasvualusta homeelle ja laholle. Ehjä maalipinta pitää veden puun ulkopuolella, ja ulkoverhous kestää pitkään.
+                Syksyn sateet kastelevat seinän. Jos maali ei pidä, puu kastuu ja homehtuu.
               </p>
             </div>
 
@@ -56,14 +56,14 @@ const MaalausProblemSection = () => {
                 Aurinko haalistaa ja haurastuttaa maalin
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Aurinko haalistaa maalin ja harmaannuttaa paljaan puun. Harmaantunut puu on nukkainen, eikä uusi maali tartu siihen kunnolla. Siksi <strong className="text-foreground">paljaat kohdat pohjamaalataan</strong> ennen pintamaalia. Eteläseinä kuluu yleensä ensin.
+                Aurinko haalistaa maalin ja harmaannuttaa paljaan puun. Harmaantuneeseen puuhun uusi maali ei tartu kunnolla. Paljaat kohdat pohjamaalataan ennen pintamaalia. Eteläseinä kuluu yleensä ensin.
               </p>
             </div>
 
             <div>
               <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
                 <Search className="w-5 h-5 text-accent-ink" />
-                Onko talosi seinässä näitä merkkejä?
+                Merkit, että talo pitää maalata
               </h4>
               <ul className="space-y-3">
                 {warningSignsData.map((w) => (

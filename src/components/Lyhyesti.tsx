@@ -1,25 +1,38 @@
-import { Check } from "lucide-react";
+import type { LyhyestiSisalto } from "@/data/tyovaiheet";
+import { cn } from "@/lib/utils";
 
 /**
- * "Lyhyesti"-laatikko heron alle (P8–P9): 4–6 lyhyttä virkettä, joissa on luku ja yksikkö.
- * Sama kaava kuin artikkeleissa. Tekoälyhaku lainaa mieluiten juuri tällaisen tiivistelmän.
- * Ei animaatiota: teksti on HTML:ssä heti.
+ * "Lyhyesti"-nauha heron alle (Eerik 13.10.2026): neljä merkittyä faktaa rivissä (puhelimessa 2 × 2),
+ * ohuet viivat välissä ja yksi lyhyt lisätieto. Ei tarkistuslistaa eikä laatikkoa, ei työvaiheiden toistoa.
+ * Pitkät arvot (pesu- ja maalaustapa, Eerik 14.10.2026) näytetään pienemmällä, jotta nauha pysyy neljässä sarakkeessa.
+ * Pieni "Lyhyesti"-otsikko jää tekoälyhakua varten. Ei animaatiota: teksti on HTML:ssä heti.
  */
-const Lyhyesti = ({ items, title = "Lyhyesti" }: { items: string[]; title?: string }) => (
+const Lyhyesti = ({ content, title = "Lyhyesti" }: { content: LyhyestiSisalto; title?: string }) => (
   <section className="bg-background pb-10 md:pb-14" aria-labelledby="lyhyesti-otsikko">
     <div className="section-container">
-      <div className="max-w-4xl mx-auto bg-accent-light border-l-4 border-accent rounded-2xl px-6 py-5 md:px-8 md:py-6">
-        <h2 id="lyhyesti-otsikko" className="font-heading font-extrabold text-sm uppercase tracking-[0.18em] text-accent-ink mb-3">
+      <div className="mx-auto max-w-4xl border-y border-border py-5 md:py-6">
+        <h2 id="lyhyesti-otsikko" className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           {title}
         </h2>
-        <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
-          {items.map((item) => (
-            <li key={item} className="flex items-start gap-2.5 text-foreground leading-snug">
-              <Check className="w-4 h-4 mt-1 text-accent-ink flex-shrink-0" aria-hidden="true" />
-              <span>{item}</span>
-            </li>
+        <dl className="grid grid-cols-2 gap-y-5 md:grid-cols-4">
+          {content.facts.map((fact) => (
+            <div
+              key={fact.label}
+              className="border-border even:border-l even:pl-4 md:[&:not(:first-child)]:border-l md:[&:not(:first-child)]:pl-5 md:[&:not(:last-child)]:pr-5"
+            >
+              <dt className="text-sm text-muted-foreground">{fact.label}</dt>
+              <dd
+                className={cn(
+                  "mt-0.5 font-heading font-extrabold leading-tight text-foreground",
+                  fact.value.length > 16 ? "text-base md:text-lg" : "text-xl md:text-2xl",
+                )}
+              >
+                {fact.value}
+              </dd>
+            </div>
           ))}
-        </ul>
+        </dl>
+        {content.note && <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">{content.note}</p>}
       </div>
     </div>
   </section>

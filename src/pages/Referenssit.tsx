@@ -8,7 +8,7 @@ import { HERO_BASE, staticSeo } from "@/data/seo";
 import ResponsiveImage from '@/components/ResponsiveImage';
 import { getResponsiveSrc, getResponsiveSrcSet, getResponsiveUrl } from '@/lib/storage';
 
-type Category = 'all' | 'pinnoitus' | 'puhdistus' | 'maalaus';
+type Category = 'all' | 'pinnoitus' | 'maalaus';
 
 interface ProjectImage {
   baseName: string;
@@ -177,7 +177,6 @@ const Referenssit = () => {
   const categories: { key: Category; label: string }[] = [
     { key: 'all', label: 'Kaikki' },
     { key: 'pinnoitus', label: 'Tiilikaton pinnoitus' },
-    { key: 'puhdistus', label: 'Katon puhdistus' },
     { key: 'maalaus', label: 'Talon maalaus' },
   ];
 
@@ -212,7 +211,7 @@ const Referenssit = () => {
     {
       type: 'group',
       title: 'Tiilikaton puhdistus – Sastamala',
-      category: 'puhdistus',
+      category: 'pinnoitus',
       images: [
         { baseName: 'sammaleinen-tiilikatto-ennen-mekaanista-puhdistusta', label: 'Sammaleinen tiilikatto ennen mekaanista puhdistusta Sastamalassa' },
         { baseName: 'puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen', label: 'Puhdas tiilikatto mekaanisen puhdistuksen jälkeen Sastamalassa' },
@@ -285,8 +284,8 @@ const Referenssit = () => {
     { type: 'single', baseName: 'tummanharmaa-kattotiili-pesu-ja-pinnoitustyo', category: 'pinnoitus', title: 'Tummanharmaa kattotiili pesu ja pinnoitustyö Pirkanmaalla' },
     { type: 'single', baseName: 'vastamaalattu-tiilikatto-kattopinnoitus-jalkeen', category: 'pinnoitus', title: 'Vastamaalattu tiilikatto kattopinnoitus jälkeen Pirkanmaalla' },
     { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-ennen-jalkeen', category: 'pinnoitus', title: 'Tiilikaton pesu ja pinnoitus ennen jälkeen Pirkanmaalla' },
-    { type: 'single', baseName: 'tiilikaton-pesu-ja-sammaleenpoisto', category: 'puhdistus', title: 'Tiilikaton pesu ja sammaleenpoisto Pirkanmaalla' },
-    { type: 'single', baseName: 'tiilikaton-harjatiivisteen-asennus-kattohuolto', category: 'puhdistus', title: 'Tiilikaton harjatiivisteen asennus kattohuolto Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pesu-ja-sammaleenpoisto', category: 'pinnoitus', title: 'Tiilikaton pesu ja sammaleenpoisto Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-harjatiivisteen-asennus-kattohuolto', category: 'pinnoitus', title: 'Tiilikaton harjatiivisteen asennus Pirkanmaalla' },
     { type: 'single', baseName: 'huolellinen-ympariston-suojaus-ennen-maalausta', category: 'maalaus', title: 'Huolellinen ympäristön suojaus ennen maalausta Pirkanmaalla' },
     { type: 'single', baseName: 'talon-julkisivun-ja-ikkunoiden-suojaustyot', category: 'maalaus', title: 'Talon julkisivun ja ikkunoiden suojaustyöt Pirkanmaalla' },
     { type: 'single', baseName: 'punainen-tiilikatto-kattopinnoitus-ja-huolto-jalkeen', category: 'pinnoitus', title: 'Punainen tiilikatto kattopinnoitus ja huolto jälkeen Pirkanmaalla' },
@@ -370,16 +369,7 @@ const Referenssit = () => {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center mb-12 space-y-4"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink font-heading">Referenssejä kattotöistä ja ulkomaalauksista</h2>
-            <p className="text-muted-foreground text-base">
-              Käy kurkkaamassa töitämme <strong>Pirkanmaan</strong> alueella. Olemme tehneet tiilikattojen pinnoituksia, katon puhdistuksia ja talojen ulkomaalauksia monissa paikoissa Pirkanmaalla ja lähikunnissa.
-            </p>
-            <p className="text-muted-foreground text-base">
-              Kuvista näet, että hyviä tuloksia saadaan, kun työ tehdään huolellisesti ja ammattitaidolla. Jokainen projekti on erilainen, mutta tavoitteemme on aina sama – <strong>hyvä lopputulos ja siisti työnjälki.</strong>
-            </p>
-            <p className="text-muted-foreground text-base">
-              Teemme töitä noin tunnin ajomatkan säteellä Tampereelta.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink font-heading">Tiilikaton pinnoituksia ja talon maalauksia</h2>
           </motion.div>
 
           <motion.div

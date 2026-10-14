@@ -13,7 +13,7 @@ const defaults: Record<WizardService, { title: string; image: string; bullets: s
   pinnoitus: {
     title: "Laske oman kattosi hinta minuutissa",
     image: "tiilikaton-pinnoitus-tampere-tiilitalo-jalkeen",
-    bullets: ["Viisi kysymystä katostasi", "Hinta-arvio heti", "Ilmainen kuntotarkastus, jos haluat"],
+    bullets: ["Viisi kysymystä katostasi", "Hinta-arvio heti", "Ilmainen arviokäynti, jos haluat"],
   },
   maalaus: {
     title: "Laske oman talosi maalauksen hinta minuutissa",

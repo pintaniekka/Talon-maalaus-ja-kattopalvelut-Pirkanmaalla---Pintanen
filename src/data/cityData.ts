@@ -4,6 +4,8 @@ import { vanhatKaupunkisivut } from "./vanhatKaupunkisivut";
 export interface CityData {
   name: string;
   cityIn: string;
+  /** Tulosija: "Tulemme Tampereelle." */
+  cityTo: string;
   cityGenitive: string;
   slug: string;
   /** Pinnoituksen kaupunkisivun paikallinen teksti. Sivu on olemassa vain, jos otsikko on annettu. */
@@ -34,6 +36,7 @@ const citiesBase: CityData[] = [
   {
     name: "Tampere",
     cityIn: "Tampereella",
+    cityTo: "Tampereelle",
     cityGenitive: "Tampereen",
     slug: "tampere",
     puhdistusMetaTitle: "Katon puhdistus Tampere – Poistaa sammaleen",
@@ -47,6 +50,7 @@ const citiesBase: CityData[] = [
   {
     name: "Sastamala",
     cityIn: "Sastamalassa",
+    cityTo: "Sastamalaan",
     cityGenitive: "Sastamalan",
     slug: "sastamala",
     puhdistusMetaTitle: "Katon puhdistus Sastamala – Katto puhtaaksi kerralla",
@@ -60,6 +64,7 @@ const citiesBase: CityData[] = [
   {
     name: "Hämeenkyrö",
     cityIn: "Hämeenkyrössä",
+    cityTo: "Hämeenkyröön",
     cityGenitive: "Hämeenkyrön",
     slug: "hameenkyro",
     puhdistusMetaTitle: "Katon puhdistus Hämeenkyrö – Turvallisesti ja huolellisesti",
@@ -73,6 +78,7 @@ const citiesBase: CityData[] = [
   {
     name: "Ylöjärvi",
     cityIn: "Ylöjärvellä",
+    cityTo: "Ylöjärvelle",
     cityGenitive: "Ylöjärven",
     slug: "ylojarvi",
     puhdistusMetaTitle: "Katon puhdistus Ylöjärvi – Pidentää katon ikää",
@@ -86,6 +92,7 @@ const citiesBase: CityData[] = [
   {
     name: "Nokia",
     cityIn: "Nokialla",
+    cityTo: "Nokialle",
     cityGenitive: "Nokian",
     slug: "nokia",
     puhdistusMetaTitle: "Katon puhdistus Nokia – Ammattitaidolla",
@@ -99,6 +106,7 @@ const citiesBase: CityData[] = [
   {
     name: "Forssa",
     cityIn: "Forssassa",
+    cityTo: "Forssaan",
     cityGenitive: "Forssan",
     slug: "forssa",
     puhdistusMetaTitle: "Katon puhdistus Forssa – Säännöllinen huolto kannattaa",
@@ -112,6 +120,7 @@ const citiesBase: CityData[] = [
   {
     name: "Hämeenlinna",
     cityIn: "Hämeenlinnassa",
+    cityTo: "Hämeenlinnaan",
     cityGenitive: "Hämeenlinnan",
     slug: "hameenlinna",
     puhdistusMetaTitle: "Katon puhdistus Hämeenlinna – Ilmainen arvio",
@@ -125,6 +134,7 @@ const citiesBase: CityData[] = [
   {
     name: "Huittinen",
     cityIn: "Huittisissa",
+    cityTo: "Huittisiin",
     cityGenitive: "Huittisten",
     slug: "huittinen",
     puhdistusMetaTitle: "Katon puhdistus Huittinen – Poistaa levän ja sammaleen",
@@ -142,96 +152,112 @@ const simpleCitiesBase: CityData[] = [
   {
     name: "Akaa",
     cityIn: "Akaassa",
+    cityTo: "Akaaseen",
     cityGenitive: "Akaan",
     slug: "akaa",
   },
   {
     name: "Ikaalinen",
     cityIn: "Ikaalisissa",
+    cityTo: "Ikaalisiin",
     cityGenitive: "Ikaalisten",
     slug: "ikaalinen",
   },
   {
     name: "Juupajoki",
     cityIn: "Juupajoella",
+    cityTo: "Juupajoelle",
     cityGenitive: "Juupajoen",
     slug: "juupajoki",
   },
   {
     name: "Kangasala",
     cityIn: "Kangasalla",
+    cityTo: "Kangasalle",
     cityGenitive: "Kangasalan",
     slug: "kangasala",
   },
   {
     name: "Kihniö",
     cityIn: "Kihniössä",
+    cityTo: "Kihniöön",
     cityGenitive: "Kihniön",
     slug: "kihnio",
   },
   {
     name: "Lempäälä",
     cityIn: "Lempäälässä",
+    cityTo: "Lempäälään",
     cityGenitive: "Lempäälän",
     slug: "lempaala",
   },
   {
     name: "Mänttä-Vilppula",
     cityIn: "Mänttä-Vilppulassa",
+    cityTo: "Mänttä-Vilppulaan",
     cityGenitive: "Mänttä-Vilppulan",
     slug: "mantta-vilppula",
   },
   {
     name: "Orivesi",
     cityIn: "Orivedellä",
+    cityTo: "Orivedelle",
     cityGenitive: "Oriveden",
     slug: "orivesi",
   },
   {
     name: "Parkano",
     cityIn: "Parkanossa",
+    cityTo: "Parkanoon",
     cityGenitive: "Parkanon",
     slug: "parkano",
   },
   {
     name: "Pirkkala",
     cityIn: "Pirkkalassa",
+    cityTo: "Pirkkalaan",
     cityGenitive: "Pirkkalan",
     slug: "pirkkala",
   },
   {
     name: "Pälkäne",
     cityIn: "Pälkäneellä",
+    cityTo: "Pälkäneelle",
     cityGenitive: "Pälkäneen",
     slug: "palkane",
   },
   {
     name: "Ruovesi",
     cityIn: "Ruovedellä",
+    cityTo: "Ruovedelle",
     cityGenitive: "Ruoveden",
     slug: "ruovesi",
   },
   {
     name: "Urjala",
     cityIn: "Urjalassa",
+    cityTo: "Urjalaan",
     cityGenitive: "Urjalan",
     slug: "urjala",
   },
   {
     name: "Valkeakoski",
     cityIn: "Valkeakoskella",
+    cityTo: "Valkeakoskelle",
     cityGenitive: "Valkeakosken",
     slug: "valkeakoski",
   },
   {
     name: "Vesilahti",
     cityIn: "Vesilahdella",
+    cityTo: "Vesilahdelle",
     cityGenitive: "Vesilahden",
     slug: "vesilahti",
   },
   {
     name: "Virrat",
     cityIn: "Virroilla",
+    cityTo: "Virroille",
     cityGenitive: "Virtain",
     slug: "virrat",
   },

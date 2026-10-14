@@ -26,6 +26,7 @@ const GoogleIcon = () => (
   </svg>
 );
 
+/** Yksi arvostelu karusellissa: nimikirjaimet, nimi, tähdet, teksti ja Google-merkki. */
 export const TestimonialCard = ({ name, stars, text }: { name: string; stars: number; text: string }) => {
   const isLong = text.length > LONG_TEXT_THRESHOLD;
   const [expanded, setExpanded] = useState(false);
@@ -33,10 +34,10 @@ export const TestimonialCard = ({ name, stars, text }: { name: string; stars: nu
   return (
     <div className="flex-shrink-0 w-[300px] sm:w-[340px] self-start bg-card rounded-xl p-5 shadow-sm border border-border/50 mx-2 [scroll-snap-align:center]">
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-semibold font-heading">
+        <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-semibold font-heading" aria-hidden="true">
           {getInitials(name)}
         </div>
-        <span className="font-medium text-sm text-foreground">{name}</span>
+        <span className="font-semibold text-sm text-foreground font-heading">{name}</span>
       </div>
       <div className="flex gap-0.5 mb-2" role="img" aria-label={`${stars} tähteä viidestä`}>
         {Array.from({ length: 5 }, (_, i) => (
@@ -193,6 +194,3 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
 };
 
 export default TestimonialsMarquee;
-
-
-

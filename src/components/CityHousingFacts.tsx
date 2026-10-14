@@ -34,7 +34,7 @@ const copy: Record<Service, { title: (cityIn: string) => string; advice: string;
     title: (cityIn) => `Minkä ikäisiä taloja ${cityIn} on?`,
     advice:
       "Tiilen tehdaspinta kuluu yleensä 10–15 vuodessa. Jos talossasi on tiilikatto näiltä vuosilta eikä sitä ole pinnoitettu, pinta on todennäköisesti jo kulunut. Tulemme katsomaan katon ilmaiseksi.",
-    cta: "Pyydä ilmainen kuntotarkastus",
+    cta: "Pyydä ilmainen arviokäynti",
     href: "/tarjouspyynto/?palvelu=pinnoitus",
   },
   maalaus: {

@@ -4,7 +4,7 @@ import SEO from "@/components/SEO";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import PriceWizard, { type WizardService } from "@/components/laskuri/PriceWizard";
 import { staticSeo } from "@/data/seo";
-import { roofTestimonials, wallTestimonials } from "@/data/testimonialsData";
+import { getRoofAndWallTestimonials } from "@/data/testimonialsData";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 /* Valmiiksi sumennettu taustakuva (Nokian tummanharmaa katto): CSS-blur raskaalla kuvalla nykii selatessa. */
@@ -12,12 +12,13 @@ const bgBase = "hintalaskuri-tausta";
 const bgSrc = getResponsiveSrc(bgBase);
 const bgSrcSet = getResponsiveSrcSet(bgBase);
 
-const testimonials = [roofTestimonials[0], wallTestimonials[0]].filter(Boolean);
+/* Kaksi kattoarvostelua ja kaksi seinäarvostelua, ei samaa kahdesti (Eerik 13.10.2026: neljä, ei kaksi). */
+const testimonials = getRoofAndWallTestimonials(2, 0);
 
 const toService = (value: string | null): WizardService | null =>
   value === "pinnoitus" || value === "maalaus" ? value : null;
 
-/** /hintalaskuri: sivuston ainoa hintalaskuri etusivun chat-laskurin lisäksi. */
+/** /hintalaskuri: sivuston ainoa hintalaskuri etusivun laskurin lisäksi. */
 const Hintalaskuri = () => {
   const [params] = useSearchParams();
   const initialService = toService(params.get("palvelu"));
@@ -46,15 +47,14 @@ const Hintalaskuri = () => {
               Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa.
             </p>
             <p className="mt-4 text-base text-primary-foreground/80 leading-relaxed">
-              Katon arvio perustuu katon kokoon, jyrkkyyteen ja kuntoon. Talon arvio perustuu talon kokoon, kerroksiin ja pohjatöiden
-              määrään. Arvio on suuntaa antava. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen, kun olemme nähneet kohteen.
+              Laskuri kysyy katon tai talon koon ja kunnon ja antaa hinta-arvion. Tarkan hinnan saat, kun olemme käyneet paikalla.
             </p>
           </div>
 
           <PriceWizard initialService={initialService} />
 
           {testimonials.length > 0 && (
-            <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mt-10">
+            <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto mt-10">
               {testimonials.map((t) => (
                 <figure key={t.name} className="bg-primary/70 rounded-2xl p-5 text-primary-foreground">
                   <div className="flex gap-0.5 mb-2" role="img" aria-label={`${t.stars} tähteä viidestä`}>

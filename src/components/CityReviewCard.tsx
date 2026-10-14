@@ -33,14 +33,15 @@ const VerifiedBadge = () => (
 interface Props {
   review: Testimonial;
   reviewCase: ReviewCase;
-  index: number;
+  /** Järjestysnumero: valitsee alkukirjainpallon värin. */
+  index?: number;
 }
 
 /**
  * Asiakkaan Google-arvostelu ja sama kohde kuvina (ennen ja jälkeen tai yksi kuva).
- * Arvostelun teksti sanasta sanaan; kertomus on Eerikin.
+ * Arvostelun teksti sanasta sanaan; kertomus on Eerikin. Alkukirjainpallo on profiilikuvan tilalla.
  */
-const CityReviewCard = ({ review, reviewCase, index }: Props) => {
+const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
   const photos = reviewCase.before && reviewCase.after
     ? [
         { base: reviewCase.before, label: "Ennen" },
@@ -59,7 +60,7 @@ const CityReviewCard = ({ review, reviewCase, index }: Props) => {
             style={{ backgroundColor: avatarColors[index % avatarColors.length] }}
             aria-hidden="true"
           >
-            {review.name[0]}
+            {review.name[0].toUpperCase()}
           </span>
           <span className="font-bold text-foreground font-heading flex-1 leading-tight">{review.name}</span>
           <GoogleG />

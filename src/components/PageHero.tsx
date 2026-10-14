@@ -1,14 +1,16 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { Building2 } from "@/components/icons/BrandIcons";
+import PintanenMark from "@/components/icons/PintanenMark";
 import Breadcrumbs, { type Crumb } from "@/components/Breadcrumbs";
-import { GOOGLE_PROFILE_URL, LUVUT, SITE_UPDATED, paivaFi } from "@/data/company";
+import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 /**
  * Alasivujen hero etusivun mallilla (auditoinnin korjaus 1): valkoinen kortti vaalealla pohjalla,
  * vasemmalle tasattu H1, keltainen pääpainike, luottamusrivi kortin sisällä ja kuva oikealla.
+ * Kuvan päällä on punainen, hieman kallistettu tarra Pintasen omalla merkillä (Eerik 13.10.2026: tarrat takaisin).
+ * "Päivitetty pp.kk.vvvv" -riviä ei näytetä (Eerik 13.10.2026).
  * Ei sisääntuloanimaatiota: H1 ja ingressi näkyvät heti, myös ilman JavaScriptiä.
  */
 
@@ -30,7 +32,7 @@ export const trustFor = (variant: TrustVariant): TrustItem[] => {
         google,
         { value: LUVUT.pinnoitetutKatot, label: "Pinnoitettua kattoa" },
         { value: "5 v", label: "Takuu työlle" },
-        { value: "0 €", label: "Kuntotarkastus", tone: "blue" },
+        { value: "0 €", label: "Arviokäynti", tone: "blue" },
       ];
     case "maalaus":
       return [
@@ -71,8 +73,6 @@ interface PageHeroProps {
   image: PageHeroImage;
   badge?: { title: string; text: string } | null;
   breadcrumbs?: Crumb[];
-  /** Näytetäänkö "Päivitetty pp.kk.vvvv" (P5). Oletus true. */
-  updated?: boolean;
   children?: ReactNode;
 }
 
@@ -82,7 +82,7 @@ const toneClass: Record<NonNullable<TrustItem["tone"]>, string> = {
   default: "text-foreground",
 };
 
-const defaultBadge = { title: "Yrittäjät itse paikalla", text: "Eerik & Eemil vastaavat jäljestä." };
+const defaultBadge = { title: "Perheyritys Tampereelta", text: "Eerik ja Eemil tekevät työn itse." };
 
 const PageHero = ({
   eyebrow,
@@ -94,7 +94,6 @@ const PageHero = ({
   image,
   badge = defaultBadge,
   breadcrumbs,
-  updated = true,
   children,
 }: PageHeroProps) => {
   const trustItems = Array.isArray(trust) ? trust : trustFor(trust);
@@ -169,12 +168,6 @@ const PageHero = ({
               );
             })}
           </div>
-
-          {updated && (
-            <p className="mt-5 text-xs text-muted-foreground">
-              Päivitetty <time dateTime={SITE_UPDATED}>{paivaFi(SITE_UPDATED)}</time>
-            </p>
-          )}
         </div>
 
         <div className="relative w-full lg:w-1/3 min-h-[260px] md:min-h-[340px] lg:min-h-full overflow-hidden bg-muted">
@@ -198,8 +191,8 @@ const PageHero = ({
           {badge && (
             <div className="absolute bottom-4 right-4 lg:bottom-8 lg:right-8 bg-roof-red text-roof-red-foreground p-4 lg:p-5 rounded-2xl lg:rounded-3xl shadow-2xl rotate-2 max-w-[210px] lg:max-w-[250px]">
               <div className="flex items-start gap-3">
-                <div className="w-9 h-9 bg-white/20 rounded-full shrink-0 flex items-center justify-center">
-                  <Building2 className="w-5 h-5" />
+                <div className="w-9 h-9 bg-white rounded-full shrink-0 flex items-center justify-center text-roof-red">
+                  <PintanenMark className="w-6 h-6" />
                 </div>
                 <div>
                   <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">{badge.title}</p>

@@ -24,9 +24,12 @@ describe("reittilista (src/data/routes.ts) vs App.tsx", () => {
   it("kaupunkisivut on johdettu samasta cityData-lähteestä", () => {
     for (const c of allCities) expect(canonicalPaths.has(`/maalauspalvelut-${c.slug}`)).toBe(true);
     for (const c of pinnoitusCities) expect(canonicalPaths.has(`/tiilikaton-pinnoitus-${c.slug}`)).toBe(true);
-    for (const c of puhdistusCities) expect(canonicalPaths.has(`/katon-puhdistus-${c.slug}`)).toBe(true);
-    // Puhdistussivuja ei tehdä uusille paikkakunnille.
-    expect(puhdistusCities.length).toBe(8);
+    // Katon puhdistus on loppunut: puhdistussivut ovat vanhoja osoitteita, jotka ohjataan pinnoitussivuille.
+    for (const c of puhdistusCities) {
+      expect(canonicalPaths.has(`/katon-puhdistus-${c.slug}`)).toBe(false);
+      expect(legacyRedirects).toContainEqual({ from: `/katon-puhdistus-${c.slug}`, to: `/tiilikaton-pinnoitus-${c.slug}` });
+    }
+    expect(legacyRedirects).toContainEqual({ from: "/katon-puhdistus-pirkanmaa", to: "/tiilikaton-pinnoitus-pirkanmaa" });
     for (const c of maalausCities) expect(canonicalPaths.has(`/talon-maalaus-${c.slug}`)).toBe(true);
   });
 
@@ -75,6 +78,7 @@ describe("reittilista (src/data/routes.ts) vs App.tsx", () => {
       expect(xml).toContain(`<loc>${loc}</loc>`);
     }
     expect(xml).not.toContain("/alue/");
+    expect(xml).not.toContain("/katon-puhdistus");
     expect(xml).not.toContain("/hinnat/");
   });
 });
@@ -193,12 +197,4 @@ describe("sivukohtainen lastmod (sisällön tiiviste)", () => {
     }
   });
 
-  it("katon puhdistus -sivut ovat matalalla prioriteetilla (palvelu loppunut)", () => {
-    for (const r of canonicalRoutes) {
-      if (r.path.startsWith("/katon-puhdistus")) {
-        expect(r.priority).toBeLessThanOrEqual(0.3);
-        expect(r.changefreq).toBe("yearly");
-      }
-    }
-  });
 });

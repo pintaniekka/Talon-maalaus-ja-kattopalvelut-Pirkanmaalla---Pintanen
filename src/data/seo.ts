@@ -12,7 +12,7 @@
  *
  * EI komponentti-importteja: tiedosto luetaan myös Nodessa build-aikana.
  */
-import { type CityData, allCities, maalausCities, pinnoitusCities, puhdistusCities } from "./cityData";
+import { type CityData, allCities, maalausCities, pinnoitusCities } from "./cityData";
 import { articles } from "./articles";
 import { getCityHeroBase } from "./projects";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
@@ -67,12 +67,10 @@ export const cityHeroBase = (slug: string, service: "pinnoitus" | "maalaus" | "a
 /** Staattisten sivujen pääkuvat (samat kuin sivukomponenttien heroissa). */
 const staticHero: Record<string, RouteSeo["hero"]> = {
   "/tiilikaton-pinnoitus-pirkanmaa": cardHero(HERO_BASE.pinnoitus),
-  "/katon-puhdistus-pirkanmaa": fullHero(HERO_BASE.puhdistus),
   "/talon-maalaus-pirkanmaa": cardHero(HERO_BASE.maalaus),
   "/hintalaskuri": fullHero("hintalaskuri-tausta"),
   "/tarjouspyynto": fullHero("hintalaskuri-tausta"),
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": cardHero(HERO_BASE.pinnoitusHinta),
-  "/katon-puhdistus-hinta-pirkanmaa": fullHero(HERO_BASE.puhdistus),
   "/talon-maalaus-hinta-pirkanmaa": cardHero(HERO_BASE.maalausHinta),
   "/meista": cardHero(HERO_BASE.meista),
   "/yhteystiedot": cardHero(HERO_BASE.meista),
@@ -120,11 +118,6 @@ export const staticSeo: Record<string, RouteSeo> = {
     description:
       "Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Vastaa muutamaan kysymykseen ja saat suuntaa antavan hinta-arvion heti. Pirkanmaa.",
   },
-  "/katon-puhdistus-hinta-pirkanmaa": {
-    title: "Katon puhdistus hinta – Sammaleen poisto ja suojakäsittely",
-    description:
-      "Paljonko katon puhdistus maksaa? Katso hintaesimerkit, mitä puhdistus sisältää ja milloin pelkkä pesu riittää. Toimimme Pirkanmaalla ja Kanta-Hämeessä.",
-  },
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": {
     title: "Tiilikaton pinnoitus hinta 2027 – hintaesimerkit ja laskuri",
     description: `Tiilikaton pinnoitus maksaa omakotitalossa yleensä ${PINNOITUS_HINTA}. Katso hintaesimerkit, laske arvio laskurilla ja lue, mitä hintaan kuuluu. Pirkanmaa.`,
@@ -146,11 +139,6 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/tiilikaton-pinnoitus-pirkanmaa": {
     title: "Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Pintanen",
     description: `Tiilikaton pinnoitus Pirkanmaalla: painepesu, rikkinäiset tiilet uusiin ja maalaus ruiskulla kahteen kertaan. Hinta yleensä ${PINNOITUS_HINTA}, 5 v takuu.`,
-  },
-  "/katon-puhdistus-pirkanmaa": {
-    title: "Katon puhdistus Pirkanmaa – Ilmainen arvio",
-    description:
-      "Tiilikaton puhdistus Pirkanmaalla. Sammal ja lika poistetaan mekaanisesti ilman painepesua, ja katto saa kasvustontorjunta-aineen. Ilmainen kuntotarkastus.",
   },
   "/talon-maalaus-pirkanmaa": {
     title: "Talon maalaus Pirkanmaa – ulkomaalaus ja julkisivumaalaus",
@@ -186,13 +174,6 @@ export const staticSeo: Record<string, RouteSeo> = {
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
   title: `Tiilikaton pinnoitus ja maalaus ${city.name} | Pintanen`,
   description: `Tiilikaton pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
-});
-
-export const puhdistusCitySeo = (city: CityData): RouteSeo => ({
-  title: city.puhdistusMetaTitle || `Tiilikaton puhdistus ${city.name}`,
-  description:
-    city.puhdistusMetaDesc ||
-    `Tiilikaton mekaaninen puhdistus ja sammaleentorjunta ${city.cityIn}. Ilmainen kuntotarkastus ja kirjallinen tarjous.`,
 });
 
 /** Maalauksen kaupunkisivu: hakutermit "ulkomaalaus" ja "julkisivumaalaus" titleen (korjaus 2). */
@@ -234,9 +215,6 @@ export const getRouteSeo = (path: string): RouteSeo | undefined => {
   }
   for (const city of pinnoitusCities) {
     if (path === `/tiilikaton-pinnoitus-${city.slug}`) return { ...pinnoitusCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "pinnoitus")) };
-  }
-  for (const city of puhdistusCities) {
-    if (path === `/katon-puhdistus-${city.slug}`) return { ...puhdistusCitySeo(city), hero: fullHero(HERO_BASE.puhdistus) };
   }
   for (const city of maalausCities) {
     if (path === `/talon-maalaus-${city.slug}`) return { ...maalausCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "maalaus")) };

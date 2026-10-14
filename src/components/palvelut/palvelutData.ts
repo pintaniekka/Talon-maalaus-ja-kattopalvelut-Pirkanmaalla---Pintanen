@@ -83,12 +83,11 @@ export const palvelut: Palvelu[] = [
     key: "pinnoitus",
     title: "Tiilikaton pinnoitus",
     href: "/tiilikaton-pinnoitus-pirkanmaa/",
-    // Eerik työssä katolla (Eerik 14.10.2026: palvelukortteihin paremmat kuvat).
-    imageBase: "eerik-tiilikatolla-tampere",
-    imageAlt: "Eerik pinnoittaa tiilikattoa Tampereella",
+    // Eerik 14.10.2026: pinnoituskorttiin punainen katto.
+    imageBase: "vihrea-talo-pinnoitettu-punainen-tiilikatto",
+    imageAlt: "Vihreä puutalo, jonka punainen tiilikatto on juuri pinnoitettu",
     imageWidth: 1200,
-    imageHeight: 1600,
-    imagePosition: "center 38%",
+    imageHeight: 900,
     hinta: PINNOITUS_HINTA,
     takuu: TAKUU.pinnoitus,
     takuuLyhyt: lyhytTakuu(TAKUU.pinnoitus),

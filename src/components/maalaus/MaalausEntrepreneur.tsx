@@ -4,7 +4,7 @@ import { LUVUT } from '@/data/company';
 const eemilImage = getStorageUrl('Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp');
 
 /**
- * Eemil ja hänen maalausparinsa tekevät työn: kuva vasemmalla, teksti oikealla (tarkastus 12.10.2026, T21). Työvaiheet
+ * Eemil maalaa: kuva vasemmalla, teksti oikealla (tarkastus 12.10.2026, T21). Työvaiheet
  * kerrotaan Lyhyesti-laatikossa ja prosessissa, joten tässä sanotaan vain se, mitä muualla ei sanota.
  */
 const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
@@ -23,14 +23,14 @@ const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
             decoding="async"
           />
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Eemil ja hänen maalausparinsa tekevät työn</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Eemil maalaa</h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
                 Olen Eemil. Maalaan talot {paikka} itse alusta loppuun. Olen tehnyt tätä työtä yli viisi vuotta ja maalannut{' '}
                 {LUVUT.maalatutTalot} taloa.
               </p>
-              <p>Seinillä meitä on aina kaksi: minä ja maalausparini. Vastaan työstä alusta loppuun.</p>
-              <p>Jos maalin alta löytyy lahoa, kerron siitä sinulle ennen kuin jatkan työtä. Annan työlle 2 vuoden kirjallisen takuun.</p>
+              <p>Maalataan seinät aina kahdestaan maalausparin kanssa.</p>
+              <p>Annan työlle 2 vuoden kirjallisen takuun.</p>
             </div>
           </div>
         </div>

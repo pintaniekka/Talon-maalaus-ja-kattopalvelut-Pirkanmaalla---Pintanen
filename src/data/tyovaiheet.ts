@@ -58,8 +58,8 @@ export const maalausTyovaiheet: Tyovaihe[] = [
     text: "Pesemme seinät homepesuaineella ja harjoilla. Lika ja home lähtevät pois.",
   },
   {
-    title: "Kaavinta ja kuivuminen",
-    text: "Kaavimme irtoavan maalin pois. Sen jälkeen seinä saa kuivua.",
+    title: "Kaavinta",
+    text: "Kaavimme irtoavan maalin pois.",
   },
   {
     title: "Pohjamaali paljaisiin kohtiin",
@@ -67,7 +67,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   },
   {
     title: "Pintamaali pensselillä",
-    text: "Maalaamme seinät pensselillä. Sateella ei maalata.",
+    text: "Maalaamme seinät pensselillä.",
   },
   {
     title: "Lopputarkastus ja takuu",
@@ -93,7 +93,7 @@ export const pinnoitusLyhyesti: LyhyestiSisalto = {
     { label: "Hinta yleensä", value: PINNOITUS_HINTA },
     { label: "Kesto", value: "2–4 päivää" },
     { label: "Pesu", value: "Painepesu + torjunta-aine" },
-    { label: "Maalaus", value: "Kahteen kertaan ruiskulla" },
+    { label: "Maalaus", value: "Kaksi kerrosta maalia" },
   ],
   note: "Pinnoitus ja maalaus tarkoittavat samaa työtä. Maali on Nowocoat.",
 };
@@ -103,8 +103,8 @@ export const maalausLyhyesti: LyhyestiSisalto = {
   facts: [
     { label: "Hinta yleensä", value: MAALAUS_HINTA },
     { label: "Kesto", value: "3–7 päivää" },
-    { label: "Pesu", value: "Homepesu harjoilla" },
-    { label: "Maalaus", value: "Pohjamaali ja pintamaali pensselillä" },
+    { label: "Pesu", value: "Märkähomepesu" },
+    { label: "Maalaus", value: "Pintamaali pensselillä" },
   ],
   note: "Maali on pääsääntöisesti Tikkurila.",
 };

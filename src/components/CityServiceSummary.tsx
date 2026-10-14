@@ -48,7 +48,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
     },
     {
       title: "Huoltomaalaus vai uusi ulkoverhous?",
-      text: "Usein huoltomaalaus riittää. Jos puu on kovaa ja ehjää, laudoitusta ei tarvitse vaihtaa. Katsomme seinät arviokäynnillä.",
+      text: "Usein huoltomaalaus riittää. Katsomme seinät arviokäynnillä ja kerromme suoraan, mitä ne tarvitsevat.",
       links: [{ to: "/talon-maalaus-pirkanmaa/", label: "Lue lisää talon maalauksesta" }],
     },
   ],

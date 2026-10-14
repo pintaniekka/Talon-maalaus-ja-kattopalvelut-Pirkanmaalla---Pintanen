@@ -375,13 +375,14 @@ export const MIN_PROJECT_ITEMS = 3;
 
 /**
  * Paikkakunnan omat kohteet ja, jos niitä on alle kolme, täytteeksi kohteita muualta Pirkanmaalta
- * (lähimmät ensin). Yhden kortin "luettelo" näyttää tyhjältä. Jos omia kohteita ei ole, lohkoa ei näytetä.
+ * (lähimmät ensin). Yhden kortin "luettelo" näyttää tyhjältä. Jos omia kohteita ei ole lainkaan, näytetään
+ * kolme kohdetta muualta Pirkanmaalta ja otsikko kertoo sen (Eerik 14.10.2026: sivu ilman kuvia ei käy).
  */
 export const getProjectItemsWithNearby = (
   city: string,
   service?: ProjectService,
   exclude: Set<string> = new Set(),
-): { items: ProjectItem[]; hasNearby: boolean } => {
+): { items: ProjectItem[]; hasNearby: boolean; hasOwn: boolean } => {
   const all = getProjectItems(city, service).filter(
     (item) => ![item.image, item.before, item.after].some((x) => x && exclude.has(x)),
   );
@@ -391,7 +392,7 @@ export const getProjectItemsWithNearby = (
   const withoutHero = all.filter((item) => item.image !== hero);
   // Jos ainoa oma kuva on jo herossa ja paikkakunnalla on arvostelukortti kuvineen, ruudukko jää pois.
   const own = withoutHero.length > 0 ? withoutHero : exclude.size > 0 ? [] : all;
-  if (own.length === 0 || own.length >= MIN_PROJECT_ITEMS) return { items: own, hasNearby: false };
+  if (own.length >= MIN_PROJECT_ITEMS) return { items: own, hasNearby: false, hasOwn: true };
 
   const order = nearbyCities[city] ?? [];
   const rank = (item: ProjectItem) => {
@@ -402,7 +403,7 @@ export const getProjectItemsWithNearby = (
     .filter((item) => item.city !== city && matches(item, service))
     .sort((a, b) => rank(a) - rank(b) || Number(Boolean(b.pair)) - Number(Boolean(a.pair)));
   const fill = others.slice(0, MIN_PROJECT_ITEMS - own.length);
-  return { items: [...own, ...fill], hasNearby: fill.length > 0 };
+  return { items: [...own, ...fill], hasNearby: fill.length > 0, hasOwn: own.length > 0 };
 };
 
 /** Nostot hintasivuille: ennen–jälkeen-parit ensin, sitten yksittäiset kuvat eri paikkakunnilta. */

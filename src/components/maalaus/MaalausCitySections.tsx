@@ -112,8 +112,7 @@ export const MaalausCityComparison = ({ cityIn }: CityProps) => (
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Riittääkö huoltomaalaus vai tarvitaanko uusi ulkoverhous?</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              Usein huoltomaalaus riittää. Jos puu on kovaa ja ehjää, vanhaa laudoitusta ei tarvitse vaihtaa. Hyvillä pohjatöillä ja
-              uudella maalilla seinä kestää taas vuosia.
+              Usein huoltomaalaus riittää. Hyvillä pohjatöillä ja uudella maalilla seinä kestää taas vuosia.
             </p>
             <p>
               Huoltomaalaus maksaa meillä yleensä {MAALAUS_HINTA}. Uusi ulkoverhous maksaa paljon enemmän. Katsomme seinät

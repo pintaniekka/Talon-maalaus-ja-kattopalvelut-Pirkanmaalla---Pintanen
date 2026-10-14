@@ -91,12 +91,12 @@ export const maalausFAQ: FAQItem[] = [
   {
     question: 'Mitä maalia käytätte?',
     answer:
-      'Käytämme pääsääntöisesti Tikkurilan ulkomaaleja. Valitsemme maalin vanhan maalin ja puun kunnon mukaan: yleensä vesiohenteinen talomaali, joskus öljymaali. Kerromme valinnan tarjouksessa.',
+      'Käytämme pääsääntöisesti Tikkurilan ulkomaaleja. Valitsemme maalin vanhan maalin ja puun kunnon mukaan. Maalit ja materiaalit kirjataan tarjoukseen.',
   },
   {
     question: 'Milloin on paras aika maalata talo?',
     answer:
-      'Maalauskausi on huhti–toukokuusta elo–syyskuuhun. Maalaamme, kun seinä on kuiva ja lämpötila on yli +5 °C. Paras sää on lämmin ja pilvinen pouta. Sateella ei maalata, ja siirretystä päivästä ei tule lisäkuluja.',
+      'Maalauskausi on huhti–toukokuusta elo–syyskuuhun. Maalaamme, kun seinä on kuiva ja ilman kosteusprosentti on alle 80. Sateella ei maalata, ja siirretystä päivästä ei tule lisäkuluja.',
   },
   {
     question: 'Maalaatteko myös mökkejä ja piharakennuksia?',

@@ -1,6 +1,7 @@
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
+import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import SEO from "@/components/SEO";
 import { generalFAQ } from "@/data/faqData";
 import { HERO_BASE, staticSeo } from "@/data/seo";
@@ -105,6 +106,8 @@ const Meista = () => {
           </div>
         </div>
       </section>
+
+      <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
 
       <section className="section-padding bg-background">
         <div className="section-container">

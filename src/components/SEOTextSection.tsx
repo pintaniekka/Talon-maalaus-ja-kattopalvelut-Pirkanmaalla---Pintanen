@@ -74,7 +74,7 @@ const SEOTextSection = () => {
             <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
               <p>
                 Maali suojaa puuta sateelta ja auringolta. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat
-                kohdat ja maalaamme pintamaalin pensselillä. Suojaamme terassit ja ikkunat.
+                kohdat ja maalaamme pintamaalin pensselillä. Suojaamme terassit ja ympäristön.
               </p>
               <p>
                 Hinta on yleensä <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja annamme työlle{" "}

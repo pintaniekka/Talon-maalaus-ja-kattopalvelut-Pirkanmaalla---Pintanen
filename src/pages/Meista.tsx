@@ -119,7 +119,7 @@ const Meista = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-secondary">
+      <section className="section-padding bg-accent-light">
         <div className="section-container">
           <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
             <div>

@@ -10,7 +10,7 @@ const pricingIncludes = ['Homepesu', 'Irtoavan maalin kaavinta', 'Pohjamaali pal
 
 const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintalaskuri/?palvelu=maalaus', calculatorLabel }: { cityName?: string; calculatorHref?: string; calculatorLabel?: string }) => {
   return (
-    <section className="section-padding bg-secondary">
+    <section className="section-padding bg-background">
       <div className="section-container max-w-5xl mx-auto">
         <div
           className="text-center mb-10"

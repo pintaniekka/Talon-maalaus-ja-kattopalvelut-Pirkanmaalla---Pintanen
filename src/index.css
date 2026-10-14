@@ -31,7 +31,7 @@
     --primary-dark: 215 30% 10%;
 
     /* Background - Light mode */
-    --background: 210 15% 96%;
+    --background: 0 0% 100%; /* vitivalkoinen sivun pohja (Eerik 14.10.2026) */
     --foreground: 215 25% 15%;
 
     /* Card surfaces */

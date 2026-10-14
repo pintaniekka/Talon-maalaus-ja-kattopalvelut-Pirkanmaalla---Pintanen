@@ -18,7 +18,7 @@ interface PinnoitusPricingCardsProps {
 
 const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvelu=pinnoitus", calculatorLabel }: PinnoitusPricingCardsProps) => {
   return (
-    <section className="section-padding bg-secondary">
+    <section className="section-padding bg-background">
       <div className="section-container max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Mitä tiilikaton pinnoitus maksaa {cityIn}?</h2>

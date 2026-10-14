@@ -147,7 +147,7 @@ const HinnatTiilikalonPinnoitus = () => {
       </section>
 
       {/* Pinnoitus vai uusi katto */}
-      <section className="section-padding bg-secondary">
+      <section className="section-padding bg-accent-light">
         <div className="section-container max-w-4xl mx-auto">
           <PriceSectionHeading
             title="Kannattaako pinnoitus vai uusi katto?"

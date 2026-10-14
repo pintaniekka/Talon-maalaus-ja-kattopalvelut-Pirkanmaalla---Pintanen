@@ -27,7 +27,7 @@ const PinnoitusEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Eerik tekee työn</h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Olen Eerik. Perustin Pintasen yhdessä veljeni Eemilin kanssa. Teen tiilikattojen pinnoitukset {paikka} itse alusta
+                Olen Eerik. Perustin Pintasen vuonna 2025. Teen tiilikattojen pinnoitukset {paikka} itse alusta
                 loppuun.
               </p>
               <p>

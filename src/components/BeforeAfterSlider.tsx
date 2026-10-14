@@ -16,7 +16,7 @@ interface BeforeAfterSliderProps {
  * samalta kuin kaikilla muilla sivustoilla). Ennen-kuva leikataan vinolla monikulmiolla ja viiva
  * käännetään samaan kulmaan; kahva pysyy pystyssä keskellä.
  */
-const TILT_DEG = 7;
+const TILT_DEG = 4;
 const TILT = Math.tan((TILT_DEG * Math.PI) / 180);
 
 const BeforeAfterSlider = ({
@@ -30,7 +30,7 @@ const BeforeAfterSlider = ({
 }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  /** Vinon viivan vaakasiirtymä ylä- ja alareunassa pikseleinä (puolet korkeudesta × tan 7°). */
+  /** Vinon viivan vaakasiirtymä ylä- ja alareunassa pikseleinä (puolet korkeudesta × tan 4°). */
   const [tiltOffset, setTiltOffset] = useState(0);
   const didDrag = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -149,14 +149,14 @@ const BeforeAfterSlider = ({
         />
       </div>
 
-      {/* Vino jakoviiva: keltainen, jotta se erottuu sekä sammaleisesta että maalatusta pinnasta. */}
+      {/* Vino jakoviiva: sivuston sininen (Eerik 14.10.2026), valkoinen reunus erottaa sen kuvasta. */}
       <div
-        className="absolute -top-[5%] -bottom-[5%] w-[3px] bg-paint-yellow shadow-[0_0_0_1px_rgba(10,25,47,0.25)] pointer-events-none"
+        className="absolute -top-[5%] -bottom-[5%] w-[3px] bg-accent-strong shadow-[0_0_0_1px_rgba(255,255,255,0.7)] pointer-events-none"
         style={{ left: `${sliderPosition}%`, transform: `translateX(-50%) rotate(${TILT_DEG}deg)` }}
         aria-hidden="true"
       />
 
-      {/* Kahva: keltainen ympyrä ja tummansiniset nuolet. Näppäimistöllä nuolinäppäimet siirtävät viivaa. */}
+      {/* Kahva: sininen ympyrä ja valkoiset nuolet. Näppäimistöllä nuolinäppäimet siirtävät viivaa. */}
       <div
         role="slider"
         tabIndex={0}
@@ -166,7 +166,7 @@ const BeforeAfterSlider = ({
         aria-valuenow={Math.round(sliderPosition)}
         aria-valuetext={`Ennen-kuvaa näkyy ${Math.round(sliderPosition)} prosenttia`}
         onKeyDown={handleKeyDown}
-        className="absolute top-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-paint-yellow text-navy shadow-xl ring-4 ring-white/80 flex items-center justify-center gap-1 focus-visible:outline-none focus-visible:ring-navy"
+        className="absolute top-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-strong text-white shadow-xl ring-4 ring-white/80 flex items-center justify-center gap-1 focus-visible:outline-none focus-visible:ring-accent-ink"
         style={{ left: `${sliderPosition}%` }}
       >
         <svg width="22" height="12" viewBox="0 0 22 12" fill="currentColor" aria-hidden="true">
@@ -178,7 +178,7 @@ const BeforeAfterSlider = ({
       <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-navy/85 text-navy-foreground font-heading font-extrabold uppercase tracking-[0.14em] text-[11px]">
         Ennen
       </div>
-      <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-paint-yellow text-paint-yellow-foreground font-heading font-extrabold uppercase tracking-[0.14em] text-[11px] shadow-md">
+      <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-accent-strong text-accent-foreground font-heading font-extrabold uppercase tracking-[0.14em] text-[11px] shadow-md">
         Jälkeen
       </div>
     </div>

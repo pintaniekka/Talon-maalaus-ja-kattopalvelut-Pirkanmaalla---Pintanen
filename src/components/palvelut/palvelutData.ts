@@ -29,6 +29,8 @@ export interface Tekija {
   first: string;
   role: string;
   image: string;
+  /** Kortin pillerin teksti: "Eerik tekee työn" / "Eemil ja maalauspari" (Eerik 14.10.2026). */
+  pilleri: string;
 }
 
 export const tekijat: Record<"eerik" | "eemil", Tekija> = {
@@ -37,12 +39,14 @@ export const tekijat: Record<"eerik" | "eemil", Tekija> = {
     first: YHTEYSTIEDOT.eerik.first,
     role: YHTEYSTIEDOT.eerik.role,
     image: getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp"),
+    pilleri: `${YHTEYSTIEDOT.eerik.first} tekee työn`,
   },
   eemil: {
     name: YHTEYSTIEDOT.eemil.name,
     first: YHTEYSTIEDOT.eemil.first,
     role: YHTEYSTIEDOT.eemil.role,
     image: getStorageUrl("Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp"),
+    pilleri: `${YHTEYSTIEDOT.eemil.first} ja maalauspari`,
   },
 };
 

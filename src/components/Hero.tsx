@@ -13,7 +13,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="hero-critical relative bg-background px-4 pt-28 pb-12 md:px-8 md:pt-32 md:pb-16 xl:pt-40 flex items-center justify-center"
+      className="hero-critical relative bg-background px-4 pt-28 pb-12 md:px-8 md:pt-32 md:pb-16 flex items-center justify-center"
     >
       <div className="relative w-full max-w-[1500px] overflow-hidden rounded-[2.5rem] bg-card shadow-2xl flex flex-col lg:flex-row">
         {/* Content Side */}

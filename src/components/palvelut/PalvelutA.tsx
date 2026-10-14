@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import {
-  BTN_YELLOW,
-  LINK_ARROW,
   LINKIT,
   PAKETTI_KYSYMYS,
   PAKETTI_VASTAUS,
@@ -29,6 +27,8 @@ const Fakta = ({ value, label, divider = false }: { value: string; label: string
  * Vaihtoehto A (?palvelut=a), hiottu 13.10.2026 Eerikin palautteen mukaan ("A on raikkain, mutta vaatii parannusta"):
  * vaaleansininen osio ja valkoiset kortit, tekijän nimi valkoisena pillerinä kuvan päällä, isommat faktaluvut
  * (hinta, takuu, kesto) ja alla tummansininen pakettihintapalkki hintasivun laskurinoston tyyliin.
+ * Eerik 14.10.2026: koko kortti on yksi linkki palvelusivulle, ei erillistä "Lue lisää" -riviä eikä nappia
+ * kortin sisällä. Hiiren päällä kortti nousee hieman ja kuvan yli pyyhkäisee kiilto.
  */
 const PalvelutA = () => (
   <section id="palvelut" className="section-padding bg-accent-light">
@@ -48,18 +48,25 @@ const PalvelutA = () => (
 
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         {palvelut.map((p) => (
-          <article
+          <Link
             key={p.key}
-            className="flex flex-col overflow-hidden rounded-3xl bg-card shadow-[0_14px_40px_rgba(10,25,47,0.10)] ring-1 ring-navy/5"
+            to={p.href}
+            aria-label={`${p.title}: lue lisää palvelusta`}
+            className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-[0_14px_40px_rgba(10,25,47,0.10)] ring-1 ring-navy/5 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(10,25,47,0.16)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
-            <div className="relative">
+            <div className="relative overflow-hidden">
               <ResponsiveImage
                 baseName={p.imageBase}
                 alt={p.imageAlt}
-                className="block h-[220px] w-full object-cover sm:h-[260px] lg:h-[250px]"
+                className="block h-[220px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100 sm:h-[260px] lg:h-[250px]"
                 sizes="(max-width: 1023px) 100vw, 560px"
                 width={p.imageWidth}
                 height={p.imageHeight}
+              />
+              {/* Kiilto: vino, läpikuultava valkoinen raita pyyhkäisee kuvan yli hiiren päällä. */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-white/0 via-white/45 to-white/0 opacity-0 transition-[transform,opacity] duration-700 ease-out group-hover:translate-x-[300%] group-hover:opacity-100 motion-reduce:transition-none motion-reduce:group-hover:opacity-0"
               />
               {/* Tekijä valkoisena pillerinä kuvan päällä: näyttää tarralta, ei tekstiriviltä. */}
               <div className="absolute bottom-4 left-4 inline-flex items-center gap-2.5 rounded-full bg-card py-1.5 pl-1.5 pr-4 shadow-lg">
@@ -72,29 +79,25 @@ const PalvelutA = () => (
                   loading="lazy"
                   decoding="async"
                 />
-                <span className="text-[13px] font-bold text-foreground">{p.tekija.first} tekee työn</span>
+                <span className="text-[13px] font-bold text-foreground">{p.tekija.pilleri}</span>
               </div>
             </div>
             <div className="flex flex-1 flex-col gap-4 p-6 md:px-8 md:pb-8 md:pt-7">
-              <h3 className="font-heading text-2xl font-extrabold leading-[1.15] text-foreground md:text-[26px]">{p.title}</h3>
+              <h3 className="flex items-center justify-between gap-4 font-heading text-2xl font-extrabold leading-[1.15] text-foreground md:text-[26px]">
+                {p.title}
+                <ArrowRight
+                  className="h-6 w-6 shrink-0 text-accent-ink transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </h3>
               <p className="text-base leading-relaxed text-muted-foreground">{kuvaukset[p.key]}</p>
               <div className="mt-auto flex flex-wrap gap-x-6 gap-y-4 rounded-2xl bg-accent-light/70 px-5 py-4 sm:grid sm:grid-cols-[auto_auto_auto] sm:justify-between sm:gap-0">
                 <Fakta value={p.hinta} label="Hinta yleensä" />
                 <Fakta value={p.takuu} label="Takuu" divider />
                 <Fakta value={p.kesto} label="Kesto" divider />
               </div>
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1">
-                <Link to={LINKIT.hintalaskuri} className={BTN_YELLOW}>
-                  Laske hinta
-                </Link>
-                <Link to={p.href} className={LINK_ARROW}>
-                  Lue lisää
-                  <span className="sr-only">: {p.title}</span>
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 

@@ -91,7 +91,7 @@ const Meista = () => {
                 <h3 className="text-xl font-bold text-foreground mb-2">Eemil maalaa talojen ulkoseinät</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Eemil pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat kohdat ja maalaa pintamaalin pensselillä.
-                  Seinillä on aina kaksi maalaria: Eemil ja hänen vakituinen työparinsa. Eemil vastaa työstä alusta loppuun. Takuu on 2 vuotta.
+                  Seinillä on aina kaksi maalaria: Eemil ja hänen maalausparinsa. Eemil vastaa työstä alusta loppuun. Takuu on 2 vuotta.
                 </p>
               </div>
             </div>

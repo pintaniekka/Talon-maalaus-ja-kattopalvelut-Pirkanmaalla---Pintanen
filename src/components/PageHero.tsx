@@ -101,7 +101,7 @@ const PageHero = ({
   const srcSet = image.srcSet ?? (image.base ? getResponsiveSrcSet(image.base) : undefined);
 
   return (
-    <section className="hero-critical relative bg-background px-4 pt-24 pb-10 md:px-8 md:pt-28 md:pb-14 xl:pt-40 flex flex-col items-center">
+    <section className="hero-critical relative bg-background px-4 pt-24 pb-10 md:px-8 md:pt-28 md:pb-14 xl:pt-36 flex flex-col items-center">
       {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="w-full max-w-[1500px] mb-4" />}
       <div className="relative w-full max-w-[1500px] overflow-hidden rounded-[2.5rem] bg-card shadow-2xl flex flex-col lg:flex-row">
         <div className="relative z-10 w-full lg:w-2/3 p-8 md:p-12 lg:px-16 lg:py-14 xl:px-20 flex flex-col justify-center bg-card">

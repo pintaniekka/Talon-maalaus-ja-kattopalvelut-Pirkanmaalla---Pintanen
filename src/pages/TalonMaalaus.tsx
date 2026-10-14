@@ -47,7 +47,7 @@ const TalonMaalaus = () => {
         secondary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
         trust="maalaus"
         image={{ base: HERO_BASE.maalaus, alt: "Tummansininen puutalo ulkomaalauksen jälkeen" }}
-        badge={{ title: "Eemil tekee työn", text: "Maalaa itse ja vastaa jäljestä." }}
+        badge={{ title: "Eemil ja hänen maalausparinsa", text: "Maalaavat talon itse ja vastaavat jäljestä." }}
         breadcrumbs={[{ name: "Talon maalaus" }]}
       />
 

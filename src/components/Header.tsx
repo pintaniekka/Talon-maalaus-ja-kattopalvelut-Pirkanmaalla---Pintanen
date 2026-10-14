@@ -3,7 +3,7 @@ import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Phone, Mail } from "@/components/icons/BrandIcons";
+import { Phone } from "@/components/icons/BrandIcons";
 import { getStorageUrl } from "@/lib/storage";
 import OptimizedImage from "./OptimizedImage";
 import WhatsAppIcon from "./WhatsAppIcon";
@@ -11,15 +11,14 @@ import WhatsAppIcon from "./WhatsAppIcon";
 const logoUrl = getStorageUrl("Pintanen-logo.png");
 
 /**
- * Keltainen palkki navigaation alla (Eerik 13.10.2026: ohut raita → palkki, jossa on teksti).
- * Yksi lyhyt lause ja linkki tarjouspyyntöön. Palkki on aina yhden rivin korkuinen (28 px):
- * puhelimessa näytetään lyhyempi lause, jotta otsikko ei jää palkin alle. Vaihda tekstit tästä.
+ * Keltainen kausipalkki navigaation yläpuolella (Eerik 14.10.2026: palkki korvaa tumman yhteystietopalkin,
+ * ei ohutta raitaa). Vasemmalla puhelinnumero, oikealla yksi lyhyt lause ja linkki tarjouspyyntöön.
+ * Palkki näkyy työpöydällä (xl) ja painuu piiloon alas skrollattaessa, kuten yhteystietopalkki ennen.
+ * Pienemmillä näytöillä palkkia ei näytetä, jotta otsikko ei jää sen alle. Vaihda tekstit tästä.
  */
 const KAUSIPALKKI = {
   teksti: "Täytämme nyt kalenteria ensi kauden parhaille maalausajoille.",
   linkki: "Pyydä ilmainen arviokäynti",
-  /** Puhelimessa koko rivi on linkki. */
-  lyhyt: "Ensi kauden maalausajat täyttyvät – pyydä arviokäynti",
   to: "/tarjouspyynto/",
 } as const;
 
@@ -131,23 +130,26 @@ const Header = () => {
     <header
       className={`on-dark fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 ${isScrolled ? "shadow-lg" : ""}`}
     >
-      {/* Desktop utility bar — collapses on scroll */}
+      {/* Keltainen kausipalkki: puhelinnumero ja kauden lause. Painuu piiloon alas skrollattaessa. */}
       <div
-        className={`hidden xl:block bg-navy text-navy-foreground overflow-hidden transition-[max-height] duration-300 border-b border-white/5 ${isScrolled ? "max-h-0" : "max-h-12"}`}
+        className={`hidden xl:block bg-paint-yellow text-paint-yellow-foreground overflow-hidden transition-[max-height] duration-300 motion-reduce:transition-none ${isScrolled ? "max-h-0" : "max-h-12"}`}
       >
-        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full h-9 flex items-center justify-between text-sm">
-          <a href="tel:+358409640066" className="flex items-center gap-2 group transition-colors">
-            <span className="bg-accent p-1 rounded group-hover:bg-paint-yellow transition-colors">
-              <Phone className="w-3.5 h-3.5 text-accent-foreground group-hover:text-navy" />
+        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full h-9 flex items-center justify-between gap-6 text-sm whitespace-nowrap">
+          <a href="tel:+358409640066" className="flex shrink-0 items-center gap-2 group">
+            <span className="bg-navy p-1 rounded transition-colors group-hover:bg-accent-strong">
+              <Phone className="w-3.5 h-3.5 text-white" />
             </span>
-            <span className="font-bold tracking-tight text-white/90 group-hover:text-paint-yellow transition-colors">040 964 0066</span>
+            <span className="font-bold tracking-tight group-hover:underline underline-offset-4 decoration-2">040 964 0066</span>
           </a>
-          <a href="mailto:myynti@pintanen.fi" className="flex items-center gap-2 group transition-colors">
-            <span className="bg-accent p-1 rounded group-hover:bg-paint-yellow transition-colors">
-              <Mail className="w-3.5 h-3.5 text-accent-foreground group-hover:text-navy" />
-            </span>
-            <span className="font-bold tracking-tight text-white/90 group-hover:text-paint-yellow transition-colors">myynti@pintanen.fi</span>
-          </a>
+          <p className="flex min-w-0 items-center gap-x-2 font-semibold">
+            <span className="truncate">{KAUSIPALKKI.teksti}</span>
+            <Link
+              to={KAUSIPALKKI.to}
+              className="shrink-0 font-extrabold underline underline-offset-4 decoration-2 hover:decoration-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy rounded-sm"
+            >
+              {KAUSIPALKKI.linkki}
+            </Link>
+          </p>
         </div>
       </div>
 
@@ -291,18 +293,8 @@ const Header = () => {
       </div>
       </div>
 
-      {/* Keltainen kausipalkki (28 px): korvaa ohuen raidan. Työpöydällä lause + linkki, puhelimessa lyhyt linkkirivi. */}
-      <div className="w-full bg-paint-yellow text-paint-yellow-foreground">
-        <p className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto h-7 flex items-center justify-center gap-x-2 text-[13px] sm:text-sm leading-7 font-semibold whitespace-nowrap overflow-hidden">
-          <span className="hidden sm:inline truncate">{KAUSIPALKKI.teksti}</span>
-          <Link to={KAUSIPALKKI.to} className="hidden sm:inline font-extrabold underline underline-offset-4 decoration-2 hover:decoration-navy">
-            {KAUSIPALKKI.linkki}
-          </Link>
-          <Link to={KAUSIPALKKI.to} className="sm:hidden truncate font-extrabold underline underline-offset-4 decoration-2">
-            {KAUSIPALKKI.lyhyt}
-          </Link>
-        </p>
-      </div>
+      {/* Yksivärinen keltainen raita (tarkastus 12.10.2026: ei kolmiväristä liukuväriä) */}
+      <div className="h-1 w-full bg-paint-yellow" aria-hidden="true" />
 
       {/* Mobile Menu */}
       <AnimatePresence>

@@ -59,7 +59,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         secondary={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
         trust="maalaus"
         image={{ base: heroBase, alt: ownPhoto ? `Maalaamamme talo ${cityData.cityIn}` : "Tummansininen puutalo ulkomaalauksen jälkeen" }}
-        badge={{ title: "Eemil tekee työn", text: "Maalaa itse ja vastaa jäljestä." }}
+        badge={{ title: "Eemil ja hänen maalausparinsa", text: "Maalaavat talon itse ja vastaavat jäljestä." }}
         breadcrumbs={crumbs}
       />
 

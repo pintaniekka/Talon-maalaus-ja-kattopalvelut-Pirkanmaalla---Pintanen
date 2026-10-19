@@ -19,6 +19,8 @@ interface CityHousingFactsProps {
   citySlug: string;
   cityIn: string;
   service: Service;
+  /** Piilota kelluva toiminta-aluekartta, kun sivulla on jo kunnan oma kartta. */
+  hideMap?: boolean;
 }
 
 /** Pylväät vuosikymmenittäin. Ennen vuotta 1960 rakennetut on yhdistetty yhdeksi ryhmäksi. */
@@ -54,7 +56,7 @@ const copy: Record<Service, { title: (cityIn: string) => string; advice: string;
  * Paikkakunnan omakotitalot vuosikymmenittäin Tilastokeskuksen rakennuskannasta.
  * Luvut tulevat tiedostosta cityHousingStats.ts (generoitu), eikä lohko näy, jos lukuja ei ole.
  */
-const CityHousingFacts = ({ citySlug, cityIn, service }: CityHousingFactsProps) => {
+const CityHousingFacts = ({ citySlug, cityIn, service, hideMap }: CityHousingFactsProps) => {
   const stats = getCityHousingStats(citySlug);
   const text = housingFactsText(citySlug, cityIn, service);
   if (!stats || !text) return null;
@@ -68,7 +70,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service }: CityHousingFactsProps) 
       <div className="section-container">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <img
+            {!hideMap && <img
               src={mapUrl}
               alt="Pintasen toiminta-alue kartalla: Pirkanmaa ja Kanta-Häme"
               width={200}
@@ -76,7 +78,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service }: CityHousingFactsProps) 
               loading="lazy"
               decoding="async"
               className="float-right ml-4 mb-3 w-32 md:w-44 rounded-2xl border border-border/50 shadow-md bg-card"
-            />
+            />}
             <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{c.title(cityIn)}</h2>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">{text}</p>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">{c.advice}</p>

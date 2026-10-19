@@ -3,6 +3,8 @@ import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
 import CityProjects from "@/components/CityProjects";
+import CityMap from "@/components/CityMap";
+import { hasKuntakartta } from "@/data/kartat";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
 import CityNeighborLinks from "@/components/CityNeighborLinks";
@@ -30,6 +32,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
   const { city: paramCity } = useParams<{ city: string }>();
   const city = propSlug || paramCity;
   const cityData = city ? getCityBySlug(city) : undefined;
+  const kartta = hasKuntakartta(propSlug ?? "");
 
   if (!cityData || !hasPinnoitusPage(cityData.slug)) return <Navigate to="/tiilikaton-pinnoitus-pirkanmaa/" replace />;
 
@@ -72,9 +75,12 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       {cityData.pinnoitusLocalHookTitle && cityData.pinnoitusLocalHookText && (
         <section className="section-padding bg-card">
           <div className="section-container">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{cityData.pinnoitusLocalHookTitle}</h2>
-              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">{cityData.pinnoitusLocalHookText}</p>
+            <div className={`mx-auto ${kartta ? "max-w-5xl grid lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 items-center" : "max-w-3xl"}`}>
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{cityData.pinnoitusLocalHookTitle}</h2>
+                <p className="text-muted-foreground leading-relaxed text-base md:text-lg">{cityData.pinnoitusLocalHookText}</p>
+              </div>
+              {kartta && <CityMap slug={cityData.slug} name={cityData.name} />}
             </div>
           </div>
         </section>
@@ -89,7 +95,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
 
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" featureFirst />
       <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
-      <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" />
+      <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" hideMap={kartta} />
       <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
 
       <FAQSection

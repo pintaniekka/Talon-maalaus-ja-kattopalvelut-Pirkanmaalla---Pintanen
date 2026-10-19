@@ -148,11 +148,15 @@ def make_svg(slug, kunnat, lakes):
         if inside.area < view.area * 0.012:
             continue
         px, py = tf(*inside.representative_point().coords[0])
+        # Nimi pysyy kuvan sisällä, vaikka kunta leikkautuu reunaan.
+        margin = 7 * len(n) / 2 + 6
+        px = min(max(px, margin), W - margin)
+        py = min(max(py, 16), H - 8)
         out.append(f'<text x="{px:.0f}" y="{py:.0f}" font-family="Montserrat, Arial, sans-serif" font-size="13" '
-                   f'fill="#4b5563" text-anchor="middle">{n}</text>')
+                   f'fill="#4b5563" stroke="#F7FAFC" stroke-width="3" paint-order="stroke" text-anchor="middle">{n}</text>')
     px, py = tf(*kunta.representative_point().coords[0])
     out.append(f'<text x="{px:.0f}" y="{py:.0f}" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="700" '
-               f'fill="#ffffff" text-anchor="middle">{name}</text>')
+               f'fill="#ffffff" stroke="#0A2A45" stroke-width="4" paint-order="stroke" text-anchor="middle">{name}</text>')
     out.append("</svg>")
     return "\n".join(out)
 

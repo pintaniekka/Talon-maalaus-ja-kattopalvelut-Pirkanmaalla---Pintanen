@@ -40,3 +40,10 @@ Maalauskausi huhti–toukokuusta elo–syyskuuhun on Eerikin oma tieto (CLAUDE.m
 ## Ormax (UKK "Pinnoitatteko Ormax-tiilikattoja?")
 
 Eerikin tieto 11.10.2026: Ormax on yleisin 2000-luvun kattotiili, vanhemmissa katoissa on monia profiileja, työ ja hinta ovat samat. Ei ulkoista lähdettä.
+
+
+## Kuntakartat (19.10.2026)
+
+- Kuntarajat: Tilastokeskus, kuntajako 2026, 1:1 000 000 (WFS `tilastointialueet:kunta1000k_2026`, https://geo.stat.fi/geoserver/wfs), CC BY 4.0.
+- Järvet: OpenStreetMap-tekijät, Overpass API (natural=water, water=lake), ODbL. Vain yli 3 km² järvet.
+- Skripti: `scripts/tee_kuntakartta.py`, tulos `public/images/kartat/<slug>.svg`. Lähdeaineisto kansiossa `.kartta-cache/` (ei repossa).

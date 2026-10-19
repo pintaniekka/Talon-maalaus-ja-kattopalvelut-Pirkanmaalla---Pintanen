@@ -41,3 +41,6 @@ dist-ssr
 
 # Wrangler pages dev -emulaation välimuisti
 .wrangler/
+
+# Kuntakarttojen lähdeaineisto (scripts/tee_kuntakartta.py)
+.kartta-cache/

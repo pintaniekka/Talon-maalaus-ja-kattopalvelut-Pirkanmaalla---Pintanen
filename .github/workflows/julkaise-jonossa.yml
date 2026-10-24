@@ -1,0 +1,46 @@
+# Jonossa oleva artikkeli (publishedAt tulevaisuudessa) saa buildissa noindex-kuoren eikä ole
+# sitemapissa. Se muuttuu julkiseksi vasta seuraavassa buildissa, joka ei tapahdu itsestään:
+# 23.10.2026 artikkeli 20.10. oli tuotannossa yhä noindex, koska viimeisin build oli 15.10.
+# Tämä workflow käynnistää Cloudflare Pagesin tuotantobuildin artikkelin julkaisupäivänä.
+#
+# Vaatii salaisuuden CF_DEPLOY_HOOK_URL (Cloudflare Pages → Settings → Builds → Deploy hooks,
+# haara main). Omistaja lisää sen: gh secret set CF_DEPLOY_HOOK_URL. Ilman sitä workflow
+# vain kertoo, että build pitäisi tehdä käsin.
+name: Julkaise jonossa oleva artikkeli
+
+on:
+  schedule:
+    - cron: "30 3 * * *" # 06:30 Suomen aikaa (kesällä), 05:30 talvella
+  workflow_dispatch:
+
+jobs:
+  julkaise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Onko tänään julkaistava artikkeli?
+        id: tanaan
+        run: |
+          tanaan=$(TZ=Europe/Helsinki date +%F)
+          echo "Päivä Suomessa: $tanaan"
+          if grep -q "publishedAt: \"$tanaan\"" src/data/articles.ts; then
+            echo "julkaise=1" >> "$GITHUB_OUTPUT"
+            echo "Artikkeli julkaistaan tänään, käynnistetään build."
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "julkaise=1" >> "$GITHUB_OUTPUT"
+            echo "Käsin käynnistetty, käynnistetään build."
+          else
+            echo "Ei julkaistavaa tänään."
+          fi
+
+      - name: Käynnistä Cloudflare Pagesin tuotantobuild
+        if: steps.tanaan.outputs.julkaise == '1'
+        env:
+          HOOK: ${{ secrets.CF_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::warning::CF_DEPLOY_HOOK_URL puuttuu. Tee tuotantobuild käsin (Cloudflare Pages → Retry deployment) tai mergeä PR."
+            exit 0
+          fi
+          curl -sS -X POST "$HOOK" -o /dev/null -w "Cloudflare vastasi %{http_code}\n"

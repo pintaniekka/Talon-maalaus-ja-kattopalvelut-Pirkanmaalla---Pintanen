@@ -7,6 +7,10 @@ import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
 import CityNeighborLinks from "@/components/CityNeighborLinks";
 import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur";
+import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
+import PinnoitusSamaTyo from "@/components/pinnoitus/PinnoitusSamaTyo";
+import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
+import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import SEO from "@/components/SEO";
@@ -21,10 +25,11 @@ import { pinnoitusLyhyesti, pinnoitusTyovaiheet, PINNOITUS_HINTA } from "@/data/
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 
 /**
- * Tiilikaton pinnoituksen kaupunkisivu. Järjestys: hero → Lyhyesti → paikallinen teksti → työvaiheet
- * avoimena (Eerik 13.10.2026: sama lista kuin pääsivulla) → kohteet → hinta ja vertailu → talokanta →
- * yrittäjä → FAQ (paikalliset kysymykset ensin) → arvostelut → yhteydenotto → naapurikunnat.
- * Pois jätetty: arvostelukaruselli, erillinen rahoituslohko ja Toiminta-alueet-palkki (korjaus 6).
+ * Tiilikaton pinnoituksen kaupunkisivu (SEO-suunnitelma 25.10.2026, vaihe 1). Järjestys: hero → Lyhyesti →
+ * paikallinen teksti (lyhyt erottaja) → miksi ajoissa + merkit → pesu ja pinnoitus työvaiheina →
+ * maalaus = pinnoitus (rinnakkaissanat) → kohteet → hintakortit katon koon mukaan → mitä hintaan kuuluu ja
+ * remontti vai pinnoitus → miksi Pintanen → talokanta → yrittäjä → FAQ → arvostelut → yhteydenotto →
+ * naapurikunnat ja kaikki kunnat. Pois jätetty: arvostelukaruselli ja Toiminta-alueet-palkki (korjaus 6).
  */
 const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string }) => {
   const { city: paramCity } = useParams<{ city: string }>();
@@ -53,11 +58,11 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         lead={
           <>
             Pinnoitamme tiilikattoja {cityData.cityIn}. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on yleensä{" "}
-            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja takuu on 5 vuotta. Arviokäynti on ilmainen.
+            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja takuu on 5 vuotta. Kuntotarkastus on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
-        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
         trust="pinnoitus"
         image={{
           base: heroBase,
@@ -80,15 +85,20 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         </section>
       )}
 
+      <PinnoitusWhyNow cityIn={cityData.cityIn} />
+
       <ProcessList
-        title="Näin tiilikaton pinnoitus etenee"
-        intro="Omakotitalon katto valmistuu yleensä 2–4 työpäivässä. Pesun ja maalauksen välissä katto saa kuivua."
+        title={`Tiilikaton pesu ja pinnoitus ${cityData.cityIn}: näin työ etenee`}
+        intro="Peruskohteen katto valmistuu 2–3 työpäivässä. Pesun ja maalauksen välissä katto saa kuivua."
         steps={pinnoitusTyovaiheet}
-        cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
+        cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
       />
 
+      <PinnoitusSamaTyo cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" featureFirst />
+      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} />
       <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
+      <MiksiValitaPintanen service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" />
       <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
 

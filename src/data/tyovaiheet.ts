@@ -20,7 +20,12 @@ export const MAALAUS_HINTA = fmtRange(maalausPrices.general.min, maalausPrices.g
 export const pinnoitusTyovaiheet: Tyovaihe[] = [
   {
     title: "Ilmainen kuntotarkastus",
-    text: "Tulemme katsomaan katon. Tarkistamme katon, aluskatteen ja ympäristön. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
+    text: "Tulemme katsomaan katon. Tarkistamme tiilet, saumat, piipun ympäryksen, läpiviennit ja aluskatteen. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
+  },
+  {
+    // Eerik 25.10.2026: kirjallinen sopimus ja aikataulu, yhteydenotto ennen aloituspäivää.
+    title: "Sopimus ja aikataulu",
+    text: "Kun hyväksyt tarjouksen, teemme kirjallisen sopimuksen ja sovimme työn ajankohdan. Otamme yhteyttä ennen aloituspäivää.",
   },
   {
     title: "Suojaus",
@@ -91,7 +96,7 @@ export interface LyhyestiSisalto {
 export const pinnoitusLyhyesti: LyhyestiSisalto = {
   facts: [
     { label: "Hinta yleensä", value: PINNOITUS_HINTA },
-    { label: "Kesto", value: "2–4 päivää" },
+    { label: "Kesto", value: "2–3 päivää" },
     { label: "Pesu", value: "Painepesu + torjunta-aine" },
     { label: "Maalaus", value: "Kaksi kerrosta maalia" },
   ],

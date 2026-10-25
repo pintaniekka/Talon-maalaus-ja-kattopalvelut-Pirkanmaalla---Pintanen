@@ -65,7 +65,6 @@ const faqItems = [
     question: "Saako tiilikaton pinnoituksesta kotitalousvähennyksen?",
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi.`,
   },
-  { question: "Voiko pinnoituksen maksaa osissa?", answer: "Kyllä voi. Meillä on maksujärjestely, jolla voit jakaa hinnan kuukausieriin." },
   { question: "Kuinka pitkä takuu pinnoituksella on?", answer: "Saat tiilikaton pinnoitukselle meiltä 5 vuoden kirjallisen takuun." },
 ];
 

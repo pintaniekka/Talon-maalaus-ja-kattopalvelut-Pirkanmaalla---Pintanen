@@ -79,7 +79,7 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
         </div>
 
         <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto">
-          Työn osuudesta saat kotitalousvähennyksen. Työn voi maksaa myös kuukausierissä. Kerromme vaihtoehdoista arviokäynnillä.
+          Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan kerromme kuntotarkastuksen jälkeen kirjallisessa tarjouksessa.
         </p>
 
         <div className="text-center mt-6">

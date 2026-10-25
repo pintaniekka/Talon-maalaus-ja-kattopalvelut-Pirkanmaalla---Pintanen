@@ -11,7 +11,8 @@ export const vanhatKaupunkisivut: Record<string, Partial<CityData>> = {
   tampere: {
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Tampereella Näsijärven ja Pyhäjärven välissä",
     pinnoitusLocalHookText:
-      "Tampere on Näsijärven ja Pyhäjärven välissä. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Kun tiilen tehdaspinta on kulunut, sammal tarttuu siihen helposti. Pinnoitamme tiilikattoja koko Tampereella, esimerkiksi Hervannassa, Lielahdessa, Tesomalla, Kaukajärvellä ja Linnainmaalla. Kuvia kohteistamme Tampereella näet tältä sivulta. Tulemme katsomaan kattosi ilmaiseksi.",
+      // SEO-suunnitelma 25.10.2026: paikallisosio on lyhyt erottaja, ei myyntiteksti. Esimerkki Tampere.
+      "Tampere on Näsijärven ja Pyhäjärven välissä. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja koko Tampereella, esimerkiksi Hervannassa, Lielahdessa, Tesomalla, Kaukajärvellä ja Linnainmaalla. Kuvia kohteistamme Tampereella näet tältä sivulta.",
     maalausLocalHookTitle: "Talon maalaus Tampereella: Pispalasta Hervantaan",
     maalausLocalHookText:
       "Tampereella on vanhoja puutaloja Pispalassa ja Pyynikillä ja uudempia omakotitaloalueita esimerkiksi Vuoreksessa ja Linnainmaalla. Järvien lähellä seinät kuivuvat sateen jälkeen hitaasti, ja pohjoisseinään tulee helposti homepilkkuja. Eemil maalaa taloja koko Tampereella. Hän pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat kohdat ja maalaa pintamaalin pensselillä. Kuvia kohteistamme Tampereella näet tältä sivulta. Arviokäynti on ilmainen.",

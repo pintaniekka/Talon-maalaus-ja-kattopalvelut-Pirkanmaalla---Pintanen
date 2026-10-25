@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getCityBySlug, hasMaalausPage, hasPinnoitusPage, type CityData } from "@/data/cityData";
+import { allCities, getCityBySlug, hasMaalausPage, hasPinnoitusPage, type CityData } from "@/data/cityData";
 import { cityNeighbors } from "@/data/cityNeighbors";
 
 type Service = "pinnoitus" | "maalaus";
@@ -30,13 +30,18 @@ const config: Record<Service, {
 const linkClass =
   "inline-flex items-center px-4 py-2 rounded-xl border border-border bg-card text-sm font-semibold text-foreground hover:border-accent hover:text-accent-ink transition-colors";
 
-/** Linkit saman palvelun sivuille naapurikunnissa sekä paikkakunnan toiseen palveluun ja aluesivulle. */
+/**
+ * Linkit saman palvelun sivuille naapurikunnissa sekä paikkakunnan toiseen palveluun ja aluesivulle.
+ * Lisäksi tekstilinkit kaikkiin muihin kuntiin (SEO-suunnitelma 25.10.2026: jokainen kaupunkisivu linkittää kaikkiin).
+ */
 const CityNeighborLinks = ({ city, service }: { city: CityData; service: Service }) => {
   const c = config[service];
   const neighbors = (cityNeighbors[city.slug] ?? [])
     .filter((slug) => c.has(slug))
     .map((slug) => getCityBySlug(slug))
     .filter((n): n is CityData => Boolean(n));
+  const neighborSlugs = new Set(neighbors.map((n) => n.slug));
+  const others = allCities.filter((o) => o.slug !== city.slug && !neighborSlugs.has(o.slug) && c.has(o.slug));
 
   return (
     <section className="py-12 md:py-16 bg-background">
@@ -54,6 +59,20 @@ const CityNeighborLinks = ({ city, service }: { city: CityData; service: Service
               ))}
             </ul>
           </>
+        )}
+        {others.length > 0 && (
+          <p className="text-sm text-muted-foreground mb-6">
+            {c.label} muualla:{" "}
+            {others.map((o, i) => (
+              <span key={o.slug}>
+                <Link to={c.href(o.slug)} className="underline hover:text-accent-ink">
+                  {o.name}
+                </Link>
+                {i < others.length - 1 ? ", " : ""}
+              </span>
+            ))}
+            .
+          </p>
         )}
         <p className="text-muted-foreground">
           {c.other.has(city.slug) && (

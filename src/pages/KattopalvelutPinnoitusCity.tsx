@@ -45,7 +45,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
   const seo = pinnoitusCitySeo(cityData);
   const crumbs = [{ name: "Tiilikaton pinnoitus", path: "/tiilikaton-pinnoitus-pirkanmaa" }, { name: cityData.name }];
   const heroBase = cityHeroBase(cityData.slug, "pinnoitus");
-  const ownPhoto = heroBase !== "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen";
+  const ownPhoto = heroBase !== "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen";
 
   return (
     <div>

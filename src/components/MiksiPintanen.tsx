@@ -1,7 +1,7 @@
 import ResponsiveImage from "./ResponsiveImage";
 import { TOIMINTA_ALUE } from "@/data/company";
 
-const sideBase = "puutalon-katon-ja-seinien-maalaus-tampere";
+const sideBase = "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen";
 
 /** Etusivun "Miksi Pintanen?" lyhennettynä puoleen (8.3, S32). Vain yksi lihavointi (tarkastus 12.10.2026). */
 const MiksiPintanen = () => {

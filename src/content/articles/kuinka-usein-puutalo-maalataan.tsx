@@ -77,7 +77,7 @@ const Body = () => (
       lahoa. Lahon laudan päälle ei kannata maalata.
     </p>
     <Figure
-      image="vihrea-puutalo-ennen-ulkomaalausta-ja-pohjatoita"
+      image="talon-maalaus-vihrea-puutalo-ennen-ulkomaalausta"
       alt="Vihreä puutalo ennen ulkomaalausta ja pohjatöitä"
       caption="Puutalo ennen pohjatöitä ja ulkomaalausta."
     />
@@ -132,7 +132,7 @@ const Body = () => (
       .
     </p>
     <Figure
-      image="keltainen-ulkoverhous-huoltomaalaus-jalkeen"
+      image="talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen"
       alt="Keltainen ulkoverhous huoltomaalauksen jälkeen"
       caption="Ulkoverhous huoltomaalauksen jälkeen."
     />

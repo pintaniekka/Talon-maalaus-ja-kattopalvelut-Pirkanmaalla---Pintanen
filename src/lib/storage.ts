@@ -50,7 +50,7 @@ const MISSING_VARIANTS: Record<string, ResponsiveWidth[]> = {};
 
 /**
  * Palauttaa URL:n yksittäiselle responsiiviselle kuvaversiolle.
- * @param baseName - Kuvan perusnimi ilman leveyssuffiksia tai tiedostopäätettä, esim. "vihrea-puutalo-ulkomaalaus-jalkeen"
+ * @param baseName - Kuvan perusnimi ilman leveyssuffiksia tai tiedostopäätettä, esim. "talon-maalaus-vihrea-puutalo-ulkomaalaus-jalkeen"
  * @param width - Haluttu leveys (400, 800, 1200 tai 1500)
  */
 export function getResponsiveUrl(baseName: string, width: ResponsiveWidth): string {

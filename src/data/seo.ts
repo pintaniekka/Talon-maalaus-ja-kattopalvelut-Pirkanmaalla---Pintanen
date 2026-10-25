@@ -47,16 +47,16 @@ const fullHero = (base: string) => ({ base, sizes: "100vw" });
 const cardHero = (base: string) => ({ base, sizes: "(max-width: 1024px) 100vw, 34vw" });
 
 export const HERO_BASE = {
-  pinnoitus: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
-  puhdistus: "puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen",
-  maalaus: "tummansininen-puutalo-ulkomaalaus-jalkeen",
-  alue: "puutalon-katon-ja-seinien-maalaus-tampere",
-  pinnoitusHinta: "tiilikaton-pesu-ja-sammaleenpoisto",
-  maalausHinta: "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
-  meista: "eerik-tiilikatolla-tampere",
-  toimintaAlueet: "keltainen-omakotitalo-julkisivumaalaus-jalkeen",
-  referenssit: "vastamaalattu-tiilikatto-kattopinnoitus-jalkeen",
-  kokemuksia: "keltainen-talo-pinnoitettu-tiilikatto-kangasala",
+  pinnoitus: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
+  puhdistus: "tiilikaton-pesu-puhdas-tiilikatto-jalkeen",
+  maalaus: "talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen",
+  alue: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
+  pinnoitusHinta: "tiilikaton-pesu-ja-pinnoitus-sammaleenpoisto",
+  maalausHinta: "talon-maalaus-vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
+  meista: "tiilikaton-pinnoitus-tampere-eerik-pitkanen-katolla",
+  toimintaAlueet: "talon-maalaus-keltainen-omakotitalo-julkisivumaalaus-jalkeen",
+  referenssit: "tiilikaton-pinnoitus-vastamaalattu-tiilikatto-jalkeen",
+  kokemuksia: "tiilikaton-pinnoitus-kangasala-keltainen-talo-jalkeen",
 } as const;
 
 /** Kaupunkisivun hero-kuva: paikkakunnan oma kohde, jos sellainen on, muuten palvelun vakiokuva. */

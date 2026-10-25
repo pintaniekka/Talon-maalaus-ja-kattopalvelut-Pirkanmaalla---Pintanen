@@ -18,7 +18,7 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
           kattomaalilla.
         </p>
         <p>
-          Tiilikaton pesu ja pinnoitus kuuluvat yhteen. Pesu on pinnoituksen ensimmäinen työvaihe. Jos tiilen pinta on kulunut,
+          Tiilikaton pesu ja pinnoitus kuuluvat yhteen. Teemme pesun aina pinnoituksen yhteydessä, ja se on työn ensimmäinen vaihe. Jos tiilen pinta on kulunut,
           pelkkä pesu ei riitä, koska tiili imee vettä heti seuraavalla sateella.
         </p>
         <p>

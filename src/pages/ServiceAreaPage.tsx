@@ -76,7 +76,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       price: PINNOITUS_HINTA,
       warranty: TAKUU.pinnoitus,
       duration: "2–4 päivää",
-      baseName: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
+      baseName: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
     },
     {
       title: `Talon maalaus ${cityName}`,
@@ -85,7 +85,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       price: MAALAUS_HINTA,
       warranty: TAKUU.maalaus,
       duration: "3–7 päivää",
-      baseName: "vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
+      baseName: "talon-maalaus-vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
     },
   ];
 

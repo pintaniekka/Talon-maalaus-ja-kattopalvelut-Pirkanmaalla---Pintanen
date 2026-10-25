@@ -152,7 +152,7 @@ const Header = () => {
               to={KAUSIPALKKI.to}
               className="shrink-0 font-extrabold underline underline-offset-4 decoration-2 hover:decoration-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy rounded-sm"
             >
-              {KAUSIPALKKI.linkki}
+              {location.pathname.includes("pinnoitus") ? "Pyydä ilmainen kuntotarkastus" : KAUSIPALKKI.linkki}
             </Link>
           </p>
         </div>

@@ -84,7 +84,7 @@ export const palvelut: Palvelu[] = [
     title: "Tiilikaton pinnoitus",
     href: "/tiilikaton-pinnoitus-pirkanmaa/",
     // Eerik 14.10.2026: pinnoituskorttiin punainen katto.
-    imageBase: "vihrea-talo-pinnoitettu-punainen-tiilikatto",
+    imageBase: "tiilikaton-pinnoitus-vihrea-talo-punainen-tiilikatto-jalkeen",
     imageAlt: "Vihreä puutalo, jonka punainen tiilikatto on juuri pinnoitettu",
     imageWidth: 1200,
     imageHeight: 900,
@@ -99,7 +99,7 @@ export const palvelut: Palvelu[] = [
     key: "maalaus",
     title: "Talon maalaus",
     href: "/talon-maalaus-pirkanmaa/",
-    imageBase: "puutalon-katon-ja-seinien-maalaus-tampere",
+    imageBase: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
     imageAlt: "Vastamaalattu vaalea puutalo Tampereella",
     imageWidth: 1200,
     imageHeight: 900,

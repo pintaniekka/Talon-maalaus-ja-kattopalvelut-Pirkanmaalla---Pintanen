@@ -46,8 +46,9 @@ export const pinnoitusPrices = {
 export const maalausPrices = {
   general: { min: 3500, max: 11000 },
   cards: [
-    { size: "1-kerroksinen omakotitalo", label: "Pieni tai keskisuuri koti", duration: "2–4 työpäivää", normalMin: 3500, normalMax: 6000, afterFrom: 2380, featured: false },
-    { size: "1,5-kerroksinen talo", label: "Yleisin talon koko", duration: "3–5 työpäivää", normalMin: 5000, normalMax: 8000, afterFrom: 3400, featured: true },
+    // Eerik 26.10.2026: haarukat 3 500–5 000, 5 000–7 000 ja 7 000–11 000 €.
+    { size: "1-kerroksinen omakotitalo", label: "Pieni tai keskisuuri koti", duration: "2–4 työpäivää", normalMin: 3500, normalMax: 5000, afterFrom: 2380, featured: false },
+    { size: "1,5-kerroksinen talo", label: "Yleisin talon koko", duration: "3–5 työpäivää", normalMin: 5000, normalMax: 7000, afterFrom: 3400, featured: true },
     { size: "2-kerroksinen talo", label: "Suuret omakotitalot", duration: "4–8 työpäivää", normalMin: 7000, normalMax: 11000, afterFrom: 4760, featured: false },
   ] as PriceCard[],
   includes: ["Homepesu", "Irtoavan maalin kaavinta", "Terassien ja ympäristön suojaus", "Pohjamaali paljaisiin kohtiin", "Pintamaali pensselillä", "Työmaan siivous"],

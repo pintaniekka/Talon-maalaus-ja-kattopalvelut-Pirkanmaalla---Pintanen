@@ -17,8 +17,8 @@ const MaalausSanasto = ({ cityIn }: { cityIn?: string }) => (
           irtoava maali kaavitaan, paljaat kohdat pohjamaalataan ja pintamaali maalataan pensselillä.
         </p>
         <p>
-          Maalaamme puutalojen ulkoseinät: omakotitalot, rintamamiestalot, paritalot, mökit ja piharakennukset, kuten autotallit ja
-          autokatokset. Katon ja seinät samalla kertaa saat edullisempana pakettihintana.{" "}
+          Maalaamme puutalojen ulkoseinät: omakotitalot, rintamamiestalot, hirsitalot, paritalot, mökit ja piharakennukset, kuten
+          autotallit ja autokatokset. Katon ja seinät samalla kertaa saat edullisempana pakettihintana.{" "}
           <Link to="/talon-maalaus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
             Hintaesimerkit ja laskuri
           </Link>

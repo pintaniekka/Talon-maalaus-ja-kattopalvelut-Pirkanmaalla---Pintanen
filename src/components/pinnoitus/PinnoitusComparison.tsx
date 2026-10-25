@@ -3,7 +3,7 @@ import ResponsiveImage from '@/components/ResponsiveImage';
 import { PINNOITUS_HINTA } from '@/data/tyovaiheet';
 import { getArticleBySlug, isPublished } from '@/data/articles';
 
-const comparisonBase = "tummanharmaa-kattotiili-pesu-ja-pinnoitustyo";
+const comparisonBase = "tiilikaton-pesu-ja-pinnoitus-tummanharmaa-kattotiili";
 const ARTIKKELI_SLUG = "pinnoitus-vai-uusi-katto";
 
 /**

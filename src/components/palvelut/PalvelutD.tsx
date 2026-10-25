@@ -44,7 +44,7 @@ const rivit: Rivi[] = [
     key: "paketti",
     title: "Katto ja seinät samalla kertaa",
     tekija: `${tekijat.eerik.first} ja ${tekijat.eemil.first}`,
-    imageBase: "puutalon-katon-ja-seinien-maalaus-tampere",
+    imageBase: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
     imageAlt: "Puutalo, jonka katto ja seinät on maalattu",
     kuvaus: `Teemme katon ja seinät samaan aikaan. ${PAKETTI_VASTAUS}`,
     hinta: "Pakettihinta",

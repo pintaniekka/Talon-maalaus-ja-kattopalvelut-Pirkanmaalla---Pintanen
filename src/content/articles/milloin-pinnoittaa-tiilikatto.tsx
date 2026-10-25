@@ -50,7 +50,7 @@ const Body = () => (
       ohentunut ja tiili on alkanut <strong>imeä vettä</strong>.
     </p>
     <Figure
-      image="haalistunut-punainen-tiilikatto-ennen-pinnoitusta"
+      image="tiilikaton-pinnoitus-haalistunut-punainen-tiilikatto-ennen"
       alt="Haalistunut punainen tiilikatto ennen pinnoitusta"
       caption="Haalistunut väri on ensimmäinen merkki kuluneesta pinnoitteesta."
     />
@@ -63,7 +63,7 @@ const Body = () => (
       pinnoite, joka tekee pinnasta vettä hylkivän.
     </p>
     <Figure
-      image="sammaleinen-tiilikatto-ennen-mekaanista-puhdistusta"
+      image="tiilikaton-pesu-sammaleinen-tiilikatto-ennen"
       alt="Sammaloitunut tiilikatto ennen puhdistusta"
       caption="Nopeasti palaava sammal kertoo huokoiseksi kuluneesta tiilestä."
     />
@@ -101,7 +101,7 @@ const Body = () => (
       kuvaus on sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
     <Figure
-      image="tummanharmaa-tiilikaton-pinnoitus-ja-huolto-jalkeen"
+      image="tiilikaton-pinnoitus-tummanharmaa-tiilikatto-pinnoitus-jalkeen"
       alt="Tummanharmaa tiilikatto pinnoituksen jälkeen"
       caption="Pinnoitettu katto hylkii vettä ja pysyy puhtaana pidempään."
     />

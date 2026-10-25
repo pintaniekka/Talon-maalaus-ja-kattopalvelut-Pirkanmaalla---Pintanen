@@ -113,8 +113,8 @@ export const calculatorQuestions: Record<WizardService, CalculatorQuestion[]> = 
 
 // eslint-disable-next-line react-refresh/only-export-components -- jaettu data etusivun laskurille
 export const calculatorServices: { value: WizardService; label: string; imageBase: string }[] = [
-  { value: "pinnoitus", label: "Tiilikaton pinnoitus", imageBase: "puhdas-tiilenpunainen-tiilikatto-suojakasittelyn-jalkeen" },
-  { value: "maalaus", label: "Talon maalaus", imageBase: "moderni-tumma-puutalo-julkisivumaalaus-valmis" },
+  { value: "pinnoitus", label: "Tiilikaton pinnoitus", imageBase: "tiilikaton-pesu-ja-pinnoitus-puhdas-tiilenpunainen-tiilikatto" },
+  { value: "maalaus", label: "Talon maalaus", imageBase: "talon-maalaus-moderni-tumma-puutalo-julkisivumaalaus-valmis" },
 ];
 
 const labelOf = (q: CalculatorQuestion, value: string) => q.options?.find((o) => o.value === value)?.label ?? value;

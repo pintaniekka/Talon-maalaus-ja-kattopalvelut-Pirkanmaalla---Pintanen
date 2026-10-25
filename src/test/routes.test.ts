@@ -64,11 +64,14 @@ describe("reittilista (src/data/routes.ts) vs App.tsx", () => {
       expect(rules).toContain(`${from}/ ${to}/ 301`);
     }
     for (const rule of rules) {
-      const [, target, status] = rule.split(/\s+/);
+      const [source, target, status] = rule.split(/\s+/);
+      if (source.startsWith("/images/")) continue; // kuvatiedostojen uudet nimet 26.10.2026: kohde on tiedosto
       if (status === "301") expect(target.endsWith("/"), rule).toBe(true);
     }
     expect(rules[rules.length - 1]).toBe("/* /index.html 200");
-    expect(tail).not.toMatch(/\s301\s*$/m);
+    // Käsin kirjoitetut 301-säännöt vain kuville; sivujen ohjaukset tulevat routes.ts:stä.
+    const tail301 = tail.split("\n").filter((l) => /\s301\s*$/.test(l) && !l.startsWith("/images/"));
+    expect(tail301).toEqual([]);
   });
 
   it("sitemap sisältää kaikki kanoniset reitit loppukauttaviivalla", () => {

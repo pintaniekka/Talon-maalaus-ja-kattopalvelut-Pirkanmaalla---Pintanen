@@ -42,6 +42,8 @@ def check_file(redirects: pathlib.Path, sitemap: pathlib.Path | None) -> int:
         xml = sitemap.read_text(encoding="utf-8")
         locs = set(re.findall(r"<loc>https://pintanen\.fi([^<]*)</loc>", xml))
     for src, dst in rules:
+        if src.startswith("/images/"):
+            continue  # kuvatiedostojen uudet nimet (26.10.2026): ei kauttaviivaa, ei paria, ei sitemapissa
         if not dst.endswith("/"):
             problems.append(f"kohde ilman kauttaviivaa (308-ketju): {src} -> {dst}")
         twin = src[:-1] if src.endswith("/") else src + "/"

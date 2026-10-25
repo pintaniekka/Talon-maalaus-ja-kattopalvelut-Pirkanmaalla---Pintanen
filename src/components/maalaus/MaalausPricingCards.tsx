@@ -8,7 +8,7 @@ const cards = maalausPrices.cards;
 /** Hintakortit säilyvät sellaisinaan (sääntö). Sisältölista noudattaa sovittua sanastoa. */
 const pricingIncludes = ['Homepesu', 'Irtoavan maalin kaavinta', 'Pohjamaali paljaisiin kohtiin', 'Pintamaali pensselillä'];
 
-const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintalaskuri/?palvelu=maalaus', calculatorLabel }: { cityName?: string; calculatorHref?: string; calculatorLabel?: string }) => {
+const MaalausPricingCards = ({ cityName = 'Pirkanmaa', cityIn, calculatorHref = '/hintalaskuri/?palvelu=maalaus', calculatorLabel }: { cityName?: string; cityIn?: string; calculatorHref?: string; calculatorLabel?: string }) => {
   return (
     <section className="section-padding bg-background">
       <div className="section-container max-w-5xl mx-auto">
@@ -16,7 +16,7 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
           className="text-center mb-10"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
-            Mitä talon maalaus maksaa{cityName === 'Pirkanmaa' ? ' Pirkanmaalla' : ` – ${cityName}`}?
+            Mitä talon maalaus maksaa {cityIn ?? (cityName === 'Pirkanmaa' ? 'Pirkanmaalla' : cityName)}?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Hintaan kuuluu koko työ ja siivous. Piilokuluja ei ole.

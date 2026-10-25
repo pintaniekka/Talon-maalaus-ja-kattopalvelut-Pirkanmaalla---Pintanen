@@ -11,6 +11,7 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausComparison from "@/components/maalaus/MaalausComparison";
+import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist } from "@/components/hinnat/PriceSections";
 import { maalausPrices, fmtRange } from "@/data/prices";
@@ -45,6 +46,14 @@ const faqItems = [
     answer: "Hinta lasketaan talon mukaan: pinta-ala, kerrosluku, verhouksen kunto ja pesun tarve ratkaisevat. Siksi annamme hinnan arviokäynnin jälkeen kirjallisena, ja laskurista saat haarukan heti.",
   },
   { question: "Kuinka kauan talon maalaus kestää?", answer: "Yleensä 3–7 päivää talon koon ja pohjatöiden määrän mukaan." },
+  {
+    question: "Saanko karkean hinta-arvion ennen käyntiä?",
+    answer: "Kyllä. Hintalaskuri antaa suuntaa antavan arvion heti seinäpinta-alan, kerrosten ja hilseilyn mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa ilmaisen arviokäynnin jälkeen.",
+  },
+  {
+    question: "Milloin pääsette katsomaan talon?",
+    answer: "Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen.",
+  },
   { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme seinät ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sovitut asiat ovat kunnossa." },
   { question: "Kuinka usein talo pitää maalata?", answer: "Yleensä 10–15 vuoden välein. Väli riippuu maalista ja säästä. Eteläseinä kuluu ensin." },
   {
@@ -149,6 +158,7 @@ const HinnatTalonMaalaus = () => {
           </p>
         </div>
       </section>
+      <Vaarinymmarrykset service="maalaus" />
 
       <FeaturedProjects service="maalaus" title="Talon maalauksia Pirkanmaalla" />
 

@@ -1,5 +1,6 @@
 import ResponsiveImage from "@/components/ResponsiveImage";
 import type { ReviewCase } from "@/data/reviewCases";
+import { getCityBySlug } from "@/data/cityData";
 import type { Testimonial } from "@/data/testimonialsData";
 
 const avatarColors = ["#0f766e", "#ea580c", "#7c3aed", "#0369a1"];
@@ -42,6 +43,7 @@ interface Props {
  * Arvostelun teksti sanasta sanaan; kertomus on Eerikin. Alkukirjainpallo on profiilikuvan tilalla.
  */
 const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
+  const cityIn = getCityBySlug(reviewCase.city)?.cityIn;
   const photos = reviewCase.before && reviewCase.after
     ? [
         { base: reviewCase.before, label: "Ennen" },
@@ -83,7 +85,7 @@ const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
             <div key={p.base} className="relative">
               <ResponsiveImage
                 baseName={p.base}
-                alt={`${review.name}: kohde ${p.label ? p.label.toLowerCase() : ""}`.trim()}
+                alt={`${review.category === "seina" ? "Maalattu talo" : "Pinnoitettu tiilikatto"}${cityIn ? ` ${cityIn}` : ""}${p.label ? `, ${p.label.toLowerCase()}` : ""}: ${review.name}n kohde`}
                 className="w-full h-full min-h-[200px] aspect-[3/4] md:aspect-auto object-cover"
                 sizes="(max-width: 768px) 50vw, 240px"
                 width={400}

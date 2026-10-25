@@ -28,8 +28,9 @@ import { getTestimonialsByCity } from "@/data/testimonialsData";
 
 /**
  * Tiilikaton pinnoituksen kaupunkisivu (SEO-suunnitelma 25.10.2026, vaihe 1). Järjestys: hero → Lyhyesti →
- * paikallinen teksti (lyhyt erottaja) → miksi ajoissa + merkit → pesu ja pinnoitus työvaiheina →
- * maalaus = pinnoitus (rinnakkaissanat) → kohteet → hintakortit katon koon mukaan → mitä hintaan kuuluu ja
+ * paikallinen teksti (lyhyt erottaja) ja kartta → miksi ajoissa + merkit → hintakortit katon koon mukaan
+ * (yöajo 26.10.2026: "paljonko maksaa" on asiakasviestien yleisin kysymys, joten hinta heti syyn jälkeen) →
+ * pesu ja pinnoitus työvaiheina → maalaus = pinnoitus (rinnakkaissanat) → kohteet → mitä hintaan kuuluu ja
  * remontti vai pinnoitus → miksi Pintanen → talokanta → yrittäjä → FAQ → arvostelut → yhteydenotto →
  * naapurikunnat ja kaikki kunnat. Pois jätetty: arvostelukaruselli ja Toiminta-alueet-palkki (korjaus 6).
  */
@@ -49,7 +50,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
   return (
     <div>
       <SEO {...seo} breadcrumbs={crumbs} />
-      <ServiceSchema name="Tiilikaton pinnoitus" area={cityData.name} description={seo.description} priceRange={pinnoitusPrices.general} />
+      <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} description={seo.description} priceRange={pinnoitusPrices.general} />
 
       <PageHero
         eyebrow={`Tiilikaton pinnoitus · ${cityData.name}`}
@@ -92,6 +93,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       )}
 
       <PinnoitusWhyNow cityIn={cityData.cityIn} />
+      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} />
 
       <ProcessList
         title={`Tiilikaton pesu ja pinnoitus ${cityData.cityIn}: näin työ etenee`}
@@ -102,7 +104,6 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
 
       <PinnoitusSamaTyo cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" featureFirst />
-      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} />
       <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
       <MiksiValitaPintanen service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" hideMap={kartta} />

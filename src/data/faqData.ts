@@ -164,6 +164,15 @@ export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityI
       answer: `Maali hilseilee, väri on haalistunut tai seinässä on homepilkkuja. Puutalot ${paikka} tarvitsevat uuden maalin yleensä 10–15 vuoden välein.`,
     },
     {
+      question: `Milloin pääsette maalaamaan ${paikka}?`,
+      answer:
+        'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+    },
+    {
+      question: 'Kuinka kauan talon maalaus kestää?',
+      answer: 'Omakotitalo valmistuu yleensä <strong>3–7 päivässä</strong>. Aika riippuu talon koosta ja pohjatöiden määrästä.',
+    },
+    {
       question: 'Saako talon maalauksesta kotitalousvähennystä?',
       answer: KOTITALOUSVAHENNYS_VASTAUS,
     },
@@ -198,6 +207,11 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
       question: 'Milloin tiilikatto pitää pinnoittaa?',
       answer:
         'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 10–15 vuotta vanha.',
+    },
+    {
+      question: `Milloin pääsette katsomaan katon ${paikka}?`,
+      answer:
+        'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
     },
     {
       question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',

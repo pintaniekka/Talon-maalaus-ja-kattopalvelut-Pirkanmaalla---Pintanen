@@ -182,7 +182,17 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: 'Kuinka kauan työ kestää?',
       answer:
-        'Omakotitalon katto valmistuu yleensä <strong>2–4 työpäivässä</strong>. Pesun jälkeen katto saa kuivua ennen maalausta.',
+        'Peruskohteen katto valmistuu <strong>2–3 työpäivässä</strong>. Pesun jälkeen katto saa kuivua ennen maalausta.',
+    },
+    {
+      question: `Onko tiilikaton pesu ja pinnoitus sama palvelu ${paikka}?`,
+      answer:
+        'Pesu on pinnoituksen ensimmäinen työvaihe. Pesemme katon painepesulla, levitämme kasvustontorjunta-aineen ja maalaamme katon kahteen kertaan. Jos tiilen pinta on kulunut, pelkkä pesu ei riitä, koska tiili imee vettä heti seuraavalla sateella.',
+    },
+    {
+      question: 'Mitä eroa on katon pinnoituksella ja tiilikaton maalauksella?',
+      answer:
+        'Ei mitään. Katon pinnoitus, tiilikaton maalaus ja kattomaalaus tarkoittavat samaa työtä. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin kattomaalilla.',
     },
     {
       question: 'Milloin tiilikatto pitää pinnoittaa?',

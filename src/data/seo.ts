@@ -173,7 +173,7 @@ export const staticSeo: Record<string, RouteSeo> = {
  */
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
   title: `Tiilikaton pinnoitus ja maalaus ${city.name} | Pintanen`,
-  description: `Tiilikaton pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
+  description: `Tiilikaton pesu ja pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
 });
 
 /** Maalauksen kaupunkisivu: hakutermit "ulkomaalaus" ja "julkisivumaalaus" titleen (korjaus 2). */

@@ -215,6 +215,10 @@ const Footer = () => {
               Tietosuojaseloste
             </Link>
           </p>
+          {/* Kuntakarttojen lähdemaininta: Tilastokeskus CC BY 4.0 ja OpenStreetMap ODbL vaativat sen (Eerik 25.10.2026: ei kuvan alle). */}
+          <p className="mt-2 text-xs text-primary-foreground/40">
+            Kuntakartat: Tilastokeskus, kuntajako 2026 (CC BY 4.0) ja OpenStreetMap-tekijät (ODbL).
+          </p>
         </div>
       </div>
     </footer>

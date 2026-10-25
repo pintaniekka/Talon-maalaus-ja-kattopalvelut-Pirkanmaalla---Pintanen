@@ -17,10 +17,12 @@ interface Card {
  * vertailu) ovat palvelun pääsivulla ja hintasivulla, joihin kortit linkittävät.
  */
 const cards: Record<Service, (cityIn: string) => Card[]> = {
+  // Eerik 25.10.2026: hintaan kuuluu suojaus, pohjatyöt, pohjamaalaus, pintamaalaus, siivous ja takuu.
+  // Hintakortit katon koon mukaan ovat omana osionaan (PinnoitusPricingCards), joten hintaa ei toisteta tässä.
   pinnoitus: (cityIn) => [
     {
-      title: `Hinta on yleensä ${PINNOITUS_HINTA}`,
-      text: "Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Tarkan hinnan kerromme, kun olemme nähneet katon.",
+      title: "Hintaan kuuluu kaikki",
+      text: "Suojaus, pesu ja rikkinäisten tiilien vaihto, pohjamaalaus, pintamaalaus, siivous ja 5 vuoden takuu. Saat kirjallisen tarjouksen kiinteällä hinnalla heti kuntotarkastuksen jälkeen.",
       links: [
         { to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" },
         { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Katso hintaesimerkit" },
@@ -28,7 +30,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
     },
     {
       title: `Tiilikattoremontti vai pinnoitus ${cityIn}?`,
-      text: "Usein pinnoitus riittää. Jos aluskate ja katon rakenteet ovat kunnossa, kattoa ei tarvitse uusia. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Katsomme sen arviokäynnillä.",
+      text: "Usein pinnoitus riittää. Jos aluskate ja katon rakenteet ovat kunnossa, kattoa ei tarvitse uusia. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Katsomme sen kuntotarkastuksessa.",
       links: [{ to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Lue lisää pinnoituksesta" }],
     },
   ],
@@ -55,7 +57,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
 };
 
 const headings: Record<Service, (cityIn: string) => string> = {
-  pinnoitus: (cityIn) => `Hinta ja vaihtoehdot ${cityIn}`,
+  pinnoitus: (cityIn) => `Mitä hintaan kuuluu ${cityIn}?`,
   maalaus: (cityIn) => `Hinta, työn kulku ja takuu ${cityIn}`,
 };
 

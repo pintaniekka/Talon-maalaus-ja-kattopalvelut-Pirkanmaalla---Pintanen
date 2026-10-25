@@ -79,7 +79,7 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', calculatorHref = '/hintal
         </div>
 
         <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto">
-          Työn osuudesta saat kotitalousvähennyksen. Voit maksaa myös kuukausierissä. Kysy lisää arviokäynnillä.
+          Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan kerromme arviokäynnin jälkeen kirjallisessa tarjouksessa.
         </p>
 
         <div className="text-center mt-6">

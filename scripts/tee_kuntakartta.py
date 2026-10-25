@@ -11,8 +11,8 @@ Lähteet (kirjattu myös docs/sisallon-lahteet-2026-10-12.md):
   - Järvet: OpenStreetMap-tekijät, Overpass API, ODbL. Valinnainen: jos tiedostoa
     .kartta-cache/lakes_osm.json ei ole, kartta tehdään ilman järviä.
 
-Tulos: public/images/kartat/<slug>.svg. Kunta täytettynä sivuston sinisellä, naapurikunnat
-vaaleanharmaina nimineen, suuret järvet vaaleansinisinä. Ei teitä eikä taajamia.
+Tulos: public/images/kartat/<slug>.svg. Kunta sivuston sinisellä korostettuna, naapurikunnat haaleina
+ääriviivoina ja reunat häivytettyinä (Eerik 25.10.2026), suuret järvet vaaleansinisinä. Ei teitä eikä taajamia.
 """
 import json, math, sys, urllib.request, pathlib
 from shapely.geometry import shape, Polygon, MultiPolygon, LineString, box
@@ -117,11 +117,12 @@ def svg_path(geom, tf):
 
 
 def make_svg(slug, kunnat, lakes):
+    """Tyyli (Eerik 25.10.2026): reunat häivytetty, naapurit vain ääriviivoina ja haaleina,
+    kunta yrityksen sinisenä korostettuna, järvet vaaleansinisinä (kunnan sisällä vaaleampana)."""
     name = SLUGS[slug]
     kunta = kunnat[name]
     minx, miny, maxx, maxy = kunta.bounds
     w, h = maxx - minx, maxy - miny
-    # viewBox kunnan ympärille, säilyttäen 5:4-suhde
     cx, cy = (minx + maxx) / 2, (miny + maxy) / 2
     span = max(w * (1 + 2 * PAD), h * (1 + 2 * PAD) * W / H)
     vw, vh = span, span * H / W
@@ -134,31 +135,47 @@ def make_svg(slug, kunnat, lakes):
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" '
            f'aria-labelledby="t">',
            f"<title id=\"t\">{name} ja naapurikunnat kartalla</title>",
-           f'<rect width="{W}" height="{H}" fill="#F7FAFC"/>']
+           '<defs>',
+           '<radialGradient id="fade" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">'
+           '<stop offset="0.55" stop-color="#fff" stop-opacity="1"/>'
+           '<stop offset="0.8" stop-color="#fff" stop-opacity="0.55"/>'
+           '<stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>',
+           f'<mask id="m"><ellipse cx="{W/2:.0f}" cy="{H/2:.0f}" rx="{W*0.62:.0f}" ry="{H*0.62:.0f}" fill="url(#fade)"/></mask>',
+           '<filter id="varjo" x="-10%" y="-10%" width="120%" height="120%">'
+           '<feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0A2A45" flood-opacity="0.35"/></filter>',
+           '</defs>',
+           '<g mask="url(#m)">']
+    # Naapurit: haalea täyttö ja ohut ääriviiva, joka jatkuu reunaan asti
     for n, g in naapurit:
-        out.append(f'<path d="{svg_path(simp(g.intersection(view)), tf)}" fill="{COL_NAAPURI}" stroke="{COL_RAJA}" stroke-width="1"/>')
-    out.append(f'<path d="{svg_path(simp(kunta), tf)}" fill="{COL_KUNTA}" stroke="#0A2A45" stroke-width="1.5"/>')
+        out.append(f'<path d="{svg_path(simp(g.intersection(view)), tf)}" fill="#F3F6F9" stroke="#C3CDD8" stroke-width="1"/>')
+    # Järvet naapureissa
     if lakes is not None:
-        lk = lakes.intersection(view)
+        lk = lakes.intersection(view).difference(kunta)
         if not lk.is_empty:
-            out.append(f'<path d="{svg_path(lk.simplify(span / 500), tf)}" fill="{COL_JARVI}" stroke="#8CC4E8" stroke-width="0.8" fill-rule="evenodd"/>')
-    # Naapurien nimet
+            out.append(f'<path d="{svg_path(lk.simplify(span / 500), tf)}" fill="#D6E8F5" stroke="#B7D4EA" stroke-width="0.8" fill-rule="evenodd"/>')
+    # Naapurien nimet haaleina
     for n, g in naapurit:
         inside = g.intersection(view)
         if inside.area < view.area * 0.012:
             continue
         px, py = tf(*inside.representative_point().coords[0])
-        # Nimi pysyy kuvan sisällä, vaikka kunta leikkautuu reunaan.
         margin = 7 * len(n) / 2 + 6
         px = min(max(px, margin), W - margin)
         py = min(max(py, 16), H - 8)
-        out.append(f'<text x="{px:.0f}" y="{py:.0f}" font-family="Montserrat, Arial, sans-serif" font-size="13" '
-                   f'fill="#4b5563" stroke="#F7FAFC" stroke-width="3" paint-order="stroke" text-anchor="middle">{n}</text>')
+        out.append(f'<text x="{px:.0f}" y="{py:.0f}" font-family="Montserrat, Arial, sans-serif" font-size="12" '
+                   f'fill="#8A97A5" text-anchor="middle">{n}</text>')
+    out.append('</g>')
+    # Kunta korostettuna, ei häivytystä
+    out.append(f'<path d="{svg_path(simp(kunta), tf)}" fill="{COL_KUNTA}" stroke="#0A2A45" stroke-width="1.5" filter="url(#varjo)"/>')
+    if lakes is not None:
+        lk = lakes.intersection(kunta)
+        if not lk.is_empty:
+            out.append(f'<path d="{svg_path(lk.simplify(span / 500), tf)}" fill="#9CC8EA" stroke="#7FB6DF" stroke-width="0.8" fill-rule="evenodd"/>')
     px, py = tf(*kunta.representative_point().coords[0])
-    out.append(f'<text x="{px:.0f}" y="{py:.0f}" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="700" '
+    out.append(f'<text x="{px:.0f}" y="{py:.0f}" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800" '
                f'fill="#ffffff" stroke="#0A2A45" stroke-width="4" paint-order="stroke" text-anchor="middle">{name}</text>')
     out.append("</svg>")
-    return "\n".join(out)
+    return chr(10).join(out)
 
 
 def main(argv):

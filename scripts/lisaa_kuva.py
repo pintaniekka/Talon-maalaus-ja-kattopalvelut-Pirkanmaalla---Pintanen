@@ -7,7 +7,7 @@ Käyttö:
 Esimerkki:
     python3 scripts/lisaa_kuva.py ~/GitHub/uudet-kuvat/IMG_1234.HEIC punainen-tiilikatto-lempaala-jalkeen
 
-Tulos: public/images/Pictures-400|800|1200/<perusnimi>-<leveys>.webp ja lisäksi
+Tulos: public/images/Pictures-400|600|800|1200/<perusnimi>-<leveys>.webp ja lisäksi
 Pictures-1500, jos alkuperäinen on vähintään 1500 px leveä. Kuvaa käytetään
 koodissa perusnimellä (ResponsiveImage, getResponsiveSrcSet).
 
@@ -23,7 +23,7 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
-PAKOLLISET = (400, 800, 1200)
+PAKOLLISET = (400, 600, 800, 1200)
 VALINNAINEN = 1500
 LAATU = 70
 

@@ -51,14 +51,17 @@ const OptimizedImage = ({
   const finalSrcSet = errored ? undefined : srcSet;
   const finalSizes = errored ? undefined : (sizes ?? "(max-width: 768px) 100vw, 600px");
 
+  // loading ja decoding ennen src-attribuuttia: React asettaa attribuutit tässä järjestyksessä,
+  // ja Chrome aloittaa latauksen heti src-arvon saatuaan. Jos loading="lazy" tulee vasta sen
+  // jälkeen, näkymän ulkopuolisetkin kuvat ladataan heti (26.10.2026).
   return (
     <img
+      loading={priority ? undefined : "lazy"}
+      decoding="async"
       src={finalSrc}
       srcSet={finalSrcSet}
       alt={alt}
       className={className}
-      loading={priority ? undefined : "lazy"}
-      decoding="async"
       {...({ fetchpriority: priority ? "high" : "low" } as Record<string, string>)}
       sizes={finalSizes}
       draggable={draggable}

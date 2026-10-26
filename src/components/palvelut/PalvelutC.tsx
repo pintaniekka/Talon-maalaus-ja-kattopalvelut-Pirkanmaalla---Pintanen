@@ -55,13 +55,13 @@ const PalvelutC = () => (
             >
               <div className="flex items-center gap-3">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={p.tekija.image}
                   alt=""
                   width={48}
                   height={48}
                   className="h-12 w-12 rounded-full object-cover"
-                  loading="lazy"
-                  decoding="async"
                 />
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[15px] font-bold">{p.tekija.name}</span>

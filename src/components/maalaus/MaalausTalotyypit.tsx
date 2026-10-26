@@ -5,8 +5,8 @@ import { MAALAUS_HINTA } from "@/data/tyovaiheet";
  * Talotyypit talon maalauksen hub-sivulle (hakutulosanalyysi 26.10.2026, brief 4). Yrityksestä sanotaan vain
  * sivuston omat faktat (tyovaiheet.ts, faqData.ts, UKK); yleiset faktat rintamamiestaloista, hirrestä ja
  * sivellinmaalauksesta on tarkistettu lähteistä, jotka on kirjattu docs/lahteet-talotyypit-2026-10-26.md.
- * Lautojen vaihdosta tai lahosta ei sanota mitään (CLAUDE.md). Kivitalon puuosia ei luvata, koska sivusto ei
- * mainitse niitä palveluna. Hinta vain haarukkana ja linkkinä hintasivulle.
+ * Lautojen vaihdosta tai lahosta ei sanota mitään (CLAUDE.md). Kivitalon puuosat (räystäät, ikkunat, kuistit)
+ * maalataan (Eerik 27.10.2026). Hinta vain haarukkana ja linkkinä hintasivulle.
  */
 const talotyypit = [
   {
@@ -31,6 +31,13 @@ const talotyypit = [
       "Matkasta ei tule lisäkulua, ja maalaamme myös kauempana Tampereelta. Katon ja seinät samalla kertaa saat edullisempana pakettihintana.",
     ],
   },
+  {
+    title: "Kivitalon puuosat",
+    paragraphs: [
+      "Kivitalossa maalattavaa ovat räystäät, ikkunat ja kuistit. Maalaamme ne samoilla työvaiheilla: pesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
+      "Hinta riippuu puuosien määrästä ja kunnosta. Arviokäynnillä katsomme, mitä maalia pinnassa on, ja annamme kirjallisen tarjouksen.",
+    ],
+  },
 ];
 
 const MaalausTalotyypit = () => (
@@ -39,12 +46,12 @@ const MaalausTalotyypit = () => (
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Millaisia taloja maalaamme?</h2>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Maalaamme puutalojen ulkoseinät. Talotyyppi vaikuttaa pohjatöihin ja maalin valintaan, mutta työvaiheet ovat samat: homepesu,
-          kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.
+          Maalaamme puutalojen ulkoseinät ja kivitalojen puuosat. Talotyyppi vaikuttaa pohjatöihin ja maalin valintaan, mutta
+          työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {talotyypit.map((t) => (
           <div key={t.title} className="bg-card rounded-2xl p-6 md:p-8 border border-border">
             <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">{t.title}</h3>

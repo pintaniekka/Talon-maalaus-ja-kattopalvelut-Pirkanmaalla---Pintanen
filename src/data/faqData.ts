@@ -30,10 +30,10 @@ export const MAKSU_FAQ: FAQItem = {
     'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
 };
 
+/** Pesukysymys on yksi ja sama kaikilla pinnoitussivuilla (Eerik 27.10.2026). */
 export const PESU_VAI_PINNOITUS_FAQ: FAQItem = {
-  question: 'Riittääkö pelkkä pesu, vai pitääkö katto pinnoittaa?',
-  answer:
-    'Pesu poistaa lian ja sammaleen, mutta kulunut tiili imee vettä pesun jälkeenkin. Teemme pesun aina pinnoituksen yhteydessä. Jos tiilen pinta on haalistunut tai karhea, katto kannattaa pinnoittaa. Katsomme sen ilmaisessa kuntotarkastuksessa.',
+  question: 'Pesettekö tiilikattoja?',
+  answer: 'Kyllä. Pesemme katon aina ennen pinnoitusta.',
 };
 
 export const PINNOITUS_MAALI_FAQ: FAQItem = {
@@ -97,11 +97,7 @@ export const pinnoitusFAQ: FAQItem[] = [
     answer:
       'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.',
   },
-  {
-    question: 'Poistatteko sammaleen ja pesettekö katon ennen pinnoitusta?',
-    answer:
-      'Kyllä. Teemme pesun aina pinnoituksen yhteydessä. Painepesu irrottaa sammaleen ja jäkälän, ja kasvustontorjunta-aine hidastaa uuden kasvuston tuloa. Pinnoitetulla katolla sammal ei saa otetta, koska tiili ei enää ime vettä.',
-  },
+  PESU_VAI_PINNOITUS_FAQ,
   {
     question: 'Voiko katon värin vaihtaa pinnoituksessa?',
     answer: 'Kyllä voi. Nowocoatin kattomaaleissa on laaja värivalikoima.',

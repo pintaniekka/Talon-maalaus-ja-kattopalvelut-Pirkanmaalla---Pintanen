@@ -21,11 +21,11 @@ import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
 const eemilImage = getStorageUrl("Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp");
 
-const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) => [
-  {
-    question: `Paljonko tiilikaton pinnoitus tai talon maalaus maksaa ${cityIn}?`,
-    answer: `Tiilikaton pinnoitus maksaa meillä yleensä ${PINNOITUS_HINTA}. Talon ulkomaalaus maksaa yleensä ${MAALAUS_HINTA}. Hinta riippuu kohteen koosta, kunnosta ja pohjatöiden määrästä. Katso tarkemmin: <a href="${pinnoitusHref}/">tiilikaton pinnoitus</a> ja <a href="${maalausHref}/">talon maalaus</a>.`,
-  },
+/**
+ * Aluesivun UKK ilman hintakysymystä (sivuroolit, hakutulosanalyysi 26.10.2026, brief 1): hinta vastataan
+ * palvelusivuilla ja hintasivuilla, jotta aluesivu ei kilpaile niiden kanssa "<palvelu> hinta <kunta>" -hauissa.
+ */
+const getAreaFAQ = (cityIn: string) => [
   {
     question: `Kuinka kauan työ kestää ${cityIn}?`,
     answer: "Tiilikaton pinnoitus kestää yleensä 2–4 työpäivää ja talon maalaus 3–7 työpäivää. Aika riippuu kohteen koosta ja pohjatöiden määrästä.",
@@ -240,7 +240,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         </div>
       </section>
 
-      <FAQSection items={getAreaFAQ(cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
+      <FAQSection items={getAreaFAQ(cityIn)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
 
       {ownReviews.length === 0 && <ReviewsTeaser citySlug={citySlug} />}
       <ServiceContactSection variant="general" cityIn={cityIn} />

@@ -54,8 +54,12 @@ const ToimintaAlueet = () => {
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {allCities.map((city) => (
                 <li key={city.slug} className="bg-card rounded-xl border border-border/50 p-4">
+                  {/* Aluesivun ainoa linkki sivustolla (sivuroolit 26.10.2026): ankkuri "Maalausliike <kunta>", näkyvissä kunnan nimi. */}
                   <Link to={`/maalauspalvelut-${city.slug}/`} className="flex items-center justify-between gap-1 font-bold text-foreground hover:text-accent-ink transition-colors group">
-                    <span>{city.name}</span>
+                    <span>
+                      <span className="sr-only">Maalausliike </span>
+                      {city.name}
+                    </span>
                     <ChevronRight className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                   </Link>
                   <p className="text-sm text-muted-foreground mt-1.5 flex flex-wrap gap-x-3">

@@ -36,7 +36,7 @@ const regionGroups: { title: string; slugs: string[] }[] = [
 const pinnoitusSlugs = new Set(pinnoitusCities.map((c) => c.slug));
 const maalausSlugs = new Set(maalausCities.map((c) => c.slug));
 
-/** Palvelulinkit: vain paikkakunnat, joilla on oma palvelusivu. Aluesivut linkitetään vain alatunnisteessa. */
+/** Palvelulinkit: vain paikkakunnat, joilla on oma palvelusivu. Aluesivut linkitetään vain toiminta-alueet-sivulta (26.10.2026). */
 const linkGroups = [
   { key: "pinnoitus", title: "Tiilikaton pinnoitus", has: (slug: string) => pinnoitusSlugs.has(slug), href: (slug: string) => `/tiilikaton-pinnoitus-${slug}/` },
   { key: "maalaus", title: "Talon maalaus", has: (slug: string) => maalausSlugs.has(slug), href: (slug: string) => `/talon-maalaus-${slug}/` },
@@ -144,7 +144,7 @@ const RegionAccordion = ({ region, defaultOpen, activeCity, service }: RegionAcc
  * otsikko, yksi lause, kaksi haitaria (Pirkanmaa auki, Kanta-Häme & Satakunta kiinni), joissa sirot
  * tekstilinkit tiilikaton pinnoituksen ja talon maalauksen kaupunkisivuille, pieni kartta ja linkki
  * Toiminta-alueet-sivulle. Kartta on läpinäkyvä PNG ja istuu tummalle pohjalle, ei valkoiselle.
- * Aluesivujen linkit ovat vain alatunnisteessa. Kaikki linkit ovat aina HTML:ssä.
+ * Aluesivujen linkit ovat vain toiminta-alueet-sivulla. Kaikki linkit ovat aina HTML:ssä.
  */
 const ToimintaAlueetBanner = ({ activeCity, service = "alue", showNeighbors = false }: ToimintaAlueetBannerProps) => {
   const [mapFailed, setMapFailed] = useState(false);

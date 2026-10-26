@@ -27,7 +27,7 @@ const VahennysC = () => (
         className="inline-flex min-h-[48px] shrink-0 items-center gap-1.5 self-start whitespace-nowrap rounded-xl border-2 border-white/60 px-6 font-heading text-[15px] font-extrabold text-navy-foreground transition-colors hover:border-white hover:bg-white/10 md:self-auto"
       >
         Lue lisää
-        <span className="sr-only">: kotitalousvähennys katto- ja maalaustöissä</span>
+        <span className="sr-only">: kotitalousvähennys katon pinnoituksesta ja talon maalauksesta</span>
         <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </Link>
     </div>

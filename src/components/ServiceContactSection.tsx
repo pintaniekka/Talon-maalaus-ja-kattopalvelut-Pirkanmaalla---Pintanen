@@ -42,7 +42,7 @@ const contactPersons = {
 };
 
 const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
-  <div className="bg-card rounded-2xl p-6 shadow-md border border-border flex flex-col items-center text-center">
+  <div className="kortti-a p-6 flex flex-col items-center text-center">
     <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden bg-muted mb-4 ring-4 ring-background shadow-sm">
       <img
         src={person.image}
@@ -183,10 +183,10 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
           <div className="h-full flex justify-center">
             <form
               onSubmit={handleSubmit}
-              className="bg-card rounded-2xl p-8 md:p-10 shadow-md border border-border w-full max-w-md h-full flex flex-col"
+              className="kortti-a p-8 md:p-10 w-full max-w-md h-full flex flex-col"
             >
               <div className="flex items-center gap-3 mb-6">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent-ink" aria-hidden="true">
+                <span className="kortti-a-merkki" aria-hidden="true">
                   <PintanenMark className="h-6 w-6" />
                 </span>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading">Pyydä ilmainen arviokäynti</h3>

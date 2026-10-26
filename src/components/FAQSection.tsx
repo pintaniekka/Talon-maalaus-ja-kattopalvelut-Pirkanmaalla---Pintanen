@@ -20,8 +20,8 @@ interface FAQSectionProps {
  * Avaaminen on React-ohjattu (Eerik 14.10.2026: vastaus avautuu liukumalla): natiivi <details> ei osaa
  * animoida korkeutta, joten kysymys on painike (aria-expanded, aria-controls) ja vastaus liukuu auki
  * grid-template-rows-siirtymällä 0fr → 1fr. Liikettä vähentäville ei animoida.
- * Ulkoasu (Eerik 13.10. ja 14.10.2026): valkoinen tausta, yksi kapea lista ohuilla viivoilla ilman
- * laatikoita, kysymys otsikkofontilla, plus-merkki kääntyy ristiksi kun vastaus on auki.
+ * Ulkoasu tyylillä A (Eerik 26.10.2026): koko lista yhdessä kortissa, jolla on paksu ääriviiva ja kova
+ * sininen varjo; kysymykset erotetaan viivoilla, plus-merkki on keltainen laatta ja kääntyy ristiksi.
  */
 const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
   const baseId = useId();
@@ -54,12 +54,12 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
           <h2 className="heading-style text-3xl md:text-4xl mb-8 md:mb-12 text-center" style={{ color: 'hsl(var(--heading-navy))' }}>
             {title || 'Usein kysytyt kysymykset'}
           </h2>
-          <div className="border-t border-[hsl(var(--heading-navy)/0.15)]">
+          <div className="kortti-a px-5 md:px-7 divide-y-2 divide-navy/15">
             {items.map((item, index) => {
               const isOpen = open[index] ?? index < openCount;
               const answerId = `${baseId}-faq-${index}`;
               return (
-                <div key={index} className="border-b border-[hsl(var(--heading-navy)/0.15)]">
+                <div key={index}>
                   <h3 className="font-heading text-lg md:text-xl font-bold leading-snug" style={{ color: 'hsl(var(--heading-navy))' }}>
                     <button
                       type="button"
@@ -70,7 +70,7 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
                     >
                       <span>{item.question}</span>
                       <span
-                        className={`mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full border border-[hsl(var(--heading-navy)/0.3)] transition-transform duration-300 motion-reduce:transition-none ${isOpen ? 'rotate-45' : ''}`}
+                        className={`kortti-a-merkki mt-0.5 !h-8 !w-8 transition-transform duration-300 motion-reduce:transition-none ${isOpen ? '!rotate-45' : ''}`}
                         aria-hidden="true"
                       >
                         <Plus className="h-4 w-4" strokeWidth={2.25} />

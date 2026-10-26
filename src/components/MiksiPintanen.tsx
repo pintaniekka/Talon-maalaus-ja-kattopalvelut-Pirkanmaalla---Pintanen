@@ -6,7 +6,7 @@ const sideBase = "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen"
 /** Etusivun "Miksi Pintanen?" lyhennettynä puoleen (8.3, S32). Vain yksi lihavointi (tarkastus 12.10.2026). */
 const MiksiPintanen = () => {
   return (
-    <section className="section-padding bg-accent-light">
+    <section className="section-padding bg-background">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div>
@@ -25,7 +25,7 @@ const MiksiPintanen = () => {
             </div>
           </div>
 
-          <div className="rounded-2xl overflow-hidden">
+          <div className="kortti-a overflow-hidden">
             <ResponsiveImage
               baseName={sideBase}
               alt="Pintasen maalaama puutalo Tampereella: sekä tiilikatto että seinät maalattu"

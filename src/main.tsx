@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 // Itse tarjoillut fontit (ei Google Fonts -kutsuja kävijän selaimesta).
@@ -23,30 +22,27 @@ document.head
 
 const rootEl = document.getElementById("root")!;
 
-// Esirenderöity sivu: #root sisältää jo valmiin HTML:n (build-aikainen esirenderöinti).
-// React rakentaa saman näkymän uudelleen. Siksi aikaa, kun sivun oma koodipaketti latautuu,
-// näytetään tämä sama HTML, ettei ruutu välähdä tyhjäksi.
-//
-// Tilannekuvaa käytetään vain ensimmäisellä latauksella. Kun sovellus on kerran näkyvissä,
-// se tyhjennetään: myöhemmissä sivunvaihdoissa latausnäkymä on tyhjä, ei vanha sivu.
-let prerenderedHtml = rootEl.innerHTML.trim();
-
-const InitialFallback = () => {
-  // Arvo luetaan kerran tämän latausnäkymän syntyessä.
-  const [html] = useState(prerenderedHtml);
-  return html ? (
-    <div data-prerender-snapshot dangerouslySetInnerHTML={{ __html: html }} />
-  ) : (
-    <div className="min-h-screen" />
-  );
-};
-
-const clearPrerenderedHtml = () => {
-  prerenderedHtml = "";
-};
-
-createRoot(rootEl).render(
+const app = (
   <HelmetProvider>
-    <App fallback={<InitialFallback />} onReady={clearPrerenderedHtml} />
+    <App />
   </HelmetProvider>
 );
+
+// Esirenderöity sivu: #root sisältää jo valmiin HTML:n (build-aikainen esirenderöinti).
+// React liittää siihen (hydrateRoot) sen sijaan, että rakentaisi näkymän uudelleen:
+// sivu on näkyvissä heti HTML:n saavuttua, ja koodipaketin lataus vain tekee siitä
+// toimivan. Laiskasti ladattavan alasivun sisältö pysyy paikallaan, kunnes sen paketti
+// on ladattu (Suspense-raja). Tyhjä #root (404-sivu, jonossa oleva artikkeli)
+// renderöidään selaimessa kuten ennenkin.
+//
+// Hydraatio alkaa vasta, kun selain on piirtänyt valmiin HTML:n kerran (requestAnimationFrame
+// + setTimeout): nopealla yhteydellä koodi ehtii perille ennen ensimmäistä piirtoa, eikä
+// ensimmäisen piirron pidä odottaa Reactin työtä. Hinta on yksi ruudunpäivitys (noin 16 ms)
+// ennen kuin napit toimivat.
+if (rootEl.firstElementChild) {
+  requestAnimationFrame(() => {
+    setTimeout(() => hydrateRoot(rootEl, app), 0);
+  });
+} else {
+  createRoot(rootEl).render(app);
+}

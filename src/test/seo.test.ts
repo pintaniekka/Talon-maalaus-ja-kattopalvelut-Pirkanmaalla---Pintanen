@@ -2,9 +2,11 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 import { getCanonicalRoutes, buildLlmsTxt, buildLlmsFullTxt, htmlToPlainText, buildSitemapXml } from "@/data/routes";
-import { getRouteSeo, withBrand, canonicalUrl } from "@/data/seo";
+import { getRouteSeo, withBrand, canonicalUrl, titleLength, TITLE_MIN, TITLE_MAX } from "@/data/seo";
 import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
 import { allCities } from "@/data/cityData";
+import { articles } from "@/data/articles";
+import { cityLocalFacts, getCityLocalFacts } from "@/data/cityLocalFacts";
 
 const routes = getCanonicalRoutes().map((r) => r.path);
 
@@ -14,17 +16,29 @@ describe("sivukohtaiset SEO-tiedot (src/data/seo.ts)", () => {
     expect(missing).toEqual([]);
   });
 
-  it("titlet ovat uniikkeja ja mahtuvat hakutulokseen (enintään 70 merkkiä)", () => {
+  // Myös ajastetut artikkelit: niiden title näkyy hakutuloksessa julkaisupäivänä ilman uutta buildia.
+  const routesWithQueued = Array.from(new Set([...routes, ...articles.map((a) => `/artikkelit/${a.slug}`)]));
+
+  // Raja lasketaan ilman " | Pintanen" -loppua (Eerik 26.10.2026); täytettä "– takuu" ei titleissä ole.
+  it("titlet ovat uniikkeja ja 30–60 merkkiä ilman brändiä (Eerik 26.10.2026)", () => {
+    expect([TITLE_MIN, TITLE_MAX]).toEqual([30, 60]);
     const titles = routes.map((p) => withBrand(getRouteSeo(p)!.title));
     expect(new Set(titles).size).toBe(titles.length);
-    const tooLong = routes.filter((p) => withBrand(getRouteSeo(p)!.title).length > 70);
-    expect(tooLong).toEqual([]);
+    // Lyhin on Akaan aluesivu (34 merkkiä); Eerik 26.10.2026: aluesivuille ei lisäystä, alaraja 30 ilman poikkeuksia.
+    const bad = routesWithQueued
+      .map((p) => [p, titleLength(getRouteSeo(p)!.title)] as const)
+      .filter(([, len]) => len < TITLE_MIN || len > TITLE_MAX);
+    expect(bad).toEqual([]);
+    expect(titleLength(getRouteSeo("/maalauspalvelut-akaa")!.title)).toBe(34);
+    const filler = routesWithQueued.filter((p) => / – takuu$/.test(getRouteSeo(p)!.title));
+    expect(filler).toEqual([]);
+    expect(titleLength("Meistä | Pintanen")).toBe(6);
   });
 
-  it("descriptionit ovat 50–175 merkkiä", () => {
-    const bad = routes
+  it("descriptionit ovat 120–160 merkkiä (auditointi 27.10.2026)", () => {
+    const bad = routesWithQueued
       .map((p) => [p, getRouteSeo(p)!.description.length] as const)
-      .filter(([, len]) => len < 50 || len > 175);
+      .filter(([, len]) => len < 120 || len > 160);
     expect(bad).toEqual([]);
   });
 
@@ -125,10 +139,10 @@ describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
     walk(srcDir);
     // Puhdistussivut jäävät ennalleen (palvelu poistuu), joten ne jätetään tarkistuksen ulkopuolelle.
     const skip = /Puhdistus|puhdistusFAQ|puhdistus-itse|HinnatKatonPuhdistus/;
-    // 15–20 vuotta on katon lisäikä; pinnoitus on ajankohtainen noin 10–15 vuoden iässä (Eerik 11.10.2026).
+    // Pinnoitus on ajankohtainen noin 15 vuoden iässä (Eerik 26.10.2026; aiemmin 10–15); lisäikä on jopa 15 vuotta.
     // Yritys on tamperelainen (Eerik 5.10. ja 11.10.2026): Oulua ei mainita.
     // Peltikattoa ei markkinoida, mutta UKK "Maalaatteko myös peltikattoja?" sallittiin (Eerik 26.10.2026), joten sanaa ei enää kielletä.
-    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /(?<!alkaen 15 )€\/m²/, /emme tee/i, /emme vaihda/i, /sisämaalau/i, /Emme\. /, /kirvesmies/, /15[-–]20 vuotta vanha/, /15[-–]20 vuoden iässä/, /Oulu/];
+    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /(?<!alkaen 15 )€\/m²/, /emme tee/i, /emme vaihda/i, /sisämaalau/i, /Emme\. /, /kirvesmies/, /15[-–]20 vuotta vanha/, /15[-–]20 vuoden iässä/, /10[-–]15 vuotta vanha/, /10[-–]15 vuoden iässä/, /10[-–]15 vuodessa/, /Oulu/];
     const hits: string[] = [];
     for (const file of files) {
       if (skip.test(file)) continue;
@@ -136,6 +150,55 @@ describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
       for (const re of forbidden) if (re.test(source)) hits.push(`${path.relative(srcDir, file)}: ${re}`);
     }
     expect(hits).toEqual([]);
+  });
+});
+
+describe("paikkakuntien omat tekstit (paketti C, cityLocalFacts.ts)", () => {
+  const sentences = (text: string) =>
+    text
+      .split(/(?<=[.?])\s+/)
+      .map((s) => s.trim().replace(/\s+/g, " "))
+      .filter((s) => s.length > 0);
+
+  it("jokaisella paikkakunnalla on rakennusjärjestyksen sääntö, tilanne, UKK-vastaus ja lähde", () => {
+    for (const city of allCities) {
+      const facts = getCityLocalFacts(city.slug);
+      expect(facts, city.slug).toBeDefined();
+      expect(facts!.saanto.length, city.slug).toBeGreaterThan(80);
+      expect(facts!.tilanne.length, city.slug).toBeGreaterThan(60);
+      expect(facts!.ukk.length, city.slug).toBeGreaterThan(80);
+      expect(facts!.lahde, city.slug).toMatch(/^https:\/\//);
+    }
+    expect(cityLocalFacts.map((c) => c.slug).sort()).toEqual(allCities.map((c) => c.slug).sort());
+  });
+
+  it("sama virke ei toistu paikkakunnalta toiselle", () => {
+    const seen = new Map<string, string>();
+    const toistot: string[] = [];
+    for (const c of cityLocalFacts) {
+      for (const field of [c.saanto, c.tilanne, c.ukk]) {
+        for (const s of sentences(field)) {
+          const key = s.toLowerCase();
+          const owner = seen.get(key);
+          if (owner && owner !== c.slug) toistot.push(`${owner} / ${c.slug}: ${s}`);
+          else seen.set(key, c.slug);
+        }
+      }
+    }
+    expect(toistot).toEqual([]);
+  });
+
+  it("virkkeet ovat lyhyitä, ilman huutomerkkejä ja pitkää ajatusviivaa (kielisäännöt 25.10.2026)", () => {
+    const viat: string[] = [];
+    for (const c of cityLocalFacts) {
+      for (const field of [c.saanto, c.tilanne, c.ukk]) {
+        if (/[!—]/.test(field)) viat.push(`${c.slug}: huutomerkki tai pitkä ajatusviiva`);
+        for (const s of sentences(field)) {
+          if (s.split(" ").length > 20) viat.push(`${c.slug}: yli 20 sanaa: ${s}`);
+        }
+      }
+    }
+    expect(viat).toEqual([]);
   });
 });
 

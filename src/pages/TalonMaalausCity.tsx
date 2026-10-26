@@ -6,6 +6,7 @@ import CityMap from "@/components/CityMap";
 import CityProjects from "@/components/CityProjects";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
+import CityLocalRules from "@/components/CityLocalRules";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import { MaalausCitySigns } from "@/components/maalaus/MaalausCitySections";
@@ -19,6 +20,7 @@ import ReviewsTeaser from "@/components/ReviewsTeaser";
 import ServiceSchema from "@/components/ServiceSchema";
 import { maalausCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { getCityBySlug } from "@/data/cityData";
+import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { hasKuntakartta } from "@/data/kartat";
 import { getMaalausCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
@@ -54,6 +56,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         name="Talon ulkomaalaus"
         alternateNames={["Talon maalaus", "Julkisivumaalaus", "Huoltomaalaus", "Puutalon maalaus"]}
         area={cityName}
+        areaSameAs={getCityWikipediaUrl(cityData)}
         description={seo.description}
         priceRange={maalausPrices.general}
       />
@@ -68,7 +71,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         lead={
           <>
             Maalaamme puutaloja {cityData.cityIn}. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Hinta on yleensä{" "}
-            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja takuu on 2 vuotta. Arviokäynti on ilmainen.
+            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, työ kestää 3–7 päivää ja takuu on 2 vuotta. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
@@ -111,6 +114,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       <CityServiceSummary service="maalaus" cityIn={cityData.cityIn} />
       <MiksiValitaPintanen service="maalaus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" hideMap={kartta} />
+      <CityLocalRules citySlug={cityData.slug} cityIn={cityData.cityIn} />
       <MaalausEntrepreneur cityIn={cityData.cityIn} vainPaikkakunta={vainPaikkakunta(cityData.slug)} />
       <FAQSection
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}

@@ -46,7 +46,7 @@ const Meista = () => {
         eyebrow="Pintanen Oy · perheyritys"
         title={
           <>
-            Veljekset, jotka tekevät työn <span className="text-accent-ink">itse</span>
+            Veljekset, jotka maalaavat <span className="text-accent-ink">itse</span>
           </>
         }
         lead={

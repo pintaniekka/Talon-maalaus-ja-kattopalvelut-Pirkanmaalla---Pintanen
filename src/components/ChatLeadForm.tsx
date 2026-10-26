@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { X, Send, Loader2, RotateCcw } from 'lucide-react';
 import { getStorageUrl } from '@/lib/storage';
 import { submitContactForm } from '@/lib/contactForm';
@@ -28,7 +28,7 @@ type Step =
 /**
  * Chatin tekstit (Eerik 13.10.2026: "chat bot saa olla lempeämpi", emojit ovat chatissa ok).
  * Ei etäarviota (tarjous tehdään aina paikan päällä) eikä sanaa "kattohuolto". Yrityksestä sanotaan vain se,
- * mikä on sivustolla muuallakin: maalausväli 10–15 vuotta, pinnoitus ajankohtainen noin 10–15 vuoden iässä.
+ * mikä on sivustolla muuallakin: maalausväli 10–15 vuotta, pinnoitus ajankohtainen noin 15 vuoden iässä (Eerik 26.10.2026).
  */
 const GREETING = 'Moikka! 👋 Haluatko tarjouksen talon maalauksesta tai katon pinnoituksesta? Voit myös kysyä mitä vain.';
 const SERVICE_QUESTION = 'Arviokäynti on ilmainen ☀️ Mitä työtä se koskee?';
@@ -202,7 +202,7 @@ const ChatLeadForm = () => {
         break;
       case 'katto_info':
         botSay(
-          'Pinnoitus on ajankohtainen noin 10–15 vuoden iässä. Kun tiilen pinta on kulunut, tiili imee vettä ja sammaloituu. 🏠 Haluatko, että tulemme katsomaan katon? Käynti on ilmainen.',
+          'Pinnoitus on ajankohtainen noin 15 vuoden iässä. Kun tiilen pinta on kulunut, tiili imee vettä ja sammaloituu. 🏠 Haluatko, että tulemme katsomaan katon? Käynti on ilmainen.',
           infoFollowUp
         );
         break;
@@ -307,7 +307,7 @@ const ChatLeadForm = () => {
       <div className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] lg:bottom-4 right-4 z-[9998] flex flex-col items-end gap-2">
         <AnimatePresence>
           {bubbleVisible && !open && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 10, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.9 }}
@@ -326,7 +326,7 @@ const ChatLeadForm = () => {
               >
                 <X className="w-3 h-3" />
               </button>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
         {!open && (
@@ -344,7 +344,7 @@ const ChatLeadForm = () => {
       {/* Chat modal */}
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
@@ -494,7 +494,7 @@ const ChatLeadForm = () => {
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

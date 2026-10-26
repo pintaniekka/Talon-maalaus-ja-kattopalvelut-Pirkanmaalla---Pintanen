@@ -42,7 +42,7 @@ const TalonMaalaus = () => {
         lead={
           <>
             Maalaamme puutalojen ulkoseinät. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Hinta on yleensä{" "}
-            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, ja takuu on 2 vuotta. Arviokäynti on ilmainen.
+            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, työ kestää 3–7 päivää ja takuu on 2 vuotta. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}

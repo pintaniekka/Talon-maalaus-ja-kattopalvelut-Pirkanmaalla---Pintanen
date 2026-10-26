@@ -1,0 +1,92 @@
+{
+  "route": "/toiminta-alueet/",
+  "project": "puhelin",
+  "violations": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=playwright",
+      "nodes": [
+        {
+          "target": [
+            ".mb-1"
+          ],
+          "html": "<p class=\"text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1\">Perheyritys Tampereelta</p>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.9 (foreground color: #e9bbbb, background color: #b51c1c, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".btn-hero"
+          ],
+          "html": "<button type=\"submit\" class=\"btn-hero w-full !py-4 !text-base mt-auto disabled:opacity-70 disabled:hover:scale-100\">",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.36 (foreground color: #ffffff, background color: #0091eb, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".hover\\:opacity-90.font-medium[href=\"https://wa.me/358409640066\"]"
+          ],
+          "html": "<a href=\"https://wa.me/358409640066\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm\" style=\"background-color: rgb(93, 219, 121);\">",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.76 (foreground color: #ffffff, background color: #5ddb79, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            "a[href=\"https://wa.me/358401642233\"]"
+          ],
+          "html": "<a href=\"https://wa.me/358401642233\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm\" style=\"background-color: rgb(93, 219, 121);\">",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.76 (foreground color: #ffffff, background color: #5ddb79, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".hover\\:text-accent.hover\\:underline[href$=\"maalauspalvelut-akaa/\"]"
+          ],
+          "html": "<a class=\"transition-colors hover:text-accent hover:underline\" href=\"/maalauspalvelut-akaa/\">Akaa</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.45 (foreground color: #787e8c, background color: #0a152e, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".hover\\:text-accent.hover\\:underline[href=\"/maalauspalvelut-hameenkyro/\"]"
+          ],
+          "html": "<a class=\"transition-colors hover:text-accent hover:underline\" href=\"/maalauspalvelut-hameenkyro/\">Hämeenkyrö</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.45 (foreground color: #787e8c, background color: #0a152e, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".hover\\:text-accent.hover\\:underline[href=\"/maalauspalvelut-ikaalinen/\"]"
+          ],
+          "html": "<a class=\"transition-colors hover:text-accent hover:underline\" href=\"/maalauspalvelut-ikaalinen/\">Ikaalinen</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.45 (foreground color: #787e8c, background color: #0a152e, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".hover\\:text-accent.hover\\:underline[href=\"/maalauspalvelut-juupajoki/\"]"
+          ],
+          "html": "<a class=\"transition-colors hover:text-accent hover:underline\" href=\"/maalauspalvelut-juupajoki/\">Juupajoki</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.45 (foreground color: #787e8c, background color: #0a152e, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".hover\\:text-accent.hover\\:underline[href=\"/maalauspalvelut-kangasala/\"]"
+          ],
+          "html": "<a class=\"transition-colors hover:text-accent hover:underline\" href=\"/maalauspalvelut-kangasala/\">Kangasala</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.45 (foreground color: #787e8c, background color: #0a152e, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+        },
+        {
+          "target": [
+            ".hover\\:text-accent.hover\\:underline[href$=\"maalauspalvelut-kihnio/\"]"
+          ],
+          "html": "<a class=\"transition-colors hover:text-accent hover:underline\" href=\"/maalauspalvelut-kihnio/\">Kihniö</a>",
+          "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.45 (foreground color: #787e8c, background color: #0a152e, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+        }
+      ],
+      "count": 30
+    }
+  ],
+  "incomplete": [
+    {
+      "id": "color-contrast",
+      "impact": "serious",
+      "count": 41
+    }
+  ]
+}

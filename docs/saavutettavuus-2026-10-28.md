@@ -10,6 +10,7 @@ Ajo: yöajo 3, paketti E (26.10.2026). Työkalu: @axe-core/playwright 4.14 (axe-
 | serious | label-content-name-mismatch | 82 | 170 | korjattu (ei ulkoasumuutosta) |
 | moderate | landmark-unique | 1 (etusivu) | 2 | korjattu |
 | minor | image-redundant-alt | 1 (/hintalaskuri/) | 4 | korjattu |
+| serious | target-size | 1 (/toiminta-alueet/) | 48 (työpöytä), 18 (puhelin) | korjattu (ei ulkoasumuutosta) |
 
 Critical-tason löydöksiä ei ollut. Axe ei pystynyt päättämään kontrastia osassa kohtia (incomplete, color-contrast, joka sivulla): ne ovat tekstiä kuvan tai liukuvärin päällä, ja ne pitää katsoa silmällä.
 
@@ -46,6 +47,14 @@ Etusivulla sekä arvostelunostot (`ReviewHighlights`) että arvostelukaruselli (
 ### 4. image-redundant-alt (minor): kuvan alt toistaa viereisen tekstin
 
 Hintalaskurin palveluvalinnassa kuvan alt oli sama kuin painikkeen teksti ("Tiilikaton pinnoitus", "Talon maalaus"), joten ruudunlukija luki nimen kahdesti. Kuva on koriste, alt on nyt tyhjä (`src/components/laskuri/PriceWizard.tsx`).
+
+### 5. target-size (serious): kosketusalue alle 24 px
+
+WCAG 2.5.8 (2.2 AA) vaatii, että klikattava alue on vähintään 24 × 24 px tai että sen ympärillä on tilaa.
+Toiminta-alueet-sivun kuntakorteissa pienet linkit "Tiilikaton pinnoitus" ja "Talon maalaus" (14 px teksti,
+rivikorkeus 20 px) ovat vierekkäin 12 px välillä. Löytyi vasta CI-ajossa (ensimmäinen paikallinen ajo oli vanhaa
+buildia vastaan). Korjaus: linkeille `py-0.5 -my-0.5`, jolloin klikattava alue on 24 px mutta rivin korkeus ei muutu.
+Ulkoasu ei muutu.
 
 ## Mitä axe ei näe
 

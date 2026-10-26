@@ -95,7 +95,7 @@ const Meista = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center">Kaksi veljestä, kaksi työtä</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-card rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm">
-                <img src={eerikImage} alt="Eerik Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" loading="lazy" decoding="async" />
+                <img loading="lazy" decoding="async" src={eerikImage} alt="Eerik Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" />
                 <h3 className="text-xl font-bold text-foreground mb-2">Eerik pinnoittaa tiilikatot</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Pesen ja maalaan kattoja kesäkaudet, noin 30–40 kattoa kesässä. Talvet kuluvat koulun penkillä ja urakoita myydessä.
@@ -104,7 +104,7 @@ const Meista = () => {
                 </p>
               </div>
               <div className="bg-card rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm">
-                <img src={eemilImage} alt="Eemil Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" loading="lazy" decoding="async" />
+                <img loading="lazy" decoding="async" src={eemilImage} alt="Eemil Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" />
                 <h3 className="text-xl font-bold text-foreground mb-2">Eemil maalaa talojen ulkoseinät</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Maalaan kaikki Pintasen talot, aina maalausparini kanssa. Aloitin maalauksen muualla, ja pian taito riitti yrittämiseen.

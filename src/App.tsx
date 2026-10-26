@@ -1,4 +1,4 @@
-import { Suspense, useEffect, type ReactNode } from "react";
+import { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -32,27 +32,14 @@ const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 /**
  * Sovelluksen sisältö ilman reititintä. Selaimessa se kääritään BrowserRouteriin (App),
  * build-aikaisessa esirenderöinnissä StaticRouteriin (src/entry-prerender.tsx).
- * `fallback` näytetään, kun laiskasti ladattava sivu on vielä tulossa.
+ * Suspensen latausnäkymä näkyy vain sivunvaihdossa, kun laiskasti ladattava sivu on vielä
+ * tulossa. Ensimmäisellä latauksella esirenderöity HTML pysyy paikallaan (hydraatio, main.tsx).
  */
-/** Ilmoittaa, kun Suspensen sisältö on oikeasti näkyvissä (ei latausnäkymä). */
-const OnReady = ({ onReady }: { onReady?: () => void }) => {
-  useEffect(() => {
-    onReady?.();
-  }, [onReady]);
-  return null;
-};
-
-export const AppContent = ({
-  fallback = <div className="min-h-screen" />,
-  onReady,
-}: {
-  fallback?: ReactNode;
-  onReady?: () => void;
-}) => (
+export const AppContent = () => (
   <TooltipProvider>
       <Toaster />
       <Sonner />
-        <Suspense fallback={fallback}>
+        <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
@@ -97,14 +84,13 @@ export const AppContent = ({
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-          <OnReady onReady={onReady} />
         </Suspense>
   </TooltipProvider>
 );
 
-const App = ({ fallback, onReady }: { fallback?: ReactNode; onReady?: () => void }) => (
+const App = () => (
   <BrowserRouter>
-    <AppContent fallback={fallback} onReady={onReady} />
+    <AppContent />
   </BrowserRouter>
 );
 

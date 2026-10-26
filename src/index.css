@@ -266,6 +266,22 @@
     @apply py-16 md:py-24;
   }
 
+  /* Tyyli A, "sarjakuva" (Eerik 26.10.2026): valkoinen kortti, paksu tummansininen ääriviiva ja kova sininen
+     varjo oikealle alas. Numero tai kuvake on keltainen, hieman kallistettu laatta mustalla varjolla.
+     Sama kaava kaikissa palikoissa: faktat, työvaiheet, hintakortit, UKK, arvostelut, yhteydenotto, miksi Pintanen. */
+  .kortti-a {
+    @apply relative bg-card border-[3px] border-navy rounded-[18px] shadow-[8px_8px_0_hsl(var(--accent-strong))];
+  }
+  .kortti-a-keltainen {
+    @apply shadow-[8px_8px_0_hsl(var(--paint-yellow))];
+  }
+  .kortti-a-numero {
+    @apply absolute -top-[18px] left-5 flex h-11 w-11 -rotate-6 items-center justify-center rounded-xl border-[3px] border-navy bg-paint-yellow font-heading text-xl font-black text-navy shadow-[3px_3px_0_hsl(var(--navy))];
+  }
+  .kortti-a-merkki {
+    @apply inline-flex h-9 w-9 flex-none -rotate-3 items-center justify-center rounded-[10px] border-[3px] border-navy bg-paint-yellow text-navy shadow-[2px_2px_0_hsl(var(--navy))];
+  }
+
   .card-elevated {
     @apply bg-card rounded-2xl p-6 md:p-8;
     box-shadow: var(--card-shadow);

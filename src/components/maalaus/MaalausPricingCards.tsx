@@ -23,18 +23,14 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', cityIn, calculatorHref = 
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto md:items-start">
           {cards.map((card, i) => (
             <div
               key={i}
-              className={`relative bg-card rounded-2xl shadow-sm flex flex-col overflow-hidden ${
-                card.featured
-                  ? 'border-2 border-accent md:scale-105 md:shadow-lg'
-                  : 'border border-border/50'
-              }`}
+              className={`kortti-a flex flex-col overflow-hidden ${card.featured ? 'kortti-a-keltainen md:-translate-y-2' : ''}`}
             >
               {card.featured && (
-                <div className="bg-accent-strong text-accent-foreground text-xs font-bold uppercase tracking-wider text-center py-1.5">
+                <div className="bg-navy text-navy-foreground text-xs font-extrabold uppercase tracking-wider text-center py-1.5">
                   Yleisin talon koko
                 </div>
               )}

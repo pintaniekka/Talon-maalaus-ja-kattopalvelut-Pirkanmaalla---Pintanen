@@ -12,27 +12,28 @@ interface ProcessListProps {
 
 /**
  * Työvaiheet avoimena numeroituna listana (korjaus 5, V12): sisältö on HTML:ssä ilman haitaria.
- * Yksi palsta, numero, otsikko ja yksi rivi tekstiä (tarkastus 12.10.2026, luku 3: ei korttiruudukkoa,
- * jonka viimeinen rivi jää vajaaksi). Sama ulkoasu kuin maalauksen kaupunkisivun merkkilistalla.
+ * Tyyli A (Eerik 26.10.2026): kortit paksulla ääriviivalla ja keltaisella numerolaatalla kolmessa
+ * sarakkeessa. Jos viimeinen kortti jäisi yksin riville, se levenee koko rivin leveydeksi.
  */
 const ProcessList = ({ title, intro, steps, cta, id }: ProcessListProps) => (
   <section id={id} className="section-padding bg-background">
-    <div className="section-container max-w-3xl mx-auto">
+    <div className="section-container max-w-5xl mx-auto">
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">{title}</h2>
         {intro && <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{intro}</p>}
       </div>
 
-      <ol className="space-y-5">
+      <ol className="grid gap-x-7 gap-y-9 pt-3 md:grid-cols-2 lg:grid-cols-3 md:[&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(3n+1)]:col-span-3 lg:[&>li:last-child:nth-child(3n+2)]:col-span-1">
         {steps.map((step, i) => (
-          <li key={step.title} className="flex items-start gap-4">
-            <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent-strong text-accent-foreground font-bold flex items-center justify-center">
+          <li key={step.title} className="kortti-a px-6 pb-6 pt-8">
+            <span className="kortti-a-numero" aria-hidden="true">
               {i + 1}
             </span>
-            <div>
-              <h3 className="text-lg font-bold text-foreground">{step.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{step.text}</p>
-            </div>
+            <h3 className="font-heading text-lg font-extrabold text-navy mb-1.5">
+              <span className="sr-only">Vaihe {i + 1}: </span>
+              {step.title}
+            </h3>
+            <p className="text-muted-foreground leading-relaxed text-[15px]">{step.text}</p>
           </li>
         ))}
       </ol>

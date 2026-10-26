@@ -1,14 +1,12 @@
 import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
-import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { Phone } from "@/components/icons/BrandIcons";
 import { staticSeo, HERO_BASE } from "@/data/seo";
 import { TOIMINTA_ALUE, VASTAUSLUPAUS, YHTEYSTIEDOT } from "@/data/company";
 
 /**
- * Yhteystiedot (Eerik 14.10.2026: oma kohta päävalikkoon). Herossa puhelinnumerot isolla: KATOT Eerik,
- * SEINÄT Eemil (Eerik 26.10.2026, malli Lummecon yhteystietosivu). Sama lomake kuin muualla.
+ * Yhteystiedot (Eerik 14.10.2026: oma kohta päävalikkoon). Herossa heti otsikon alla KATOT ja SEINÄT
+ * numeroineen samalla koolla, ilman nimiä ja WhatsAppia (Eerik 26.10.2026). Sitten johdanto ja napit.
  */
 const faktat = [
   ["Yritys", "Pintanen Oy"],
@@ -35,35 +33,22 @@ const Yhteystiedot = () => {
             Soita <span className="text-accent-ink">meille</span>
           </>
         }
-        lead={
-          <>
-            Eerik vastaa katoista ja Eemil seinistä. {VASTAUSLUPAUS} Arviokäynti on ilmainen.
-          </>
-        }
-        beforeActions={
-          <ul className="mb-8 space-y-4">
+        afterTitle={
+          <ul className="mb-6 space-y-2 md:mb-8">
             {numerot.map(({ label, person }) => (
-              <li key={label} className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                <span className="w-16 text-xs font-extrabold uppercase tracking-[0.2em] text-accent-ink">{label}</span>
-                <a
-                  href={person.phoneHref}
-                  className="font-heading text-3xl font-extrabold tracking-tight text-foreground transition-colors hover:text-accent-ink md:text-4xl"
-                >
+              <li key={label} className="font-heading text-3xl font-extrabold tracking-tight md:text-4xl">
+                <span className="uppercase text-accent-ink">{label}</span>{" "}
+                <a href={person.phoneHref} className="text-foreground transition-colors hover:text-accent-ink">
                   {person.phone}
-                </a>
-                <span className="text-sm text-muted-foreground">{person.first}</span>
-                <a
-                  href={person.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`WhatsApp ${person.first}`}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform hover:scale-105"
-                >
-                  <WhatsAppIcon className="h-5 w-5" color="#ffffff" />
                 </a>
               </li>
             ))}
           </ul>
+        }
+        lead={
+          <>
+            Eerik vastaa katoista ja Eemil seinistä. {VASTAUSLUPAUS} Arviokäynti on ilmainen.
+          </>
         }
         primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
         secondary={{ to: "/hintalaskuri/", label: "Laske hinta-arvio" }}

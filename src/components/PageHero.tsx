@@ -69,6 +69,8 @@ interface PageHeroProps {
   lead: ReactNode;
   /** Johdannon ja nappien väliin, esim. yhteystietosivun isot puhelinnumerot (Eerik 26.10.2026). */
   beforeActions?: ReactNode;
+  /** Heti otsikon alle, ennen johdantoa: yhteystietosivun puhelinnumerot (Eerik 26.10.2026). */
+  afterTitle?: ReactNode;
   primary: { to: string; label: string };
   secondary?: { to: string; label: string };
   trust?: TrustVariant | TrustItem[];
@@ -91,6 +93,7 @@ const PageHero = ({
   title,
   lead,
   beforeActions,
+  afterTitle,
   primary,
   secondary,
   trust = "yleinen",
@@ -119,6 +122,7 @@ const PageHero = ({
             {title}
           </h1>
 
+          {afterTitle}
           <p className="hero-lead text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl leading-relaxed font-sans">{lead}</p>
           {beforeActions}
 

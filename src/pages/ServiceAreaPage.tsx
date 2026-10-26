@@ -251,8 +251,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         <div className="section-container max-w-4xl mx-auto">
           <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-center">
             <div className="flex justify-center gap-4">
-              <img src={eerikImage} alt="Eerik Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" loading="lazy" decoding="async" />
-              <img src={eemilImage} alt="Eemil Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" loading="lazy" decoding="async" />
+              <img loading="lazy" decoding="async" src={eerikImage} alt="Eerik Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" />
+              <img loading="lazy" decoding="async" src={eemilImage} alt="Eemil Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" />
             </div>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-3 font-heading">Eerik ja Eemil tekevät työn</h2>

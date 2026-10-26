@@ -69,14 +69,17 @@ const ResponsiveImage = ({
     resolvedSizes = undefined;
   }
 
+  // loading ja decoding ennen src-attribuuttia: React asettaa attribuutit tässä järjestyksessä,
+  // ja Chrome aloittaa latauksen heti src-arvon saatuaan. Jos loading="lazy" tulee vasta sen
+  // jälkeen, näkymän ulkopuolisetkin kuvat ladataan heti (26.10.2026).
   return (
     <img
+      loading={priority ? undefined : 'lazy'}
+      decoding={priority ? 'sync' : 'async'}
       src={src}
       srcSet={srcSet}
       alt={resolvedAlt}
       className={className}
-      loading={priority ? undefined : 'lazy'}
-      decoding={priority ? 'sync' : 'async'}
       {...({ fetchpriority: priority ? 'high' : 'low' } as Record<string, string>)}
       sizes={resolvedSizes}
       draggable={draggable}

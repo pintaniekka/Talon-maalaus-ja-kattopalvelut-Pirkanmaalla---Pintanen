@@ -16,13 +16,13 @@ const PinnoitusEntrepreneur = ({ cityIn, vainPaikkakunta }: { cityIn?: string; v
       <div className="section-container">
         <div className="max-w-4xl mx-auto grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-start">
           <img
+            loading="lazy"
+            decoding="async"
             src={eerikImage}
             alt="Eerik Pitkänen, Pintanen Oy"
             width={200}
             height={200}
             className="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover"
-            loading="lazy"
-            decoding="async"
           />
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Eerik tekee työn</h2>

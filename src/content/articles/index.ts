@@ -13,4 +13,5 @@ export const articleBodies: Record<string, LazyExoticComponent<ComponentType>> =
   "tiilikaton-pinnoituksen-tyovaiheet": lazyWithRetry(() => import("./tiilikaton-pinnoituksen-tyovaiheet")),
   "huoltomaalaus-vai-uusi-ulkoverhous": lazyWithRetry(() => import("./huoltomaalaus-vai-uusi-ulkoverhous")),
   "voiko-tiilikaton-pinnoittaa-itse": lazyWithRetry(() => import("./voiko-tiilikaton-pinnoittaa-itse")),
+  "tiilikaton-pesu-ja-pinnoitus": lazyWithRetry(() => import("./tiilikaton-pesu-ja-pinnoitus")),
 };

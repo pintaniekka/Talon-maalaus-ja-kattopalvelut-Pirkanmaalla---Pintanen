@@ -106,10 +106,11 @@ export const articles: ArticleMeta[] = [
     seoTitle: "Tiilikaton pinnoitus: työvaiheet ja kesto",
     description:
       "Tiilikaton pinnoituksessa on kuusi työvaihetta kuntotarkastuksesta lopputarkastukseen. Lue, mitä kussakin vaiheessa tehdään ja kauanko työ kestää.",
-    lead: "Tiilikaton pinnoituksessa on kuusi työvaihetta: kuntotarkastus, tarvittavat suojaukset, pesu, kasvustontorjunta ja tiilien vaihto, pohjamaali ja pintamaali sekä lopputarkastus. Omakotitalon katto valmistuu 2–4 työpäivässä.",
+    lead: "Tiilikaton pinnoituksessa on kuusi työvaihetta: kuntotarkastus, tarvittavat suojaukset, pesu, kasvustontorjunta ja tiilien vaihto, pohjamaali ja pintamaali sekä lopputarkastus. Peruskohteen katto valmistuu 2–3 työpäivässä.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-10-20",
+    updatedAt: "2026-10-26",
     readingMinutes: 5,
     heroImage: "tiilikaton-pinnoitus-ja-aurinkopaneelien-suojaus",
     heroAlt: "Tiilikaton pinnoitus ja aurinkopaneelien suojaus",
@@ -140,6 +141,20 @@ export const articles: ArticleMeta[] = [
     readingMinutes: 5,
     heroImage: "tiilikaton-pinnoitus-tummanharmaa-tiilikatto-pinnoitus-jalkeen",
     heroAlt: "Tummanharmaa tiilikatto pinnoituksen ja huollon jälkeen",
+  },
+  {
+    slug: "tiilikaton-pesu-ja-pinnoitus",
+    title: "Tiilikaton pesu ja pinnoitus: miksi pelkkä pesu ei riitä?",
+    seoTitle: "Tiilikaton pesu ja pinnoitus: miksi pesu ei yksin riitä",
+    description:
+      "Pesu poistaa sammaleen, mutta kulunut tiili imee vettä heti seuraavalla sateella. Lue, miksi katto maalataan pesun jälkeen, mitä työ maksaa ja kauanko se kestää.",
+    lead: "Tiilikaton pesu poistaa sammaleen ja lian, mutta kulunut tiilen pinta imee vettä heti seuraavalla sateella. Siksi pesun jälkeen katto maalataan kahteen kertaan. Peruskohteen katto valmistuu 2–3 työpäivässä, ja hinta on yleensä 2 850–7 000 €.",
+    category: "katto",
+    author: "eerik",
+    publishedAt: "2026-11-10",
+    readingMinutes: 4,
+    heroImage: "tiilikaton-pesu-ja-pinnoitus-tampere-pesu-kesken",
+    heroAlt: "Tiilikaton pesu käynnissä Tampereella, puolet katosta pesty",
   },
 ];
 

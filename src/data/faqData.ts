@@ -18,6 +18,49 @@ interface FAQItem {
 /** Kotitalousvähennyksen vastaus samassa muodossa joka sarjassa. */
 const KOTITALOUSVAHENNYS_VASTAUS = `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Työn osuus on laskussa eriteltynä. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`;
 
+/**
+ * UKK-täydennykset palvelu- ja hintasivuille (hakutulosanalyysi 26.10.2026, brief 10). Vastaukset ovat Eerikin jo
+ * antamia faktoja (CLAUDE.md, tyovaiheet.ts, kaupunkisivujen UKK); ei uusia väitteitä. Hintasivut tuovat samat
+ * kysymykset omiin listoihinsa, joten teksti on yhdessä paikassa. Kaupunkisivujen sarjoihin ei lisätty
+ * (enintään 10 kysymystä).
+ */
+export const MAKSU_FAQ: FAQItem = {
+  question: 'Miten maksu tapahtuu?',
+  answer:
+    'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
+};
+
+/** Pesukysymys on yksi ja sama kaikilla pinnoitussivuilla (Eerik 27.10.2026). */
+export const PESU_VAI_PINNOITUS_FAQ: FAQItem = {
+  question: 'Pesettekö tiilikattoja?',
+  answer: 'Kyllä. Pesemme katon aina ennen pinnoitusta.',
+};
+
+export const PINNOITUS_MAALI_FAQ: FAQItem = {
+  question: 'Millä maalilla pinnoitatte tiilikaton?',
+  answer:
+    'Käytämme Nowocoatin kattomaaleja. Maalaamme katon korkeapaineruiskulla aina kahteen kertaan: ensin pohjamaali ja sitten pintamaali. Reunat ja ahtaat paikat maalaamme telalla tai käsin.',
+};
+
+export const PINNOITUS_SADE_FAQ: FAQItem = {
+  question: 'Mitä jos sataa kesken pinnoituksen?',
+  answer:
+    'Sateella ei maalata, koska pinnan pitää olla kuiva. Seuraamme sääennustetta ja siirrämme tarvittaessa päivää, eikä siitä tule lisäkuluja. Jos sade jättää jälkiä tuoreeseen maaliin, korjaamme ne ilman lisähintaa.',
+};
+
+/** Yleisfakta siveltimestä: K-Rauta, Ulkomaalausohje (docs/lahteet-talotyypit-2026-10-26.md). Pintasen työtapa: tyovaiheet.ts. */
+export const MAALAUS_PENSSELI_FAQ: FAQItem = {
+  question: 'Maalaatteko ruiskulla vai pensselillä?',
+  answer:
+    'Maalaamme seinät pensselillä. Ulkomaalausohjeissa puupinnan maali levitetään siveltimellä, ja ruiskutettu pinta viimeistellään siveltimellä. Pohjamaalin laitamme paljaisiin puukohtiin ennen pintamaalia.',
+};
+
+export const MAALAUS_SADE_FAQ: FAQItem = {
+  question: 'Mitä jos sataa kesken maalauksen?',
+  answer:
+    'Sateella ei maalata, koska seinän pitää olla kuiva. Seuraamme sääennustetta ja siirrämme tarvittaessa päivää, eikä siitä tule lisäkuluja. Jos sade jättää jälkiä tuoreeseen maaliin, korjaamme ne ilman lisähintaa.',
+};
+
 export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Mitä tiilikaton pinnoitus maksaa?',
@@ -54,11 +97,7 @@ export const pinnoitusFAQ: FAQItem[] = [
     answer:
       'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.',
   },
-  {
-    question: 'Poistatteko sammaleen ja pesettekö katon ennen pinnoitusta?',
-    answer:
-      'Kyllä. Teemme pesun aina pinnoituksen yhteydessä. Painepesu irrottaa sammaleen ja jäkälän, ja kasvustontorjunta-aine hidastaa uuden kasvuston tuloa. Pinnoitetulla katolla sammal ei saa otetta, koska tiili ei enää ime vettä.',
-  },
+  PESU_VAI_PINNOITUS_FAQ,
   {
     question: 'Voiko katon värin vaihtaa pinnoituksessa?',
     answer: 'Kyllä voi. Nowocoatin kattomaaleissa on laaja värivalikoima.',
@@ -96,6 +135,10 @@ export const pinnoitusFAQ: FAQItem[] = [
     question: 'Miten maksu tapahtuu?',
     answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
   },
+  // Brief 10 (26.10.2026): pesu vai pinnoitus, maali, sade. "Miten maksu tapahtuu?" on jo yllä.
+  PESU_VAI_PINNOITUS_FAQ,
+  PINNOITUS_MAALI_FAQ,
+  PINNOITUS_SADE_FAQ,
 ];
 
 export const puhdistusFAQ: FAQItem[] = [
@@ -164,6 +207,9 @@ export const maalausFAQ: FAQItem[] = [
     question: 'Miten maksu tapahtuu?',
     answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
   },
+  // Brief 10 (26.10.2026): pensseli, sade. "Millä maalilla" ("Mitä maalia käytätte?") ja "Miten maksu tapahtuu?" ovat jo yllä.
+  MAALAUS_PENSSELI_FAQ,
+  MAALAUS_SADE_FAQ,
 ];
 
 export const generalFAQ: FAQItem[] = [

@@ -86,7 +86,7 @@ const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm"
-        style={{ backgroundColor: '#5ddb79' }}
+        style={{ backgroundColor: '#11853b' }}
       >
         <WhatsAppIcon className="w-5 h-5" color="white" />
         WhatsApp

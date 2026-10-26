@@ -55,7 +55,7 @@ const ReviewCard = ({ review, index = 0 }: Props) => {
         <Stars stars={review.stars} />
       </div>
       <blockquote className="text-[15px] text-foreground leading-snug flex-1">{review.text}</blockquote>
-      <p className="mt-3 text-xs text-muted-foreground/80">Google-arvostelu</p>
+      <p className="mt-3 text-xs text-muted-foreground">Google-arvostelu</p>
     </figure>
   );
 };

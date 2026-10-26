@@ -18,6 +18,7 @@ import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist } from "@/c
 import { maalausPrices, fmtRange } from "@/data/prices";
 import { HERO_BASE } from "@/data/seo";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
+import { MAALAUS_PENSSELI_FAQ, MAALAUS_SADE_FAQ } from "@/data/faqData";
 
 const general = fmtRange(maalausPrices.general.min, maalausPrices.general.max);
 
@@ -62,6 +63,9 @@ const faqItems = [
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`,
   },
   { question: "Kuinka pitkä takuu maalauksella on?", answer: "Saat talon maalaukselle meiltä 2 vuoden takuun." },
+  // Brief 10 (26.10.2026): samat kysymykset kuin palvelusivulla (faqData.ts).
+  MAALAUS_PENSSELI_FAQ,
+  MAALAUS_SADE_FAQ,
   { question: "Miten maksu tapahtuu?", answer: "Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi." },
 ];
 

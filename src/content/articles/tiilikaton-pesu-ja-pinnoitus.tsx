@@ -35,7 +35,7 @@ const Body = () => (
         <li>Pesu poistaa sammaleen ja lian, mutta kulunut tiilen pinta imee vettä heti seuraavalla sateella.</li>
         <li>Siksi pesun jälkeen katto maalataan kahteen kertaan. Teemme pesun aina pinnoituksen yhteydessä.</li>
         <li>Peruskohteen katto valmistuu 2–3 työpäivässä, ja hinta on yleensä 2 850–7 000 €.</li>
-        <li>Pinnoitettu katto kestää jopa 15–20 vuotta pidempään.</li>
+        <li>Pinnoitettu katto kestää jopa 15 vuotta pidempään.</li>
       </ul>
     </KeyPoints>
 

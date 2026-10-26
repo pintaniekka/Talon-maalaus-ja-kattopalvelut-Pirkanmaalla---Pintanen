@@ -52,7 +52,7 @@ const faqItems = [
   },
   {
     question: "Kuinka pitkään pinnoitettu katto kestää?",
-    answer: "Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Kesto riippuu säästä ja katon kunnosta.",
+    answer: "Pinnoitettu katto kestää jopa 15 vuotta pidempään. Kesto riippuu säästä ja katon kunnosta.",
   },
   {
     question: "Paljonko tiilikaton pinnoitus maksaa neliöltä?",

@@ -43,7 +43,7 @@ const SEOTextSection = () => {
             height={600}
           />
           <div>
-            <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">Tiilikaton pinnoitus lisää katon ikää jopa 15–20 vuotta</h3>
+            <h3 className="heading-style text-2xl md:text-3xl text-accent-ink mb-6">Tiilikaton pinnoitus lisää katon ikää jopa 15 vuotta</h3>
             <div className="space-y-5 text-foreground/80 leading-relaxed text-base">
               <p>
                 Kulunutta tiilikattoa ei yleensä tarvitse uusia. Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet uusiin ja

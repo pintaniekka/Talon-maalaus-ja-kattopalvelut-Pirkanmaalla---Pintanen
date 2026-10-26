@@ -44,7 +44,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Kannattaako tiilikaton pinnoitus?',
     answer:
-      'Kannattaa, jos tiilen pinta on kulunut mutta aluskate ja rakenteet ovat kunnossa. Kulunut tiili imee vettä, ja talvella vesi jäätyy ja murentaa tiiltä sisältäpäin. Pinnoituksen jälkeen tiili ei ime vettä, eikä sammal saa otetta. Katto kestää jopa 15–20 vuotta pidempään.',
+      'Kannattaa, jos tiilen pinta on kulunut mutta aluskate ja rakenteet ovat kunnossa. Kulunut tiili imee vettä, ja talvella vesi jäätyy ja murentaa tiiltä sisältäpäin. Pinnoituksen jälkeen tiili ei ime vettä, eikä sammal saa otetta. Katto kestää jopa 15 vuotta pidempään.',
   },
   {
     question: 'Kattoremontti vai pinnoitus?',

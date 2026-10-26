@@ -14,7 +14,7 @@ Pintanen Oy on tamperelainen perheyritys. Veljekset Eerik ja Eemil Pitkänen tek
 
 Kategoria Kattourakoitsija:
 - **Tiilikaton pinnoitus Pirkanmaa** – Pesemme katon painepesulla, vaihdamme rikkinäiset tiilet ja maalaamme katon korkeapaineruiskulla kahteen kertaan Nowocoatin kattomaalilla. 5 vuoden kirjallinen takuu. Hinta yleensä 2 850–7 000 €. Arviokäynti on ilmainen.
-- **Tiilikaton maalaus** – Sama työ kuin pinnoitus: pesu, rikkinäisten tiilien vaihto ja maalaus kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään.
+- **Tiilikaton maalaus** – Sama työ kuin pinnoitus: pesu, rikkinäisten tiilien vaihto ja maalaus kahteen kertaan. Pinnoitettu katto kestää jopa 15 vuotta pidempään.
 - **Katon huoltomaalaus** – Kuluneen tiilikaton pesu ja maalaus ennen kuin tiili alkaa rapautua. Ilmainen kuntotarkastus kertoo, riittääkö pinnoitus.
 
 Kategoria Maalari:

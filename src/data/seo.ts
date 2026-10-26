@@ -77,6 +77,8 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/toiminta-alueet": cardHero(HERO_BASE.toimintaAlueet),
   "/referenssit": cardHero(HERO_BASE.referenssit),
   "/kokemuksia": cardHero(HERO_BASE.kokemuksia),
+  "/ilmainen-kuntotarkastus": cardHero(HERO_BASE.meista),
+  "/kotitalousvahennys": cardHero(HERO_BASE.alue),
 };
 
 /** Preload-linkin attribuutit pääkuvalle. */
@@ -143,6 +145,15 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/talon-maalaus-pirkanmaa": {
     title: "Talon maalaus Pirkanmaa – ulkomaalaus ja julkisivumaalaus",
     description: `Talon maalaus Pirkanmaalla. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin ja maalaamme pensselillä. Hinta yleensä ${MAALAUS_HINTA}, 2 v takuu.`,
+  },
+  "/ilmainen-kuntotarkastus": {
+    title: "Ilmainen tiilikaton kuntotarkastus Pirkanmaalla",
+    description: `Pyydä ilmainen tiilikaton kuntotarkastus. Eerik katsoo tiilet, saumat, läpiviennit ja aluskatteen, yleensä samalla viikolla. Saat kirjallisen tarjouksen kiinteällä hinnalla.`,
+  },
+  "/kotitalousvahennys": {
+    title: "Kotitalousvähennys 2026 ja 2027: katto ja maalaus",
+    description:
+      "Kotitalousvähennys katon pinnoituksesta ja talon maalauksesta: 40 % työn osuudesta, enintään 2 100 € vuodessa, omavastuu 150 €. Samat luvut 2026 ja 2027.",
   },
   "/tietosuoja": {
     title: "Tietosuojaseloste",

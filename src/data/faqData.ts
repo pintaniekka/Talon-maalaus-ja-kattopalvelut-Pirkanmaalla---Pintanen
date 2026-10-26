@@ -14,7 +14,7 @@ interface FAQItem {
 }
 
 /** Kotitalousvähennyksen vastaus samassa muodossa joka sarjassa. */
-const KOTITALOUSVAHENNYS_VASTAUS = `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Työn osuus on laskussa eriteltynä.`;
+const KOTITALOUSVAHENNYS_VASTAUS = `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Työn osuus on laskussa eriteltynä. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`;
 
 export const pinnoitusFAQ: FAQItem[] = [
   {

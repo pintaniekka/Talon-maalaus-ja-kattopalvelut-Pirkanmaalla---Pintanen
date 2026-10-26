@@ -23,7 +23,11 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
         </p>
         <p>
           Pinnoitamme betonitiilikattoja. Tavallisin tiili 2000-luvun taloissa on Ormax, vanhemmissa katoissa profiileja on monia.
-          Katsomme tiilen kuntotarkastuksessa.{" "}
+          Katsomme tiilen{" "}
+          <Link to="/ilmainen-kuntotarkastus/" className="text-primary font-semibold hover:underline">
+            ilmaisessa kuntotarkastuksessa
+          </Link>
+          .{" "}
           <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
             Hintaesimerkit ja laskuri
           </Link>

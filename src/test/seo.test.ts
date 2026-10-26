@@ -5,6 +5,7 @@ import { getCanonicalRoutes, buildLlmsTxt, buildSitemapXml } from "@/data/routes
 import { getRouteSeo, withBrand, canonicalUrl } from "@/data/seo";
 import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
 import { allCities } from "@/data/cityData";
+import { articles } from "@/data/articles";
 
 const routes = getCanonicalRoutes().map((r) => r.path);
 
@@ -14,17 +15,22 @@ describe("sivukohtaiset SEO-tiedot (src/data/seo.ts)", () => {
     expect(missing).toEqual([]);
   });
 
-  it("titlet ovat uniikkeja ja mahtuvat hakutulokseen (enintään 70 merkkiä)", () => {
+  // Myös ajastetut artikkelit: niiden title näkyy hakutuloksessa julkaisupäivänä ilman uutta buildia.
+  const routesWithQueued = Array.from(new Set([...routes, ...articles.map((a) => `/artikkelit/${a.slug}`)]));
+
+  it("titlet ovat uniikkeja ja 50–60 merkkiä brändin kanssa (auditointi 27.10.2026)", () => {
     const titles = routes.map((p) => withBrand(getRouteSeo(p)!.title));
     expect(new Set(titles).size).toBe(titles.length);
-    const tooLong = routes.filter((p) => withBrand(getRouteSeo(p)!.title).length > 70);
-    expect(tooLong).toEqual([]);
+    const bad = routesWithQueued
+      .map((p) => [p, withBrand(getRouteSeo(p)!.title).length] as const)
+      .filter(([, len]) => len < 50 || len > 60);
+    expect(bad).toEqual([]);
   });
 
-  it("descriptionit ovat 50–175 merkkiä", () => {
-    const bad = routes
+  it("descriptionit ovat 120–160 merkkiä (auditointi 27.10.2026)", () => {
+    const bad = routesWithQueued
       .map((p) => [p, getRouteSeo(p)!.description.length] as const)
-      .filter(([, len]) => len < 50 || len > 175);
+      .filter(([, len]) => len < 120 || len > 160);
     expect(bad).toEqual([]);
   });
 

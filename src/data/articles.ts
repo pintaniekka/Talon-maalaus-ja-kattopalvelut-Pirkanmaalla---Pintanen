@@ -90,8 +90,9 @@ export const articles: ArticleMeta[] = [
   {
     slug: "pinnoitus-vai-uusi-katto",
     title: "Tiilikattoremontti vai pinnoitus: kumpi kannattaa?",
+    seoTitle: "Tiilikattoremontti vai pinnoitus: kumpi kannattaa",
     description:
-      "Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää. Kattoremontti maksaa yleensä 15 000–30 000 €, pinnoitus 2 850–7 000 €. Lue, milloin katto pitää uusia.",
+      "Jos aluskate ja rakenteet ovat ehjät, pinnoitus riittää. Kattoremontti maksaa yleensä 15 000–30 000 €, pinnoitus 2 850–7 000 €. Lue, milloin katto pitää uusia.",
     lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa yleensä 2 850–7 000 euroa ja kattoremontti yleensä 15 000–30 000 euroa. Pinnoitus pidentää katon käyttöikää jopa 15 vuotta.",
     category: "katto",
     author: "eerik",
@@ -118,6 +119,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: "huoltomaalaus-vai-uusi-ulkoverhous",
     title: "Huoltomaalaus vai uusi ulkoverhous: milloin maali riittää?",
+    seoTitle: "Huoltomaalaus vai uusi ulkoverhous: puu ratkaisee",
     description:
       "Hilseilevä maali ei tarkoita, että laudoitus pitää uusia. Jos puu on kovaa eikä lahoa, huoltomaalaus riittää. Lue, miten tarkistat puun kunnon.",
     lead: "Jos puu maalin alla on kovaa eikä lahoa, ulkoverhousta ei yleensä tarvitse uusia. Hyvät pohjatyöt ja uusi maali riittävät, ja hinta on murto-osa uuden laudoituksen hinnasta.",
@@ -145,9 +147,9 @@ export const articles: ArticleMeta[] = [
   {
     slug: "tiilikaton-pesu-ja-pinnoitus",
     title: "Tiilikaton pesu ja pinnoitus: miksi pelkkä pesu ei riitä?",
-    seoTitle: "Tiilikaton pesu ja pinnoitus: miksi pesu ei yksin riitä",
+    seoTitle: "Tiilikaton pesu ja pinnoitus: miksi pesu ei riitä",
     description:
-      "Pesu poistaa sammaleen, mutta kulunut tiili imee vettä heti seuraavalla sateella. Lue, miksi katto maalataan pesun jälkeen, mitä työ maksaa ja kauanko se kestää.",
+      "Pesu poistaa sammaleen, mutta kulunut tiili imee vettä seuraavalla sateella. Lue, miksi katto maalataan pesun jälkeen, mitä työ maksaa ja kauanko se kestää.",
     lead: "Tiilikaton pesu poistaa sammaleen ja lian, mutta kulunut tiilen pinta imee vettä heti seuraavalla sateella. Siksi pesun jälkeen katto maalataan kahteen kertaan. Peruskohteen katto valmistuu 2–3 työpäivässä, ja hinta on yleensä 2 850–7 000 €.",
     category: "katto",
     author: "eerik",

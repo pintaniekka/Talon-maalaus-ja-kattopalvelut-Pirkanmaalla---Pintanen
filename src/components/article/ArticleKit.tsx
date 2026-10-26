@@ -11,12 +11,12 @@ import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 export const Figure = ({ image, alt, caption }: { image: string; alt: string; caption?: string }) => (
   <figure>
     <img
+      loading="lazy"
+      decoding="async"
       src={getResponsiveSrc(image)}
       srcSet={getResponsiveSrcSet(image)}
       sizes="(min-width: 768px) 720px, 100vw"
       alt={alt}
-      loading="lazy"
-      decoding="async"
       className="w-full h-auto max-h-[30rem] object-cover rounded-xl bg-muted"
     />
     {caption && <figcaption>{caption}</figcaption>}

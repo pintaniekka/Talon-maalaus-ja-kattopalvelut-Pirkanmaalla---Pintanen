@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { LazyMotion } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
@@ -43,7 +42,6 @@ const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
  */
 export const AppContent = () => (
   <LazyMotion features={loadMotionFeatures}>
-  <TooltipProvider>
       <Toaster />
         <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
@@ -93,7 +91,6 @@ export const AppContent = () => (
             </Route>
           </Routes>
         </Suspense>
-  </TooltipProvider>
   </LazyMotion>
 );
 

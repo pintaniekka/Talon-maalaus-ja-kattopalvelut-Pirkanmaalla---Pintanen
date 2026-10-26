@@ -219,13 +219,13 @@ const ToimintaAlueetBanner = ({ activeCity, service = "alue", showNeighbors = fa
             {!mapFailed && (
               <div className="flex items-start justify-center lg:justify-end lg:pt-1">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={mapImage}
                   alt="Suomen kartta, jossa Pirkanmaa ja Kanta-Häme on korostettu"
                   className="h-auto w-full max-w-[150px] opacity-90 lg:max-w-[180px]"
                   width={276}
                   height={415}
-                  loading="lazy"
-                  decoding="async"
                   onError={() => setMapFailed(true)}
                 />
               </div>

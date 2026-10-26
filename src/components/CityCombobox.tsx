@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +30,15 @@ const ALL_CITY_NAMES = Array.from(
   new Set([...allCities.map((c) => c.name), ...EXTRA_KANTA_HAME])
 ).sort((a, b) => a.localeCompare(b, "fi"));
 
+/**
+ * Lista avataan kahdessa vaiheessa: ensin vain rivit, jotka mahtuvat näkyviin (300 px:n lista,
+ * noin 7 riviä), ja loput seuraavassa ruudunpäivityksessä. Näin napautuksen ja listan
+ * ilmestymisen väli lyhenee (INP) eikä ulkoasu muutu: loput rivit ovat vierityksen alapuolella.
+ * Hintalaskurin paikkakuntavalitsimen avaus oli hitain vuorovaikutus (224–264 ms hidastetulla
+ * suorittimella, 26.10.2026).
+ */
+const ENSIMMAINEN_ERA = 10;
+
 interface CityComboboxProps {
   value: string;
   onChange: (value: string) => void;
@@ -38,6 +47,25 @@ interface CityComboboxProps {
 
 const CityCombobox = ({ value, onChange, placeholder = "Valitse kunta..." }: CityComboboxProps) => {
   const [open, setOpen] = useState(false);
+  const [kaikkiRivit, setKaikkiRivit] = useState(false);
+
+  useEffect(() => {
+    if (!open) {
+      setKaikkiRivit(false);
+      return;
+    }
+    // Kaksi ruudunpäivitystä: ensimmäinen piirtää listan alun, toinen lisää loput rivit.
+    let toinen = 0;
+    const ensimmainen = requestAnimationFrame(() => {
+      toinen = requestAnimationFrame(() => setKaikkiRivit(true));
+    });
+    return () => {
+      cancelAnimationFrame(ensimmainen);
+      cancelAnimationFrame(toinen);
+    };
+  }, [open]);
+
+  const nakyvat = kaikkiRivit ? ALL_CITY_NAMES : ALL_CITY_NAMES.slice(0, ENSIMMAINEN_ERA);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -64,7 +92,7 @@ const CityCombobox = ({ value, onChange, placeholder = "Valitse kunta..." }: Cit
           <CommandList>
             <CommandEmpty>Ei tuloksia.</CommandEmpty>
             <CommandGroup>
-              {ALL_CITY_NAMES.map((city) => (
+              {nakyvat.map((city) => (
                 <CommandItem
                   key={city}
                   value={city}

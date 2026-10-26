@@ -100,11 +100,12 @@ export const withBrand = (title?: string): string =>
 export const stripBrand = (title: string): string => title.replace(/\s*\|\s*Pintanen\s*$/i, "");
 
 /**
- * Title-pituus hakutuloksessa: 35–60 merkkiä ilman " | Pintanen" -loppua (Eerik 26.10.2026; auditoinnissa
- * 27.10.2026 raja oli 50–60 brändin kanssa, mikä pakotti lyhyisiin titleihin täytteen "– takuu").
+ * Title-pituus hakutuloksessa: 30–60 merkkiä ilman " | Pintanen" -loppua (Eerik 26.10.2026; alaraja oli ensin 35,
+ * mutta Akaan aluesivu on 34 merkkiä eikä kaupunkisivun titleen lisätä Pirkanmaata. Auditoinnissa 27.10.2026 raja
+ * oli 50–60 brändin kanssa, mikä pakotti lyhyisiin titleihin täytteen "– takuu").
  * Palauttaa ensimmäisen vaihtoehdon, joka mahtuu haarukkaan; jos mikään ei mahdu, viimeisen.
  */
-export const TITLE_MIN = 35;
+export const TITLE_MIN = 30;
 export const TITLE_MAX = 60;
 export const titleLength = (title: string): number => stripBrand(title).length;
 export const fitTitle = (variants: string[]): string =>

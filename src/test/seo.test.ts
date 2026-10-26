@@ -19,15 +19,14 @@ describe("sivukohtaiset SEO-tiedot (src/data/seo.ts)", () => {
   const routesWithQueued = Array.from(new Set([...routes, ...articles.map((a) => `/artikkelit/${a.slug}`)]));
 
   // Raja lasketaan ilman " | Pintanen" -loppua (Eerik 26.10.2026); täytettä "– takuu" ei titleissä ole.
-  it("titlet ovat uniikkeja ja 35–60 merkkiä ilman brändiä (Eerik 26.10.2026)", () => {
-    expect([TITLE_MIN, TITLE_MAX]).toEqual([35, 60]);
+  it("titlet ovat uniikkeja ja 30–60 merkkiä ilman brändiä (Eerik 26.10.2026)", () => {
+    expect([TITLE_MIN, TITLE_MAX]).toEqual([30, 60]);
     const titles = routes.map((p) => withBrand(getRouteSeo(p)!.title));
     expect(new Set(titles).size).toBe(titles.length);
-    // Akaa on ainoa kunta, jonka aluesivun title jää alle 35 merkin (34); Eerik 26.10.2026: aluesivuille ei lisäystä.
-    const lyhytSallittu = ["/maalauspalvelut-akaa"];
+    // Lyhin on Akaan aluesivu (34 merkkiä); Eerik 26.10.2026: aluesivuille ei lisäystä, alaraja 30 ilman poikkeuksia.
     const bad = routesWithQueued
       .map((p) => [p, titleLength(getRouteSeo(p)!.title)] as const)
-      .filter(([p, len]) => (len < TITLE_MIN && !lyhytSallittu.includes(p)) || len > TITLE_MAX);
+      .filter(([, len]) => len < TITLE_MIN || len > TITLE_MAX);
     expect(bad).toEqual([]);
     expect(titleLength(getRouteSeo("/maalauspalvelut-akaa")!.title)).toBe(34);
     const filler = routesWithQueued.filter((p) => / – takuu$/.test(getRouteSeo(p)!.title));

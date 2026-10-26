@@ -150,7 +150,7 @@ const IlmainenKuntotarkastus = () => {
       <RelatedArticles categories={["katto"]} />
 
       <ToimintaAlueetBanner service="pinnoitus" />
-      <ServiceContactSection variant="katto" formTitle="Pyydä ilmainen kuntotarkastus" />
+      <ServiceContactSection variant="katto" />
     </>
   );
 };

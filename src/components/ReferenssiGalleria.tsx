@@ -104,8 +104,8 @@ const Kortti = ({ k, iso, onOpen }: { k: ReferenssiNakyma; iso: boolean; onOpen:
               ],
             })
           }
-          aria-label={`Suurenna: ${otsikko}`}
         >
+          <span className="sr-only">Suurenna: {otsikko}</span>
           {[
             { base: k.before, label: "Ennen" },
             { base: k.after, label: "Jälkeen" },
@@ -128,8 +128,8 @@ const Kortti = ({ k, iso, onOpen }: { k: ReferenssiNakyma; iso: boolean; onOpen:
           type="button"
           className="block text-left"
           onClick={() => onOpen({ title: otsikko, kuvat: [{ base: k.image!, alt: k.alt }] })}
-          aria-label={`Suurenna: ${otsikko}`}
         >
+          <span className="sr-only">Suurenna: {otsikko}</span>
           <ResponsiveImage baseName={k.image!} alt={k.alt} className="aspect-[4/3] w-full object-cover" sizes={sizes} width={800} height={600} />
         </button>
       )}

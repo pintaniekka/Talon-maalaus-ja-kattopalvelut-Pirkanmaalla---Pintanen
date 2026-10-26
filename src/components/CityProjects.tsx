@@ -7,6 +7,7 @@ import { LUVUT } from "@/data/company";
 import { TestimonialCard } from "@/components/TestimonialsMarquee";
 import CityReviewCard from "@/components/CityReviewCard";
 import { getReviewCases, reviewCaseImages } from "@/data/reviewCases";
+import { vainPaikkakunta } from "@/data/kannibalisointi";
 
 interface CityProjectsProps {
   citySlug: string;
@@ -34,14 +35,16 @@ const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsP
   const story = getCityStory(citySlug, service);
   const reviews = getTestimonialsByCity(citySlug);
   if (items.length === 0 && cases.length === 0 && reviews.length === 0) return null;
+  // Kannibalisointi (yöajo 3): viidellä paikkakunnalla Pirkanmaa mainitaan leipätekstissä vain kerran.
+  const muualla = vainPaikkakunta(citySlug) ? "muualta" : "muualla Pirkanmaalla";
 
   return (
     <section className="py-16 md:py-20 bg-background">
       <div className="section-container">
         <div className="max-w-3xl mx-auto text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading mb-3">
-            {hasOwn ? headings[service ?? "all"](cityIn) : headings[service ?? "all"]("muualla Pirkanmaalla")}
-            {hasOwn && hasNearby && " ja muualla Pirkanmaalla"}
+            {hasOwn ? headings[service ?? "all"](cityIn) : headings[service ?? "all"](muualla)}
+            {hasOwn && hasNearby && ` ja ${muualla}`}
           </h2>
           {story ? (
             <p className="text-base md:text-lg text-foreground leading-relaxed">{story.text}</p>

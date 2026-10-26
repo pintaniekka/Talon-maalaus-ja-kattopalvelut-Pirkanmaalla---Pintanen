@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import ServiceContactSection from '@/components/ServiceContactSection';
@@ -95,7 +95,7 @@ const Lightbox = ({
   onNext: (e: React.MouseEvent) => void;
   onSelectIndex: (idx: number) => void;
 }) => (
-  <motion.div
+  <m.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
@@ -126,7 +126,7 @@ const Lightbox = ({
     )}
 
     <div className="flex flex-col items-center max-w-5xl w-full">
-      <motion.img
+      <m.img
         key={currentIndex}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -165,7 +165,7 @@ const Lightbox = ({
         </>
       )}
     </div>
-  </motion.div>
+  </m.div>
 );
 
 const Referenssit = () => {
@@ -363,16 +363,16 @@ const Referenssit = () => {
 
       <section className="section-padding bg-background">
         <div className="section-container">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center mb-12 space-y-4"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink font-heading">Tiilikaton pinnoituksia ja talon maalauksia</h2>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -389,12 +389,12 @@ const Referenssit = () => {
                 {cat.label}
               </button>
             ))}
-          </motion.div>
+          </m.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="popLayout">
               {visibleProjects.map((project, index) => (
-                <motion.div
+                <m.div
                   key={`${project.title}-${index}`}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -431,7 +431,7 @@ const Referenssit = () => {
                       )}
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </AnimatePresence>
           </div>

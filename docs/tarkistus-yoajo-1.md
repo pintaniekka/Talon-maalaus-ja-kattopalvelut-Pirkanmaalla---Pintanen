@@ -340,6 +340,7 @@ kertoo, missä paketissa muutos tehtiin.
 | `src/data/prices.ts` (maalaus, 2-kerroksinen talo) | alk. 4 760 € | alk. 4 900 € (muut kaksi maalauskorttia ennallaan: 2 380 € ja 3 400 €) | tämä PR |
 | `src/components/laskuri/PriceWizard.tsx` (/hintalaskuri/, tulosruutu) | Kotitalousvähennyksen jälkeen: [hinta] | Kotitalousvähennyksen jälkeen: [hinta] + pieni teksti "Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin." Luku lasketaan nyt ilman omavastuuta. | tämä PR |
 | `src/components/ChatPriceCalculator.tsx` (etusivun chat) | (ei vähennysriviä) | Uusi viesti kiitosviestin jälkeen: "Kotitalousvähennyksen jälkeen: [hinta]. Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin." | tämä PR |
+| `src/components/vahennys/VahennysE.tsx` (hintasivujen vähennysesimerkki) | Urakkahinta 4 000 € / Materiaalit 1 000 € / Työn osuus 3 000 € / 40 % työstä 1 200 € / Omavastuu −150 € / Kotitalousvähennys 1 050 €. "Luvut ovat esimerkki; vähennys tehdään verotuksessa." | Omavastuurivi poistettu, Kotitalousvähennys 1 200 €. "Luvut ovat esimerkki; vähennys tehdään verotuksessa. Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin." (Eerik 26.10.2026, vastaus kysymykseen 1) | tämä PR |
 
 ### Lisätyt osiot, UKK-kohdat ja Avainhuomiot vanhoihin artikkeleihin (vanhoja lauseita ei poistettu)
 
@@ -387,6 +388,8 @@ Lähde prosentille ja enimmäismäärälle: Verohallinto, tarkistettu 26.10.2026
 Laskureissa rivi näyttää haarukan: alaraja ja yläraja lasketaan erikseen samalla kaavalla (esim. 2 850–7 000 € → 1 940–4 900 €).
 Yksikkötestit `src/test/hintalaskuri.test.tsx` tarkistavat nämä luvut sekä rivit 5 000 € → 3 400 € ja 11 000 € → 8 900 €.
 
+Hintasivujen vähennysesimerkki (`VahennysE`) laskee samalla säännöllä: työn osuus on esimerkissä annettu (3 000 €), 40 % siitä on 1 200 €, omavastuuta ei vähennetä. Testi `src/test/vahennysEsimerkki.test.tsx` tarkistaa sen.
+
 Hintakorttien "alk."-luvut samalla kaavalla (vanha → uusi):
 
 | Kortti | Normaalihinta alk. | Vanha "alk." | Uusi "alk." |
@@ -405,3 +408,11 @@ Hintakorttien "alk."-luvut samalla kaavalla (vanha → uusi):
 3. Kotitalousvähennysartikkeli sanoo "Saat täydet 2 100 euroa, kun maksat vuoden aikana työstä 5 625 euroa." Luku sisältää omavastuun (40 % × 5 625 − 150 = 2 100). Jätetäänkö lause ennalleen? Se on oikein verotuksen kannalta, mutta laskurit laskevat ilman omavastuuta.
 4. Etusivun chatissa vähennysrivi tulee omana viestinään kiitosviestin jälkeen. Käykö se, vai haluatko sen samaan viestiin?
 5. Artikkelijonossa on nyt aukko: 2.11. ja 5.11. jälkeen seuraava artikkeli on vasta to 19.11. (sitten ma 23.11., to 26.11., ma 30.11.). Siirretäänkö 19.11. ja 23.11. viikolle 9.–12.11., jolloin kahden artikkelin viikkotahti jatkuu?
+
+## Eerikin vastaukset 26.10.2026 ja toteutus
+
+1. Sama kaava: omavastuurivi poistettu hintasivujen esimerkistä, tulos 1 050 € → 1 200 €, omavastuulause esimerkin alle (`src/components/vahennys/VahennysE.tsx`).
+2. Ok: maalauskortin "alk." 4 900 € pysyy.
+3. Ok: artikkelin lause "5 625 euroa" pysyy ennallaan.
+4. Oma viesti: chatin vähennysrivi pysyy omana viestinään.
+5. Ok: artikkelit siirretty: tiilikaton pinnoituksen hinta 2027 to 19.11. → ma 9.11., Ormax ma 23.11. → to 12.11. Jono on nyt ma 2.11., to 5.11., ma 9.11., to 12.11., to 26.11., ma 30.11. (`src/data/articles.ts`).

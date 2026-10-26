@@ -2,19 +2,27 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
 import { fmtEur } from "@/data/prices";
-import { VAHENNYS_ARTIKKELI, VAHENNYS_ERITTELY, VAHENNYS_LINK_ARROW, VAHENNYS_OTSIKKO, VAHENNYS_SAANTO } from "./vahennysData";
+import {
+  VAHENNYS_ARTIKKELI,
+  VAHENNYS_ERITTELY,
+  VAHENNYS_LINK_ARROW,
+  VAHENNYS_OMAVASTUU_HUOMAUTUS,
+  VAHENNYS_OTSIKKO,
+  VAHENNYS_SAANTO,
+} from "./vahennysData";
 
 /**
  * Yksi esimerkkilaskelma (Eerik 14.10.2026: "Yksi esimerkki riittää. Urakkahinta 4000, työ 1000"):
  * urakka 4 000 €, josta materiaalit 1 000 € ja työn osuus 3 000 €. Luvut lasketaan säännöstä
- * (VAHENNYS_SAANTO), jotta teoria ja esimerkki eivät eroa toisistaan.
+ * (VAHENNYS_SAANTO), jotta teoria ja esimerkki eivät eroa toisistaan. Omavastuuta ei vähennetä, sama
+ * kaava kuin hintalaskurissa (Eerik 26.10.2026); omavastuu kerrotaan esimerkin alla.
  */
 const ESIMERKKI = { urakka: 4000, materiaalit: 1000 } as const;
 
-const { osuus, omavastuu, enimmaismaara } = VAHENNYS_SAANTO;
+const { osuus, enimmaismaara } = VAHENNYS_SAANTO;
 const tyo = ESIMERKKI.urakka - ESIMERKKI.materiaalit;
 const osuusTyosta = Math.round(tyo * osuus);
-const vahennys = Math.min(osuusTyosta - omavastuu, enimmaismaara);
+const vahennys = Math.min(osuusTyosta, enimmaismaara);
 const prosentti = Math.round(osuus * 100);
 
 const rivit: { label: string; value: string; muted?: boolean }[] = [
@@ -22,7 +30,6 @@ const rivit: { label: string; value: string; muted?: boolean }[] = [
   { label: "Materiaalit", value: fmtEur(ESIMERKKI.materiaalit), muted: true },
   { label: "Työn osuus", value: fmtEur(tyo) },
   { label: `${prosentti} % työstä`, value: fmtEur(osuusTyosta) },
-  { label: "Omavastuu", value: `−${fmtEur(omavastuu)}`, muted: true },
 ];
 
 /**
@@ -63,7 +70,9 @@ const VahennysE = () => (
               </div>
             </dl>
           </div>
-          <p className="px-1 text-xs text-muted-foreground">Luvut ovat esimerkki; vähennys tehdään verotuksessa.</p>
+          <p className="px-1 text-xs text-muted-foreground">
+            Luvut ovat esimerkki; vähennys tehdään verotuksessa. {VAHENNYS_OMAVASTUU_HUOMAUTUS}
+          </p>
         </div>
       </div>
     </div>

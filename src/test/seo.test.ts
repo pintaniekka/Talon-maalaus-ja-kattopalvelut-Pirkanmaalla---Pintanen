@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
-import { getCanonicalRoutes, buildLlmsTxt, buildSitemapXml } from "@/data/routes";
+import { getCanonicalRoutes, buildLlmsTxt, buildLlmsFullTxt, htmlToPlainText, buildSitemapXml } from "@/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl } from "@/data/seo";
 import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
 import { allCities } from "@/data/cityData";
@@ -85,6 +85,22 @@ describe("llms.txt ja sitemap", () => {
     expect(txt).toContain("https://pintanen.fi/tiilikaton-pinnoitus-tampere/");
     // Säännöt: ei neliöhintaa, ei "alkaen"-hintaa, ei prosenttisäästöväitettä
     expect(txt).not.toMatch(/€\/m²|alkaen \d|alk\. |jopa \d+ %/);
+  });
+
+  it("llms-full.txt sisältää sivujen tekstin otsikoineen ilman HTML:ää", () => {
+    const body =
+      '<header>Valikko</header><main><h1 class="x">Tiilikaton pinnoitus <span class="sr-only">ruudunlukijalle</span>Tampere</h1>' +
+      '<p>Hinta on 2&nbsp;850&#8211;7&#160;000&nbsp;&euro;.</p><ul><li>Pesu</li><li>Maalaus &amp; reunat</li></ul>' +
+      '<svg><path d="M1"/></svg><script>var x = 1;</script><h2>Usein kysyttyä</h2><div>Vastaus</div></main><footer>Alatunniste</footer>';
+    const txt = buildLlmsFullTxt([{ route: "/tiilikaton-pinnoitus-tampere", body }, { route: "/ei-ole", body }]);
+    expect(txt.startsWith("# Pintanen Oy")).toBe(true);
+    expect(txt).toContain("URL: https://pintanen.fi/tiilikaton-pinnoitus-tampere/");
+    expect(txt).toContain("# Tiilikaton pinnoitus Tampere");
+    expect(txt).toContain("Hinta on 2 850–7 000 €.");
+    expect(txt).toContain("- Maalaus & reunat");
+    expect(txt).toContain("## Usein kysyttyä");
+    expect(txt).not.toMatch(/<[a-z]|var x|ruudunlukijalle|Valikko|Alatunniste|\/ei-ole/);
+    expect(htmlToPlainText("<main><p>a</p>\n\n\n<p>b</p></main>")).toBe("a\n\nb");
   });
 
   it("jokaisella sivulla on sitemapissa lastmod (P5)", () => {

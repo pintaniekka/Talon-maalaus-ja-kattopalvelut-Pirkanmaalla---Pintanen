@@ -21,6 +21,10 @@ const MiksiPintanen = () => {
                 Eerik pinnoittaa tiilikatot ja Eemil maalaa talojen ulkoseinät. Teemme omakotitalojen, paritalojen ja mökkien ulkotyöt{" "}
                 {TOIMINTA_ALUE}. Takuu: pinnoitus 5 vuotta, maalaus 2 vuotta.
               </p>
+              <p>
+                Katolle käytämme Nowocoatin kattomaalia ja seiniin pääsääntöisesti Tikkurilan maaleja. Pinnoitettu katto
+                kestää jopa 15 vuotta pidempään, ja työn osuudesta saat kotitalousvähennyksen.
+              </p>
               <p className="font-semibold text-primary">– Eerik &amp; Eemil</p>
             </div>
           </div>

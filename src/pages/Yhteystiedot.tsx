@@ -59,7 +59,7 @@ const Yhteystiedot = () => {
                   aria-label={`WhatsApp ${person.first}`}
                   className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform hover:scale-105"
                 >
-                  <WhatsAppIcon className="h-5 w-5" />
+                  <WhatsAppIcon className="h-5 w-5" color="#ffffff" />
                 </a>
               </li>
             ))}

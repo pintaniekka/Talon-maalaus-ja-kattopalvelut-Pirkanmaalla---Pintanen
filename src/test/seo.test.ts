@@ -232,6 +232,30 @@ describe("responsiiviset kuvat", () => {
     expect(missing).toEqual([]);
   });
 
+  it("srcset sisältää koot 400, 600, 800 ja 1200, ja poikkeuslista vastaa levyn tilannetta (600 px lisätty 26.10.2026)", async () => {
+    const { getResponsiveSrcSet } = await import("@/lib/storage");
+    const { puuttuvatKuvakoot } = await import("@/data/kuvakoot");
+    expect(getResponsiveSrcSet("x")).toBe(
+      "/images/Pictures-400/x-400.webp 400w, /images/Pictures-600/x-600.webp 600w, /images/Pictures-800/x-800.webp 800w, /images/Pictures-1200/x-1200.webp 1200w"
+    );
+    const imagesDir = path.resolve(__dirname, "../../public/images");
+    const baseNames = fs
+      .readdirSync(path.join(imagesDir, "Pictures-1200"))
+      .filter((f) => f.endsWith("-1200.webp"))
+      .map((f) => f.replace(/-1200\.webp$/, ""));
+    // Poikkeuslistan kuvilta koko puuttuu levyltä, ja kaikilta muilta se löytyy (scripts/taydenna_kuvakoot.py pitää listan ajan tasalla).
+    for (const [width, listed] of Object.entries(puuttuvatKuvakoot)) {
+      const onDisk = new Set(
+        fs.readdirSync(path.join(imagesDir, `Pictures-${width}`)).filter((f) => f.endsWith(`-${width}.webp`)).map((f) => f.replace(new RegExp(`-${width}\\.webp$`), ""))
+      );
+      const shouldBeListed = baseNames.filter((b) => !onDisk.has(b)).sort();
+      expect([...listed].sort()).toEqual(shouldBeListed);
+      for (const base of listed) expect(getResponsiveSrcSet(base)).not.toContain(`Pictures-${width}/`);
+    }
+    const with600 = baseNames.length - (puuttuvatKuvakoot[600]?.length ?? 0);
+    expect(with600).toBeGreaterThan(baseNames.length / 2);
+  });
+
   it("kuvaosoitteet ovat sivuston omia eivätkä osoita ulkoiseen tallennuspalveluun", async () => {
     const { getStorageUrl, getResponsiveSrc, toAbsoluteUrl } = await import("@/lib/storage");
     expect(getStorageUrl("Icons/Tiilikatto icon.svg")).toBe("/images/Icons/Tiilikatto%20icon.svg");

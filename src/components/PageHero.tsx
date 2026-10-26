@@ -67,6 +67,8 @@ interface PageHeroProps {
   title: ReactNode;
   /** 2–3 lyhyttä virkettä. */
   lead: ReactNode;
+  /** Johdannon ja nappien väliin, esim. yhteystietosivun isot puhelinnumerot (Eerik 26.10.2026). */
+  beforeActions?: ReactNode;
   primary: { to: string; label: string };
   secondary?: { to: string; label: string };
   trust?: TrustVariant | TrustItem[];
@@ -88,6 +90,7 @@ const PageHero = ({
   eyebrow,
   title,
   lead,
+  beforeActions,
   primary,
   secondary,
   trust = "yleinen",
@@ -117,6 +120,7 @@ const PageHero = ({
           </h1>
 
           <p className="hero-lead text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl leading-relaxed font-sans">{lead}</p>
+          {beforeActions}
 
           <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4 sm:gap-6 mb-8 md:mb-10">
             <Link

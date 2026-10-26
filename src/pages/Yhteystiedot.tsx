@@ -1,12 +1,14 @@
 import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { Phone } from "@/components/icons/BrandIcons";
 import { staticSeo, HERO_BASE } from "@/data/seo";
-import { TOIMINTA_ALUE, VASTAUSLUPAUS } from "@/data/company";
+import { TOIMINTA_ALUE, VASTAUSLUPAUS, YHTEYSTIEDOT } from "@/data/company";
 
 /**
- * Yhteystiedot (Eerik 14.10.2026: oma kohta päävalikkoon). Sama lomake ja samat yhteyshenkilöt kuin
- * muualla (ServiceContactSection, jossa Eerikin ja Eemilin numerot), sen päällä lyhyt hero ja yrityksen tiedot.
+ * Yhteystiedot (Eerik 14.10.2026: oma kohta päävalikkoon). Herossa puhelinnumerot isolla: KATOT Eerik,
+ * SEINÄT Eemil (Eerik 26.10.2026, malli Lummecon yhteystietosivu). Sama lomake kuin muualla.
  */
 const faktat = [
   ["Yritys", "Pintanen Oy"],
@@ -15,6 +17,11 @@ const faktat = [
   ["Toiminta-alue", `${TOIMINTA_ALUE.charAt(0).toUpperCase()}${TOIMINTA_ALUE.slice(1)}`],
 ] as const;
 
+const numerot = [
+  { label: "Katot", person: YHTEYSTIEDOT.eerik },
+  { label: "Seinät", person: YHTEYSTIEDOT.eemil },
+];
+
 const Yhteystiedot = () => {
   const crumbs = [{ name: "Yhteystiedot" }];
   return (
@@ -22,16 +29,41 @@ const Yhteystiedot = () => {
       <SEO {...staticSeo["/yhteystiedot"]} breadcrumbs={crumbs} />
 
       <PageHero
-        eyebrow="Pintanen Oy · Tampere"
+        eyebrow="Yhteystiedot · Pintanen Oy"
         title={
           <>
-            Soita tai jätä <span className="text-accent-ink">viesti</span>
+            Soita <span className="text-accent-ink">meille</span>
           </>
         }
         lead={
           <>
             Eerik vastaa katoista ja Eemil seinistä. {VASTAUSLUPAUS} Arviokäynti on ilmainen.
           </>
+        }
+        beforeActions={
+          <ul className="mb-8 space-y-4">
+            {numerot.map(({ label, person }) => (
+              <li key={label} className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                <span className="w-16 text-xs font-extrabold uppercase tracking-[0.2em] text-accent-ink">{label}</span>
+                <a
+                  href={person.phoneHref}
+                  className="font-heading text-3xl font-extrabold tracking-tight text-foreground transition-colors hover:text-accent-ink md:text-4xl"
+                >
+                  {person.phone}
+                </a>
+                <span className="text-sm text-muted-foreground">{person.first}</span>
+                <a
+                  href={person.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`WhatsApp ${person.first}`}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-white transition-transform hover:scale-105"
+                >
+                  <WhatsAppIcon className="h-5 w-5" color="#ffffff" />
+                </a>
+              </li>
+            ))}
+          </ul>
         }
         primary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
         secondary={{ to: "/hintalaskuri/", label: "Laske hinta-arvio" }}

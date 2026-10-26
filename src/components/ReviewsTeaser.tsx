@@ -22,7 +22,7 @@ const ReviewsTeaser = ({ citySlug, category }: Props) => {
     <section className="section-padding bg-background" aria-label="Asiakasarvostelut">
       <div className="section-container max-w-4xl mx-auto">
         <h2 className="heading-style text-2xl md:text-3xl text-accent-ink text-center mb-8">Mitä asiakkaat sanovat meistä?</h2>
-        <div className="grid sm:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 gap-7">
           {reviews.map((r, i) => (
             <ReviewCard key={`${r.name}-${i}`} review={r} index={i} />
           ))}

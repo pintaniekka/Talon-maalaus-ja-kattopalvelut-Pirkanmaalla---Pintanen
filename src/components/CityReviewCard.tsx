@@ -54,7 +54,7 @@ const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
       : [];
 
   return (
-    <article className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden grid md:grid-cols-[1fr_minmax(0,40%)]">
+    <article className="kortti-a overflow-hidden grid md:grid-cols-[1fr_minmax(0,40%)]">
       <div className="p-6 flex flex-col">
         <div className="flex items-center gap-3 mb-2.5">
           <span

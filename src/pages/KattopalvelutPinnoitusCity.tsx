@@ -22,6 +22,7 @@ import { getPinnoitusCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
 import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
+import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { pinnoitusPrices } from "@/data/prices";
 import { pinnoitusLyhyesti, pinnoitusTyovaiheet, PINNOITUS_HINTA } from "@/data/tyovaiheet";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
@@ -50,7 +51,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
   return (
     <div>
       <SEO {...seo} breadcrumbs={crumbs} />
-      <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} description={seo.description} priceRange={pinnoitusPrices.general} />
+      <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} areaSameAs={getCityWikipediaUrl(cityData)} description={seo.description} priceRange={pinnoitusPrices.general} />
 
       <PageHero
         eyebrow={`Tiilikaton pinnoitus · ${cityData.name}`}

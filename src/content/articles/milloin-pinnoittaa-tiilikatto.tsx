@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -68,6 +68,7 @@ const Body = () => (
       caption="Nopeasti palaava sammal kertoo huokoiseksi kuluneesta tiilestä."
     />
 
+    <Avainhuomio>Pinnoitettu katto hylkii vettä ja kestää jopa 15 vuotta pidempään.</Avainhuomio>
     <h2>3. Tiilen pinta tuntuu karhealta</h2>
     <p>
       Tämän voit kokeilla itse räystäältä tai tikkailta. Hyväkuntoinen tiili on sileä ja kova. Kulunut tiili tuntuu
@@ -89,6 +90,7 @@ const Body = () => (
       Ajoissa tehty pinnoitus tulee halvemmaksi kuin tiilien vaihto tai koko katon uusiminen.
     </p>
 
+    <Avainhuomio>Pinnoitus on ajankohtainen noin 10–15 vuoden iässä, kun tehdaspinnoite on kulunut.</Avainhuomio>
     <h2>Mitä tiilikaton pinnoituksessa tehdään?</h2>
     <ol>
       <li>Katto pestään ja sadevesikourut huuhdellaan.</li>
@@ -100,6 +102,7 @@ const Body = () => (
       Omakotitalon katolla tähän menee 2–4 työpäivää, ja annamme työlle 5 vuoden kirjallisen takuun. Tarkempi
       kuvaus on sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
+    <Avainhuomio>Peruskohteen katto valmistuu 2–3 työpäivässä, ja takuu on 5 vuotta.</Avainhuomio>
     <Figure
       image="tiilikaton-pinnoitus-tummanharmaa-tiilikatto-pinnoitus-jalkeen"
       alt="Tummanharmaa tiilikatto pinnoituksen jälkeen"

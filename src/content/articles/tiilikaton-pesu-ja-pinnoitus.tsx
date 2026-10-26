@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Table } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/article/ArticleKit";
 
 /**
  * Aihe asiakasviesteistä (17.3.–19.10.2026): yleisin pyyntö on "tiilikaton pesu ja pinnoitus", ja moni kysyy
@@ -69,6 +69,7 @@ const Body = () => (
       ennen maalausta, ja maalaamme sen aina pesun jälkeen.
     </p>
 
+    <Avainhuomio>Tiilen tehdaspinta kuluu noin 10–15 vuodessa, ja sen jälkeen vain uusi maalipinta pitää veden pois.</Avainhuomio>
     <h2>Miten pesu ja pinnoitus etenevät?</h2>
     <ol>
       <li>Ilmainen kuntotarkastus. Tarkistamme tiilet, saumat, piipun ympäryksen, läpiviennit ja aluskatteen.</li>
@@ -98,6 +99,7 @@ const Body = () => (
       <Link to="/hintalaskuri/?palvelu=pinnoitus">hintalaskurilla</Link>, ja tarkemmat esimerkit ovat sivulla{" "}
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link>.
     </p>
+    <Avainhuomio>Hinta on yleensä 2 850–7 000 €, ja työn osuudesta saat kotitalousvähennyksen.</Avainhuomio>
     <Figure
       image="tiilikaton-pinnoitus-vastamaalattu-tiilikatto-jalkeen"
       alt="Vastamaalattu tiilikatto pinnoituksen jälkeen"

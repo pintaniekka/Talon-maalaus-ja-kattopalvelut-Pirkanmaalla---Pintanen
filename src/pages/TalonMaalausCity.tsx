@@ -19,6 +19,7 @@ import ReviewsTeaser from "@/components/ReviewsTeaser";
 import ServiceSchema from "@/components/ServiceSchema";
 import { maalausCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { getCityBySlug } from "@/data/cityData";
+import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { hasKuntakartta } from "@/data/kartat";
 import { getMaalausCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
@@ -53,6 +54,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         name="Talon ulkomaalaus"
         alternateNames={["Talon maalaus", "Julkisivumaalaus", "Huoltomaalaus", "Puutalon maalaus"]}
         area={cityName}
+        areaSameAs={getCityWikipediaUrl(cityData)}
         description={seo.description}
         priceRange={maalausPrices.general}
       />

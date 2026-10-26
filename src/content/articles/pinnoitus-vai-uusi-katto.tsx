@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Sources } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Sources } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -56,6 +56,7 @@ const Body = () => (
       alkaa imeä vettä ja sammal tarttuu siihen.
     </p>
 
+    <Avainhuomio>Tiilen tehdaspinnoite kuluu 10–15 vuodessa, vaikka tiili itse kestää jopa 70 vuotta.</Avainhuomio>
     <h2>Milloin tiilikaton pinnoitus riittää?</h2>
     <p>Pinnoitus riittää, kun katossa on nämä merkit:</p>
     <ul>
@@ -98,6 +99,7 @@ const Body = () => (
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link>.
     </p>
 
+    <Avainhuomio>Pinnoitus maksaa yleensä 2 850–7 000 €, kattoremontti yleensä 15 000–30 000 €.</Avainhuomio>
     <h2>Miten voit tarkistaa katon kunnon itse?</h2>
     <ol>
       <li>Katso tiiliä. Onko väri haalistunut? Onko pinta karhea? Näkyykö sammalta tai halkeamia?</li>

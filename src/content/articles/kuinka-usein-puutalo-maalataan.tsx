@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Note, Sources } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Note, Sources } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -47,6 +47,7 @@ const Body = () => (
       maalia, vaikka muut näyttävät vielä hyviltä.
     </p>
 
+    <Avainhuomio>Puutalo maalataan yleensä 10–15 vuoden välein, ja aurinkoisin seinä kuluu ensin.</Avainhuomio>
     <h2>Mistä tiedät, että talo pitää maalata?</h2>
     <p>Kierrä talo ja katso seinät läpi. Nämä viisi merkkiä kertovat, että maali ei enää suojaa puuta.</p>
 
@@ -99,6 +100,7 @@ const Body = () => (
       tarvitaan. Lue lisää sivulta <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.
     </p>
 
+    <Avainhuomio>Pohjamaali tulee paljaisiin puukohtiin ja pintamaali pensselillä. Takuu on 2 vuotta.</Avainhuomio>
     <h2>Mihin aikaan vuodesta talo kannattaa maalata?</h2>
     <p>
       Useimmat ulkomaalit vaativat vähintään +5 astetta. Paras lämpötila on +10–+30 astetta. Puun pitää olla
@@ -118,7 +120,7 @@ const Body = () => (
 
     <h2>Paljonko talon huoltomaalaus maksaa?</h2>
     <p>
-      Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–6 000 euroa. Kaksikerroksisen talon maalaus
+      Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–5 000 euroa. Kaksikerroksisen talon maalaus
       maksaa noin 7 000–11 000 euroa. Hinta riippuu pohjatöiden määrästä, talon korkeudesta ja seinien
       pinta-alasta.
     </p>
@@ -131,6 +133,7 @@ const Body = () => (
       </Link>
       .
     </p>
+    <Avainhuomio>Omakotitalon maalaus maksaa yleensä 3 500–11 000 € ja kestää 3–7 päivää.</Avainhuomio>
     <Figure
       image="talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen"
       alt="Keltainen ulkoverhous huoltomaalauksen jälkeen"

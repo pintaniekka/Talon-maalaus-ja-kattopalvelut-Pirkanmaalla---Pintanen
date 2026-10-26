@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -45,6 +45,7 @@ const Body = () => (
       suoraan. Käynnin jälkeen saat tarjouksen.
     </p>
 
+    <Avainhuomio>Kuntotarkastus on ilmainen, ja sen jälkeen saat kirjallisen tarjouksen kiinteällä hinnalla.</Avainhuomio>
     <h2>2. Tarvittavat suojaukset</h2>
     <p>
       Katon pesu irrottaa likaa. Teemme ennen pesua kohteen vaatimat suojaukset. Jätämme pihasi yhtä siistiksi kuin
@@ -75,6 +76,7 @@ const Body = () => (
     </p>
     <p>Katon pitää kuivua pesun jälkeen ja maalikerrosten välissä. Siksi työ kestää useamman päivän.</p>
 
+    <Avainhuomio>Katto maalataan aina kahteen kertaan: ensin pohjamaali, sitten pintamaali, ja maali on Nowocoat.</Avainhuomio>
     <h2>6. Lopputarkastus yhdessä sinun kanssasi</h2>
     <p>
       Työ on valmis vasta, kun olemme kiertäneet talon yhdessä ja katsoneet työn jäljen. Saat pinnoitukselle 5
@@ -92,6 +94,7 @@ const Body = () => (
       katon pitää olla kuiva. Jos sää yllättää, sovimme uuden päivän. Siitä ei tule lisäkuluja.
     </p>
 
+    <Avainhuomio>Peruskohteen katto valmistuu 2–3 työpäivässä, ja siirretystä sadepäivästä ei tule lisäkuluja.</Avainhuomio>
     <h2>Mitä sinun pitää tehdä ennen työtä?</h2>
     <ul>
       <li>Siirrä pihakalusteet, ruukut ja muut kevyet tavarat kauemmas talosta.</li>

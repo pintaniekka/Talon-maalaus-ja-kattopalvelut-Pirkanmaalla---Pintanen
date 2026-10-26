@@ -131,15 +131,15 @@ export const staticSeo: Record<string, RouteSeo> = {
       "Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Vastaa muutamaan kysymykseen ja saat suuntaa antavan hinta-arvion heti. Pirkanmaa.",
   },
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": {
-    title: "Tiilikaton pinnoitus hinta 2027 – hintalaskuri",
+    title: `Tiilikaton pinnoitus hinta 2027: ${PINNOITUS_HINTA}`,
     description: `Tiilikaton pinnoitus maksaa omakotitalossa yleensä ${PINNOITUS_HINTA}. Katso hintaesimerkit, laske arvio laskurilla ja lue, mitä hintaan kuuluu. Pirkanmaa.`,
   },
   "/talon-maalaus-hinta-pirkanmaa": {
-    title: "Talon maalaus hinta 2027 – esimerkit ja laskuri",
+    title: `Talon maalaus hinta 2027: ${MAALAUS_HINTA}`,
     description: `Talon ulkomaalaus maksaa omakotitalossa yleensä ${MAALAUS_HINTA}. Katso hintaesimerkit, laske arvio laskurilla ja lue, mistä hinta syntyy. Pirkanmaa.`,
   },
   "/meista": {
-    title: "Meistä: veljekset Eerik ja Eemil tekevät itse",
+    title: "Meistä – Eerik ja Eemil, yli 200 kohdetta",
     description:
       "Pintanen Oy on nuori perheyritys. Eerik pinnoittaa tiilikattoja ja Eemil maalaa taloja Pirkanmaalla ja lähikunnissa. Ei välikäsiä, kirjallinen takuu.",
   },
@@ -149,7 +149,7 @@ export const staticSeo: Record<string, RouteSeo> = {
       "Yhteystiedot: Eerik Pitkänen 040 964 0066 (tiilikatot) ja Eemil Pitkänen 040 164 2233 (talon maalaus). Pintanen Oy, Tampere ja Pirkanmaa. Ilmainen arviokäynti.",
   },
   "/tiilikaton-pinnoitus-pirkanmaa": {
-    title: "Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Pintanen",
+    title: "Tiilikaton pinnoitus Pirkanmaa – hinta, 5 v takuu",
     description: `Tiilikaton pinnoitus Pirkanmaalla: painepesu, rikkinäiset tiilet uusiin ja maalaus ruiskulla kahteen kertaan. Hinta yleensä ${PINNOITUS_HINTA}, 5 v takuu.`,
   },
   "/talon-maalaus-pirkanmaa": {
@@ -167,7 +167,7 @@ export const staticSeo: Record<string, RouteSeo> = {
       "Kuvia Pintasen töistä Pirkanmaalla ja lähikunnissa: tiilikattoja ennen ja jälkeen pinnoituksen sekä maalattuja taloja. Kuvat ovat omista kohteistamme.",
   },
   "/kokemuksia": {
-    title: "Asiakkaiden kokemuksia: kaikki Google-arvostelut",
+    title: "Asiakkaiden kokemuksia: Google-arvostelut 5,0 / 5",
     description:
       "Kaikki Pintasen Google-arvostelut sanasta sanaan: tiilikaton pinnoitus ja talon maalaus Pirkanmaalla. Keskiarvo 5,0 / 5. Lue, mitä asiakkaat sanovat työstämme.",
   },
@@ -184,12 +184,12 @@ export const staticSeo: Record<string, RouteSeo> = {
  * hinta siirtyi kuvaukseen, jotta title pysyy alle 60 merkin.
  */
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
-  // Lyhyillä kunnannimillä (Akaa, Nokia, Forssa…) pelkkä perusmuoto jää alle 50 merkin (auditointi 27.10.2026),
-  // joten perään tulee sivun oma fakta: 5 vuoden takuu, tai jos sekään ei mahdu, hinta.
+  // Vaihe 12 (27.10.2026): hinta ja takuu titleen Eerikin mallin mukaan ("Tiilikaton pinnoitus Tampere – hinta, …
+  // ja 5 v takuu"). Sana "maalaus" ei mahdu 60 merkkiin lukujen kanssa; se on kuvauksessa ja H1:n alla.
   title: fitTitle([
+    `Tiilikaton pinnoitus ${city.name} – hinta ja 5 v takuu`,
+    `Tiilikaton pinnoitus ${city.name} – 5 v takuu`,
     `Tiilikaton pinnoitus ja maalaus ${city.name}`,
-    `Tiilikaton pinnoitus ja maalaus ${city.name} – 5 v takuu`,
-    `Tiilikaton pinnoitus ja maalaus ${city.name} – hinta`,
   ]),
   description: `Tiilikaton pesu ja pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
 });

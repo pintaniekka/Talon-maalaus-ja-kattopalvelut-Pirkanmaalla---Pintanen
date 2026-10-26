@@ -15,7 +15,8 @@ import { getAreaCityContent } from "@/data/areaCityContent";
 import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 import { areaCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
-import { KOTITALOUSVAHENNYS, TAKUU } from "@/data/company";
+import { GOOGLE_PROFILE_URL, KOTITALOUSVAHENNYS, TAKUU } from "@/data/company";
+import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
@@ -93,8 +94,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     "@context": "https://schema.org",
     "@type": "Service",
     name: `Maalausliike ja kattopalvelut ${cityName}`,
-    provider: { "@id": "https://pintanen.fi/#yritys" },
-    areaServed: { "@type": "City", name: cityName },
+    provider: { "@id": "https://pintanen.fi/#yritys", name: "Pintanen Oy", sameAs: [GOOGLE_PROFILE_URL] },
+    areaServed: { "@type": "City", name: cityName, sameAs: getCityWikipediaUrl(cityData) },
     description: seo.description,
   };
 

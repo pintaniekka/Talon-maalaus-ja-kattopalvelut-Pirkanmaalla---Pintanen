@@ -184,11 +184,11 @@ export const staticSeo: Record<string, RouteSeo> = {
  * hinta siirtyi kuvaukseen, jotta title pysyy alle 60 merkin.
  */
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
-  // Vaihe 12 (27.10.2026): hinta ja takuu titleen Eerikin mallin mukaan ("Tiilikaton pinnoitus Tampere – hinta, …
-  // ja 5 v takuu"). Sana "maalaus" ei mahdu 60 merkkiin lukujen kanssa; se on kuvauksessa ja H1:n alla.
+  // Vaihe 12 (27.10.2026) ja Eerik 26.10.2026: sana "maalaus" pysyy titlessä hakujen "katon maalaus <kunta>"
+  // takia, ja "hinta" jätetään pois, koska se ei mahdu 60 merkkiin. Takuu lisätään, jos se mahtuu.
   title: fitTitle([
-    `Tiilikaton pinnoitus ${city.name} – hinta ja 5 v takuu`,
-    `Tiilikaton pinnoitus ${city.name} – 5 v takuu`,
+    `Tiilikaton pinnoitus ja maalaus ${city.name} – 5 v takuu`,
+    `Tiilikaton pinnoitus ja maalaus ${city.name} – takuu`,
     `Tiilikaton pinnoitus ja maalaus ${city.name}`,
   ]),
   description: `Tiilikaton pesu ja pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Avainhuomio, KeyPoints, Note, Sources } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, KeyPoints, Note, Sources, Table } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -15,6 +15,11 @@ const faq = [
   {
     question: "Saako kotitalousvähennyksen kesämökillä tehdystä työstä?",
     answer: "Kyllä saa. Kesämökillä on samat säännöt kuin kotona.",
+  },
+  {
+    question: "Näkyykö työn osuus laskussa?",
+    answer:
+      "Kyllä. Kirjoitamme laskuun työn ja materiaalit erikseen. Tarvitset vain sen luvun, kun ilmoitat vähennyksen OmaVerossa.",
   },
   {
     question: "Minä vuonna vähennys lasketaan, jos työ tehdään vuodenvaihteessa?",
@@ -45,6 +50,16 @@ const Body = () => (
       Saat vähentää <strong>40 % työn osuudesta</strong>. Työn osuuteen lasketaan mukaan arvonlisävero. Vähennystä
       saa enintään <strong>2 100 euroa vuodessa</strong> yhdeltä ihmiseltä. Omavastuu on 150 euroa vuodessa.
     </p>
+    <Table
+      head={["", "2026 ja 2027"]}
+      rows={[
+        ["Vähennys työn osuudesta", "40 %"],
+        ["Enimmäismäärä henkilöltä", "2 100 € vuodessa"],
+        ["Omavastuu", "150 € vuodessa"],
+        ["Pariskunta yhteensä", "4 200 € vuodessa"],
+      ]}
+      caption="Kotitalousvähennys yritykseltä ostetusta työstä. Lähde: Verohallinto."
+    />
     <p>Vuonna 2025 vähennys oli 35 % ja enintään 1 600 euroa. Nyt saat siis selvästi enemmän takaisin.</p>
     <Note title="Korotus on voimassa vuosina 2026 ja 2027">
       <p>
@@ -86,6 +101,16 @@ const Body = () => (
     </p>
 
     <Avainhuomio>Katon pinnoitus ja talon ulkomaalaus ovat kodin kunnossapitoa, josta vähennyksen saa. Omavastuu on 150 € vuodessa.</Avainhuomio>
+    <h2>Mitä laskustamme pitää katsoa?</h2>
+    <p>
+      Kirjoitamme laskuun työn ja materiaalit erikseen. Vähennys lasketaan työn osuudesta, ja arvonlisävero on
+      siinä mukana. Tarvitset ilmoitukseen kolme asiaa: yrityksen nimen, Y-tunnuksen ja maksamasi työn osuuden.
+    </p>
+    <p>
+      Pinnoituksessa työn osuus on iso osa hinnasta, koska pesu, tiilien vaihto ja kaksi maalikerrosta ovat
+      käsityötä. Maalauksessa samoin: homepesu, kaavinta ja pensselillä maalaus ovat työtä, maali on tarvike.
+    </p>
+
     <h2>Maksupäivä ratkaisee vuoden</h2>
     <p>
       Vähennys kuuluu sille vuodelle, jona maksat laskun. Jos olet jo käyttänyt tämän vuoden vähennyksen,

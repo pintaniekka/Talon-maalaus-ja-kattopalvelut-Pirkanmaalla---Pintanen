@@ -5,7 +5,7 @@ const faq = [
   {
     question: "Kuinka kauan tiilikaton pinnoitus kestää?",
     answer:
-      "Tavallisen omakotitalon tiilikaton pesu ja pinnoitus kestää 2–4 työpäivää. Sää vaikuttaa aikatauluun, koska sateella emme maalaa.",
+      "Peruskohteen tiilikaton pesu ja pinnoitus kestää 2–3 työpäivää, suuri tai jyrkkä katto 2–4. Sää vaikuttaa aikatauluun, koska katon pitää olla kuiva.",
   },
   {
     question: "Pitääkö työn aikana olla kotona?",
@@ -27,7 +27,7 @@ const Body = () => (
     <KeyPoints>
       <ul>
         <li>Tiilikaton pinnoituksessa on kuusi työvaihetta.</li>
-        <li>Omakotitalon katto valmistuu 2–4 työpäivässä.</li>
+        <li>Peruskohteen katto valmistuu 2–3 työpäivässä.</li>
         <li>Katto maalataan ruiskulla kahteen kertaan: ensin pohjamaali, sitten pintamaali.</li>
         <li>Saat työlle 5 vuoden kirjallisen takuun.</li>
       </ul>
@@ -88,8 +88,8 @@ const Body = () => (
 
     <h2>Kuinka kauan tiilikaton pinnoitus kestää?</h2>
     <p>
-      Tavallisen omakotitalon katto valmistuu 2–4 työpäivässä. Sää vaikuttaa aikatauluun, koska sateella emme
-      maalaa. Jos sää yllättää, sovimme uuden päivän. Siitä ei tule lisäkuluja.
+      Peruskohteen katto valmistuu 2–3 työpäivässä, suuri tai jyrkkä katto 2–4. Sää vaikuttaa aikatauluun, koska
+      katon pitää olla kuiva. Jos sää yllättää, sovimme uuden päivän. Siitä ei tule lisäkuluja.
     </p>
 
     <h2>Mitä sinun pitää tehdä ennen työtä?</h2>

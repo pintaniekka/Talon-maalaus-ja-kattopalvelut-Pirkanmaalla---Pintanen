@@ -76,7 +76,7 @@ const Body = () => (
     <h2>Paljonko huoltomaalaus maksaa?</h2>
     <p>
       Huoltomaalaus maksaa vain murto-osan uuden laudoituksen hinnasta. Samalla vältät ison rakennusprojektin.
-      Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–6 000 euroa ja kaksikerroksisen noin
+      Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–5 000 euroa ja kaksikerroksisen noin
       7 000–11 000 euroa. Työ kestää yleensä 3–7 päivää. Saat maalaukselle 2 vuoden takuun.
     </p>
     <p>

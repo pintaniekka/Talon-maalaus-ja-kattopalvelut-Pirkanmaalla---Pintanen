@@ -63,6 +63,7 @@ const Hero = () => {
               <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest group-hover:underline">
                 Google-arviot
               </span>
+              <span className="sr-only">, lue Pintasen Google-arviot</span>
             </a>
             <div className="flex flex-col">
               <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">{LUVUT.kohteet}</span>

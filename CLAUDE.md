@@ -27,11 +27,14 @@ npm run build:dev     # build in development mode (unminified, for debugging bui
 npm run lint           # eslint .
 npm run test           # vitest run (single run)
 npm run test:watch     # vitest in watch mode
+npm run test:e2e       # Playwright end-to-end tests against dist (run npm run build first)
 ```
 
 To run a single test file: `npx vitest run src/test/example.test.ts` (or any path matching `src/**/*.{test,spec}.{ts,tsx}`). Test environment is jsdom, with `src/test/setup.ts` loaded globally (see `vitest.config.ts`).
 
 `.npmrc` sets `engine-strict=true` and `package.json` requires Node >=18 — use a matching Node version or installs will fail.
+
+**End-to-end tests (`tests/e2e/`, Playwright).** They run against the built site: `npm run build`, then `npm run test:e2e` (the config starts `vite preview` on 127.0.0.1:4173 itself; `--project=puhelin` or `tyopoyta` for one width, `-g "Hintalaskuri"` for one group, `--ui` to watch). Three specs: `toiminnot.spec.ts` (price calculator, quote wizard, page-bottom form, chat bubble, cookie banner, menus, area accordion, before/after slider), `saavutettavuus.spec.ts` (axe on every sitemap page; fails on critical/serious findings not listed in `tests/e2e/axe-sallitut.json`, writes `test-results/axe/`) and `kuvakaappaukset.spec.ts` (full-page screenshot of every sitemap page at 390 and 1280 px against `tests/e2e/vertailukuvat/<project>/`). Every test mocks `/api/contact` through `tests/e2e/fixtures.ts`, so no lead is ever sent; new tests must use the `contact` fixture, never a real request. The chat timers are shortened with `shortenChatTimers`, not `page.clock` (it freezes framer-motion exits). **Screenshot baselines are taken only in CI**, in the `mcr.microsoft.com/playwright:v1.63.0-noble` image, so fonts match: Actions → E2E → Run workflow on `main` with `paivita-vertailukuvat` checked; the run commits the images to a `vertailukuvat/<n>` branch and opens a draft PR to review and merge. Pages without a baseline are skipped, not failed. `.github/workflows/e2e.yml` runs all three specs on every PR, uploads the report and diff images as an artifact, comments the PR with the links, and waits for the Cloudflare preview to run `verify_live.py` + `verify_dist.py` against it. The Playwright version is pinned exactly in `package.json`; when bumping it, change the Docker image tag too and retake the baselines. Locally Playwright needs its browser: `npx playwright install chromium` (in the cloud sandbox it is preinstalled under `/opt/pw-browsers`).
 
 ## Architecture
 

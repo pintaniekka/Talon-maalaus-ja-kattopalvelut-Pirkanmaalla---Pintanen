@@ -273,7 +273,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                 onClick={() => pickService(opt.value)}
                 className="group rounded-2xl overflow-hidden border border-border bg-background text-left transition-all hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <ResponsiveImage baseName={opt.imageBase} alt={opt.label} className="w-full aspect-[4/3] object-cover" sizes="(max-width: 640px) 100vw, 300px" width={800} height={600} />
+                <ResponsiveImage baseName={opt.imageBase} alt="" className="w-full aspect-[4/3] object-cover" sizes="(max-width: 640px) 100vw, 300px" width={800} height={600} />
                 <span className="block px-5 py-4 font-bold text-foreground">{opt.label}</span>
               </button>
             ))}

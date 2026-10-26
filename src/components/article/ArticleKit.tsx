@@ -83,9 +83,13 @@ export const ArticleFaq = ({ items, title = "Usein kysyttyä" }: { items: FaqIte
   );
 };
 
-/** Taulukko hinnoille ja vertailuille. Ensimmäinen sarake on rivin otsikko. */
+/**
+ * Taulukko hinnoille ja vertailuille. Ensimmäinen sarake on rivin otsikko. Kääre vierii
+ * vaakasuunnassa kapealla näytöllä, joten se on näppäimistöllä kohdistettava alue
+ * (axe: scrollable-region-focusable).
+ */
 export const Table = ({ head, rows, caption }: { head: string[]; rows: string[][]; caption?: string }) => (
-  <div className="article-table-wrap">
+  <div className="article-table-wrap" role="region" aria-label={caption ?? "Taulukko"} tabIndex={0}>
     <table>
       {caption && <caption>{caption}</caption>}
       <thead>

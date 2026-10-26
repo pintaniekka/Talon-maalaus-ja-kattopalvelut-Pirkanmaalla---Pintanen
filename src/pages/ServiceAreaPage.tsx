@@ -15,7 +15,8 @@ import { getAreaCityContent } from "@/data/areaCityContent";
 import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 import { areaCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
-import { KOTITALOUSVAHENNYS, TAKUU } from "@/data/company";
+import { GOOGLE_PROFILE_URL, KOTITALOUSVAHENNYS, TAKUU } from "@/data/company";
+import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
@@ -28,7 +29,7 @@ const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) 
   },
   {
     question: `Kuinka kauan työ kestää ${cityIn}?`,
-    answer: "Tiilikaton pinnoitus kestää yleensä 2–4 työpäivää ja talon maalaus 3–7 työpäivää. Aika riippuu kohteen koosta ja pohjatöiden määrästä.",
+    answer: "Tiilikaton pinnoitus kestää yleensä 2–3 työpäivää ja talon maalaus 3–7 työpäivää. Aika riippuu kohteen koosta ja pohjatöiden määrästä.",
   },
   {
     question: `Kuka tekee työn ${cityIn}?`,
@@ -75,7 +76,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       description: "Eerik pesee katon, vaihtaa rikkinäiset tiilet uusiin ja maalaa katon ruiskulla kahteen kertaan.",
       price: PINNOITUS_HINTA,
       warranty: TAKUU.pinnoitus,
-      duration: "2–4 päivää",
+      duration: "2–3 päivää",
       baseName: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
     },
     {
@@ -93,8 +94,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
     "@context": "https://schema.org",
     "@type": "Service",
     name: `Maalausliike ja kattopalvelut ${cityName}`,
-    provider: { "@id": "https://pintanen.fi/#yritys" },
-    areaServed: { "@type": "City", name: cityName },
+    provider: { "@id": "https://pintanen.fi/#yritys", name: "Pintanen Oy", sameAs: [GOOGLE_PROFILE_URL] },
+    areaServed: { "@type": "City", name: cityName, sameAs: getCityWikipediaUrl(cityData) },
     description: seo.description,
   };
 
@@ -116,8 +117,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         }
         lead={
           <>
-            Pinnoitamme tiilikattoja ja maalaamme taloja {cityIn}. <strong className="text-foreground">Teemme työn itse.</strong> Tulemme
-            katsomaan kohteen ilmaiseksi.
+            Pinnoitamme tiilikattoja ja maalaamme taloja {cityIn}. <strong className="text-foreground">Teemme työn itse.</strong> Tiilikaton
+            pinnoitus maksaa yleensä {PINNOITUS_HINTA} ja talon maalaus {MAALAUS_HINTA}. Tulemme katsomaan kohteen ilmaiseksi.
           </>
         }
         primary={{ to: "/hintalaskuri/", label: "Laske hinta" }}

@@ -42,7 +42,7 @@ const VahennysE = () => (
           </p>
           <Link to={VAHENNYS_ARTIKKELI} className={`${VAHENNYS_LINK_ARROW} mt-1`}>
             Lue lisää
-            <span className="sr-only">: kotitalousvähennys katto- ja maalaustöissä</span>
+            <span className="sr-only">: kotitalousvähennys katon pinnoituksesta ja talon maalauksesta</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>

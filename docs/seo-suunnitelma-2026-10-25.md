@@ -178,3 +178,7 @@ Lummeco kertoo nämä. Onko Pintasella samoin? Vain vahvistettu tieto menee sivu
 | 7 | Mittaus: Search Console 3.11. ja 1.12., vertailu lähtötasoon. | – |
 
 Jokainen vaihe päättyy toimintatestiin (laskuri, tarjouspyyntö, liukusäädin) ja `verify_dist.py` + `verify_live.py`.
+
+## 10. Ulkoiset linkit (Eerik 26.10.2026)
+
+Linkkien kohteet tärkeysjärjestyksessä: 1. /tiilikaton-pinnoitus-tampere/, 2. /tiilikaton-pinnoitus-hinta-pirkanmaa/, 3. /talon-maalaus-tampere/, sitten /talon-maalaus-hinta-pirkanmaa/ ja pienten kuntien kaupunkisivut paikallisista lähteistä. Pirkanmaa-sivut ovat syventäviä "lue lisää" -sivuja, joihin kaupunkisivut linkittävät; niihin ei hankita ulkoisia linkkejä. Etusivulle vain hakemistot ja profiilit. Linkin teksti palvelu ja paikka. Tavoite 10–15 oikeaa linkkiä kevääseen 2027. Ehdotukset lähteiksi: Nowocoat, Tikkurila, paikallinen maalikauppa, Suomen Yrittäjät, Luotettava Kumppani, Fonecta, Urakkamaailma, paikallislehdet, seurat ja yhdistykset kohdekunnissa.

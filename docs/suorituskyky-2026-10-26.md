@@ -327,4 +327,13 @@ Eerik vastasi 26.10.2026 illalla luvun 8 kysymyksiin: "kysymykset ok". Tulkinta 
 5. **Pienet jatkokorjaukset:** saa tehdä. Haarat `claude/yo2-perf-kuvien-lataus` (`loading` ennen `src`) ja `claude/yo2-perf-vendor-ui` (paketin jako), kumpikin mitataan.
 6. **Mergejärjestys:** hyväksytty: #132 → #133 → #137 → #138 → #139, jokaisen jälkeen mainin merge seuraavaan haaraan ja esikatselun tarkistus. Merget tekee Eerik itse (sovittu sääntö). Ristiriidat ratkaisen pyynnöstä: kun ensimmäinen on mergetty, sano "ratkaise ristiriidat", niin mergeän mainin jäljellä oleviin haaroihin ja ajan tarkistukset.
 
-PR-numerot täydennetään tähän, kun haarat on avattu.
+Toteutus 26.10.2026 illalla (yksityiskohdat `docs/avoimet-prt-2026-10-26.md`, Tulossa-osio, ja `/mnt/project-files/yoajo/d-jatko-1-tulokset.md` ja `d-jatko-2-tulokset.md`):
+
+1. **Fontit:** ei PR:ää. Mittaus kuudella sivulla: kaksi esilatausta neljän sijaan LCP 3,4 → 3,5 s ja FCP 2,3 → 2,5 s; ilman esilatauksia FCP 2,8–3,1 s ja CLS 0,01–0,035. Esilataamattomat fontit saavat korkean prioriteetin CSS:n jälkeen ja viivästyttävät ensimmäistä piirtoa; LCP:n viive on JavaScript-sidonnainen. Raportin arvio 0,3–0,5 s ei pitänyt. Neljä esilatausta pidetään.
+2. **Kontrasti:** PR #150 (luonnos, ulkoasumuutos). Lighthouse-saavutettavuus 96–97 → 100 kaikilla 14 mitatulla sivulla. Värimuutokset: napit ja siniset merkit #0091eb → #007bc7 (3,4:1 → 4,5:1), sininen teksti vaaleansinisellä #007bc7 → #0074bd, alatunnisteen kuntalinkit ja karttojen lähdemaininta white/50, hero-merkin otsikko white/90, WhatsApp-nappi #5ddb79 → #11853b, "Google-arvostelu" täysi muted-väri. Kuvakaappaukset `/mnt/project-files/yoajo/kontrasti-kuvat/`.
+3. **600 px:n kuvakoko:** PR #148 (luonnos). 66 kuvaa saivat 600-koon (3,7 Mt), 31 eivät (800-tiedosto on jo pienempi; lista `src/data/kuvakoot.ts`). Työpöydällä −13…−34 % kuvatavuja, tarkoilla puhelimilla −9…−11 %, Lighthousen Moto G -profiililla ei muutosta.
+4. **Paikkakuntavalitsin:** PR #149 (luonnos). Lista renderöi ensin 10 riviä ja loput seuraavassa kehyksessä; avaamisen INP 248 → 168 ms (viiden ajon mediaani). Suodatus, valinta ja näppäimistö todettu samoiksi kuin mainissa.
+5. **Pienet jatkokorjaukset:** PR #151 (`loading` ennen `src`): etusivu puhelimella 16 kuvaa / 1 955 kt → 6 / 270 kt heti ladattuna, Tampere 580 → 100 kt, Lempäälä 397 → 116 kt; 404-sivu ja jonossa oleva artikkeli ennallaan. PR #152 (`vendor-ui`): 219 → 161 kt (gzip 71 → 51), `TooltipProvider` pois `App.tsx`:stä; siirretty JavaScript −20 kt 88 sivulla.
+6. **Mergejärjestys:** Eki pyysi 26.10.2026 klo 21.26 tekemään yhdistämisen itse. #132, #133, #138, #137 ja #139 on yhdistetty mainiin (ks. `docs/yhdistaminen-2026-10-26.md`); App.tsx-ristiriidat ratkaistiin pitämällä mainin rakenne.
+
+Ehdotus erilliseksi PR:ksi: hintalaskurin kahden palvelukuvan `priority`-attribuutti (Lighthouse merkitsee LCP-kuvan laiskasti ladatuksi; LCP-aika ei muuttunut).

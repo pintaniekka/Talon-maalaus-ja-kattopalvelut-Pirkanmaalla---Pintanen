@@ -27,17 +27,13 @@ export default defineConfig(() => ({
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
           // framer-motion ei ole omassa paketissaan: sen animaatio-ominaisuudet ladataan laiskasti
           // (src/lib/motionFeatures.ts), ja oma paketti pakottaisi ne samaan tiedostoon ytimen kanssa.
-          'vendor-ui': [
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-navigation-menu',
-            '@radix-ui/react-popover',
-            '@radix-ui/react-select',
-            '@radix-ui/react-tabs',
-            '@radix-ui/react-toast',
-            '@radix-ui/react-tooltip',
-          ],
+          // Vain se Radix-paketti, jota sovelluksen runko tarvitsee jokaisella sivulla (Toaster
+          // App.tsx:ssä). Muut Radix-paketit (popover, dialog) latautuvat vain sivuilla, jotka niitä
+          // käyttävät, ja käyttämättömät karsiutuvat kokonaan. Aiemmin listassa oli yhdeksän pakettia,
+          // jolloin myös käyttämättömät (accordion, dropdown-menu, navigation-menu, select, tabs,
+          // tooltip) päätyivät jokaisen sivun lataukseen: vendor-ui oli 225 kt, josta Lighthouse laski
+          // 47 % käyttämättömäksi (26.10.2026). Älä lisää tähän pakettia, jota App.tsx ei tarvitse.
+          'vendor-ui': ['@radix-ui/react-toast'],
           // recharts, cmdk, vaul ja embla eivät ole vendor-ui-paketissa (vaihe 5, 12.10.2026): käyttämättöminä
           // ne karsiutuvat kokonaan, käytettyinä ne latautuvat vain sivulla, joka niitä tarvitsee.
         },

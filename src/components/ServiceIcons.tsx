@@ -10,15 +10,15 @@ const paintBrushUrl = getStorageUrl("Icons/Maalauspensseli icon.svg");
 
 /** Tiilikatto / roof tile icon */
 export const RoofTileIcon = ({ className = "w-6 h-6" }: IconProps) => (
-  <img src={roofTileUrl} alt="" className={className} loading="lazy" decoding="async" width={24} height={24} />
+  <img loading="lazy" decoding="async" src={roofTileUrl} alt="" className={className} width={24} height={24} />
 );
 
 /** Katon puhdistus / roof cleaning icon */
 export const RoofCleanIcon = ({ className = "w-6 h-6" }: IconProps) => (
-  <img src={roofCleanUrl} alt="" className={className} loading="lazy" decoding="async" width={24} height={24} />
+  <img loading="lazy" decoding="async" src={roofCleanUrl} alt="" className={className} width={24} height={24} />
 );
 
 /** Maalauspensseli / paint brush icon */
 export const PaintBrushIcon = ({ className = "w-6 h-6" }: IconProps) => (
-  <img src={paintBrushUrl} alt="" className={className} loading="lazy" decoding="async" width={24} height={24} />
+  <img loading="lazy" decoding="async" src={paintBrushUrl} alt="" className={className} width={24} height={24} />
 );

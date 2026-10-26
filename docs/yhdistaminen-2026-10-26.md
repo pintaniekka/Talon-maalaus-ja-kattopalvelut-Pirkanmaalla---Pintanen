@@ -76,8 +76,9 @@ Yhdelläkään sivulla ei ollut �-merkkejä tai rikkinäistä tekstiä.
 2. E2E-työnkulun verify_live-työ odottaa esikatselusta vain sitemapin 200-vastausta, joten se voi testata edellisen pushin buildia. Varmempi ehto: odota, että esikatselun `index.html` sisältää pushatun commitin tunnisteen, tai lue Cloudflaren kommentista tarkan deployn osoite.
 3. `llms.txt` ei linkitä `llms-full.txt`-tiedostoon. Yksi rivi riittää.
 4. `talon-maalaus-hinta-pirkanmaa`-sivulla teksti "Yleisin talon koko" esiintyy kahdesti (hintakortin merkki ja toinen maininta). Pieni asia, mutta kannattaa katsoa.
+5. `CLAUDE.md` mainitsi `vendor-motion`-chunkin, jota ei #139:n jälkeen enää ole (framer-motionin ominaisuudet latautuvat laiskasti `motionFeatures`-chunkissa). Korjattu tässä PR:ssä.
 
 ## 6. Jäljellä
 
-- Luonnos-PR:t #144–#152 (A-briefit ja D-jatko): main mergettiin jokaiseen yhdistämisen jälkeen, jotta esikatselut vastaavat tuotantoa. Ne odottavat Eerikin katselmusta; #150 (kontrasti) on ulkoasumuutos ja julkaistaan vain Eerikin ok:lla. Avoimet kysymykset ovat kunkin PR:n kuvauksessa ja tiivistettynä `docs/avoimet-prt-2026-10-26.md`-tiedoston Tulossa-osiossa.
+- Luonnos-PR:t #144–#152 (A-briefit ja D-jatko): main mergettiin jokaiseen yhdistämisen jälkeen (klo 22.30–22.45), jotta esikatselut vastaavat tuotantoa; jokaisessa tsc, lint, testit, build, `verify_dist.py` ja `verify_redirects.py` menivät läpi. Kolme mergeä vaati valinnan, jotka on kirjattu Tulossa-osioon: #144:n kaksi "10–15 vuodessa" -ilmausta muutettiin "noin 15 vuodessa" (`seo.test.ts`), #145:n hintakysymyksen poisto aluesivuilta jäi tekemättä (mainin teksti pidettiin, Eerik päättää) ja #147:n päällekkäinen maksukysymys jätettiin pois. Ne odottavat Eerikin katselmusta; #150 (kontrasti) on ulkoasumuutos ja julkaistaan vain Eerikin ok:lla. Avoimet kysymykset ovat kunkin PR:n kuvauksessa ja tiivistettynä `docs/avoimet-prt-2026-10-26.md`-tiedoston Tulossa-osiossa.
 - Tämä raportti ja dokumenttipäivitykset ovat omassa docs-PR:ssä.

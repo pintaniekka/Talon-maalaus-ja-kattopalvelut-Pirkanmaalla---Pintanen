@@ -19,7 +19,7 @@ const faq = [
   },
   {
     question: "Kuinka monta vuotta pinnoitus antaa katolle lisää?",
-    answer: "Pinnoitus pidentää katon käyttöikää jopa 15–20 vuotta. Kesto riippuu säästä ja katon kunnosta.",
+    answer: "Pinnoitus pidentää katon käyttöikää jopa 15 vuotta. Kesto riippuu säästä ja katon kunnosta.",
   },
 ];
 
@@ -29,7 +29,7 @@ const Body = () => (
       <ul>
         <li>Jos aluskate ja puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia.</li>
         <li>Pinnoitus maksaa yleensä 2 850–7 000 euroa, kattoremontti yleensä 15 000–30 000 euroa.</li>
-        <li>Pinnoitus pidentää katon käyttöikää jopa 15–20 vuotta.</li>
+        <li>Pinnoitus pidentää katon käyttöikää jopa 15 vuotta.</li>
         <li>Rakenteiden vaurioita pinnoitus ei korjaa.</li>
       </ul>
     </KeyPoints>

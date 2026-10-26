@@ -20,7 +20,7 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
       href: `/tiilikaton-pinnoitus-${citySlug}/`,
       beforeBase: "tiilikaton-pinnoitus-haalistunut-punainen-tiilikatto-ennen",
       afterBase: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
-      description: "Pesemme katon, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään.",
+      description: "Pesemme katon, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15 vuotta pidempään.",
       features: ["Pesu painepesulla", "Rikkinäiset tiilet uusiin", "Pohjamaali ja pintamaali ruiskulla"],
       warranty: "5 v takuu",
     },

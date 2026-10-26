@@ -92,7 +92,7 @@ export const articles: ArticleMeta[] = [
     title: "Tiilikattoremontti vai pinnoitus: kumpi kannattaa?",
     description:
       "Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää. Kattoremontti maksaa yleensä 15 000–30 000 €, pinnoitus 2 850–7 000 €. Lue, milloin katto pitää uusia.",
-    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa yleensä 2 850–7 000 euroa ja kattoremontti yleensä 15 000–30 000 euroa. Pinnoitus pidentää katon käyttöikää jopa 15–20 vuotta.",
+    lead: "Jos aluskate ja katon puurakenteet ovat kunnossa, kattoa ei yleensä tarvitse uusia. Pinnoitus maksaa yleensä 2 850–7 000 euroa ja kattoremontti yleensä 15 000–30 000 euroa. Pinnoitus pidentää katon käyttöikää jopa 15 vuotta.",
     category: "katto",
     author: "eerik",
     publishedAt: "2026-10-13",

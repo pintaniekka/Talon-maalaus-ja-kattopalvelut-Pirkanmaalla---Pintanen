@@ -61,7 +61,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         }
         lead={
           <>
-            Pinnoitamme tiilikattoja {cityData.cityIn}. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Hinta on yleensä{" "}
+            Pinnoitamme tiilikattoja {cityData.cityIn}. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Hinta on yleensä{" "}
             <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja takuu on 5 vuotta. Kuntotarkastus on ilmainen.
           </>
         }

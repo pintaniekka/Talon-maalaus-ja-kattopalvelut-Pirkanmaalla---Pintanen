@@ -25,7 +25,7 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
                 Tiilikattoremontti vai pinnoitus{cityIn ? ` ${cityIn}` : ''}?
               </h2>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-                <p>Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään.</p>
+                <p>Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Pinnoitettu katto kestää jopa 15 vuotta pidempään.</p>
                 <p>
                   Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Pinnoitus maksaa yleensä {PINNOITUS_HINTA}.
                   Uusi katto maksaa yleensä 15 000–30 000 €.

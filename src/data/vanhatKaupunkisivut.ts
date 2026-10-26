@@ -81,6 +81,6 @@ export const vanhatKaupunkisivut: Record<string, Partial<CityData>> = {
   pirkkala: {
     maalausLocalHookTitle: "Talon maalaus Pirkkalassa, 10 kilometriä Tampereelta",
     maalausLocalHookText:
-      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja Tampereelle on matkaa 10 kilometriä. Eemil maalaa taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa.",
+      "Pirkkala on Pyhäjärven rannalla, ja keskustaan on matkaa 10 kilometriä. Eemil maalaa taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa.",
   },
 };

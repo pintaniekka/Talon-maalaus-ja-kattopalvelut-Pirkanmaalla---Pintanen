@@ -21,6 +21,7 @@ import ReviewsTeaser from "@/components/ReviewsTeaser";
 import ServiceSchema from "@/components/ServiceSchema";
 import { getPinnoitusCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
+import { vainPaikkakunta } from "@/data/kannibalisointi";
 import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
 import { getCityWikipediaUrl } from "@/data/cityWikipedia";
@@ -110,7 +111,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <MiksiValitaPintanen service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" hideMap={kartta} />
       <CityLocalRules citySlug={cityData.slug} cityIn={cityData.cityIn} />
-      <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
+      <PinnoitusEntrepreneur cityIn={cityData.cityIn} vainPaikkakunta={vainPaikkakunta(cityData.slug)} />
 
       <FAQSection
         items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name, cityData.cityIn)]}

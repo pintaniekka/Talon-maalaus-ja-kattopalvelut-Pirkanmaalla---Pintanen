@@ -9,7 +9,8 @@
  *  3. Poistaa alasivujen kopioista etusivun hero-kuvan preloadin (data-home-only).
  *  4. Kirjoittaa dist/404.html:n (noindex), jotta tuntemattomat polut renderöivät
  *     SPA:n oman 404-sivun oikealla 404-statuksella.
- *  5. Generoi dist/sitemap.xml:n, dist/image-sitemap.xml:n ja dist/llms.txt:n samasta reittilistasta.
+ *  5. Generoi dist/sitemap.xml:n, dist/image-sitemap.xml:n, dist/llms.txt:n ja dist/llms-full.txt:n
+ *     (jokaisen esirenderöidyn sivun näkyvä teksti) samasta reittilistasta.
  *  6. Kirjoittaa dist/_redirects-tiedoston: vanhat osoitteet 301:llä suoraan kanoniseen
  *     sivuun molemmissa muodoissa (ilman ja kauttaviivalla), public/_redirects loppuun.
  *  7. Merkitsee jonossa olevat (vielä julkaisemattomat) artikkelit noindexiksi.
@@ -21,7 +22,7 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 import type { ViteDevServer } from "vite";
-import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt, buildRedirectsFile } from "./src/data/routes";
+import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt, buildLlmsFullTxt, buildRedirectsFile } from "./src/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
 import { allCities } from "./src/data/cityData";
 
@@ -218,12 +219,14 @@ export default function spaRoutes() {
       // Etusivu: canonical ja og:url mukaan staattiseen HTML:ään.
       const manifest = readLastmod();
       const lastmods: Record<string, string> = {};
+      const fullTextPages: { route: string; body: string }[] = [];
       const homeSeo = getRouteSeo("/");
       if (homeSeo) {
         const home = await injectPrerender(applySeo(baseHtml, "/", homeSeo), "/", prerender, failed);
         if (home.body) {
           prerendered++;
           lastmods["/"] = trackLastmod(manifest, "/", home.body);
+          fullTextPages.push({ route: "/", body: home.body });
         }
         fs.writeFileSync(indexPath, home.html, "utf-8");
       }
@@ -241,6 +244,7 @@ export default function spaRoutes() {
             if (page.body) {
               prerendered++;
               lastmods[route] = trackLastmod(manifest, route, page.body);
+              fullTextPages.push({ route, body: page.body });
             }
           } else html = applyNoindex(html);
           withSeo++;
@@ -268,13 +272,14 @@ export default function spaRoutes() {
       fs.writeFileSync(path.join(distDir, "sitemap.xml"), buildSitemapXml(new Date(), lastmods), "utf-8");
       fs.writeFileSync(path.join(distDir, "image-sitemap.xml"), buildImageSitemapXml(), "utf-8");
       fs.writeFileSync(path.join(distDir, "llms.txt"), buildLlmsTxt(), "utf-8");
+      if (fullTextPages.length) fs.writeFileSync(path.join(distDir, "llms-full.txt"), buildLlmsFullTxt(fullTextPages), "utf-8");
 
       await ssrServer?.close();
       if (previousNodeEnv === undefined) delete process.env.NODE_ENV;
       else process.env.NODE_ENV = previousNodeEnv;
 
       console.log(
-        `[spa-routes] Generated ${routes.length} route files (${withSeo} with page-specific head, ${prerendered} prerendered), 404.html, sitemaps, llms.txt and _redirects.`,
+        `[spa-routes] Generated ${routes.length} route files (${withSeo} with page-specific head, ${prerendered} prerendered), 404.html, sitemaps, llms.txt, llms-full.txt and _redirects.`,
       );
       if (failed.length) console.warn(`[spa-routes] Esirenderöinti epäonnistui ${failed.length} reitillä:\n  ${failed.join("\n  ")}`);
     },

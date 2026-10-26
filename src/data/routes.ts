@@ -254,6 +254,74 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
   ].join("\n");
 };
 
+/** Purkaa HTML-entiteetit (&amp;, &nbsp;, &#39;, &#xA0; …) tavallisiksi merkeiksi. */
+const decodeEntities = (text: string): string =>
+  text
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, dec) => String.fromCodePoint(Number(dec)))
+    .replace(/&nbsp;/g, " ")
+    .replace(/&shy;/g, "")
+    .replace(/&euro;/g, "€")
+    .replace(/&ndash;/g, "–")
+    .replace(/&mdash;/g, "—")
+    .replace(/&hellip;/g, "…")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+
+/**
+ * Esirenderöidyn sivun <main>-sisältö pelkkänä tekstinä llms-full.txt:tä varten.
+ * Otsikot merkitään markdown-tasoilla, listakohdat viivalla; skriptit, svg:t ja
+ * ruudunlukijalle tarkoitetut sr-only-tekstit jätetään pois.
+ */
+export const htmlToPlainText = (html: string): string => {
+  const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? html;
+  const text = main
+    .replace(/<(script|style|noscript|svg|template)\b[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+class="[^"]*\bsr-only\b[^"]*"[^>]*>[\s\S]*?<\/(?:span|p|div)>/gi, " ")
+    .replace(/<h1\b[^>]*>/gi, "\n\n# ")
+    .replace(/<h2\b[^>]*>/gi, "\n\n## ")
+    .replace(/<h3\b[^>]*>/gi, "\n\n### ")
+    .replace(/<h[4-6]\b[^>]*>/gi, "\n\n#### ")
+    .replace(/<li\b[^>]*>/gi, "\n- ")
+    .replace(/<(?:p|div|section|article|header|footer|nav|aside|blockquote|figure|figcaption|table|tr|ul|ol|dl|dt|dd|br|hr)\b[^>]*>/gi, "\n")
+    .replace(/<\/(?:h[1-6]|p|li|tr|blockquote|figcaption|dd)>/gi, "\n")
+    .replace(/<\/(?:td|th)>/gi, " | ")
+    .replace(/<[^>]+>/g, "");
+  return decodeEntities(text)
+    .split("\n")
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+};
+
+/**
+ * llms-full.txt: jokaisen julkisen sivun koko näkyvä teksti yhdessä tiedostossa
+ * (https://llmstxt.org). Sivut tulevat samasta reittilistasta kuin llms.txt ja sitemap;
+ * teksti on buildin esirenderöimä <main>-sisältö, joten se vastaa sivun oikeaa sisältöä.
+ */
+export const buildLlmsFullTxt = (pages: { route: string; body: string }[], now: Date = new Date()): string => {
+  const order = new Map(getCanonicalRoutes(now).map((r, i) => [r.path, i]));
+  const sorted = [...pages].filter((p) => order.has(p.route)).sort((a, b) => (order.get(a.route) ?? 0) - (order.get(b.route) ?? 0));
+  const url = (p: string) => (p === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${p}/`);
+  const sections = sorted.map((p) => {
+    const seo = getRouteSeo(p.route);
+    const head = [`<!-- ${url(p.route)} -->`, `URL: ${url(p.route)}`];
+    if (seo) head.push(`Otsikko: ${seo.title}`, `Kuvaus: ${seo.description}`);
+    return `${head.join("\n")}\n\n${htmlToPlainText(p.body)}`;
+  });
+  return [
+    "# Pintanen Oy: kaikkien sivujen teksti",
+    "",
+    `> Tiivis kuvaus sivustosta on osoitteessa ${SITE_ORIGIN}/llms.txt. Tämä tiedosto sisältää jokaisen julkisen sivun näkyvän tekstin sellaisena kuin sivu näytetään. Sivuja: ${sorted.length}. Sisältö tarkistettu ${SITE_UPDATED}.`,
+    "",
+    ...sections.flatMap((s) => [s, "", "---", ""]),
+  ].join("\n");
+};
+
 /** Etusivun hero-kuva (sama kuin src/components/Hero.tsx). */
 const HOME_HERO_IMAGE = `${SITE_ORIGIN}/images/Eerik-maalaa/Eerik-maalaa-kattoa-1200.avif`;
 

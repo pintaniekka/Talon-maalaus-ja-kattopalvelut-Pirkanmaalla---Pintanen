@@ -3,14 +3,16 @@
  *
  * Kuvat ovat sivuston omia tiedostoja kansiossa `public/images/` ja ne julkaistaan
  * sivuston mukana osoitteessa `/images/…` (Cloudflare Pages). Kansiorakenne:
- * `Pictures-400|800|1200|1500/` (responsiiviset WebP-kuvat), `Pictures-200/` (henkilökuvat),
+ * `Pictures-400|600|800|1200|1500/` (responsiiviset WebP-kuvat), `Pictures-200/` (henkilökuvat),
  * `Eerik-maalaa/` (etusivun hero, AVIF), `Icons/` ja juuressa logo, favicon ja kartta.
  *
- * Uusi kuva: lisää tiedostot kansioihin Pictures-400, -800 ja -1200 nimellä
+ * Uusi kuva: lisää tiedostot kansioihin Pictures-400, -600, -800 ja -1200 nimellä
  * `<perusnimi>-<leveys>.webp` ja viittaa siihen perusnimellä.
  *
  * @module storage
  */
+
+import { puuttuvatKuvakoot } from "../data/kuvakoot";
 
 /** Sivuston osoite absoluuttisia kuvaosoitteita varten (og:image, JSON-LD, kuvasitemap). */
 export const SITE_ORIGIN = "https://pintanen.fi";
@@ -29,37 +31,44 @@ export function toAbsoluteUrl(url: string): string {
 }
 
 /* ═══════════════════════════════════════════════════════
- *  UUSI NELIPORTAINEN RESPONSIIVINEN KUVARAKENNE
- *  Koot: 400w, 800w, 1200w, 1500w (kaikki WebP)
- *  Kansiot: Pictures-400/, Pictures-800/, Pictures-1200/, Pictures-1500/
- *  Tiedostonimet: [perusnimi]-[leveys]w.webp
+ *  RESPONSIIVINEN KUVARAKENNE
+ *  Koot: 400w, 600w, 800w, 1200w, 1500w (kaikki WebP)
+ *  Kansiot: Pictures-400/, Pictures-600/, Pictures-800/, Pictures-1200/, Pictures-1500/
+ *  Tiedostonimet: [perusnimi]-[leveys].webp
  * ═══════════════════════════════════════════════════════ */
 
-export type ResponsiveWidth = 400 | 800 | 1200 | 1500;
+export type ResponsiveWidth = 400 | 600 | 800 | 1200 | 1500;
 
-// Vain 400/800/1200 ovat aina saatavilla; 1500 puuttuu osasta
+// Vain 400/600/800/1200 ovat aina saatavilla; 1500 puuttuu osasta
 // kuvia, joten oletus-srcSet ei käytä sitä. Tämä estää tilanteen, jossa
 // selain valitsee 1500w-version, saa 400-virheen eikä näytä kuvaa lainkaan.
-const RESPONSIVE_WIDTHS: ResponsiveWidth[] = [400, 800, 1200];
+// 600 px lisättiin 26.10.2026: puhelimen puolen leveyden kuvat (DPR 2,75–3) ja
+// työpöydän 460–600 px:n kuvat saavat sen 800 px:n sijaan.
+const RESPONSIVE_WIDTHS: ResponsiveWidth[] = [400, 600, 800, 1200];
 
 /**
  * Kuvaversiot, joita ei ole kansiossa public/images. Ne jätetään pois srcsetistä, koska
- * selain ei yritä toista kokoa, jos valittu puuttuu. Tällä hetkellä kaikki koot ovat olemassa.
+ * selain ei yritä toista kokoa, jos valittu puuttuu. Lista tulee generoidusta tiedostosta
+ * src/data/kuvakoot.ts (scripts/taydenna_kuvakoot.py): 600 px puuttuu kuvilta, joiden
+ * 800 px:n tiedosto on jo niin pieni, ettei 600 px:n versio olisi sitä pienempi.
  */
 const MISSING_VARIANTS: Record<string, ResponsiveWidth[]> = {};
+for (const [width, bases] of Object.entries(puuttuvatKuvakoot)) {
+  for (const base of bases) (MISSING_VARIANTS[base] ??= []).push(Number(width) as ResponsiveWidth);
+}
 
 /**
  * Palauttaa URL:n yksittäiselle responsiiviselle kuvaversiolle.
  * @param baseName - Kuvan perusnimi ilman leveyssuffiksia tai tiedostopäätettä, esim. "talon-maalaus-vihrea-puutalo-ulkomaalaus-jalkeen"
- * @param width - Haluttu leveys (400, 800, 1200 tai 1500)
+ * @param width - Haluttu leveys (400, 600, 800, 1200 tai 1500)
  */
 export function getResponsiveUrl(baseName: string, width: ResponsiveWidth): string {
   return getStorageUrl(`Pictures-${width}/${baseName}-${width}.webp`);
 }
 
 /**
- * Palauttaa täydellisen neliportaisen srcSet-merkkijonon.
- * Esim: ".../Pictures-400/nimi-400w.webp 400w, .../Pictures-800/nimi-800w.webp 800w, ..."
+ * Palauttaa srcSet-merkkijonon (400, 600, 800 ja 1200 px).
+ * Esim: "/images/Pictures-400/nimi-400.webp 400w, /images/Pictures-600/nimi-600.webp 600w, ..."
  */
 export function getResponsiveSrcSet(
   baseName: string,

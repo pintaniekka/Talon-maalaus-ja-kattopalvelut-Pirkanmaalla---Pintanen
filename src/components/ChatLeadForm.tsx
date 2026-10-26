@@ -332,7 +332,7 @@ const ChatLeadForm = () => {
         {!open && (
           <button
             onClick={handleOpen}
-            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-accent-strong border border-white/60 hover:scale-105 transition-transform"
+            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-white border-2 border-white hover:scale-105 transition-transform"
             aria-label="Avaa chat"
           >
             <img src={eerikImage} alt="Eerik – Pintanen" className="w-full h-full rounded-full object-cover" />

@@ -113,7 +113,7 @@ const Hero = () => {
                 <PintanenMark className="w-6 h-6 lg:w-7 lg:h-7" />
               </div>
               <div>
-                <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">
+                <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/90 mb-1">
                   Yrittäjät itse paikalla
                 </p>
                 <p className="text-sm lg:text-base font-heading font-extrabold leading-tight">

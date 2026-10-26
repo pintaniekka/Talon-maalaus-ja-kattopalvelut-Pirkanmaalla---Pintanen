@@ -61,7 +61,7 @@ export const TestimonialCard = ({ name, stars, text }: { name: string; stars: nu
           {expanded ? "Näytä vähemmän" : "Lue lisää"}
         </button>
       )}
-      <div className="flex items-center gap-1.5 text-xs text-muted-foreground/70">
+      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
         <GoogleIcon />
         <span>Google-arvostelu</span>
       </div>

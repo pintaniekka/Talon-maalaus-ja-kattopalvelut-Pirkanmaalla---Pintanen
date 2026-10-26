@@ -18,6 +18,7 @@ import { PriceExamplesSection } from "@/components/hinnat/PriceExamples";
 import { pinnoitusPrices, fmtRange } from "@/data/prices";
 import { HERO_BASE } from "@/data/seo";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
+import { PESU_VAI_PINNOITUS_FAQ, PINNOITUS_MAALI_FAQ } from "@/data/faqData";
 
 const general = fmtRange(pinnoitusPrices.general.min, pinnoitusPrices.general.max);
 
@@ -77,6 +78,9 @@ const faqItems = [
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`,
   },
   { question: "Kuinka pitkä takuu pinnoituksella on?", answer: "Saat tiilikaton pinnoitukselle meiltä 5 vuoden kirjallisen takuun." },
+  // Brief 10 (26.10.2026): samat kysymykset kuin palvelusivulla (faqData.ts).
+  PESU_VAI_PINNOITUS_FAQ,
+  PINNOITUS_MAALI_FAQ,
   { question: "Miten maksu tapahtuu?", answer: "Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi." },
 ];
 

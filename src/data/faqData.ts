@@ -16,6 +16,49 @@ interface FAQItem {
 /** Kotitalousvähennyksen vastaus samassa muodossa joka sarjassa. */
 const KOTITALOUSVAHENNYS_VASTAUS = `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Työn osuus on laskussa eriteltynä.`;
 
+/**
+ * UKK-täydennykset palvelu- ja hintasivuille (hakutulosanalyysi 26.10.2026, brief 10). Vastaukset ovat Eerikin jo
+ * antamia faktoja (CLAUDE.md, tyovaiheet.ts, kaupunkisivujen UKK); ei uusia väitteitä. Hintasivut tuovat samat
+ * kysymykset omiin listoihinsa, joten teksti on yhdessä paikassa. Kaupunkisivujen sarjoihin ei lisätty
+ * (enintään 10 kysymystä).
+ */
+export const MAKSU_FAQ: FAQItem = {
+  question: 'Miten maksu tapahtuu?',
+  answer:
+    'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
+};
+
+export const PESU_VAI_PINNOITUS_FAQ: FAQItem = {
+  question: 'Riittääkö pelkkä pesu, vai pitääkö katto pinnoittaa?',
+  answer:
+    'Pesu poistaa lian ja sammaleen, mutta kulunut tiili imee vettä pesun jälkeenkin. Teemme pesun aina pinnoituksen yhteydessä. Jos tiilen pinta on haalistunut tai karhea, katto kannattaa pinnoittaa. Katsomme sen ilmaisessa kuntotarkastuksessa.',
+};
+
+export const PINNOITUS_MAALI_FAQ: FAQItem = {
+  question: 'Millä maalilla pinnoitatte tiilikaton?',
+  answer:
+    'Käytämme Nowocoatin kattomaaleja. Maalaamme katon korkeapaineruiskulla aina kahteen kertaan: ensin pohjamaali ja sitten pintamaali. Reunat ja ahtaat paikat maalaamme telalla tai käsin.',
+};
+
+export const PINNOITUS_SADE_FAQ: FAQItem = {
+  question: 'Mitä jos sataa kesken pinnoituksen?',
+  answer:
+    'Sateella ei maalata, koska pinnan pitää olla kuiva. Seuraamme sääennustetta ja siirrämme tarvittaessa päivää, eikä siitä tule lisäkuluja. Jos sade jättää jälkiä tuoreeseen maaliin, korjaamme ne ilman lisähintaa.',
+};
+
+/** Yleisfakta siveltimestä: K-Rauta, Ulkomaalausohje (docs/lahteet-talotyypit-2026-10-26.md). Pintasen työtapa: tyovaiheet.ts. */
+export const MAALAUS_PENSSELI_FAQ: FAQItem = {
+  question: 'Maalaatteko ruiskulla vai pensselillä?',
+  answer:
+    'Maalaamme seinät pensselillä. Ulkomaalausohjeissa puupinnan maali levitetään siveltimellä, ja ruiskutettu pinta viimeistellään siveltimellä. Pohjamaalin laitamme paljaisiin puukohtiin ennen pintamaalia.',
+};
+
+export const MAALAUS_SADE_FAQ: FAQItem = {
+  question: 'Mitä jos sataa kesken maalauksen?',
+  answer:
+    'Sateella ei maalata, koska seinän pitää olla kuiva. Seuraamme sääennustetta ja siirrämme tarvittaessa päivää, eikä siitä tule lisäkuluja. Jos sade jättää jälkiä tuoreeseen maaliin, korjaamme ne ilman lisähintaa.',
+};
+
 export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Mitä tiilikaton pinnoitus maksaa?',
@@ -64,6 +107,11 @@ export const pinnoitusFAQ: FAQItem[] = [
       question: 'Maalaatteko myös peltikattoja?',
       answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
     },
+  // Brief 10 (26.10.2026): pesu vai pinnoitus, maali, sade, maksu.
+  PESU_VAI_PINNOITUS_FAQ,
+  PINNOITUS_MAALI_FAQ,
+  PINNOITUS_SADE_FAQ,
+  MAKSU_FAQ,
 ];
 
 export const puhdistusFAQ: FAQItem[] = [
@@ -114,6 +162,10 @@ export const maalausFAQ: FAQItem[] = [
       question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
       answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
     },
+  // Brief 10 (26.10.2026): pensseli, sade, maksu. "Millä maalilla" on jo yllä ("Mitä maalia käytätte?").
+  MAALAUS_PENSSELI_FAQ,
+  MAALAUS_SADE_FAQ,
+  MAKSU_FAQ,
 ];
 
 export const generalFAQ: FAQItem[] = [

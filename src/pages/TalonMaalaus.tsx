@@ -7,6 +7,7 @@ import MaalausProblemSection from "@/components/maalaus/MaalausProblemSection";
 import MaalausComparison from "@/components/maalaus/MaalausComparison";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausEntrepreneur from "@/components/maalaus/MaalausEntrepreneur";
+import MaalausTalotyypit from "@/components/maalaus/MaalausTalotyypit";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
@@ -83,6 +84,9 @@ const TalonMaalaus = () => {
         steps={maalausTyovaiheet}
         cta={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
       />
+
+      {/* Talotyypit työvaiheiden jälkeen (brief 4, 26.10.2026): rintamamiestalo, hirsitalo, mökki ja piharakennukset. */}
+      <MaalausTalotyypit />
 
       <MaalausComparison />
       <MaalausPricingCards />

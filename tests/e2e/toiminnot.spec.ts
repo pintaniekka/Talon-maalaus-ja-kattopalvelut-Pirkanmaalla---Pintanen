@@ -120,7 +120,8 @@ test.describe("Sivun lopun lomake", () => {
     await open(page, "/tiilikaton-pinnoitus-tampere/");
     const form = page.locator("#yhteystiedot form");
     await form.scrollIntoViewIfNeeded();
-    await expect(form.getByRole("heading", { name: "Pyydä ilmainen arviokäynti" })).toBeVisible();
+    // Pinnoitussivuilla lomakkeen otsikko on "Pyydä ilmainen kuntotarkastus" (ServiceContactSection, Eerik 26.10.2026).
+    await expect(form.getByRole("heading", { name: "Pyydä ilmainen kuntotarkastus" })).toBeVisible();
 
     await form.getByRole("textbox", { name: "Nimi" }).fill("Testi Testaaja");
     await form.getByRole("textbox", { name: "Puhelinnumero" }).fill("040 123 4567");

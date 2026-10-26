@@ -115,7 +115,7 @@ const Footer = () => (
   <footer className="relative bg-navy text-navy-foreground">
     <div className="h-1 w-full bg-gradient-to-r from-paint-yellow via-accent to-accent-strong" aria-hidden="true" />
     <div className="section-container py-12 md:py-14">
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:pr-20">
         <div className="md:col-span-2 lg:col-span-5">
           <OptimizedImage
             src={logoUrl}

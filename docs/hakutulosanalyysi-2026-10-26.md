@@ -430,3 +430,19 @@ Jokaiselle palvelu- ja hintasivulle 2–3 uutta kysymystä `faqData.ts`:ään il
 8. **Työkalukreditit.** OpenRushin kreditit loppuivat yhdeksän haun jälkeen. OpenSEO:sta kului noin 255 krediittiä 500:sta. Jatkossa 60 haun seurantakierros maksaa noin 300 OpenSEO-krediittiä. Tehdäänkö seuranta kuukausittain?
 9. **katonpuhdistus.fi** (13 top-10-osumaa) ei avautunut työkaluille. Katsotko sen itse selaimella, vai jätetäänkö?
 
+
+## 12. Eerikin vastaukset 26.10.2026 ja toteutus
+
+Eerik vastasi 26.10.2026 illalla luvun 11 kysymyksiin: "kysymykset ok". Tulkinta ja toteutus kysymyksittäin:
+
+1. **Sivuroolit (brief 1):** linkitys ensin, ei 301-ohjauksia. Valikon, alatunnisteen ja toiminta-alueiden linkit osoittavat pinnoituksen ja maalauksen kaupunkisivuihin; `maalauspalvelut-<kunta>` pysyy "Maalausliike <kunta>" -sivuna. Haara `claude/yo2-sivuroolit`.
+2. **Toteutuneet kohteet:** kohteita ei annettu. Brief 3 (hintasivujen esimerkkikohteet koon mukaan) tehdään hintalaskurista johdetuilla haarukoilla ilman oikeita kohteita. Brief 9 (kokemuksia-sivun kohdetarinat) jää odottamaan kohteita. Haara `claude/yo2-hintatekstit` (yhdessä briefin 5 kanssa).
+3. **Sammal-artikkeli (brief 2):** saa kirjoittaa pinnoituksen kulmasta. Haara `claude/yo2-artikkeli-sammal`.
+4. **Kestävyys (brief 7):** Nowocoatin teknistä tietoa ei annettu. Erillistä artikkelia ei tehdä, koska paketin B artikkeliohjelma (PR #140) sisältää jo "Kuinka kauan tiilikatto kestää? Tiilen ikä ja pinnan ikä" (25.2.2027) ja "Mikä Nowocoat on ja miksi käytämme sitä" (21.1.2027). Kestoväite pysyy sivuston omana: jopa 15 vuotta lisäikää, 5 vuoden kirjallinen takuu.
+5. **Talotyypit (briefit 4 ja 6):** Eemilin lauseita ei tullut. Talon maalauksen hub-sivun talotyyppiosio (brief 4) tehdään sivuston omilla faktoilla ja web-lähteistä tarkistetuilla yleisillä faktoilla (lähteet `docs/lahteet-talotyypit-2026-10-26.md`). Brief 6 (rintamamiestalon maalaus) ja brief 8 (milloin talon voi maalata) ovat jo paketin B ohjelmassa (28.12.2026 ja 17.12.2026), joten niitä ei tehdä kahdesti. Haara `claude/yo2-maalaus-hub-ukk` (yhdessä briefin 10 kanssa).
+6. **Hintalaskurisivu (brief 5):** saa kirjoittaa esimerkkihaarukat koon mukaan, liidiportti pysyy. Haara `claude/yo2-hintatekstit`.
+7. **Linkit (luku 7):** hakemistot, jäsenyydet ja tiedotteet vaativat yrityksen omat tunnukset ja maksut, joten rekisteröinnit jäävät Eerikille. Ilmaiset profiilit (omaurakka, remppakamu, urakkamaailma, kodinplaza, trustmary, kokemuksia.fi) kannattaa tehdä ensin; maksulliset (pintaurakoitsijat.fi, kauppakamari, Suomalaista palvelua, sttinfo.fi) Eerik päättää erikseen.
+8. **Seuranta kuukausittain:** kyllä. Ajastettu tehtävä luotu 26.10.2026: joka kuukauden 1. päivä aamulla ajetaan sama 60 haun kierros OpenSEO:lla, tulokset kirjoitetaan `docs/hakutulosseuranta-<pvm>.md`-tiedostoon luonnos-PR:nä ja verrataan edelliseen kierrokseen. OpenSEO-krediittejä on noin 245 ja kierros maksaa noin 300, joten ensimmäinen kierros jää vajaaksi, ellei krediittejä lisätä ennen 1.12.2026.
+9. **katonpuhdistus.fi:** sivusto kieltää hakurobotit (robots.txt), joten työkalut eivät avaa sitä. Jätetään; Eerik voi katsoa sen selaimella.
+
+Brief 10 (UKK-täydennykset palvelusivuille) tehdään haarassa `claude/yo2-maalaus-hub-ukk`; päällekkäisyydet PR:ien #131, #135 ja #141 kanssa tarkistetaan ja kerrotaan PR-kuvauksessa. Kaikki haarat tehdään mainista omina luonnos-PR:inä; PR-numerot täydennetään tähän, kun ne on avattu.

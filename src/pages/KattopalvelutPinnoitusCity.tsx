@@ -7,6 +7,7 @@ import CityMap from "@/components/CityMap";
 import { hasKuntakartta } from "@/data/kartat";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
+import CityLocalRules from "@/components/CityLocalRules";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur";
 import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
@@ -108,6 +109,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
       <MiksiValitaPintanen service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" hideMap={kartta} />
+      <CityLocalRules citySlug={cityData.slug} cityIn={cityData.cityIn} />
       <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
 
       <FAQSection

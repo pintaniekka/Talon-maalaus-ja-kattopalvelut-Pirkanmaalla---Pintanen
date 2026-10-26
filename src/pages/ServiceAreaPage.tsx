@@ -13,6 +13,8 @@ import { getStorageUrl } from "@/lib/storage";
 import { getCityBySlug, hasPinnoitusPage, hasMaalausPage } from "@/data/cityData";
 import { getAreaCityContent } from "@/data/areaCityContent";
 import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
+import { getCityLocalFacts } from "@/data/cityLocalFacts";
+import CityLocalRules from "@/components/CityLocalRules";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 import { areaCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { GOOGLE_PROFILE_URL, KOTITALOUSVAHENNYS, TAKUU } from "@/data/company";
@@ -22,7 +24,7 @@ import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
 const eemilImage = getStorageUrl("Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp");
 
-const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) => [
+const getAreaFAQ = (citySlug: string, cityIn: string, pinnoitusHref: string, maalausHref: string) => [
   {
     question: `Paljonko tiilikaton pinnoitus tai talon maalaus maksaa ${cityIn}?`,
     answer: `Tiilikaton pinnoitus maksaa meillä yleensä ${PINNOITUS_HINTA}. Talon ulkomaalaus maksaa yleensä ${MAALAUS_HINTA}. Hinta riippuu kohteen koosta, kunnosta ja pohjatöiden määrästä. Katso tarkemmin: <a href="${pinnoitusHref}/">tiilikaton pinnoitus</a> ja <a href="${maalausHref}/">talon maalaus</a>.`,
@@ -53,6 +55,15 @@ const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) 
     question: "Maalaatteko myös peltikattoja?",
     answer: "Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.",
   },
+  // Paketti C (26.10.2026): kunnan rakennusjärjestyksen sääntö värin vaihdosta, teksti cityLocalFacts.ts:ssä.
+  ...(getCityLocalFacts(citySlug)
+    ? [
+        {
+          question: `Pitääkö katon tai seinän värin vaihdosta ilmoittaa kunnalle ${cityIn}?`,
+          answer: getCityLocalFacts(citySlug)!.ukk,
+        },
+      ]
+    : []),
 ];
 
 /**
@@ -201,6 +212,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         </div>
       </section>
 
+      <CityLocalRules citySlug={citySlug} cityIn={cityIn} showHousing />
+
       {neighborhoods && (
         <section className="section-padding bg-background">
           <div className="section-container">
@@ -251,7 +264,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         </div>
       </section>
 
-      <FAQSection items={getAreaFAQ(cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
+      <FAQSection items={getAreaFAQ(citySlug, cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
 
       {ownReviews.length === 0 && <ReviewsTeaser citySlug={citySlug} />}
       <ServiceContactSection variant="general" cityIn={cityIn} />

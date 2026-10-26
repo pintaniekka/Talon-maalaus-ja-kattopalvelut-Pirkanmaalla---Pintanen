@@ -29,7 +29,7 @@ export interface ArticleMeta {
   /** Viimeisin sisältöpäivitys YYYY-MM-DD, jos tekstiä on muutettu julkaisun jälkeen. */
   updatedAt?: string;
   readingMinutes: number;
-  /** Pääkuvan perusnimi kansiossa public/images (Pictures-400/800/1200). */
+  /** Pääkuvan perusnimi kansiossa public/images (Pictures-400/600/800/1200). */
   heroImage: string;
   heroAlt: string;
   heroCaption?: string;
@@ -187,6 +187,21 @@ export const articles: ArticleMeta[] = [
     readingMinutes: 5,
     heroImage: "tiilikaton-pinnoitus-nokia-tummanharmaa-tiilikatto-lahikuva",
     heroAlt: "Pinnoitettu tummanharmaa betonitiilikatto Nokialla lähikuvassa",
+  },
+  {
+    slug: "sammal-tiilikatolla",
+    title: "Sammal tiilikatolla: mitä se kertoo ja milloin katto kannattaa pinnoittaa",
+    seoTitle: "Sammal tiilikatolla: milloin katto kannattaa pinnoittaa",
+    description:
+      "Sammal tiilikatolla kertoo, että tiilen pinta pidättää kosteutta. Lue, miksi sammal kasvaa, mitä se tekee tiilelle ja milloin pesu ja pinnoitus kannattaa tehdä.",
+    lead: "Sammal tiilikatolla kertoo, että tiilen pinta on kulunut huokoiseksi ja pysyy märkänä. Sammal pitää kosteuden tiilessä, ja talvella jäätyvä vesi rapauttaa tiiltä. Noin 15 vuoden iässä katto kannattaa pestä ja pinnoittaa: sen jälkeen tiili hylkii taas vettä ja katto kestää jopa 15 vuotta pidempään.",
+    category: "katto",
+    author: "eerik",
+    publishedAt: "2026-11-16",
+    readingMinutes: 5,
+    heroImage: "tiilikaton-pinnoitus-kangasala-sammaleinen-tiilikatto-ennen",
+    heroAlt: "Sammaloitunut tiilikatto Kangasalla ennen pinnoitusta",
+    heroCaption: "Sammal kasvaa tiilen huokoisessa pinnassa ja pitää sen märkänä.",
   },
   {
     slug: "puutalon-ulkomaalin-valinta",

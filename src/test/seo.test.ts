@@ -5,6 +5,7 @@ import { getCanonicalRoutes, buildLlmsTxt, buildSitemapXml } from "@/data/routes
 import { getRouteSeo, withBrand, canonicalUrl } from "@/data/seo";
 import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
 import { allCities } from "@/data/cityData";
+import { articles } from "@/data/articles";
 
 const routes = getCanonicalRoutes().map((r) => r.path);
 
@@ -14,17 +15,22 @@ describe("sivukohtaiset SEO-tiedot (src/data/seo.ts)", () => {
     expect(missing).toEqual([]);
   });
 
-  it("titlet ovat uniikkeja ja mahtuvat hakutulokseen (enintään 70 merkkiä)", () => {
+  // Myös ajastetut artikkelit: niiden title näkyy hakutuloksessa julkaisupäivänä ilman uutta buildia.
+  const routesWithQueued = Array.from(new Set([...routes, ...articles.map((a) => `/artikkelit/${a.slug}`)]));
+
+  it("titlet ovat uniikkeja ja 50–60 merkkiä brändin kanssa (auditointi 27.10.2026)", () => {
     const titles = routes.map((p) => withBrand(getRouteSeo(p)!.title));
     expect(new Set(titles).size).toBe(titles.length);
-    const tooLong = routes.filter((p) => withBrand(getRouteSeo(p)!.title).length > 70);
-    expect(tooLong).toEqual([]);
+    const bad = routesWithQueued
+      .map((p) => [p, withBrand(getRouteSeo(p)!.title).length] as const)
+      .filter(([, len]) => len < 50 || len > 60);
+    expect(bad).toEqual([]);
   });
 
-  it("descriptionit ovat 50–175 merkkiä", () => {
-    const bad = routes
+  it("descriptionit ovat 120–160 merkkiä (auditointi 27.10.2026)", () => {
+    const bad = routesWithQueued
       .map((p) => [p, getRouteSeo(p)!.description.length] as const)
-      .filter(([, len]) => len < 50 || len > 175);
+      .filter(([, len]) => len < 120 || len > 160);
     expect(bad).toEqual([]);
   });
 
@@ -109,10 +115,10 @@ describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
     walk(srcDir);
     // Puhdistussivut jäävät ennalleen (palvelu poistuu), joten ne jätetään tarkistuksen ulkopuolelle.
     const skip = /Puhdistus|puhdistusFAQ|puhdistus-itse|HinnatKatonPuhdistus/;
-    // 15–20 vuotta on katon lisäikä; pinnoitus on ajankohtainen noin 10–15 vuoden iässä (Eerik 11.10.2026).
+    // Pinnoitus on ajankohtainen noin 15 vuoden iässä (Eerik 26.10.2026; aiemmin 10–15); lisäikä on jopa 15 vuotta.
     // Yritys on tamperelainen (Eerik 5.10. ja 11.10.2026): Oulua ei mainita.
     // Peltikattoa ei markkinoida, mutta UKK "Maalaatteko myös peltikattoja?" sallittiin (Eerik 26.10.2026), joten sanaa ei enää kielletä.
-    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /(?<!alkaen 15 )€\/m²/, /emme tee/i, /emme vaihda/i, /sisämaalau/i, /Emme\. /, /kirvesmies/, /15[-–]20 vuotta vanha/, /15[-–]20 vuoden iässä/, /Oulu/];
+    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /(?<!alkaen 15 )€\/m²/, /emme tee/i, /emme vaihda/i, /sisämaalau/i, /Emme\. /, /kirvesmies/, /15[-–]20 vuotta vanha/, /15[-–]20 vuoden iässä/, /10[-–]15 vuotta vanha/, /10[-–]15 vuoden iässä/, /10[-–]15 vuodessa/, /Oulu/];
     const hits: string[] = [];
     for (const file of files) {
       if (skip.test(file)) continue;

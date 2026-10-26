@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Sources } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Sources } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -55,6 +55,7 @@ const Body = () => (
       </li>
     </ol>
 
+    <Avainhuomio>Meillä katto maalataan ruiskulla kahteen kertaan, ja työlle on 5 vuoden kirjallinen takuu.</Avainhuomio>
     <h2>Missä itse tehty pinnoitus yleensä menee pieleen?</h2>
 
     <h3>Pesu jää kesken tai vahingoittaa kattoa</h3>
@@ -102,6 +103,7 @@ const Body = () => (
       <Link to="/artikkelit/tiilikaton-pinnoituksen-tyovaiheet/">näin tiilikaton pinnoitus etenee</Link>.
     </p>
 
+    <Avainhuomio>Yritykseltä ostetun työn osuudesta saat kotitalousvähennyksen 40 %, enintään 2 100 € vuodessa.</Avainhuomio>
     <h2>Mitä katolle kannattaa tehdä itse?</h2>
     <ul>
       <li>Katso keväällä ja syksyllä, että tiilet ovat ehjiä ja paikoillaan.</li>

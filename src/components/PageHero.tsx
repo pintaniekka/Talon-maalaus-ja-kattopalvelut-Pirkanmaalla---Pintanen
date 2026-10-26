@@ -164,7 +164,6 @@ const PageHero = ({
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Lue Pintasen Google-arviot"
                   className="group flex flex-col"
                 >
                   {inner}

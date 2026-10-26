@@ -8,7 +8,8 @@ export const VAHENNYS_OTSIKKO = "Työn osuudesta saat kotitalousvähennyksen";
 
 export const VAHENNYS_ERITTELY = "Työn osuus on laskussa eriteltynä.";
 
-export const VAHENNYS_ARTIKKELI = "/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/";
+/** "Lue lisää" vie kotitalousvähennyssivulle (Eerik 26.10.2026); aiemmin artikkeliin kotitalousvahennys-katto-ja-maalaustyot. */
+export const VAHENNYS_ARTIKKELI = "/kotitalousvahennys/";
 
 export const VAHENNYS_VUODET = "2026–2027";
 
@@ -17,6 +18,19 @@ export const VAHENNYS_VUODET = "2026–2027";
  * 40 % työn osuudesta, omavastuu 150 €, enintään 2 100 € yhdeltä ihmiseltä vuodessa. Jos lause muuttuu, päivitä nämä.
  */
 export const VAHENNYS_SAANTO = { osuus: 0.4, omavastuu: 150, enimmaismaara: 2100 } as const;
+
+/**
+ * Työn osuus urakkahinnasta hintalaskurin riville "Kotitalousvähennyksen jälkeen" (Eerik 26.10.2026: materiaalit
+ * noin 20 %, lukua ei kirjoiteta sivuille). Vähennys lasketaan yhden maksajan enimmäismäärällä.
+ */
+export const VAHENNYS_TYON_OSUUS = 0.8;
+
+/** Hinta kotitalousvähennyksen jälkeen, pyöristettynä kymmeneen euroon. */
+export const hintaVahennyksenJalkeen = (hinta: number): number => {
+  const tyo = hinta * VAHENNYS_TYON_OSUUS;
+  const vahennys = Math.min(Math.max(Math.round(tyo * VAHENNYS_SAANTO.osuus) - VAHENNYS_SAANTO.omavastuu, 0), VAHENNYS_SAANTO.enimmaismaara);
+  return Math.round((hinta - vahennys) / 10) * 10;
+};
 
 /** Kuukausierät: sama lause kuin hintakorttien alla (src/components/pinnoitus/PinnoitusPricingCards.tsx). */
 

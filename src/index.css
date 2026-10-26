@@ -52,13 +52,15 @@
     /* Accent - Brand blue #38b6ff */
     --accent: 202 100% 61%;
     --accent-foreground: 0 0% 100%;
-    /* Nappien ja tekstiä sisältävien sinisten pintojen tausta: #0091eb, valkoinen teksti 3,4:1
-       (brändin #38b6ff on 2,3:1). Raikkaampi kuin #0077cc (4,7:1), jota Eerik piti liian tummana. */
-    --accent-strong: 203 100% 46%;
+    /* Nappien ja tekstiä sisältävien sinisten pintojen tausta: #007bc7, valkoinen teksti 4,5:1
+       (WCAG AA). Aiemmin #0091eb (3,4:1; Eerik piti #0077cc:tä 12.10.2026 liian tummana, hyväksyi
+       tummennuksen saavutettavuuden takia 26.10.2026). Brändin #38b6ff on 2,3:1. */
+    --accent-strong: 203 100% 39%;
     --accent-light: 205 100% 96%; /* #ecf7ff */
-    /* Sininen tekstinä: vaalealla pohjalla #007bc7 (4,5:1 valkoisella, vaihe 5C 12.10.2026; aiemmin #0091eb 3,4:1),
+    /* Sininen tekstinä: vaalealla pohjalla #0074bd (4,6:1 vaaleansinisellä #ecf7ff-pohjalla ja 5,0:1
+       valkoisella; 26.10.2026, aiemmin #007bc7, joka jäi vaaleansinisellä pohjalla 4,1:1:een),
        tummalla pohjalla brändin kirkas sininen. */
-    --accent-ink: 203 100% 39%;
+    --accent-ink: 203 100% 37%;
 
     /* Header navy #0A192F & deep blue CTA #0038A8 */
     --navy: 222 64% 11%;
@@ -241,7 +243,7 @@
   .bg-secondary,
   .bg-muted,
   .bg-accent-light {
-    --accent-ink: 203 100% 39%;
+    --accent-ink: 203 100% 37%;
   }
 
   .btn-hero {

@@ -202,7 +202,7 @@ const PageHero = ({
                   <PintanenMark className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/70 mb-1">{badge.title}</p>
+                  <p className="text-[10px] font-heading font-bold uppercase tracking-widest text-white/90 mb-1">{badge.title}</p>
                   <p className="text-sm font-heading font-extrabold leading-tight">{badge.text}</p>
                 </div>
               </div>

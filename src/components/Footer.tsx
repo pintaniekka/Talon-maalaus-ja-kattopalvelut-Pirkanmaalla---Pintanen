@@ -157,7 +157,7 @@ const Footer = () => (
       </div>
 
       {/* Aluesivut linkitetään vain täältä (maalauspalvelut-<kunta>). */}
-      <p className="mt-10 border-t border-white/10 pt-6 text-[13px] leading-6 text-white/45">
+      <p className="mt-10 border-t border-white/10 pt-6 text-[13px] leading-6 text-white/50">
         <span className="font-bold text-white/60">Pirkanmaa:</span>{" "}
         {pirkanmaa.map((city, i, arr) => (
           <span key={city.slug}>
@@ -207,7 +207,7 @@ const Footer = () => (
         </p>
       </div>
       {/* Kuntakarttojen lähdemaininta: Tilastokeskus CC BY 4.0 ja OpenStreetMap ODbL vaativat sen (Eerik 25.10.2026: ei kuvan alle). */}
-      <p className="mt-2 text-[11px] text-white/30">Kuntakartat: Tilastokeskus, kuntajako 2026 (CC BY 4.0) ja OpenStreetMap-tekijät (ODbL).</p>
+      <p className="mt-2 text-[11px] text-white/50">Kuntakartat: Tilastokeskus, kuntajako 2026 (CC BY 4.0) ja OpenStreetMap-tekijät (ODbL).</p>
     </div>
   </footer>
 );

@@ -34,8 +34,15 @@ const app = (
 // toimivan. Laiskasti ladattavan alasivun sisältö pysyy paikallaan, kunnes sen paketti
 // on ladattu (Suspense-raja). Tyhjä #root (404-sivu, jonossa oleva artikkeli)
 // renderöidään selaimessa kuten ennenkin.
+//
+// Hydraatio alkaa vasta, kun selain on piirtänyt valmiin HTML:n kerran (requestAnimationFrame
+// + setTimeout): nopealla yhteydellä koodi ehtii perille ennen ensimmäistä piirtoa, eikä
+// ensimmäisen piirron pidä odottaa Reactin työtä. Hinta on yksi ruudunpäivitys (noin 16 ms)
+// ennen kuin napit toimivat.
 if (rootEl.firstElementChild) {
-  hydrateRoot(rootEl, app);
+  requestAnimationFrame(() => {
+    setTimeout(() => hydrateRoot(rootEl, app), 0);
+  });
 } else {
   createRoot(rootEl).render(app);
 }

@@ -2,7 +2,8 @@
  * Usein kysytyt kysymykset. Vastaukset noudattavat sivuston sanastoa:
  * lyhyet virkkeet, me-muoto, yksi hintahaarukka per palvelu (pinnoitus 2 850–7 000 €,
  * maalaus 3 500–11 000 €), ei "alkaen"-hintoja eikä neliöhintoja.
- * Vastaukset renderöidään näkyvään HTML:ään (FAQSection), joten ne saavat sisältää vain <strong>-tageja.
+ * Vastaukset renderöidään näkyvään HTML:ään (FAQSection), joten ne saavat sisältää vain <strong>-tageja
+ * ja sivuston sisäisiä <a href="/…/">-linkkejä (yöajo 3, 28.10.2026).
  * Karsittu 12.10.2026 (tarkastus): työnkulkua ei toisteta UKK:ssa, kotitalousvähennys on joka sarjassa
  * yhdessä kysymyksessä, ja kaupunkisivun sarja on yhdessä cityFaq.ts:n kanssa enintään 10 kysymystä.
  */
@@ -51,7 +52,12 @@ export const pinnoitusFAQ: FAQItem[] = [
     question: 'Kattoremontti vai pinnoitus?',
     // Aluskatteen pienet vauriot: sama tieto kuin sivulla /ilmainen-kuntotarkastus/ (Eerik 26.10.2026).
     answer:
-      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet.',
+      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.',
+  },
+  {
+    question: 'Poistatteko sammaleen ja pesettekö katon ennen pinnoitusta?',
+    answer:
+      'Kyllä. Teemme pesun aina pinnoituksen yhteydessä. Painepesu irrottaa sammaleen ja jäkälän, ja kasvustontorjunta-aine hidastaa uuden kasvuston tuloa. Pinnoitetulla katolla sammal ei saa otetta, koska tiili ei enää ime vettä.',
   },
   {
     question: 'Voiko katon värin vaihtaa pinnoituksessa?',
@@ -296,7 +302,7 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: `Onko tiilikaton pesu ja pinnoitus sama palvelu ${paikka}?`,
       answer:
-        'Teemme pesun aina pinnoituksen yhteydessä. Pesemme katon painepesulla, levitämme kasvustontorjunta-aineen ja maalaamme katon kahteen kertaan. Jos tiilen pinta on kulunut, pelkkä pesu ei riitä, koska tiili imee vettä heti seuraavalla sateella.',
+        'Teemme pesun aina pinnoituksen yhteydessä. Pesemme katon painepesulla, levitämme kasvustontorjunta-aineen ja maalaamme katon kahteen kertaan. Painepesu irrottaa sammaleen ja jäkälän, ja pinnoitetulla katolla sammal ei saa enää otetta. Jos tiilen pinta on kulunut, pelkkä pesu ei riitä, koska tiili imee vettä heti seuraavalla sateella.',
     },
     {
       question: 'Maalaatteko myös peltikattoja?',
@@ -315,6 +321,11 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
       question: 'Milloin tiilikatto pitää pinnoittaa?',
       answer:
         'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 15 vuotta vanha.',
+    },
+    {
+      question: 'Pitääkö katto uusia vai riittääkö pinnoitus?',
+      answer:
+        'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa ja tiilet ovat ehjiä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen, saumat ja läpiviennit ilmaisessa kuntotarkastuksessa. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.',
     },
     {
       question: `Milloin pääsette katsomaan katon ${paikka}?`,

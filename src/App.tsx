@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { LazyMotion } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -7,6 +8,10 @@ import Index from "./pages/Index";
 import { allCities, maalausCities, pinnoitusCities } from "./data/cityData";
 import { legacyRedirects } from "./data/routes";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
+
+// Animaatiokirjaston ominaisuudet ladataan omana pakettina vasta käynnistyksen jälkeen
+// (src/lib/motionFeatures.ts). Komponentit käyttävät m.div-elementtejä.
+const loadMotionFeatures = () => import("./lib/motionFeatures").then((mod) => mod.default);
 
 // Lazy-loaded subpages
 const KattopalvelutPinnoitus = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitus"));
@@ -37,6 +42,7 @@ const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
  * tulossa. Ensimmäisellä latauksella esirenderöity HTML pysyy paikallaan (hydraatio, main.tsx).
  */
 export const AppContent = () => (
+  <LazyMotion features={loadMotionFeatures}>
   <TooltipProvider>
       <Toaster />
         <Suspense fallback={<div className="min-h-screen" />}>
@@ -88,6 +94,7 @@ export const AppContent = () => (
           </Routes>
         </Suspense>
   </TooltipProvider>
+  </LazyMotion>
 );
 
 const App = () => (

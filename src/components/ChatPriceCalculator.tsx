@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useId } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { Send, Loader2 } from 'lucide-react';
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
 import { submitContactForm, formErrorMessage } from '@/lib/contactForm';
@@ -79,7 +79,7 @@ const TypingIndicator = () => (
 
 // ── Bot message bubble ────────────────────────────────────────────────────
 const BotBubble = ({ text }: { text: string }) => (
-  <motion.div
+  <m.div
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     className="flex items-end gap-2 mb-3"
@@ -88,12 +88,12 @@ const BotBubble = ({ text }: { text: string }) => (
     <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm max-w-[85%]">
       <p className="text-sm text-foreground leading-relaxed">{text}</p>
     </div>
-  </motion.div>
+  </m.div>
 );
 
 // ── User message bubble ───────────────────────────────────────────────────
 const UserBubble = ({ text, imageBase }: { text: string; imageBase?: string }) => (
-  <motion.div
+  <m.div
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     className="flex justify-end mb-3"
@@ -113,7 +113,7 @@ const UserBubble = ({ text, imageBase }: { text: string; imageBase?: string }) =
       )}
       <p className="text-sm leading-relaxed px-4 py-3">{text}</p>
     </div>
-  </motion.div>
+  </m.div>
 );
 
 // ── Main component ────────────────────────────────────────────────────────
@@ -473,7 +473,7 @@ const ChatPriceCalculator = () => {
         }
       `}</style>
       <div className="section-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -521,7 +521,7 @@ const ChatPriceCalculator = () => {
 
               {/* Inline bubble-style options */}
               {!isTyping && stepUI && (stepUI.kind === 'image-options' || stepUI.kind === 'options') && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-end mb-3"
@@ -564,7 +564,7 @@ const ChatPriceCalculator = () => {
                       ))}
                     </div>
                   )}
-                </motion.div>
+                </m.div>
               )}
             </div>
 
@@ -705,7 +705,7 @@ const ChatPriceCalculator = () => {
               </div>
             )}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

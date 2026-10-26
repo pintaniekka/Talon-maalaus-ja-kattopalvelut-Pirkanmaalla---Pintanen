@@ -33,7 +33,8 @@ vi.mock("framer-motion", async () => {
   const strip = ({ initial, animate, exit, transition, whileInView, viewport, ...rest }: MotionProps) => rest;
   return {
     AnimatePresence: ({ children }: React.PropsWithChildren) => React.createElement(React.Fragment, null, children),
-    motion: { div: (props: MotionProps) => React.createElement("div", strip(props), props.children) },
+    LazyMotion: ({ children }: React.PropsWithChildren) => React.createElement(React.Fragment, null, children),
+    m: { div: (props: MotionProps) => React.createElement("div", strip(props), props.children) },
   };
 });
 

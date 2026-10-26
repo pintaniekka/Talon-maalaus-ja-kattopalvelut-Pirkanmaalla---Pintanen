@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowLeft, Check, Loader2 } from "lucide-react";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import CityCombobox from "@/components/CityCombobox";
@@ -306,7 +306,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.div key={`${service}-${index}`} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2 }}>
+            <m.div key={`${service}-${index}`} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2 }}>
               {current && (
                 <>
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-2">{current.title}</h2>
@@ -392,7 +392,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                   </form>
                 </>
               )}
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
       )}

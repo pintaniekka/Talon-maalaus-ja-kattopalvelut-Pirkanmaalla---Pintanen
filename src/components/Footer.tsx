@@ -17,6 +17,7 @@ const kantaHame = allCities.filter((c) => kantaHameSlugs.has(c.slug)).sort(byNam
 /**
  * Kolme palstaa, enintään neljä linkkiä kussakin (Eerik 26.10.2026: "siivoa footer"). Kuntotarkastus-linkki vie
  * omalle sivulleen ja Pintanen-palstassa on viidentenä kotitalousvähennys (Eerik 26.10.2026, yöajon kysymykset 11–12).
+ * Viisi linkkiä Pintanen-palstassa on hyväksytty (Eerik 26.10.2026, yöajon kysymys 18).
  */
 const palstat = [
   {

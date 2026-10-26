@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
 import { trackEvent } from "@/lib/analytics";
 import { calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
-import { hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
+import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
 import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 
 export type WizardService = "pinnoitus" | "maalaus";
@@ -262,9 +262,12 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           <p className="text-muted-foreground mb-2">Hinta-arvio</p>
           <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>
           {resultAfterDeduction && (
-            <p className="text-muted-foreground mb-4">
-              Kotitalousvähennyksen jälkeen: <strong className="text-foreground">{resultAfterDeduction}</strong>
-            </p>
+            <div className="mb-4">
+              <p className="text-muted-foreground">
+                Kotitalousvähennyksen jälkeen: <strong className="text-foreground">{resultAfterDeduction}</strong>
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">{VAHENNYS_OMAVASTUU_HUOMAUTUS}</p>
+            </div>
           )}
           <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
             Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.

@@ -155,6 +155,13 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     expect(reply.textContent).toContain("Kiitos Testi!");
     expect(reply.textContent).toContain("Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.");
     expect(screen.queryByRole("button", { name: "Lähetä ja näytä hinta-arvio" })).not.toBeInTheDocument();
+    // Sama vähennysrivi kuin /hintalaskuri-sivulla (Eerik 26.10.2026, yöajon kysymys 20), omana viestinään.
+    await tick();
+    const price = calculateRoofPrice(200, "normaali");
+    const after = formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) });
+    const deduction = screen.getByText(/Kotitalousvähennyksen jälkeen:/);
+    expect(shown(deduction.textContent ?? "")).toContain(shown(after));
+    expect(shown(deduction.textContent ?? "")).toContain("Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.");
   });
 
   it("maalaus: hinta lasketaan seinäkaavalla kerrosten ja hilseilyn mukaan", async () => {
@@ -280,8 +287,12 @@ describe("/hintalaskuri-sivu", () => {
     const after = formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) });
     expect(screen.getByText(shown(after))).toBeInTheDocument();
     expect(screen.getByText(/Kotitalousvähennyksen jälkeen:/)).toBeInTheDocument();
-    // 40 % työn osuudesta (80 % hinnasta) miinus omavastuu 150 €, enintään 2 100 €.
-    expect(hintaVahennyksenJalkeen(5000)).toBe(3550);
+    expect(screen.getByText("Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.")).toBeInTheDocument();
+    // 40 % työn osuudesta (80 % hinnasta), enintään 2 100 €; omavastuuta ei vähennetä (Eerik 26.10.2026).
+    expect(hintaVahennyksenJalkeen(2850)).toBe(1940);
+    expect(hintaVahennyksenJalkeen(3500)).toBe(2380);
+    expect(hintaVahennyksenJalkeen(5000)).toBe(3400);
+    expect(hintaVahennyksenJalkeen(7000)).toBe(4900);
     expect(hintaVahennyksenJalkeen(11000)).toBe(8900);
   });
 });

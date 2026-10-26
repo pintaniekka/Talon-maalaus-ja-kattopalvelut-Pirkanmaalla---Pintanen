@@ -21,16 +21,24 @@ export const VAHENNYS_SAANTO = { osuus: 0.4, omavastuu: 150, enimmaismaara: 2100
 
 /**
  * Työn osuus urakkahinnasta hintalaskurin riville "Kotitalousvähennyksen jälkeen" (Eerik 26.10.2026: materiaalit
- * noin 20 %, lukua ei kirjoiteta sivuille). Vähennys lasketaan yhden maksajan enimmäismäärällä.
+ * noin 20 %, lukua ei kirjoiteta sivuille). Vähennys lasketaan yhden maksajan enimmäismäärällä (Eerik 26.10.2026,
+ * yöajon kysymys 19).
  */
 export const VAHENNYS_TYON_OSUUS = 0.8;
 
-/** Hinta kotitalousvähennyksen jälkeen, pyöristettynä kymmeneen euroon. */
+/**
+ * Hinta kotitalousvähennyksen jälkeen, pyöristettynä kymmeneen euroon. Sama kaava kuin hintakorttien afterFrom-luvuissa
+ * (src/data/prices.ts): työn osuus 80 % hinnasta, siitä 40 %, enintään 2 100 €. Omavastuuta ei vähennetä, koska se on
+ * henkilökohtainen ja vähennetään kerran vuodessa, ei joka työstä (Eerik 26.10.2026). Omavastuu kerrotaan rivin alla.
+ */
 export const hintaVahennyksenJalkeen = (hinta: number): number => {
   const tyo = hinta * VAHENNYS_TYON_OSUUS;
-  const vahennys = Math.min(Math.max(Math.round(tyo * VAHENNYS_SAANTO.osuus) - VAHENNYS_SAANTO.omavastuu, 0), VAHENNYS_SAANTO.enimmaismaara);
+  const vahennys = Math.min(Math.round(tyo * VAHENNYS_SAANTO.osuus), VAHENNYS_SAANTO.enimmaismaara);
   return Math.round((hinta - vahennys) / 10) * 10;
 };
+
+/** Pieni teksti vähennysrivin alla laskureissa (Eerik 26.10.2026). */
+export const VAHENNYS_OMAVASTUU_HUOMAUTUS = "Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.";
 
 /** Kuukausierät: sama lause kuin hintakorttien alla (src/components/pinnoitus/PinnoitusPricingCards.tsx). */
 

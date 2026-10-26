@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { X } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { UserRound, Phone, MapPin, Mail, Building, MessageSquare } from "@/components/icons/BrandIcons";
@@ -148,7 +148,7 @@ const DesktopQuoteDrawer = () => {
       <AnimatePresence>
         {open && (
           <>
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -159,7 +159,7 @@ const DesktopQuoteDrawer = () => {
             />
 
             {/* Desktop: right drawer / Mobile: bottom sheet */}
-            <motion.div
+            <m.div
               ref={drawerRef}
               initial={{ x: "100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -239,7 +239,7 @@ const DesktopQuoteDrawer = () => {
                   {isSubmitted ? "Lähetetty ✓" : isSubmitting ? "Lähetetään..." : "Lähetä"}
                 </button>
               </form>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

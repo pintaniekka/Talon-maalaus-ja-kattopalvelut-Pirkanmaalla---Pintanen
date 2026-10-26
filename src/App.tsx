@@ -1,4 +1,5 @@
 import { Suspense, useEffect, type ReactNode } from "react";
+import { LazyMotion } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,10 @@ import Index from "./pages/Index";
 import { allCities, maalausCities, pinnoitusCities } from "./data/cityData";
 import { legacyRedirects } from "./data/routes";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
+
+// Animaatiokirjaston ominaisuudet ladataan omana pakettina vasta käynnistyksen jälkeen
+// (src/lib/motionFeatures.ts). Komponentit käyttävät m.div-elementtejä.
+const loadMotionFeatures = () => import("./lib/motionFeatures").then((mod) => mod.default);
 
 // Lazy-loaded subpages
 const KattopalvelutPinnoitus = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitus"));
@@ -49,6 +54,7 @@ export const AppContent = ({
   fallback?: ReactNode;
   onReady?: () => void;
 }) => (
+  <LazyMotion features={loadMotionFeatures}>
   <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -100,6 +106,7 @@ export const AppContent = ({
           <OnReady onReady={onReady} />
         </Suspense>
   </TooltipProvider>
+  </LazyMotion>
 );
 
 const App = ({ fallback, onReady }: { fallback?: ReactNode; onReady?: () => void }) => (

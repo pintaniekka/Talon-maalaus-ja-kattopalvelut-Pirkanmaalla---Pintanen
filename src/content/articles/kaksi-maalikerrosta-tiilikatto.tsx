@@ -24,10 +24,6 @@ const faq = [
     answer:
       "Valmistajan mukaan pinta on päälle maalattavissa noin kahden tunnin kuluttua. Siksi molemmat kerrokset onnistuvat usein samana päivänä.",
   },
-  {
-    question: "Maalaatteko myös reunat kahteen kertaan?",
-    answer: "Kyllä. Reunat, harjatiilet ja ahtaat paikat maalaamme telalla tai käsin, myös kahteen kertaan.",
-  },
 ];
 
 const Body = () => (
@@ -102,7 +98,7 @@ const Body = () => (
       ja maalista kerromme artikkelissa <Link to="/artikkelit/nowocoat-kattomaali/">mikä Nowocoat on</Link>. Palvelun
       esittelemme sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
-    <Avainhuomio>Kaksi kerrosta reunoineen onnistuu usein samana päivänä, ja koko työ kestää 2–3 päivää.</Avainhuomio>
+    <Avainhuomio>Kaksi kerrosta onnistuu usein samana päivänä, ja koko työ kestää 2–3 päivää.</Avainhuomio>
 
     <ArticleFaq items={faq} />
 

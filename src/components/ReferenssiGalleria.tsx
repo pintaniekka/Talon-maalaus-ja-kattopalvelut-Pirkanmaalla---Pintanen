@@ -139,7 +139,7 @@ const Kortti = ({ k, iso, onOpen }: { k: ReferenssiNakyma; iso: boolean; onOpen:
           {k.year ? ` · ${k.year}` : ""}
         </span>
         <span className="font-heading text-lg font-extrabold leading-snug text-navy">{k.title}</span>
-        <span className="text-[15px] leading-relaxed text-muted-foreground">{k.text}</span>
+        {k.text && <span className="text-[15px] leading-relaxed text-muted-foreground">{k.text}</span>}
       </figcaption>
     </figure>
   );
@@ -221,7 +221,7 @@ const ReferenssiGalleria = () => {
           {lista.length} {lista.length === 1 ? "kohde" : "kohdetta"}
         </p>
 
-        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-start gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {nakyvat.map((k, i) => (
             <Kortti key={k.pair ?? k.image ?? k.after ?? i} k={k} iso={i === 0 && k.ennenJalkeen} onOpen={setAvattu} />
           ))}

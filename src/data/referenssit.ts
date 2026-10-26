@@ -146,7 +146,14 @@ const projektista = (p: ProjectItem): ReferenssiKohde => {
     : p.services[0] === "maalaus"
       ? "Talon maalaus"
       : "Tiilikaton pinnoitus";
-  const text = p.caption.replace(/,\s*[^,]+$/, "");
+  const kuvateksti = p.caption.replace(/,\s*[^,]+$/, "");
+  // Kun kuvateksti olisi sama kuin otsikko ("Tiilikaton pinnoitus"), parille kerrotaan liukusäätimestä ja yksittäiselle kuvalle ei toisteta.
+  const text =
+    kuvateksti.toLowerCase() === service.toLowerCase()
+      ? p.pair
+        ? "Sama katto ennen ja jälkeen. Vedä liukusäädintä."
+        : ""
+      : kuvateksti;
   return { city: p.city, services: p.services, title: service, text, alt: p.alt, pair: p.pair, before: p.before, after: p.after, image: p.image };
 };
 

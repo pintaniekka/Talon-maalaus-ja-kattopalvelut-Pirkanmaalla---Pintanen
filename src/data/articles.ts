@@ -159,7 +159,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: "kotitalousvahennys-2027-katon-pinnoitus-ja-talon-maalaus",
     title: "Kotitalousvähennys 2027: näin saat sen katon pinnoituksesta ja talon maalauksesta",
-    seoTitle: "Kotitalousvähennys 2027 katon pinnoituksessa ja maalauksessa",
+    seoTitle: "Kotitalousvähennys 2027: katto ja talon maalaus",
     description:
       "Kotitalousvähennys 2027 on 40 % työn osuudesta, enintään 2 100 € henkilöltä. Lue, miten saat sen tiilikaton pinnoituksesta ja talon maalauksesta.",
     lead: "Vuonna 2027 saat vähentää verotuksessa 40 % yritykseltä ostetun työn osuudesta, enintään 2 100 euroa henkilöltä. Tiilikaton pinnoitus ja talon ulkomaalaus ovat molemmat vähennykseen oikeuttavaa kunnossapitoa, myös mökillä.",
@@ -173,9 +173,9 @@ export const articles: ArticleMeta[] = [
   {
     slug: "sammaleen-poisto-tiilikatolta",
     title: "Sammaleen poisto tiilikatolta: miksi pesu ei riitä?",
-    seoTitle: "Sammaleen poisto tiilikatolta: miksi pesu ei yksin riitä",
+    seoTitle: "Sammaleen poisto tiilikatolta: miksi pesu ei auta",
     description:
-      "Sammal kasvaa tiilikatolle, kun tehdaspinta on kulunut. Pesu poistaa sammaleen, mutta karhea pinta jää. Lue, miksi katto maalataan pesun jälkeen ja mitä työ maksaa.",
+      "Sammal kasvaa tiilikatolle, kun tehdaspinta on kulunut. Pesu poistaa sammaleen, mutta karhea pinta jää. Lue, miksi katto maalataan ja mitä se maksaa.",
     lead: "Sammal tarttuu tiilikattoon, kun tehdaspinta on kulunut, yleensä 10–15 vuoden iässä. Pesu poistaa sammaleen, mutta karhea pinta imee vettä ja sammal palaa. Siksi katto maalataan pesun jälkeen kahteen kertaan.",
     category: "katto",
     author: "eerik",
@@ -201,7 +201,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: "milloin-talon-maalaus-kannattaa",
     title: "Milloin talon maalaus kannattaa? Merkit, jotka näet seinästä",
-    seoTitle: "Milloin talon maalaus kannattaa? 5 merkkiä seinässä",
+    seoTitle: "Milloin talon maalaus kannattaa? 5 merkkiä",
     description:
       "Talon maalaus kannattaa, kun maali liituaa, haalistuu tai hilseilee. Lue viisi merkkiä, miksi odottaminen tulee kalliimmaksi ja milloin 2027 kannattaa maalata.",
     lead: "Talon maalaus kannattaa, kun maali jää käteen, väri on haalistunut tai maali hilseilee. Peittävä ulkomaali suojaa puuta yleensä 5–15 vuotta. Mitä aiemmin maalaat, sitä vähemmän pohjatöitä tarvitaan.",
@@ -215,9 +215,9 @@ export const articles: ArticleMeta[] = [
   {
     slug: "ormax-tiilikaton-pinnoitus",
     title: "Ormax-tiilikaton pinnoitus: mitä kannattaa tietää?",
-    seoTitle: "Ormax-tiilikaton pinnoitus: hinta, ajoitus ja työvaiheet",
+    seoTitle: "Ormax-tiilikaton pinnoitus: hinta ja ajoitus",
     description:
-      "Ormax on yleisin 2000-luvun kattotiili. Lue, milloin Ormax-katto kannattaa pinnoittaa, miten työ etenee, mitä se maksaa ja mitä valmistaja sanoo tiilen hoidosta.",
+      "Ormax on yleisin 2000-luvun kattotiili. Lue, milloin Ormax-katto kannattaa pinnoittaa, miten työ etenee, mitä se maksaa ja mitä valmistaja sanoo hoidosta.",
     lead: "Ormax on yleisin 2000-luvun kattotiili, ja pinnoitamme sitä samalla työllä ja hinnalla kuin muita betonitiiliä. Valmistajan mukaan tiili kestää huollettuna 50–70 vuotta, mutta pinta kuluu paljon nopeammin. Pinnoitus on ajankohtainen, kun väri on haalistunut tai pinta karhea.",
     category: "katto",
     author: "eerik",
@@ -229,7 +229,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: "puutalon-ulkomaalin-valinta",
     title: "Puutalon ulkomaalin valinta: öljymaali vai vesiohenteinen?",
-    seoTitle: "Puutalon ulkomaalin valinta: öljymaali vai vesiohenteinen",
+    seoTitle: "Puutalon ulkomaali: öljymaali vai vesiohenteinen",
     description:
       "Ulkomaali valitaan vanhan maalin mukaan: vesiohenteisen päälle vain vesiohenteinen, öljymaalin päälle kumpi tahansa. Lue, miten tunnistat vanhan maalin.",
     lead: "Oikea ulkomaali riippuu siitä, mitä seinässä on nyt. Vesiohenteisen maalin päälle sopii vain vesiohenteinen, öljymaalin päälle kumpi tahansa. Vanhan maalin tunnistat pyyhkäisemällä, taivuttamalla ja spriillä. Käytämme pääsääntöisesti Tikkurilan maaleja.",

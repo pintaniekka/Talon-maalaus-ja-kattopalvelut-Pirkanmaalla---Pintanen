@@ -15,22 +15,43 @@ const byName = (a: { name: string }, b: { name: string }) => a.name.localeCompar
 const pirkanmaa = allCities.filter((c) => !kantaHameSlugs.has(c.slug)).sort(byName);
 const kantaHame = allCities.filter((c) => kantaHameSlugs.has(c.slug)).sort(byName);
 
-const palvelut = [
-  { to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Tiilikaton pinnoitus" },
-  { to: "/talon-maalaus-pirkanmaa/", label: "Talon maalaus" },
-  { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Pinnoituksen hinta" },
-  { to: "/talon-maalaus-hinta-pirkanmaa/", label: "Maalauksen hinta" },
-  { to: "/hintalaskuri/", label: "Hintalaskuri" },
-  { to: "/tarjouspyynto/", label: "Pyydä tarjous" },
+/** Palstat Lummecon tapaan palveluittain (Eerik 26.10.2026): palvelusivu, hinta, laskuri, ilmainen käynti, kokemuksia. */
+const palstat = [
+  {
+    title: "Tiilikaton pinnoitus",
+    links: [
+      { to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Tiilikaton pinnoitus Pirkanmaalla" },
+      { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Pinnoituksen hinta" },
+      { to: "/hintalaskuri/?palvelu=pinnoitus", label: "Hintalaskuri katolle" },
+      { to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Ilmainen kuntotarkastus" },
+      { to: "/kokemuksia/", label: "Kokemuksia pinnoituksesta" },
+    ],
+  },
+  {
+    title: "Talon maalaus",
+    links: [
+      { to: "/talon-maalaus-pirkanmaa/", label: "Talon maalaus Pirkanmaalla" },
+      { to: "/talon-maalaus-hinta-pirkanmaa/", label: "Maalauksen hinta" },
+      { to: "/hintalaskuri/?palvelu=maalaus", label: "Hintalaskuri seinille" },
+      { to: "/tarjouspyynto/?palvelu=maalaus", label: "Ilmainen arviokäynti" },
+      { to: "/kokemuksia/", label: "Kokemuksia maalauksesta" },
+    ],
+  },
+  {
+    title: "Pintanen",
+    links: [
+      { to: "/meista/", label: "Meistä" },
+      { to: "/referenssit/", label: "Referenssit" },
+      { to: "/artikkelit/", label: "Artikkelit" },
+      { to: "/toiminta-alueet/", label: "Toiminta-alueet" },
+      { to: "/yhteystiedot/", label: "Yhteystiedot" },
+    ],
+  },
 ];
 
-const yritys = [
-  { to: "/meista/", label: "Meistä" },
-  { to: "/referenssit/", label: "Referenssit" },
-  { to: "/kokemuksia/", label: "Kokemuksia" },
-  { to: "/artikkelit/", label: "Artikkelit" },
-  { to: "/toiminta-alueet/", label: "Toiminta-alueet" },
-  { to: "/yhteystiedot/", label: "Yhteystiedot" },
+const numerot = [
+  { label: "Katot", person: YHTEYSTIEDOT.eerik },
+  { label: "Seinät", person: YHTEYSTIEDOT.eemil },
 ];
 
 const FacebookIcon = () => (
@@ -55,95 +76,101 @@ const columnTitle = "mb-4 text-[11px] font-extrabold uppercase tracking-[0.18em]
 const linkClass = "text-[15px] text-white/80 transition-colors hover:text-accent";
 
 /**
- * Alatunniste (Eerik 26.10.2026: ulkoasu uusiksi). Tumma navy-pohja kuten Toiminta-alueet-lohkossa,
- * ohut värillinen yläviiva kuten otsakkeessa. Neljä palstaa: yritys ja yhteystiedot (puhelin isolla,
- * Google-arvio), palvelut, yritys, toiminta-alueet (kaikki 24 kuntaa aluesivuille). Alin rivi: tekijänoikeus,
- * Y-tunnus, tietosuoja, evästeet ja karttojen lähdemaininta (CC BY 4.0 ja ODbL vaativat sen).
+ * Alatunniste (Eerik 26.10.2026: ulkoasu uusiksi, rakenne Lummecon tapaan palveluittain). Navy-pohja kuten
+ * Toiminta-alueet-lohkossa, värillinen yläviiva kuten otsakkeessa. Vasemmalla yritys: logo, lause, puhelinnumerot
+ * KATOT ja SEINÄT isolla, sähköposti, Google-arvio, some. Palstat: Tiilikaton pinnoitus, Talon maalaus, Pintanen,
+ * Toiminta-alueet (kaikki 24 kuntaa aluesivuille, cityData). Alin rivi: ©, Y-tunnus, tietosuoja, evästeet, karttojen lähde.
  */
-const Footer = () => {
-  const eerik = YHTEYSTIEDOT.eerik;
-  return (
-    <footer className="relative bg-navy text-navy-foreground">
-      <div className="h-1 w-full bg-gradient-to-r from-paint-yellow via-accent to-accent-strong" aria-hidden="true" />
-      <div className="section-container py-12 md:py-16">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          {/* Yritys ja yhteystiedot */}
-          <div className="lg:col-span-4">
-            <OptimizedImage
-              src={logoUrl}
-              alt="Pintanen logo"
-              className="h-12 w-auto object-contain brightness-0 invert"
-              width={360}
-              height={144}
-              sizes="360px"
-            />
-            <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-white/70">
-              Tamperelainen perheyritys. Eerik pinnoittaa tiilikatot ja Eemil maalaa talot Pirkanmaalla ja lähikunnissa.
-              Takuu: pinnoitus {TAKUU.pinnoitus}, maalaus {TAKUU.maalaus}.
-            </p>
+const Footer = () => (
+  <footer className="relative bg-navy text-navy-foreground">
+    <div className="h-1 w-full bg-gradient-to-r from-paint-yellow via-accent to-accent-strong" aria-hidden="true" />
+    <div className="section-container py-12 md:py-16">
+      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+        {/* Yritys ja yhteystiedot */}
+        <div className="md:col-span-2 lg:col-span-4">
+          <OptimizedImage
+            src={logoUrl}
+            alt="Pintanen logo"
+            className="h-12 w-auto object-contain brightness-0 invert"
+            width={360}
+            height={144}
+            sizes="360px"
+          />
+          <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-white/70">
+            Tamperelainen perheyritys. Eerik pinnoittaa tiilikatot ja Eemil maalaa talot Pirkanmaalla ja lähikunnissa.
+            Takuu: pinnoitus {TAKUU.pinnoitus}, maalaus {TAKUU.maalaus}.
+          </p>
 
-            <a
-              href={eerik.phoneHref}
-              className="group mt-6 inline-flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 transition-colors hover:border-accent hover:bg-white/10"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-strong text-white">
-                <Phone className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-white/55">Soita Eerikille</span>
-                <span className="block font-heading text-xl font-extrabold text-white">{eerik.phone}</span>
-              </span>
-            </a>
-
-            <a href="mailto:myynti@pintanen.fi" className="mt-3 flex items-center gap-2 text-[15px] text-white/80 transition-colors hover:text-accent">
-              <Mail className="h-4 w-4 text-white/50" />
-              myynti@pintanen.fi
-            </a>
-
-            <a
-              href={GOOGLE_PROFILE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-[15px] text-white/80 transition-colors hover:text-accent"
-            >
-              <span className="flex items-center gap-0.5 text-paint-yellow" aria-hidden="true">
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-                <Star className="h-4 w-4 fill-current" />
-              </span>
-              <span className="font-bold text-white">{LUVUT.googleArvio}</span>
-              <span>Google-arvostelut</span>
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-
-            <div className="mt-6 flex items-center gap-3">
-              {[
-                { href: "https://www.facebook.com/profile.php?id=61587740767358", label: "Facebook", Icon: FacebookIcon },
-                { href: "https://www.instagram.com/pintanenoy/", label: "Instagram", Icon: InstagramIcon },
-                { href: "https://x.com/PintanenOy", label: "X (Twitter)", Icon: XIcon },
-              ].map(({ href, label, Icon }) => (
+          <ul className="mt-6 space-y-3">
+            {numerot.map(({ label, person }) => (
+              <li key={label}>
                 <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-white/70 transition-colors hover:border-accent hover:text-accent"
+                  href={person.phoneHref}
+                  className="group flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 transition-colors hover:border-accent hover:bg-white/10"
                 >
-                  <Icon />
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-strong text-white">
+                    <Phone className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-white/55">
+                      {label} · {person.first}
+                    </span>
+                    <span className="block font-heading text-xl font-extrabold text-white">{person.phone}</span>
+                  </span>
                 </a>
-              ))}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ul>
 
-          {/* Palvelut */}
-          <div className="lg:col-span-2">
-            <h3 className={columnTitle}>Palvelut</h3>
+          <a href="mailto:myynti@pintanen.fi" className="mt-4 flex items-center gap-2 text-[15px] text-white/80 transition-colors hover:text-accent">
+            <Mail className="h-4 w-4 text-white/50" />
+            myynti@pintanen.fi
+          </a>
+
+          <a
+            href={GOOGLE_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-2 text-[15px] text-white/80 transition-colors hover:text-accent"
+          >
+            <span className="flex items-center gap-0.5 text-paint-yellow" aria-hidden="true">
+              <Star className="h-4 w-4 fill-current" />
+              <Star className="h-4 w-4 fill-current" />
+              <Star className="h-4 w-4 fill-current" />
+              <Star className="h-4 w-4 fill-current" />
+              <Star className="h-4 w-4 fill-current" />
+            </span>
+            <span className="font-bold text-white">{LUVUT.googleArvio}</span>
+            <span>Google-arvostelut</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+
+          <div className="mt-6 flex items-center gap-3">
+            {[
+              { href: "https://www.facebook.com/profile.php?id=61587740767358", label: "Facebook", Icon: FacebookIcon },
+              { href: "https://www.instagram.com/pintanenoy/", label: "Instagram", Icon: InstagramIcon },
+              { href: "https://x.com/PintanenOy", label: "X (Twitter)", Icon: XIcon },
+            ].map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-white/70 transition-colors hover:border-accent hover:text-accent"
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {palstat.map((p) => (
+          <div key={p.title} className="lg:col-span-2">
+            <h3 className={columnTitle}>{p.title}</h3>
             <ul className="space-y-2.5">
-              {palvelut.map((l) => (
-                <li key={l.to}>
+              {p.links.map((l) => (
+                <li key={l.to + l.label}>
                   <Link to={l.to} className={linkClass}>
                     {l.label}
                   </Link>
@@ -151,69 +178,53 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+        ))}
 
-          {/* Yritys */}
-          <div className="lg:col-span-2">
-            <h3 className={columnTitle}>Pintanen</h3>
-            <ul className="space-y-2.5">
-              {yritys.map((l) => (
-                <li key={l.to}>
-                  <Link to={l.to} className={linkClass}>
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Toiminta-alueet */}
-          <div className="md:col-span-2 lg:col-span-4">
-            <h3 className={columnTitle}>Toiminta-alueet</h3>
-            <p className="text-[13px] font-bold text-white/60">Pirkanmaa</p>
-            <p className="mt-1 text-[15px] leading-7 text-white/80">
-              {pirkanmaa.map((city, i, arr) => (
-                <span key={city.slug}>
-                  <Link to={`/maalauspalvelut-${city.slug}/`} className="transition-colors hover:text-accent hover:underline">
-                    {city.name}
-                  </Link>
-                  {i < arr.length - 1 && ", "}
-                </span>
-              ))}
-            </p>
-            <p className="mt-4 text-[13px] font-bold text-white/60">Kanta-Häme ja Satakunta</p>
-            <p className="mt-1 text-[15px] leading-7 text-white/80">
-              {kantaHame.map((city, i, arr) => (
-                <span key={city.slug}>
-                  <Link to={`/maalauspalvelut-${city.slug}/`} className="transition-colors hover:text-accent hover:underline">
-                    {city.name}
-                  </Link>
-                  {i < arr.length - 1 && ", "}
-                </span>
-              ))}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-[13px] text-white/50 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} Pintanen Oy · Y-tunnus 3525786-9
+        {/* Toiminta-alueet: kaikki kunnat aluesivuille */}
+        <div className="md:col-span-2 lg:col-span-2">
+          <h3 className={columnTitle}>Toiminta-alueet</h3>
+          <p className="text-[13px] font-bold text-white/60">Pirkanmaa</p>
+          <p className="mt-1 text-[14px] leading-6 text-white/80">
+            {pirkanmaa.map((city, i, arr) => (
+              <span key={city.slug}>
+                <Link to={`/maalauspalvelut-${city.slug}/`} className="transition-colors hover:text-accent hover:underline">
+                  {city.name}
+                </Link>
+                {i < arr.length - 1 && ", "}
+              </span>
+            ))}
           </p>
-          <p className="flex flex-wrap gap-x-4 gap-y-1">
-            <Link to="/tietosuoja/" className="transition-colors hover:text-white">
-              Tietosuojaseloste
-            </Link>
-            <button type="button" onClick={openConsentSettings} className="transition-colors hover:text-white">
-              Evästeasetukset
-            </button>
+          <p className="mt-3 text-[13px] font-bold text-white/60">Kanta-Häme ja Satakunta</p>
+          <p className="mt-1 text-[14px] leading-6 text-white/80">
+            {kantaHame.map((city, i, arr) => (
+              <span key={city.slug}>
+                <Link to={`/maalauspalvelut-${city.slug}/`} className="transition-colors hover:text-accent hover:underline">
+                  {city.name}
+                </Link>
+                {i < arr.length - 1 && ", "}
+              </span>
+            ))}
           </p>
         </div>
-        {/* Kuntakarttojen lähdemaininta: Tilastokeskus CC BY 4.0 ja OpenStreetMap ODbL vaativat sen (Eerik 25.10.2026: ei kuvan alle). */}
-        <p className="mt-3 text-[12px] text-white/35">
-          Kuntakartat: Tilastokeskus, kuntajako 2026 (CC BY 4.0) ja OpenStreetMap-tekijät (ODbL).
+      </div>
+
+      <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-[13px] text-white/50 md:flex-row md:items-center md:justify-between">
+        <p>© {new Date().getFullYear()} Pintanen Oy · Y-tunnus 3525786-9</p>
+        <p className="flex flex-wrap gap-x-4 gap-y-1">
+          <Link to="/tietosuoja/" className="transition-colors hover:text-white">
+            Tietosuojaseloste
+          </Link>
+          <button type="button" onClick={openConsentSettings} className="transition-colors hover:text-white">
+            Evästeasetukset
+          </button>
         </p>
       </div>
-    </footer>
-  );
-};
+      {/* Kuntakarttojen lähdemaininta: Tilastokeskus CC BY 4.0 ja OpenStreetMap ODbL vaativat sen (Eerik 25.10.2026: ei kuvan alle). */}
+      <p className="mt-3 text-[12px] text-white/35">
+        Kuntakartat: Tilastokeskus, kuntajako 2026 (CC BY 4.0) ja OpenStreetMap-tekijät (ODbL).
+      </p>
+    </div>
+  </footer>
+);
 
 export default Footer;

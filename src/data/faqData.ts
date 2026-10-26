@@ -104,7 +104,7 @@ export const maalausFAQ: FAQItem[] = [
   },
   {
     question: 'Maalaatteko myös mökkejä ja piharakennuksia?',
-    answer: 'Kyllä. Mökki ja piharakennus maalataan samalla tavalla kuin talo. Hinta riippuu koosta.',
+    answer: 'Kyllä. Mökissä ja piharakennuksessa työvaiheet ovat samat kuin talossa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Hinta riippuu koosta.',
   },
   {
     question: 'Saako talon maalauksesta kotitalousvähennystä?',
@@ -112,7 +112,7 @@ export const maalausFAQ: FAQItem[] = [
   },
     {
       question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
-      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Seinät pestään homepesuaineella, irtoava maali kaavitaan ja paljaat kohdat pohjamaalataan samalla tavalla.',
+      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
     },
 ];
 
@@ -182,7 +182,7 @@ export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityI
     },
     {
       question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
-      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Seinät pestään homepesuaineella, irtoava maali kaavitaan ja paljaat kohdat pohjamaalataan samalla tavalla.',
+      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
     },
     {
       question: 'Miten maksu tapahtuu?',

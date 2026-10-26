@@ -48,6 +48,8 @@ interface Sisalto {
   title: string;
   intro: string;
   kokoOtsikko: string;
+  /** Vierivän taulukkokääreen nimi ruudunlukijalle. */
+  taulukko: string;
   rivit: Rivi[];
   kuuluu: string;
   kaynti: string;
@@ -58,6 +60,7 @@ const sisalto: Record<ExampleService, Sisalto> = {
     title: "Tiilikaton pesun ja pinnoituksen hinta: kolme esimerkkiä",
     intro: "Laskimme kolme esimerkkikattoa hintalaskurillamme. Katon koko ja jyrkkyys vaikuttavat hintaan eniten.",
     kokoOtsikko: "Katon koko",
+    taulukko: "Tiilikaton pinnoituksen hintaesimerkit",
     rivit: pinnoitusRivit,
     kuuluu: "Hintaan kuuluu pesu, rikkinäisten tiilien vaihto, kaksi kerrosta maalia ja siivous.",
     kaynti: "Tarkan hinnan saat kirjallisena ilmaisen kuntotarkastuksen jälkeen.",
@@ -67,6 +70,7 @@ const sisalto: Record<ExampleService, Sisalto> = {
     intro:
       "Laskimme kolme esimerkkitaloa hintalaskurillamme. Esimerkeissä vanha maali on ehjä. Jos maali hilseilee, pohjatöitä on enemmän ja hinta nousee.",
     kokoOtsikko: "Pohjapinta-ala",
+    taulukko: "Talon maalauksen hintaesimerkit",
     rivit: maalausRivit,
     kuuluu: "Hintaan kuuluu homepesu, kaavinta, pohjamaali paljaisiin kohtiin, pintamaali pensselillä ja siivous.",
     kaynti: "Tarkan hinnan saat kirjallisena ilmaisen arviokäynnin jälkeen.",
@@ -84,7 +88,13 @@ export const PriceExampleTable = ({ service }: { service: ExampleService }) => {
   const s = sisalto[service];
   return (
     <div>
-      <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+      {/* Vierivä kääre on kohdistettava näppäimistöllä (axe scrollable-region-focusable), kuten ArticleKitin Table. */}
+      <div
+        className="overflow-x-auto rounded-2xl border border-border bg-card"
+        role="region"
+        aria-label={s.taulukko}
+        tabIndex={0}
+      >
         <table className="w-full border-collapse text-left text-base">
           <thead>
             <tr className="border-b border-border">

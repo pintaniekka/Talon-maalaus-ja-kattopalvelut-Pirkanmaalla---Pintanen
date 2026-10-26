@@ -31,6 +31,18 @@ export const KeyPoints = ({ title = "Lyhyesti", children }: { title?: string; ch
   </aside>
 );
 
+/**
+ * Avainhuomio: yksi virke ja yksi luku H2-osion loppuun. Tekoälyhaut ja Googlen vastaukset poimivat
+ * tällaisen tiivistyksen helpoimmin. Käyttää samaa ulkoasua kuin Note, jotta artikkelin tyyli ei muutu.
+ */
+export const Avainhuomio = ({ children }: { children: ReactNode }) => (
+  <aside className="article-note">
+    <p>
+      <strong>Avainhuomio:</strong> {children}
+    </p>
+  </aside>
+);
+
 /** Huomautus tai vinkki tekstin lomaan. */
 export const Note = ({ title, children }: { title?: string; children: ReactNode }) => (
   <aside className="article-note">

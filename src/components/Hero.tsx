@@ -57,7 +57,6 @@ const Hero = () => {
               href={GOOGLE_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Lue Pintasen Google-arviot"
               className="group flex flex-col"
             >
               <span className="text-roof-red font-heading font-extrabold text-2xl md:text-3xl">5,0 / 5</span>

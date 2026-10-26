@@ -34,7 +34,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Kuinka kauan työ kestää?',
     answer:
-      'Omakotitalon katto valmistuu yleensä <strong>2–4 työpäivässä</strong>. Pesun jälkeen katto saa kuivua ennen maalausta.',
+      'Peruskohteen katto valmistuu yleensä <strong>2–3 työpäivässä</strong>, suuri tai jyrkkä katto 2–4. Pesun jälkeen katto saa kuivua ennen maalausta.',
   },
   {
     question: 'Milloin tiilikatto pitää pinnoittaa?',
@@ -64,6 +64,20 @@ export const pinnoitusFAQ: FAQItem[] = [
       question: 'Maalaatteko myös peltikattoja?',
       answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
     },
+  {
+    question: 'Saanko hinta-arvion ennen kuntotarkastusta?',
+    answer:
+      'Kyllä. Hintalaskuri antaa suuntaa antavan arvion katon koon ja jyrkkyyden mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa ilmaisen kuntotarkastuksen jälkeen. Kuntotarkastuksella sinun on hyvä olla paikalla.',
+  },
+  {
+    question: 'Milloin pääsette katsomaan katon?',
+    answer:
+      'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+  },
+  {
+    question: 'Miten maksu tapahtuu?',
+    answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
+  },
 ];
 
 export const puhdistusFAQ: FAQItem[] = [
@@ -114,6 +128,19 @@ export const maalausFAQ: FAQItem[] = [
       question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
       answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
     },
+  {
+    question: 'Kuinka kauan talon maalaus kestää?',
+    answer: 'Omakotitalo valmistuu yleensä <strong>3–7 päivässä</strong>. Aika riippuu talon koosta ja pohjatöiden määrästä. Työ ei estä normaalia asumista.',
+  },
+  {
+    question: 'Milloin pääsette maalaamaan?',
+    answer:
+      'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+  },
+  {
+    question: 'Miten maksu tapahtuu?',
+    answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
+  },
 ];
 
 export const generalFAQ: FAQItem[] = [
@@ -125,7 +152,7 @@ export const generalFAQ: FAQItem[] = [
   {
     question: 'Kuinka kauan työ kestää?',
     answer:
-      'Tiilikaton pinnoitus kestää yleensä 2–4 työpäivää. Talon ulkomaalaus kestää yleensä 3–7 työpäivää. Työ ei estä normaalia asumista.',
+      'Tiilikaton pinnoitus kestää yleensä 2–3 työpäivää. Talon ulkomaalaus kestää yleensä 3–7 työpäivää. Työ ei estä normaalia asumista.',
   },
   {
     question: 'Mitä tehdään, jos sovittuna työpäivänä sataa?',

@@ -97,7 +97,7 @@ const Body = () => (
       <li>Katto ruiskumaalataan kahteen kertaan.</li>
     </ol>
     <p>
-      Omakotitalon katolla tähän menee 2–4 työpäivää, ja annamme työlle 5 vuoden kirjallisen takuun. Tarkempi
+      Peruskohteen katolla tähän menee 2–3 työpäivää, ja annamme työlle 5 vuoden kirjallisen takuun. Tarkempi
       kuvaus on sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
     <Figure

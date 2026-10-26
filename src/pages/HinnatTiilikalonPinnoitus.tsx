@@ -14,6 +14,7 @@ import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist, CompareCards } from "@/components/hinnat/PriceSections";
+import { PriceExamplesSection } from "@/components/hinnat/PriceExamples";
 import { pinnoitusPrices, fmtRange } from "@/data/prices";
 import { HERO_BASE } from "@/data/seo";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
@@ -138,6 +139,9 @@ const HinnatTiilikalonPinnoitus = () => {
       <KotitalousVahennys />
 
       <CalculatorCta service="pinnoitus" />
+
+      {/* Kolme esimerkkikattoa laskurin kaavoilla (brief 3, 26.10.2026); "Mitä hintaan kuuluu" seuraa heti alla. */}
+      <PriceExamplesSection service="pinnoitus" />
 
       {/* Mitä hintaan kuuluu */}
       <section className="section-padding bg-background">

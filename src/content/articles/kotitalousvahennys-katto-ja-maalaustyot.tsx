@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, KeyPoints, Note, Sources } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, KeyPoints, Note, Sources, Table } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -15,6 +15,11 @@ const faq = [
   {
     question: "Saako kotitalousvähennyksen kesämökillä tehdystä työstä?",
     answer: "Kyllä saa. Kesämökillä on samat säännöt kuin kotona.",
+  },
+  {
+    question: "Näkyykö työn osuus laskussa?",
+    answer:
+      "Kyllä. Kirjoitamme laskuun työn ja materiaalit erikseen. Tarvitset vain sen luvun, kun ilmoitat vähennyksen OmaVerossa.",
   },
   {
     question: "Minä vuonna vähennys lasketaan, jos työ tehdään vuodenvaihteessa?",
@@ -37,7 +42,9 @@ const Body = () => (
     <p>
       Kun ostat tiilikaton pinnoituksen tai talon maalauksen yritykseltä, saat osan työn osuudesta takaisin
       verotuksessa. Tämä on kotitalousvähennys. Kerromme tässä, paljonko vähennys on vuonna 2027, mistä töistä sen
-      saa ja miten sitä haetaan.
+      saa ja miten sitä haetaan. Vähennys koskee kaikkia töitämme, esimerkiksi{" "}
+      <Link to="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitusta Tampereella</Link> ja{" "}
+      <Link to="/talon-maalaus-tampere/">talon maalausta Tampereella</Link>.
     </p>
 
     <h2>Paljonko kotitalousvähennys on vuonna 2027?</h2>
@@ -45,12 +52,21 @@ const Body = () => (
       Saat vähentää <strong>40 % työn osuudesta</strong>. Työn osuuteen lasketaan mukaan arvonlisävero. Vähennystä
       saa enintään <strong>2 100 euroa vuodessa</strong> yhdeltä ihmiseltä. Omavastuu on 150 euroa vuodessa.
     </p>
+    <Table
+      head={["", "2026 ja 2027"]}
+      rows={[
+        ["Vähennys työn osuudesta", "40 %"],
+        ["Enimmäismäärä henkilöltä", "2 100 € vuodessa"],
+        ["Omavastuu", "150 € vuodessa"],
+        ["Pariskunta yhteensä", "4 200 € vuodessa"],
+      ]}
+      caption="Kotitalousvähennys yritykseltä ostetusta työstä. Lähde: Verohallinto."
+    />
     <p>Vuonna 2025 vähennys oli 35 % ja enintään 1 600 euroa. Nyt saat siis selvästi enemmän takaisin.</p>
-    <Note title="Korotus on voimassa määräajan">
+    <Note title="Korotus on voimassa vuosina 2026 ja 2027">
       <p>
-        Korotus perustuu hallituksen esitykseen. Se koskee laskuja, jotka on maksettu 1.1.2026 alkaen.
-        Verohallinto kertoi kesäkuussa 2026, että muutos vaatii vielä eduskunnan hyväksynnän. Tarkista tuoreet
-        luvut{" "}
+        Korotus koskee laskuja, jotka on maksettu 1.1.2026 alkaen. Verohallinnon sivun mukaan sama määrä on
+        voimassa myös vuonna 2027. Tarkista tuoreet luvut{" "}
         <a href="https://www.vero.fi/henkiloasiakkaat/vahennykset/kotitalousvahennys/kotitalousvahennyksen-maara" target="_blank" rel="noopener noreferrer">
           Verohallinnon sivulta
         </a>
@@ -58,6 +74,7 @@ const Body = () => (
       </p>
     </Note>
 
+    <Avainhuomio>Vuosina 2026 ja 2027 vähennys on 40 % työn osuudesta, enintään 2 100 € vuodessa.</Avainhuomio>
     <h2>Milloin saat täyden vähennyksen?</h2>
     <p>
       Saat täydet 2 100 euroa, kun maksat vuoden aikana työstä 5 625 euroa. Vähennys on jokaisen oma. Pariskunta
@@ -83,6 +100,17 @@ const Body = () => (
     <p>
       Yrityksen pitää kuulua ennakkoperintärekisteriin. Voit tarkistaa sen ilmaiseksi osoitteesta ytj.fi. Pintanen
       kuuluu rekisteriin. Kirjoitamme laskuun työn ja materiaalit erikseen, joten vähennyksen hakeminen on helppoa.
+    </p>
+
+    <Avainhuomio>Katon pinnoitus ja talon ulkomaalaus ovat kodin kunnossapitoa, josta vähennyksen saa. Omavastuu on 150 € vuodessa.</Avainhuomio>
+    <h2>Mitä laskustamme pitää katsoa?</h2>
+    <p>
+      Kirjoitamme laskuun työn ja materiaalit erikseen. Vähennys lasketaan työn osuudesta, ja arvonlisävero on
+      siinä mukana. Tarvitset ilmoitukseen kolme asiaa: yrityksen nimen, Y-tunnuksen ja maksamasi työn osuuden.
+    </p>
+    <p>
+      Pinnoituksessa työn osuus on iso osa hinnasta, koska pesu, tiilien vaihto ja kaksi maalikerrosta ovat
+      käsityötä. Maalauksessa samoin: homepesu, kaavinta ja pensselillä maalaus ovat työtä, maali on tarvike.
     </p>
 
     <h2>Maksupäivä ratkaisee vuoden</h2>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type MouseEvent } from "react";
 import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Phone } from "@/components/icons/BrandIcons";
 import { getStorageUrl } from "@/lib/storage";
@@ -257,7 +257,7 @@ const Header = () => {
 
                   <AnimatePresence>
                     {openDropdown === item.label && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
@@ -277,7 +277,7 @@ const Header = () => {
                             </Link>
                           ))}
                         </div>
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -310,7 +310,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -354,7 +354,7 @@ const Header = () => {
                     </div>
                     <AnimatePresence>
                       {openDropdown === item.label && (
-                        <motion.div
+                        <m.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
@@ -370,7 +370,7 @@ const Header = () => {
                               {subItem.label}
                             </Link>
                           ))}
-                        </motion.div>
+                        </m.div>
                       )}
                     </AnimatePresence>
                   </div>
@@ -393,7 +393,7 @@ const Header = () => {
                 </Link>
               </div>
             </nav>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

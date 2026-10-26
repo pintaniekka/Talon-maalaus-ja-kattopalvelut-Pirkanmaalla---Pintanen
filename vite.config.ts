@@ -25,7 +25,8 @@ export default defineConfig(() => ({
         assetFileNames: "assets/[name].[hash][extname]",
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-motion': ['framer-motion'],
+          // framer-motion ei ole omassa paketissaan: sen animaatio-ominaisuudet ladataan laiskasti
+          // (src/lib/motionFeatures.ts), ja oma paketti pakottaisi ne samaan tiedostoon ytimen kanssa.
           // Vain se Radix-paketti, jota sovelluksen runko tarvitsee jokaisella sivulla (Toaster
           // App.tsx:ssä). Muut Radix-paketit (popover, dialog) latautuvat vain sivuilla, jotka niitä
           // käyttävät, ja käyttämättömät karsiutuvat kokonaan. Aiemmin listassa oli yhdeksän pakettia,

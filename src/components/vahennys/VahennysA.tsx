@@ -22,7 +22,7 @@ const VahennysA = () => (
         </div>
         <Link to={VAHENNYS_ARTIKKELI} className={`${VAHENNYS_BTN_OUTLINE} self-start md:self-auto`}>
           Lue lisää
-          <span className="sr-only">: kotitalousvähennys katto- ja maalaustöissä</span>
+          <span className="sr-only">: kotitalousvähennys katon pinnoituksesta ja talon maalauksesta</span>
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>

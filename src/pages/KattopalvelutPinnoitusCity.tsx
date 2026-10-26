@@ -7,7 +7,7 @@ import CityMap from "@/components/CityMap";
 import { hasKuntakartta } from "@/data/kartat";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
-import CityNeighborLinks from "@/components/CityNeighborLinks";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur";
 import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
 import PinnoitusSamaTyo from "@/components/pinnoitus/PinnoitusSamaTyo";
@@ -115,7 +115,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       />
       {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
       <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
-      <CityNeighborLinks city={cityData} service="pinnoitus" />
+      <ToimintaAlueetBanner activeCity={cityData.slug} service="pinnoitus" showNeighbors />
     </div>
   );
 };

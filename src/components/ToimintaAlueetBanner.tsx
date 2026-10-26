@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { allCities, pinnoitusCities, maalausCities } from "@/data/cityData";
+import { allCities, pinnoitusCities, maalausCities, getCityBySlug, type CityData } from "@/data/cityData";
+import { cityNeighbors } from "@/data/cityNeighbors";
 import { getStorageUrl } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +15,8 @@ interface ToimintaAlueetBannerProps {
   activeCity?: string;
   /** Millä sivulla ollaan. Palvelusivulla saman palvelun linkki on nykyinen sivu; aluesivulla ("alue", oletus) korostetaan molemmat. */
   service?: Service;
+  /** Kaupunkisivulla: naapurikunnat nappeina haitarien yläpuolelle (Eerik 26.10.2026: yksi toiminta-alueet-lohko, ei kahta). */
+  showNeighbors?: boolean;
 }
 
 /** Kaksi ryhmää (Eerik 14.10.2026): Pirkanmaa sekä Kanta-Häme ja Satakunta yhdessä. */
@@ -143,8 +146,18 @@ const RegionAccordion = ({ region, defaultOpen, activeCity, service }: RegionAcc
  * Toiminta-alueet-sivulle. Kartta on läpinäkyvä PNG ja istuu tummalle pohjalle, ei valkoiselle.
  * Aluesivujen linkit ovat vain alatunnisteessa. Kaikki linkit ovat aina HTML:ssä.
  */
-const ToimintaAlueetBanner = ({ activeCity, service = "alue" }: ToimintaAlueetBannerProps) => {
+const ToimintaAlueetBanner = ({ activeCity, service = "alue", showNeighbors = false }: ToimintaAlueetBannerProps) => {
   const [mapFailed, setMapFailed] = useState(false);
+  const group = linkGroups.find((g) => g.key === service);
+  const neighbors: CityData[] =
+    showNeighbors && activeCity && group
+      ? (cityNeighbors[activeCity] ?? [])
+          .filter((slug) => group.has(slug))
+          .map((slug) => getCityBySlug(slug))
+          .filter((c): c is CityData => Boolean(c))
+          .slice(0, 6)
+      : [];
+  const city = activeCity ? getCityBySlug(activeCity) : undefined;
 
   return (
     <section className="bg-background py-8 md:py-12" aria-labelledby="toiminta-alueet-otsikko">
@@ -158,6 +171,26 @@ const ToimintaAlueetBanner = ({ activeCity, service = "alue" }: ToimintaAlueetBa
               <p className="mt-2 max-w-xl text-[15px] leading-relaxed text-white/70 md:text-base">
                 Pinnoitamme tiilikattoja ja maalaamme taloja Pirkanmaalla ja lähikunnissa.
               </p>
+
+              {neighbors.length > 0 && group && city && (
+                <div className="mt-5">
+                  <h3 className="m-0 text-sm font-bold uppercase tracking-wider text-white/60">
+                    {group.title} {city.cityGenitive} naapurikunnissa
+                  </h3>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {neighbors.map((n) => (
+                      <li key={n.slug}>
+                        <Link
+                          to={group.href(n.slug)}
+                          className="inline-flex items-center rounded-xl border border-white/20 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
+                        >
+                          {group.title} {n.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               <div className="mt-5">
                 {regions.map((region, i) => (

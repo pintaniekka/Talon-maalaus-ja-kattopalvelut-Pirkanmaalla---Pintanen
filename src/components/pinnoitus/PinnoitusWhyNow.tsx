@@ -30,10 +30,10 @@ const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
       <div className="grid lg:grid-cols-2 gap-10 items-start max-w-6xl mx-auto">
         <div className="lg:sticky lg:top-28">
           <BeforeAfterSlider
-            beforeImage={getResponsiveSrc("likainen-tiilikatto-ennen-pesua-ja-suojakasittelya")}
-            afterImage={getResponsiveSrc("uudenveroinen-punainen-tiilikatto-maalaus-jalkeen")}
-            beforeSrcSet={getResponsiveSrcSet("likainen-tiilikatto-ennen-pesua-ja-suojakasittelya")}
-            afterSrcSet={getResponsiveSrcSet("uudenveroinen-punainen-tiilikatto-maalaus-jalkeen")}
+            beforeImage={getResponsiveSrc("tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen")}
+            afterImage={getResponsiveSrc("tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen")}
+            beforeSrcSet={getResponsiveSrcSet("tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen")}
+            afterSrcSet={getResponsiveSrcSet("tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen")}
             beforeAlt="Likainen tiilikatto ennen pesua"
             afterAlt="Punainen tiilikatto maalauksen jälkeen"
           />

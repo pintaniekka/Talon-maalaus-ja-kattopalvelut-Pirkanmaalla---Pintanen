@@ -54,7 +54,7 @@ export const articles: ArticleMeta[] = [
     publishedAt: "2026-05-24",
     updatedAt: "2026-09-30",
     readingMinutes: 5,
-    heroImage: "punainen-tiilikatto-kattopinnoitus-ja-huolto-jalkeen",
+    heroImage: "tiilikaton-pinnoitus-punainen-tiilikatto-kattopinnoitus-jalkeen",
     heroAlt: "Punainen tiilikatto pinnoituksen ja huollon jälkeen",
     heroCaption: "Pinnoitettu tiilikatto huollon jälkeen.",
   },
@@ -70,7 +70,7 @@ export const articles: ArticleMeta[] = [
     publishedAt: "2026-09-30",
     updatedAt: "2026-10-12",
     readingMinutes: 5,
-    heroImage: "keltainen-omakotitalo-julkisivumaalaus-jalkeen",
+    heroImage: "talon-maalaus-keltainen-omakotitalo-julkisivumaalaus-jalkeen",
     heroAlt: "Keltainen omakotitalo julkisivumaalauksen jälkeen",
   },
   {
@@ -84,7 +84,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2026-10-04",
     readingMinutes: 6,
-    heroImage: "tummansininen-puutalo-ulkomaalaus-jalkeen",
+    heroImage: "talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen",
     heroAlt: "Tummansininen puutalo ulkomaalauksen jälkeen",
   },
   {
@@ -124,7 +124,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2026-10-27",
     readingMinutes: 5,
-    heroImage: "keltainen-puuverhous-ennen-julkisivumaalausta",
+    heroImage: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta",
     heroAlt: "Keltainen puuverhous ennen julkisivumaalausta",
   },
   {
@@ -138,7 +138,7 @@ export const articles: ArticleMeta[] = [
     author: "eerik",
     publishedAt: "2026-11-03",
     readingMinutes: 5,
-    heroImage: "tummanharmaa-tiilikaton-pinnoitus-ja-huolto-jalkeen",
+    heroImage: "tiilikaton-pinnoitus-tummanharmaa-tiilikatto-pinnoitus-jalkeen",
     heroAlt: "Tummanharmaa tiilikatto pinnoituksen ja huollon jälkeen",
   },
 ];

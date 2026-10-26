@@ -75,7 +75,7 @@ const Body = () => (
       Me käytämme korkeapaineruiskua. Sillä maali leviää tasaisesti.
     </p>
     <Figure
-      image="kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen"
+      image="tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen"
       alt="Kirkkaan punainen tiilikatto pinnoituksen jälkeen"
       caption="Tasainen pinta vaatii hyvät pohjatyöt ja kaksi maalikerrosta."
     />

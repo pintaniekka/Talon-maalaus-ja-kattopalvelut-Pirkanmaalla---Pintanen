@@ -8,6 +8,7 @@ import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur"
 import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
 import PinnoitusSamaTyo from "@/components/pinnoitus/PinnoitusSamaTyo";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
+import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
@@ -32,6 +33,7 @@ const KattopalvelutPinnoitus = () => {
       <SEO {...seo} breadcrumbs={[{ name: "Tiilikaton pinnoitus" }]} />
       <ServiceSchema
         name="Tiilikaton pinnoitus"
+        alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]}
         area="Pirkanmaa"
         areaType="AdministrativeArea"
         description={seo.description}
@@ -71,6 +73,7 @@ const KattopalvelutPinnoitus = () => {
       />
 
       <PinnoitusSamaTyo />
+      <Vaarinymmarrykset service="pinnoitus" />
 
       <PinnoitusComparison />
       <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" />

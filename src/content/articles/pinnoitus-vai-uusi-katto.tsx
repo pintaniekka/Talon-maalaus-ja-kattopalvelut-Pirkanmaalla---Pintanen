@@ -69,7 +69,7 @@ const Body = () => (
       <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto/">milloin tiilikatto pitää pinnoittaa</Link>.
     </p>
     <Figure
-      image="tummanharmaa-kattotiili-pesu-ja-pinnoitustyo"
+      image="tiilikaton-pesu-ja-pinnoitus-tummanharmaa-kattotiili"
       alt="Tummanharmaa tiilikatto pesu- ja pinnoitustyön aikana"
       caption="Pinnoituksessa tiili saa uuden pinnan. Kattoa ei pureta."
     />

@@ -50,7 +50,7 @@ const Body = () => (
       <li>Katso lautojen päät ja saumat. Halkeamat ja tummat kohdat kertovat kosteudesta.</li>
     </ol>
     <Figure
-      image="puutalon-ja-parvekkeen-puuosien-kunnostus-ennen"
+      image="talon-maalaus-puutalo-ja-parveke-ennen-maalausta"
       alt="Puutalon ja parvekkeen puuosat ennen kunnostusta"
       caption="Puuosat ennen kunnostusta ja huoltomaalausta."
     />
@@ -86,7 +86,7 @@ const Body = () => (
       palvelu sivulta <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.
     </p>
     <Figure
-      image="puutalon-ja-parvekkeen-huoltomaalaus-jalkeen"
+      image="talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen"
       alt="Puutalo ja parveke huoltomaalauksen jälkeen"
       caption="Sama kohde kunnostuksen ja huoltomaalauksen jälkeen."
     />

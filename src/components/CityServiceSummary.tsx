@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
 type Service = "pinnoitus" | "maalaus";
 
@@ -34,19 +33,15 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
       links: [{ to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Lue lisää pinnoituksesta" }],
     },
   ],
+  // Yöajo 26.10.2026: hintakortit ja työvaiheet ovat omina osioinaan, joten tässä vain mitä hintaan kuuluu ja vertailu.
   maalaus: (cityIn) => [
     {
-      title: `Mitä talon maalaus ${cityIn} maksaa?`,
-      text: `Omakotitalon ulkomaalaus maksaa meillä yleensä ${MAALAUS_HINTA}. Hinta riippuu talon koosta, kerroksista ja pohjatöiden määrästä.`,
+      title: "Hintaan kuuluu kaikki",
+      text: "Suojaus, homepesu, kaavinta, pohjamaali paljaisiin kohtiin, pintamaali pensselillä, siivous ja 2 vuoden takuu. Saat kirjallisen tarjouksen kiinteällä hinnalla heti arviokäynnin jälkeen.",
       links: [
         { to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" },
         { to: "/talon-maalaus-hinta-pirkanmaa/", label: "Katso hintaesimerkit" },
       ],
-    },
-    {
-      title: "Talo valmistuu 3–7 päivässä",
-      text: "Eemil tulee ensin katsomaan seinät, ja saat kirjallisen tarjouksen. Sitten seinät pestään homepesuaineella ja irtoava maali kaavitaan. Paljaat kohdat pohjamaalataan, ja pintamaali maalataan pensselillä. Työllä on 2 vuoden takuu.",
-      links: [{ to: "/talon-maalaus-pirkanmaa/", label: "Katso kaikki työvaiheet" }],
     },
     {
       title: "Huoltomaalaus vai uusi ulkoverhous?",
@@ -58,7 +53,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
 
 const headings: Record<Service, (cityIn: string) => string> = {
   pinnoitus: (cityIn) => `Mitä hintaan kuuluu ${cityIn}?`,
-  maalaus: (cityIn) => `Hinta, työn kulku ja takuu ${cityIn}`,
+  maalaus: (cityIn) => `Mitä hintaan kuuluu ${cityIn}?`,
 };
 
 const CityServiceSummary = ({ service, cityIn }: { service: Service; cityIn: string }) => {

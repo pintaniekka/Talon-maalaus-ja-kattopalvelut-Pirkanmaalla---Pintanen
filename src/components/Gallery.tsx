@@ -8,9 +8,9 @@ const items = [
   "tiilikaton-pinnoitus-tampere-tiilitalo",
   "talon-maalaus-parkano-keltainen-puutalo",
   "tiilikaton-pinnoitus-ylojarvi-punainen-katto",
-  "vaalea-talo-pinnoitettu-tiilikatto-kangasala",
-  "musta-tiilikatto-pinnoituksen-jalkeen-ylojarvi",
-  "punainen-tiilikatto-pinnoituksen-jalkeen-orivesi",
+  "tiilikaton-pinnoitus-kangasala-vaalea-talo-jalkeen",
+  "tiilikaton-pinnoitus-ylojarvi-musta-tiilikatto-jalkeen",
+  "tiilikaton-pinnoitus-orivesi-punainen-tiilikatto-jalkeen",
 ]
   .map(pick)
   .filter((p): p is ProjectItem => Boolean(p));

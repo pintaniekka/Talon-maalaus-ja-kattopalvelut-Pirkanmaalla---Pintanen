@@ -17,8 +17,8 @@ interface CityProps {
   cityIn: string;
 }
 
-const beforeBase = "keltainen-puutalo-varinvaihto-ennen-maalausta";
-const afterBase = "violetti-puutalo-varinvaihto-peittomaalaus-jalkeen";
+const beforeBase = "talon-maalaus-keltainen-puutalo-varinvaihto-ennen";
+const afterBase = "talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen";
 
 const signs = [
   {
@@ -102,7 +102,7 @@ export const MaalausCitySigns = ({ cityIn }: CityProps) => (
   </section>
 );
 
-const comparisonBase = "keltainen-ulkoverhous-huoltomaalaus-jalkeen";
+const comparisonBase = "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen";
 
 export const MaalausCityComparison = ({ cityIn }: CityProps) => (
   <section className="section-padding bg-background">

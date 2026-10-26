@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import { UserRound, Phone, MapPin, Mail, Building, MessageSquare } from "@/components/icons/BrandIcons";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactForm, formErrorMessage } from "@/lib/contactForm";
@@ -13,6 +14,8 @@ let globalOpenFn: (() => void) | null = null;
 export const openQuoteDrawer = () => globalOpenFn?.();
 
 const DesktopQuoteDrawer = () => {
+  // Eerik 26.10.2026: pinnoitussivuilla sana on kuntotarkastus, maalauksessa arviokäynti.
+  const ctaLabel = useLocation().pathname.includes("pinnoitus") ? "Pyydä ilmainen kuntotarkastus" : "Pyydä ilmainen arviokäynti";
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -129,7 +132,7 @@ const DesktopQuoteDrawer = () => {
       <button
         onClick={handleOpen}
         data-track="tarjouspyynto"
-        aria-label="Pyydä ilmainen arviokäynti"
+        aria-label={ctaLabel}
         className="hidden lg:flex fixed right-0 top-1/2 -translate-y-1/2 z-[60] items-center justify-center cursor-pointer group"
         style={{ writingMode: "vertical-rl" }}
       >
@@ -137,7 +140,7 @@ const DesktopQuoteDrawer = () => {
           className="flex items-center gap-2 px-3 py-6 rounded-l-xl text-accent-foreground font-semibold text-sm tracking-wide shadow-md transition-all duration-200 group-hover:px-4 group-hover:shadow-lg"
           style={{ backgroundColor: "hsl(var(--accent-strong))" }}
         >
-          Pyydä ilmainen arviokäynti
+          {ctaLabel}
         </span>
       </button>
 
@@ -173,7 +176,7 @@ const DesktopQuoteDrawer = () => {
               <div className="flex items-start justify-between px-5 pt-5 pb-2 lg:px-6 lg:pt-6">
                 <div className="flex-1 pr-4">
                   <h2 className="text-lg font-bold text-foreground leading-snug">
-                    Pyydä ilmainen arviokäynti
+                    {ctaLabel}
                   </h2>
                   <p className="text-sm text-muted-foreground mt-1">
                     Jätä yhteystietosi. {VASTAUSLUPAUS}

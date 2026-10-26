@@ -10,6 +10,7 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
 import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
+import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist, CompareCards } from "@/components/hinnat/PriceSections";
 import { pinnoitusPrices, fmtRange } from "@/data/prices";
@@ -39,7 +40,15 @@ const faqItems = [
     question: "Paljonko tiilikaton pinnoitus maksaa?",
     answer: `Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä ${general}. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Laskurilla saat suuntaa antavan arvion. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.`,
   },
-  { question: "Kuinka monta päivää työ kestää?", answer: "Työ kestää yleensä 2–4 päivää katon koon mukaan." },
+  { question: "Kuinka monta päivää työ kestää?", answer: "Peruskohteen katto valmistuu 2–3 työpäivässä. Suuri tai jyrkkä katto voi viedä neljä." },
+  {
+    question: "Saanko karkean hinta-arvion ennen käyntiä?",
+    answer: "Kyllä. Hintalaskuri antaa suuntaa antavan arvion heti katon koon ja jyrkkyyden mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa ilmaisen kuntotarkastuksen jälkeen.",
+  },
+  {
+    question: "Milloin pääsette katsomaan katon?",
+    answer: "Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen.",
+  },
   {
     question: "Kuinka pitkään pinnoitettu katto kestää?",
     answer: "Pinnoitettu katto kestää jopa 15–20 vuotta pidempään. Kesto riippuu säästä ja katon kunnosta.",
@@ -66,6 +75,7 @@ const faqItems = [
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi.`,
   },
   { question: "Kuinka pitkä takuu pinnoituksella on?", answer: "Saat tiilikaton pinnoitukselle meiltä 5 vuoden kirjallisen takuun." },
+  { question: "Miten maksu tapahtuu?", answer: "Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi." },
 ];
 
 const faqSchema = {
@@ -180,6 +190,7 @@ const HinnatTiilikalonPinnoitus = () => {
           <Checklist items={offerChecklist} />
         </div>
       </section>
+      <Vaarinymmarrykset service="pinnoitus" />
 
       <FeaturedProjects service="pinnoitus" title="Tiilikaton pinnoituksia Pirkanmaalla" />
 

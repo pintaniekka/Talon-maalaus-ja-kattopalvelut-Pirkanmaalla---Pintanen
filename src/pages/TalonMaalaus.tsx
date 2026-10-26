@@ -7,6 +7,8 @@ import MaalausProblemSection from "@/components/maalaus/MaalausProblemSection";
 import MaalausComparison from "@/components/maalaus/MaalausComparison";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausEntrepreneur from "@/components/maalaus/MaalausEntrepreneur";
+import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
+import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
@@ -28,7 +30,7 @@ const TalonMaalaus = () => {
   return (
     <div>
       <SEO {...seo} breadcrumbs={[{ name: "Talon maalaus" }]} />
-      <ServiceSchema name="Talon ulkomaalaus" area="Pirkanmaa" areaType="AdministrativeArea" description={seo.description} priceRange={maalausPrices.general} />
+      <ServiceSchema name="Talon ulkomaalaus" alternateNames={["Talon maalaus", "Julkisivumaalaus", "Huoltomaalaus", "Puutalon maalaus"]} area="Pirkanmaa" areaType="AdministrativeArea" description={seo.description} priceRange={maalausPrices.general} />
 
       <PageHero
         eyebrow="Talon maalaus · Pirkanmaa"
@@ -74,6 +76,7 @@ const TalonMaalaus = () => {
       </section>
 
       <MaalausProblemSection />
+      <Vaarinymmarrykset service="maalaus" />
 
       <ProcessList
         title="Näin talon maalaus etenee"
@@ -85,6 +88,7 @@ const TalonMaalaus = () => {
       <MaalausComparison />
       <MaalausPricingCards />
       <KotitalousVahennys />
+      <MiksiValitaPintanen service="maalaus" />
       <MaalausEntrepreneur />
       <FAQSection items={maalausFAQ} title="Usein kysyttyä talon maalauksesta" />
 

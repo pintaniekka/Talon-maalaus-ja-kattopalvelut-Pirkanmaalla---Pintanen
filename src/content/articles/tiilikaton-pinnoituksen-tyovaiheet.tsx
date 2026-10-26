@@ -57,7 +57,7 @@ const Body = () => (
       sadevesikourut.
     </p>
     <Figure
-      image="tummanharmaa-kattotiili-pesu-ja-pinnoitustyo"
+      image="tiilikaton-pesu-ja-pinnoitus-tummanharmaa-kattotiili"
       alt="Tiilikaton pesu ja pinnoitus käynnissä"
       caption="Pesu ja pinnoitus etenevät lape kerrallaan."
     />
@@ -81,7 +81,7 @@ const Body = () => (
       vuoden kirjallisen takuun.
     </p>
     <Figure
-      image="uudenveroinen-punainen-tiilikatto-maalaus-jalkeen"
+      image="tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen"
       alt="Punainen tiilikatto maalauksen jälkeen"
       caption="Valmis katto pohjamaalin ja pintamaalin jälkeen."
     />

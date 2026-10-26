@@ -1,25 +1,25 @@
 import { Link } from "react-router-dom";
-import { allCities, getCityBySlug, hasMaalausPage, hasPinnoitusPage, type CityData } from "@/data/cityData";
+import { getCityBySlug, hasMaalausPage, hasPinnoitusPage, type CityData } from "@/data/cityData";
 import { cityNeighbors } from "@/data/cityNeighbors";
 
 type Service = "pinnoitus" | "maalaus";
 
 const config: Record<Service, {
-  title: (c: CityData) => string;
+  title: string;
   label: string;
   href: (slug: string) => string;
   has: (slug: string) => boolean;
   other: { label: (c: CityData) => string; href: (slug: string) => string; has: (slug: string) => boolean };
 }> = {
   pinnoitus: {
-    title: (c) => `Pinnoitamme tiilikattoja myös ${c.cityGenitive} naapurikunnissa`,
+    title: "Tiilikaton pinnoitus muualla Pirkanmaalla",
     label: "Tiilikaton pinnoitus",
     href: (slug) => `/tiilikaton-pinnoitus-${slug}/`,
     has: hasPinnoitusPage,
     other: { label: (c) => `Talon maalaus ${c.cityIn}`, href: (slug) => `/talon-maalaus-${slug}/`, has: hasMaalausPage },
   },
   maalaus: {
-    title: (c) => `Maalaamme taloja myös ${c.cityGenitive} naapurikunnissa`,
+    title: "Talon maalaus muualla Pirkanmaalla",
     label: "Talon maalaus",
     href: (slug) => `/talon-maalaus-${slug}/`,
     has: hasMaalausPage,
@@ -27,69 +27,51 @@ const config: Record<Service, {
   },
 };
 
-const linkClass =
+const chip =
   "inline-flex items-center px-4 py-2 rounded-xl border border-border bg-card text-sm font-semibold text-foreground hover:border-accent hover:text-accent-ink transition-colors";
 
 /**
- * Linkit saman palvelun sivuille naapurikunnissa sekä paikkakunnan toiseen palveluun ja aluesivulle.
- * Lisäksi tekstilinkit kaikkiin muihin kuntiin (SEO-suunnitelma 25.10.2026: jokainen kaupunkisivu linkittää kaikkiin).
+ * Sivun loppu: naapurikunnat nappeina (enintään kuusi), sitten yksi rivi: toinen palvelu samalla
+ * paikkakunnalla ja kaikki paikkakunnat. Yöajo 26.10.2026 (Eerik: "sekava linkkiröykkiö" pois):
+ * tekstilinkit kaikkiin kuntiin poistettu, koska alatunniste linkittää jo jokaiseen kuntaan.
  */
 const CityNeighborLinks = ({ city, service }: { city: CityData; service: Service }) => {
   const c = config[service];
   const neighbors = (cityNeighbors[city.slug] ?? [])
     .filter((slug) => c.has(slug))
     .map((slug) => getCityBySlug(slug))
-    .filter((n): n is CityData => Boolean(n));
-  const neighborSlugs = new Set(neighbors.map((n) => n.slug));
-  const others = allCities.filter((o) => o.slug !== city.slug && !neighborSlugs.has(o.slug) && c.has(o.slug));
+    .filter((n): n is CityData => Boolean(n))
+    .slice(0, 6);
 
   return (
     <section className="py-12 md:py-16 bg-background">
       <div className="section-container max-w-4xl mx-auto text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-6 font-heading">{c.title}</h2>
         {neighbors.length > 0 && (
-          <>
-            <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-6 font-heading">{c.title(city)}</h2>
-            <ul className="flex flex-wrap justify-center gap-3 mb-8">
-              {neighbors.map((n) => (
-                <li key={n.slug}>
-                  <Link to={c.href(n.slug)} className={linkClass}>
-                    {c.label} {n.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-        {others.length > 0 && (
-          <p className="text-sm text-muted-foreground mb-6">
-            {c.label} muualla:{" "}
-            {others.map((o, i) => (
-              <span key={o.slug}>
-                <Link to={c.href(o.slug)} className="underline hover:text-accent-ink">
-                  {o.name}
+          <ul className="flex flex-wrap justify-center gap-3 mb-6">
+            {neighbors.map((n) => (
+              <li key={n.slug}>
+                <Link to={c.href(n.slug)} className={chip}>
+                  {n.name}
                 </Link>
-                {i < others.length - 1 ? ", " : ""}
-              </span>
+              </li>
             ))}
+            <li>
+              <Link to="/toiminta-alueet/" className={`${chip} border-accent text-accent-ink`}>
+                Kaikki paikkakunnat
+              </Link>
+            </li>
+          </ul>
+        )}
+        {c.other.has(city.slug) && (
+          <p className="text-muted-foreground">
+            Katso myös:{" "}
+            <Link to={c.other.href(city.slug)} className="text-accent-ink underline font-medium">
+              {c.other.label(city)}
+            </Link>
             .
           </p>
         )}
-        <p className="text-muted-foreground">
-          {c.other.has(city.slug) && (
-            <>
-              Katso myös:{" "}
-              <Link to={c.other.href(city.slug)} className="text-accent-ink underline font-medium">
-                {c.other.label(city)}
-              </Link>
-              .{" "}
-            </>
-          )}
-          Kaikki palvelumme {city.cityIn}:{" "}
-          <Link to={`/maalauspalvelut-${city.slug}/`} className="text-accent-ink underline font-medium">
-            Maalausliike ja kattopalvelut {city.name}
-          </Link>
-          .
-        </p>
       </div>
     </section>
   );

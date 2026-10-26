@@ -18,8 +18,8 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
     {
       title: "Tiilikaton pinnoitus",
       href: `/tiilikaton-pinnoitus-${citySlug}/`,
-      beforeBase: "haalistunut-punainen-tiilikatto-ennen-pinnoitusta",
-      afterBase: "kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen",
+      beforeBase: "tiilikaton-pinnoitus-haalistunut-punainen-tiilikatto-ennen",
+      afterBase: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
       description: "Pesemme katon, vaihdamme rikkinäiset tiilet uusiin ja maalaamme katon ruiskulla kahteen kertaan. Pinnoitettu katto kestää jopa 15–20 vuotta pidempään.",
       features: ["Pesu painepesulla", "Rikkinäiset tiilet uusiin", "Pohjamaali ja pintamaali ruiskulla"],
       warranty: "5 v takuu",
@@ -27,8 +27,8 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
     {
       title: "Ulkomaalaus",
       href: `/talon-maalaus-${citySlug}/`,
-      beforeBase: "keltainen-puutalo-varinvaihto-ennen-maalausta",
-      afterBase: "violetti-puutalo-varinvaihto-peittomaalaus-jalkeen",
+      beforeBase: "talon-maalaus-keltainen-puutalo-varinvaihto-ennen",
+      afterBase: "talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen",
       description: "Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
       features: ["Homepesu ja kaavinta", "Pintamaali pensselillä", "2 v takuu"],
       warranty: "2 v takuu",

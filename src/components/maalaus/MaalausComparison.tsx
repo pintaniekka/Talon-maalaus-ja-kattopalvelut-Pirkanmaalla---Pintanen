@@ -3,7 +3,7 @@ import ResponsiveImage from '@/components/ResponsiveImage';
 import { MAALAUS_HINTA } from '@/data/tyovaiheet';
 import { getArticleBySlug, isPublished } from '@/data/articles';
 
-const comparisonBase = "keltainen-ulkoverhous-huoltomaalaus-jalkeen";
+const comparisonBase = "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen";
 const ARTIKKELI_SLUG = "huoltomaalaus-vai-uusi-ulkoverhous";
 
 /** Huoltomaalaus vai uusi ulkoverhous (palvelusivu ja hintasivu). Ei säästölukuja, hinta haarukkana. */

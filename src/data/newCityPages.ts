@@ -36,7 +36,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Lempäälä on Tampereen eteläinen naapurikunta. Keskusta on kannaksella Vanajaveden ja Pyhäjärven välissä. Asutus jatkuu keskustasta yhtenäisenä Tampereen rajalle asti, esimerkiksi Kuljuun ja Sääksjärvelle.",
     maalausLocalHookTitle: "Talon maalaus Lempäälässä: Kulju, Sääksjärvi, Hakkari ja keskusta",
     maalausLocalHookText:
-      "Lempäälä on Tampereen eteläinen naapurikunta, ja asutus jatkuu keskustasta yhtenäisenä Tampereen rajalle asti. Eemil maalaa taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa. Lempäälässä on 1 026 omakoti- ja paritaloa, jotka on rakennettu vuosina 2000–2009. Puutalo maalataan yleensä 10–15 vuoden välein. Jos sen ikäistä taloa ei ole vielä maalattu uudelleen, seinät kannattaa katsoa läpi. Arviokäynti on ilmainen.",
+      "Lempäälä on Tampereen eteläinen naapurikunta, ja asutus jatkuu keskustasta yhtenäisenä Tampereen rajalle asti. Eemil maalaa taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa.",
   },
   valkeakoski: {
     ...era(1),
@@ -45,7 +45,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Valkeakoski on 35 kilometriä Tampereelta etelään. Kaupunki on Mallasveden ja Vanajaveden yhtymäkohdassa, ja keskustan läpi kulkee kanava. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Valkeakosken keskustassa, Sääksmäellä ja Kärjenniemessä.",
     maalausLocalHookTitle: "Talon maalaus Valkeakoskella: joka kolmas talo on 1940- ja 1950-luvuilta",
     maalausLocalHookText:
-      "Valkeakoski kasvoi paperi- ja selluloosatehtaiden ympärille. Kaupungin 4 827 omakoti- ja paritalosta 1 579 on rakennettu vuosina 1940–1959, eli joka kolmas. Osuus on suurempi kuin missään muussa toiminta-alueemme kunnassa. Sen ikäinen puutalo on maalattu jo monta kertaa. Silloin pohjatyöt ratkaisevat: irtoava maali kaavitaan pois ennen uutta maalia. Eemil maalaa taloja Valkeakosken keskustassa, Sääksmäellä ja Kärjenniemessä. Arviokäynti on ilmainen.",
+      "Valkeakoski kasvoi paperi- ja selluloosatehtaiden ympärille. Eemil maalaa taloja Valkeakosken keskustassa, Sääksmäellä ja Kärjenniemessä.",
   },
   akaa: {
     ...era(1),
@@ -54,7 +54,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Akaa syntyi vuonna 2007, kun Toijala ja Viiala yhdistyivät. Kylmäkoski liittyi kaupunkiin vuonna 2011. Pinnoitamme tiilikattoja kaikissa kolmessa taajamassa ja niiden ympäristössä. Toijalasta on Tampereelle noin 41 kilometriä.",
     maalausLocalHookTitle: "Puutalon maalaus Toijalassa, Viialassa ja Kylmäkoskella",
     maalausLocalHookText:
-      "Akaassa on paljon vanhoja taloja. Kaupungin 4 998 omakoti- ja paritalosta 2 179 on rakennettu ennen vuotta 1960. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja Toijalassa, Viialassa ja Kylmäkoskella. Hän pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat puukohdat ja maalaa pintamaalin pensselillä. Arviokäynti on ilmainen.",
+      "Akaa syntyi vuonna 2007, kun Toijala ja Viiala yhdistyivät, ja Kylmäkoski liittyi kaupunkiin 2011. Akaassa on paljon vanhoja puutaloja. Eemil maalaa taloja Toijalassa, Viialassa ja Kylmäkoskella.",
   },
   orivesi: {
     ...era(1),
@@ -63,7 +63,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Orivedeltä on Tampereelle noin 40 kilometriä. Kaupungissa on yli 350 järveä, ja maisemaa hallitsee Längelmävesi. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä.",
     maalausLocalHookTitle: "Talon maalaus Orivedellä: lähes puolet taloista on ajalta ennen 1960",
     maalausLocalHookText:
-      "Orivedellä on 3 260 omakoti- ja paritaloa. Niistä 1 548 on rakennettu ennen vuotta 1960, eli lähes puolet. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä. Hän tulee ensin katsomaan seinät ja kertoo, paljonko pohjatöitä ne tarvitsevat. Käynti on ilmainen, ja Orivedeltä on Tampereelle vain noin 40 kilometriä.",
+      "Orivedeltä on Tampereelle noin 40 kilometriä. Kaupungissa on yli 350 järveä, ja veden ja metsän lähellä seinät kuivuvat sateen jälkeen hitaasti. Eemil maalaa taloja Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä.",
   },
 
   // ───────────── Erä 2 ─────────────
@@ -74,7 +74,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Ikaalisten keskusta on niemessä Kyrösjärven rannalla. Tampereelle on matkaa runsaat 50 kilometriä. Pinnoitamme tiilikattoja Ikaalisten keskustassa ja kylissä, esimerkiksi Kilvakkalassa.",
     maalausLocalHookTitle: "Talon maalaus Ikaalisissa: keskustasta Kilvakkalaan",
     maalausLocalHookText:
-      "Eemil maalaa taloja Ikaalisten keskustassa ja kylissä, esimerkiksi Kilvakkalassa. Keskusta on niemessä Kyrösjärven rannalla, ja Tampereelle on runsaat 50 kilometriä. Varjoisa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Siksi pesemme seinät aina homepesuaineella ennen maalausta. Arviokäynti Ikaalisissa on ilmainen.",
+      "Ikaalisten keskusta on niemessä Kyrösjärven rannalla, ja Tampereelle on runsaat 50 kilometriä. Varjoisa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Eemil maalaa taloja Ikaalisten keskustassa ja kylissä, esimerkiksi Kilvakkalassa.",
   },
   juupajoki: {
     ...era(2),
@@ -83,7 +83,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Juupajoki on väkiluvultaan Pirkanmaan pienin kunta. Kunnan ainoa taajama on Korkeakoski, ja Tampereelle on matkaa 55 kilometriä. Pinnoitamme tiilikattoja Korkeakoskella ja kunnan kylissä.",
     maalausLocalHookTitle: "Talon maalaus Juupajoella: joka toinen talo on ajalta ennen 1960",
     maalausLocalHookText:
-      "Juupajoella on paljon vanhoja taloja. Kunnan 797 omakoti- ja paritalosta 418 on rakennettu ennen vuotta 1960. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat puukohdat ja maalaa pintamaalin pensselillä. Arviokäynti Korkeakoskella ja muualla Juupajoella on ilmainen.",
+      "Juupajoki on Pirkanmaan pienin kunta, ja sen ainoa taajama on Korkeakoski. Juupajoella on paljon vanhoja puutaloja. Eemil maalaa taloja Korkeakoskella ja muualla Juupajoella.",
   },
   kihnio: {
     ...era(2),
@@ -92,7 +92,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Kihniö on Pirkanmaan pohjoisosassa. Kirkonkylä on Sulkuejärven rannalla valtatien 23 varrella. Pinnoitamme tiilikattoja kirkonkylässä ja kunnan kylissä.",
     maalausLocalHookTitle: "Talon maalaus Kihniössä: kirkonkylä, Nerkoo ja Linnankylä",
     maalausLocalHookText:
-      "Kihniö on Pirkanmaan pohjoisosassa, ja kirkonkylä on Sulkuejärven rannalla. Eemil maalaa taloja kirkonkylässä ja kylissä, esimerkiksi Nerkoossa ja Linnankylässä. Kihniön 892 omakoti- ja paritalosta lähes kaikki on rakennettu ennen vuotta 2010. Puutalo maalataan yleensä 10–15 vuoden välein, joten moni talo on jo maalattu ainakin kerran uudelleen. Arviokäynti on ilmainen.",
+      "Kihniö on Pirkanmaan pohjoisosassa, ja kirkonkylä on Sulkuejärven rannalla. Eemil maalaa taloja kirkonkylässä ja kylissä, esimerkiksi Nerkoossa ja Linnankylässä.",
   },
   "mantta-vilppula": {
     ...era(2),
@@ -101,7 +101,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Mänttä-Vilppula syntyi vuonna 2009, kun Mänttä ja Vilppula yhdistyivät. Mäntän keskusta on kannaksella Keurusselän ja Kuoreveden välissä. Kaupungissa on 3 096 omakoti- ja paritaloa. Niistä 928 on rakennettu 1970- ja 1980-luvuilla, ja uusia taloja on vähän. Kun tiilen pinta on kulunut, tiili imee vettä ja sammal tarttuu siihen. Pinnoitamme tiilikattoja Mäntässä, Vilppulassa, Kolhossa ja Pohjaslahdella.",
     maalausLocalHookTitle: "Talon maalaus Mäntässä, Vilppulassa, Kolhossa ja Pohjaslahdella",
     maalausLocalHookText:
-      "Mänttä-Vilppula on kasvanut metsäteollisuuden ympärille. Kaupungin 3 096 omakoti- ja paritalosta 1 375 on rakennettu ennen vuotta 1960. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja Mäntässä, Vilppulassa, Kolhossa ja Pohjaslahdella. Hän tulee ensin katsomaan seinät ja kertoo, paljonko pohjatöitä ne tarvitsevat. Käynti on ilmainen.",
+      "Mänttä-Vilppula on kasvanut metsäteollisuuden ympärille. Eemil maalaa taloja Mäntässä, Vilppulassa, Kolhossa ja Pohjaslahdella.",
   },
   parkano: {
     ...era(2),
@@ -110,7 +110,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Parkano on valtateiden 3 ja 23 risteyksessä, noin tunnin matkan päässä Tampereelta. Kaupungin pinta-alasta 65 prosenttia on metsää. Puiden varjossa katto kuivuu hitaasti, ja sammal viihtyy kosteassa.",
     maalausLocalHookTitle: "Talon maalaus Parkanossa metsien keskellä",
     maalausLocalHookText:
-      "Parkanon pinta-alasta 65 prosenttia on metsää. Puiden varjossa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Siksi pesemme seinät aina homepesuaineella ennen maalausta. Kuvia kohteestamme Parkanossa näet tältä sivulta. Eemil tulee katsomaan talosi ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.",
+      "Parkanon pinta-alasta 65 prosenttia on metsää. Puiden varjossa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Eemil maalaa taloja Parkanon keskustassa ja kylissä. Kuvia kohteestamme Parkanossa näet tältä sivulta.",
   },
   palkane: {
     ...era(2),
@@ -119,7 +119,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Pälkäneeltä on Tampereelle 35 kilometriä. Kunnan keskusta Onkkaala on kannaksella Pälkäneveden ja Mallasveden välissä. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Onkkaalassa, Luopioisissa ja Aitoossa.",
     maalausLocalHookTitle: "Talon maalaus Pälkäneellä: Onkkaalasta Luopioisiin",
     maalausLocalHookText:
-      "Pälkäneellä on 2 813 omakoti- ja paritaloa, ja niistä 1 281 on rakennettu ennen vuotta 1960. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja Onkkaalassa, Luopioisissa ja Aitoossa. Hän pesee seinät homepesuaineella, kaapii irtoavan maalin, pohjamaalaa paljaat puukohdat ja maalaa pintamaalin pensselillä. Pälkäneeltä on Tampereelle vain 35 kilometriä, ja arviokäynti on ilmainen.",
+      "Pälkäneeltä on Tampereelle 35 kilometriä, ja kunnan keskusta Onkkaala on kannaksella Pälkäneveden ja Mallasveden välissä. Pälkäneellä on paljon vanhoja puutaloja. Eemil maalaa taloja Onkkaalassa, Luopioisissa ja Aitoossa.",
   },
   ruovesi: {
     ...era(2),
@@ -128,7 +128,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Ruoveden kirkonkylä on Näsijärven Ruoveden rannalla. Tampereen keskustaan on matkaa 73 kilometriä. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja kirkonkylässä, Visuvedellä ja Jäminkipohjassa.",
     maalausLocalHookTitle: "Talon maalaus Ruovedellä: yli puolet taloista on ajalta ennen 1960",
     maalausLocalHookText:
-      "Ruovedellä on 1 929 omakoti- ja paritaloa. Niistä 1 005 on rakennettu ennen vuotta 1960, eli yli puolet. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja kirkonkylässä, Visuvedellä ja Jäminkipohjassa. Hän tulee ensin katsomaan seinät ja kertoo, paljonko pohjatöitä ne tarvitsevat. Käynti on ilmainen.",
+      "Ruoveden kirkonkylä on Näsijärven Ruoveden rannalla, ja Tampereen keskustaan on matkaa 73 kilometriä. Ruovedellä on paljon vanhoja puutaloja. Eemil maalaa taloja kirkonkylässä, Visuvedellä ja Jäminkipohjassa.",
   },
   urjala: {
     ...era(2),
@@ -137,7 +137,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Urjala on valtatie 9:n varrella, ja Tampereelle on matkaa 60 kilometriä. Kunnan ainoa taajama on kirkonkylä, ja yli puolet asukkaista asuu sen ulkopuolella. Pinnoitamme tiilikattoja kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa.",
     maalausLocalHookTitle: "Talon maalaus Urjalassa: toiminta-alueemme vanhimmat talot",
     maalausLocalHookText:
-      "Urjalassa on 2 216 omakoti- ja paritaloa, ja niistä 1 237 on rakennettu ennen vuotta 1960. Osuus on suurempi kuin missään muussa toiminta-alueemme kunnassa. Vanha puutalo kestää hyvin, kun maali pidetään kunnossa. Eemil maalaa taloja Urjalan kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa. Arviokäynti on ilmainen.",
+      "Urjala on valtatie 9:n varrella, ja Tampereelle on matkaa 60 kilometriä. Urjalassa on paljon vanhoja puutaloja, ja yli puolet asukkaista asuu kirkonkylän ulkopuolella. Eemil maalaa taloja Urjalan kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa.",
   },
   vesilahti: {
     ...era(2),
@@ -146,7 +146,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Vesilahti on Pyhäjärven etelä- ja kaakkoisrannalla, noin 30 kilometriä Tampereelta lounaaseen. Pinnoitamme tiilikattoja kirkonkylässä, Narvassa ja Koskenkylässä.",
     maalausLocalHookTitle: "Talon maalaus Vesilahdella: kirkonkylä, Narva ja Koskenkylä",
     maalausLocalHookText:
-      "Vesilahti on noin 30 kilometriä Tampereelta lounaaseen. Vesilahdella on 358 omakoti- ja paritaloa, jotka on rakennettu vuosina 2000–2009. Puutalo maalataan yleensä 10–15 vuoden välein. Jos sen ikäistä taloa ei ole vielä maalattu uudelleen, seinät kannattaa katsoa läpi. Eemil maalaa taloja kirkonkylässä, Narvassa ja Koskenkylässä. Arviokäynti on ilmainen.",
+      "Vesilahti on noin 30 kilometriä Tampereelta lounaaseen. Eemil maalaa taloja kirkonkylässä, Narvassa ja Koskenkylässä.",
   },
   virrat: {
     ...era(2),
@@ -155,6 +155,6 @@ export const newCityPages: Record<string, Partial<CityData>> = {
       "Virroilla on 269 järveä, ja asutus on keskittynyt järvien rannoille. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Virtain keskustassa ja kylissä, esimerkiksi Killinkoskella ja Vaskivedellä.",
     maalausLocalHookTitle: "Talon maalaus Virroilla: keskusta, Killinkoski ja Vaskivesi",
     maalausLocalHookText:
-      "Virroilla asutus on keskittynyt järvien rannoille, ja metsää on paljon. Varjoisa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Siksi pesemme seinät aina homepesuaineella ennen maalausta. Eemil maalaa taloja Virtain keskustassa ja kylissä, esimerkiksi Killinkoskella ja Vaskivedellä. Arviokäynti on ilmainen, ja saat kirjallisen tarjouksen käynnin jälkeen.",
+      "Virroilla asutus on keskittynyt järvien rannoille, ja metsää on paljon. Varjoisa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Eemil maalaa taloja Virtain keskustassa ja kylissä, esimerkiksi Killinkoskella ja Vaskivedellä.",
   },
 };

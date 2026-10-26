@@ -35,7 +35,7 @@ const SEOTextSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <ResponsiveImage
-            baseName="tiilikaton-pesu-kesken-tampere"
+            baseName="tiilikaton-pesu-ja-pinnoitus-tampere-pesu-kesken"
             alt="Tiilikaton pesu käynnissä Tampereella: pesty tiili on puhdas ja valmis maalaukseen"
             className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg"
             sizes="(max-width: 1024px) 100vw, 560px"
@@ -61,7 +61,7 @@ const SEOTextSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <ResponsiveImage
-            baseName="puutalon-seinien-maalaus-kaynnissa-tampere"
+            baseName="talon-maalaus-tampere-puutalon-seinien-maalaus-kaynnissa"
             alt="Talon ulkomaalaus käynnissä Tampereella: Pintasen maalari maalaa puutalon seinää pensselillä"
             className="w-full aspect-[4/3] object-cover rounded-2xl shadow-lg lg:order-2"
             sizes="(max-width: 1024px) 100vw, 560px"

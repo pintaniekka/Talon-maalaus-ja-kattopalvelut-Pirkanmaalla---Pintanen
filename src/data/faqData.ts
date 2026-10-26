@@ -60,6 +60,10 @@ export const pinnoitusFAQ: FAQItem[] = [
     answer:
       'Katon voi pestä ja maalata itse, mutta ilman ruiskua ja kunnon kalustoa pinnasta on vaikea saada tasainen. Meiltä saat työlle <strong>5 vuoden kirjallisen takuun</strong>.',
   },
+    {
+      question: 'Maalaatteko myös peltikattoja?',
+      answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
+    },
 ];
 
 export const puhdistusFAQ: FAQItem[] = [
@@ -106,6 +110,10 @@ export const maalausFAQ: FAQItem[] = [
     question: 'Saako talon maalauksesta kotitalousvähennystä?',
     answer: KOTITALOUSVAHENNYS_VASTAUS,
   },
+    {
+      question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
+      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Seinät pestään homepesuaineella, irtoava maali kaavitaan ja paljaat kohdat pohjamaalataan samalla tavalla.',
+    },
 ];
 
 export const generalFAQ: FAQItem[] = [
@@ -164,6 +172,23 @@ export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityI
       answer: `Maali hilseilee, väri on haalistunut tai seinässä on homepilkkuja. Puutalot ${paikka} tarvitsevat uuden maalin yleensä 10–15 vuoden välein.`,
     },
     {
+      question: `Milloin pääsette maalaamaan ${paikka}?`,
+      answer:
+        'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+    },
+    {
+      question: 'Kuinka kauan talon maalaus kestää?',
+      answer: 'Omakotitalo valmistuu yleensä <strong>3–7 päivässä</strong>. Aika riippuu talon koosta ja pohjatöiden määrästä.',
+    },
+    {
+      question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
+      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Seinät pestään homepesuaineella, irtoava maali kaavitaan ja paljaat kohdat pohjamaalataan samalla tavalla.',
+    },
+    {
+      question: 'Miten maksu tapahtuu?',
+      answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
+    },
+    {
       question: 'Saako talon maalauksesta kotitalousvähennystä?',
       answer: KOTITALOUSVAHENNYS_VASTAUS,
     },
@@ -187,7 +212,15 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: `Onko tiilikaton pesu ja pinnoitus sama palvelu ${paikka}?`,
       answer:
-        'Pesu on pinnoituksen ensimmäinen työvaihe. Pesemme katon painepesulla, levitämme kasvustontorjunta-aineen ja maalaamme katon kahteen kertaan. Jos tiilen pinta on kulunut, pelkkä pesu ei riitä, koska tiili imee vettä heti seuraavalla sateella.',
+        'Teemme pesun aina pinnoituksen yhteydessä. Pesemme katon painepesulla, levitämme kasvustontorjunta-aineen ja maalaamme katon kahteen kertaan. Jos tiilen pinta on kulunut, pelkkä pesu ei riitä, koska tiili imee vettä heti seuraavalla sateella.',
+    },
+    {
+      question: 'Maalaatteko myös peltikattoja?',
+      answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
+    },
+    {
+      question: 'Miten maksu tapahtuu?',
+      answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
     },
     {
       question: 'Mitä eroa on katon pinnoituksella ja tiilikaton maalauksella?',
@@ -198,6 +231,11 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
       question: 'Milloin tiilikatto pitää pinnoittaa?',
       answer:
         'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 10–15 vuotta vanha.',
+    },
+    {
+      question: `Milloin pääsette katsomaan katon ${paikka}?`,
+      answer:
+        'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
     },
     {
       question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
@@ -220,3 +258,4 @@ export const getPuhdistusCityFAQ = (cityName: string, cityGenitive?: string): FA
     answer: `Useimmat omakotitalojen katot ${cityGenitive || cityName + 'n'} seudulla puhdistetaan ja käsitellään yhdessä työpäivässä. Tyhjennämme myös rännit roskista työn päätteeksi.`,
   },
 ];
+

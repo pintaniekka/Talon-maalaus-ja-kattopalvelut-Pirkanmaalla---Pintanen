@@ -182,21 +182,21 @@ const Referenssit = () => {
 
   const projects: Project[] = [
     // 1. Vaalea kartano
-    { type: 'single', baseName: 'vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen', category: 'maalaus', title: 'Vaalea kartanomainen puutalo ulkomaalaus jälkeen Pirkanmaalla' },
+    { type: 'single', baseName: 'talon-maalaus-vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen', category: 'maalaus', title: 'Vaalea kartanomainen puutalo ulkomaalaus jälkeen Pirkanmaalla' },
     // 2. Moderni tumma puutalo
-    { type: 'single', baseName: 'moderni-tumma-puutalo-julkisivumaalaus-valmis', category: 'maalaus', title: 'Moderni tumma puutalo julkisivumaalaus valmis Pirkanmaalla' },
+    { type: 'single', baseName: 'talon-maalaus-moderni-tumma-puutalo-julkisivumaalaus-valmis', category: 'maalaus', title: 'Moderni tumma puutalo julkisivumaalaus valmis Pirkanmaalla' },
     // 3. Aurinkopaneeli
     { type: 'single', baseName: 'tiilikaton-pinnoitus-ja-aurinkopaneelien-suojaus', category: 'pinnoitus', title: 'Tiilikaton pinnoitus ja aurinkopaneelien suojaus Pirkanmaalla' },
     // 4. Puhdas tiilenpunainen
-    { type: 'single', baseName: 'puhdas-tiilenpunainen-tiilikatto-suojakasittelyn-jalkeen', category: 'pinnoitus', title: 'Puhdas tiilenpunainen tiilikatto suojakäsittelyn jälkeen Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-puhdas-tiilenpunainen-tiilikatto', category: 'pinnoitus', title: 'Puhdas tiilenpunainen tiilikatto suojakäsittelyn jälkeen Pirkanmaalla' },
     // Loput samassa järjestyksessä
     {
       type: 'group',
       title: 'Tiilikaton pinnoitus – Valkeakoski',
       category: 'pinnoitus',
       images: [
-        { baseName: 'likainen-tiilikatto-ennen-pesua-ja-suojakasittelya', label: 'Likainen tiilikatto ennen pesua ja suojakäsittelyä Valkeakoskella' },
-        { baseName: 'uudenveroinen-punainen-tiilikatto-maalaus-jalkeen', label: 'Uudenveroinen punainen tiilikatto maalaus jälkeen Valkeakoskella' },
+        { baseName: 'tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen', label: 'Likainen tiilikatto ennen pesua ja suojakäsittelyä Valkeakoskella' },
+        { baseName: 'tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen', label: 'Uudenveroinen punainen tiilikatto maalaus jälkeen Valkeakoskella' },
       ],
     },
     {
@@ -204,8 +204,8 @@ const Referenssit = () => {
       title: 'Tiilikaton pinnoitus – Tampere',
       category: 'pinnoitus',
       images: [
-        { baseName: 'haalistunut-punainen-tiilikatto-ennen-pinnoitusta', label: 'Haalistunut punainen tiilikatto ennen pinnoitusta Tampereella' },
-        { baseName: 'kirkkaan-punainen-tiilikatto-pinnoituksen-jalkeen', label: 'Kirkkaan punainen tiilikatto pinnoituksen jälkeen Tampereella' },
+        { baseName: 'tiilikaton-pinnoitus-haalistunut-punainen-tiilikatto-ennen', label: 'Haalistunut punainen tiilikatto ennen pinnoitusta Tampereella' },
+        { baseName: 'tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen', label: 'Kirkkaan punainen tiilikatto pinnoituksen jälkeen Tampereella' },
       ],
     },
     {
@@ -213,8 +213,8 @@ const Referenssit = () => {
       title: 'Tiilikaton puhdistus – Sastamala',
       category: 'pinnoitus',
       images: [
-        { baseName: 'sammaleinen-tiilikatto-ennen-mekaanista-puhdistusta', label: 'Sammaleinen tiilikatto ennen mekaanista puhdistusta Sastamalassa' },
-        { baseName: 'puhdas-tiilikatto-mekaanisen-puhdistuksen-jalkeen', label: 'Puhdas tiilikatto mekaanisen puhdistuksen jälkeen Sastamalassa' },
+        { baseName: 'tiilikaton-pesu-sammaleinen-tiilikatto-ennen', label: 'Sammaleinen tiilikatto ennen mekaanista puhdistusta Sastamalassa' },
+        { baseName: 'tiilikaton-pesu-puhdas-tiilikatto-jalkeen', label: 'Puhdas tiilikatto mekaanisen puhdistuksen jälkeen Sastamalassa' },
       ],
     },
     {
@@ -222,8 +222,8 @@ const Referenssit = () => {
       title: 'Värinvaihto – Tampere',
       category: 'maalaus',
       images: [
-        { baseName: 'keltainen-puutalo-varinvaihto-ennen-maalausta', label: 'Keltainen puutalo värinvaihto ennen maalausta Tampereella' },
-        { baseName: 'violetti-puutalo-varinvaihto-peittomaalaus-jalkeen', label: 'Violetti puutalo värinvaihto peittomaalaus jälkeen Tampereella' },
+        { baseName: 'talon-maalaus-keltainen-puutalo-varinvaihto-ennen', label: 'Keltainen puutalo värinvaihto ennen maalausta Tampereella' },
+        { baseName: 'talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen', label: 'Violetti puutalo värinvaihto peittomaalaus jälkeen Tampereella' },
       ],
     },
     {
@@ -231,8 +231,8 @@ const Referenssit = () => {
       title: 'Sinisen talon maalaus – Hämeenkyrö',
       category: 'maalaus',
       images: [
-        { baseName: 'tummansininen-puutalo-ulkomaalaus-ennen', label: 'Tummansininen puutalo ulkomaalaus ennen Hämeenkyrössä' },
-        { baseName: 'tummansininen-puutalo-ulkomaalaus-jalkeen', label: 'Tummansininen puutalo ulkomaalaus jälkeen Hämeenkyrössä' },
+        { baseName: 'talon-maalaus-tummansininen-puutalo-ulkomaalaus-ennen', label: 'Tummansininen puutalo ulkomaalaus ennen Hämeenkyrössä' },
+        { baseName: 'talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen', label: 'Tummansininen puutalo ulkomaalaus jälkeen Hämeenkyrössä' },
       ],
     },
     {
@@ -240,8 +240,8 @@ const Referenssit = () => {
       title: 'Värinvaihto harmaaksi – Pirkanmaa',
       category: 'maalaus',
       images: [
-        { baseName: 'punainen-omakotitalo-varinvaihto-ennen-maalausta', label: 'Punainen omakotitalo värinvaihto ennen maalausta Pirkanmaalla' },
-        { baseName: 'harmaa-omakotitalo-varinvaihto-ulkomaalaus-jalkeen', label: 'Harmaa omakotitalo värinvaihto ulkomaalaus jälkeen Pirkanmaalla' },
+        { baseName: 'talon-maalaus-punainen-omakotitalo-varinvaihto-ennen', label: 'Punainen omakotitalo värinvaihto ennen maalausta Pirkanmaalla' },
+        { baseName: 'talon-maalaus-harmaa-omakotitalo-varinvaihto-jalkeen', label: 'Harmaa omakotitalo värinvaihto ulkomaalaus jälkeen Pirkanmaalla' },
       ],
     },
     {
@@ -249,8 +249,8 @@ const Referenssit = () => {
       title: 'Vihreän talon maalaus – Hämeenkyrö',
       category: 'maalaus',
       images: [
-        { baseName: 'vihrea-puutalo-ennen-ulkomaalausta-ja-pohjatoita', label: 'Vihreä puutalo ennen ulkomaalausta ja pohjatöitä Hämeenkyrössä' },
-        { baseName: 'vihrea-puutalo-ulkomaalaus-jalkeen', label: 'Vihreä puutalo ulkomaalaus jälkeen Hämeenkyrössä' },
+        { baseName: 'talon-maalaus-vihrea-puutalo-ennen-ulkomaalausta', label: 'Vihreä puutalo ennen ulkomaalausta ja pohjatöitä Hämeenkyrössä' },
+        { baseName: 'talon-maalaus-vihrea-puutalo-ulkomaalaus-jalkeen', label: 'Vihreä puutalo ulkomaalaus jälkeen Hämeenkyrössä' },
       ],
     },
     {
@@ -258,8 +258,8 @@ const Referenssit = () => {
       title: 'Keltaisen talon maalaus – Hämeenlinna',
       category: 'maalaus',
       images: [
-        { baseName: 'keltainen-omakotitalo-huoltomaalaus-ennen', label: 'Keltainen omakotitalo huoltomaalaus ennen Hämeenlinnassa' },
-        { baseName: 'keltainen-omakotitalo-julkisivumaalaus-jalkeen', label: 'Keltainen omakotitalo julkisivumaalaus jälkeen Hämeenlinnassa' },
+        { baseName: 'talon-maalaus-keltainen-omakotitalo-huoltomaalaus-ennen', label: 'Keltainen omakotitalo huoltomaalaus ennen Hämeenlinnassa' },
+        { baseName: 'talon-maalaus-keltainen-omakotitalo-julkisivumaalaus-jalkeen', label: 'Keltainen omakotitalo julkisivumaalaus jälkeen Hämeenlinnassa' },
       ],
     },
     {
@@ -267,8 +267,8 @@ const Referenssit = () => {
       title: 'Keltainen seinä – Pirkanmaa',
       category: 'maalaus',
       images: [
-        { baseName: 'keltainen-puuverhous-ennen-julkisivumaalausta', label: 'Keltainen puuverhous ennen julkisivumaalausta Pirkanmaalla' },
-        { baseName: 'keltainen-ulkoverhous-huoltomaalaus-jalkeen', label: 'Keltainen ulkoverhous huoltomaalaus jälkeen Pirkanmaalla' },
+        { baseName: 'talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta', label: 'Keltainen puuverhous ennen julkisivumaalausta Pirkanmaalla' },
+        { baseName: 'talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen', label: 'Keltainen ulkoverhous huoltomaalaus jälkeen Pirkanmaalla' },
       ],
     },
     {
@@ -276,32 +276,32 @@ const Referenssit = () => {
       title: 'Parveke ja julkisivu – Ylöjärvi',
       category: 'maalaus',
       images: [
-        { baseName: 'puutalon-ja-parvekkeen-puuosien-kunnostus-ennen', label: 'Puutalon ja parvekkeen puuosien kunnostus ennen Ylöjärvellä' },
-        { baseName: 'puutalon-ja-parvekkeen-huoltomaalaus-jalkeen', label: 'Puutalon ja parvekkeen huoltomaalaus jälkeen Ylöjärvellä' },
+        { baseName: 'talon-maalaus-puutalo-ja-parveke-ennen-maalausta', label: 'Puutalon ja parvekkeen puuosien kunnostus ennen Ylöjärvellä' },
+        { baseName: 'talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen', label: 'Puutalon ja parvekkeen huoltomaalaus jälkeen Ylöjärvellä' },
       ],
     },
-    { type: 'single', baseName: 'tummanharmaa-tiilikaton-pinnoitus-ja-huolto-jalkeen', category: 'pinnoitus', title: 'Tummanharmaa tiilikaton pinnoitus ja huolto jälkeen Pirkanmaalla' },
-    { type: 'single', baseName: 'tummanharmaa-kattotiili-pesu-ja-pinnoitustyo', category: 'pinnoitus', title: 'Tummanharmaa kattotiili pesu ja pinnoitustyö Pirkanmaalla' },
-    { type: 'single', baseName: 'vastamaalattu-tiilikatto-kattopinnoitus-jalkeen', category: 'pinnoitus', title: 'Vastamaalattu tiilikatto kattopinnoitus jälkeen Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-tummanharmaa-tiilikatto-pinnoitus-jalkeen', category: 'pinnoitus', title: 'Tummanharmaa tiilikaton pinnoitus ja huolto jälkeen Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-tummanharmaa-kattotiili', category: 'pinnoitus', title: 'Tummanharmaa kattotiili pesu ja pinnoitustyö Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-vastamaalattu-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Vastamaalattu tiilikatto kattopinnoitus jälkeen Pirkanmaalla' },
     { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-ennen-jalkeen', category: 'pinnoitus', title: 'Tiilikaton pesu ja pinnoitus ennen jälkeen Pirkanmaalla' },
-    { type: 'single', baseName: 'tiilikaton-pesu-ja-sammaleenpoisto', category: 'pinnoitus', title: 'Tiilikaton pesu ja sammaleenpoisto Pirkanmaalla' },
-    { type: 'single', baseName: 'tiilikaton-harjatiivisteen-asennus-kattohuolto', category: 'pinnoitus', title: 'Tiilikaton harjatiivisteen asennus Pirkanmaalla' },
-    { type: 'single', baseName: 'huolellinen-ympariston-suojaus-ennen-maalausta', category: 'maalaus', title: 'Huolellinen ympäristön suojaus ennen maalausta Pirkanmaalla' },
-    { type: 'single', baseName: 'talon-julkisivun-ja-ikkunoiden-suojaustyot', category: 'maalaus', title: 'Talon julkisivun ja ikkunoiden suojaustyöt Pirkanmaalla' },
-    { type: 'single', baseName: 'punainen-tiilikatto-kattopinnoitus-ja-huolto-jalkeen', category: 'pinnoitus', title: 'Punainen tiilikatto kattopinnoitus ja huolto jälkeen Pirkanmaalla' },
-    { type: 'single', baseName: 'uutta-vastaava-tiilikatto-pesu-ja-suojakasittely', category: 'pinnoitus', title: 'Uutta vastaava tiilikatto pesu ja suojakäsittely Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-sammaleenpoisto', category: 'pinnoitus', title: 'Tiilikaton pesu ja sammaleenpoisto Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-harjatiivisteen-asennus', category: 'pinnoitus', title: 'Tiilikaton harjatiivisteen asennus Pirkanmaalla' },
+    { type: 'single', baseName: 'talon-maalaus-ympariston-suojaus-ennen-maalausta', category: 'maalaus', title: 'Huolellinen ympäristön suojaus ennen maalausta Pirkanmaalla' },
+    { type: 'single', baseName: 'talon-maalaus-julkisivun-ja-ikkunoiden-suojaus', category: 'maalaus', title: 'Talon julkisivun ja ikkunoiden suojaustyöt Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-punainen-tiilikatto-kattopinnoitus-jalkeen', category: 'pinnoitus', title: 'Punainen tiilikatto kattopinnoitus ja huolto jälkeen Pirkanmaalla' },
+    { type: 'single', baseName: 'tiilikaton-pesu-ja-pinnoitus-uutta-vastaava-tiilikatto', category: 'pinnoitus', title: 'Uutta vastaava tiilikatto pesu ja suojakäsittely Pirkanmaalla' },
     { type: 'single', baseName: 'tiilikaton-pinnoitus-tampere-tiilitalo-jalkeen', category: 'pinnoitus', title: 'Tiilikaton pinnoitus Tampereella 2026' },
-    { type: 'single', baseName: 'tummanharmaa-tiilikatto-pinnoituksen-jalkeen-tampere', category: 'pinnoitus', title: 'Tummanharmaa tiilikatto pinnoituksen jälkeen Tampereella 2026' },
-    { type: 'single', baseName: 'puutalon-katon-ja-seinien-maalaus-tampere', category: 'maalaus', title: 'Katon ja seinien maalaus Tampereella 2026' },
-    { type: 'single', baseName: 'musta-tiilikatto-pinnoituksen-jalkeen-ylojarvi', category: 'pinnoitus', title: 'Musta tiilikatto pinnoituksen jälkeen Ylöjärvellä 2026' },
-    { type: 'single', baseName: 'ruskea-tiilikatto-pinnoituksen-jalkeen-ylojarvi', category: 'pinnoitus', title: 'Ruskea tiilikatto pinnoituksen jälkeen Ylöjärvellä 2026' },
-    { type: 'single', baseName: 'keltainen-talo-pinnoitettu-tiilikatto-ylojarvi', category: 'pinnoitus', title: 'Pinnoitettu tiilikatto Ylöjärvellä 2026' },
-    { type: 'single', baseName: 'keltainen-talo-pinnoitettu-tiilikatto-kangasala', category: 'pinnoitus', title: 'Pinnoitettu tiilikatto Kangasalla 2026' },
-    { type: 'single', baseName: 'punainen-tiilikatto-pinnoituksen-jalkeen-orivesi', category: 'pinnoitus', title: 'Punainen tiilikatto pinnoituksen jälkeen Orivedellä 2026' },
-    { type: 'single', baseName: 'tummanharmaa-tiilikatto-pinnoituksen-jalkeen-nokia', category: 'pinnoitus', title: 'Tummanharmaa tiilikatto pinnoituksen jälkeen Nokialla 2026' },
-    { type: 'single', baseName: 'musta-tiilikatto-pinnoituksen-jalkeen-loimaa', category: 'pinnoitus', title: 'Musta tiilikatto pinnoituksen jälkeen Loimaalla 2026' },
-    { type: 'single', baseName: 'vihrea-talo-pinnoitettu-punainen-tiilikatto', category: 'pinnoitus', title: 'Pinnoitettu punainen tiilikatto Pirkanmaalla 2026' },
-    { type: 'single', baseName: 'keltainen-puutalo-maalauksen-jalkeen-parkano', category: 'maalaus', title: 'Talon maalaus Parkanossa 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-tampere-tummanharmaa-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Tummanharmaa tiilikatto pinnoituksen jälkeen Tampereella 2026' },
+    { type: 'single', baseName: 'talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen', category: 'maalaus', title: 'Katon ja seinien maalaus Tampereella 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-ylojarvi-musta-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Musta tiilikatto pinnoituksen jälkeen Ylöjärvellä 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-ylojarvi-ruskea-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Ruskea tiilikatto pinnoituksen jälkeen Ylöjärvellä 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-ylojarvi-keltainen-talo-jalkeen', category: 'pinnoitus', title: 'Pinnoitettu tiilikatto Ylöjärvellä 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-kangasala-keltainen-talo-jalkeen', category: 'pinnoitus', title: 'Pinnoitettu tiilikatto Kangasalla 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-orivesi-punainen-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Punainen tiilikatto pinnoituksen jälkeen Orivedellä 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-nokia-tummanharmaa-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Tummanharmaa tiilikatto pinnoituksen jälkeen Nokialla 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-loimaa-musta-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Musta tiilikatto pinnoituksen jälkeen Loimaalla 2026' },
+    { type: 'single', baseName: 'tiilikaton-pinnoitus-vihrea-talo-punainen-tiilikatto-jalkeen', category: 'pinnoitus', title: 'Pinnoitettu punainen tiilikatto Pirkanmaalla 2026' },
+    { type: 'single', baseName: 'talon-maalaus-parkano-keltainen-puutalo-maalauksen-jalkeen', category: 'maalaus', title: 'Talon maalaus Parkanossa 2026' },
   ];
 
   const filteredProjects = activeCategory === 'all' ? projects : projects.filter((p) => p.category === activeCategory);

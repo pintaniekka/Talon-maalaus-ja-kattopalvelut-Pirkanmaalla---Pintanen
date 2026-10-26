@@ -20,27 +20,27 @@ export const reviewCases: ReviewCase[] = [
     name: "Jukka Peurala",
     city: "tampere",
     story: "Sade uhkasi, ja työ piti keskeyttää hetkeksi. Sateen jälkeen katto maalattiin loppuun. Katosta tuli kuin uusi.",
-    before: "harmaa-tiilikatto-ennen-pinnoitusta-tampere",
-    after: "tummanharmaa-tiilikatto-pinnoituksen-jalkeen-tampere",
+    before: "tiilikaton-pinnoitus-tampere-harmaa-tiilikatto-ennen",
+    after: "tiilikaton-pinnoitus-tampere-tummanharmaa-tiilikatto-jalkeen",
   },
   {
     name: "Saarinen Seppo",
     city: "tampere",
     story: "Katto oli todella kulunut. Se pestiin ja maalattiin kahteen kertaan. Harjalle asennettiin myös harjatiiviste.",
-    image: "tummanharmaa-pinnoitettu-tiilikatto-lahikuva-tampere",
+    image: "tiilikaton-pinnoitus-tampere-tummanharmaa-tiilikatto-lahikuva",
   },
   {
     name: "Toni Reunanen",
     city: "tampere",
     story: "Samaan taloon maalattiin sekä katto että seinät.",
-    image: "puutalon-katon-ja-seinien-maalaus-tampere",
+    image: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
   },
   {
     name: "Sari Haataja",
     city: "ylojarvi",
     story: "Katto oli jyrkkä, ja siinä on kattoikkuna. Pesussa piti olla varovainen, ja ikkuna suojattiin maalauksen ajaksi. Työhön meni kolme päivää.",
-    before: "tiilikatto-puoliksi-pesty-ylojarvi",
-    after: "keltainen-talo-pinnoitettu-tiilikatto-ylojarvi",
+    before: "tiilikaton-pesu-ja-pinnoitus-ylojarvi-puoliksi-pesty",
+    after: "tiilikaton-pinnoitus-ylojarvi-keltainen-talo-jalkeen",
   },
 ];
 

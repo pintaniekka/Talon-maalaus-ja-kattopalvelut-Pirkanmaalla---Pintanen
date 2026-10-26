@@ -8,8 +8,8 @@ import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 
 /** Kaksi ryhmää Eerikin luokittelulla (12.10.2026). Ei "muut"-ryhmää: jokainen arvostelu kuuluu kattoon, seiniin tai molempiin. */
 const groups: { category: TestimonialCategory; title: string; intro: string }[] = [
-  { category: "katto", title: "Tiilikaton pinnoitus", intro: "Nämä asiakkaat teettivät meillä tiilikaton pinnoituksen. Osalla maalasimme samalla myös seinät." },
-  { category: "seina", title: "Talon maalaus", intro: "Nämä asiakkaat teettivät meillä talon ulkomaalauksen. Osalla pinnoitimme samalla myös katon." },
+  { category: "katto", title: "Kokemuksia tiilikaton pinnoituksesta", intro: "Nämä asiakkaat teettivät meillä tiilikaton pinnoituksen. Osalla maalasimme samalla myös seinät." },
+  { category: "seina", title: "Kokemuksia talon maalauksesta", intro: "Nämä asiakkaat teettivät meillä talon ulkomaalauksen. Osalla pinnoitimme samalla myös katon." },
 ];
 
 const crumbs = [{ name: "Kokemuksia" }];

@@ -49,7 +49,7 @@ const faqItems = [
   },
   {
     question: "Milloin pääsette katsomaan katon?",
-    answer: "Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen.",
+    answer: 'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen. Lue, mitä <a href="/ilmainen-kuntotarkastus/">ilmaisessa kuntotarkastuksessa</a> katsotaan.',
   },
   {
     question: "Kuinka pitkään pinnoitettu katto kestää?",
@@ -74,7 +74,7 @@ const faqItems = [
   { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme katon ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sähkö ja vesipiste ovat käytettävissä." },
   {
     question: "Saako tiilikaton pinnoituksesta kotitalousvähennyksen?",
-    answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi.`,
+    answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`,
   },
   { question: "Kuinka pitkä takuu pinnoituksella on?", answer: "Saat tiilikaton pinnoitukselle meiltä 5 vuoden kirjallisen takuun." },
   { question: "Miten maksu tapahtuu?", answer: "Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi." },
@@ -118,8 +118,8 @@ const HinnatTiilikalonPinnoitus = () => {
         lead={
           <>
             Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu
-            katon koosta, jyrkkyydestä, muodosta ja tiilien kunnosta. Tarkan hinnan saat, kun käymme katsomassa katon. Arviokäynti on
-            ilmainen.
+            katon koosta, jyrkkyydestä, muodosta ja tiilien kunnosta. Työ kestää 2–3 päivää, ja takuu on 5 vuotta. Tarkan hinnan saat,
+            kun käymme katsomassa katon. Kuntotarkastus on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta laskurilla" }}

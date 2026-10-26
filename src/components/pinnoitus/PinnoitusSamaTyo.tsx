@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 /**
  * Rinnakkaissanat samalle työlle (SEO-suunnitelma 25.10.2026): asiakkaat hakevat katon pinnoitusta,
  * tiilikaton maalausta, kattomaalausta sekä katon pesua ja pinnoitusta. Google ei yhdistä muotoja itse,
- * joten ne sanotaan H2-tasolla. Tiilimerkit saa mainita (Eerik 25.10.2026).
+ * joten ne sanotaan H2-tasolla. Tiilimerkit saa mainita (Eerik 25.10.2026). Hintasivun linkin ankkuri vaihtelee
+ * paikkakunnan mukaan (Eerik 26.10.2026, yöajon kysymys 14), jotta sama teksti ei toistu 24 sivulla.
  */
 const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
   <section className="section-padding bg-background">
@@ -23,9 +24,13 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
         </p>
         <p>
           Pinnoitamme betonitiilikattoja. Tavallisin tiili 2000-luvun taloissa on Ormax, vanhemmissa katoissa profiileja on monia.
-          Katsomme tiilen kuntotarkastuksessa.{" "}
+          Katsomme tiilen{" "}
+          <Link to="/ilmainen-kuntotarkastus/" className="text-primary font-semibold hover:underline">
+            ilmaisessa kuntotarkastuksessa
+          </Link>
+          .{" "}
           <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
-            Hintaesimerkit ja laskuri
+            {cityIn ? `Katso tiilikaton pinnoituksen hinta ${cityIn}` : "Hintaesimerkit ja laskuri"}
           </Link>
           .
         </p>

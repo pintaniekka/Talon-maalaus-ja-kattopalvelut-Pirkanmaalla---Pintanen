@@ -60,7 +60,7 @@ const faqItems = [
   { question: "Kuinka usein talo pitää maalata?", answer: "Yleensä 10–15 vuoden välein. Väli riippuu maalista ja säästä. Eteläseinä kuluu ensin." },
   {
     question: "Saako talon maalauksesta kotitalousvähennyksen?",
-    answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi.`,
+    answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`,
   },
   { question: "Kuinka pitkä takuu maalauksella on?", answer: "Saat talon maalaukselle meiltä 2 vuoden takuun." },
   { question: "Miten maksu tapahtuu?", answer: "Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi." },
@@ -104,7 +104,8 @@ const HinnatTalonMaalaus = () => {
         lead={
           <>
             Omakotitalon ulkomaalaus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu talon
-            koosta, korkeudesta ja pohjatöiden määrästä. Tarkan hinnan saat, kun käymme katsomassa talon. Arviokäynti on ilmainen.
+            koosta, korkeudesta ja pohjatöiden määrästä. Työ kestää 3–7 päivää, ja takuu on 2 vuotta. Tarkan hinnan saat, kun käymme
+            katsomassa talon. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta laskurilla" }}

@@ -34,6 +34,8 @@ export const staticRoutes: SiteRoute[] = [
   { path: "/tarjouspyynto", priority: 0.9, changefreq: "monthly" },
   { path: "/tiilikaton-pinnoitus-hinta-pirkanmaa", priority: 0.8, changefreq: "monthly" },
   { path: "/talon-maalaus-hinta-pirkanmaa", priority: 0.8, changefreq: "monthly" },
+  { path: "/ilmainen-kuntotarkastus", priority: 0.8, changefreq: "monthly" },
+  { path: "/kotitalousvahennys", priority: 0.7, changefreq: "monthly" },
   { path: "/toiminta-alueet", priority: 0.7, changefreq: "monthly" },
   { path: "/referenssit", priority: 0.8, changefreq: "monthly" },
   { path: "/kokemuksia", priority: 0.8, changefreq: "monthly" },
@@ -172,11 +174,12 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     return `- [${label}](${url(p)})${seo ? `: ${seo.description}` : ""}`;
   };
   const published = getPublishedArticles(now);
-  const cityLine = (c: { slug: string; name: string }) => {
-    const links = [`[kaikki palvelut](${url(`/maalauspalvelut-${c.slug}`)})`];
-    if (pinnoitusCities.some((p) => p.slug === c.slug)) links.push(`[tiilikaton pinnoitus](${url(`/tiilikaton-pinnoitus-${c.slug}`)})`);
-    if (maalausCities.some((m) => m.slug === c.slug)) links.push(`[talon maalaus](${url(`/talon-maalaus-${c.slug}`)})`);
-    return `- ${c.name}: ${links.join(", ")}`;
+  /** Jokaisesta paikkakuntasivusta oma rivi, jossa on sivun kuvaus seo.ts:stä (GEO-kierros 27.10.2026). */
+  const cityLines = (c: { slug: string; name: string }) => {
+    const lines = [line(`/maalauspalvelut-${c.slug}`, `Maalausliike ja kattopalvelut ${c.name}`)];
+    if (pinnoitusCities.some((p) => p.slug === c.slug)) lines.push(line(`/tiilikaton-pinnoitus-${c.slug}`, `Tiilikaton pinnoitus ${c.name}`));
+    if (maalausCities.some((m) => m.slug === c.slug)) lines.push(line(`/talon-maalaus-${c.slug}`, `Talon maalaus ${c.name}`));
+    return lines;
   };
 
   return [
@@ -204,7 +207,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     ...pinnoitusTyovaiheet.map((t, i) => `${i + 1}. ${t.title}: ${t.text}`),
     "",
-    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Työ kestää yleensä 2–4 päivää.",
+    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Työ kestää yleensä 2–3 päivää, suuri tai jyrkkä katto 2–4.",
     "",
     "## Näin talon maalaus tehdään",
     "",
@@ -216,6 +219,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     line("/tiilikaton-pinnoitus-pirkanmaa", "Tiilikaton pinnoitus Pirkanmaalla"),
     line("/talon-maalaus-pirkanmaa", "Talon maalaus Pirkanmaalla"),
+    line("/ilmainen-kuntotarkastus", "Ilmainen tiilikaton kuntotarkastus"),
     "",
     "## Hinnat ja hintalaskurit",
     "",
@@ -223,6 +227,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     line("/tarjouspyynto", "Tarjouspyyntö"),
     line("/tiilikaton-pinnoitus-hinta-pirkanmaa", "Tiilikaton pinnoituksen hinta"),
     line("/talon-maalaus-hinta-pirkanmaa", "Talon maalauksen hinta"),
+    line("/kotitalousvahennys", "Kotitalousvähennys"),
     "",
     "## Usein kysyttyä",
     "",
@@ -230,6 +235,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     "## Artikkelit",
     "",
+    line("/artikkelit", "Kaikki artikkelit"),
     ...published.map((a) => `- [${a.title}](${url(articlePath(a.slug))}): ${a.lead}`),
     "",
     "## Yritys",
@@ -243,8 +249,76 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     "## Toiminta-alueet paikkakunnittain",
     "",
-    ...allCities.map(cityLine),
+    ...allCities.flatMap(cityLines),
     "",
+  ].join("\n");
+};
+
+/** Purkaa HTML-entiteetit (&amp;, &nbsp;, &#39;, &#xA0; …) tavallisiksi merkeiksi. */
+const decodeEntities = (text: string): string =>
+  text
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, dec) => String.fromCodePoint(Number(dec)))
+    .replace(/&nbsp;/g, " ")
+    .replace(/&shy;/g, "")
+    .replace(/&euro;/g, "€")
+    .replace(/&ndash;/g, "–")
+    .replace(/&mdash;/g, "—")
+    .replace(/&hellip;/g, "…")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+
+/**
+ * Esirenderöidyn sivun <main>-sisältö pelkkänä tekstinä llms-full.txt:tä varten.
+ * Otsikot merkitään markdown-tasoilla, listakohdat viivalla; skriptit, svg:t ja
+ * ruudunlukijalle tarkoitetut sr-only-tekstit jätetään pois.
+ */
+export const htmlToPlainText = (html: string): string => {
+  const main = html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? html;
+  const text = main
+    .replace(/<(script|style|noscript|svg|template)\b[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+class="[^"]*\bsr-only\b[^"]*"[^>]*>[\s\S]*?<\/(?:span|p|div)>/gi, " ")
+    .replace(/<h1\b[^>]*>/gi, "\n\n# ")
+    .replace(/<h2\b[^>]*>/gi, "\n\n## ")
+    .replace(/<h3\b[^>]*>/gi, "\n\n### ")
+    .replace(/<h[4-6]\b[^>]*>/gi, "\n\n#### ")
+    .replace(/<li\b[^>]*>/gi, "\n- ")
+    .replace(/<(?:p|div|section|article|header|footer|nav|aside|blockquote|figure|figcaption|table|tr|ul|ol|dl|dt|dd|br|hr)\b[^>]*>/gi, "\n")
+    .replace(/<\/(?:h[1-6]|p|li|tr|blockquote|figcaption|dd)>/gi, "\n")
+    .replace(/<\/(?:td|th)>/gi, " | ")
+    .replace(/<[^>]+>/g, "");
+  return decodeEntities(text)
+    .split("\n")
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+};
+
+/**
+ * llms-full.txt: jokaisen julkisen sivun koko näkyvä teksti yhdessä tiedostossa
+ * (https://llmstxt.org). Sivut tulevat samasta reittilistasta kuin llms.txt ja sitemap;
+ * teksti on buildin esirenderöimä <main>-sisältö, joten se vastaa sivun oikeaa sisältöä.
+ */
+export const buildLlmsFullTxt = (pages: { route: string; body: string }[], now: Date = new Date()): string => {
+  const order = new Map(getCanonicalRoutes(now).map((r, i) => [r.path, i]));
+  const sorted = [...pages].filter((p) => order.has(p.route)).sort((a, b) => (order.get(a.route) ?? 0) - (order.get(b.route) ?? 0));
+  const url = (p: string) => (p === "/" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${p}/`);
+  const sections = sorted.map((p) => {
+    const seo = getRouteSeo(p.route);
+    const head = [`<!-- ${url(p.route)} -->`, `URL: ${url(p.route)}`];
+    if (seo) head.push(`Otsikko: ${seo.title}`, `Kuvaus: ${seo.description}`);
+    return `${head.join("\n")}\n\n${htmlToPlainText(p.body)}`;
+  });
+  return [
+    "# Pintanen Oy: kaikkien sivujen teksti",
+    "",
+    `> Tiivis kuvaus sivustosta on osoitteessa ${SITE_ORIGIN}/llms.txt. Tämä tiedosto sisältää jokaisen julkisen sivun näkyvän tekstin sellaisena kuin sivu näytetään. Sivuja: ${sorted.length}. Sisältö tarkistettu ${SITE_UPDATED}.`,
+    "",
+    ...sections.flatMap((s) => [s, "", "---", ""]),
   ].join("\n");
 };
 

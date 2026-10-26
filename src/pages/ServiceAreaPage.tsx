@@ -43,6 +43,16 @@ const getAreaFAQ = (cityIn: string, pinnoitusHref: string, maalausHref: string) 
     question: "Saako työstä kotitalousvähennyksen?",
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Työn osuus on laskussa eriteltynä.`,
   },
+  // Search Console 26.10.2026 (paketti H): haut "tiilikattoremontti <kunta>" ja "peltikaton maalaus <kunta>" tuovat
+  // aluesivuille näyttöjä ilman klikkauksia. Vastaukset ovat samat kuin yleisessä UKK:ssa ja pinnoituksen UKK:ssa.
+  {
+    question: `Tiilikattoremontti vai pinnoitus ${cityIn}?`,
+    answer: `Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa ja vain tiilen pinta on kulunut. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Pinnoitus maksaa yleensä ${PINNOITUS_HINTA}, kattoremontti yleensä 15 000–30 000 €. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.`,
+  },
+  {
+    question: "Maalaatteko myös peltikattoja?",
+    answer: "Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.",
+  },
 ];
 
 /**

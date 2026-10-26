@@ -106,7 +106,8 @@ const Body = () => (
       <li>Jos et ole varma, pyydä meidät katsomaan. Kuntotarkastus on ilmainen.</li>
     </ol>
     <p>
-      Lue lisää sivulta <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
+      Lue lisää sivulta <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>. Tampereella
+      tehdyistä töistä kerromme sivulla <Link to="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitus Tampere</Link>.
     </p>
 
     <ArticleFaq items={faq} />

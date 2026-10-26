@@ -37,7 +37,8 @@ const Body = () => (
     <p>
       Maali suojaa puutaloa auringolta, sateelta ja pakkaselta. Kun maali kuluu, puu alkaa imeä vettä. Mitä
       pidempään odotat, sitä enemmän työtä seinä vaatii. Vuosiluku ei kerro kaikkea. Katso seinää, niin näet,
-      missä kunnossa se on.
+      missä kunnossa se on. Esimerkkejä maalaamistamme taloista näet sivulta{" "}
+      <Link to="/talon-maalaus-tampere/">puutalon maalaus Tampereella</Link>.
     </p>
 
     <h2>Kuinka usein puutalo pitää maalata?</h2>

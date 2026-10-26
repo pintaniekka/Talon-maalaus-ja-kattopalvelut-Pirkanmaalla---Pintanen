@@ -109,7 +109,8 @@ const Body = () => (
       Kun tiilen väri on haalistunut, pinta tuntuu karhealta tai sammal kasvaa nopeasti. Yleensä tämä on
       ajankohtaista noin 10–15 vuoden iässä. Teemme pinnoituksia huhti–toukokuusta elo–syyskuuhun Pirkanmaalla ja
       lähikunnissa. Katso palvelu sivulta{" "}
-      <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
+      <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link> tai kotikaupunkimme sivulta{" "}
+      <Link to="/tiilikaton-pinnoitus-tampere/">tiilikaton pesu ja pinnoitus Tampereella</Link>.
     </p>
 
     <ArticleFaq items={faq} />

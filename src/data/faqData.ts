@@ -7,6 +7,7 @@
  * yhdessä kysymyksessä, ja kaupunkisivun sarja on yhdessä cityFaq.ts:n kanssa enintään 10 kysymystä.
  */
 import { KOTITALOUSVAHENNYS as KOTITALOUSVAHENNYS_LAUSE } from "./company";
+import { allCities } from "./cityData";
 
 interface FAQItem {
   question: string;
@@ -157,6 +158,35 @@ export const generalFAQ: FAQItem[] = [
   },
 ];
 
+/**
+ * Naapurikuntien sivuilta tekstilinkki Tampereen palvelusivulle (sisäinen linkitys 27.10.2026).
+ * Ankkuri vaihtuu paikkakunnan nimen mukaan, jotta sama ankkuri ei toistu yli viidesti. Tampereen omalla sivulla ei linkkiä.
+ */
+const TAMPERE_PINNOITUS_LINKIT = [
+  'Pinnoitamme kattoja myös <a href="/tiilikaton-pinnoitus-tampere/">Tampereen alueella</a>.',
+  'Katso myös <a href="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitus ja maalaus Tampereella</a>.',
+  'Sama työ ja sama hinta pätevät myös <a href="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitukseen Tampereella</a>.',
+  'Lue, miten <a href="/tiilikaton-pinnoitus-tampere/">pinnoitamme tiilikattoja Tampereella</a>.',
+  'Kuvia näet sivulta, jolla esittelemme <a href="/tiilikaton-pinnoitus-tampere/">Tampereen kattokohteet</a>.',
+  'Samalla tavalla pinnoitamme <a href="/tiilikaton-pinnoitus-tampere/">Tampereen tiilikatot</a>.',
+  'Kotikaupungissamme teemme <a href="/tiilikaton-pinnoitus-tampere/">katon pinnoituksia Tampereella</a>.',
+];
+const TAMPERE_MAALAUS_LINKIT = [
+  'Maalaamme taloja myös <a href="/talon-maalaus-tampere/">Tampereen alueella</a>.',
+  'Katso myös <a href="/talon-maalaus-tampere/">ulkomaalaus Tampereella</a>.',
+  'Samat työvaiheet ja hinnat pätevät myös <a href="/talon-maalaus-tampere/">talon maalaukseen Tampereella</a>.',
+  'Lue, miten <a href="/talon-maalaus-tampere/">maalaamme puutaloja Tampereella</a>.',
+  'Kuvia näet sivulta, jolla esittelemme <a href="/talon-maalaus-tampere/">Tampereen maalauskohteet</a>.',
+  'Samalla tavalla maalaamme <a href="/talon-maalaus-tampere/">Tampereen puutalot</a>.',
+  'Kotikaupungissamme teemme <a href="/talon-maalaus-tampere/">julkisivumaalauksia Tampereella</a>.',
+];
+/** Ankkuri kiertää paikkakuntalistan järjestyksessä, jolloin kukin toistuu enintään viidesti (29 paikkakuntaa, 7 ankkuria). */
+const tampereLinkki = (cityName: string, linkit: string[]): string => {
+  if (cityName === "Tampere") return "";
+  const i = allCities.findIndex((c) => c.name === cityName);
+  return ` Olemme tamperelainen yritys. ${linkit[(i < 0 ? 0 : i) % linkit.length]}`;
+};
+
 /** Maalauksen kaupunkisivu: yhdessä cityFaq.ts:n kuuden kysymyksen kanssa 9 kysymystä. */
 export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityIn?: string): FAQItem[] => {
   const gen = cityGenitive || `${cityName}n`;
@@ -174,7 +204,8 @@ export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityI
     {
       question: `Milloin pääsette maalaamaan ${paikka}?`,
       answer:
-        'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+        'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
+        tampereLinkki(cityName, TAMPERE_MAALAUS_LINKIT),
     },
     {
       question: 'Kuinka kauan talon maalaus kestää?',
@@ -235,7 +266,8 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: `Milloin pääsette katsomaan katon ${paikka}?`,
       answer:
-        'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+        'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
+        tampereLinkki(cityName, TAMPERE_PINNOITUS_LINKIT),
     },
     {
       question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',

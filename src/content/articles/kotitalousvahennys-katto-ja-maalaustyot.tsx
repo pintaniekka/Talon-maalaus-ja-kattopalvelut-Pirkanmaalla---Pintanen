@@ -37,7 +37,9 @@ const Body = () => (
     <p>
       Kun ostat tiilikaton pinnoituksen tai talon maalauksen yritykseltä, saat osan työn osuudesta takaisin
       verotuksessa. Tämä on kotitalousvähennys. Kerromme tässä, paljonko vähennys on vuonna 2027, mistä töistä sen
-      saa ja miten sitä haetaan.
+      saa ja miten sitä haetaan. Vähennys koskee kaikkia töitämme, esimerkiksi{" "}
+      <Link to="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitusta Tampereella</Link> ja{" "}
+      <Link to="/talon-maalaus-tampere/">talon maalausta Tampereella</Link>.
     </p>
 
     <h2>Paljonko kotitalousvähennys on vuonna 2027?</h2>

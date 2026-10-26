@@ -34,7 +34,8 @@ const Body = () => (
 
     <p>
       Talon maali hilseilee pahasti, ja mietit, pitääkö koko ulkoverhous uusia. Useimmiten ei pidä. Maalin kunto ja
-      puun kunto ovat kaksi eri asiaa. Uutta lautaa tarvitaan vain, jos puu on pilalla.
+      puun kunto ovat kaksi eri asiaa. Uutta lautaa tarvitaan vain, jos puu on pilalla. Näin arvioimme seinät myös{" "}
+      <Link to="/talon-maalaus-tampere/">talon maalauksessa Tampereella</Link>.
     </p>
 
     <h2>Huoltomaalaus vai uusi ulkoverhous: kumpi riittää?</h2>

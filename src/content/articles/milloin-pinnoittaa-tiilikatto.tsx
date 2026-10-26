@@ -40,7 +40,9 @@ const Body = () => (
     <p>
       Betonitiilen pinnassa on tehtaalla tehty pinnoite, joka pitää veden tiilen ulkopuolella. Aurinko ja pakkanen
       kuluttavat sitä, ja tavallisesti se on ohut 10–15 vuoden jälkeen. Siitä eteenpäin tiili imee vettä ja
-      rapautuu joka talvi vähän lisää. Näistä viidestä merkistä näet itse, missä vaiheessa oma kattosi on.
+      rapautuu joka talvi vähän lisää. Näistä viidestä merkistä näet itse, missä vaiheessa oma kattosi on. Esimerkkejä
+      pinnoittamistamme katoista näet sivulta{" "}
+      <Link to="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitus Tampereella</Link>.
     </p>
 
     <h2>1. Väri on haalistunut tai laikukas</h2>

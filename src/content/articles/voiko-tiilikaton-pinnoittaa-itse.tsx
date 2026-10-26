@@ -108,7 +108,10 @@ const Body = () => (
       <li>Poista lehdet ja roskat sadevesikouruista.</li>
       <li>Seuraa, kasvaako katolla sammalta ja kuluuko tiilen pinta.</li>
     </ul>
-    <p>Näin huomaat ajoissa, kun katto tarvitsee huoltoa.</p>
+    <p>
+      Näin huomaat ajoissa, kun katto tarvitsee huoltoa. Jos haluat meidät katsomaan katon, lue lisää sivulta{" "}
+      <Link to="/tiilikaton-pinnoitus-tampere/">katon pinnoitus Tampereella</Link>. Kuntotarkastus on ilmainen.
+    </p>
 
     <ArticleFaq items={faq} />
 

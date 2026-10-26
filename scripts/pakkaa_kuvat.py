@@ -11,7 +11,7 @@ from pathlib import Path
 
 from PIL import Image
 
-KANSIOT = ["Pictures-400", "Pictures-800", "Pictures-1200", "Pictures-1500"]
+KANSIOT = ["Pictures-400", "Pictures-600", "Pictures-800", "Pictures-1200", "Pictures-1500"]
 
 
 def main() -> int:

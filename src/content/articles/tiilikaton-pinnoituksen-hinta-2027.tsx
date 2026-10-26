@@ -95,10 +95,7 @@ const Body = () => (
       Vuonna 2027 saat vähentää verotuksessa 40 % työn osuudesta. Vähennystä saa enintään 2 100 euroa henkilöltä,
       ja omavastuu on 150 euroa. Pariskunta saa kumpikin oman vähennyksensä. Kirjoitamme laskuun työn osuuden
       erikseen, joten vähennyksen hakeminen on helppoa. Lue lisää artikkelista{" "}
-      <Link to="/artikkelit/kotitalousvahennys-2027-katon-pinnoitus-ja-talon-maalaus/">
-        kotitalousvähennys 2027 katon pinnoituksessa ja talon maalauksessa
-      </Link>
-      .
+      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/">kotitalousvähennys katto- ja maalaustöissä</Link>.
     </p>
     <Avainhuomio>Vähennys on 40 % työn osuudesta ja enintään 2 100 euroa henkilöltä vuonna 2027.</Avainhuomio>
 

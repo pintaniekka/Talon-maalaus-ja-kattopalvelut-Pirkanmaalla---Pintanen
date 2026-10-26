@@ -124,7 +124,7 @@ const Body = () => (
       työlle 2 vuoden kirjallisen takuun. Hintaesimerkit ovat sivulla{" "}
       <Link to="/talon-maalaus-hinta-pirkanmaa/">talon maalauksen hinta</Link>, ja palvelun kuvaamme sivulla{" "}
       <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>. Milloin maalaus kannattaa, kerromme
-      artikkelissa <Link to="/artikkelit/milloin-talon-maalaus-kannattaa/">milloin talon maalaus kannattaa</Link>.
+      artikkelissa <Link to="/artikkelit/kuinka-usein-puutalo-maalataan/">kuinka usein puutalo pitää maalata</Link>.
     </p>
     <Avainhuomio>Maalin merkki ei muuta hintaa paljon, ja talon maalaus maksaa yleensä 3 500–11 000 euroa.</Avainhuomio>
 

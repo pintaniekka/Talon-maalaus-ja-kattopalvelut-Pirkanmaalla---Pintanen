@@ -3,9 +3,10 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Sources, Table } from "@/co
 
 /**
  * Yrityksen faktat sivuston omia: Ormax on yleisin 2000-luvun kattotiili (Eerik 11.10.2026), työ ja hinta samat kuin
- * muilla betonitiilillä, tehdaspinta kuluu 10–15 vuodessa, Nowocoat, kaksi kerrosta, hinnat prices.ts.
- * Valmistajan tiedot BMI:n sivuilta (luettu 26.10.2026): betonitiili kestää huollettuna 50–70 vuotta, Protector-pinnoite,
- * rikkinäiset tiilet vaihdetaan heti, pinnoitus ei korvaa katon korjausta, BMI puhuu 20–30 vuoden iästä.
+ * muilla betonitiilillä, pinnoitus ajankohtainen noin 15 vuoden iässä (Eerik 26.10.2026), Nowocoat, kaksi kerrosta,
+ * hinnat prices.ts. Valmistajan tiedot BMI:n sivuilta (luettu 26.10.2026): betonitiili kestää huollettuna 50–70 vuotta,
+ * Protector-pinnoite, rikkinäiset tiilet vaihdetaan heti, pinnoitus ei korvaa katon korjausta. Valmistajan omaa
+ * ikäarviota ja takuuta ei mainita (Eerik 26.10.2026).
  */
 const faq = [
   {
@@ -16,7 +17,7 @@ const faq = [
   {
     question: "Milloin Ormax-katto kannattaa pinnoittaa?",
     answer:
-      "Kun tiilen väri on haalistunut, pinta tuntuu karhealta tai sammal kasvaa nopeasti. Pirkanmaalla tämä on yleensä ajankohtaista noin 10–15 vuoden iässä.",
+      "Kun tiilen väri on haalistunut, pinta tuntuu karhealta tai sammal kasvaa nopeasti. Pirkanmaalla tämä on yleensä ajankohtaista noin 15 vuoden iässä.",
   },
   {
     question: "Voiko Ormax-katon värin vaihtaa pinnoituksessa?",
@@ -35,7 +36,7 @@ const Body = () => (
       <ul>
         <li>Ormax on yleisin 2000-luvun kattotiili Suomessa. Pinnoitamme niitä samalla työllä ja hinnalla kuin muita betonitiiliä.</li>
         <li>Valmistajan mukaan betonitiili kestää huollettuna 50–70 vuotta. Pinta kuluu paljon nopeammin.</li>
-        <li>Pinnoitus on ajankohtainen, kun pinta on haalistunut tai karhea, yleensä 10–15 vuoden iässä.</li>
+        <li>Pinnoitus on ajankohtainen, kun pinta on haalistunut tai karhea, yleensä noin 15 vuoden iässä.</li>
         <li>Työ kestää 2–3 päivää ja maksaa yleensä 2 850–7 000 euroa. Takuu on 5 vuotta.</li>
       </ul>
     </KeyPoints>
@@ -59,15 +60,15 @@ const Body = () => (
     <p>
       Kun tehdaspinta on kulunut, tiili alkaa imeä vettä ja sammal saa otteen. Merkit ovat samat kuin muillakin
       betonitiilillä: väri on haalistunut, pinta tuntuu karhealta ja sammal palaa pian pesun jälkeen. Pirkanmaalla
-      tämä on yleensä ajankohtaista noin 10–15 vuoden iässä. Valmistaja puhuu omilla sivuillaan 20–30 vuoden
-      iästä, mutta varjoinen lape, metsän läheisyys ja järven ranta kuluttavat pintaa nopeammin.
+      tämä on yleensä ajankohtaista noin 15 vuoden iässä. Varjoinen lape, metsän läheisyys ja järven ranta
+      kuluttavat pintaa nopeammin.
     </p>
     <p>
       Valmistaja neuvoo tarkistamaan tiilien kunnon esimerkiksi kovan talven jälkeen ja vaihtamaan rikkoutuneet
       tiilet heti. Sama koskee pinnoitusta: ajoissa tehtynä se estää pakkasrapautumisen. Merkit kerromme
       tarkemmin artikkelissa <Link to="/artikkelit/milloin-pinnoittaa-tiilikatto/">milloin tiilikatto pitää pinnoittaa</Link>.
     </p>
-    <Avainhuomio>Haalistunut ja karhea Ormax-tiili kannattaa pinnoittaa, Pirkanmaalla yleensä 10–15 vuoden iässä.</Avainhuomio>
+    <Avainhuomio>Haalistunut ja karhea Ormax-tiili kannattaa pinnoittaa, Pirkanmaalla yleensä noin 15 vuoden iässä.</Avainhuomio>
 
     <h2>Miten Ormax-katon pinnoitus etenee?</h2>
     <ol>

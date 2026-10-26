@@ -112,7 +112,7 @@ const Body = () => (
     <h2>Milloin mökki kannattaa maalata?</h2>
     <p>
       Kun maali jää käteen, väri on haalistunut tai puu on harmaantunut. Merkit kerromme artikkelissa{" "}
-      <Link to="/artikkelit/milloin-talon-maalaus-kannattaa/">milloin talon maalaus kannattaa</Link>. Kesän työt
+      <Link to="/artikkelit/kuinka-usein-puutalo-maalataan/">kuinka usein puutalo pitää maalata</Link>. Kesän työt
       täyttyvät pitkälti jo keväällä, joten arviokäynti kannattaa pyytää ajoissa. Tulemme Pirkanmaalla ja
       lähikunnissa yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Palvelun kuvaamme sivulla{" "}
       <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.

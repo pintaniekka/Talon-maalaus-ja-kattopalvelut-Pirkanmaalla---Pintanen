@@ -131,7 +131,9 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       <section className="pb-16 md:pb-24 bg-background">
         <div className="section-container">
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3">Tiilikaton pinnoitus ja talon maalaus {cityIn}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3">
+              {hasPinnoitusPage(citySlug) ? `Palvelumme ${cityIn}` : `Tiilikaton pinnoitus ja talon maalaus ${cityIn}`}
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Valitse palvelu, niin näet hinnan, työvaiheet ja paikkakunnan tiedot.</p>
           </div>
 

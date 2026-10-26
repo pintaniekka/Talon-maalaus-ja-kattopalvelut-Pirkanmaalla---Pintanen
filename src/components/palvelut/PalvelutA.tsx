@@ -102,6 +102,21 @@ const PalvelutA = () => (
         ))}
       </div>
 
+      {/* Suorat linkit Tampereen palvelusivuille (kannibalisointi, Search Console 26.10.2026): etusivu ohjaa
+          tärkeimmän kaupungin hakuihin tarkalla ankkurilla. */}
+      <p className="mt-6 text-center text-base text-muted-foreground">
+        Tampereella:{" "}
+        <Link to="/tiilikaton-pinnoitus-tampere/" className="font-bold text-accent-ink hover:underline underline-offset-4">
+          Tiilikaton pinnoitus Tampere
+        </Link>
+        <span className="mx-2 text-accent/60" aria-hidden="true">
+          ·
+        </span>
+        <Link to="/talon-maalaus-tampere/" className="font-bold text-accent-ink hover:underline underline-offset-4">
+          Talon maalaus Tampere
+        </Link>
+      </p>
+
       {/* Pakettihinta tummansinisenä palkkina (vrt. hintasivun "Laske oman kattosi hinta minuutissa"). */}
       <div className="mt-8 flex flex-col gap-5 overflow-hidden rounded-3xl bg-navy px-6 py-6 text-navy-foreground shadow-xl sm:flex-row sm:items-center sm:justify-between md:px-9 md:py-7">
         <div className="flex flex-col gap-1">

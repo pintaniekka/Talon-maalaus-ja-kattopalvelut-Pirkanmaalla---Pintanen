@@ -12,7 +12,7 @@
  *
  * EI komponentti-importteja: tiedosto luetaan myös Nodessa build-aikana.
  */
-import { type CityData, allCities, maalausCities, pinnoitusCities } from "./cityData";
+import { type CityData, allCities, hasPinnoitusPage, maalausCities, pinnoitusCities } from "./cityData";
 import { articles } from "./articles";
 import { getCityHeroBase } from "./projects";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
@@ -192,7 +192,11 @@ export const maalausCitySeo = (city: CityData): RouteSeo => {
  */
 export const areaCitySeo = (city: CityData): RouteSeo => ({
   title: `Maalausliike ja kattopalvelut ${city.name} | Pintanen`,
-  description: `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
+  // Kannibalisointi (Search Console 26.10.2026): kun kaupungilla on omat palvelusivut, aluesivu ei kilpaile
+  // samoilla avainsanoilla, vaan kuvaus esittelee yrityksen ja ohjaa palvelusivuille.
+  description: hasPinnoitusPage(city.slug)
+    ? `Maalausliike ja kattopalvelut ${city.cityIn}: Eerik pinnoittaa tiilikatot ja Eemil maalaa talot. Teemme työn itse. Ilmainen arviokäynti ja kirjallinen takuu.`
+    : `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
 });
 
 /** SEO-tiedot mille tahansa kanoniselle polulle (ilman loppukauttaviivaa). */

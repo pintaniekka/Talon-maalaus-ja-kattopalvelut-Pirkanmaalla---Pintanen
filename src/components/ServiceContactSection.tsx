@@ -50,11 +50,11 @@ const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
   <div className="kortti-a p-6 flex flex-col items-center text-center">
     <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden bg-muted mb-4 ring-4 ring-background shadow-sm">
       <img
+        loading="lazy"
+        decoding="async"
         src={person.image}
         alt={person.name}
         className="w-full h-full object-cover"
-        loading="lazy"
-        decoding="async"
         width={144}
         height={144}
         onError={(e) => {

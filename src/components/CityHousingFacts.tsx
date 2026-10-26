@@ -71,12 +71,12 @@ const CityHousingFacts = ({ citySlug, cityIn, service, hideMap }: CityHousingFac
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
             {!hideMap && <img
+              loading="lazy"
+              decoding="async"
               src={mapUrl}
               alt="Pintasen toiminta-alue kartalla: Pirkanmaa ja Kanta-Häme"
               width={200}
               height={200}
-              loading="lazy"
-              decoding="async"
               className="float-right ml-4 mb-3 w-32 md:w-44 rounded-2xl border border-border/50 shadow-md bg-card"
             />}
             <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{c.title(cityIn)}</h2>

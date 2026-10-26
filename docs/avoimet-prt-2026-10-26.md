@@ -2,6 +2,10 @@
 
 Tilanne 26.10.2026 illalla, 23 avointa PR:ää (#121–#143). Kaikki on tehty mainin commitista c075954. Taulukko kertoo jokaisesta, muuttaako se sivuston koodia tai sisältöä vai vain docs-kansiota, mitä kävijälle näkyy, ja riippuuko se toisesta PR:stä. "Sisältää" tarkoittaa, että haara on tehty toisen haaran päälle: PR näyttää myös edellisten muutokset, kunnes ne on yhdistetty, ja oma osuus jää jäljelle. "Samat tiedostot" tarkoittaa, että kaksi mainista tehtyä haaraa muuttaa samaa tiedostoa: kun toinen on yhdistetty, toiseen pitää mergetä main ja ratkaista ristiriita ennen yhdistämistä.
 
+## Tilanne 26.10.2026 klo 22.30
+
+Eki pyysi klo 21.26 yhdistämään muutokset oikeassa järjestyksessä ja tarkistamaan sivuston. Kaikki taulukon PR:t on yhdistetty mainiin tässä järjestyksessä, CI vihreänä joka välissä: #130, #134, #143, #132, #142 (ketjun kärki, toi mukanaan #121–#128, #131, #135 ja #140), #129, #133, #138, #137, #139, #136 ja viimeisenä #141. Tuotanto on tarkistettu ja 91 muuttunutta osoitetta lähetetty IndexNow'hun. Yksityiskohdat: `docs/yhdistaminen-2026-10-26.md`. Alla oleva taulukko ja suositeltu järjestys ovat tilanne ennen yhdistämistä.
+
 ## Taulukko
 
 | PR | Haara | Koodi tai sisältö vai docs | Mitä kävijälle näkyy | Riippuvuudet |
@@ -49,4 +53,18 @@ Ristiriitojen ratkaisun ja mainin merget haaroihin teen pyynnöstä (sano "ratka
 
 ## Tulossa (26.10.2026 illalla aloitetut, Eerikin "kysymykset ok")
 
-Mainista omina luonnos-PR:inä: fonttien esilataus (`claude/yo2-perf-fontit`, esikatselu ennen mergeä), kuvien `loading`-järjestys (`claude/yo2-perf-kuvien-lataus`), `vendor-ui`-paketin jako (`claude/yo2-perf-vendor-ui`), hintalaskurin paikkakuntavalitsin (`claude/yo2-perf-paikkakuntavalitsin`), 600 px:n kuvakoko (`claude/yo2-perf-kuvat-600`), värien kontrasti (`claude/yo2-kontrasti`, ulkoasumuutos, vain Eerikin ok:lla), sivuroolit ja linkitys (`claude/yo2-sivuroolit`), hintasivujen ja hintalaskurisivun tekstit (`claude/yo2-hintatekstit`), talon maalauksen talotyypit ja UKK (`claude/yo2-maalaus-hub-ukk`) ja sammal-artikkeli (`claude/yo2-artikkeli-sammal`). PR-numerot täydennetään tähän, kun ne on avattu.
+Mainista omina luonnos-PR:inä. Kaikkiin on mergetty main yhdistämisen jälkeen (26.10.2026 illalla), jotta Cloudflaren esikatselu vastaa tuotantoa. Fonttien esilatausta (`claude/yo2-perf-fontit`) ei viety PR:ksi, koska mittaus ei näyttänyt hyötyä.
+
+| PR | Haara | Mitä | Tila ja kysymykset Eerikille |
+|---|---|---|---|
+| #144 | `claude/yo2-artikkeli-sammal` | Artikkeli "Sammal tiilikatolla" jonoon 16.11.2026 | Luonnos. Mainin mergessä kaksi kohtaa muutettiin "noin 10–15 vuodessa" → "noin 15 vuodessa", koska `seo.test.ts` kieltää vanhan ilmauksen (Eerik 26.10.2026). Kysymykset: kuvateksti kuvalle `tiilikaton-pesu-ja-pinnoitus-sammaleenpoisto` (onko etummainen lape pinnoitettu vai pesty), pääkuvan alt "Kangasalla" tiedostonimen perusteella, halutaanko jäkälästä oma kappale. |
+| #145 | `claude/yo2-sivuroolit` | Alatunniste ja toiminta-alueet linkittävät palvelujen kaupunkisivuihin | Luonnos. Mainin mergessä haaran poisto aluesivun UKK:n hintakysymyksestä ("Paljonko tiilikaton pinnoitus tai talon maalaus maksaa <kunta>?") ei mennyt läpi: mainin teksti pidettiin, ja mainin aluesivu kertoo hinnat nyt myös ingressissä (#122). Kysymykset: alatunnisteen kaksi riviä ok, vai yksi rivi? Poistetaanko hintakysymys aluesivuilta haaran ehdotuksen mukaan? |
+| #146 | `claude/yo2-hintatekstit` | Hintasivuille esimerkkikohteet koon mukaan, hintalaskurisivulle teksti | Luonnos. Mainin mergen jälkeen E2E (axe, puhelin) löysi esimerkkitaulukon vierivästä kääreestä `scrollable-region-focusable`-virheen kolmella sivulla; korjattu kuten ArticleKitin Table (`role="region"`, `aria-label`, `tabIndex=0`), commit dae2d7f. Kysymykset: laskuri antaa korkeampia lukuja kuin hintakortit (kortti 190–240 m² 3 300–3 700 €, laskuri 200 m² 3 600–4 200 €; kortti 250–300 m² 3 750–4 880 €, laskuri jyrkälle 250 m² 5 500–6 250 €): kumpi on oikein? Hintalaskurin H1 rivittyy puhelimella kolmelle riville: ok vai lyhyempi? |
+| #147 | `claude/yo2-maalaus-hub-ukk` | Talon maalauksen hubiin talotyypit, palvelusivuille UKK-täydennykset | Luonnos. Mainin mergessä haaran "Miten maksu tapahtuu?" jätettiin pois, koska main sisältää jo saman kysymyksen. Kysymykset: maalataanko kivitalojen puuosat (räystäät, ikkunat, kuistit)? Pidetäänkö sekä "Riittääkö pelkkä pesu, vai pitääkö katto pinnoittaa?" että #141:n "Poistatteko sammaleen ja pesettekö katon ennen pinnoitusta?" vai vain toinen? |
+| #148 | `claude/yo2-perf-kuvat-600` | Kuvasarjaan 600 px:n koko (66 kuvaa) | Luonnos, ei ulkoasumuutosta. Työpöydällä −13…−34 % kuvatavuja, tarkoilla puhelimilla −9…−11 %. Kysymys: `CityReviewCard`-kuvan `sizes`-korjaus (terävämpi kuva, enemmän tavuja)? Suositus: ei. |
+| #149 | `claude/yo2-perf-paikkakuntavalitsin` | Paikkakuntavalitsimen lista kahdessa vaiheessa | Luonnos, ei ulkoasumuutosta. INP 248 → 168 ms. |
+| #150 | `claude/yo2-kontrasti` | Sävyt tummemmiksi, Lighthouse-saavutettavuus 96–97 → 100 | Luonnos, **ulkoasumuutos: vain Eerikin ok:lla esikatselun jälkeen.** Kysymys: onko sininen #007bc7 ok (12.10. #0077cc oli liian tumma; uusi on hieman vaaleampi)? Vaihtoehto: tumma teksti vaaleammalla pohjalla. |
+| #151 | `claude/yo2-perf-kuvien-lataus` | `loading` ennen `src`-attribuuttia | Luonnos, ei ulkoasumuutosta. Etusivu puhelimella 16 kuvaa / 1 955 kt → 6 / 270 kt heti ladattuna. 404-sivulla ja jonossa olevalla artikkelilla ei muutosta. |
+| #152 | `claude/yo2-perf-vendor-ui` | `vendor-ui`-paketin jako, `TooltipProvider` pois | Luonnos, ei ulkoasumuutosta. Mainin mergen jälkeen vendor-ui 225 → 165 kt (gzip 73 → 53); `PhoneInput`-chunk kasvoi 19 → 73 kt, koska popover- ja dialog-paketit latautuvat nyt vain niitä käyttävillä sivuilla. |
+
+Lisäksi D-jatko 1 ehdottaa omaa PR:ää hintalaskurin kahden palvelukuvan `priority`-attribuutille (Lighthouse merkitsee LCP-kuvan laiskasti ladatuksi).

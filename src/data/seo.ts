@@ -98,15 +98,21 @@ export const DEFAULT_DESCRIPTION =
 export const withBrand = (title?: string): string =>
   !title ? DEFAULT_TITLE : /\|\s*Pintanen\s*$/i.test(title) ? title : `${title} | Pintanen`;
 
+/** Poistaa "| Pintanen" -lopun, jotta pituus lasketaan pelkästä otsikosta. */
+export const stripBrand = (title: string): string => title.replace(/\s*\|\s*Pintanen\s*$/i, "");
+
 /**
- * Title-pituus hakutuloksessa (auditointi 27.10.2026): 50–60 merkkiä "| Pintanen" mukaan luettuna.
+ * Title-pituus hakutuloksessa: 30–60 merkkiä ilman " | Pintanen" -loppua (Eerik 26.10.2026; alaraja oli ensin 35,
+ * mutta Akaan aluesivu on 34 merkkiä eikä kaupunkisivun titleen lisätä Pirkanmaata. Auditoinnissa 27.10.2026 raja
+ * oli 50–60 brändin kanssa, mikä pakotti lyhyisiin titleihin täytteen "– takuu").
  * Palauttaa ensimmäisen vaihtoehdon, joka mahtuu haarukkaan; jos mikään ei mahdu, viimeisen.
  */
-export const TITLE_MIN = 50;
+export const TITLE_MIN = 30;
 export const TITLE_MAX = 60;
+export const titleLength = (title: string): number => stripBrand(title).length;
 export const fitTitle = (variants: string[]): string =>
   variants.find((t) => {
-    const n = withBrand(t).length;
+    const n = titleLength(t);
     return n >= TITLE_MIN && n <= TITLE_MAX;
   }) ?? variants[variants.length - 1];
 
@@ -198,12 +204,9 @@ export const staticSeo: Record<string, RouteSeo> = {
  */
 export const pinnoitusCitySeo = (city: CityData): RouteSeo => ({
   // Vaihe 12 (27.10.2026) ja Eerik 26.10.2026: sana "maalaus" pysyy titlessä hakujen "katon maalaus <kunta>"
-  // takia, ja "hinta" jätetään pois, koska se ei mahdu 60 merkkiin. Takuu lisätään, jos se mahtuu.
-  title: fitTitle([
-    `Tiilikaton pinnoitus ja maalaus ${city.name} – 5 v takuu`,
-    `Tiilikaton pinnoitus ja maalaus ${city.name} – takuu`,
-    `Tiilikaton pinnoitus ja maalaus ${city.name}`,
-  ]),
+  // takia, ja "hinta" jätetään pois, koska se ei mahdu 60 merkkiin. Takuu "5 v takuu" joka kaupungille
+  // (Eerik 26.10.2026, korjaukset 3); pelkkä "– takuu" oli täytettä, eikä sitä enää käytetä.
+  title: fitTitle([`Tiilikaton pinnoitus ja maalaus ${city.name} – 5 v takuu`, `Tiilikaton pinnoitus ja maalaus ${city.name}`]),
   description: `Tiilikaton pesu ja pinnoitus ${city.cityIn}. Eerik tekee työn itse. Ilmainen kuntotarkastus, 5 v takuu ja kotitalousvähennys. Hinta ${PINNOITUS_HINTA}.`,
 });
 
@@ -222,8 +225,8 @@ export const maalausCitySeo = (city: CityData): RouteSeo => ({
  * "Maalausliike" titleen ja H1:een Eerikin päätöksellä 11.10.2026 ("maalausliike tampere" on suurin ei-brändihaku).
  */
 export const areaCitySeo = (city: CityData): RouteSeo => ({
-  // Lyhyillä kunnannimillä perusmuoto jää alle 50 merkin (auditointi 27.10.2026): perään kuvauksen lupaus takuusta.
-  title: fitTitle([`Maalausliike ja kattopalvelut ${city.name}`, `Maalausliike ja kattopalvelut ${city.name} – takuu`]),
+  // Ilman lisäyksiä (Eerik 26.10.2026, korjaukset 3): täyte "– takuu" poistettiin, kun raja laskettiin ilman brändiä.
+  title: `Maalausliike ja kattopalvelut ${city.name}`,
   // Kannibalisointi (Search Console 26.10.2026): kun kaupungilla on omat palvelusivut, aluesivu ei kilpaile
   // samoilla avainsanoilla, vaan kuvaus esittelee yrityksen ja ohjaa palvelusivuille.
   description: hasPinnoitusPage(city.slug)

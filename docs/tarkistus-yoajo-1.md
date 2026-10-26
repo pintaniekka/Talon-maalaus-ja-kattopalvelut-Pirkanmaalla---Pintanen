@@ -16,9 +16,10 @@ Sisältö:
 ## a) Title- ja description-muutokset
 
 Vertailu on tehty rakennetuista sivuista (`dist/*/index.html`): `main`-haaran build vastaan tämän haaran build.
-Merkkimäärä on koko titlen pituus, " | Pintanen" mukaan lukien. Taulukoissa ovat vain sivut, joiden title tai
-description muuttui tai jotka ovat uusia. Yhteensä 84 muuttunutta tai uutta sivua: 73 title-muutosta ja 33
-description-muutosta. Kaikkien muiden sivujen title ja description ovat ennallaan.
+Titlet on esitetty ilman " | Pintanen" -loppua, ja merkkimäärä on titlen pituus ilman sitä (Eerik 26.10.2026,
+korjaukset 3: raja 30–60 merkkiä lasketaan ilman brändiä; alaraja oli ensin 35, Eerikin vastaus kysymykseen 6). Taulukoissa ovat vain sivut, joiden title tai description
+muuttui `main`-haaraan verrattuna tai jotka ovat uusia. Title-taulukko on päivitetty korjausten 3 jälkeen: 66
+title-muutosta ja 33 description-muutosta. Kaikkien muiden sivujen title ja description ovat ennallaan.
 
 Uudet sivut: `/ilmainen-kuntotarkastus/`, `/kotitalousvahennys/` ja neljä jonossa olevaa artikkelia (`tiilikaton-pinnoituksen-hinta-2027`,
 `ormax-tiilikaton-pinnoitus`, `puutalon-ulkomaalin-valinta`, `mokin-ja-piharakennuksen-maalaus`).
@@ -27,79 +28,72 @@ Uudet sivut: `/ilmainen-kuntotarkastus/`, `/kotitalousvahennys/` ja neljä jonos
 
 | Polku | Title ennen | Title jälkeen | Merkkiä |
 |---|---|---|---|
-| `/artikkelit/` | Artikkelit ja oppaat | Pintanen | Artikkelit ja oppaat – katto ja talon maalaus | Pintanen | 31 → 56 |
-| `/artikkelit/huoltomaalaus-vai-uusi-ulkoverhous/` | Huoltomaalaus vai uusi ulkoverhous: milloin maali riittää? | Pintanen | Huoltomaalaus vai uusi ulkoverhous: puu ratkaisee | Pintanen | 69 → 60 |
-| `/artikkelit/mokin-ja-piharakennuksen-maalaus/` (uusi sivu) | – | Mökin ja piharakennuksen maalaus: näin työ etenee | Pintanen | 0 → 60 |
-| `/artikkelit/ormax-tiilikaton-pinnoitus/` (uusi sivu) | – | Ormax-tiilikaton pinnoitus: hinta ja ajoitus | Pintanen | 0 → 55 |
-| `/artikkelit/pinnoitus-vai-uusi-katto/` | Tiilikattoremontti vai pinnoitus: kumpi kannattaa? | Pintanen | Kattoremontti vai pinnoitus 2027: hinta ja päätös | Pintanen | 61 → 60 |
-| `/artikkelit/puutalon-ulkomaalin-valinta/` (uusi sivu) | – | Puutalon ulkomaali: öljymaali vai vesiohenteinen | Pintanen | 0 → 59 |
-| `/artikkelit/tiilikaton-pesu-ja-pinnoitus/` | Tiilikaton pesu ja pinnoitus: miksi pesu ei yksin riitä | Pintanen | Tiilikaton pesu ja pinnoitus: miksi pesu ei riitä | Pintanen | 66 → 60 |
-| `/artikkelit/tiilikaton-pinnoituksen-hinta-2027/` (uusi sivu) | – | Tiilikaton pinnoituksen hinta 2027 Pirkanmaalla | Pintanen | 0 → 58 |
-| `/hintalaskuri/` | Hintalaskuri: tiilikaton pinnoitus ja talon maalaus | Pintanen | Hintalaskuri: tiilikaton pinnoitus, talon maalaus | Pintanen | 62 → 60 |
-| `/ilmainen-kuntotarkastus/` (uusi sivu) | – | Ilmainen tiilikaton kuntotarkastus Pirkanmaalla | Pintanen | 0 → 58 |
-| `/kokemuksia/` | Asiakkaiden kokemuksia: kaikki Google-arvostelumme | Pintanen | Asiakkaiden kokemuksia: Google-arvostelut 5,0 / 5 | Pintanen | 61 → 60 |
-| `/kotitalousvahennys/` (uusi sivu) | – | Kotitalousvähennys 2026 ja 2027: katto ja maalaus | Pintanen | 0 → 60 |
-| `/maalauspalvelut-akaa/` | Maalausliike ja kattopalvelut Akaa | Pintanen | Maalausliike ja kattopalvelut Akaa – takuu | Pintanen | 45 → 53 |
-| `/maalauspalvelut-forssa/` | Maalausliike ja kattopalvelut Forssa | Pintanen | Maalausliike ja kattopalvelut Forssa – takuu | Pintanen | 47 → 55 |
-| `/maalauspalvelut-kihnio/` | Maalausliike ja kattopalvelut Kihniö | Pintanen | Maalausliike ja kattopalvelut Kihniö – takuu | Pintanen | 47 → 55 |
-| `/maalauspalvelut-lempaala/` | Maalausliike ja kattopalvelut Lempäälä | Pintanen | Maalausliike ja kattopalvelut Lempäälä – takuu | Pintanen | 49 → 57 |
-| `/maalauspalvelut-nokia/` | Maalausliike ja kattopalvelut Nokia | Pintanen | Maalausliike ja kattopalvelut Nokia – takuu | Pintanen | 46 → 54 |
-| `/maalauspalvelut-orivesi/` | Maalausliike ja kattopalvelut Orivesi | Pintanen | Maalausliike ja kattopalvelut Orivesi – takuu | Pintanen | 48 → 56 |
-| `/maalauspalvelut-palkane/` | Maalausliike ja kattopalvelut Pälkäne | Pintanen | Maalausliike ja kattopalvelut Pälkäne – takuu | Pintanen | 48 → 56 |
-| `/maalauspalvelut-parkano/` | Maalausliike ja kattopalvelut Parkano | Pintanen | Maalausliike ja kattopalvelut Parkano – takuu | Pintanen | 48 → 56 |
-| `/maalauspalvelut-pirkkala/` | Maalausliike ja kattopalvelut Pirkkala | Pintanen | Maalausliike ja kattopalvelut Pirkkala – takuu | Pintanen | 49 → 57 |
-| `/maalauspalvelut-ruovesi/` | Maalausliike ja kattopalvelut Ruovesi | Pintanen | Maalausliike ja kattopalvelut Ruovesi – takuu | Pintanen | 48 → 56 |
-| `/maalauspalvelut-tampere/` | Maalausliike ja kattopalvelut Tampere | Pintanen | Maalausliike ja kattopalvelut Tampere – takuu | Pintanen | 48 → 56 |
-| `/maalauspalvelut-urjala/` | Maalausliike ja kattopalvelut Urjala | Pintanen | Maalausliike ja kattopalvelut Urjala – takuu | Pintanen | 47 → 55 |
-| `/maalauspalvelut-virrat/` | Maalausliike ja kattopalvelut Virrat | Pintanen | Maalausliike ja kattopalvelut Virrat – takuu | Pintanen | 47 → 55 |
-| `/maalauspalvelut-ylojarvi/` | Maalausliike ja kattopalvelut Ylöjärvi | Pintanen | Maalausliike ja kattopalvelut Ylöjärvi – takuu | Pintanen | 49 → 57 |
-| `/meista/` | Meistä: veljekset Eerik ja Eemil tekevät työn itse | Pintanen | Meistä – Eerik ja Eemil, yli 200 kohdetta | Pintanen | 61 → 52 |
-| `/talon-maalaus-akaa/` | Talon maalaus Akaa – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Akaa – ulkomaalaus, 2 v takuu | Pintanen | 63 → 54 |
-| `/talon-maalaus-forssa/` | Talon maalaus Forssa – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Forssa – ulkomaalaus, 2 v takuu | Pintanen | 65 → 56 |
-| `/talon-maalaus-hameenkyro/` | Talon maalaus Hämeenkyrö – ulkomaalaus | Pintanen | Talon maalaus Hämeenkyrö – ulkomaalaus, 2 v takuu | Pintanen | 49 → 60 |
-| `/talon-maalaus-hinta-pirkanmaa/` | Talon maalaus hinta 2027 – hintaesimerkit ja laskuri | Pintanen | Talon maalaus hinta 2027: 3 500–11 000 € | Pintanen | 63 → 51 |
-| `/talon-maalaus-huittinen/` | Talon maalaus Huittinen – ulkomaalaus | Pintanen | Talon maalaus Huittinen – ulkomaalaus, 2 v takuu | Pintanen | 48 → 59 |
-| `/talon-maalaus-ikaalinen/` | Talon maalaus Ikaalinen – ulkomaalaus | Pintanen | Talon maalaus Ikaalinen – ulkomaalaus, 2 v takuu | Pintanen | 48 → 59 |
-| `/talon-maalaus-juupajoki/` | Talon maalaus Juupajoki – ulkomaalaus | Pintanen | Talon maalaus Juupajoki – ulkomaalaus, 2 v takuu | Pintanen | 48 → 59 |
-| `/talon-maalaus-kangasala/` | Talon maalaus Kangasala – ulkomaalaus | Pintanen | Talon maalaus Kangasala – ulkomaalaus, 2 v takuu | Pintanen | 48 → 59 |
-| `/talon-maalaus-kihnio/` | Talon maalaus Kihniö – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Kihniö – ulkomaalaus, 2 v takuu | Pintanen | 65 → 56 |
-| `/talon-maalaus-lempaala/` | Talon maalaus Lempäälä – ulkomaalaus | Pintanen | Talon maalaus Lempäälä – ulkomaalaus, 2 v takuu | Pintanen | 47 → 58 |
-| `/talon-maalaus-nokia/` | Talon maalaus Nokia – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Nokia – ulkomaalaus, 2 v takuu | Pintanen | 64 → 55 |
-| `/talon-maalaus-orivesi/` | Talon maalaus Orivesi – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Orivesi – ulkomaalaus, 2 v takuu | Pintanen | 66 → 57 |
-| `/talon-maalaus-palkane/` | Talon maalaus Pälkäne – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Pälkäne – ulkomaalaus, 2 v takuu | Pintanen | 66 → 57 |
-| `/talon-maalaus-parkano/` | Talon maalaus Parkano – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Parkano – ulkomaalaus, 2 v takuu | Pintanen | 66 → 57 |
-| `/talon-maalaus-pirkanmaa/` | Talon maalaus Pirkanmaa – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Pirkanmaa – ulkomaalaus, 2 v takuu | Pintanen | 68 → 59 |
-| `/talon-maalaus-pirkkala/` | Talon maalaus Pirkkala – ulkomaalaus | Pintanen | Talon maalaus Pirkkala – ulkomaalaus, 2 v takuu | Pintanen | 47 → 58 |
-| `/talon-maalaus-ruovesi/` | Talon maalaus Ruovesi – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Ruovesi – ulkomaalaus, 2 v takuu | Pintanen | 66 → 57 |
-| `/talon-maalaus-sastamala/` | Talon maalaus Sastamala – ulkomaalaus | Pintanen | Talon maalaus Sastamala – ulkomaalaus, 2 v takuu | Pintanen | 48 → 59 |
-| `/talon-maalaus-tampere/` | Talon maalaus Tampere – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Tampere – ulkomaalaus, 2 v takuu | Pintanen | 66 → 57 |
-| `/talon-maalaus-urjala/` | Talon maalaus Urjala – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Urjala – ulkomaalaus, 2 v takuu | Pintanen | 65 → 56 |
-| `/talon-maalaus-vesilahti/` | Talon maalaus Vesilahti – ulkomaalaus | Pintanen | Talon maalaus Vesilahti – ulkomaalaus, 2 v takuu | Pintanen | 48 → 59 |
-| `/talon-maalaus-virrat/` | Talon maalaus Virrat – ulkomaalaus ja julkisivumaalaus | Pintanen | Talon maalaus Virrat – ulkomaalaus, 2 v takuu | Pintanen | 65 → 56 |
-| `/talon-maalaus-ylojarvi/` | Talon maalaus Ylöjärvi – ulkomaalaus | Pintanen | Talon maalaus Ylöjärvi – ulkomaalaus, 2 v takuu | Pintanen | 47 → 58 |
-| `/tietosuoja/` | Tietosuojaseloste | Pintanen | Tietosuojaseloste – mitä tietoja keräämme | Pintanen | 28 → 52 |
-| `/tiilikaton-pinnoitus-akaa/` | Tiilikaton pinnoitus ja maalaus Akaa | Pintanen | Tiilikaton pinnoitus ja maalaus Akaa – 5 v takuu | Pintanen | 47 → 59 |
-| `/tiilikaton-pinnoitus-forssa/` | Tiilikaton pinnoitus ja maalaus Forssa | Pintanen | Tiilikaton pinnoitus ja maalaus Forssa – takuu | Pintanen | 49 → 57 |
-| `/tiilikaton-pinnoitus-hinta-pirkanmaa/` | Tiilikaton pinnoitus hinta 2027 – hintaesimerkit ja laskuri | Pintanen | Tiilikaton pinnoitus hinta 2027: 2 850–7 000 € | Pintanen | 70 → 57 |
-| `/tiilikaton-pinnoitus-huittinen/` | Tiilikaton pinnoitus ja maalaus Huittinen | Pintanen | Tiilikaton pinnoitus ja maalaus Huittinen – takuu | Pintanen | 52 → 60 |
-| `/tiilikaton-pinnoitus-ikaalinen/` | Tiilikaton pinnoitus ja maalaus Ikaalinen | Pintanen | Tiilikaton pinnoitus ja maalaus Ikaalinen – takuu | Pintanen | 52 → 60 |
-| `/tiilikaton-pinnoitus-juupajoki/` | Tiilikaton pinnoitus ja maalaus Juupajoki | Pintanen | Tiilikaton pinnoitus ja maalaus Juupajoki – takuu | Pintanen | 52 → 60 |
-| `/tiilikaton-pinnoitus-kangasala/` | Tiilikaton pinnoitus ja maalaus Kangasala | Pintanen | Tiilikaton pinnoitus ja maalaus Kangasala – takuu | Pintanen | 52 → 60 |
-| `/tiilikaton-pinnoitus-kihnio/` | Tiilikaton pinnoitus ja maalaus Kihniö | Pintanen | Tiilikaton pinnoitus ja maalaus Kihniö – takuu | Pintanen | 49 → 57 |
-| `/tiilikaton-pinnoitus-lempaala/` | Tiilikaton pinnoitus ja maalaus Lempäälä | Pintanen | Tiilikaton pinnoitus ja maalaus Lempäälä – takuu | Pintanen | 51 → 59 |
-| `/tiilikaton-pinnoitus-nokia/` | Tiilikaton pinnoitus ja maalaus Nokia | Pintanen | Tiilikaton pinnoitus ja maalaus Nokia – 5 v takuu | Pintanen | 48 → 60 |
-| `/tiilikaton-pinnoitus-orivesi/` | Tiilikaton pinnoitus ja maalaus Orivesi | Pintanen | Tiilikaton pinnoitus ja maalaus Orivesi – takuu | Pintanen | 50 → 58 |
-| `/tiilikaton-pinnoitus-palkane/` | Tiilikaton pinnoitus ja maalaus Pälkäne | Pintanen | Tiilikaton pinnoitus ja maalaus Pälkäne – takuu | Pintanen | 50 → 58 |
-| `/tiilikaton-pinnoitus-parkano/` | Tiilikaton pinnoitus ja maalaus Parkano | Pintanen | Tiilikaton pinnoitus ja maalaus Parkano – takuu | Pintanen | 50 → 58 |
-| `/tiilikaton-pinnoitus-pirkanmaa/` | Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Pintanen | Tiilikaton pinnoitus Pirkanmaa – hinta, 5 v takuu | Pintanen | 53 → 60 |
-| `/tiilikaton-pinnoitus-pirkkala/` | Tiilikaton pinnoitus ja maalaus Pirkkala | Pintanen | Tiilikaton pinnoitus ja maalaus Pirkkala – takuu | Pintanen | 51 → 59 |
-| `/tiilikaton-pinnoitus-ruovesi/` | Tiilikaton pinnoitus ja maalaus Ruovesi | Pintanen | Tiilikaton pinnoitus ja maalaus Ruovesi – takuu | Pintanen | 50 → 58 |
-| `/tiilikaton-pinnoitus-sastamala/` | Tiilikaton pinnoitus ja maalaus Sastamala | Pintanen | Tiilikaton pinnoitus ja maalaus Sastamala – takuu | Pintanen | 52 → 60 |
-| `/tiilikaton-pinnoitus-tampere/` | Tiilikaton pinnoitus ja maalaus Tampere | Pintanen | Tiilikaton pinnoitus ja maalaus Tampere – takuu | Pintanen | 50 → 58 |
-| `/tiilikaton-pinnoitus-urjala/` | Tiilikaton pinnoitus ja maalaus Urjala | Pintanen | Tiilikaton pinnoitus ja maalaus Urjala – takuu | Pintanen | 49 → 57 |
-| `/tiilikaton-pinnoitus-vesilahti/` | Tiilikaton pinnoitus ja maalaus Vesilahti | Pintanen | Tiilikaton pinnoitus ja maalaus Vesilahti – takuu | Pintanen | 52 → 60 |
-| `/tiilikaton-pinnoitus-virrat/` | Tiilikaton pinnoitus ja maalaus Virrat | Pintanen | Tiilikaton pinnoitus ja maalaus Virrat – takuu | Pintanen | 49 → 57 |
-| `/tiilikaton-pinnoitus-ylojarvi/` | Tiilikaton pinnoitus ja maalaus Ylöjärvi | Pintanen | Tiilikaton pinnoitus ja maalaus Ylöjärvi – takuu | Pintanen | 51 → 59 |
+| `/artikkelit/` | Artikkelit ja oppaat | Artikkelit ja oppaat – katto ja talon maalaus | 20 → 45 |
+| `/artikkelit/huoltomaalaus-vai-uusi-ulkoverhous/` | Huoltomaalaus vai uusi ulkoverhous: milloin maali riittää? | Huoltomaalaus vai uusi ulkoverhous: puu ratkaisee | 58 → 49 |
+| `/artikkelit/mokin-ja-piharakennuksen-maalaus/` (uusi sivu) | – | Mökin ja piharakennuksen maalaus: näin työ etenee | 0 → 49 |
+| `/artikkelit/ormax-tiilikaton-pinnoitus/` (uusi sivu) | – | Ormax-tiilikaton pinnoitus: hinta ja ajoitus | 0 → 44 |
+| `/artikkelit/pinnoitus-vai-uusi-katto/` | Tiilikattoremontti vai pinnoitus: kumpi kannattaa? | Kattoremontti vai pinnoitus 2027: hinta ja päätös | 50 → 49 |
+| `/artikkelit/puutalon-ulkomaalin-valinta/` (uusi sivu) | – | Puutalon ulkomaali: öljymaali vai vesiohenteinen | 0 → 48 |
+| `/artikkelit/tiilikaton-pesu-ja-pinnoitus/` | Tiilikaton pesu ja pinnoitus: miksi pesu ei yksin riitä | Tiilikaton pesu ja pinnoitus: miksi pesu ei riitä | 55 → 49 |
+| `/artikkelit/tiilikaton-pinnoituksen-hinta-2027/` (uusi sivu) | – | Tiilikaton pinnoituksen hinta 2027 Pirkanmaalla | 0 → 47 |
+| `/hintalaskuri/` | Hintalaskuri: tiilikaton pinnoitus ja talon maalaus | Hintalaskuri: tiilikaton pinnoitus, talon maalaus | 51 → 49 |
+| `/ilmainen-kuntotarkastus/` (uusi sivu) | – | Ilmainen tiilikaton kuntotarkastus Pirkanmaalla | 0 → 47 |
+| `/kokemuksia/` | Asiakkaiden kokemuksia: kaikki Google-arvostelumme | Asiakkaiden kokemuksia: Google-arvostelut 5,0 / 5 | 50 → 49 |
+| `/kotitalousvahennys/` (uusi sivu) | – | Kotitalousvähennys 2026 ja 2027: katto ja maalaus | 0 → 49 |
+| `/meista/` | Meistä: veljekset Eerik ja Eemil tekevät työn itse | Meistä – Eerik ja Eemil, yli 200 kohdetta | 50 → 41 |
+| `/talon-maalaus-akaa/` | Talon maalaus Akaa – ulkomaalaus ja julkisivumaalaus | Talon maalaus Akaa – ulkomaalaus, 2 v takuu | 52 → 43 |
+| `/talon-maalaus-forssa/` | Talon maalaus Forssa – ulkomaalaus ja julkisivumaalaus | Talon maalaus Forssa – ulkomaalaus, 2 v takuu | 54 → 45 |
+| `/talon-maalaus-hameenkyro/` | Talon maalaus Hämeenkyrö – ulkomaalaus | Talon maalaus Hämeenkyrö – ulkomaalaus, 2 v takuu | 38 → 49 |
+| `/talon-maalaus-hameenlinna/` | Talon maalaus Hämeenlinna – ulkomaalaus | Talon maalaus Hämeenlinna – ulkomaalaus, 2 v takuu | 39 → 50 |
+| `/talon-maalaus-hinta-pirkanmaa/` | Talon maalaus hinta 2027 – hintaesimerkit ja laskuri | Talon maalaus hinta 2027: 3 500–11 000 € | 52 → 40 |
+| `/talon-maalaus-huittinen/` | Talon maalaus Huittinen – ulkomaalaus | Talon maalaus Huittinen – ulkomaalaus, 2 v takuu | 37 → 48 |
+| `/talon-maalaus-ikaalinen/` | Talon maalaus Ikaalinen – ulkomaalaus | Talon maalaus Ikaalinen – ulkomaalaus, 2 v takuu | 37 → 48 |
+| `/talon-maalaus-juupajoki/` | Talon maalaus Juupajoki – ulkomaalaus | Talon maalaus Juupajoki – ulkomaalaus, 2 v takuu | 37 → 48 |
+| `/talon-maalaus-kangasala/` | Talon maalaus Kangasala – ulkomaalaus | Talon maalaus Kangasala – ulkomaalaus, 2 v takuu | 37 → 48 |
+| `/talon-maalaus-kihnio/` | Talon maalaus Kihniö – ulkomaalaus ja julkisivumaalaus | Talon maalaus Kihniö – ulkomaalaus, 2 v takuu | 54 → 45 |
+| `/talon-maalaus-lempaala/` | Talon maalaus Lempäälä – ulkomaalaus | Talon maalaus Lempäälä – ulkomaalaus, 2 v takuu | 36 → 47 |
+| `/talon-maalaus-mantta-vilppula/` | Talon maalaus Mänttä-Vilppula – ulkomaalaus | Talon maalaus Mänttä-Vilppula – ulkomaalaus, 2 v takuu | 43 → 54 |
+| `/talon-maalaus-nokia/` | Talon maalaus Nokia – ulkomaalaus ja julkisivumaalaus | Talon maalaus Nokia – ulkomaalaus, 2 v takuu | 53 → 44 |
+| `/talon-maalaus-orivesi/` | Talon maalaus Orivesi – ulkomaalaus ja julkisivumaalaus | Talon maalaus Orivesi – ulkomaalaus, 2 v takuu | 55 → 46 |
+| `/talon-maalaus-palkane/` | Talon maalaus Pälkäne – ulkomaalaus ja julkisivumaalaus | Talon maalaus Pälkäne – ulkomaalaus, 2 v takuu | 55 → 46 |
+| `/talon-maalaus-parkano/` | Talon maalaus Parkano – ulkomaalaus ja julkisivumaalaus | Talon maalaus Parkano – ulkomaalaus, 2 v takuu | 55 → 46 |
+| `/talon-maalaus-pirkanmaa/` | Talon maalaus Pirkanmaa – ulkomaalaus ja julkisivumaalaus | Talon maalaus Pirkanmaa – ulkomaalaus, 2 v takuu | 57 → 48 |
+| `/talon-maalaus-pirkkala/` | Talon maalaus Pirkkala – ulkomaalaus | Talon maalaus Pirkkala – ulkomaalaus, 2 v takuu | 36 → 47 |
+| `/talon-maalaus-ruovesi/` | Talon maalaus Ruovesi – ulkomaalaus ja julkisivumaalaus | Talon maalaus Ruovesi – ulkomaalaus, 2 v takuu | 55 → 46 |
+| `/talon-maalaus-sastamala/` | Talon maalaus Sastamala – ulkomaalaus | Talon maalaus Sastamala – ulkomaalaus, 2 v takuu | 37 → 48 |
+| `/talon-maalaus-tampere/` | Talon maalaus Tampere – ulkomaalaus ja julkisivumaalaus | Talon maalaus Tampere – ulkomaalaus, 2 v takuu | 55 → 46 |
+| `/talon-maalaus-urjala/` | Talon maalaus Urjala – ulkomaalaus ja julkisivumaalaus | Talon maalaus Urjala – ulkomaalaus, 2 v takuu | 54 → 45 |
+| `/talon-maalaus-valkeakoski/` | Talon maalaus Valkeakoski – ulkomaalaus | Talon maalaus Valkeakoski – ulkomaalaus, 2 v takuu | 39 → 50 |
+| `/talon-maalaus-vesilahti/` | Talon maalaus Vesilahti – ulkomaalaus | Talon maalaus Vesilahti – ulkomaalaus, 2 v takuu | 37 → 48 |
+| `/talon-maalaus-virrat/` | Talon maalaus Virrat – ulkomaalaus ja julkisivumaalaus | Talon maalaus Virrat – ulkomaalaus, 2 v takuu | 54 → 45 |
+| `/talon-maalaus-ylojarvi/` | Talon maalaus Ylöjärvi – ulkomaalaus | Talon maalaus Ylöjärvi – ulkomaalaus, 2 v takuu | 36 → 47 |
+| `/tietosuoja/` | Tietosuojaseloste | Tietosuojaseloste – mitä tietoja keräämme | 17 → 41 |
+| `/tiilikaton-pinnoitus-akaa/` | Tiilikaton pinnoitus ja maalaus Akaa | Tiilikaton pinnoitus ja maalaus Akaa – 5 v takuu | 36 → 48 |
+| `/tiilikaton-pinnoitus-forssa/` | Tiilikaton pinnoitus ja maalaus Forssa | Tiilikaton pinnoitus ja maalaus Forssa – 5 v takuu | 38 → 50 |
+| `/tiilikaton-pinnoitus-hameenkyro/` | Tiilikaton pinnoitus ja maalaus Hämeenkyrö | Tiilikaton pinnoitus ja maalaus Hämeenkyrö – 5 v takuu | 42 → 54 |
+| `/tiilikaton-pinnoitus-hameenlinna/` | Tiilikaton pinnoitus ja maalaus Hämeenlinna | Tiilikaton pinnoitus ja maalaus Hämeenlinna – 5 v takuu | 43 → 55 |
+| `/tiilikaton-pinnoitus-hinta-pirkanmaa/` | Tiilikaton pinnoitus hinta 2027 – hintaesimerkit ja laskuri | Tiilikaton pinnoitus hinta 2027: 2 850–7 000 € | 59 → 46 |
+| `/tiilikaton-pinnoitus-huittinen/` | Tiilikaton pinnoitus ja maalaus Huittinen | Tiilikaton pinnoitus ja maalaus Huittinen – 5 v takuu | 41 → 53 |
+| `/tiilikaton-pinnoitus-ikaalinen/` | Tiilikaton pinnoitus ja maalaus Ikaalinen | Tiilikaton pinnoitus ja maalaus Ikaalinen – 5 v takuu | 41 → 53 |
+| `/tiilikaton-pinnoitus-juupajoki/` | Tiilikaton pinnoitus ja maalaus Juupajoki | Tiilikaton pinnoitus ja maalaus Juupajoki – 5 v takuu | 41 → 53 |
+| `/tiilikaton-pinnoitus-kangasala/` | Tiilikaton pinnoitus ja maalaus Kangasala | Tiilikaton pinnoitus ja maalaus Kangasala – 5 v takuu | 41 → 53 |
+| `/tiilikaton-pinnoitus-kihnio/` | Tiilikaton pinnoitus ja maalaus Kihniö | Tiilikaton pinnoitus ja maalaus Kihniö – 5 v takuu | 38 → 50 |
+| `/tiilikaton-pinnoitus-lempaala/` | Tiilikaton pinnoitus ja maalaus Lempäälä | Tiilikaton pinnoitus ja maalaus Lempäälä – 5 v takuu | 40 → 52 |
+| `/tiilikaton-pinnoitus-mantta-vilppula/` | Tiilikaton pinnoitus ja maalaus Mänttä-Vilppula | Tiilikaton pinnoitus ja maalaus Mänttä-Vilppula – 5 v takuu | 47 → 59 |
+| `/tiilikaton-pinnoitus-nokia/` | Tiilikaton pinnoitus ja maalaus Nokia | Tiilikaton pinnoitus ja maalaus Nokia – 5 v takuu | 37 → 49 |
+| `/tiilikaton-pinnoitus-orivesi/` | Tiilikaton pinnoitus ja maalaus Orivesi | Tiilikaton pinnoitus ja maalaus Orivesi – 5 v takuu | 39 → 51 |
+| `/tiilikaton-pinnoitus-palkane/` | Tiilikaton pinnoitus ja maalaus Pälkäne | Tiilikaton pinnoitus ja maalaus Pälkäne – 5 v takuu | 39 → 51 |
+| `/tiilikaton-pinnoitus-parkano/` | Tiilikaton pinnoitus ja maalaus Parkano | Tiilikaton pinnoitus ja maalaus Parkano – 5 v takuu | 39 → 51 |
+| `/tiilikaton-pinnoitus-pirkanmaa/` | Tiilikaton pinnoitus Pirkanmaa | 5 v takuu | Tiilikaton pinnoitus Pirkanmaa – hinta, 5 v takuu | 42 → 49 |
+| `/tiilikaton-pinnoitus-pirkkala/` | Tiilikaton pinnoitus ja maalaus Pirkkala | Tiilikaton pinnoitus ja maalaus Pirkkala – 5 v takuu | 40 → 52 |
+| `/tiilikaton-pinnoitus-ruovesi/` | Tiilikaton pinnoitus ja maalaus Ruovesi | Tiilikaton pinnoitus ja maalaus Ruovesi – 5 v takuu | 39 → 51 |
+| `/tiilikaton-pinnoitus-sastamala/` | Tiilikaton pinnoitus ja maalaus Sastamala | Tiilikaton pinnoitus ja maalaus Sastamala – 5 v takuu | 41 → 53 |
+| `/tiilikaton-pinnoitus-tampere/` | Tiilikaton pinnoitus ja maalaus Tampere | Tiilikaton pinnoitus ja maalaus Tampere – 5 v takuu | 39 → 51 |
+| `/tiilikaton-pinnoitus-urjala/` | Tiilikaton pinnoitus ja maalaus Urjala | Tiilikaton pinnoitus ja maalaus Urjala – 5 v takuu | 38 → 50 |
+| `/tiilikaton-pinnoitus-valkeakoski/` | Tiilikaton pinnoitus ja maalaus Valkeakoski | Tiilikaton pinnoitus ja maalaus Valkeakoski – 5 v takuu | 43 → 55 |
+| `/tiilikaton-pinnoitus-vesilahti/` | Tiilikaton pinnoitus ja maalaus Vesilahti | Tiilikaton pinnoitus ja maalaus Vesilahti – 5 v takuu | 41 → 53 |
+| `/tiilikaton-pinnoitus-virrat/` | Tiilikaton pinnoitus ja maalaus Virrat | Tiilikaton pinnoitus ja maalaus Virrat – 5 v takuu | 38 → 50 |
+| `/tiilikaton-pinnoitus-ylojarvi/` | Tiilikaton pinnoitus ja maalaus Ylöjärvi | Tiilikaton pinnoitus ja maalaus Ylöjärvi – 5 v takuu | 40 → 52 |
 
 ### Descriptionit
 
@@ -212,7 +206,7 @@ Yhteiset lohkot sivun lopussa:
 
 - **Lue lisää aiheesta**: kolme artikkelikorttia (Näin tiilikaton pinnoitus etenee: 6 työvaihetta; Tiilikattoremontti vai pinnoitus: kumpi kannattaa?; Milloin tiilikatto pitää pinnoittaa? 5 merkkiä, että aika on nyt) ja linkki Kaikki artikkelit.
 - **Toiminta-alueet**: "Pinnoitamme tiilikattoja ja maalaamme taloja Pirkanmaalla ja lähikunnissa." sekä kuntalistat (Pirkanmaa; Kanta-Häme & Satakunta) ja linkki Kaikki toiminta-alueet.
-- **Ota yhteyttä**: "Vastaamme viimeistään seuraavana arkipäivänä.", lomake "Pyydä ilmainen arviokäynti" (Mihin haluat tarjouksen? Tiilikaton pinnoitus / Talon maalaus, tietosuojalause, Lähetä) ja Eerikin yhteystiedot.
+- **Ota yhteyttä**: "Vastaamme viimeistään seuraavana arkipäivänä.", lomake "Pyydä ilmainen kuntotarkastus" (korjaukset 3; aiemmin "Pyydä ilmainen arviokäynti") (Mihin haluat tarjouksen? Tiilikaton pinnoitus / Talon maalaus, tietosuojalause, Lähetä) ja Eerikin yhteystiedot.
 
 ## c) Sivun /kotitalousvahennys/ koko näkyvä teksti
 
@@ -340,6 +334,10 @@ kertoo, missä paketissa muutos tehtiin.
 | `src/data/prices.ts` (maalaus, 2-kerroksinen talo) | alk. 4 760 € | alk. 4 900 € (muut kaksi maalauskorttia ennallaan: 2 380 € ja 3 400 €) | tämä PR |
 | `src/components/laskuri/PriceWizard.tsx` (/hintalaskuri/, tulosruutu) | Kotitalousvähennyksen jälkeen: [hinta] | Kotitalousvähennyksen jälkeen: [hinta] + pieni teksti "Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin." Luku lasketaan nyt ilman omavastuuta. | tämä PR |
 | `src/components/ChatPriceCalculator.tsx` (etusivun chat) | (ei vähennysriviä) | Uusi viesti kiitosviestin jälkeen: "Kotitalousvähennyksen jälkeen: [hinta]. Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin." | tämä PR |
+| `src/components/vahennys/VahennysE.tsx` (hintasivujen vähennysesimerkki) | Urakkahinta 4 000 € / Materiaalit 1 000 € / Työn osuus 3 000 € / 40 % työstä 1 200 € / Omavastuu −150 € / Kotitalousvähennys 1 050 €. "Luvut ovat esimerkki; vähennys tehdään verotuksessa." | Omavastuurivi poistettu, Kotitalousvähennys 1 200 €. "Luvut ovat esimerkki; vähennys tehdään verotuksessa. Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin." (Eerik 26.10.2026, vastaus kysymykseen 1) | tämä PR |
+| `src/data/faqData.ts` (pinnoituksen UKK "Kattoremontti vai pinnoitus?") | Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. | Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. | korjaukset 3 |
+| `src/components/ServiceContactSection.tsx` (lomakkeen otsikko pinnoitussivuilla: /tiilikaton-pinnoitus-pirkanmaa/, /tiilikaton-pinnoitus-hinta-pirkanmaa/, 24 pinnoituskaupunkia ja /ilmainen-kuntotarkastus/) | Pyydä ilmainen arviokäynti | Pyydä ilmainen kuntotarkastus (maalaus- ja yleisillä sivuilla ennallaan; Eerikin vastaus kysymykseen 7) | korjaukset 3 |
+| `src/components/DesktopQuoteDrawer.tsx` (sivun oikean reunan nappi sivulla /ilmainen-kuntotarkastus/) | Pyydä ilmainen arviokäynti | Pyydä ilmainen kuntotarkastus (sama sääntö kuin pinnoitussivuilla) | korjaukset 3 |
 
 ### Lisätyt osiot, UKK-kohdat ja Avainhuomiot vanhoihin artikkeleihin (vanhoja lauseita ei poistettu)
 
@@ -387,6 +385,8 @@ Lähde prosentille ja enimmäismäärälle: Verohallinto, tarkistettu 26.10.2026
 Laskureissa rivi näyttää haarukan: alaraja ja yläraja lasketaan erikseen samalla kaavalla (esim. 2 850–7 000 € → 1 940–4 900 €).
 Yksikkötestit `src/test/hintalaskuri.test.tsx` tarkistavat nämä luvut sekä rivit 5 000 € → 3 400 € ja 11 000 € → 8 900 €.
 
+Hintasivujen vähennysesimerkki (`VahennysE`) laskee samalla säännöllä: työn osuus on esimerkissä annettu (3 000 €), 40 % siitä on 1 200 €, omavastuuta ei vähennetä. Testi `src/test/vahennysEsimerkki.test.tsx` tarkistaa sen.
+
 Hintakorttien "alk."-luvut samalla kaavalla (vanha → uusi):
 
 | Kortti | Normaalihinta alk. | Vanha "alk." | Uusi "alk." |
@@ -405,3 +405,42 @@ Hintakorttien "alk."-luvut samalla kaavalla (vanha → uusi):
 3. Kotitalousvähennysartikkeli sanoo "Saat täydet 2 100 euroa, kun maksat vuoden aikana työstä 5 625 euroa." Luku sisältää omavastuun (40 % × 5 625 − 150 = 2 100). Jätetäänkö lause ennalleen? Se on oikein verotuksen kannalta, mutta laskurit laskevat ilman omavastuuta.
 4. Etusivun chatissa vähennysrivi tulee omana viestinään kiitosviestin jälkeen. Käykö se, vai haluatko sen samaan viestiin?
 5. Artikkelijonossa on nyt aukko: 2.11. ja 5.11. jälkeen seuraava artikkeli on vasta to 19.11. (sitten ma 23.11., to 26.11., ma 30.11.). Siirretäänkö 19.11. ja 23.11. viikolle 9.–12.11., jolloin kahden artikkelin viikkotahti jatkuu?
+
+## Eerikin vastaukset 26.10.2026 ja toteutus
+
+1. Sama kaava: omavastuurivi poistettu hintasivujen esimerkistä, tulos 1 050 € → 1 200 €, omavastuulause esimerkin alle (`src/components/vahennys/VahennysE.tsx`).
+2. Ok: maalauskortin "alk." 4 900 € pysyy.
+3. Ok: artikkelin lause "5 625 euroa" pysyy ennallaan.
+4. Oma viesti: chatin vähennysrivi pysyy omana viestinään.
+5. Ok: artikkelit siirretty: tiilikaton pinnoituksen hinta 2027 to 19.11. → ma 9.11., Ormax ma 23.11. → to 12.11. Jono on nyt ma 2.11., to 5.11., ma 9.11., to 12.11., to 26.11., ma 30.11. (`src/data/articles.ts`).
+
+## Korjaukset 3 (26.10.2026)
+
+Eerikin viesti 26.10.2026 klo 13.57. Vahvistukset 1–5 ja korjaukset A–D, kaikki haarassa `claude/yo-korjaukset-2`.
+
+Vahvistukset:
+
+1. Aluskate: lause "Aluskate: pienet vauriot korjaamme pinnoituksen yhteydessä." pysyy sivulla `/ilmainen-kuntotarkastus/`. Sama tieto lisättiin pinnoituksen UKK:hon (`src/data/faqData.ts`, kysymys "Kattoremontti vai pinnoitus?") yhdellä lauseella: "Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä." Kysymys näkyy sivuilla `/tiilikaton-pinnoitus-pirkanmaa/` ja `/tiilikaton-pinnoitus-hinta-pirkanmaa/`.
+2. "Mitä jos katto ei tarvitse pinnoitusta? Sanomme sen suoraan." pysyy.
+3. Pesuartikkelin itiölause pysyy.
+4. Hintakorttien "alk."-luvut 1 940, 2 240, 2 550 ja 4 900 € pysyvät.
+5. "Pintanen kuuluu ennakkoperintärekisteriin" pysyy.
+
+Korjaukset:
+
+- **A. Title-sääntö.** `fitTitle` ja `src/test/seo.test.ts` laskevat nyt 35–60 merkkiä ilman " | Pintanen" -loppua (`titleLength`, `stripBrand` tiedostossa `src/data/seo.ts`). Täyte "– takuu" poistettiin: aluesivut ovat muodossa "Maalausliike ja kattopalvelut <kunta>" (ei lisäystä), pinnoituskaupungit "Tiilikaton pinnoitus ja maalaus <kunta> – 5 v takuu" ja maalauskaupungit "Talon maalaus <kunta> – ulkomaalaus, 2 v takuu". Testi tarkistaa myös, ettei yhdenkään sivun title pääty sanaan "– takuu". Muuttuneet titlet: 66 sivua taulukossa a; verrattuna korjauksiin 2 muuttui 39 sivua: 14 aluesivua (täyte pois), 22 pinnoituskaupunkia (– takuu → – 5 v takuu, tai takuu lisätty: Hämeenkyrö, Hämeenlinna, Mänttä-Vilppula, Valkeakoski) ja 3 maalauskaupunkia (Hämeenlinna, Mänttä-Vilppula, Valkeakoski saivat "2 v takuu", joka ei aiemmin mahtunut). Description-raja 120–160 pysyy. Lyhin title on `/maalauspalvelut-akaa/` "Maalausliike ja kattopalvelut Akaa", 34 merkkiä. Eerikin vastaus kysymykseen 6: alaraja laskettiin 30 merkkiin (`TITLE_MIN = 30`), joten testissä ei ole poikkeusta eikä Akaalle tule lisäystä.
+- **B. Lomakkeen otsikko.** `ServiceContactSection` sai valinnaisen `formTitle`-propin (oletus "Pyydä ilmainen arviokäynti"). Eerikin vastaus kysymykseen 7: oletus on nyt `variant="katto"` -sivuilla "Pyydä ilmainen kuntotarkastus" (palvelusivu `/tiilikaton-pinnoitus-pirkanmaa/`, hintasivu `/tiilikaton-pinnoitus-hinta-pirkanmaa/`, 24 pinnoituskaupunkia ja `/ilmainen-kuntotarkastus/`); maalaus- ja yleisillä sivuilla (etusivu, yhteystiedot, aluesivut, kotitalousvähennys, hintalaskuri) "Pyydä ilmainen arviokäynti". Samalla sivun oikean reunan tarjousnappi (`DesktopQuoteDrawer`) sanoo "Pyydä ilmainen kuntotarkastus" myös polulla `/ilmainen-kuntotarkastus/` (sääntö oli jo pinnoitussivuilla). Ylätunnisteen linkki "Pyydä ilmainen arviokäynti" on sivuston yhteinen ja ennallaan.
+- **C. Vähennysesimerkki.** Tehty jo korjauksissa 2 (commit 1c673ae): omavastuurivi pois, tulos 1 200 €, lause "Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin." esimerkin alla. Testi `src/test/vahennysEsimerkki.test.tsx`.
+- **D. Vero.fi-lähde.** Sivulla "Kotitalousvähennyksen määrä" (päivitetty 13.10.2026) on lause "Jos teetät saman vuoden aikana lisää vähennykseen oikeuttavaa työtä, omavastuuta ei vähennetä enää uudelleen." sekä "Omavastuu vähennetään vain kerran vuodessa." Molemmat on lainattu tiedostoon `docs/lahteet-kotitalousvahennys-2026-10-27.md` (kolmas tarkistus), ja `VAHENNYS_OMAVASTUU_HUOMAUTUS`-vakion koodikommentti `src/components/vahennys/vahennysData.ts`:ssä viittaa niihin laskurin huomautuslauseen perusteluna.
+
+Tarkistukset: `npm run lint` 0 virhettä (10 vanhaa varoitusta), `tsc --noEmit` ok, `npx vitest run` 62 testiä 8 tiedostossa läpi, `npm run build` 99 reittiä ja `lastmod.json` päivitetty, `verify_dist.py dist` 0 ongelmaa, `verify_redirects.py` 431 sääntöä 0 ongelmaa. Uudet titlet tarkistettu `dist/*/index.html`-tiedostoista. Lomakkeita ei lähetetty.
+
+### Kysymykset (korjaukset 3)
+
+6. Akaan aluesivun title "Maalausliike ja kattopalvelut Akaa" on 34 merkkiä eli yhden alle 35 rajan. Jätetäänkö se (testissä on poikkeus), vai haluatko Akaalle lisäyksen, esimerkiksi "Maalausliike ja kattopalvelut Akaa, Pirkanmaa" (45)?
+7. Lomakkeen otsikko "Pyydä ilmainen kuntotarkastus" on nyt vain sivulla /ilmainen-kuntotarkastus/. Vaihdetaanko se myös pinnoitussivujen lomakkeisiin (/tiilikaton-pinnoitus-pirkanmaa/, hintasivu ja 24 pinnoituskaupunkia, `variant="katto"`), jolloin sana olisi katon sivuilla aina kuntotarkastus?
+
+### Eerikin vastaukset 26.10.2026 (kysymykset 6–7) ja toteutus
+
+6. Akaa jää 34 merkkiin, ei lisäystä ", Pirkanmaa" (kaupunkisivun titleen ei lisätä Pirkanmaata, se olisi kannibalisointia). Sääntö muutettu: alaraja 30 merkkiä ilman " | Pintanen" -loppua (`TITLE_MIN = 30`, `src/data/seo.ts` ja `src/test/seo.test.ts`), poikkeus poistettu testistä. Titlet eivät muuttuneet.
+7. "Pyydä ilmainen kuntotarkastus" on nyt kaikkien pinnoitussivujen lomakkeen otsikko (`ServiceContactSection`, `variant="katto"`): palvelusivu, hintasivu, 24 kaupunkisivua ja kuntotarkastussivu. Maalaus- ja yleisillä sivuilla pysyy "Pyydä ilmainen arviokäynti".

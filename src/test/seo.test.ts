@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 import { getCanonicalRoutes, buildLlmsTxt, buildSitemapXml } from "@/data/routes";
-import { getRouteSeo, withBrand, canonicalUrl } from "@/data/seo";
+import { getRouteSeo, withBrand, canonicalUrl, titleLength, TITLE_MIN, TITLE_MAX } from "@/data/seo";
 import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
 import { allCities } from "@/data/cityData";
 import { articles } from "@/data/articles";
@@ -19,13 +19,20 @@ describe("sivukohtaiset SEO-tiedot (src/data/seo.ts)", () => {
   // Myös ajastetut artikkelit: niiden title näkyy hakutuloksessa julkaisupäivänä ilman uutta buildia.
   const routesWithQueued = Array.from(new Set([...routes, ...articles.map((a) => `/artikkelit/${a.slug}`)]));
 
-  it("titlet ovat uniikkeja ja 50–60 merkkiä brändin kanssa (auditointi 27.10.2026)", () => {
+  // Raja lasketaan ilman " | Pintanen" -loppua (Eerik 26.10.2026); täytettä "– takuu" ei titleissä ole.
+  it("titlet ovat uniikkeja ja 30–60 merkkiä ilman brändiä (Eerik 26.10.2026)", () => {
+    expect([TITLE_MIN, TITLE_MAX]).toEqual([30, 60]);
     const titles = routes.map((p) => withBrand(getRouteSeo(p)!.title));
     expect(new Set(titles).size).toBe(titles.length);
+    // Lyhin on Akaan aluesivu (34 merkkiä); Eerik 26.10.2026: aluesivuille ei lisäystä, alaraja 30 ilman poikkeuksia.
     const bad = routesWithQueued
-      .map((p) => [p, withBrand(getRouteSeo(p)!.title).length] as const)
-      .filter(([, len]) => len < 50 || len > 60);
+      .map((p) => [p, titleLength(getRouteSeo(p)!.title)] as const)
+      .filter(([, len]) => len < TITLE_MIN || len > TITLE_MAX);
     expect(bad).toEqual([]);
+    expect(titleLength(getRouteSeo("/maalauspalvelut-akaa")!.title)).toBe(34);
+    const filler = routesWithQueued.filter((p) => / – takuu$/.test(getRouteSeo(p)!.title));
+    expect(filler).toEqual([]);
+    expect(titleLength("Meistä | Pintanen")).toBe(6);
   });
 
   it("descriptionit ovat 120–160 merkkiä (auditointi 27.10.2026)", () => {

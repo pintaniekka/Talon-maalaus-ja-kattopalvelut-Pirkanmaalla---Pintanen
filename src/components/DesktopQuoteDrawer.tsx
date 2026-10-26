@@ -15,7 +15,9 @@ export const openQuoteDrawer = () => globalOpenFn?.();
 
 const DesktopQuoteDrawer = () => {
   // Eerik 26.10.2026: pinnoitussivuilla sana on kuntotarkastus, maalauksessa arviokäynti.
-  const ctaLabel = useLocation().pathname.includes("pinnoitus") ? "Pyydä ilmainen kuntotarkastus" : "Pyydä ilmainen arviokäynti";
+  // Katon sivuilla sana on "kuntotarkastus" (myös /ilmainen-kuntotarkastus/, Eerik 26.10.2026), muualla "arviokäynti".
+  const pathname = useLocation().pathname;
+  const ctaLabel = pathname.includes("pinnoitus") || pathname.includes("kuntotarkastus") ? "Pyydä ilmainen kuntotarkastus" : "Pyydä ilmainen arviokäynti";
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);

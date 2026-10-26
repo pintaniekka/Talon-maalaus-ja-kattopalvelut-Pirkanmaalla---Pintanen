@@ -37,7 +37,12 @@ export const hintaVahennyksenJalkeen = (hinta: number): number => {
   return Math.round((hinta - vahennys) / 10) * 10;
 };
 
-/** Pieni teksti vähennysrivin alla laskureissa (Eerik 26.10.2026). */
+/**
+ * Pieni teksti vähennysrivin alla laskureissa ja hintasivujen esimerkissä (Eerik 26.10.2026). Perustelu: vero.fi,
+ * Kotitalousvähennyksen määrä (päivitetty 13.10.2026): "Omavastuu vähennetään vain kerran vuodessa. Jos teetät saman
+ * vuoden aikana lisää vähennykseen oikeuttavaa työtä, omavastuuta ei vähennetä enää uudelleen."
+ * (docs/lahteet-kotitalousvahennys-2026-10-27.md). Siksi laskuri ei vähennä omavastuuta, vaan kertoo sen.
+ */
 export const VAHENNYS_OMAVASTUU_HUOMAUTUS = "Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.";
 
 /** Kuukausierät: sama lause kuin hintakorttien alla (src/components/pinnoitus/PinnoitusPricingCards.tsx). */

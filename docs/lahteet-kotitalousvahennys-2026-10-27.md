@@ -31,3 +31,15 @@ Tarkistettu uudelleen 26.10.2026 iltapäivällä hintakorttien afterFrom-lukuja 
 Johtopäätös: prosentti on 40, enimmäismäärä 2 100 € henkilöltä vuodessa ja omavastuu 150 € henkilöltä vuodessa, samat vuosina 2026 ja 2027. Sivuston lause `KOTITALOUSVAHENNYS` (company.ts), sivu `/kotitalousvahennys/` ja artikkelit sanovat samat luvut.
 
 Laskentatapa sivustolla (Eerik 26.10.2026): hintakorttien "alk."-hinta ja laskurien rivi "Kotitalousvähennyksen jälkeen" lasketaan ilman omavastuuta, koska omavastuu on henkilökohtainen ja vähennetään kerran vuodessa, ei joka työstä. Kaava: työn osuus 80 % hinnasta, vähennys 40 % työn osuudesta, enintään 2 100 € (yksi maksaja). Omavastuu kerrotaan rivin alla: "Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin."
+
+## Tarkistus 26.10.2026 (kolmas kerta, omavastuun perustelu)
+
+Verohallinto, Kotitalousvähennyksen määrä (sivu päivitetty 13.10.2026): https://www.vero.fi/henkiloasiakkaat/vahennykset/kotitalousvahennys/kotitalousvahennyksen-maara
+
+- "Kotitalousvähennyksen omavastuu on 150 euroa henkilöltä vuodessa."
+- "Omavastuu vähennetään vain kerran vuodessa."
+- "Jos teetät saman vuoden aikana lisää vähennykseen oikeuttavaa työtä, omavastuuta ei vähennetä enää uudelleen."
+- "Jos haette vähennyksen vain toisen puolison verotuksessa, omavastuu (150 euroa) maksetaan vain kerran."
+
+Tämä on peruste sille, että laskurit ja hintasivujen esimerkki eivät vähennä omavastuuta, vaan kertovat sen rivin alla
+(`VAHENNYS_OMAVASTUU_HUOMAUTUS`, `src/components/vahennys/vahennysData.ts`): omavastuu menee kerran vuodessa, ei joka työstä.

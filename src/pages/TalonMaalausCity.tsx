@@ -6,6 +6,7 @@ import CityMap from "@/components/CityMap";
 import CityProjects from "@/components/CityProjects";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
+import CityLocalRules from "@/components/CityLocalRules";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import { MaalausCitySigns } from "@/components/maalaus/MaalausCitySections";
@@ -112,6 +113,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       <CityServiceSummary service="maalaus" cityIn={cityData.cityIn} />
       <MiksiValitaPintanen service="maalaus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" hideMap={kartta} />
+      <CityLocalRules citySlug={cityData.slug} cityIn={cityData.cityIn} />
       <MaalausEntrepreneur cityIn={cityData.cityIn} />
       <FAQSection
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}

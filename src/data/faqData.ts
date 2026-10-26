@@ -77,6 +77,16 @@ export const pinnoitusFAQ: FAQItem[] = [
       'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
   },
   {
+    question: 'Pinnoitatteko myös autotallin tai autokatoksen katon?',
+    answer:
+      'Kyllä. Pinnoitamme myös autotallin, autokatoksen ja muun piharakennuksen tiilikaton. Yleensä teemme sen samalla kertaa talon katon kanssa.',
+  },
+  {
+    question: 'Miten hyväksyn tarjouksen ja mitä sen jälkeen tapahtuu?',
+    answer:
+      'Hyväksyt tarjouksen vastaamalla tarjousviestiin. Sen jälkeen teemme kirjallisen sopimuksen ja sovimme aikataulun. Otamme sinuun yhteyttä ennen aloituspäivää.',
+  },
+  {
     question: 'Miten maksu tapahtuu?',
     answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
   },
@@ -140,6 +150,11 @@ export const maalausFAQ: FAQItem[] = [
       'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
   },
   {
+    question: 'Miten hyväksyn tarjouksen ja mitä sen jälkeen tapahtuu?',
+    answer:
+      'Hyväksyt tarjouksen vastaamalla tarjousviestiin. Sen jälkeen teemme kirjallisen sopimuksen ja sovimme aikataulun. Otamme sinuun yhteyttä ennen aloituspäivää.',
+  },
+  {
     question: 'Miten maksu tapahtuu?',
     answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
   },
@@ -179,6 +194,16 @@ export const generalFAQ: FAQItem[] = [
     question: 'Pitääkö minun siirtää tavaroita pihalta?',
     answer:
       'Siirrä kevyet pihakalusteet ja ruukut hieman kauemmas talosta. Muusta huolehdimme itse.',
+  },
+  {
+    question: 'Tarvitsetteko sähköä tai vettä?',
+    answer:
+      'Kyllä. Tarvitsemme vesipisteen ja sähköä. Kaiken muun, kuten telineet, nostimet ja maalit, tuomme itse.',
+  },
+  {
+    question: 'Toimitteko Pirkanmaan ulkopuolella?',
+    answer:
+      'Toimimme Pirkanmaalla ja lähikunnissa. Matkasta ei tule lisäkulua. Jos kohde on kauempana, kysy, niin katsomme, onnistuuko se.',
   },
   {
     question: 'Saanko työstä kotitalousvähennyksen?',

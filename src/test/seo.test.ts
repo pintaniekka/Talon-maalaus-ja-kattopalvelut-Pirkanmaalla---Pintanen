@@ -6,6 +6,7 @@ import { getRouteSeo, withBrand, canonicalUrl, titleLength, TITLE_MIN, TITLE_MAX
 import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
 import { allCities } from "@/data/cityData";
 import { articles } from "@/data/articles";
+import { cityLocalFacts, getCityLocalFacts } from "@/data/cityLocalFacts";
 
 const routes = getCanonicalRoutes().map((r) => r.path);
 
@@ -133,6 +134,55 @@ describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
       for (const re of forbidden) if (re.test(source)) hits.push(`${path.relative(srcDir, file)}: ${re}`);
     }
     expect(hits).toEqual([]);
+  });
+});
+
+describe("paikkakuntien omat tekstit (paketti C, cityLocalFacts.ts)", () => {
+  const sentences = (text: string) =>
+    text
+      .split(/(?<=[.?])\s+/)
+      .map((s) => s.trim().replace(/\s+/g, " "))
+      .filter((s) => s.length > 0);
+
+  it("jokaisella paikkakunnalla on rakennusjärjestyksen sääntö, tilanne, UKK-vastaus ja lähde", () => {
+    for (const city of allCities) {
+      const facts = getCityLocalFacts(city.slug);
+      expect(facts, city.slug).toBeDefined();
+      expect(facts!.saanto.length, city.slug).toBeGreaterThan(80);
+      expect(facts!.tilanne.length, city.slug).toBeGreaterThan(60);
+      expect(facts!.ukk.length, city.slug).toBeGreaterThan(80);
+      expect(facts!.lahde, city.slug).toMatch(/^https:\/\//);
+    }
+    expect(cityLocalFacts.map((c) => c.slug).sort()).toEqual(allCities.map((c) => c.slug).sort());
+  });
+
+  it("sama virke ei toistu paikkakunnalta toiselle", () => {
+    const seen = new Map<string, string>();
+    const toistot: string[] = [];
+    for (const c of cityLocalFacts) {
+      for (const field of [c.saanto, c.tilanne, c.ukk]) {
+        for (const s of sentences(field)) {
+          const key = s.toLowerCase();
+          const owner = seen.get(key);
+          if (owner && owner !== c.slug) toistot.push(`${owner} / ${c.slug}: ${s}`);
+          else seen.set(key, c.slug);
+        }
+      }
+    }
+    expect(toistot).toEqual([]);
+  });
+
+  it("virkkeet ovat lyhyitä, ilman huutomerkkejä ja pitkää ajatusviivaa (kielisäännöt 25.10.2026)", () => {
+    const viat: string[] = [];
+    for (const c of cityLocalFacts) {
+      for (const field of [c.saanto, c.tilanne, c.ukk]) {
+        if (/[!—]/.test(field)) viat.push(`${c.slug}: huutomerkki tai pitkä ajatusviiva`);
+        for (const s of sentences(field)) {
+          if (s.split(" ").length > 20) viat.push(`${c.slug}: yli 20 sanaa: ${s}`);
+        }
+      }
+    }
+    expect(viat).toEqual([]);
   });
 });
 

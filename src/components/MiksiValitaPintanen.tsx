@@ -17,7 +17,7 @@ const reasons: Record<Service, Reason[]> = {
   pinnoitus: [
     { title: "Yrittäjä tekee työn itse", text: "Eerik käy katsomassa katon, tekee tarjouksen ja pinnoittaa katon itse. Sama mies alusta loppuun." },
     { title: "Kokemus näkyy jäljessä", text: `Eerik on tehnyt kattotöitä ${LUVUT.kokemusVuotta} vuotta ja pinnoittanut ${LUVUT.pinnoitetutKatot} kattoa.` },
-    { title: "Maalia aina tarpeeksi", text: "Katto saa maalia niin paljon kuin se tarvitsee. Kaksi kerrosta joka kohtaan, myös reunoihin ja harjalle." },
+    { title: "Maalia aina tarpeeksi", text: "Katto saa maalia niin paljon kuin se tarvitsee. Pohjamaali ja pintamaali, aina kaksi kerrosta." },
     { title: "Kiinteä ja kilpailukykyinen hinta", text: "Saat kirjallisen tarjouksen heti kuntotarkastuksen jälkeen. Hinta sisältää työn, materiaalit ja siivouksen." },
     { title: "Sovitussa pysytään", text: "Teemme kirjallisen sopimuksen ja sovimme ajankohdan. Otamme yhteyttä ennen aloituspäivää." },
     { title: `Takuu ${TAKUU.pinnoitus} kirjallisesti`, text: "Eerik vastaa itse lopputuloksesta. Jos jäljessä on vikaa, se korjataan takuun aikana ilman lisähintaa." },

@@ -156,6 +156,21 @@ export const articles: ArticleMeta[] = [
     heroImage: "tiilikaton-pesu-ja-pinnoitus-tampere-pesu-kesken",
     heroAlt: "Tiilikaton pesu käynnissä Tampereella, puolet katosta pesty",
   },
+  {
+    slug: "sammal-tiilikatolla",
+    title: "Sammal tiilikatolla: mitä se kertoo ja milloin katto kannattaa pinnoittaa",
+    seoTitle: "Sammal tiilikatolla: milloin katto kannattaa pinnoittaa",
+    description:
+      "Sammal tiilikatolla kertoo, että tiilen pinta pidättää kosteutta. Lue, miksi sammal kasvaa, mitä se tekee tiilelle ja milloin pesu ja pinnoitus kannattaa tehdä.",
+    lead: "Sammal tiilikatolla kertoo, että tiilen pinta on kulunut huokoiseksi ja pysyy märkänä. Sammal pitää kosteuden tiilessä, ja talvella jäätyvä vesi rapauttaa tiiltä. Noin 15 vuoden iässä katto kannattaa pestä ja pinnoittaa: sen jälkeen tiili hylkii taas vettä ja katto kestää jopa 15 vuotta pidempään.",
+    category: "katto",
+    author: "eerik",
+    publishedAt: "2026-11-16",
+    readingMinutes: 5,
+    heroImage: "tiilikaton-pinnoitus-kangasala-sammaleinen-tiilikatto-ennen",
+    heroAlt: "Sammaloitunut tiilikatto Kangasalla ennen pinnoitusta",
+    heroCaption: "Sammal kasvaa tiilen huokoisessa pinnassa ja pitää sen märkänä.",
+  },
 ];
 
 /** Tämän päivän päivämäärä Suomen aikaa muodossa YYYY-MM-DD. */

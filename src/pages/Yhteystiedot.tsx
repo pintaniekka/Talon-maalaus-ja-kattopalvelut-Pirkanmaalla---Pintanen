@@ -1,6 +1,8 @@
 import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import FaktaNauha from "@/components/FaktaNauha";
+import { Building2, FileText, Mail, MapPin } from "lucide-react";
 import { staticSeo, HERO_BASE } from "@/data/seo";
 import { TOIMINTA_ALUE, VASTAUSLUPAUS, YHTEYSTIEDOT } from "@/data/company";
 
@@ -9,11 +11,23 @@ import { TOIMINTA_ALUE, VASTAUSLUPAUS, YHTEYSTIEDOT } from "@/data/company";
  * numeroineen samalla koolla, ilman nimiä ja WhatsAppia (Eerik 26.10.2026). Sitten johdanto ja napit.
  */
 const faktat = [
-  ["Yritys", "Pintanen Oy"],
-  ["Y-tunnus", "3525786-9"],
-  ["Sähköposti", "myynti@pintanen.fi"],
-  ["Toiminta-alue", `${TOIMINTA_ALUE.charAt(0).toUpperCase()}${TOIMINTA_ALUE.slice(1)}`],
-] as const;
+  { label: "Yritys", value: "Pintanen Oy", icon: Building2 },
+  { label: "Y-tunnus", value: "3525786-9", icon: FileText },
+  {
+    label: "Sähköposti",
+    value: (
+      <a href="mailto:myynti@pintanen.fi" className="text-accent-ink hover:underline">
+        myynti@pintanen.fi
+      </a>
+    ),
+    icon: Mail,
+  },
+  {
+    label: "Toiminta-alue",
+    value: `${TOIMINTA_ALUE.charAt(0).toUpperCase()}${TOIMINTA_ALUE.slice(1)}`,
+    icon: MapPin,
+  },
+];
 
 const numerot = [
   { label: "Katot", person: YHTEYSTIEDOT.eerik },
@@ -57,18 +71,7 @@ const Yhteystiedot = () => {
         breadcrumbs={crumbs}
       />
 
-      <section className="bg-accent-light py-8 md:py-10">
-        <div className="section-container">
-          <dl className="max-w-5xl mx-auto grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {faktat.map(([k, v]) => (
-              <div key={k} className="bg-card rounded-2xl px-5 py-4 border border-border/50 shadow-sm">
-                <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{k}</dt>
-                <dd className="mt-1 font-bold text-foreground break-words">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
+      <FaktaNauha items={faktat} ariaLabel="Yrityksen tiedot" />
 
       <ServiceContactSection variant="general" />
     </div>

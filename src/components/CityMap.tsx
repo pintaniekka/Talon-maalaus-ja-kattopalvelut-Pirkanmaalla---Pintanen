@@ -10,12 +10,12 @@ const CityMap = ({ slug, name }: { slug: string; name: string }) => {
   return (
   <figure className="mx-auto w-full max-w-md lg:max-w-none">
     <img
+      loading="lazy"
+      decoding="async"
       src={kuntakarttaUrl(slug)}
       alt={`${name} ja naapurikunnat kartalla`}
       width={w}
       height={h}
-      loading="lazy"
-      decoding="async"
       className="mx-auto h-auto w-auto max-h-[26rem]"
     />
   </figure>

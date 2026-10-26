@@ -72,13 +72,13 @@ const PalvelutA = () => (
               {/* Tekijä valkoisena pillerinä kuvan päällä: näyttää tarralta, ei tekstiriviltä. */}
               <div className="absolute bottom-4 left-4 inline-flex items-center gap-2.5 rounded-full bg-card py-1.5 pl-1.5 pr-4 shadow-lg">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={p.tekija.image}
                   alt=""
                   width={32}
                   height={32}
                   className="h-8 w-8 rounded-full object-cover ring-2 ring-accent-light"
-                  loading="lazy"
-                  decoding="async"
                 />
                 <span className="text-[13px] font-bold text-foreground">{p.tekija.pilleri}</span>
               </div>

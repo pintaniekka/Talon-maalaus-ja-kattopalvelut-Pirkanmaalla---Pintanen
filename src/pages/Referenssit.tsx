@@ -69,11 +69,11 @@ const LightboxImage = ({
     : getResponsiveSrc(baseName);
   return (
     <img
+      loading={thumbnail ? 'lazy' : 'eager'}
+      decoding="async"
       src={src}
       alt={alt}
       className={className}
-      loading={thumbnail ? 'lazy' : 'eager'}
-      decoding="async"
       onClick={onClick}
       onError={() => setErrored(true)}
     />

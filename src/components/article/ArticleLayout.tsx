@@ -239,11 +239,11 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
           <footer className="mt-12 pt-8 border-t border-border">
             <div className="flex items-start gap-4">
               <img
+                loading="lazy"
                 src={author.image}
                 alt={author.name}
                 width={64}
                 height={64}
-                loading="lazy"
                 className="w-16 h-16 rounded-full object-cover bg-muted shrink-0"
               />
               <div>

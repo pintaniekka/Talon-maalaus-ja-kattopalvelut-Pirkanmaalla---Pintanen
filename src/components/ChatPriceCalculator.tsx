@@ -101,12 +101,12 @@ const UserBubble = ({ text, imageBase }: { text: string; imageBase?: string }) =
       {imageBase && (
         <div className="aspect-[16/9] overflow-hidden max-h-28">
           <img
+            loading="lazy"
             src={getResponsiveSrc(imageBase)}
             srcSet={getResponsiveSrcSet(imageBase)}
             alt={text}
             sizes="(max-width: 768px) 45vw, 250px"
             className="w-full h-full object-cover"
-            loading="lazy"
           />
         </div>
       )}
@@ -528,12 +528,12 @@ const ChatPriceCalculator = () => {
                         >
                           <div className="aspect-[16/9] overflow-hidden max-h-24">
                             <img
+                              loading="lazy"
                               src={getResponsiveSrc(opt.imageBase)}
                               srcSet={getResponsiveSrcSet(opt.imageBase)}
                               alt={opt.label}
                               sizes="(max-width: 768px) 40vw, 240px"
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              loading="lazy"
                             />
                           </div>
                           <span className="py-2 px-3 text-sm font-semibold text-foreground text-center">

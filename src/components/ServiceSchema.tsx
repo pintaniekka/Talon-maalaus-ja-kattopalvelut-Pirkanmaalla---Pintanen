@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { canonicalUrl } from '@/data/seo';
+import { GOOGLE_PROFILE_URL } from '@/data/company';
 
 interface ServiceSchemaProps {
   /** Palvelun nimi, esim. "Tiilikaton pinnoitus". */
@@ -11,12 +12,14 @@ interface ServiceSchemaProps {
   /** Alue, jolla palvelua tarjotaan: kaupunki tai "Pirkanmaa". */
   area: string;
   areaType?: 'City' | 'AdministrativeArea';
+  /** Alueen sameAs, esim. kunnan suomenkielinen Wikipedia-sivu. */
+  areaSameAs?: string;
   /** Hintahaarukka euroina (AggregateOffer). */
   priceRange?: { min: number; max: number };
 }
 
 /** Service-schema palvelusivuille. Viittaa index.html:n LocalBusiness-tietoon @id:llä. */
-const ServiceSchema = ({ name, alternateNames, description, area, areaType = 'City', priceRange }: ServiceSchemaProps) => {
+const ServiceSchema = ({ name, alternateNames, description, area, areaType = 'City', areaSameAs, priceRange }: ServiceSchemaProps) => {
   const { pathname } = useLocation();
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -26,8 +29,8 @@ const ServiceSchema = ({ name, alternateNames, description, area, areaType = 'Ci
     serviceType: alternateNames ? [name, ...alternateNames] : name,
     description,
     url: canonicalUrl(pathname),
-    provider: { '@id': 'https://pintanen.fi/#yritys' },
-    areaServed: { '@type': areaType, name: area },
+    provider: { '@id': 'https://pintanen.fi/#yritys', name: 'Pintanen Oy', sameAs: [GOOGLE_PROFILE_URL] },
+    areaServed: { '@type': areaType, name: area, ...(areaSameAs && { sameAs: areaSameAs }) },
     ...(priceRange && {
       offers: { '@type': 'AggregateOffer', priceCurrency: 'EUR', lowPrice: priceRange.min, highPrice: priceRange.max },
     }),

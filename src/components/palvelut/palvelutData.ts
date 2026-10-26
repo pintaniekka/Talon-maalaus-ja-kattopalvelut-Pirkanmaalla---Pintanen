@@ -9,7 +9,7 @@ import { TAKUU, YHTEYSTIEDOT } from "@/data/company";
  */
 
 /** Kestot samoin kuin "Lyhyesti"-laatikoissa (src/data/tyovaiheet.ts) ja hintasivujen UKK:ssa. */
-export const KESTO = { pinnoitus: "2–4 päivää", maalaus: "3–7 päivää" } as const;
+export const KESTO = { pinnoitus: "2–3 päivää", maalaus: "3–7 päivää" } as const;
 
 /** Osion johdanto (T6; Eerik 13.10.2026: "Pirkanmaalla ja lähikunnissa" on selvempi kuin "tunnin säteellä"). */
 export const PALVELUT_INTRO =
@@ -68,9 +68,9 @@ export interface Palvelu {
   takuu: string;
   /** "5 v" */
   takuuLyhyt: string;
-  /** "2–4 päivää" */
+  /** "2–3 päivää" */
   kesto: string;
-  /** "2–4 pv" */
+  /** "2–3 pv" */
   kestoLyhyt: string;
   tekija: Tekija;
 }

@@ -22,7 +22,7 @@ const VahennysD = () => (
           className="inline-flex min-h-[44px] shrink-0 items-center self-start whitespace-nowrap text-[15px] font-bold text-accent-ink underline underline-offset-4 sm:self-auto"
         >
           Lue lisää
-          <span className="sr-only">: kotitalousvähennys katto- ja maalaustöissä</span>
+          <span className="sr-only">: kotitalousvähennys katon pinnoituksesta ja talon maalauksesta</span>
         </Link>
       </div>
     </div>

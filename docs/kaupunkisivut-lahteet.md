@@ -181,3 +181,167 @@ Alla paikkakunnittain faktat, joita sivujen teksteissä on käytetty tai voidaan
 - Asutus on harvaa ja keskittynyt lähinnä järvien rannoille; metsäalueet ovat laajoja ja korkeuserot suuria. Lainaus: "harvoine, lähinnä järvien rannoille keskittyneine asutuksineen, laajoine metsäalueineen" (https://fi.wikipedia.org/wiki/Virrat)
 - Kunnan alueella on 269 järveä, ja sisävesiä on 10,5 % pinta-alasta. Lainaus: "Järviä kunnan alueella on kaikkiaan 269" (https://fi.wikipedia.org/wiki/Virrat)
 - Virtain kirkko on rakennettu 1772–1774. Lainaus: "Virtain kirkko on rakennettu 1772–1774" (https://fi.wikipedia.org/wiki/Virrat)
+
+## Rakennusjärjestys ja katon tai julkisivun värin vaihto (luettu 26.10.2026, paketti C)
+
+Sivuilla näkyvät tekstit ovat tiedostossa `src/data/cityLocalFacts.ts` (lohko `CityLocalRules` aluesivuilla ja 16 palvelusivulla sekä yksi UKK-kysymys per paikkakunta). Alla jokaisen kunnan asiakirja, lainaus ja osoite. Kaikki asiakirjat luettiin 26.10.2026; PDF-kopiot ovat vain työkansiossa, eivät repossa.
+
+**Laki.** Rakentamislaki 751/2023 tuli voimaan 1.1.2025 (https://www.finlex.fi/fi/lainsaadanto/saadoskokoelma/2023/751). Se korvasi rakennusluvan, toimenpideluvan ja toimenpideilmoituksen yhdellä rakentamisluvalla. Ikaalisten kaupungin sivu: "1.1.2025 voimaan tulleen uuden rakentamislain myötä rakennuslupa ja toimenpidelupa (sekä toimenpideilmoitus) korv[attiin rakentamisluvalla]" (https://ikaalinen.fi/asuminen-ja-ymparisto/asuminen-rakentaminen-ja-tontit/rakentamisen-luvat/rakentamisen-luvat/). Lain 42 §:n mukaan kunta voi rakennusjärjestyksessä määrätä, ettei vähäiseen hankkeeseen tarvita lupaa (Sastamalan sivu: "Rakentamisen luvanvaraisuudesta voidaan myös antaa kuntakohtaisia tarkentavia määräyksiä kunnan rakennusjärjestyksessä", https://sastamala.fi/asuminen-ja-ymparisto/rakennusvalvonta-ja-lupaasiat/rakentamisen-luvat-ja-luvanvaraisuus/). Siirtymäaika Nokian sivun mukaan: "Siirtymäsäännöksen mukaan rakennusjärjestys on muutettava rakentamislain mukaiseksi viimeistään 1.1.2027 (RakL 28 §)." (https://www.nokiankaupunki.fi/asuminen-ja-ymparisto/rakentaminen/rakennusvalvonta/rakennusjarjestyksen-uudistaminen/). Tampereen sivu: "Rakennusjärjestys vanhenee joltain osin rakentamislain voimaantulon myötä 1.1.2025. Niiltä osin kuin rakennusjärjestyksessä määrätty on ristiriidassa rakentamislain (751/2023) kanssa, noudatetaan hierarkisesti ylempää säädöstä eli lakia."
+
+**Huoltomaalaus samaan väriin.** Lohkon yhteinen virke "Maalaus samaan väriin on yleensä tavallista huoltoa, johon ei tarvita lupaa" perustuu siihen, että kuntien säännöt koskevat värin tai materiaalin *muuttamista*, ja Euran–Huittisten–Säkylän rakennusjärjestys vapauttaa erikseen "maalauksen tai julkisivupinnoituksen uusiminen" (kohta 8.3). Sana "yleensä" on mukana, koska suojellut kohteet ja kaavamääräykset voivat poiketa.
+
+**Vanhojen taulukoiden merkinnät.** Ennen vuotta 2025 tehdyissä rakennusjärjestyksissä toimenpiteet on taulukoitu: X tai T = toimenpidelupa haettava, O tai I tai IL = ilmoitus tehtävä, − = ei lupaa eikä ilmoitusta. Nämä menettelyt poistuivat 1.1.2025, joten sivuilla ne kerrotaan menneessä aikamuodossa.
+
+**Mitä ei saatu luettua.** Skannattuja PDF-tiedostoja ilman tekstikerrosta: Juupajoki 2003, Kihniö 2014, Parkano 2014, Sastamala 2015, Vesilahti 2004. Lempäälän 2019 rakennusjärjestys on SharePoint-linkin takana (ei latautunut), Nokian 2001 PDF-osoite palauttaa 404. Näiden kuntien teksti kertoo vain voimassaolon, uudistuksen tilan ja kehotuksen kysyä rakennusvalvonnasta.
+
+### akaa
+
+- Voimassa: hyväksytty 19.12.2018, voimaan 1.10.2019 (https://akaa.fi/wp-content/uploads/2020/08/akaan_rakennusjarjestys_1_10_2019.pdf).
+- Sääntö (6 §, taulukko, sarakkeet asemakaava-alue / muu alue / ranta-alue): "julkisivujen tai vesikatteen värin merkittävä muuttaminen O O O" eli ilmoitus kaikilla alueilla; "julkisivu- tai vesikatemateriaalin muuttaminen X O O".
+- Uudistus: Rakennusjärjestysehdotus II 3.9.2026 (https://akaa.fi/wp-content/uploads/2026/09/Rakennusjarjestysehdotus-II-3.9.2026.pdf): "Julkisivun ja katon värisävyn ja materiaalin muutokset, kun muutos noudattaa kaavamääräyksiä ja rakennustapaohjeita tai muutokset sopeutuvat ympäristöönsä." (luvasta vapautettujen lista). Voimaantulo "xx.xx.xxxx".
+- Sivu: https://akaa.fi/asuminen-ja-ymparisto/rakennusvalvonta/rakennusjarjestys/
+
+### forssa
+
+- Voimassa: 1.1.2026, kumosi 13.3.2023 voimaan tulleen (54 §) (https://www.forssa.fi/client/forssa/userfiles/forssa-rakennusjarjestys-112026.pdf).
+- Sääntö (25.4): "Julkisivun ja katon värisävyn sekä vuorilautojen ja ikkunapuitejaon tulee olla alueelle ja rakennusajankohdalle ominainen. Luvanvaraisuudesta on vapautettu rakennusten julkisivun ja katon värisävyn, vähäiset ikkuna- ja oviaukko muutokset, edellyttäen että noudatetaan kaavamääräyksiä ja rakennustapaohjeita. Toimenpide ei saa heikentää rakennuksen arkkitehtuuria eikä rakennushistoriallisten arvojen säilymistä. Arvokkailla kulttuuriympäristöalueilla ja suojelluissa rakennuksissa muutos edellyttää museoviraston lausuntoa."
+- Sivu: https://www.forssa.fi/asuminen-ja-ymparisto/rakennusvalvonta/rakennusjarjestykset/
+
+### hameenkyro
+
+- Voimassa: 1.1.2013 (https://hameenkyro.fi/wp-content/uploads/2020/11/rakennusjarjestys1.1.2013.pdf).
+- Sääntö (5 §, osa-alueet 1 asemakaava, 2 suunnittelutarve, 3 ranta, 4 muu): "katteen tai sen värin muuttaminen o o o o", "ulkoverhouksen rakennusaineen tai värin muuttaminen o o o o" (o = ilmoitus tehtävä).
+- Uudistus: ehdotus 15.6.2026 (https://hameenkyro.cloudnc.fi/download/noname/{f9798ee9-087d-48b4-9deb-bd6335255c51}/36149), kohta 23.4: "Luvanvaraisuudesta on vapautettu rakennusten julkisivun ja katon värisävyn muutokset muualla kuin asemakaava-alueilla. Luvanvaraisuudesta on vapautettu asemakaava-alueilla rakennusten julkisivun ja katon värisävyn muutokset, kun noudattaa kaavamääräyksiä ja rakennustapaohjeita." Voimaantulo "xx.xx.2026".
+- Sivu: https://hameenkyro.fi/palvelut/asuminen-ja-elinymparisto/rakentaminen/rakennusjarjestyksen-uudistaminen/
+
+### hameenlinna
+
+- Voimassa: 1.1.2025, kumosi 13.3.2019 voimaan tulleen (90 §) (https://www.hameenlinna.fi/rakennusjarjestys_1_1_2025__839963/).
+- Sääntö (74 §): "Julkisivun ja katon värisävyn tai katteen muutokset ovat vapautettu rakentamisluvan tarpeesta, kun rakennus ei ole suojeltu ja uusi kate ei lisää yläpohjarakenteen kuormaa." (51 §): "Arvokkailla kulttuuriympäristöalueilla julkisivun väritykseen tulee kiinnittää erityistä huomiota ja julkisivun väritys ei saa heikentää alueen kulttuuriympäristöön liittyviä arvoja."
+- Sivu: https://www.hameenlinna.fi/asuminen-ja-ymparisto/tontit-ja-rakentaminen/rakentamisen-luvat/rakennusjarjestys/
+
+### huittinen
+
+- Voimassa: Euran, Huittisten ja Säkylän yhteinen rakennusjärjestys 17.6.2025 (https://www.sakyla.fi/wp-content/uploads/2025/06/RAKENNUSJARJESTYS.pdf).
+- Sääntö (8.3): "rakennusten julkisivun ja katon värisävyn muutokset, kun noudattaa kaavamääräyksiä ja rakennustapaohjeita"; "maalauksen tai julkisivupinnoituksen uusiminen"; "julkisivuvärityksen muuttaminen. Mikäli kyseessä on suojeltu tai kulttuurihistoriallisesti arvokas rakennus, muutos alkuperäisestä vaatii poikkeamisluvan"; "rakennusten julkisivun ja katon värisävyn muutokset muualla kuin asemakaava-alueilla. Julkisivun ja katon värisävyn tulee olla alueelle ja rakennusajankohdalle ominainen".
+- Sivu: https://www.huittinen.fi/asuminen-ja-ymparisto/kaavoitus-maankaytto-ja-rakentaminen/rakennusvalvonta/rakennusjarjestys/
+
+### ikaalinen
+
+- Voimassa: 1.6.2014 (https://ikaalinen.fi/wp-content/uploads/2019/01/Rakennusjärjestys.pdf).
+- Sääntö (taulukko 7, osa-alueet 1 asemakaava, 2 suunnittelutarve, 3 ranta, 4 muu): "katteen tai sen värityksen olennainen muuttaminen O O O O", "ulkoverhouksen rakennusaineen tai värityksen muuttaminen, aurinkopaneelien asennus > 10 m2 X X X O" (X = toimenpidelupa, O = kirjallinen ilmoitus).
+- Uudistus: ehdotus, elinympäristölautakunta 20.5.2026 (https://ikaalinen.fi/wp-content/uploads/2026/06/rakennusjarjestys_2026_ehdotus.pdf), kohta 23.4 sama sanamuoto kuin Hämeenkyrössä; "Vapautus luvanvaraisuudesta ei koske suojeltuja rakennuksia". Voimaantulo "xx.xx.2025" (pohjan jäänne).
+- Sivu: https://ikaalinen.fi/asuminen-ja-ymparisto/asuminen-rakentaminen-ja-tontit/rakentamisen-luvat/rakentamisen-luvat/
+
+### juupajoki
+
+- Voimassa: 4.3.2003 (https://juupajoki.fi/wp-content/uploads/2024/05/Rakennusjarjestys.pdf, skannattu, ei tekstikerrosta).
+- Uudistus: luonnos, kunnanhallitus 27.4.2026 § 84, nähtävillä 4.5.–5.6.2026 (https://juupajoki.fi/wp-content/uploads/2026/05/Rakennusjarjestysluonnos-Kh-27.4.2026-%C2%A7-84-liite-6-Juupajoki_rakennusjarjestys.pdf). Luonnoksessa ei erillistä värinvaihtokohtaa; "Rakennuskohteen tulee olla värisävyltään hillitty ja maisemaan sopeutuva." ja "Kun kaavamääräys tai suojelupäätös kieltää rakennuksen julkisivun tyylin ja ominaispiirteiden muuttamisen, tällaisiksi tyylin ja ominaispiirteiden muuttamiseksi katsotaan rakennuksen julkisivun, katon, ovien ja ikkunapuitteiden ja -karmien materiaalin, värityksen sekä ikkunajaon muuttaminen."
+- Sivu: https://juupajoki.fi/asuminen-ja-ymparisto/rakentaminen/rakennusjarjestys/
+
+### kangasala
+
+- Voimassa: 22.7.2025, kumosi 15.7.2024 voimaan tulleen (61 §) (https://www.kangasala.fi/wp-content/uploads/sites/2/2025/08/rakennusjarjestys-2025.pdf).
+- Sääntö (6.1 §): "Luvanvaraisuudesta on vapautettu rakennuksen julkisivun ja katon muutokset, ellei kaavamääräyksissä tai rakentamistapaohjeissa muuta ole määrätty: värin ja materiaalin muuttaminen; …". "Vapautus ei koske kaavassa tai lain nojalla suojeltuja alueita ja kohteita".
+- Sivu: https://www.kangasala.fi/asu-hyvin/rakennusvalvonta-tontit-ja-asuntoasiat/rakennusvalvonta/
+
+### kihnio
+
+- Voimassa: 1.7.2014 (kunnan sivu; PDF skannattu, ei tekstikerrosta).
+- Uudistus: luonnos 1.6.2026 (https://www.kihnio.fi/media/asuminen-ja-ymparisto/rakennusvalvonta/kihnion-kunnan-rakennusjarjestys_luonnos_01062026.pdf), kohta 23.4 sama sanamuoto kuin Hämeenkyrössä; "Vapautus luvanvaraisuudesta ei koske suojeltuja rakennuksia, eikä alueita, joita koskee [suojelumerkintä]".
+- Sivu: https://www.kihnio.fi/fi/asuminen-ja-ymparisto/maankaytto-ja-rakennusvalvonta/rakennusvalvonta
+
+### lempaala
+
+- Voimassa: kunnan sivu: "Lempäälän nykyinen rakennusjärjestys on astunut voimaan 19.6.2019". PDF on SharePoint-linkin takana eikä latautunut, joten värisääntöä ei luettu.
+- Uudistus: "Lempäälän kunnan yhdyskuntalautakunta on kokouksessaan 16.6.2026 § 96 päättänyt asettaa rakennusjärjestysehdotuksen nähtäville. Mahdolliset rakennusjärjestysehdotusta koskevat muistutukset on toimitettava viimeistään 14.8.2026".
+- Sivu: https://www.lempaala.fi/asuminen-ja-ymparisto/rakentaminen/rakennusvalvonta/rakennusjarjestys/
+
+### mantta-vilppula
+
+- Voimassa: 11.1.2022, kumosi 8.1.2010 kuulutetun (https://manttavilppula.fi/asuminen-ja-ymparisto/rakennusvalvonta/rakennusjarjestys-ja-taksat/, tiedosto rakennusjarjestys.pdf).
+- Sääntö (taulukko 7, 1 = asemakaava-alue, 2 = muut alueet): "rakennuksen tai sen osan värityksen muuttaminen I -", "katteen tai ulkoverhouksen rakennusaineen muuttaminen T -" (T = toimenpidelupa, I = ilmoitus, - = ei ennakkovalvontaa). "(Kulttuurihistoriallisesti ja/tai kaupunkikuvallisesti arvokkaan rakennuksen julkisivun muuttaminen vaatii rakennusluvan)".
+- Uudistus: luonnos, kaupunkikehityslautakunta 14.4.2026, nähtävillä 22.4.–22.5.2026 (saman sivun PDF). Luonnoksen taulukossa "Rakentamislupaa edellyttävät toimenpiteet (R = vaatii rakentamisluvan)" ei ole värin muutosta; "Vapautus luvanvaraisuudesta ei koske suojeltuja rakennuksia, eikä alueita, joita koskee suojelumerkintä." Lisäksi "Luvanvaraisuudesta vapautettujen hankkeiden muistilista" 17.9.2026.
+- Sivu: https://manttavilppula.fi/asuminen-ja-ymparisto/rakennusvalvonta/rakennusjarjestys-ja-taksat/
+
+### nokia
+
+- Voimassa: kaupungin sivu: "voimassa oleva rakennusjärjestys koskee koko kaupungin aluetta ja se on tullut voimaan 22.10.2001". PDF-osoite (https://www.nokiankaupunki.fi/wp-content/uploads/2017/11/rakennusjarjestysoikea.pdf) palauttaa 404, joten värisääntöä ei luettu.
+- Uudistus: "rakennus- ja ympäristölautakunta on päättänyt 25.9.2024 aloittaa rakennusjärjestyksen uudistamisen"; OAS 25.9.2024 § 78; sivu päivitetty 14.7.2026.
+- Sivu: https://www.nokiankaupunki.fi/asuminen-ja-ymparisto/rakentaminen/rakennusvalvonta/rakennusjarjestyksen-uudistaminen/
+
+### orivesi
+
+- Voimassa: 22.12.2021 (https://orivesi.fi/wp-content/uploads/2021/12/Oriveden-rakennusjarjestys-22.12.2021.pdf).
+- Sääntö (8 §, sarakkeet asemakaava-alueella / yleiskaava- ja suunnittelutarvealueilla sekä rantavyöhykkeellä / muilla alueilla): "katteen tai sen värityksen muuttaminen IL IL ─", "ulkoverhouksen rakennusaineen tai värityksen muuttaminen IL IL ─" (IL = toimenpideilmoitus tehtävä).
+- Uudistus: rakennusjärjestysehdotus 8.6.2026 (https://orivesi.fi/wp-content/uploads/2026/08/RAKENNUSJARJESTYKSEN-UUDISTAMINEN_Ehdotus-1.pdf), kohta 25.4: "Luvanvaraisuudesta on vapautettu rakennusten julkisivun ja katon värisävyn muutokset muualla kuin asemakaava-alueilla. Luvanvaraisuudesta on vapautettu asemakaava-alueilla rakennusten julkisivun ja katon värisävyn muutokset, kun noudattaa kaavamääräyksiä ja rakennustapaohjeita." Voimaantulo "xx.xx.2027".
+- Sivu: https://orivesi.fi/asukkaalle/asuminen-rakentaminen-ja-ymparisto/rakentaminen/rakennusjarjestys/
+
+### palkane
+
+- Voimassa: 11.9.2026; kunnan sivu: "Pälkäneen kunnanvaltuusto hyväksyi uuden rakennusjärjestyksen 7.9.2026. Rakennusjärjestys on tullut voimaan 11.9.2026." (https://www.palkane.fi/wp-content/uploads/Palkaneen-kunnan-rakennusjarjestys-11.9.2026.pdf).
+- Sääntö (5.15): "Julkisivun ja katon värisävyn tulee olla alueelle ja rakennusajankohdalle ominainen. Luvanvaraisuudesta on vapautettu rakennusten julkisivun ja katon värisävyn muutokset, ellei asemakaavasta muuta johdu. Vapautus luvanvaraisuudesta ei koske suojeltuja rakennuksia, eikä alueita, joita koskee aluesuojelumerkintä. RKY-alueilla värityksen tulee noudattaa rakennuksen rakentamisajankohdalle tyypillisiä värejä."
+- Sivu: https://www.palkane.fi/asuminen-ja-ymparisto/rakennusvalvonta/rakennusjarjestyksen-uudistaminen-2/
+
+### parkano
+
+- Voimassa: vuoden 2014 rakennusjärjestys (https://parkano.fi/wp-content/uploads/2024/10/Rakennusjarjestys-2014.pdf, skannattu, ei tekstikerrosta).
+- Uudistus: hyväksytty KV 28.9.2026 § 46, voimaantulo 1.1.2027 (https://parkano.fi/wp-content/uploads/2026/09/Rakennusjarjestys-1.1.2027-hyvaksytty-KV-28.9.2026-§-46.pdf), kohta 23.4: "Luvanvaraisuudesta on vapautettu rakennusten julkisivun ja katon värisävyn muutokset muualla kuin asemakaava-alueilla. Luvanvaraisuudesta on vapautettu asemakaava-alueilla rakennusten julkisivun ja katon värisävyn muutokset, kun noudattaa kaavamääräyksiä ja rakennustapaohjeita. … Vapautus luvanvaraisuudesta ei koske suojeltuja rakennuksia, eikä alueita, joita koskee suojelumerkintä."
+- Sivu: https://parkano.fi/asuminenjaymparisto/rakentaminen/rakennusjarjestys/
+
+### pirkkala
+
+- Voimassa: 9.6.2026, kumosi 1.6.2016 voimaan tulleen (https://www.pirkkala.fi/wp-content/uploads/sites/4/2026/05/Rakennusjarjestys_2026.pdf).
+- Sääntö (luvasta vapautetut, kohta 8): "Julkisivumuutos: Omakoti- ja paritalon sekä vapaa-ajan asuinrakennuksen ja niiden talousrakennusten julkisivun ja katon materiaalin sekä värin muuttaminen." "Vapautukset eivät koske asemakaavassa tai lain nojalla suojeltua rakennusta, eivätkä asemakaavoittamattomilla alueilla sijaitsevia, yleiskaavalla suojeltuja, tai muutoin esim. maakuntakaavan selvityksissä arvokkaiksi todettuja kohteita."
+- Sivu: sama PDF.
+
+### ruovesi
+
+- Voimassa: 17.5.2010, kumosi 22.6.2002 voimaan tulleen (39 §) (https://www.ruovesi.fi/attachments/filebank/79.pdf?name=Rakennusjarjestys_).
+- Sääntö (taulukko 7, 1 = asemakaava-alueet ja oikeusvaikutteisen yleiskaavan alueet, 2 = muut alueet): "rakennuksen tai sen osan värityksen muuttaminen T I" (T = toimenpidelupa, I = ilmoitus).
+- Uudistus: kunnan sivuilla ei 26.10.2026 mainintaa uudistuksesta. Rakennustarkastajan puhelinpäivystys ja Lupapisteen neuvontapyynnöt mainitaan rakennusvalvonnan sivulla.
+- Sivu: https://www.ruovesi.fi/asuminen-ja-ymparisto/tontit-ja-rakentaminen/rakennusvalvonta
+
+### sastamala
+
+- Voimassa: ehdotuksen 52 §:n mukaan kumottavana on "kaupunginvaltuuston 10.11.2014 hyväksymä ja 1.1.2015 voimaan tullut rakennusjärjestys" (https://sastamala.fi/wp-content/uploads/2022/03/20595.pdf, skannattu, ei tekstikerrosta).
+- Uudistus: ehdotus 17.2.2026 (https://sastamala.fi/wp-content/uploads/2026/03/sastamala-rj-ehdotus.pdf); OAS 12.11.2024, luonnos nähtävillä 28.5.–20.8.2025. Kohta 23.4: "Luvanvaraisuudesta on vapautettu rakennusten julkisivun ja katon värisävyn muutokset muualla kuin asemakaava-alueilla. Luvanvaraisuudesta on vapautettu asemakaava-alueilla rakennusten julkisivun ja katon värisävyn muutokset, kun noudattaa kaavamääräyksiä ja rakennustapaohjeita." Voimaantulo "xx.xx.2026".
+- Sivu: https://sastamala.fi/asuminen-ja-ymparisto/rakennusvalvonta-ja-lupaasiat/lait-ja-ohjeet/
+
+### tampere
+
+- Voimassa: 1.10.2014; kaupungin sivu: "Rakennusjärjestys vanhenee joltain osin 1.1.2025 alkaen" ja "Katso ohjeet luvanvaraisuuden osalta sivulta Rakentaminen ilman rakentamislupaa". Vuoden 2014 tekstissä ei erillistä värinvaihtokohtaa.
+- Uudistus: rakennusjärjestysehdotus 9.6.2026 (https://www.tampere.fi/sites/default/files/2026-06/Rakennusjarjestysehdotus.pdf): "Julkisivuihin kohdistuvat korjaus- ja muutostyöt. Alla listatut vapautukset eivät koske asemakaavalla, lailla tai asetuksella suojeltuja tai muutoin kulttuurihistoriallisesti arvokkaita rakennuksia tai alueita … Muutostöiden tulee olla lain ja asetusten, voimassa olevan asemakaavan ja rakentamistapaohjeiden sekä rakennusjärjestyksen määräysten mukaisia, vaikka lupaa ei edellytetä. 1. Julkisivun värin muuttaminen 2. Katon värin muuttaminen 3. Kattomateriaalin vaihtaminen …".
+- Sivu: https://www.tampere.fi/asuminen-ja-rakentaminen/rakenna-ja-korjaa/rakentamisen-maaraykset-ja-ohjeet/rakennusjarjestys
+
+### urjala
+
+- Voimassa: kunnan sivun "Urjalan rakennusjärjestys (pdf)" -linkki vie tiedostoon rjehdotus2.pdf, jonka kansilehti: "Urjalan kunnanvaltuuston hyväksymä 16.03.26 § 3, Voimaan 04.05.2026" (https://www.urjala.fi/client/urjala/userfiles/rjehdotus2.pdf). Otsikossa lukee yhä "RAKENNUSJÄRJESTYS/ehdotus" ja 12 §:ssä "tulee voimaan valtuuston erikseen päättämänä ajankohtana"; kansilehden päivämäärää on käytetty.
+- Sääntö (2.6, kohta 8): "Julkisivun ja katon värisävyn tai materiaalin muutokset, kun muutokset noudattavat kaavamääräyksiä ja rakennustapaohjeita."
+- Sivu: https://www.urjala.fi/asuminen-ja-ymparisto/rakentaminen/rakennusvalvonta/
+
+### valkeakoski
+
+- Voimassa: 1.1.2026, kumosi 12.11.2020 voimaan tulleen (https://www.valkeakoski.fi/uploads/sites/1/2026/01/de6c1708-valkeakosken-rakennusjarjestys-2025-hyvaksytty_nettiin.pdf).
+- Sääntö ("Julkisivun ja katon värisävyn muutokset"): "Luvanvaraisuudesta on vapautettu omakoti- ja paritalojen sekä niiden talousrakennusten julkisivun ja katon värisävyn muutokset edellytyksellä, että ne säilyvät määräysten ja rakennustapaohjeen mukaisina pois lukien suojellut rakennukset. RKY-alueilla värityksen tulee noudattaa rakentamistapaohjetta tai rakennuksen rakentamisajankohdalle tyypillisiä värejä. Jos alueella ei ole rakentamistapaohjetta, tulee julkisivuväri hyväksyttää rakennusvalvonnalla."
+- Sivu: sama PDF.
+
+### vesilahti
+
+- Voimassa: kunnan sivu: "Vesilahden kunnanvaltuusto on 27.9.2004 § 39 hyväksynyt rakennusjärjestyksen. Suunnittelutarvealueiden osalta päivitetty rakennusjärjestys on hyväksytty 9.3.2015 § 14 ja tullut voimaan 22.4.2015." PDF (https://www.vesilahti.fi/wp-content/uploads/Vesilahden-kunnan-rakennusjarjestys.pdf) on skannattu, ei tekstikerrosta.
+- Uudistus: "Uuden rakentamislain voimaantulo tuo muutoksia rakennusjärjestykseen. Vesilahden rakennusjärjestyksen uudistaminen on käynnissä." Hankesivu: https://vesilahti.cloudnc.fi/fi-FI/Hankkeet/Yleinen_hanke/Rakennusjaumlrjestyksen_paumlivittaumlmi(10081)
+- Sivu: https://www.vesilahti.fi/asuminen-ja-ymparisto/rakentaminen/
+
+### virrat
+
+- Voimassa: 1.10.2003 (https://www.virrat.fi/client/virrat/userfiles/virtain-kaupungin-rakennusjarjestys-08092003.pdf).
+- Sääntö (2.2, osa-alue 1 = kaava-alue, 2 = kaava-alueen ulkopuolinen alue): "rakennuksen värityksen muuttaminen O -", "katemateriaalin muuttaminen X -", "ulkoverhouksen rakennusaineen muuttaminen X O" (X = toimenpidelupa, O = ilmoitus, - = ei tarvitse ilmoitusta).
+- Uudistus: "Kaupunginhallitus hyväksynyt ehdotuksena 28.9.2026 § 211, Ehdotus nähtävillä 8.10.–6.11.2026", "Tämä rakennusjärjestys tulee voimaan 1.1.2027" (https://www.virrat.fi/client/virrat/userfiles/rakennusjarjestys-ehdotus-kh-2892026-211.pdf). Ehdotuksen rakentamislupataulukossa (R = vaatii rakentamisluvan) ei ole värin muutosta; "Rakentamislupaa edellyttävän rakennuksen tulee olla värisävyltään hillitty ja maisemaan sopeutuva."
+- Sivu: https://www.virrat.fi/asuminen-ja-ymparisto/kaavoitus-ja-rakentaminen/kaavoitus/rakennusjarjestys/
+
+### ylojarvi
+
+- Voimassa: 1.1.2022, kumosi 1.1.2017 voimaan tulleen (49 §) (Rakennusj_rjestys_2021.pdf kaupungin sivulta).
+- Sääntö (41 §, sarakkeet asemakaava-alue / asemakaava-alueen ulkopuoliset alueet): "katteen tai sen värityksen muuttaminen X −", "ulkoverhouksen rakennusaineen tai värityksen muuttaminen X −" (X = toimenpidelupa haettava, − = ei toimenpidelupaa tai ilmoitusta). Kaupungin UKK: "Olemme vaihtamassa katetta ja sen väritystä. Tarvitaanko lupaa? Mikäli kiinteistönne sijaitsee haja-asutusalueella, rakentamislupaa ei tarvita. Mikäli kiinteistönne sijaitsee asemakaava-alueella täyttäkää rakentamislupahakemus osoitteessa Lupapiste.fi" (https://www.ylojarvi.fi/rakennusvalvonta/usein-kysytyt-kysymykset/ukk-luvanvaraisuus/).
+- Uudistus: luonnos 29.4.2026 (https://ylojarvi10.oncloudos.com/kokous/2026834-8-46912.PDF): luvasta vapautettu "12. Julkisivumuutos, kun kyseessä on a. julkisivun tai katon materiaalin tai värin muuttaminen". Rakennusvalvonnan sivu: "Ylöjärven ympäristölautakunta on 23.9.2026 tekemällään päätöksellä päättänyt asettaa rakennusjärjestysehdotuksen julkisesti nähtäville."
+- Sivu: https://www.ylojarvi.fi/rakennusvalvonta/usein-kysytyt-kysymykset/ukk-luvanvaraisuus/

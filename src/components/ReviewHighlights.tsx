@@ -50,7 +50,7 @@ const ReviewHighlights = () => (
       <div
         className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:overflow-visible md:pb-0"
         role="region"
-        aria-label="Arvostelut, vieritettävä lista"
+        aria-label="Arvostelunostot, vieritettävä lista"
         tabIndex={0}
       >
         {reviews.map((r, i) => (

@@ -44,3 +44,7 @@ dist-ssr
 
 # Kuntakarttojen lähdeaineisto (scripts/tee_kuntakartta.py)
 .kartta-cache/
+
+# Playwright-ajon tulosteet (tests/e2e)
+playwright-report/
+test-results/

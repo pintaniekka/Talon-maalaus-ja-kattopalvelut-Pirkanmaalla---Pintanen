@@ -39,7 +39,7 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Sammal tarttuu huokoiseen ja kosteaan pintaan. Uuden tiilen tiivis pinta kuluu noin 10–15 vuodessa.</li>
+        <li>Sammal tarttuu huokoiseen ja kosteaan pintaan. Uuden tiilen tiivis pinta kuluu noin 15 vuodessa.</li>
         <li>Sammal pitää tiilen märkänä. Talvella vesi jäätyy tiilen sisällä ja rapauttaa sitä.</li>
         <li>Pelkkä sammaleen poisto auttaa hetken. Kun pinta on kulunut, katto kannattaa pestä ja pinnoittaa, yleensä noin 15 vuoden iässä.</li>
         <li>Pesu kuuluu aina pinnoitukseen. Pinnoitettu katto hylkii vettä ja kestää jopa 15 vuotta pidempään. Hinta on yleensä 2 850–7 000 €.</li>
@@ -55,7 +55,7 @@ const Body = () => (
     <h2>Miksi tiilikatolle kasvaa sammalta?</h2>
     <p>
       Sammal tarvitsee kaksi asiaa: kosteutta ja pinnan, johon tarttua. Uuden betonitiilen pinta on tehtaalla tehty
-      tiiviiksi. Vesi valuu siitä pois, eikä sammal saa otetta. Aurinko ja pakkanen kuluttavat pintaa, ja noin 10–15
+      tiiviiksi. Vesi valuu siitä pois, eikä sammal saa otetta. Aurinko ja pakkanen kuluttavat pintaa, ja noin 15
       vuodessa se on ohut. Sen jälkeen tiili imee vettä ja pysyy sateen jälkeen pitkään kosteana. Siihen sammal ja
       jäkälä tarttuvat.
     </p>

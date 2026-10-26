@@ -13,7 +13,8 @@ interface Card {
  * Kaupunkisivun tiivis yhteenveto: hinta ja vertailu (pinnoitus, kaksi korttia) tai hinta, työn kulku ja
  * vertailu (maalaus, kolme korttia). Pinnoituksen kaupunkisivulla työvaiheet ovat omana listanaan
  * (ProcessList, Eerik 13.10.2026), joten työn kulkua ei toisteta tässä. Pitkät versiot (hintakortit,
- * vertailu) ovat palvelun pääsivulla ja hintasivulla, joihin kortit linkittävät.
+ * vertailu) ovat palvelun pääsivulla ja hintasivulla, joihin kortit linkittävät. Hintasivun ankkuri vaihtelee
+ * paikkakunnan mukaan (Eerik 26.10.2026, yöajon kysymys 14).
  */
 const cards: Record<Service, (cityIn: string) => Card[]> = {
   // Eerik 25.10.2026: hintaan kuuluu suojaus, pohjatyöt, pohjamaalaus, pintamaalaus, siivous ja takuu.
@@ -24,7 +25,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
       text: "Suojaus, pesu ja rikkinäisten tiilien vaihto, pohjamaalaus, pintamaalaus, siivous ja 5 vuoden takuu. Saat kirjallisen tarjouksen kiinteällä hinnalla heti kuntotarkastuksen jälkeen.",
       links: [
         { to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" },
-        { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Katso hintaesimerkit" },
+        { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: `Pinnoituksen hinta ${cityIn}` },
       ],
     },
     {
@@ -40,7 +41,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
       text: "Suojaus, homepesu, kaavinta, pohjamaali paljaisiin kohtiin, pintamaali pensselillä, siivous ja 2 vuoden takuu. Saat kirjallisen tarjouksen kiinteällä hinnalla heti arviokäynnin jälkeen.",
       links: [
         { to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" },
-        { to: "/talon-maalaus-hinta-pirkanmaa/", label: "Katso hintaesimerkit" },
+        { to: "/talon-maalaus-hinta-pirkanmaa/", label: `Maalauksen hinta ${cityIn}` },
       ],
     },
     {

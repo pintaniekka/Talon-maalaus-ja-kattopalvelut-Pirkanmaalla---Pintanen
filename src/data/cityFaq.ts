@@ -1,5 +1,6 @@
 import type { CityData } from "./cityData";
 import { getProjectItems, type ProjectService } from "./projects";
+import { getCityLocalFacts } from "./cityLocalFacts";
 
 interface FAQItem {
   question: string;
@@ -24,7 +25,20 @@ export const getLocalCityFaq = (city: CityData, service: ProjectService): FAQIte
           question: `Teettekö talon maalauksia ${city.cityIn}?`,
           answer: `Kyllä. Eemil tulee ${city.cityTo} katsomaan talon ilmaiseksi, ja saat kirjallisen tarjouksen käynnin jälkeen.${kuvat}`,
         };
-  return [paikkakunta, ...yleisetKysymykset(service)];
+  // Paketti C (26.10.2026): kunnan rakennusjärjestyksen sääntö värin vaihdosta, teksti cityLocalFacts.ts:ssä.
+  const local = getCityLocalFacts(city.slug);
+  const vari: FAQItem[] = local
+    ? [
+        {
+          question:
+            service === "pinnoitus"
+              ? `Pitääkö katon värin vaihdosta ilmoittaa kunnalle ${city.cityIn}?`
+              : `Pitääkö seinien värin vaihdosta ilmoittaa kunnalle ${city.cityIn}?`,
+          answer: local.ukk,
+        },
+      ]
+    : [];
+  return [paikkakunta, ...vari, ...yleisetKysymykset(service)];
 };
 
 /**

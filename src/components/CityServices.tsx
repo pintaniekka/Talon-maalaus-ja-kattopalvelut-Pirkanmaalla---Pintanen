@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
@@ -38,14 +38,14 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
   return (
     <section className="section-padding bg-accent-light">
       <div className="section-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-12">
+        <m.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-heading">Palvelut {cityGenitive} alueella</h2>
           <p className="text-muted-foreground text-lg">Eerik pinnoittaa tiilikatot ja Eemil maalaa talot. Arviokäynti on ilmainen.</p>
-        </motion.div>
+        </m.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {services.map((service, index) => (
-            <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.15 }}>
+            <m.div key={service.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.15 }}>
               <div
                 role="link"
                 tabIndex={0}
@@ -79,7 +79,7 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

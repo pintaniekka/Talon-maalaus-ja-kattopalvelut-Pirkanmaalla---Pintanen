@@ -25,7 +25,8 @@ export default defineConfig(() => ({
         assetFileNames: "assets/[name].[hash][extname]",
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-motion': ['framer-motion'],
+          // framer-motion ei ole omassa paketissaan: sen animaatio-ominaisuudet ladataan laiskasti
+          // (src/lib/motionFeatures.ts), ja oma paketti pakottaisi ne samaan tiedostoon ytimen kanssa.
           'vendor-ui': [
             '@radix-ui/react-accordion',
             '@radix-ui/react-dialog',

@@ -62,14 +62,15 @@ const ToimintaAlueet = () => {
                     </span>
                     <ChevronRight className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                   </Link>
+                  {/* Linkeillä py-0.5 ja -my-0.5: kosketusalue 24 px (WCAG 2.5.8, axe target-size) rivin korkeutta muuttamatta. */}
                   <p className="text-sm text-muted-foreground mt-1.5 flex flex-wrap gap-x-3">
                     {hasPinnoitusPage(city.slug) && (
-                      <Link to={`/tiilikaton-pinnoitus-${city.slug}/`} className="hover:text-accent-ink underline-offset-2 hover:underline">
+                      <Link to={`/tiilikaton-pinnoitus-${city.slug}/`} className="py-0.5 -my-0.5 hover:text-accent-ink underline-offset-2 hover:underline">
                         Tiilikaton pinnoitus
                       </Link>
                     )}
                     {hasMaalausPage(city.slug) && (
-                      <Link to={`/talon-maalaus-${city.slug}/`} className="hover:text-accent-ink underline-offset-2 hover:underline">
+                      <Link to={`/talon-maalaus-${city.slug}/`} className="py-0.5 -my-0.5 hover:text-accent-ink underline-offset-2 hover:underline">
                         Talon maalaus
                       </Link>
                     )}

@@ -14,14 +14,18 @@ const byName = (a: { name: string }, b: { name: string }) => a.name.localeCompar
 const pirkanmaa = allCities.filter((c) => !kantaHameSlugs.has(c.slug)).sort(byName);
 const kantaHame = allCities.filter((c) => kantaHameSlugs.has(c.slug)).sort(byName);
 
-/** Kolme palstaa, enintään neljä linkkiä kussakin (Eerik 26.10.2026: "siivoa footer"). */
+/**
+ * Kolme palstaa, enintään neljä linkkiä kussakin (Eerik 26.10.2026: "siivoa footer"). Kuntotarkastus-linkki vie
+ * omalle sivulleen ja Pintanen-palstassa on viidentenä kotitalousvähennys (Eerik 26.10.2026, yöajon kysymykset 11–12).
+ * Viisi linkkiä Pintanen-palstassa on hyväksytty (Eerik 26.10.2026, yöajon kysymys 18).
+ */
 const palstat = [
   {
     title: "Tiilikaton pinnoitus",
     links: [
       { to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Tiilikaton pinnoitus" },
       { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Hinta ja hintalaskuri" },
-      { to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Ilmainen kuntotarkastus" },
+      { to: "/ilmainen-kuntotarkastus/", label: "Ilmainen kuntotarkastus" },
     ],
   },
   {
@@ -39,6 +43,7 @@ const palstat = [
       { to: "/referenssit/", label: "Referenssit" },
       { to: "/kokemuksia/", label: "Kokemuksia" },
       { to: "/artikkelit/", label: "Artikkelit" },
+      { to: "/kotitalousvahennys/", label: "Kotitalousvähennys" },
     ],
   },
 ];

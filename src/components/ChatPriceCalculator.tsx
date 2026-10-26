@@ -9,6 +9,7 @@ import CityCombobox from '@/components/CityCombobox';
 import PhoneInput from '@/components/PhoneInput';
 import { YHTEYSTIEDOT } from '@/data/company';
 import { calculateWallPrice, calculateRoofPrice, formatPriceRange } from '@/lib/priceCalc';
+import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from '@/components/vahennys/vahennysData';
 import {
   isValidFinnishMobile,
   formatToInternational,
@@ -388,15 +389,21 @@ const ChatPriceCalculator = () => {
 
     const d = dataRef.current;
     let priceStr = '';
+    let afterStr = '';
     let details = '';
+    // Sama rivi kuin /hintalaskuri-sivulla: hinta kotitalousvähennyksen jälkeen (Eerik 26.10.2026, yöajon kysymys 20).
+    const withAfter = (p: { min: number; max: number }) => {
+      priceStr = formatPriceRange(p);
+      afterStr = formatPriceRange({ min: hintaVahennyksenJalkeen(p.min), max: hintaVahennyksenJalkeen(p.max) });
+    };
 
     if (path === 'maalaus') {
-      priceStr = formatPriceRange(calculateWallPrice(Number(d.squareMeters), d.stories, d.peeling));
+      withAfter(calculateWallPrice(Number(d.squareMeters), d.stories, d.peeling));
       const storyLabels: Record<string, string> = { '1': '1 kerros', '1.5': '1,5 kerrosta', '2': '2 kerrosta' };
       const peelingLabels: Record<string, string> = { none: 'Ei hilseilyä', '1-2': '1–2 seinällä', '3+': 'Yli 3 seinällä' };
       details = `Pohjaneliöt: ${d.squareMeters} m², Kerrokset: ${storyLabels[d.stories] || d.stories}, Hilseily: ${peelingLabels[d.peeling] || d.peeling}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä löytyy' : 'Ei löydy'}, Kaupunki: ${d.city || '-'}`;
     } else {
-      priceStr = formatPriceRange(calculateRoofPrice(Number(d.squareMeters), d.slope));
+      withAfter(calculateRoofPrice(Number(d.squareMeters), d.slope));
       const brokenLabels: Record<string, string> = { ei: 'Ei rikkinäisiä', '1-5': '1–5 rikkinäistä', '5-20': '5–20 rikkinäistä' };
       const slopeLabels: Record<string, string> = { loiva: 'Loiva', normaali: 'Normaali', jyrkka: 'Todella jyrkkä' };
       details = `Katon koko: ${d.squareMeters} m², Rikkinäiset tiilet: ${brokenLabels[d.brokenTiles] || d.brokenTiles}, Aluskate: ${d.underlayment === 'kylla' ? 'Löytyy' : 'Epävarma'}, Jyrkkyys: ${slopeLabels[d.slope] || d.slope}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä löytyy' : 'Ei löydy'}, Kaupunki: ${d.city || '-'}`;
@@ -421,6 +428,7 @@ const ChatPriceCalculator = () => {
       await addBotMessage(
         `Kiitos ${firstName}! 🎉 Alustava hinta-arvio ${tyo} on ${priceStr}. Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.`,
       );
+      await addBotMessage(`Kotitalousvähennyksen jälkeen: ${afterStr}. ${VAHENNYS_OMAVASTUU_HUOMAUTUS}`);
     } catch (err) {
       // Lomake ei väitä onnistuneensa: virhe kerrotaan chatissa ja yhteystietokentät jäävät näkyviin.
       await addBotMessage(`Hups, lähetys ei onnistunut (${formErrorMessage(err)}). Kokeile uudelleen tai soita meille: ${YHTEYSTIEDOT.eerik.phone}.`);

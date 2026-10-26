@@ -111,8 +111,8 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-sammaleenpoisto"
-      alt="Tiilikatto, jonka etummainen lape on käsitelty ja takimmainen vielä sammaleinen"
-      caption="Sama katto kesken työn: etummainen lape on käsitelty, takimmainen odottaa vuoroaan."
+      alt="Tiilikatto kesken pesun: etummainen lape on pesty, takimmainen vielä sammaleinen"
+      caption="Pesu kesken: etummainen lape on pesty, takimmainen odottaa vuoroaan. Pesun jälkeen katto saa kuivua, ja sitten se maalataan."
     />
 
     <h2>Miten sammal poistetaan pinnoituksen yhteydessä?</h2>

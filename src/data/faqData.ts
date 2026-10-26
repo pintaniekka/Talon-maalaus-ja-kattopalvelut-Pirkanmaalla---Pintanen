@@ -49,8 +49,9 @@ export const pinnoitusFAQ: FAQItem[] = [
   },
   {
     question: 'Kattoremontti vai pinnoitus?',
+    // Aluskatteen pienet vauriot: sama tieto kuin sivulla /ilmainen-kuntotarkastus/ (Eerik 26.10.2026).
     answer:
-      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet.',
+      'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet.',
   },
   {
     question: 'Voiko katon värin vaihtaa pinnoituksessa?',

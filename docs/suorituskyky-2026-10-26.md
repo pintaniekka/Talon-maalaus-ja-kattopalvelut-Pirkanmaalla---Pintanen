@@ -315,3 +315,16 @@ Lopputilanteessa mobiilipisteet ovat 93 (mediaani) ja tietokone 100. Lighthousen
 4. **Paikkakuntavalitsin.** Hintalaskurin paikkakuntavalitsimen avaaminen on hitain vuorovaikutus (224–264 ms hidastetulla suorittimella). Saako sen toteutusta muuttaa (lista renderöidään vasta kirjoitettaessa tai virtualisoidaan)? Ulkoasu pysyisi samana.
 5. **Pienet jatkokorjaukset ilman ulkoasumuutosta.** Saanko tehdä seuraavassa ajossa: `OptimizedImage`:n `loading`-attribuutti ennen `src`-attribuuttia (kohta 7.6) ja `vendor-ui`-paketin jako (kohta 7.5)? Kumpikin on pieni, ja mittaan ne samalla tavalla.
 6. **Mergejärjestys.** Ehdotan: #132 → #133 → #137 → #138 → #139, jokaisen jälkeen mainin merge seuraavaan haaraan ja Cloudflaren esikatselun tarkistus. Sopiiko, että teen merget ja ristiriitojen ratkaisun, kun annat luvan, vai haluatko mergetä itse?
+
+## 9. Eerikin vastaukset 26.10.2026 ja toteutus
+
+Eerik vastasi 26.10.2026 illalla luvun 8 kysymyksiin: "kysymykset ok". Tulkinta ja toteutus kysymyksittäin:
+
+1. **Fontit:** saa kokeilla. Haarassa `claude/yo2-perf-fontit` mitataan kaksi vaihtoehtoa (esilataukset neljästä kahteen; esilataukset pois) samalla kuuden sivun mittauksella, ja PR:ään viedään parempi. Fonttien vaihtuminen on ulkoasuriski, joten Eerik katsoo Cloudflaren esikatselun ennen mergeä.
+2. **Värien kontrasti:** saa tummentaa. Haara `claude/yo2-kontrasti` muuttaa sävyjä vain sen verran, että `color-contrast` menee läpi (saavutettavuus 100). Ulkoasumuutos: luonnos-PR, esikatselu ja kuvakaappaukset ennen/jälkeen; julkaistaan vain Eerikin ok:lla.
+3. **600 px:n kuvakoko:** saa lisätä. Haara `claude/yo2-perf-kuvat-600`: 600 px:n koko tuotetaan Pictures-1500- tai Pictures-1200-kuvasta, koska alkuperäiset ovat Eerikin koneella; `lisaa_kuva.py` tuottaa jatkossa myös 600-koon.
+4. **Paikkakuntavalitsin:** saa muuttaa toteutusta ulkoasua muuttamatta. Haara `claude/yo2-perf-paikkakuntavalitsin`, INP mitataan ennen ja jälkeen.
+5. **Pienet jatkokorjaukset:** saa tehdä. Haarat `claude/yo2-perf-kuvien-lataus` (`loading` ennen `src`) ja `claude/yo2-perf-vendor-ui` (paketin jako), kumpikin mitataan.
+6. **Mergejärjestys:** hyväksytty: #132 → #133 → #137 → #138 → #139, jokaisen jälkeen mainin merge seuraavaan haaraan ja esikatselun tarkistus. Merget tekee Eerik itse (sovittu sääntö). Ristiriidat ratkaisen pyynnöstä: kun ensimmäinen on mergetty, sano "ratkaise ristiriidat", niin mergeän mainin jäljellä oleviin haaroihin ja ajan tarkistukset.
+
+PR-numerot täydennetään tähän, kun haarat on avattu.

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
@@ -72,6 +73,17 @@ const Meista = () => {
                 seinäpuolen itsenäisesti.
               </p>
               <p>Meillä ei ole välikäsiä eikä raskasta kulurakennetta. Soitat suoraan Eerikille tai Eemilille.</p>
+              <p>
+                Kotikaupungissamme Eerik{" "}
+                <Link to="/tiilikaton-pinnoitus-tampere/" className="text-primary font-semibold hover:underline">
+                  pinnoittaa tiilikattoja Tampereella
+                </Link>{" "}
+                ja Eemil{" "}
+                <Link to="/talon-maalaus-tampere/" className="text-primary font-semibold hover:underline">
+                  maalaa puutaloja Tampereella
+                </Link>
+                . Samalla tavalla teemme työt Pirkanmaalla ja lähikunnissa.
+              </p>
             </div>
           </div>
         </div>

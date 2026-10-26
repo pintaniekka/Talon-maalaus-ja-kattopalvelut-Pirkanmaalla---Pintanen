@@ -27,7 +27,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Pirkkalassa, 10 kilometriä Tampereelta",
     pinnoitusLocalHookText:
-      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja Tampereelle on matkaa 10 kilometriä. Pinnoitamme tiilikattoja koko Pirkkalassa. Asuinalueita ovat esimerkiksi Nuoliala, Toivio, Pere ja Kurikka.",
+      "Pirkkala on Pyhäjärven rannalla, ja keskustaan on matkaa 10 kilometriä. Pinnoitamme tiilikattoja koko Pirkkalassa. Asuinalueita ovat esimerkiksi Nuoliala, Toivio, Pere ja Kurikka.",
   },
   lempaala: {
     ...era(1),

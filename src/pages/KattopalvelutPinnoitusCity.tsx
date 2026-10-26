@@ -7,6 +7,7 @@ import CityMap from "@/components/CityMap";
 import { hasKuntakartta } from "@/data/kartat";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
+import CityLocalRules from "@/components/CityLocalRules";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur";
 import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
@@ -20,8 +21,10 @@ import ReviewsTeaser from "@/components/ReviewsTeaser";
 import ServiceSchema from "@/components/ServiceSchema";
 import { getPinnoitusCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
+import { vainPaikkakunta } from "@/data/kannibalisointi";
 import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
+import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { pinnoitusPrices } from "@/data/prices";
 import { pinnoitusLyhyesti, pinnoitusTyovaiheet, PINNOITUS_HINTA } from "@/data/tyovaiheet";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
@@ -50,7 +53,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
   return (
     <div>
       <SEO {...seo} breadcrumbs={crumbs} />
-      <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} description={seo.description} priceRange={pinnoitusPrices.general} />
+      <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} areaSameAs={getCityWikipediaUrl(cityData)} description={seo.description} priceRange={pinnoitusPrices.general} />
 
       <PageHero
         eyebrow={`Tiilikaton pinnoitus · ${cityData.name}`}
@@ -62,7 +65,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         lead={
           <>
             Pinnoitamme tiilikattoja {cityData.cityIn}. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Hinta on yleensä{" "}
-            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, ja takuu on 5 vuotta. Kuntotarkastus on ilmainen.
+            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, työ kestää 2–3 päivää ja takuu on 5 vuotta. Kuntotarkastus on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
@@ -107,7 +110,8 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
       <MiksiValitaPintanen service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" hideMap={kartta} />
-      <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
+      <CityLocalRules citySlug={cityData.slug} cityIn={cityData.cityIn} />
+      <PinnoitusEntrepreneur cityIn={cityData.cityIn} vainPaikkakunta={vainPaikkakunta(cityData.slug)} />
 
       <FAQSection
         items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name, cityData.cityIn)]}

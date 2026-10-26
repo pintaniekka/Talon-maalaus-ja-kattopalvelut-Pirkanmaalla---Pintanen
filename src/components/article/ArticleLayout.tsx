@@ -114,6 +114,8 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
       "@type": "Person",
       name: author.name,
       jobTitle: author.role,
+      telephone: author.phone,
+      email: author.email,
       worksFor: { "@type": "Organization", name: "Pintanen Oy" },
       url: "https://pintanen.fi/meista/",
     },
@@ -249,7 +251,10 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Kirjoittaja</p>
                 <p className="font-heading font-bold text-foreground">{author.name}</p>
-                <p className="text-sm text-muted-foreground mb-2">{author.role}</p>
+                <p className="text-sm text-muted-foreground">{author.role}</p>
+                <p className="text-sm text-muted-foreground mb-2">
+                  {author.phone} · {author.email}
+                </p>
                 <p className="text-muted-foreground leading-relaxed">
                   {author.bio}{" "}
                   <Link to="/meista/" className="text-[#006ead] underline underline-offset-2">

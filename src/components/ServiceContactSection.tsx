@@ -18,6 +18,11 @@ interface ServiceContactSectionProps {
   cityName?: string;
   cityGenitive?: string;
   cityIn?: string;
+  /**
+   * Lomakekortin otsikko. Oletus pinnoitussivuilla (variant "katto": palvelusivu, hintasivu, kaupunkisivut ja
+   * kuntotarkastussivu) "Pyydä ilmainen kuntotarkastus", muualla "Pyydä ilmainen arviokäynti" (Eerik 26.10.2026).
+   */
+  formTitle?: string;
 }
 
 const contactPersons = {
@@ -95,7 +100,8 @@ const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
  * Paikkakuntasivuilla otsikossa on paikkakunta (Eerik 13.10.2026: takaisin hakukoneita varten);
  * lomakekortin otsikon vieressä on Pintasen oma merkki.
  */
-const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, cityIn }: ServiceContactSectionProps) => {
+const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, cityIn, formTitle }: ServiceContactSectionProps) => {
+  const formHeading = formTitle ?? (variant === 'katto' ? 'Pyydä ilmainen kuntotarkastus' : 'Pyydä ilmainen arviokäynti');
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -189,7 +195,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                 <span className="kortti-a-merkki" aria-hidden="true">
                   <PintanenMark className="h-6 w-6" />
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading">Pyydä ilmainen arviokäynti</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading">{formHeading}</h3>
               </div>
 
               <div className="space-y-4 flex flex-col flex-1">

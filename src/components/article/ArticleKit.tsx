@@ -31,6 +31,18 @@ export const KeyPoints = ({ title = "Lyhyesti", children }: { title?: string; ch
   </aside>
 );
 
+/**
+ * Avainhuomio: yksi virke ja yksi luku H2-osion loppuun. Tekoälyhaut ja Googlen vastaukset poimivat
+ * tällaisen tiivistyksen helpoimmin. Käyttää samaa ulkoasua kuin Note, jotta artikkelin tyyli ei muutu.
+ */
+export const Avainhuomio = ({ children }: { children: ReactNode }) => (
+  <aside className="article-note">
+    <p>
+      <strong>Avainhuomio:</strong> {children}
+    </p>
+  </aside>
+);
+
 /** Huomautus tai vinkki tekstin lomaan. */
 export const Note = ({ title, children }: { title?: string; children: ReactNode }) => (
   <aside className="article-note">
@@ -71,9 +83,13 @@ export const ArticleFaq = ({ items, title = "Usein kysyttyä" }: { items: FaqIte
   );
 };
 
-/** Taulukko hinnoille ja vertailuille. Ensimmäinen sarake on rivin otsikko. */
+/**
+ * Taulukko hinnoille ja vertailuille. Ensimmäinen sarake on rivin otsikko. Kääre vierii
+ * vaakasuunnassa kapealla näytöllä, joten se on näppäimistöllä kohdistettava alue
+ * (axe: scrollable-region-focusable).
+ */
 export const Table = ({ head, rows, caption }: { head: string[]; rows: string[][]; caption?: string }) => (
-  <div className="article-table-wrap">
+  <div className="article-table-wrap" role="region" aria-label={caption ?? "Taulukko"} tabIndex={0}>
     <table>
       {caption && <caption>{caption}</caption>}
       <thead>

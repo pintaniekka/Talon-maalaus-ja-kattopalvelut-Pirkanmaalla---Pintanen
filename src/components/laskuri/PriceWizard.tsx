@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { ArrowLeft, Check, Loader2 } from "lucide-react";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import CityCombobox from "@/components/CityCombobox";
@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
 import { trackEvent } from "@/lib/analytics";
 import { calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
+import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
 import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 
 export type WizardService = "pinnoitus" | "maalaus";
@@ -153,6 +154,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const [phoneError, setPhoneError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [resultAfterDeduction, setResultAfterDeduction] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
 
   const qs = service ? calculatorQuestions[service] : [];
@@ -238,6 +240,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
         "hintalaskuri"
       );
       setResult(priceStr);
+      // Eerik 26.10.2026 (yöajon kysymys 13): hinta myös kotitalousvähennyksen jälkeen.
+      setResultAfterDeduction(formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) }));
       trackEvent("laskuri_valmis", { palvelu: service });
     } catch {
       toast({ title: "Virhe", description: "Jokin meni pieleen. Yritä uudelleen tai soita meille.", variant: "destructive" });
@@ -257,6 +261,14 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           </div>
           <p className="text-muted-foreground mb-2">Hinta-arvio</p>
           <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>
+          {resultAfterDeduction && (
+            <div className="mb-4">
+              <p className="text-muted-foreground">
+                Kotitalousvähennyksen jälkeen: <strong className="text-foreground">{resultAfterDeduction}</strong>
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">{VAHENNYS_OMAVASTUU_HUOMAUTUS}</p>
+            </div>
+          )}
           <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
             Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.
           </p>
@@ -273,7 +285,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                 onClick={() => pickService(opt.value)}
                 className="group rounded-2xl overflow-hidden border border-border bg-background text-left transition-all hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <ResponsiveImage baseName={opt.imageBase} alt={opt.label} className="w-full aspect-[4/3] object-cover" sizes="(max-width: 640px) 100vw, 300px" width={800} height={600} />
+                <ResponsiveImage baseName={opt.imageBase} alt="" className="w-full aspect-[4/3] object-cover" sizes="(max-width: 640px) 100vw, 300px" width={800} height={600} />
                 <span className="block px-5 py-4 font-bold text-foreground">{opt.label}</span>
               </button>
             ))}
@@ -294,7 +306,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.div key={`${service}-${index}`} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2 }}>
+            <m.div key={`${service}-${index}`} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.2 }}>
               {current && (
                 <>
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-2">{current.title}</h2>
@@ -380,7 +392,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                   </form>
                 </>
               )}
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
       )}

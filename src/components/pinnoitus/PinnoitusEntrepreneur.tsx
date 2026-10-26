@@ -8,8 +8,9 @@ const eerikImage = getStorageUrl('Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoit
  * (tarkastus 12.10.2026, T12–T13). Paikkakunta tulee propsina (V1). Lause "sama mies käy
  * katsomassa, tekee tarjouksen ja tekee työn" sanotaan sivustolla vain tässä.
  */
-const PinnoitusEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
-  const paikka = cityIn ? `${cityIn} ja muualla Pirkanmaalla` : 'Pirkanmaalla ja lähikunnissa';
+/** vainPaikkakunta: paikkakunta ilman "ja muualla Pirkanmaalla" (src/data/kannibalisointi.ts). */
+const PinnoitusEntrepreneur = ({ cityIn, vainPaikkakunta }: { cityIn?: string; vainPaikkakunta?: boolean }) => {
+  const paikka = cityIn ? (vainPaikkakunta ? cityIn : `${cityIn} ja muualla Pirkanmaalla`) : 'Pirkanmaalla ja lähikunnissa';
   return (
     <section className="section-padding bg-accent-light">
       <div className="section-container">

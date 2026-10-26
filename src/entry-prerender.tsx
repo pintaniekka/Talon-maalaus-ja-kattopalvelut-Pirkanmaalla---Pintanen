@@ -34,7 +34,11 @@ export const render = (url: string): Promise<PrerenderResult> =>
     });
     sink.on("finish", () => {
       clearTimeout(timer);
-      resolve({ html, headScripts: helmetContext.helmet?.script.toString() ?? "" });
+      // React 18:n renderToPipeableStream kirjoittaa ylimääräisen NUL-tavun (\0), kun monitavuinen
+      // merkki (ä, ö, –) ei mahdu sen 2 kt:n puskurin loppuun: puskuri lähetetään kokonaisena,
+      // vaikka viimeinen tavu jäi käyttämättä. Selain näyttää tavun �-merkkinä ja hydraatio
+      // ei täsmää. Merkit itsessään ovat ehjiä, joten NUL-tavut vain poistetaan.
+      resolve({ html: html.replace(/\0/g, ""), headScripts: helmetContext.helmet?.script.toString() ?? "" });
     });
 
     const stream = renderToPipeableStream(

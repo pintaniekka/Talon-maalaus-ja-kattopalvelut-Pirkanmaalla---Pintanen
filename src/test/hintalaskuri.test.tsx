@@ -8,6 +8,7 @@ import ChatPriceCalculator from "@/components/ChatPriceCalculator";
 import Hintalaskuri from "@/pages/Hintalaskuri";
 import { calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
 import { PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
+import { hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
 
 /*
  * Laskurit testataan ilman oikeaa lähetystä: fetch korvataan, joten mitään ei mene myynnin
@@ -32,7 +33,8 @@ vi.mock("framer-motion", async () => {
   const strip = ({ initial, animate, exit, transition, whileInView, viewport, ...rest }: MotionProps) => rest;
   return {
     AnimatePresence: ({ children }: React.PropsWithChildren) => React.createElement(React.Fragment, null, children),
-    motion: { div: (props: MotionProps) => React.createElement("div", strip(props), props.children) },
+    LazyMotion: ({ children }: React.PropsWithChildren) => React.createElement(React.Fragment, null, children),
+    m: { div: (props: MotionProps) => React.createElement("div", strip(props), props.children) },
   };
 });
 
@@ -154,6 +156,13 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     expect(reply.textContent).toContain("Kiitos Testi!");
     expect(reply.textContent).toContain("Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.");
     expect(screen.queryByRole("button", { name: "Lähetä ja näytä hinta-arvio" })).not.toBeInTheDocument();
+    // Sama vähennysrivi kuin /hintalaskuri-sivulla (Eerik 26.10.2026, yöajon kysymys 20), omana viestinään.
+    await tick();
+    const price = calculateRoofPrice(200, "normaali");
+    const after = formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) });
+    const deduction = screen.getByText(/Kotitalousvähennyksen jälkeen:/);
+    expect(shown(deduction.textContent ?? "")).toContain(shown(after));
+    expect(shown(deduction.textContent ?? "")).toContain("Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.");
   });
 
   it("maalaus: hinta lasketaan seinäkaavalla kerrosten ja hilseilyn mukaan", async () => {
@@ -251,6 +260,41 @@ describe("/hintalaskuri-sivu", () => {
     expect(screen.getByText("Jätä vielä nimi ja puhelinnumero, niin näytämme arvion.")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Näytä hinta-arvio" })).toBeInTheDocument();
     expect(document.querySelector('input[name="website"]')).not.toBeNull(); // honeypot
+  });
+
+  it("laskurisivu näyttää hinnan myös kotitalousvähennyksen jälkeen (Eerik 26.10.2026)", async () => {
+    render(
+      <HelmetProvider>
+        <MemoryRouter future={future} initialEntries={["/hintalaskuri/?palvelu=pinnoitus"]}>
+          <Hintalaskuri />
+        </MemoryRouter>
+      </HelmetProvider>,
+    );
+    fireEvent.change(screen.getByLabelText("Kuinka suuri katto on?"), { target: { value: "200" } });
+    fireEvent.click(screen.getByRole("button", { name: "Jatka" }));
+    for (const label of ["Ei ole", "Löytyy kyllä", "Normaali jyrkkyys, valjailla pärjää", "Kyllä löytyy"]) {
+      fireEvent.click(screen.getByRole("button", { name: label }));
+    }
+    fireEvent.click(screen.getByRole("button", { name: "Jatka" }));
+    // Sivulla on myös yhteydenottolomake, jossa on toinen Nimi-kenttä; laskurin kentät ovat ensimmäiset.
+    fireEvent.change(screen.getAllByLabelText("Nimi")[0], { target: { value: "Testi Henkilö" } });
+    fireEvent.change(screen.getAllByLabelText("Puhelinnumero")[0], { target: { value: "40 123 4567" } });
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Näytä hinta-arvio" }));
+    });
+    const price = calculateRoofPrice(200, "normaali");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByText(shown(formatPriceRange(price)))).toBeInTheDocument();
+    const after = formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) });
+    expect(screen.getByText(shown(after))).toBeInTheDocument();
+    expect(screen.getByText(/Kotitalousvähennyksen jälkeen:/)).toBeInTheDocument();
+    expect(screen.getByText("Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.")).toBeInTheDocument();
+    // 40 % työn osuudesta (80 % hinnasta), enintään 2 100 €; omavastuuta ei vähennetä (Eerik 26.10.2026).
+    expect(hintaVahennyksenJalkeen(2850)).toBe(1940);
+    expect(hintaVahennyksenJalkeen(3500)).toBe(2380);
+    expect(hintaVahennyksenJalkeen(5000)).toBe(3400);
+    expect(hintaVahennyksenJalkeen(7000)).toBe(4900);
+    expect(hintaVahennyksenJalkeen(11000)).toBe(8900);
   });
 });
 

@@ -120,7 +120,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "pirkkala",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Pirkkalassa",
     alueLocalHookText:
-      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja Tampereelle on matkaa 10 kilometriä. Pirkkalassa on 774 omakoti- ja paritaloa 1970- ja 1980-luvuilta. Sen ikäisessä talossa katto ja maali ovat usein huollon iässä. Pinnoitamme kattoja ja maalaamme taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa. Käynti on ilmainen.",
+      "Pirkkala on Tampereen naapurikunta Pyhäjärven rannalla, ja keskustaan on matkaa 10 kilometriä. Pirkkalassa on 774 omakoti- ja paritaloa 1970- ja 1980-luvuilta. Sen ikäisessä talossa katto ja maali ovat usein huollon iässä. Pinnoitamme kattoja ja maalaamme taloja koko Pirkkalassa, esimerkiksi Nuolialassa, Toiviossa, Peressä ja Kurikassa. Käynti on ilmainen.",
   },
   {
     slug: "palkane",

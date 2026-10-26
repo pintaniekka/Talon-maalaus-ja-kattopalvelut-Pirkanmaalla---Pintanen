@@ -80,6 +80,10 @@ st, ll, hd = get(BASE + "/llms.txt"); ll = ll.decode()
 llinks = re.findall(r"\]\((https://pintanen\.fi[^)]*)\)", ll)
 missing = [u for u in llinks if u.replace("https://pintanen.fi", "") not in routes]
 print(f"llms.txt: {st}, {hd.get('Content-Type') or hd.get('content-type')}, {len(ll)} merkkiä, linkkejä {len(llinks)}, linkit sitemapin ulkopuolelle: {missing or 'ei yhtään'}")
+st, lf, hd = get(BASE + "/llms-full.txt"); lf = lf.decode()
+lfurls = re.findall(r"^URL: (https://pintanen\.fi\S*)$", lf, flags=re.M)
+lfmissing = sorted(set(routes) - {u.replace("https://pintanen.fi", "") for u in lfurls})
+print(f"llms-full.txt: {st}, {hd.get('Content-Type') or hd.get('content-type')}, {len(lf)} merkkiä, sivuja {len(lfurls)}, sitemapin sivut ilman tekstiä: {lfmissing or 'ei yhtään'}")
 st, rb, _ = get(BASE + "/robots.txt"); print("robots.txt:", st, "| sitemap-rivit:", re.findall(r"Sitemap: (\S+)", rb.decode()))
 
 # schema validity

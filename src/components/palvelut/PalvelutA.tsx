@@ -51,7 +51,6 @@ const PalvelutA = () => (
           <Link
             key={p.key}
             to={p.href}
-            aria-label={`${p.title}: lue lisää palvelusta`}
             className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-[0_14px_40px_rgba(10,25,47,0.10)] ring-1 ring-navy/5 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(10,25,47,0.16)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             <div className="relative overflow-hidden">

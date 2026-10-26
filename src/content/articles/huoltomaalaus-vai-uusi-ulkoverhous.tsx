@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -67,6 +67,7 @@ const Body = () => (
       puukohdat ja maalaamme pintamaalin pensselillä. Näillä pohjatöillä vanhakin seinä saadaan kuntoon.
     </p>
 
+    <Avainhuomio>Pintamaali levitetään pensselillä, ja saat maalaukselle 2 vuoden takuun.</Avainhuomio>
     <h2>Milloin ulkoverhous pitää uusia?</h2>
     <p>
       Ulkoverhous pitää uusia, kun lahoa on laajasti. Lahon puun maalaaminen ei auta, koska kosteus on jo puun
@@ -85,6 +86,7 @@ const Body = () => (
       <Link to="/artikkelit/kuinka-usein-puutalo-maalataan/">kuinka usein puutalo pitää maalata</Link> ja katso
       palvelu sivulta <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.
     </p>
+    <Avainhuomio>Omakotitalon maalaus maksaa yleensä 3 500–11 000 € ja kestää 3–7 päivää.</Avainhuomio>
     <Figure
       image="talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen"
       alt="Puutalo ja parveke huoltomaalauksen jälkeen"

@@ -46,7 +46,7 @@ const faqItems = [
   {
     question: "Milloin tiilikaton pinnoitus on ajankohtainen?",
     answer:
-      "Yleensä noin 10–15 vuoden iässä, kun tiilen väri on haalistunut, pinta tuntuu karhealta ja sammal kasvaa nopeasti. Pinnoitettu katto kestää jopa 15 vuotta pidempään.",
+      "Yleensä noin 15 vuoden iässä, kun tiilen väri on haalistunut, pinta tuntuu karhealta ja sammal kasvaa nopeasti. Pinnoitettu katto kestää jopa 15 vuotta pidempään.",
   },
   {
     question: "Katsotteko samalla myös seinät?",

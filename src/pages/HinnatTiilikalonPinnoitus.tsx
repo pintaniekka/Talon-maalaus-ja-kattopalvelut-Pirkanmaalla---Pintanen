@@ -117,8 +117,8 @@ const HinnatTiilikalonPinnoitus = () => {
         lead={
           <>
             Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu
-            katon koosta, jyrkkyydestä, muodosta ja tiilien kunnosta. Tarkan hinnan saat, kun käymme katsomassa katon. Arviokäynti on
-            ilmainen.
+            katon koosta, jyrkkyydestä, muodosta ja tiilien kunnosta. Työ kestää 2–3 päivää, ja takuu on 5 vuotta. Tarkan hinnan saat,
+            kun käymme katsomassa katon. Kuntotarkastus on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta laskurilla" }}

@@ -28,7 +28,7 @@ type Step =
 /**
  * Chatin tekstit (Eerik 13.10.2026: "chat bot saa olla lempeämpi", emojit ovat chatissa ok).
  * Ei etäarviota (tarjous tehdään aina paikan päällä) eikä sanaa "kattohuolto". Yrityksestä sanotaan vain se,
- * mikä on sivustolla muuallakin: maalausväli 10–15 vuotta, pinnoitus ajankohtainen noin 10–15 vuoden iässä.
+ * mikä on sivustolla muuallakin: maalausväli 10–15 vuotta, pinnoitus ajankohtainen noin 15 vuoden iässä (Eerik 26.10.2026).
  */
 const GREETING = 'Moikka! 👋 Haluatko tarjouksen talon maalauksesta tai katon pinnoituksesta? Voit myös kysyä mitä vain.';
 const SERVICE_QUESTION = 'Arviokäynti on ilmainen ☀️ Mitä työtä se koskee?';
@@ -202,7 +202,7 @@ const ChatLeadForm = () => {
         break;
       case 'katto_info':
         botSay(
-          'Pinnoitus on ajankohtainen noin 10–15 vuoden iässä. Kun tiilen pinta on kulunut, tiili imee vettä ja sammaloituu. 🏠 Haluatko, että tulemme katsomaan katon? Käynti on ilmainen.',
+          'Pinnoitus on ajankohtainen noin 15 vuoden iässä. Kun tiilen pinta on kulunut, tiili imee vettä ja sammaloituu. 🏠 Haluatko, että tulemme katsomaan katon? Käynti on ilmainen.',
           infoFollowUp
         );
         break;

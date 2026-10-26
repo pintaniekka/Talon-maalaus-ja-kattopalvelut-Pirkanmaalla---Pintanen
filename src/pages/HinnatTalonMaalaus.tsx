@@ -103,7 +103,8 @@ const HinnatTalonMaalaus = () => {
         lead={
           <>
             Omakotitalon ulkomaalaus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu talon
-            koosta, korkeudesta ja pohjatöiden määrästä. Tarkan hinnan saat, kun käymme katsomassa talon. Arviokäynti on ilmainen.
+            koosta, korkeudesta ja pohjatöiden määrästä. Työ kestää 3–7 päivää, ja takuu on 2 vuotta. Tarkan hinnan saat, kun käymme
+            katsomassa talon. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta laskurilla" }}

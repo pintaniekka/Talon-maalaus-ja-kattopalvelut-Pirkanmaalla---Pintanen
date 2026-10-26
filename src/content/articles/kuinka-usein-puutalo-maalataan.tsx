@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Note, Sources } from "@/components/article/ArticleKit";
+import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Note, Sources } from "@/components/article/ArticleKit";
 
 const faq = [
   {
     question: "Kuinka usein puutalo pitää maalata?",
     answer:
       "Puutalo maalataan yleensä 10–15 vuoden välein. Aurinkoiset seinät kuluvat nopeammin kuin muut, joten katso seinät läpi joka vuosi.",
+  },
+  {
+    question: "Kannattaako talo maalata, vaikka maali ei vielä hilseile?",
+    answer:
+      "Kannattaa, jos väri on haalistunut ja maali liituaa eli jää käteen. Silloin maali on ohentunut, ja uusi kerros on halvempi tehdä nyt kuin kaavinnan jälkeen.",
   },
   {
     question: "Missä lämpötilassa taloa voi maalata?",
@@ -19,7 +24,7 @@ const faq = [
   {
     question: "Paljonko talon huoltomaalaus maksaa?",
     answer:
-      "Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–6 000 euroa ja kaksikerroksisen noin 7 000–11 000 euroa. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.",
+      "Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–5 000 euroa ja kaksikerroksisen noin 7 000–11 000 euroa. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.",
   },
 ];
 
@@ -44,9 +49,11 @@ const Body = () => (
     <p>
       Puutalo tarvitsee uuden maalin yleensä <strong>10–15 vuoden välein</strong>. Kaikki seinät eivät kulu yhtä
       nopeasti. Aurinko ja sade kuluttavat joitakin seiniä enemmän. Usein yksi tai kaksi seinää tarvitsee jo
-      maalia, vaikka muut näyttävät vielä hyviltä.
+      maalia, vaikka muut näyttävät vielä hyviltä. Tikkurilan ohjeen mukaan peittävän ulkomaalin huoltoväli on
+      noin 5–15 vuotta, ja etelä- ja länsiseinät kuluvat nopeimmin.
     </p>
 
+    <Avainhuomio>Puutalo maalataan yleensä 10–15 vuoden välein, ja aurinkoisin seinä kuluu ensin.</Avainhuomio>
     <h2>Mistä tiedät, että talo pitää maalata?</h2>
     <p>Kierrä talo ja katso seinät läpi. Nämä viisi merkkiä kertovat, että maali ei enää suojaa puuta.</p>
 
@@ -82,6 +89,19 @@ const Body = () => (
       caption="Puutalo ennen pohjatöitä ja ulkomaalausta."
     />
 
+    <h2>Miksi odottaminen tulee kalliimmaksi?</h2>
+    <p>
+      Maalauksen hinta ratkeaa pohjatöistä. Kun maali on vain haalistunut, pesemme seinän ja maalaamme sen. Kun
+      maali hilseilee, kaavimme irtoavan maalin ja pohjamaalaamme paljaat kohdat ennen pintamaalia. Kaavinta on
+      käsityötä, ja se vie päiviä. Kun maali liituaa tai väri on selvästi haalistunut, seinä kannattaa siis maalata
+      seuraavana kesänä. Kun maali jo hilseilee, kannattaa maalata heti.
+    </p>
+    <p>
+      Puun kunto on toinen asia. Jos vesi on päässyt puuhun vuosia, puu voi olla pehmeää. Puun kunnon voit
+      tarkistaa itse ruuvitaltalla. Kerromme siitä artikkelissa{" "}
+      <Link to="/artikkelit/huoltomaalaus-vai-uusi-ulkoverhous/">huoltomaalaus vai uusi ulkoverhous</Link>.
+    </p>
+
     <h2>Mitä pohjatöitä talon maalaus vaatii?</h2>
     <p>
       Uusi maali kestää vain, jos pohja on tehty hyvin. Siksi pohjatyöt ovat maalauksen tärkein vaihe. Me teemme
@@ -99,10 +119,12 @@ const Body = () => (
       tarvitaan. Lue lisää sivulta <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.
     </p>
 
+    <Avainhuomio>Pohjamaali tulee paljaisiin puukohtiin ja pintamaali pensselillä. Takuu on 2 vuotta.</Avainhuomio>
     <h2>Mihin aikaan vuodesta talo kannattaa maalata?</h2>
     <p>
       Useimmat ulkomaalit vaativat vähintään +5 astetta. Paras lämpötila on +10–+30 astetta. Puun pitää olla
-      kuivaa, eli sen kosteus saa olla enintään 20 %. Paras maalaussää on pilvinen ja poutainen päivä. Kovassa
+      kuivaa, eli sen kosteus saa olla enintään 20 %, ja ilman kosteuden pitää olla alle 80 %. Paras maalaussää on
+      pilvinen ja poutainen päivä. Kovassa
       auringonpaisteessa maali kuivuu liian nopeasti eikä tartu kunnolla.
     </p>
     <p>
@@ -118,7 +140,7 @@ const Body = () => (
 
     <h2>Paljonko talon huoltomaalaus maksaa?</h2>
     <p>
-      Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–6 000 euroa. Kaksikerroksisen talon maalaus
+      Yksikerroksisen omakotitalon maalaus maksaa meillä noin 3 500–5 000 euroa. Kaksikerroksisen talon maalaus
       maksaa noin 7 000–11 000 euroa. Hinta riippuu pohjatöiden määrästä, talon korkeudesta ja seinien
       pinta-alasta.
     </p>
@@ -131,6 +153,7 @@ const Body = () => (
       </Link>
       .
     </p>
+    <Avainhuomio>Omakotitalon maalaus maksaa yleensä 3 500–11 000 € ja kestää 3–7 päivää.</Avainhuomio>
     <Figure
       image="talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen"
       alt="Keltainen ulkoverhous huoltomaalauksen jälkeen"
@@ -143,6 +166,14 @@ const Body = () => (
       items={[
         { label: "K-Rauta: Ulkomaalausohje", url: "https://www.k-rauta.fi/inspiraatio-ja-ohjeet/maalaaminen/ulkomaalausohje" },
         { label: "K-Rauta: Puutalon maalaus", url: "https://www.k-rauta.fi/inspiraatio-ja-ohjeet/maalaaminen/puutalon-maalaus" },
+        {
+          label: "Tikkurila: Huoltomaalaussuosituksia puu-ulkoverhouspinnoille (luettu 26.10.2026)",
+          url: "https://tikkurila.fi/pro/artikkeli/huoltomaalaussuosituksia-puu-ulkoverhouspinnoille",
+        },
+        {
+          label: "Tikkurila: How to paint wooden façades and fences (lämpötila ja kosteus, luettu 26.10.2026)",
+          url: "https://tikkurila.com/pro/how-to-paint-wooden-facades-and-fences",
+        },
       ]}
     />
   </>

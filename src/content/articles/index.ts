@@ -14,4 +14,8 @@ export const articleBodies: Record<string, LazyExoticComponent<ComponentType>> =
   "huoltomaalaus-vai-uusi-ulkoverhous": lazyWithRetry(() => import("./huoltomaalaus-vai-uusi-ulkoverhous")),
   "voiko-tiilikaton-pinnoittaa-itse": lazyWithRetry(() => import("./voiko-tiilikaton-pinnoittaa-itse")),
   "tiilikaton-pesu-ja-pinnoitus": lazyWithRetry(() => import("./tiilikaton-pesu-ja-pinnoitus")),
+  "tiilikaton-pinnoituksen-hinta-2027": lazyWithRetry(() => import("./tiilikaton-pinnoituksen-hinta-2027")),
+  "ormax-tiilikaton-pinnoitus": lazyWithRetry(() => import("./ormax-tiilikaton-pinnoitus")),
+  "puutalon-ulkomaalin-valinta": lazyWithRetry(() => import("./puutalon-ulkomaalin-valinta")),
+  "mokin-ja-piharakennuksen-maalaus": lazyWithRetry(() => import("./mokin-ja-piharakennuksen-maalaus")),
 };

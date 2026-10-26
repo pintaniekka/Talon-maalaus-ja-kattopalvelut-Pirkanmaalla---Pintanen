@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
 import { trackEvent } from "@/lib/analytics";
 import { calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
+import { hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
 import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 
 export type WizardService = "pinnoitus" | "maalaus";
@@ -153,6 +154,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const [phoneError, setPhoneError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [resultAfterDeduction, setResultAfterDeduction] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
 
   const qs = service ? calculatorQuestions[service] : [];
@@ -238,6 +240,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
         "hintalaskuri"
       );
       setResult(priceStr);
+      // Eerik 26.10.2026 (yöajon kysymys 13): hinta myös kotitalousvähennyksen jälkeen.
+      setResultAfterDeduction(formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) }));
       trackEvent("laskuri_valmis", { palvelu: service });
     } catch {
       toast({ title: "Virhe", description: "Jokin meni pieleen. Yritä uudelleen tai soita meille.", variant: "destructive" });
@@ -257,6 +261,11 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           </div>
           <p className="text-muted-foreground mb-2">Hinta-arvio</p>
           <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>
+          {resultAfterDeduction && (
+            <p className="text-muted-foreground mb-4">
+              Kotitalousvähennyksen jälkeen: <strong className="text-foreground">{resultAfterDeduction}</strong>
+            </p>
+          )}
           <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
             Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.
           </p>
@@ -273,7 +282,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                 onClick={() => pickService(opt.value)}
                 className="group rounded-2xl overflow-hidden border border-border bg-background text-left transition-all hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <ResponsiveImage baseName={opt.imageBase} alt={opt.label} className="w-full aspect-[4/3] object-cover" sizes="(max-width: 640px) 100vw, 300px" width={800} height={600} />
+                <ResponsiveImage baseName={opt.imageBase} alt="" className="w-full aspect-[4/3] object-cover" sizes="(max-width: 640px) 100vw, 300px" width={800} height={600} />
                 <span className="block px-5 py-4 font-bold text-foreground">{opt.label}</span>
               </button>
             ))}

@@ -3,6 +3,7 @@ import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import FAQSection from "@/components/FAQSection";
 import RelatedArticles from "@/components/RelatedArticles";
+import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
 import { staticSeo, HERO_BASE } from "@/data/seo";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
@@ -11,7 +12,8 @@ import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 /**
  * Kotitalousvähennys katon pinnoituksesta ja talon maalauksesta (yöajo 27.10.2026, paketti 5).
  * Luvut ovat Verohallinnon sivulta (lähteet sivun lopussa ja docs/lahteet-kotitalousvahennys-2026-10-27.md).
- * Ei laskuesimerkkejä (hintasääntö): vain selitys ja linkit hintalaskuriin ja hintasivuille.
+ * Ei laskuesimerkkejä (hintasääntö): selitys, linkit hintalaskuriin ja hintasivuille sekä yleinen
+ * yhteydenottolomake (Eerik 26.10.2026, yöajon kysymys 13).
  */
 const lahteet = [
   { label: "Verohallinto: Kotitalousvähennyksen määrä", url: "https://www.vero.fi/henkiloasiakkaat/vahennykset/kotitalousvahennys/kotitalousvahennyksen-maara" },
@@ -165,6 +167,7 @@ const Kotitalousvahennys = () => {
       </section>
 
       <RelatedArticles categories={["raha"]} />
+      <ServiceContactSection />
     </>
   );
 };

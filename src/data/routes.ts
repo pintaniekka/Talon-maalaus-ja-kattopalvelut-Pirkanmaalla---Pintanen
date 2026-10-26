@@ -174,11 +174,12 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     return `- [${label}](${url(p)})${seo ? `: ${seo.description}` : ""}`;
   };
   const published = getPublishedArticles(now);
-  const cityLine = (c: { slug: string; name: string }) => {
-    const links = [`[kaikki palvelut](${url(`/maalauspalvelut-${c.slug}`)})`];
-    if (pinnoitusCities.some((p) => p.slug === c.slug)) links.push(`[tiilikaton pinnoitus](${url(`/tiilikaton-pinnoitus-${c.slug}`)})`);
-    if (maalausCities.some((m) => m.slug === c.slug)) links.push(`[talon maalaus](${url(`/talon-maalaus-${c.slug}`)})`);
-    return `- ${c.name}: ${links.join(", ")}`;
+  /** Jokaisesta paikkakuntasivusta oma rivi, jossa on sivun kuvaus seo.ts:stä (GEO-kierros 27.10.2026). */
+  const cityLines = (c: { slug: string; name: string }) => {
+    const lines = [line(`/maalauspalvelut-${c.slug}`, `Maalausliike ja kattopalvelut ${c.name}`)];
+    if (pinnoitusCities.some((p) => p.slug === c.slug)) lines.push(line(`/tiilikaton-pinnoitus-${c.slug}`, `Tiilikaton pinnoitus ${c.name}`));
+    if (maalausCities.some((m) => m.slug === c.slug)) lines.push(line(`/talon-maalaus-${c.slug}`, `Talon maalaus ${c.name}`));
+    return lines;
   };
 
   return [
@@ -206,7 +207,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     ...pinnoitusTyovaiheet.map((t, i) => `${i + 1}. ${t.title}: ${t.text}`),
     "",
-    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Työ kestää yleensä 2–4 päivää.",
+    "Tiilikaton pinnoitus ja tiilikaton maalaus tarkoittavat samaa työtä. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Työ kestää yleensä 2–3 päivää, suuri tai jyrkkä katto 2–4.",
     "",
     "## Näin talon maalaus tehdään",
     "",
@@ -234,6 +235,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     "## Artikkelit",
     "",
+    line("/artikkelit", "Kaikki artikkelit"),
     ...published.map((a) => `- [${a.title}](${url(articlePath(a.slug))}): ${a.lead}`),
     "",
     "## Yritys",
@@ -247,7 +249,7 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     "## Toiminta-alueet paikkakunnittain",
     "",
-    ...allCities.map(cityLine),
+    ...allCities.flatMap(cityLines),
     "",
   ].join("\n");
 };

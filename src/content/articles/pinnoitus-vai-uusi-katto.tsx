@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArticleFaq, Figure, KeyPoints, Sources } from "@/components/article/ArticleKit";
+import { ArticleFaq, Figure, KeyPoints, Sources, Table } from "@/components/article/ArticleKit";
 
 const faq = [
   {
@@ -20,6 +20,11 @@ const faq = [
   {
     question: "Kuinka monta vuotta pinnoitus antaa katolle lisää?",
     answer: "Pinnoitus pidentää katon käyttöikää jopa 15 vuotta. Kesto riippuu säästä ja katon kunnosta.",
+  },
+  {
+    question: "Saako kattoremontista ja pinnoituksesta kotitalousvähennyksen?",
+    answer:
+      "Kummastakin saa vähennyksen työn osuudesta. Vuosina 2026 ja 2027 vähennys on 40 % työn osuudesta ja enintään 2 100 euroa henkilöltä.",
   },
 ];
 
@@ -52,8 +57,8 @@ const Body = () => (
     <h2>Kuinka kauan tiilikatto kestää?</h2>
     <p>
       Tiili kestää pitkään. K-Raudan ohjeen mukaan VTT:n tutkimuksissa kattotiilen elinkaareksi on todettu jopa 70
-      vuotta. Tiilen tehdaspinnoite kuluu paljon nopeammin, yleensä 10–15 vuodessa. Kun pinnoite on kulunut, tiili
-      alkaa imeä vettä ja sammal tarttuu siihen.
+      vuotta, ja valmistajan mukaan betonitiili kestää huollettuna 50–70 vuotta. Tiilen tehdaspinnoite kuluu paljon
+      nopeammin, yleensä noin 15 vuodessa. Kun pinnoite on kulunut, tiili alkaa imeä vettä ja sammal tarttuu siihen.
     </p>
 
     <h2>Milloin tiilikaton pinnoitus riittää?</h2>
@@ -87,6 +92,14 @@ const Body = () => (
     </p>
 
     <h2>Paljonko tiilikattoremontti maksaa verrattuna pinnoitukseen?</h2>
+    <Table
+      head={["", "Hinta yleensä", "Kesto", "Lisäikä"]}
+      rows={[
+        ["Tiilikaton pinnoitus", "2 850–7 000 €", "2–3 päivää", "jopa 15 vuotta"],
+        ["Kattoremontti", "15 000–30 000 €", "viikkoja", "uusi katto"],
+      ]}
+      caption="Pinnoituksen hinnat ovat omiamme. Kattoremontin hinnat ovat kattourakoitsijoiden omilta hintasivuilta; isot rakenteiden korjaukset nostavat hintaa."
+    />
     <p>
       Omakotitalon kattoremontti maksaa yleensä 15 000–30 000 euroa. Kattourakoitsijoiden omilla hintasivuilla tiilikaton
       uusimisen hinta on 18 000–30 000 euroa, ja isot rakenteiden korjaukset nostavat hintaa siitä. Hintaan vaikuttavat katon
@@ -96,6 +109,15 @@ const Body = () => (
       Pinnoitus maksaa yleensä selvästi vähemmän kuin uusi katto. Omakotitalon tiilikaton pinnoitus maksaa meillä
       yleensä 2 850–7 000 euroa, ja työn osuudesta saat kotitalousvähennyksen. Lue lisää artikkelista{" "}
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link>.
+    </p>
+
+    <h2>Miten kotitalousvähennys vaikuttaa vertailuun?</h2>
+    <p>
+      Molemmista töistä saa kotitalousvähennyksen työn osuudesta. Vuosina 2026 ja 2027 vähennys on 40 % työn
+      osuudesta, enintään 2 100 euroa henkilöltä, ja omavastuu on 150 euroa. Pinnoituksessa työn osuus on iso osa
+      hinnasta, koska pesu, tiilien vaihto ja maalaus ovat käsityötä. Kattoremontissa materiaalien osuus on
+      suurempi, eikä niistä saa vähennystä. Lue lisää artikkelista{" "}
+      <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/">kotitalousvähennys katto- ja maalaustöissä</Link>.
     </p>
 
     <h2>Miten voit tarkistaa katon kunnon itse?</h2>
@@ -117,6 +139,14 @@ const Body = () => (
         { label: "Laatukoti: Kattoremontin hinta (15.5.2025)", url: "https://laatukoti.fi/kattoremontti/kattoremontin-hinta/" },
         { label: "Kattokeskus: Kattoremontin hinta 2026", url: "https://kattokeskus.fi/kattoremontin-hinta/" },
         { label: "Saneerauspojat: Kattoremontin hintaopas 2026", url: "https://www.saneerauspojat.fi/kattoremontin-hintaopas-2026/" },
+        {
+          label: "BMI Suomi: Usein kysytyt kysymykset, BMI Ormax -betonikattotiilet (käyttöikä 50–70 vuotta, luettu 26.10.2026)",
+          url: "https://bmifinland.zendesk.com/hc/fi-fi/articles/33093701704082-Usein-kysytyt-kysymykset-BMI-Ormax-betonikattotiilet",
+        },
+        {
+          label: "Verohallinto: Kotitalousvähennyksen määrä (luettu 26.10.2026)",
+          url: "https://www.vero.fi/henkiloasiakkaat/vahennykset/kotitalousvahennys/kotitalousvahennyksen-maara",
+        },
       ]}
     />
   </>

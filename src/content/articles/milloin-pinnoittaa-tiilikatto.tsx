@@ -5,7 +5,7 @@ const faq = [
   {
     question: "Kuinka usein tiilikatto pitää pinnoittaa?",
     answer:
-      "Tiilen tehdaspinnoite kestää yleensä 10–15 vuotta. Sen jälkeen katto kannattaa pinnoittaa, kun väri on haalistunut, pinta tuntuu karhealta tai sammal palaa nopeasti.",
+      "Tiilen tehdaspinnoite kestää yleensä noin 15 vuotta. Sen jälkeen katto kannattaa pinnoittaa, kun väri on haalistunut, pinta tuntuu karhealta tai sammal palaa nopeasti.",
   },
   {
     question: "Mitä tiilikaton pinnoitus maksaa?",
@@ -32,14 +32,14 @@ const Body = () => (
         <li>Sammal palaa pian puhdistuksen jälkeen</li>
         <li>Tiilen pinta tuntuu karhealta</li>
         <li>Tiilissä on halkeamia tai lohkeamia</li>
-        <li>Katto on yli 10–15 vuotta vanha eikä sitä ole pinnoitettu</li>
+        <li>Katto on noin 15 vuotta vanha eikä sitä ole pinnoitettu</li>
       </ul>
       <p>Jos tunnistat näistä kaksi tai useamman, pinnoitus kannattaa tehdä lähivuosina.</p>
     </KeyPoints>
 
     <p>
       Betonitiilen pinnassa on tehtaalla tehty pinnoite, joka pitää veden tiilen ulkopuolella. Aurinko ja pakkanen
-      kuluttavat sitä, ja tavallisesti se on ohut 10–15 vuoden jälkeen. Siitä eteenpäin tiili imee vettä ja
+      kuluttavat sitä, ja tavallisesti se on ohut noin 15 vuoden jälkeen. Siitä eteenpäin tiili imee vettä ja
       rapautuu joka talvi vähän lisää. Näistä viidestä merkistä näet itse, missä vaiheessa oma kattosi on.
     </p>
 
@@ -82,7 +82,7 @@ const Body = () => (
       pelkkä pinnoitus ei riitä ja katon kunto pitää arvioida laajemmin.
     </p>
 
-    <h2>5. Katto on yli 10–15 vuotta vanha eikä sitä ole pinnoitettu</h2>
+    <h2>5. Katto on noin 15 vuotta vanha eikä sitä ole pinnoitettu</h2>
     <p>
       Tehdaspinnoitteen kesto riippuu ilmastosta, katon suunnasta ja puiden varjosta. Jos katto on tässä iässä
       eikä sitä ole huollettu, pinnoitus on todennäköisesti ajankohtainen, vaikka vaurioita ei vielä näkyisi.
@@ -97,7 +97,7 @@ const Body = () => (
       <li>Katto ruiskumaalataan kahteen kertaan.</li>
     </ol>
     <p>
-      Omakotitalon katolla tähän menee 2–4 työpäivää, ja annamme työlle 5 vuoden kirjallisen takuun. Tarkempi
+      Peruskohteen katolla tähän menee 2–3 työpäivää, ja annamme työlle 5 vuoden kirjallisen takuun. Tarkempi
       kuvaus on sivulla <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
     <Figure

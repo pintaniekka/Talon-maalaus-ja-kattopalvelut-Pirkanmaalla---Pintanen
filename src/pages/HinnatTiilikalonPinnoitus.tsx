@@ -11,6 +11,7 @@ import FAQSection from "@/components/FAQSection";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
 import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist, CompareCards } from "@/components/hinnat/PriceSections";
 import { pinnoitusPrices, fmtRange } from "@/data/prices";
@@ -197,6 +198,8 @@ const HinnatTiilikalonPinnoitus = () => {
       <FAQSection items={faqItems} />
 
       <RelatedArticles categories={["katto", "raha"]} />
+
+      <ToimintaAlueetBanner service="pinnoitus" />
       <ServiceContactSection variant="katto" />
     </>
   );

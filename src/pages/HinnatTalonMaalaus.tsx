@@ -12,6 +12,7 @@ import FAQSection from "@/components/FAQSection";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausComparison from "@/components/maalaus/MaalausComparison";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist } from "@/components/hinnat/PriceSections";
 import { maalausPrices, fmtRange } from "@/data/prices";
@@ -166,6 +167,8 @@ const HinnatTalonMaalaus = () => {
       <FAQSection items={faqItems} />
 
       <RelatedArticles categories={["maalaus", "raha"]} />
+
+      <ToimintaAlueetBanner service="maalaus" />
       <ServiceContactSection variant="maalaus" />
     </>
   );

@@ -6,7 +6,7 @@ import CityMap from "@/components/CityMap";
 import CityProjects from "@/components/CityProjects";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
-import CityNeighborLinks from "@/components/CityNeighborLinks";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import { MaalausCitySigns } from "@/components/maalaus/MaalausCitySections";
 import MaalausSanasto from "@/components/maalaus/MaalausSanasto";
@@ -117,7 +117,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       />
       {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}
       <ServiceContactSection variant="maalaus" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
-      <CityNeighborLinks city={cityData} service="maalaus" />
+      <ToimintaAlueetBanner activeCity={cityData.slug} service="maalaus" showNeighbors />
     </div>
   );
 };

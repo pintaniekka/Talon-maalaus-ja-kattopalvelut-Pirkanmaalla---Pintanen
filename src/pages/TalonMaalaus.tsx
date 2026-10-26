@@ -15,14 +15,13 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import RelatedArticles from "@/components/RelatedArticles";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { wallTestimonials } from "@/data/testimonialsData";
 import { maalausFAQ } from "@/data/faqData";
 import { HERO_BASE, staticSeo } from "@/data/seo";
-import { maalausCities } from "@/data/cityData";
 import { maalausPrices } from "@/data/prices";
 import { maalausTyovaiheet, maalausLyhyesti, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
-const cityLinks = maalausCities.filter((c) => ["tampere", "nokia", "ylojarvi", "kangasala", "lempaala", "pirkkala", "valkeakoski", "sastamala"].includes(c.slug));
 
 /** /talon-maalaus-pirkanmaa: päätehtävä "talon maalaus Pirkanmaa", rinnakkaissanat ulkomaalaus ja julkisivumaalaus (korjaus 2). */
 const TalonMaalaus = () => {
@@ -92,32 +91,7 @@ const TalonMaalaus = () => {
       <MaalausEntrepreneur />
       <FAQSection items={maalausFAQ} title="Usein kysyttyä talon maalauksesta" />
 
-      <section className="py-12 md:py-16 bg-background">
-        <div className="section-container max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">Talon maalaus paikkakunnittain</h2>
-          <p className="text-muted-foreground mb-6">Maalaamme taloja Pirkanmaalla ja lähikunnissa. Katso oman paikkakuntasi sivu:</p>
-          <ul className="flex flex-wrap justify-center gap-3">
-            {cityLinks.map((c) => (
-              <li key={c.slug}>
-                <Link
-                  to={`/talon-maalaus-${c.slug}/`}
-                  className="inline-flex items-center px-4 py-2 rounded-xl border border-border bg-card text-sm font-semibold text-foreground hover:border-accent hover:text-accent-ink transition-colors"
-                >
-                  Talon maalaus {c.name}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link
-                to="/toiminta-alueet/"
-                className="inline-flex items-center px-4 py-2 rounded-xl border border-accent bg-card text-sm font-semibold text-accent-ink hover:bg-accent-light transition-colors"
-              >
-                Kaikki paikkakunnat
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <ToimintaAlueetBanner service="maalaus" />
 
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
       <RelatedArticles categories={["maalaus", "raha"]} />

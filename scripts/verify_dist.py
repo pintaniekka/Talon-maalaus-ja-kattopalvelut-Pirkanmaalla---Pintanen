@@ -43,6 +43,7 @@ for r in routes:
     f = dist/"index.html" if r=="/" else dist/r.strip("/")/"index.html"
     if not f.exists(): problems.append(f"{r}: tiedosto puuttuu"); continue
     h = f.read_text()
+    if "\0" in h: problems.append(f"{r}: NUL-tavuja HTML:ssä {h.count(chr(0))} (esirenderöinti, ks. src/entry-prerender.tsx)")
     t = re.findall(r"<title>(.*?)</title>", h, flags=re.S)
     d = re.findall(r'<meta name="description" content="([^"]*)"', h)
     c = re.findall(r'<link rel="canonical" href="([^"]*)"', h)

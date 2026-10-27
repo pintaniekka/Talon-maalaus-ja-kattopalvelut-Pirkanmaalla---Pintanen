@@ -4,8 +4,9 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/
 /**
  * Yrityksen faktat sivuston omia: tyovaiheet.ts ("Suojaamme esimerkiksi aurinkopaneelit, lasiterassit ja valokatteet"),
  * projects.ts (aurinkopaneelit suojattuna, Tampere 2026; Sastamala ja Valkeakoski aurinkopaneelit ennen/jälkeen), hinta-artikkeli
- * (suojattavat kohteet vaikuttavat hintaan haarukan sisällä). Paneelien irrotusta ei luvata eikä kielletä: Eerikin vastaus
- * (K4) puuttuu, joten sanotaan vain, että paneelit suojataan ja katto pinnoitetaan niiden ympäriltä.
+ * (suojattavat kohteet vaikuttavat hintaan haarukan sisällä). Eerik 27.10.2026: paneeleita ei irroteta koskaan (hyvin
+ * kallista), ne suojataan paikoilleen, kasvustontorjunta-aine ajetaan myös paneelien alle, paneelit suojaavat alla olevat
+ * tiilet auringolta ja säältä. Paneeleja harkitsevalle: katto pinnoitetaan ennen asennusta.
  */
 const faq = [
   {
@@ -14,7 +15,7 @@ const faq = [
   },
   {
     question: "Pitääkö paneelit irrottaa?",
-    answer: "Yleensä ei. Paneelit suojataan ja katto pinnoitetaan niiden ympäriltä. Katsomme kuntotarkastuksessa, miten paneelit on asennettu, ja sovimme tavan sinun kanssasi.",
+    answer: "Ei. Paneeleita ei irroteta, koska se olisi hyvin kallista. Suojaamme ne paikoilleen ja pinnoitamme katon niiden ympäriltä. Kasvustontorjunta-aine levitetään myös paneelien alle, joten sammal kuolee sielläkin.",
   },
   {
     question: "Maksaako suojaus lisää?",
@@ -24,6 +25,11 @@ const faq = [
     question: "Vahingoittuuko paneeli pesussa?",
     answer: "Paneelit suojataan ennen painepesua, eikä pesua suunnata niihin. Suojaukset poistetaan, kun maali on kuiva.",
   },
+  {
+    question: "Harkitsen aurinkopaneeleja. Pitääkö katto pinnoittaa ensin?",
+    answer:
+      "Kyllä. Pinnoita katto ennen paneelien asennusta. Paneelien alle ei pääse maalaamaan jälkeenpäin, eikä paneeleita irroteta pinnoitusta varten.",
+  },
 ];
 
 const Body = () => (
@@ -31,7 +37,9 @@ const Body = () => (
     <KeyPoints>
       <ul>
         <li>Katto voidaan pinnoittaa, vaikka katolla on aurinkopaneelit.</li>
-        <li>Paneelit suojataan ennen pesua ja maalausta, ja katto pinnoitetaan niiden ympäriltä.</li>
+        <li>Paneeleita ei irroteta. Ne suojataan paikoilleen, ja katto pinnoitetaan niiden ympäriltä.</li>
+        <li>Kasvustontorjunta-aine levitetään myös paneelien alle, joten sammal kuolee sielläkin.</li>
+        <li>Jos harkitset paneeleja, pinnoita katto ennen niiden asennusta.</li>
         <li>Suojaus kuuluu hintaan. Olemme tehneet näin Tampereella, Sastamalassa ja Valkeakoskella.</li>
         <li>Asennustapa katsotaan kuntotarkastuksessa ja kirjataan tarjoukseen.</li>
       </ul>
@@ -49,6 +57,7 @@ const Body = () => (
         ["Kuntotarkastus", "Katsomme, miten paneelit on kiinnitetty ja onko tiiliä rikki kiinnikkeiden alla"],
         ["Suojaus", "Paneelit, kaapelit ja kiinnikkeet suojataan ennen pesua"],
         ["Pesu painepesulla", "Pesu suunnataan tiiliin, ei paneeleihin"],
+        ["Kasvustontorjunta-aine", "Levitetään koko katolle, myös paneelien alle"],
         ["Tiilien vaihto", "Rikkinäiset tiilet vaihdetaan sieltä, mihin pääsee"],
         ["Maalaus kahteen kertaan", "Ruiskulla avoimet lappeet, paneelien reunat käsin tai telalla"],
         ["Lopputarkastus", "Suojaukset pois, kun maali on kuiva, ja katto kierretään yhdessä"],
@@ -61,9 +70,9 @@ const Body = () => (
     <p>
       Paneelin alla oleva katto on varjossa ja suojassa sateelta, auringolta ja suurelta osin lumelta. Se
       kuluu hitaammin kuin avoin lape. Pinnoituksessa maalataan avoimet lappeet ja paneelien reunat niin pitkälle
-      kuin käsin yltää. Jos haluat koko katon maalatuksi paneelien alta, se vaatii paneelien irrotuksen, ja
-      siitä sovitaan erikseen. Katsomme kuntotarkastuksessa, mikä sinun katollesi on järkevin tapa, ja
-      kirjaamme sen tarjoukseen.
+      kuin käsin yltää. Paneeleita ei irroteta pinnoitusta varten, koska se olisi hyvin kallista. Paneelit
+      suojaavat alla olevat tiilet auringolta ja säältä. Kasvustontorjunta-aine levitetään myös paneelien
+      alle, joten sammal kuolee sielläkin.
     </p>
     <Figure
       image="tiilikaton-pinnoitus-tampere-aurinkopaneelit-suojattu"
@@ -71,6 +80,15 @@ const Body = () => (
       caption="Aurinkopaneelit suojattuna pinnoituksen ajaksi Tampereella 2026."
     />
     <Avainhuomio>Paneelin alla oleva katto on suojassa säältä, joten se kuluu hitaammin kuin avoin lape.</Avainhuomio>
+
+    <h2>Harkitsetko paneeleja? Pinnoita katto ensin</h2>
+    <p>
+      Jos paneelit ovat vasta suunnitteilla, pinnoita katto ennen niiden asennusta. Paneelien alle ei pääse
+      maalaamaan jälkeenpäin, eikä paneeleita irroteta pinnoitusta varten. Pinnoitus on ajankohtainen noin
+      15 vuoden iässä, ja pinnoitettu katto kestää jopa 15 vuotta pidempään. Kun katto on kunnossa ennen
+      paneeleja, molemmat saavat olla rauhassa pitkään.
+    </p>
+    <Avainhuomio>Pinnoita katto ennen paneelien asennusta, koska paneelien alle ei pääse maalaamaan jälkeenpäin.</Avainhuomio>
 
     <h2>Mitä katsomme paneelien kiinnikkeistä?</h2>
     <p>

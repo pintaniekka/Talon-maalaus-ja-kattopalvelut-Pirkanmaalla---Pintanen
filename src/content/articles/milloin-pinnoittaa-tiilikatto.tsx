@@ -15,7 +15,7 @@ const faq = [
   {
     question: "Kauanko pinnoitus kestää?",
     answer:
-      "Tavallisen omakotitalon katto valmistuu 2–4 työpäivässä. Työ tehdään ulkona, joten talossa voi asua normaalisti.",
+      "Tavallisen omakotitalon katto valmistuu 2–3 työpäivässä, suuri tai jyrkkä katto 2–4. Työ tehdään ulkona, joten talossa voi asua normaalisti.",
   },
   {
     question: "Mihin aikaan vuodesta katon voi pinnoittaa?",

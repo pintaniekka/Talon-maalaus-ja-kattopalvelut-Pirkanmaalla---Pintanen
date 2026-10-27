@@ -153,8 +153,9 @@ describe("sanasto ja luvut (auditointi, korjaus 3)", () => {
     const skip = /Puhdistus|puhdistusFAQ|puhdistus-itse|HinnatKatonPuhdistus/;
     // Pinnoitus on ajankohtainen noin 15 vuoden iässä (Eerik 26.10.2026; aiemmin 10–15); lisäikä on jopa 15 vuotta.
     // Yritys on tamperelainen (Eerik 5.10. ja 11.10.2026): Oulua ei mainita.
+    // Neliöhinnat pinnoitukselle katon koon mukaan (13–15, 15–18, 18–22 €/m²) sallittiin 27.10.2026.
     // Peltikattoa ei markkinoida, mutta UKK "Maalaatteko myös peltikattoja?" sallittiin (Eerik 26.10.2026), joten sanaa ei enää kielletä.
-    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /(?<!alkaen 15 )€\/m²/, /emme tee/i, /emme vaihda/i, /sisämaalau/i, /Emme\. /, /kirvesmies/, /15[-–]20 vuotta vanha/, /15[-–]20 vuoden iässä/, /10[-–]15 vuotta vanha/, /10[-–]15 vuoden iässä/, /10[-–]15 vuodessa/, /Oulu/];
+    const forbidden = [/tehopesu/i, /pohjuste/i, /\bprimer\b/i, /10[-–]15 vuotta lisää/, /jopa 15 000/, /10[-–]20 % uuden/, /jopa 80 %/, /alkaen 2 050/, /alle 2 100/, /(?<!alkaen 15 |13–15 |15–18 |18–22 |13–22 )€\/m²/, /emme tee/i, /emme vaihda/i, /sisämaalau/i, /Emme\. /, /kirvesmies/, /15[-–]20 vuotta vanha/, /15[-–]20 vuoden iässä/, /10[-–]15 vuotta vanha/, /10[-–]15 vuoden iässä/, /10[-–]15 vuodessa/, /Oulu/];
     const hits: string[] = [];
     for (const file of files) {
       if (skip.test(file)) continue;

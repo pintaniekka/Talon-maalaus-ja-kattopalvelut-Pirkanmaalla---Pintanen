@@ -48,3 +48,4 @@ dist-ssr
 # Playwright-ajon tulosteet (tests/e2e)
 playwright-report/
 test-results/
+.claude/worktrees/

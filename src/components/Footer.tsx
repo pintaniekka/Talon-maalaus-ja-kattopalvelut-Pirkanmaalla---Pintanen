@@ -3,7 +3,7 @@ import { getStorageUrl } from "@/lib/storage";
 import OptimizedImage from "./OptimizedImage";
 import { Phone, Mail, Star } from "@/components/icons/BrandIcons";
 import { GOOGLE_PROFILE_URL, LUVUT, YHTEYSTIEDOT } from "@/data/company";
-import { allCities, hasPinnoitusPage, hasMaalausPage, type CityData } from "@/data/cityData";
+import { allCities, type CityData } from "@/data/cityData";
 import { openConsentSettings } from "@/lib/analytics";
 
 const logoUrl = getStorageUrl("Pintanen-logo.png");
@@ -13,17 +13,6 @@ const kantaHameSlugs = new Set(["forssa", "hameenlinna", "huittinen"]);
 const byName = (a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name, "fi");
 const pirkanmaa = allCities.filter((c) => !kantaHameSlugs.has(c.slug)).sort(byName);
 const kantaHame = allCities.filter((c) => kantaHameSlugs.has(c.slug)).sort(byName);
-
-/**
- * Kaupunkilinkit palveluittain (sivuroolit, hakutulosanalyysi 26.10.2026, brief 1): alatunniste linkittää
- * tiilikaton pinnoituksen ja talon maalauksen kaupunkisivuihin, ei enää aluesivuihin (maalauspalvelut-<kunta>),
- * jotta "<palvelu> <kunta>" -haut löytävät palvelusivun. Aluesivut linkitetään vain toiminta-alueet-sivulta.
- * Ankkurissa on palvelu ruudunlukijalle ja hakukoneelle (sr-only), näkyvissä vain kunnan nimi kuten ennen.
- */
-const kaupunkiryhmat = [
-  { title: "Tiilikaton pinnoitus", has: hasPinnoitusPage, href: (slug: string) => `/tiilikaton-pinnoitus-${slug}/` },
-  { title: "Talon maalaus", has: hasMaalausPage, href: (slug: string) => `/talon-maalaus-${slug}/` },
-] as const;
 
 /**
  * Kolme palstaa, enintään neljä linkkiä kussakin (Eerik 26.10.2026: "siivoa footer"). Kuntotarkastus-linkki vie
@@ -86,29 +75,24 @@ const columnTitle = "mb-3 text-[11px] font-extrabold uppercase tracking-[0.18em]
 const linkClass = "text-[15px] text-white/80 transition-colors hover:text-accent";
 const cityLink = "transition-colors hover:text-accent hover:underline";
 
-/** Kunnat pilkuilla eroteltuna; linkki palvelun kaupunkisivulle, ankkurissa palvelu sr-only-tekstinä. */
-const KaupunkiLinkit = ({ cities, ryhma }: { cities: CityData[]; ryhma: (typeof kaupunkiryhmat)[number] }) => {
-  const list = cities.filter((c) => ryhma.has(c.slug));
-  return (
-    <>
-      {list.map((city, i) => (
-        <span key={city.slug}>
-          <Link to={ryhma.href(city.slug)} className={cityLink}>
-            <span className="sr-only">{ryhma.title} </span>
-            {city.name}
-          </Link>
-          {i < list.length - 1 && ", "}
-        </span>
-      ))}
-    </>
-  );
-};
+/** Kunnat pilkuilla eroteltuna, linkki kunnan aluesivulle (Eerik 27.10.2026: alatunnisteessa pelkät aluelinkit). */
+const KaupunkiLinkit = ({ cities }: { cities: CityData[] }) => (
+  <>
+    {cities.map((city, i) => (
+      <span key={city.slug}>
+        <Link to={`/maalauspalvelut-${city.slug}/`} className={cityLink}>
+          {city.name}
+        </Link>
+        {i < cities.length - 1 && ", "}
+      </span>
+    ))}
+  </>
+);
 
 /**
  * Alatunniste, siivottu (Eerik 26.10.2026). Navy-pohja, värillinen yläviiva. Rivi 1: yritys (logo, puhelimet
- * KATOT ja SEINÄT, sähköposti, Google-arvio) ja kolme lyhyttä palstaa. Rivi 2: palvelukohtaiset kaupunkisivut
- * himmeänä tekstinä, kaksi riviä (pinnoitus ja maalaus; sivuroolit 26.10.2026, aluesivut linkitetään vain
- * toiminta-alueet-sivulta). Rivi 3: ©, Y-tunnus, tietosuoja, evästeet,
+ * KATOT ja SEINÄT, sähköposti, Google-arvio) ja kolme lyhyttä palstaa. Rivi 2: kuntien aluesivut himmeänä
+ * tekstinä (Eerik 27.10.2026). Rivi 3: ©, Y-tunnus, tietosuoja, evästeet,
  * some ja karttojen lähdemaininta (CC BY 4.0 ja ODbL vaativat sen).
  */
 const Footer = () => (
@@ -186,17 +170,13 @@ const Footer = () => (
         </div>
       </div>
 
-      {/* Kaupunkisivut palveluittain; aluesivut (maalauspalvelut-<kunta>) linkitetään vain toiminta-alueet-sivulta. */}
-      <div className="mt-10 space-y-1 border-t border-white/10 pt-6 text-[13px] leading-6 text-white/50">
-        {kaupunkiryhmat.map((ryhma) => (
-          <p key={ryhma.title}>
-            <span className="font-bold text-white/60">{ryhma.title} · Pirkanmaa:</span>{" "}
-            <KaupunkiLinkit cities={pirkanmaa} ryhma={ryhma} />
-            {" · "}
-            <span className="font-bold text-white/60">Kanta-Häme ja Satakunta:</span>{" "}
-            <KaupunkiLinkit cities={kantaHame} ryhma={ryhma} />
-          </p>
-        ))}
+      {/* Kuntien aluesivut (maalauspalvelut-<kunta>) yhdellä himmeällä rivillä (Eerik 27.10.2026). */}
+      <div className="mt-10 border-t border-white/10 pt-6 text-[13px] leading-6 text-white/50">
+        <p>
+          <span className="font-bold text-white/60">Pirkanmaa:</span> <KaupunkiLinkit cities={pirkanmaa} />
+          {" · "}
+          <span className="font-bold text-white/60">Kanta-Häme ja Satakunta:</span> <KaupunkiLinkit cities={kantaHame} />
+        </p>
       </div>
 
       <div className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-5 text-[13px] text-white/50 md:flex-row md:items-center md:justify-between">

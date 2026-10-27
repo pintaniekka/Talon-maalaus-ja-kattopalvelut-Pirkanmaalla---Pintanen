@@ -70,7 +70,8 @@ const Meista = () => {
             <div className="space-y-4 text-muted-foreground text-lg">
               <p>
                 Me olemme veljekset Eerik ja Eemil. Eerik aloitti kattotyöt 2022 ja perusti Pintanen Oy:n Tampereelle 2025. Eemil hoitaa
-                seinäpuolen itsenäisesti.
+                seinäpuolen itsenäisesti. Yli 200 kohdetta, yli 130 kattoa ja yli 80 taloa, on kertynyt vuodesta 2022, viimeiset
+                kaksi vuotta Pintasen nimissä.
               </p>
               <p>Meillä ei ole välikäsiä eikä raskasta kulurakennetta. Soitat suoraan Eerikille tai Eemilille.</p>
               <p>

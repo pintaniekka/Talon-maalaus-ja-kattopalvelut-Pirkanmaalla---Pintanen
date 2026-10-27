@@ -303,11 +303,15 @@ const TAMPERE_MAALAUS_LINKIT = [
   'Samalla tavalla maalaamme <a href="/talon-maalaus-tampere/">Tampereen puutalot</a>.',
   'Kotikaupungissamme teemme <a href="/talon-maalaus-tampere/">julkisivumaalauksia Tampereella</a>.',
 ];
-/** Ankkuri kiertää paikkakuntalistan järjestyksessä, jolloin kukin toistuu enintään viidesti (29 paikkakuntaa, 7 ankkuria). */
+/**
+ * Ankkuri kiertää paikkakuntalistan järjestyksessä, jolloin kukin toistuu enintään viidesti (29 paikkakuntaa, 7 ankkuria).
+ * Linkki on kaupunkisivun ainoa Tampere-maininta leipätekstissä (Eerik 27.10.2026: enintään yksi sivua kohti),
+ * joten sen edessä ei ole muuta Tampere-lausetta.
+ */
 const tampereLinkki = (cityName: string, linkit: string[]): string => {
   if (cityName === "Tampere") return "";
   const i = allCities.findIndex((c) => c.name === cityName);
-  return ` Olemme tamperelainen yritys. ${linkit[(i < 0 ? 0 : i) % linkit.length]}`;
+  return ` ${linkit[(i < 0 ? 0 : i) % linkit.length]}`;
 };
 
 /** Maalauksen kaupunkisivu: yhdessä cityFaq.ts:n kuuden kysymyksen kanssa 9 kysymystä. */

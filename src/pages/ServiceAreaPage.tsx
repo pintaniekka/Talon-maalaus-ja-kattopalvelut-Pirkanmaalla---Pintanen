@@ -146,6 +146,8 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         secondary={{ to: "/tarjouspyynto/", label: "Pyydä ilmainen arviokäynti" }}
         trust="yleinen"
         image={{ base: heroBase, alt: ownPhoto ? `Kohteemme ${cityIn}` : "Pintasen maalaama puutalo: katto ja seinät maalattu" }}
+        // Muiden kuntien sivuilla Tampere mainitaan leipätekstissä enintään kerran (Eerik 27.10.2026): se on paikallisteksti.
+        badge={citySlug === "tampere" ? undefined : { title: "Perheyritys", text: "Eerik ja Eemil tekevät työn itse." }}
         breadcrumbs={crumbs}
       />
 

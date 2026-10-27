@@ -260,7 +260,11 @@ export const getTeaserTestimonials = (
 ): Testimonial[] => {
   const inCategory = (t: Testimonial) => !category || matchesCategory(t, category);
   const own = allTestimonials.filter((t) => t.city === citySlug && inCategory(t));
-  const pool = allTestimonials.filter((t) => t.city !== citySlug && inCategory(t));
+  // Muiden kuntien sivuilla ei nosteta Tampereen arvosteluja: kortin paikkakuntarivi toistaisi sanan
+  // leipätekstissä (Eerik 27.10.2026: Tampere enintään kerran muiden kuntien sivuilla).
+  const pool = allTestimonials.filter(
+    (t) => t.city !== citySlug && inCategory(t) && (citySlug === "tampere" || t.city !== "tampere"),
+  );
 
   const picked: Testimonial[] = own.slice(0, count);
   if (pool.length === 0 || picked.length >= count) return picked;

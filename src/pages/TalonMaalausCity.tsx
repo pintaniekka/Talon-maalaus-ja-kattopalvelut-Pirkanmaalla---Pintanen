@@ -24,7 +24,6 @@ import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { hasKuntakartta } from "@/data/kartat";
 import { getMaalausCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
-import { vainPaikkakunta } from "@/data/kannibalisointi";
 import { maalausPrices } from "@/data/prices";
 import { maalausLyhyesti, maalausTyovaiheet, MAALAUS_HINTA } from "@/data/tyovaiheet";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
@@ -115,7 +114,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       <MiksiValitaPintanen service="maalaus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" hideMap={kartta} />
       <CityLocalRules citySlug={cityData.slug} cityIn={cityData.cityIn} />
-      <MaalausEntrepreneur cityIn={cityData.cityIn} vainPaikkakunta={vainPaikkakunta(cityData.slug)} />
+      <MaalausEntrepreneur cityIn={cityData.cityIn} />
       <FAQSection
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}

@@ -107,14 +107,26 @@ export const pinnoitusFAQ: FAQItem[] = [
     answer:
       'Katon voi pestä ja maalata itse, mutta ilman ruiskua ja kunnon kalustoa pinnasta on vaikea saada tasainen. Meiltä saat työlle <strong>5 vuoden kirjallisen takuun</strong>.',
   },
+  {
+    // Takuun sisältö: Eerik 27.10.2026.
+    question: 'Mitä takuu kattaa?',
+    answer:
+      'Annamme pinnoitukselle <strong>5 vuoden kirjallisen takuun</strong>. Se kattaa asennusvirheet ja maalin epänormaalin hilseilyn. Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen. Tulemme muutenkin vastaan, jos jokin ei ole kunnossa.',
+  },
     {
       question: 'Maalaatteko myös peltikattoja?',
       answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
     },
   {
+    // Ormax: Eerik 11.10. ja 26.10.2026, sama tieto kuin Ormax-artikkelissa.
+    question: 'Voiko Ormax-tiilikaton pinnoittaa?',
+    answer:
+      'Kyllä. Ormax on yleinen betonikattotiili. Pesemme katon, vaihdamme rikkinäiset tiilet ja maalaamme katon kahteen kertaan Nowocoatin kattomaalilla, kuten muutkin betonitiilikatot. Pinnoitus on ajankohtainen noin 15 vuoden iässä.',
+  },
+  {
     question: 'Saanko hinta-arvion ennen kuntotarkastusta?',
     answer:
-      'Kyllä. Hintalaskuri antaa suuntaa antavan arvion katon koon ja jyrkkyyden mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa ilmaisen kuntotarkastuksen jälkeen. Kuntotarkastuksella sinun on hyvä olla paikalla.',
+      'Kyllä. Hintalaskuri antaa suuntaa antavan arvion katon koon ja jyrkkyyden mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa ilmaisen kuntotarkastuksen jälkeen. Kuntotarkastuksella sinun on hyvä olla paikalla. Tarjouksen saat myös etänä, kun lähetät kuvat katosta ja arvion sen koosta.',
   },
   {
     question: 'Milloin pääsette katsomaan katon?',
@@ -192,6 +204,12 @@ export const maalausFAQ: FAQItem[] = [
   {
     question: 'Kuinka kauan talon maalaus kestää?',
     answer: 'Omakotitalo valmistuu yleensä <strong>3–7 päivässä</strong>. Aika riippuu talon koosta ja pohjatöiden määrästä. Työ ei estä normaalia asumista.',
+  },
+  {
+    // Takuun sisältö: Eerik 27.10.2026.
+    question: 'Mitä takuu kattaa?',
+    answer:
+      'Annamme maalaukselle <strong>2 vuoden kirjallisen takuun</strong>. Se kattaa työvirheet ja maalin epänormaalin hilseilyn. Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen. Tulemme muutenkin vastaan, jos jokin ei ole kunnossa.',
   },
   {
     question: 'Milloin pääsette maalaamaan?',

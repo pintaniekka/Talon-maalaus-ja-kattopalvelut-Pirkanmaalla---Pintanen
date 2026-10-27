@@ -77,6 +77,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-haalistunut-punainen-tiilikatto-ennen"
+      ratio="3/4"
       alt="Haalistunut punainen tiilikatto ennen pinnoitusta"
       caption="Haalistunut punainen tiilikatto ennen pinnoitusta. Tässä vaiheessa pinnoitus riittää."
     />

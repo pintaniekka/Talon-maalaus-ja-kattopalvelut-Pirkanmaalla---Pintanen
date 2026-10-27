@@ -5,6 +5,9 @@ import { pinnoitusPrices, fmtCardRange, fmtCardAfter } from '@/data/prices';
 
 const cards = pinnoitusPrices.cards;
 
+/** Nostetun kortin nauhan teksti. Jos kortin label on sama, se näytetään vain nauhassa (ei kahdesti). */
+const FEATURED_RIBBON = 'Yleisin kattokoko';
+
 /** Hintakortit säilyvät sellaisinaan (sääntö). Sisältölista noudattaa sovittua sanastoa (S15). */
 const pricingIncludes = ['Pesu painepesulla', 'Rikkinäisten tiilien vaihto', 'Pohjamaali ja pintamaali ruiskulla', 'Siivous'];
 
@@ -35,13 +38,15 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
             >
               {card.featured && (
                 <div className="bg-navy text-navy-foreground text-xs font-extrabold uppercase tracking-wider text-center py-1.5">
-                  Yleisin kattokoko
+                  {FEATURED_RIBBON}
                 </div>
               )}
 
               <div className="p-5 md:p-6 flex flex-col flex-1">
-                <p className="text-2xl font-bold text-foreground">{card.size}</p>
-                <p className="text-sm text-muted-foreground mb-4">{card.label}</p>
+                <p className={`text-2xl font-bold text-foreground ${card.featured && card.label === FEATURED_RIBBON ? 'mb-4' : ''}`}>{card.size}</p>
+                {!(card.featured && card.label === FEATURED_RIBBON) && (
+                  <p className="text-sm text-muted-foreground mb-4">{card.label}</p>
+                )}
 
                 {/* Hinta ilman alennusvaikutelmaa (Eerik 13.10.2026): haarukka isolla, vähennyksen jälkeinen hinta rauhallisesti alla. */}
                 <div className="mb-5">

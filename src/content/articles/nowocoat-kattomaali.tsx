@@ -80,6 +80,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-valkeakoski-pinnoitettu-tiilikatto-lahikuva"
+      ratio="3/4"
       alt="Pinnoitettu tiilikatto läheltä Valkeakoskella"
       caption="Nowocoatilla pinnoitettu tiilikatto läheltä. Pinta on puolihimmeä."
     />

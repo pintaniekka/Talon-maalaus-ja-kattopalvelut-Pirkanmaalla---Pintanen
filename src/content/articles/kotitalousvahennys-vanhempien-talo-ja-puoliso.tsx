@@ -14,7 +14,7 @@ const faq = [
   {
     question: "Saanko kotitalousvähennyksen, jos maksan vanhempieni katon pinnoituksen?",
     answer:
-      "Kyllä. Vähennyksen saa työstä, joka on tehty omien tai puolison vanhempien tai isovanhempien käyttämässä asunnossa tai vapaa-ajan asunnossa. Laskun pitää olla sinun nimissäsi ja sinun maksamasi.",
+      "Kyllä. Vähennyksen saa työstä, joka on tehty omien tai puolison vanhempien tai isovanhempien käyttämässä asunnossa tai vapaa-ajan asunnossa. Laskun pitää olla sinun nimissäsi ja sinun maksamasi. Kirjoitamme laskun sinun nimiisi, kun kerrot sen ennen laskutusta. Olemme tehneet näin.",
   },
   {
     question: "Saanko vähennyksen, jos maksan aikuisen lapseni talon maalauksen?",
@@ -54,7 +54,8 @@ const Body = () => (
       Saa. Verohallinnon ohjeen mukaan vähennyksen saa työstä, joka on tehty omien tai puolison vanhempien,
       isovanhempien tai näiden puolisoiden käyttämässä asunnossa tai vapaa-ajan asunnossa. Jos siis maksat
       vanhempiesi tiilikaton pinnoituksen tai talon maalauksen, vähennys kuuluu sinulle. Laskun pitää olla
-      sinun nimissäsi, ja sinun pitää maksaa se. Vanhempien ei tarvitse olla työn tilaajia.
+      sinun nimissäsi, ja sinun pitää maksaa se. Vanhempien ei tarvitse olla työn tilaajia. Kirjoitamme
+      laskun sinun nimiisi, kun kerrot sen ennen laskutusta. Olemme tehneet näin.
     </p>
     <Avainhuomio>Vanhempien tai isovanhempien talossa tehty työ oikeuttaa vähennykseen, kun maksat laskun itse.</Avainhuomio>
 

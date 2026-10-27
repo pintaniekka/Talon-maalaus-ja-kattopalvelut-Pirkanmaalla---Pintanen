@@ -60,6 +60,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-tummanharmaa-kattotiili"
+      ratio="3/4"
       alt="Tiilikaton pesu ja pinnoitus käynnissä"
       caption="Pesu ja pinnoitus etenevät lape kerrallaan."
     />
@@ -85,6 +86,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen"
+      ratio="3/4"
       alt="Punainen tiilikatto maalauksen jälkeen"
       caption="Valmis katto pohjamaalin ja pintamaalin jälkeen."
     />

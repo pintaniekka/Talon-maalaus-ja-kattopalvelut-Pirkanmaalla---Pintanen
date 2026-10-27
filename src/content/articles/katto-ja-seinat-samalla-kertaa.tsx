@@ -5,7 +5,8 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/
  * Yrityksen faktat sivuston omia: faqData.ts ("Jos teemme samalla kertaa myös katon, saat edullisemman pakettihinnan"),
  * CLAUDE.md (katto ja seinät samalla kertaa = edullisempi pakettihinta), prices.ts (pinnoitus 2 850–7 000 €, maalaus
  * 3 500–11 000 €), projects.ts (katon ja seinien maalaus samaan taloon, Tampere 2026), kotitalousvähennys vero.fi.
- * Pakettihinnan suuruutta ei kerrota: sitä ei ole sivustolla.
+ * Pakettihinnan suuruutta ei kerrota: sitä ei ole sivustolla. Eerik 27.10.2026: aloituspäivä sovitaan kummallekin
+ * työlle erikseen; nopeimmillaan kokonaiskesto on seinien kesto (3–7 päivää).
  */
 const faq = [
   {
@@ -20,7 +21,7 @@ const faq = [
   },
   {
     question: "Kauanko katto ja seinät yhdessä kestävät?",
-    answer: "Pinnoitus kestää 2–3 päivää ja maalaus 3–7 päivää. Yhdessä työt vievät yleensä noin viikon tai vähän yli.",
+    answer: "Pinnoitus kestää 2–3 päivää ja maalaus 3–7 päivää. Nopeimmillaan molemmat valmistuvat seinien maalauksen ajassa eli 3–7 päivässä. Aloituspäivä sovitaan kummallekin työlle erikseen.",
   },
   {
     question: "Saako molemmista kotitalousvähennyksen?",
@@ -69,14 +70,16 @@ const Body = () => (
         ["Seinien homepesu, kaavinta, pohjamaali ja pintamaali pensselillä", "3–7 päivää", "Eemil"],
         ["Lopputarkastus yhdessä", "Sama päivä", "Sinä ja me"],
       ]}
-      caption="Katto ensin, seinät sen jälkeen. Yhteensä noin viikko tai vähän yli."
+      caption="Katto ensin, seinät sen jälkeen. Nopeimmillaan molemmat valmistuvat 3–7 päivässä."
     />
     <p>
-      Yleensä katto tehdään ensin, koska pesu ja ruisku roiskuvat. Seinät maalataan sen jälkeen. Molempien töiden kulun kerromme artikkeleissa{" "}
+      Yleensä katto tehdään ensin, koska pesu ja ruisku roiskuvat. Seinät maalataan sen jälkeen. Aloituspäivä
+      sovitaan kummallekin työlle erikseen. Nopeimmillaan molemmat valmistuvat seinien maalauksen ajassa eli
+      3–7 päivässä. Molempien töiden kulun kerromme artikkeleissa{" "}
       <Link to="/artikkelit/tiilikaton-pinnoituksen-tyovaiheet/">näin tiilikaton pinnoitus etenee</Link> ja{" "}
       <Link to="/artikkelit/talon-maalaus-tilauksesta-valmiiseen/">talon maalaus tilauksesta valmiiseen</Link>.
     </p>
-    <Avainhuomio>Katto ensin ja seinät sen jälkeen, yhteensä noin viikko.</Avainhuomio>
+    <Avainhuomio>Katto ensin ja seinät sen jälkeen, nopeimmillaan yhteensä 3–7 päivää.</Avainhuomio>
 
     <h2>Mitä katto ja seinät yhdessä maksavat?</h2>
     <p>

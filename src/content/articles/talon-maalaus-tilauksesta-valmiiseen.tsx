@@ -3,8 +3,9 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/
 
 /**
  * Yrityksen faktat sivuston omia: tyovaiheet.ts (maalausTyovaiheet: arviokäynti, suojaus, homepesu, kaavinta, pohjamaali,
- * pintamaali pensselillä, lopputarkastus ja 2 v takuu), faqData.ts (arviokäynti samalla viikolla, asiakas paikalla, sopimus
- * ja aikataulu, ennakkolasku 10 %, 3–7 päivää, kausi huhti–toukokuusta elo–syyskuuhun), VASTAUSLUPAUS (company.ts).
+ * pintamaali pensselillä, lopputarkastus ja 2 v takuu), faqData.ts (arviokäynti samalla viikolla, asiakkaan on hyvä olla
+ * paikalla, sopimus ja aikataulu, ennakkolasku 10 %, 3–7 päivää, kausi huhti–toukokuusta elo–syyskuuhun), VASTAUSLUPAUS
+ * (company.ts). Etätarjous on mahdollinen (Eerik 27.10.2026): kuvat ja arvio seinien koosta riittävät yleensä.
  */
 const faq = [
   {
@@ -63,8 +64,10 @@ const Body = () => (
     <p>
       Eemil käy seinät läpi ja katsoo kolme asiaa: mitä maalia seinässä on nyt, paljonko maalia on irti ja
       paljonko puuta on paljaana, ja mitä pitää suojata. Hän kysyy, haluatko saman värin vai uuden. Sinun on
-      hyvä olla paikalla, koska päätökset tehdään yhdessä. Etätarjousta kuvista ei tehdä, koska vanhan maalin
-      tyyppiä ja puun kuntoa ei näe kuvasta. Tarjoukseen kirjataan maali, väri, työvaiheet ja kiinteä hinta.
+      hyvä olla paikalla, koska päätökset tehdään yhdessä. Tarjouksen saat myös etänä: yleensä kuvat seinistä
+      ja arvio seinien koosta riittävät, ja tarkat mitat ovat iso plussa. Arviokäynti on silti tarkin tapa,
+      koska vanhan maalin tyyppiä ja puun kuntoa ei näe kuvasta. Tarjoukseen kirjataan maali, väri, työvaiheet
+      ja kiinteä hinta.
     </p>
     <Avainhuomio>Arviokäynnillä katsotaan vanha maali, pohjatöiden määrä ja suojaukset, ja ne kirjataan tarjoukseen.</Avainhuomio>
 
@@ -83,6 +86,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-vihrea-puutalo-ulkomaalaus-jalkeen"
+      ratio="3/4"
       alt="Vihreä puutalo ulkomaalauksen jälkeen"
       caption="Vihreä puutalo ulkomaalauksen jälkeen."
     />

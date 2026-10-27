@@ -86,6 +86,7 @@ const Body = () => (
     <h2>Miltä vaihdettu väri näyttää valmiina?</h2>
     <Figure
       image="tiilikaton-pinnoitus-ylojarvi-musta-tiilikatto-jalkeen"
+      ratio="3/4"
       alt="Musta tiilikatto pinnoituksen jälkeen Ylöjärvellä"
       caption="Musta tiilikatto pinnoituksen jälkeen Ylöjärvellä 2026."
     />

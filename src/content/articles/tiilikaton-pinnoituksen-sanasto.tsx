@@ -76,6 +76,7 @@ const Body = () => (
     />
     <Figure
       image="tiilikaton-pinnoitus-pirkkala-punainen-tiilikatto-harja"
+      ratio="3/4"
       alt="Punaisen tiilikaton harja Pirkkalassa"
       caption="Harja ja harjatiilet. Harjatiiviste on harjatiilien alla."
     />
@@ -85,7 +86,7 @@ const Body = () => (
     <Table
       head={["Sana", "Mitä se tarkoittaa"]}
       rows={[
-        ["Kuntotarkastus", "Ilmainen käynti katolla ennen tarjousta. Sinun on hyvä olla paikalla."],
+        ["Kuntotarkastus", "Ilmainen käynti katolla ennen tarjousta. Sinun on hyvä olla paikalla. Tarjouksen saat myös etänä kuvien perusteella."],
         ["Kiinteä hinta", "Tarjouksen hinta, joka pitää, vaikka työ venyisi sateen takia."],
         ["Ennakkolasku", "10 % hinnasta, laskutetaan tarjouksen hyväksymisen jälkeen."],
         ["Loppulasku", "Loput hinnasta, kun työ on valmis ja käyty yhdessä läpi."],

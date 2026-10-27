@@ -106,8 +106,8 @@ const Body = () => (
     <h2>9. Milloin pääsette katsomaan katon?</h2>
     <p>
       Yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Kuntotarkastus on ilmainen, ja sinun on hyvä
-      olla paikalla. Saat kirjallisen tarjouksen kiinteällä hinnalla. Pinnoitukset teemme huhti–toukokuusta
-      elo–syyskuuhun.
+      olla paikalla. Tarjouksen saat myös etänä, kun lähetät kuvat katosta ja arvion sen koosta. Saat
+      kirjallisen tarjouksen kiinteällä hinnalla. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun.
     </p>
     <Avainhuomio>Kuntotarkastus onnistuu yleensä samalla viikolla ja on ilmainen.</Avainhuomio>
 
@@ -120,6 +120,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-sastamala-punainen-tiilikatto-jalkeen"
+      ratio="3/4"
       alt="Punainen tiilikatto pinnoituksen jälkeen Sastamalassa"
       caption="Pinnoitettu tiilikatto Sastamalassa 2026."
     />

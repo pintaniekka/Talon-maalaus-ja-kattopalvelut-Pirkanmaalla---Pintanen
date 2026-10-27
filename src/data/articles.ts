@@ -811,7 +811,7 @@ export const articles: ArticleMeta[] = [
     seoTitle: "Tiilikaton pinnoitus ja aurinkopaneelit",
     description:
       "Katto voidaan pinnoittaa, vaikka katolla on aurinkopaneelit. Suojaamme paneelit ja pinnoitamme katon niiden ympäriltä. Lue, miten työ etenee ja mitä katsomme.",
-    lead: "Katto voidaan pinnoittaa, vaikka katolla on aurinkopaneelit. Suojaamme paneelit ennen pesua ja maalausta ja pinnoitamme katon niiden ympäriltä. Suojaus kuuluu hintaan. Olemme tehneet näin Tampereella, Sastamalassa ja Valkeakoskella.",
+    lead: "Katto voidaan pinnoittaa, vaikka katolla on aurinkopaneelit. Paneeleita ei irroteta: suojaamme ne paikoilleen ja pinnoitamme katon niiden ympäriltä. Kasvustontorjunta-aine levitetään myös paneelien alle. Suojaus kuuluu hintaan. Olemme tehneet näin Tampereella, Sastamalassa ja Valkeakoskella.",
     category: "katto",
     author: "eerik",
     publishedAt: "2027-04-26",

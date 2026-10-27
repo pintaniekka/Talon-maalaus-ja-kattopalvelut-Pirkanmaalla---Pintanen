@@ -82,6 +82,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-pensseli"
+      ratio="14/1"
       alt="Pensseli talon ulkomaalauksessa"
       caption="Pensseli on seinällä tärkein työkalu, ja sitä pitelee yrittäjä itse."
     />

@@ -86,6 +86,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-vihrea-puutalo-ennen-ulkomaalausta"
+      ratio="3/4"
       alt="Vihreä puutalo ennen ulkomaalausta ja pohjatöitä"
       caption="Puutalo ennen pohjatöitä ja ulkomaalausta."
     />
@@ -157,6 +158,7 @@ const Body = () => (
     <Avainhuomio>Omakotitalon maalaus maksaa yleensä 3 500–11 000 € ja kestää 3–7 päivää.</Avainhuomio>
     <Figure
       image="talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen"
+      ratio="3/4"
       alt="Keltainen ulkoverhous huoltomaalauksen jälkeen"
       caption="Ulkoverhous huoltomaalauksen jälkeen."
     />

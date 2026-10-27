@@ -84,7 +84,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "kangasala",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Kangasalla",
     alueLocalHookText:
-      "Kangasala on Tampereen itäpuolella, ja Kangasalan kirkolta on Tampereelle 17 kilometriä. Noin neljännes kaupungin pinta-alasta on vettä. Veden lähellä katto ja seinät pysyvät sateen jälkeen pitkään kosteina. Pinnoitamme kattoja ja maalaamme taloja koko Kangasalla, esimerkiksi Vatialassa, Ruutanassa, Sahalahdella ja Kuhmalahdella. Käynti on ilmainen.",
+      "Kangasalan kirkolta on Tampereelle 17 kilometriä. Noin neljännes kaupungin pinta-alasta on vettä. Veden lähellä katto ja seinät pysyvät sateen jälkeen pitkään kosteina. Pinnoitamme kattoja ja maalaamme taloja koko Kangasalla, esimerkiksi Vatialassa, Ruutanassa, Sahalahdella ja Kuhmalahdella. Käynti on ilmainen.",
   },
   {
     slug: "kihnio",
@@ -96,7 +96,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "lempaala",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Lempäälässä",
     alueLocalHookText:
-      "Lempäälä on Tampereen eteläinen naapurikunta. Keskusta on Vanajaveden ja Pyhäjärven välissä, ja asutus jatkuu yhtenäisenä Tampereen rajalle. Lempäälässä on paljon 2000-luvun alun taloja, joiden katon tehdaspinta ja ensimmäinen maali alkavat nyt kulua. Pinnoitamme kattoja ja maalaamme taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa. Käynti on ilmainen.",
+      "Lempäälä on Tampereen eteläinen naapurikunta. Keskusta on Vanajaveden ja Pyhäjärven välissä, ja asutus jatkuu yhtenäisenä kunnan pohjoisrajalle. Lempäälässä on paljon 2000-luvun alun taloja, joiden katon tehdaspinta ja ensimmäinen maali alkavat nyt kulua. Pinnoitamme kattoja ja maalaamme taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa. Käynti on ilmainen.",
   },
   {
     slug: "mantta-vilppula",
@@ -138,7 +138,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "urjala",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Urjalassa",
     alueLocalHookText:
-      "Urjala on valtatie 9:n varrella Tampereelta Turkuun päin, ja Tampereelle on 60 kilometriä. Urjalassa on paljon vanhoja puutaloja, jotka on maalattu jo monta kertaa. Silloin pohjatyöt ratkaisevat. Pinnoitamme kattoja ja maalaamme taloja koko Urjalassa, esimerkiksi Laukeelassa, Nuutajärvellä ja Huhdissa. Käynti on ilmainen.",
+      "Urjala on valtatie 9:n varrella, ja Tampereelle on 60 kilometriä. Urjalassa on paljon vanhoja puutaloja, jotka on maalattu jo monta kertaa. Silloin pohjatyöt ratkaisevat. Pinnoitamme kattoja ja maalaamme taloja koko Urjalassa, esimerkiksi Laukeelassa, Nuutajärvellä ja Huhdissa. Käynti on ilmainen.",
   },
   {
     slug: "valkeakoski",
@@ -156,7 +156,7 @@ export const areaCityContent: AreaCityContent[] = [
     slug: "virrat",
     alueLocalHookTitle: "Tiilikaton pinnoitus ja talon maalaus Virroilla",
     alueLocalHookText:
-      "Virrat on Pirkanmaan pohjoisosassa Tampereen, Porin ja Jyväskylän välimaastossa, noin tunnin matkan päässä Tampereelta. Kaupungissa on 269 järveä. Talvet ovat pitkiä, ja pakkanen rikkoo kuluneen tiilen ja halkeilevan maalin alla olevan puun. Pinnoitamme kattoja ja maalaamme taloja koko Virroilla, esimerkiksi keskustassa, Killinkoskella ja Vaskivedellä. Käynti on ilmainen.",
+      "Virrat on Pirkanmaan pohjoisosassa, noin tunnin matkan päässä Tampereelta. Kaupungissa on 269 järveä. Talvet ovat pitkiä, ja pakkanen rikkoo kuluneen tiilen ja halkeilevan maalin alla olevan puun. Pinnoitamme kattoja ja maalaamme taloja koko Virroilla, esimerkiksi keskustassa, Killinkoskella ja Vaskivedellä. Käynti on ilmainen.",
   },
 ];
 

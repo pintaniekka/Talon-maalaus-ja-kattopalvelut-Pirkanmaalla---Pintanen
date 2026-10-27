@@ -21,11 +21,11 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Kangasalla: neljännes kaupungista on vettä",
     pinnoitusLocalHookText:
-      "Kangasala on Tampereen itäpuolella. Noin neljännes kaupungin pinta-alasta on vettä, ja suurimmat järvet ovat Vesijärvi, Längelmävesi ja Roine. Veden ja puiden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja koko Kangasalla, myös Vatialassa, Ruutanassa, Sahalahdella ja Kuhmalahdella.",
+      "Noin neljännes Kangasalan pinta-alasta on vettä, ja suurimmat järvet ovat Vesijärvi, Längelmävesi ja Roine. Veden ja puiden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja koko Kangasalla, myös Vatialassa, Ruutanassa, Sahalahdella ja Kuhmalahdella.",
   },
   pirkkala: {
     ...era(1),
-    pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Pirkkalassa, 10 kilometriä Tampereelta",
+    pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Pirkkalassa Pyhäjärven rannalla",
     pinnoitusLocalHookText:
       "Pirkkala on Pyhäjärven rannalla, ja keskustaan on matkaa 10 kilometriä. Pinnoitamme tiilikattoja koko Pirkkalassa. Asuinalueita ovat esimerkiksi Nuoliala, Toivio, Pere ja Kurikka.",
   },
@@ -33,16 +33,16 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Lempäälässä Vanajaveden ja Pyhäjärven välissä",
     pinnoitusLocalHookText:
-      "Lempäälä on Tampereen eteläinen naapurikunta. Keskusta on kannaksella Vanajaveden ja Pyhäjärven välissä. Asutus jatkuu keskustasta yhtenäisenä Tampereen rajalle asti, esimerkiksi Kuljuun ja Sääksjärvelle.",
+      "Lempäälän keskusta on kannaksella Vanajaveden ja Pyhäjärven välissä. Asutus jatkuu keskustasta yhtenäisenä kunnan pohjoisrajalle asti, esimerkiksi Kuljuun ja Sääksjärvelle.",
     maalausLocalHookTitle: "Talon maalaus Lempäälässä: Kulju, Sääksjärvi, Hakkari ja keskusta",
     maalausLocalHookText:
-      "Lempäälä on Tampereen eteläinen naapurikunta, ja asutus jatkuu keskustasta yhtenäisenä Tampereen rajalle asti. Eemil maalaa taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa.",
+      "Lempäälän asutus jatkuu keskustasta yhtenäisenä kunnan pohjoisrajalle asti. Eemil maalaa taloja koko Lempäälässä, esimerkiksi Kuljussa, Sääksjärvellä ja Hakkarissa.",
   },
   valkeakoski: {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Valkeakoskella Mallasveden ja Vanajaveden välissä",
     pinnoitusLocalHookText:
-      "Valkeakoski on 35 kilometriä Tampereelta etelään. Kaupunki on Mallasveden ja Vanajaveden yhtymäkohdassa, ja keskustan läpi kulkee kanava. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Valkeakosken keskustassa, Sääksmäellä ja Kärjenniemessä.",
+      "Valkeakoski on Mallasveden ja Vanajaveden yhtymäkohdassa, ja keskustan läpi kulkee kanava. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Valkeakosken keskustassa, Sääksmäellä ja Kärjenniemessä.",
     maalausLocalHookTitle: "Talon maalaus Valkeakoskella: joka kolmas talo on 1940- ja 1950-luvuilta",
     maalausLocalHookText:
       "Valkeakoski kasvoi paperi- ja selluloosatehtaiden ympärille. Eemil maalaa taloja Valkeakosken keskustassa, Sääksmäellä ja Kärjenniemessä.",
@@ -51,7 +51,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Akaassa: Toijala, Viiala ja Kylmäkoski",
     pinnoitusLocalHookText:
-      "Akaa syntyi vuonna 2007, kun Toijala ja Viiala yhdistyivät. Kylmäkoski liittyi kaupunkiin vuonna 2011. Pinnoitamme tiilikattoja kaikissa kolmessa taajamassa ja niiden ympäristössä. Toijalasta on Tampereelle noin 41 kilometriä.",
+      "Akaa syntyi vuonna 2007, kun Toijala ja Viiala yhdistyivät. Kylmäkoski liittyi kaupunkiin vuonna 2011. Pinnoitamme tiilikattoja kaikissa kolmessa taajamassa ja niiden ympäristössä.",
     maalausLocalHookTitle: "Puutalon maalaus Toijalassa, Viialassa ja Kylmäkoskella",
     maalausLocalHookText:
       "Akaa syntyi vuonna 2007, kun Toijala ja Viiala yhdistyivät, ja Kylmäkoski liittyi kaupunkiin 2011. Akaassa on paljon vanhoja puutaloja. Eemil maalaa taloja Toijalassa, Viialassa ja Kylmäkoskella.",
@@ -60,10 +60,10 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(1),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Orivedellä, yli 350 järven kaupungissa",
     pinnoitusLocalHookText:
-      "Orivedeltä on Tampereelle noin 40 kilometriä. Kaupungissa on yli 350 järveä, ja maisemaa hallitsee Längelmävesi. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä.",
+      "Orivedellä on yli 350 järveä, ja maisemaa hallitsee Längelmävesi. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä.",
     maalausLocalHookTitle: "Talon maalaus Orivedellä: lähes puolet taloista on ajalta ennen 1960",
     maalausLocalHookText:
-      "Orivedeltä on Tampereelle noin 40 kilometriä. Kaupungissa on yli 350 järveä, ja veden ja metsän lähellä seinät kuivuvat sateen jälkeen hitaasti. Eemil maalaa taloja Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä.",
+      "Orivedellä on yli 350 järveä, ja veden ja metsän lähellä seinät kuivuvat sateen jälkeen hitaasti. Eemil maalaa taloja Oriveden keskustassa ja kylissä, esimerkiksi Eräjärvellä ja Hirsilässä.",
   },
 
   // ───────────── Erä 2 ─────────────
@@ -71,16 +71,16 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Ikaalisissa Kyrösjärven rannalla",
     pinnoitusLocalHookText:
-      "Ikaalisten keskusta on niemessä Kyrösjärven rannalla. Tampereelle on matkaa runsaat 50 kilometriä. Pinnoitamme tiilikattoja Ikaalisten keskustassa ja kylissä, esimerkiksi Kilvakkalassa.",
+      "Ikaalisten keskusta on niemessä Kyrösjärven rannalla. Pinnoitamme tiilikattoja Ikaalisten keskustassa ja kylissä, esimerkiksi Kilvakkalassa.",
     maalausLocalHookTitle: "Talon maalaus Ikaalisissa: keskustasta Kilvakkalaan",
     maalausLocalHookText:
-      "Ikaalisten keskusta on niemessä Kyrösjärven rannalla, ja Tampereelle on runsaat 50 kilometriä. Varjoisa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Eemil maalaa taloja Ikaalisten keskustassa ja kylissä, esimerkiksi Kilvakkalassa.",
+      "Ikaalisten keskusta on niemessä Kyrösjärven rannalla. Varjoisa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Eemil maalaa taloja Ikaalisten keskustassa ja kylissä, esimerkiksi Kilvakkalassa.",
   },
   juupajoki: {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Juupajoella ja Korkeakoskella",
     pinnoitusLocalHookText:
-      "Juupajoki on väkiluvultaan Pirkanmaan pienin kunta. Kunnan ainoa taajama on Korkeakoski, ja Tampereelle on matkaa 55 kilometriä. Pinnoitamme tiilikattoja Korkeakoskella ja kunnan kylissä.",
+      "Juupajoki on väkiluvultaan Pirkanmaan pienin kunta. Kunnan ainoa taajama on Korkeakoski. Pinnoitamme tiilikattoja Korkeakoskella ja kunnan kylissä.",
     maalausLocalHookTitle: "Talon maalaus Juupajoella: joka toinen talo on ajalta ennen 1960",
     maalausLocalHookText:
       "Juupajoki on Pirkanmaan pienin kunta, ja sen ainoa taajama on Korkeakoski. Juupajoella on paljon vanhoja puutaloja. Eemil maalaa taloja Korkeakoskella ja muualla Juupajoella.",
@@ -107,7 +107,7 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Parkanossa: 881 taloa 1970- ja 1980-luvuilta",
     pinnoitusLocalHookText:
-      "Parkano on valtateiden 3 ja 23 risteyksessä, noin tunnin matkan päässä Tampereelta. Kaupungin pinta-alasta 65 prosenttia on metsää. Puiden varjossa katto kuivuu hitaasti, ja sammal viihtyy kosteassa.",
+      "Parkano on valtateiden 3 ja 23 risteyksessä. Kaupungin pinta-alasta 65 prosenttia on metsää. Puiden varjossa katto kuivuu hitaasti, ja sammal viihtyy kosteassa.",
     maalausLocalHookTitle: "Talon maalaus Parkanossa metsien keskellä",
     maalausLocalHookText:
       "Parkanon pinta-alasta 65 prosenttia on metsää. Puiden varjossa seinä kuivuu hitaasti, ja siihen tulee helposti tummia homepilkkuja. Eemil maalaa taloja Parkanon keskustassa ja kylissä. Kuvia kohteestamme Parkanossa näet tältä sivulta.",
@@ -116,37 +116,37 @@ export const newCityPages: Record<string, Partial<CityData>> = {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Pälkäneellä: Onkkaala, Luopioinen ja Aitoo",
     pinnoitusLocalHookText:
-      "Pälkäneeltä on Tampereelle 35 kilometriä. Kunnan keskusta Onkkaala on kannaksella Pälkäneveden ja Mallasveden välissä. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Onkkaalassa, Luopioisissa ja Aitoossa.",
+      "Pälkäneen keskusta Onkkaala on kannaksella Pälkäneveden ja Mallasveden välissä. Veden lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja Onkkaalassa, Luopioisissa ja Aitoossa.",
     maalausLocalHookTitle: "Talon maalaus Pälkäneellä: Onkkaalasta Luopioisiin",
     maalausLocalHookText:
-      "Pälkäneeltä on Tampereelle 35 kilometriä, ja kunnan keskusta Onkkaala on kannaksella Pälkäneveden ja Mallasveden välissä. Pälkäneellä on paljon vanhoja puutaloja. Eemil maalaa taloja Onkkaalassa, Luopioisissa ja Aitoossa.",
+      "Pälkäneen keskusta Onkkaala on kannaksella Pälkäneveden ja Mallasveden välissä. Pälkäneellä on paljon vanhoja puutaloja. Eemil maalaa taloja Onkkaalassa, Luopioisissa ja Aitoossa.",
   },
   ruovesi: {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Ruovedellä, Visuvedellä ja Jäminkipohjassa",
     pinnoitusLocalHookText:
-      "Ruoveden kirkonkylä on Näsijärven Ruoveden rannalla. Tampereen keskustaan on matkaa 73 kilometriä. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja kirkonkylässä, Visuvedellä ja Jäminkipohjassa.",
+      "Ruoveden kirkonkylä on Näsijärven Ruoveden rannalla. Veden ja metsän lähellä katto pysyy sateen jälkeen pitkään kosteana, ja sammal viihtyy kosteassa. Pinnoitamme tiilikattoja kirkonkylässä, Visuvedellä ja Jäminkipohjassa.",
     maalausLocalHookTitle: "Talon maalaus Ruovedellä: yli puolet taloista on ajalta ennen 1960",
     maalausLocalHookText:
-      "Ruoveden kirkonkylä on Näsijärven Ruoveden rannalla, ja Tampereen keskustaan on matkaa 73 kilometriä. Ruovedellä on paljon vanhoja puutaloja. Eemil maalaa taloja kirkonkylässä, Visuvedellä ja Jäminkipohjassa.",
+      "Ruoveden kirkonkylä on Näsijärven Ruoveden rannalla. Ruovedellä on paljon vanhoja puutaloja. Eemil maalaa taloja kirkonkylässä, Visuvedellä ja Jäminkipohjassa.",
   },
   urjala: {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Urjalassa valtatie 9:n varrella",
     pinnoitusLocalHookText:
-      "Urjala on valtatie 9:n varrella, ja Tampereelle on matkaa 60 kilometriä. Kunnan ainoa taajama on kirkonkylä, ja yli puolet asukkaista asuu sen ulkopuolella. Pinnoitamme tiilikattoja kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa.",
+      "Urjala on valtatie 9:n varrella. Kunnan ainoa taajama on kirkonkylä, ja yli puolet asukkaista asuu sen ulkopuolella. Pinnoitamme tiilikattoja kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa.",
     maalausLocalHookTitle: "Talon maalaus Urjalassa: toiminta-alueemme vanhimmat talot",
     maalausLocalHookText:
-      "Urjala on valtatie 9:n varrella, ja Tampereelle on matkaa 60 kilometriä. Urjalassa on paljon vanhoja puutaloja, ja yli puolet asukkaista asuu kirkonkylän ulkopuolella. Eemil maalaa taloja Urjalan kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa.",
+      "Urjala on valtatie 9:n varrella. Urjalassa on paljon vanhoja puutaloja, ja yli puolet asukkaista asuu kirkonkylän ulkopuolella. Eemil maalaa taloja Urjalan kirkonkylässä ja kylissä, esimerkiksi Nuutajärvellä ja Huhdissa.",
   },
   vesilahti: {
     ...era(2),
     pinnoitusLocalHookTitle: "Tiilikaton pinnoitus Vesilahdella Pyhäjärven rannalla",
     pinnoitusLocalHookText:
-      "Vesilahti on Pyhäjärven etelä- ja kaakkoisrannalla, noin 30 kilometriä Tampereelta lounaaseen. Pinnoitamme tiilikattoja kirkonkylässä, Narvassa ja Koskenkylässä.",
+      "Vesilahti on Pyhäjärven etelä- ja kaakkoisrannalla. Pinnoitamme tiilikattoja kirkonkylässä, Narvassa ja Koskenkylässä.",
     maalausLocalHookTitle: "Talon maalaus Vesilahdella: kirkonkylä, Narva ja Koskenkylä",
     maalausLocalHookText:
-      "Vesilahti on noin 30 kilometriä Tampereelta lounaaseen. Eemil maalaa taloja kirkonkylässä, Narvassa ja Koskenkylässä.",
+      "Vesilahti on Pyhäjärven etelä- ja kaakkoisrannalla. Eemil maalaa taloja kirkonkylässä, Narvassa ja Koskenkylässä.",
   },
   virrat: {
     ...era(2),

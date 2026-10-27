@@ -8,7 +8,21 @@ import { Helmet } from "react-helmet-async";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
 /** Kuva kuvatekstillä. `image` on perusnimi kansiossa public/images. */
-export const Figure = ({ image, alt, caption }: { image: string; alt: string; caption?: string }) => (
+/**
+ * Kuvan mittasuhde (Pictures-1200-tiedoston todellinen koko), josta width/height-attribuutit johdetaan:
+ * selain varaa kuvalle tilan ennen latausta eikä sivu hypi (Lighthouse unsized-images, CLS).
+ * "14/1" on koristeellinen pensselinvetoraita (talon-maalaus-pensseli, 1200 × 87 px).
+ */
+export type FigureRatio = "4/3" | "3/4" | "3/2" | "1/1" | "14/1";
+const FIGURE_SIZES: Record<FigureRatio, { width: number; height: number }> = {
+  "4/3": { width: 1200, height: 900 },
+  "3/4": { width: 900, height: 1200 },
+  "3/2": { width: 1200, height: 800 },
+  "1/1": { width: 1200, height: 1200 },
+  "14/1": { width: 1200, height: 87 },
+};
+
+export const Figure = ({ image, alt, caption, ratio = "4/3" }: { image: string; alt: string; caption?: string; ratio?: FigureRatio }) => (
   <figure>
     <img
       loading="lazy"
@@ -18,6 +32,8 @@ export const Figure = ({ image, alt, caption }: { image: string; alt: string; ca
       sizes="(min-width: 768px) 720px, 100vw"
       alt={alt}
       className="w-full h-auto max-h-[30rem] object-cover rounded-xl bg-muted"
+      width={FIGURE_SIZES[ratio].width}
+      height={FIGURE_SIZES[ratio].height}
     />
     {caption && <figcaption>{caption}</figcaption>}
   </figure>

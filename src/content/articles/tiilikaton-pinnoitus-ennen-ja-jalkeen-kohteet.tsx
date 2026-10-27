@@ -72,6 +72,7 @@ const Body = () => (
     <h2>Sastamala: pinnoitus aurinkopaneelien ympärillä</h2>
     <Figure
       image="tiilikaton-pinnoitus-sastamala-aurinkopaneelit-jalkeen"
+      ratio="3/4"
       alt="Tiilikatto aurinkopaneeleineen pinnoituksen jälkeen Sastamalassa"
       caption="Katto aurinkopaneeleineen pinnoituksen jälkeen Sastamalassa."
     />
@@ -85,6 +86,7 @@ const Body = () => (
     <h2>Valkeakoski: harmaa katto takaisin tummaksi</h2>
     <Figure
       image="tiilikaton-pinnoitus-valkeakoski-harmaa-katto-jalkeen"
+      ratio="3/4"
       alt="Harmaa tiilikatto pinnoituksen jälkeen Valkeakoskella"
       caption="Tiilikatto Valkeakoskella pinnoituksen jälkeen."
     />
@@ -98,6 +100,7 @@ const Body = () => (
     <h2>Lempäälä: värin vaihto harmaasta tummanharmaaksi</h2>
     <Figure
       image="tiilikaton-pinnoitus-lempaala-tummanharmaa-tiilikatto-jalkeen"
+      ratio="3/4"
       alt="Tummanharmaa tiilikatto pinnoituksen jälkeen Lempäälässä"
       caption="Tummanharmaa tiilikatto Lempäälässä pinnoituksen jälkeen."
     />

@@ -399,8 +399,10 @@ export const getProjectItemsWithNearby = (
     const i = order.indexOf(item.city);
     return i === -1 ? order.length : i;
   };
+  // Muiden kuntien sivuille ei täytetä Tampereen kohteita: kuvateksti "Tampere 2026" toistaisi sanan
+  // leipätekstissä (Eerik 27.10.2026: Tampere enintään kerran muiden kuntien sivuilla).
   const others = projectItems
-    .filter((item) => item.city !== city && matches(item, service))
+    .filter((item) => item.city !== city && matches(item, service) && (city === "tampere" || item.city !== "tampere"))
     .sort((a, b) => rank(a) - rank(b) || Number(Boolean(b.pair)) - Number(Boolean(a.pair)));
   const fill = others.slice(0, MIN_PROJECT_ITEMS - own.length);
   return { items: [...own, ...fill], hasNearby: fill.length > 0, hasOwn: own.length > 0 };

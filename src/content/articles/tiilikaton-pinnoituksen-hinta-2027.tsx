@@ -85,6 +85,7 @@ const Body = () => (
     </ol>
     <Figure
       image="tiilikaton-pinnoitus-tampere-aurinkopaneelit-suojattu"
+      ratio="3/4"
       alt="Tiilikaton pinnoitus Tampereella, aurinkopaneelit suojattu"
       caption="Aurinkopaneelit suojataan ennen pesua ja maalausta. Suojaus kuuluu hintaan."
     />

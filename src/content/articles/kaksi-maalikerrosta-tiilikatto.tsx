@@ -78,6 +78,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-tampere-tummanharmaa-tiilikatto-lahikuva"
+      ratio="3/4"
       alt="Tummanharmaa pinnoitettu tiilikatto läheltä Tampereella"
       caption="Kahteen kertaan maalattu tiilikatto läheltä. Pinta on tasainen myös profiilin aalloissa."
     />

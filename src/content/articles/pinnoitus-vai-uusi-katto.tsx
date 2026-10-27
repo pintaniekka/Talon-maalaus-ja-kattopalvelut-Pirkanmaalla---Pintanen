@@ -76,6 +76,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-tummanharmaa-kattotiili"
+      ratio="3/4"
       alt="Tummanharmaa tiilikatto pesu- ja pinnoitustyön aikana"
       caption="Pinnoituksessa tiili saa uuden pinnan. Kattoa ei pureta."
     />

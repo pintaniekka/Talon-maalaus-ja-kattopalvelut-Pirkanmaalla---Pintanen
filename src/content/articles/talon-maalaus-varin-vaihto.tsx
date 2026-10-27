@@ -53,6 +53,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen"
+      ratio="3/4"
       alt="Violetti puutalo värinvaihdon ja peittomaalauksen jälkeen"
       caption="Puutalo värinvaihdon jälkeen. Uusi väri on violetti, ja peittävä maali peitti vanhan."
     />
@@ -83,6 +84,7 @@ const Body = () => (
     <h2>Miltä vaihdettu väri näyttää?</h2>
     <Figure
       image="talon-maalaus-harmaa-omakotitalo-varinvaihto-jalkeen"
+      ratio="3/4"
       alt="Harmaa omakotitalo värinvaihdon jälkeen"
       caption="Omakotitalo värinvaihdon jälkeen. Uusi väri on harmaa."
     />

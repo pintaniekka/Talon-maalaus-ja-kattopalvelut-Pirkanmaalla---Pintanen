@@ -72,6 +72,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen"
+      ratio="3/4"
       alt="Puurakennus ja parveke huoltomaalauksen jälkeen"
       caption="Pienikin rakennus pestään, kaavitaan ja pohjamaalataan ennen pintamaalia."
     />
@@ -83,7 +84,7 @@ const Body = () => (
       <li>Tie ja pääsy. Kerro, pääseekö pakettiautolla pihaan ja onko tie kuiva.</li>
       <li>Ympäristö. Suojaamme terassit ja ympäristön ennen työtä. Laiturit ja veneet kannattaa siirtää seinän vierestä.</li>
       <li>Aikataulu. Maalaamme huhti–toukokuusta elo–syyskuuhun, kun seinä on kuiva ja lämpötila yli +5 °C. Sateella ei maalata.</li>
-      <li>Paikalla olo. Arviokäynnillä sinun pitää olla mökillä. Työn aikana se ei ole pakollista.</li>
+      <li>Paikalla olo. Arviokäynnillä on hyvä olla mökillä, mutta tarjouksen saat myös kuvien perusteella. Työn aikana paikalla olo ei ole pakollista.</li>
     </ul>
     <Avainhuomio>Mökillä kolme käytännön asiaa, vesi, tie ja seinän vieri, ratkaisevat, että työ alkaa sovittuna päivänä.</Avainhuomio>
 

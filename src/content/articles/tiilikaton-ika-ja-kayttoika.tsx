@@ -88,6 +88,7 @@ const Body = () => (
     </ul>
     <Figure
       image="tiilikaton-pinnoitus-kangasala-sammaleinen-tiilikatto-ennen"
+      ratio="3/4"
       alt="Sammaleinen tiilikatto Kangasalla ennen pinnoitusta"
       caption="Sammaleinen tiilikatto Kangasalla ennen pinnoitusta. Sammal pitää tiilen märkänä."
     />

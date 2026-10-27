@@ -77,6 +77,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-orivesi-puoliksi-pesty"
+      ratio="3/4"
       alt="Tiilikatto puoliksi pestynä Orivedellä"
       caption="Pesu kesken Orivedellä. Pesu onnistuu kosteallakin säällä, maalaus odottaa kuivaa kattoa."
     />

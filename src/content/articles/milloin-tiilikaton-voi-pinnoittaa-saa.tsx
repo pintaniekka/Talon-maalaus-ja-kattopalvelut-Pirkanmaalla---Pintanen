@@ -86,6 +86,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-lempaala-punainen-tiilikatto-pinnoitettu"
+      ratio="3/4"
       alt="Punainen pinnoitettu tiilikatto Lempäälässä"
       caption="Pinnoitettu tiilikatto Lempäälässä. Työ tehtiin poutajaksolla kesällä 2026."
     />

@@ -84,6 +84,7 @@ const Body = () => (
     <p>Telineet, nostimet, maalit ja suojaukset tuomme itse. Sinun ei tarvitse vuokrata mitään.</p>
     <Figure
       image="talon-maalaus-ympariston-suojaus-ennen-maalausta"
+      ratio="3/4"
       alt="Ympäristön suojaus ennen talon maalausta"
       caption="Suojaamme terassit ja ympäristön ennen työtä. Kevyet kalusteet kannattaa siirtää itse."
     />

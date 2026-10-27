@@ -125,19 +125,24 @@ jobs:
         id: esikatselu
         env:
           HAARA: ${{ github.head_ref }}
+          COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           # Cloudflare muuttaa haaran nimen aliakseksi: pienet kirjaimet, muut kuin a–z0–9 viivaksi.
           ALIAS=$(echo "$HAARA" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' | cut -c1-28)
           URL="https://${ALIAS}.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev"
           echo "url=$URL" >> "$GITHUB_OUTPUT"
-          # Odotetaan, että esikatselu palvelee tämän commitin buildin: build kirjoittaa commitin sitemapin lastmodit,
-          # joten tarkistetaan vain, että sivusto vastaa 200 ja sitemap on olemassa. Enintään 12 minuuttia.
-          for i in $(seq 1 48); do
-            KOODI=$(curl -s -o /dev/null -w '%{http_code}' "$URL/sitemap.xml" || true)
-            if [ "$KOODI" = "200" ]; then echo "esikatselu vastaa: $URL"; exit 0; fi
-            echo "odotetaan ($i/48), sitemap.xml -> $KOODI"; sleep 15
+          # Odotetaan, että esikatselu palvelee tämän commitin buildin: build kirjoittaa jokaiseen sivuun
+          # <meta name="build-commit"> (vite-plugin-spa-routes.ts, CF_PAGES_COMMIT_SHA). Pelkkä 200-vastaus
+          # ei riitä, koska edellisen pushin esikatselu vastaa samasta osoitteesta. Enintään 15 minuuttia.
+          for i in $(seq 1 60); do
+            SIVU=$(curl -s -H 'Cache-Control: no-cache' "$URL/?t=$i" || true)
+            if echo "$SIVU" | grep -q "<meta name=\"build-commit\" content=\"$COMMIT\""; then
+              echo "esikatselu palvelee commitin $COMMIT: $URL"; exit 0
+            fi
+            LOYTYI=$(echo "$SIVU" | grep -o '<meta name="build-commit" content="[0-9a-f]*"' | head -1 || true)
+            echo "odotetaan ($i/60), esikatselun build-commit: ${LOYTYI:-ei vastausta}"; sleep 15
           done
-          echo "::warning::Esikatselu ei vastannut 12 minuutissa: $URL. Ohitetaan verify_live."
+          echo "::warning::Esikatselu ei palvellut commitia $COMMIT 15 minuutissa: $URL. Ohitetaan verify_live."
           echo "ohita=1" >> "$GITHUB_OUTPUT"
 
       - name: verify_live.py esikatselua vastaan

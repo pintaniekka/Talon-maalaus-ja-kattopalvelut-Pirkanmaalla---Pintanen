@@ -86,6 +86,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-vihrea-puutalo-ulkomaalaus-jalkeen"
+      ratio="3/4"
       alt="Vihreä puutalo ulkomaalauksen jälkeen"
       caption="Vihreä puutalo ulkomaalauksen jälkeen."
     />

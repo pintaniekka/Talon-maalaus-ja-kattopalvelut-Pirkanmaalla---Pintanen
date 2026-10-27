@@ -76,3 +76,5 @@ from collections import Counter
 print("schemat:", Counter(t for x in rows for t in x[8].split(",")).most_common())
 for x in rows[:6]+rows[-3:]: print("  ", x)
 print("ONGELMAT:", len(problems)); [print("  -", p) for p in problems[:40]]
+# Löydökset kaatavat ajon (CI): tuloste pysyy samana, vain paluukoodi muuttuu.
+sys.exit(1 if problems else 0)

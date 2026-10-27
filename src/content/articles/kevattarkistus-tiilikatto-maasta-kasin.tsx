@@ -81,6 +81,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-sammaleinen-tiilikatto-ennen"
+      ratio="3/4"
       alt="Sammaleinen tiilikatto ennen pesua ja pinnoitusta"
       caption="Sammaleinen tiilikatto keväällä. Sammal näkyy maasta ja kertoo, että pinta pitää kosteutta."
     />

@@ -84,6 +84,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen"
+      ratio="3/4"
       alt="Puutalo ja parveke huoltomaalauksen jälkeen"
       caption="Huoltomaalattu puutalo. Pohjamaalatut kohdat eivät erotu pintamaalin alta."
     />

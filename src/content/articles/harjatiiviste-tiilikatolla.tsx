@@ -85,6 +85,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-kangasala-harjatiivisteen-asennus"
+      ratio="3/4"
       alt="Harjatiivisteen asennus tiilikatolle Kangasalla"
       caption="Harjatiivisteen asennus pinnoituksen yhteydessä Kangasalla 2026."
     />

@@ -72,6 +72,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen"
+      ratio="3/4"
       alt="Puurakennus ja parveke huoltomaalauksen jälkeen"
       caption="Pienikin rakennus pestään, kaavitaan ja pohjamaalataan ennen pintamaalia."
     />

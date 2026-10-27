@@ -2,9 +2,6 @@ import { Navigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ChevronRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
-import CityProjects from "@/components/CityProjects";
-import ReviewsTeaser from "@/components/ReviewsTeaser";
-import FAQSection from "@/components/FAQSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
@@ -12,17 +9,12 @@ import ResponsiveImage from "@/components/ResponsiveImage";
 import { getStorageUrl } from "@/lib/storage";
 import { getCityBySlug, hasPinnoitusPage, hasMaalausPage } from "@/data/cityData";
 import { getAreaCityContent } from "@/data/areaCityContent";
-import { getCityNeighborhoods } from "@/data/cityNeighborhoods";
 import { getCityLocalFacts } from "@/data/cityLocalFacts";
-import CityLocalRules from "@/components/CityLocalRules";
-import { getTestimonialsByCity } from "@/data/testimonialsData";
 import { areaCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { GOOGLE_PROFILE_URL, KOTITALOUSVAHENNYS, TAKUU } from "@/data/company";
 import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "@/data/tyovaiheet";
 
-const eerikImage = getStorageUrl("Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp");
-const eemilImage = getStorageUrl("Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp");
 
 const getAreaFAQ = (citySlug: string, cityIn: string, pinnoitusHref: string, maalausHref: string) => [
   {
@@ -75,7 +67,6 @@ const getAreaFAQ = (citySlug: string, cityIn: string, pinnoitusHref: string, maa
 const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
   const cityData = getCityBySlug(citySlug);
   const areaContent = getAreaCityContent(citySlug);
-  const neighborhoods = getCityNeighborhoods(citySlug);
 
   if (!cityData || !areaContent) return <Navigate to="/toiminta-alueet/" replace />;
 
@@ -84,8 +75,6 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
   const seo = areaCitySeo(cityData);
   const heroBase = cityHeroBase(citySlug, "alue");
   const ownPhoto = heroBase !== HERO_BASE.alue;
-  // Paikkakunnan omat arvostelut näkyvät kohdelohkossa; nosto muista arvosteluista vain, jos omia ei ole (8.2: yksi arvostelulohko).
-  const ownReviews = getTestimonialsByCity(citySlug);
 
   const pinnoitusHref = hasPinnoitusPage(citySlug) ? `/tiilikaton-pinnoitus-${citySlug}` : "/tiilikaton-pinnoitus-pirkanmaa";
   const maalausHref = hasMaalausPage(citySlug) ? `/talon-maalaus-${citySlug}` : "/talon-maalaus-pirkanmaa";
@@ -156,7 +145,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3">
               {hasPinnoitusPage(citySlug) ? `Palvelumme ${cityIn}` : `Tiilikaton pinnoitus ja talon maalaus ${cityIn}`}
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Valitse palvelu, niin näet hinnan, työvaiheet ja paikkakunnan tiedot.</p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Valitse palvelu, niin näet hinnan, työvaiheet, kuvat ja paikkakunnan tiedot.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
@@ -212,61 +201,6 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         </div>
       </section>
 
-      <CityLocalRules citySlug={citySlug} cityIn={cityIn} showHousing />
-
-      {neighborhoods && (
-        <section className="section-padding bg-background">
-          <div className="section-container">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Käymme näillä alueilla</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">Käymme koko kunnassa, esimerkiksi:</p>
-
-              <div className="bg-card rounded-2xl p-6 md:p-8 shadow-sm border border-border/50 mb-10">
-                <p className="text-base md:text-lg text-foreground leading-relaxed flex items-center justify-center flex-wrap gap-x-3 gap-y-2">
-                  {neighborhoods.neighborhoods.map((n, idx) => (
-                    <span key={n} className="inline-flex items-center gap-3">
-                      <span className="font-medium">{n}</span>
-                      {idx < neighborhoods.neighborhoods.length - 1 && <span className="text-accent/60">•</span>}
-                    </span>
-                  ))}
-                </p>
-              </div>
-
-              <Link
-                to={`${pinnoitusHref}/`}
-                className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
-                style={{ backgroundColor: "hsl(var(--accent-strong))" }}
-              >
-                Tiilikaton pinnoitus {cityName}
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      <CityProjects citySlug={citySlug} cityIn={cityIn} />
-
-      {/* ══ EERIK JA EEMIL ══ */}
-      <section className="section-padding bg-accent-light">
-        <div className="section-container max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-center">
-            <div className="flex justify-center gap-4">
-              <img loading="lazy" decoding="async" src={eerikImage} alt="Eerik Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" />
-              <img loading="lazy" decoding="async" src={eemilImage} alt="Eemil Pitkänen" width={144} height={144} className="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover" />
-            </div>
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-3 font-heading">Eerik ja Eemil tekevät työn</h2>
-              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                Eerik pinnoittaa katot, Eemil maalaa seinät. Tulemme katsomaan kohteen {cityIn} ilmaiseksi.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <FAQSection items={getAreaFAQ(citySlug, cityIn, pinnoitusHref, maalausHref)} title={`Usein kysyttyä maalaus- ja kattotöistä ${cityIn}`} />
-
-      {ownReviews.length === 0 && <ReviewsTeaser citySlug={citySlug} />}
       <ServiceContactSection variant="general" cityIn={cityIn} />
 
       <ToimintaAlueetBanner activeCity={citySlug} />

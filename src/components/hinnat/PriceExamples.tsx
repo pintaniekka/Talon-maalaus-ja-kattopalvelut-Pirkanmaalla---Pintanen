@@ -7,7 +7,7 @@ import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
  * hintalaskurin luvut ovat laskurin omia ja hintakortit omia, esimerkeissä käytetään hintakorttien lukuja.
  * Rivit luetaan suoraan prices.ts:n korteista, joten taulukko ei voi erota korteista. Hinta vähennyksen
  * jälkeen lasketaan samalla kaavalla kuin korttien "alk."-luvut (hintaVahennyksenJalkeen).
- * Ei neliöhintaa, ei minimihintaa, ei laskuesimerkkiä.
+ * Neliöhinta näytetään pinnoitukselle katon koon mukaan (Eerik 27.10.2026). Ei minimihintaa, ei laskuesimerkkiä.
  */
 export type ExampleService = "pinnoitus" | "maalaus";
 
@@ -18,6 +18,8 @@ interface Sisalto {
   /** Vierivän taulukkokääreen nimi ruudunlukijalle. */
   taulukko: string;
   rivit: readonly PriceCard[];
+  /** Neliöhinta korttia kohti (Eerik 27.10.2026), vain pinnoitukselle. */
+  neliohinnat?: readonly string[];
   kuuluu: string;
   kaynti: string;
 }
@@ -29,6 +31,7 @@ const sisalto: Record<ExampleService, Sisalto> = {
     kokoOtsikko: "Katon koko",
     taulukko: "Tiilikaton pinnoituksen hintaesimerkit",
     rivit: pinnoitusPrices.cards,
+    neliohinnat: ["18–22 €/m²", "15–18 €/m²", "13–15 €/m²"],
     kuuluu: "Hintaan kuuluu pesu, rikkinäisten tiilien vaihto, kaksi kerrosta maalia ja siivous.",
     kaynti: "Tarkan hinnan saat kirjallisena ilmaisen kuntotarkastuksen jälkeen.",
   },
@@ -74,13 +77,18 @@ export const PriceExampleTable = ({ service }: { service: ExampleService }) => {
               <th scope="col" className={th}>
                 Hinta yleensä
               </th>
+              {s.neliohinnat && (
+                <th scope="col" className={th}>
+                  Neliöhinta
+                </th>
+              )}
               <th scope="col" className={th}>
                 Kotitalousvähennyksen jälkeen
               </th>
             </tr>
           </thead>
           <tbody>
-            {s.rivit.map((card) => (
+            {s.rivit.map((card, i) => (
               <tr key={card.size} className="border-b border-border last:border-b-0">
                 <th scope="row" className={`${td} font-semibold`}>
                   {card.label}
@@ -89,6 +97,7 @@ export const PriceExampleTable = ({ service }: { service: ExampleService }) => {
                 <td className={`${td} whitespace-nowrap font-semibold tabular-nums text-accent-ink`}>
                   {fmtRange(card.normalMin, card.normalMax)}
                 </td>
+                {s.neliohinnat && <td className={`${td} whitespace-nowrap tabular-nums`}>{s.neliohinnat[i]}</td>}
                 <td className={`${td} whitespace-nowrap tabular-nums`}>
                   {fmtRange(hintaVahennyksenJalkeen(card.normalMin), hintaVahennyksenJalkeen(card.normalMax))}
                 </td>

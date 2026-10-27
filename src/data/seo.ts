@@ -92,7 +92,7 @@ export const DEFAULT_TITLE = "Tiilikaton pinnoitus ja talon maalaus Pirkanmaa | 
 // Search Console 26.10.2026 (paketti H): etusivu näkyy hauilla "maalausliike tampere", "julkisivumaalaus tampere" ja
 // "ulkomaalaus pirkanmaa" sijoilla 2–10 lähes ilman klikkauksia, joten kuvaus kertoo kotipaikan heti alussa.
 export const DEFAULT_DESCRIPTION =
-  "Tamperelainen Pintanen pinnoittaa tiilikattoja ja maalaa taloja Pirkanmaalla ja lähikunnissa. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti ja takuu.";
+  "Tamperelainen maalausliike Pintanen pinnoittaa tiilikattoja ja maalaa talojen julkisivut Pirkanmaalla ja lähikunnissa. Eerik ja Eemil tekevät työn itse.";
 
 /** Lisää "| Pintanen" otsikon loppuun, jos sitä ei vielä ole. */
 export const withBrand = (title?: string): string =>

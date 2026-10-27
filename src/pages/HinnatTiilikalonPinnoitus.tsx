@@ -58,7 +58,7 @@ const faqItems = [
   },
   {
     question: "Paljonko tiilikaton pinnoitus maksaa neliöltä?",
-    answer: `Neliöhinta on alkaen 15 €/m². Neliöhinta laskee, kun katto kasvaa, ja siihen vaikuttavat myös jyrkkyys ja tiilien kunto. Omakotitalon katto maksaa yleensä ${general}.`,
+    answer: `Yleensä 13–22 €/m². Pieni katto (150–180 m²) maksaa 18–22 €/m², yleisin kattokoko (190–240 m²) 15–18 €/m² ja suuri katto (250–300 m²) 13–15 €/m². Neliöhinta laskee, kun katto kasvaa, ja siihen vaikuttavat myös jyrkkyys ja tiilien kunto. Omakotitalon katto maksaa yleensä ${general}.`,
   },
   {
     question: "Paljonko katon huoltomaalaus maksaa?",

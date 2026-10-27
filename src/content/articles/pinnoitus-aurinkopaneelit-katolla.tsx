@@ -67,6 +67,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-tampere-aurinkopaneelit-suojattu"
+      ratio="3/4"
       alt="Aurinkopaneelit suojattuna tiilikaton pinnoituksen ajaksi Tampereella"
       caption="Aurinkopaneelit suojattuna pinnoituksen ajaksi Tampereella 2026."
     />
@@ -85,6 +86,7 @@ const Body = () => (
     <h2>Miltä valmis katto näyttää?</h2>
     <Figure
       image="tiilikaton-pinnoitus-valkeakoski-punainen-tiilikatto-aurinkopaneelit-jalkeen"
+      ratio="3/4"
       alt="Punainen tiilikatto aurinkopaneeleineen pinnoituksen jälkeen Valkeakoskella"
       caption="Punainen tiilikatto aurinkopaneeleineen pinnoituksen jälkeen Valkeakoskella."
     />

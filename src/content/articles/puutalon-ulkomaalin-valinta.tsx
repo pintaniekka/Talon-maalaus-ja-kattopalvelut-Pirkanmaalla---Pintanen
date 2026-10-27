@@ -85,6 +85,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-ulkoverhous-pensselilla-maalari"
+      ratio="3/2"
       alt="Maalari maalaa puutalon ulkoverhousta pensselillä"
       caption="Pintamaali levitetään pensselillä. Pensseli painaa maalin puuhun paremmin kuin ruisku."
     />

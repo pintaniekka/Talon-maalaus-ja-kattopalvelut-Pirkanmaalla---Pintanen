@@ -76,6 +76,7 @@ const Body = () => (
     />
     <Figure
       image="tiilikaton-pinnoitus-pirkkala-punainen-tiilikatto-harja"
+      ratio="3/4"
       alt="Punaisen tiilikaton harja Pirkkalassa"
       caption="Harja ja harjatiilet. Harjatiiviste on harjatiilien alla."
     />

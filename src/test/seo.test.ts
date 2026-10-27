@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import { getCanonicalRoutes, buildLlmsTxt, buildLlmsFullTxt, htmlToPlainText, buildSitemapXml } from "@/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, titleLength, TITLE_MIN, TITLE_MAX } from "@/data/seo";
-import { applySeo, applyAreaServed } from "../../vite-plugin-spa-routes";
+import { applySeo, applyAreaServed, applyBuildCommit, resolveBuildCommit } from "../../vite-plugin-spa-routes";
 import { allCities } from "@/data/cityData";
 import { articles } from "@/data/articles";
 import { cityLocalFacts, getCityLocalFacts } from "@/data/cityLocalFacts";
@@ -52,6 +52,18 @@ describe("sivukohtaiset SEO-tiedot (src/data/seo.ts)", () => {
 
 describe("staattinen head (vite-plugin-spa-routes)", () => {
   const indexHtml = fs.readFileSync(path.resolve(__dirname, "../../index.html"), "utf-8");
+
+  it("build-commit tulee ympäristöstä (Cloudflare, GitHub) tai gitistä ja kirjoitetaan head-osaan", () => {
+    expect(resolveBuildCommit({ CF_PAGES_COMMIT_SHA: "abc123", GITHUB_SHA: "def456" }, () => "git789")).toBe("abc123");
+    expect(resolveBuildCommit({ GITHUB_SHA: "def456" }, () => "git789")).toBe("def456");
+    expect(resolveBuildCommit({}, () => "git789")).toBe("git789");
+    expect(resolveBuildCommit({}, () => { throw new Error("ei gitiä"); })).toBe("dev");
+    const html = applyBuildCommit(indexHtml, "abc123");
+    expect(html.match(/<meta name="build-commit" content="abc123" \/>/g)).toHaveLength(1);
+    expect(html.indexOf('name="build-commit"')).toBeGreaterThan(html.indexOf('name="viewport"'));
+    // src/main.tsx poistaa vain description/og/twitter/canonical/robots-tagit; build-commit jää paikalleen.
+    expect(fs.readFileSync(path.resolve(__dirname, "../main.tsx"), "utf-8")).not.toContain("build-commit");
+  });
 
   it("applySeo kirjoittaa sivukohtaiset tagit index.html:ään ilman duplikaatteja", () => {
     const html = applySeo(indexHtml, "/meista", { title: 'Testi "otsikko"', description: "Kuvaus & muuta" });

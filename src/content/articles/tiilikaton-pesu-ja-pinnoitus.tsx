@@ -79,6 +79,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-sammaleinen-tiilikatto-ennen"
+      ratio="3/4"
       alt="Sammaleinen tiilikatto ennen pesua ja pinnoitusta"
       caption="Sammal peittää tiilet ja pitää ne märkinä. Tällainen katto rapautuu talvella."
     />
@@ -92,6 +93,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-tampere-pesu-kesken"
+      ratio="3/4"
       alt="Tiilikaton pesu käynnissä Tampereella, puolet katosta pesty"
       caption="Pesu kesken: vasen puoli on pesty, oikea odottaa vuoroaan."
     />
@@ -141,6 +143,7 @@ const Body = () => (
     <Avainhuomio>Hinta on yleensä 2 850–7 000 €, ja työn osuudesta saat kotitalousvähennyksen.</Avainhuomio>
     <Figure
       image="tiilikaton-pinnoitus-vastamaalattu-tiilikatto-jalkeen"
+      ratio="3/4"
       alt="Vastamaalattu tiilikatto pinnoituksen jälkeen"
       caption="Sama työ pesun ja kahden maalikerroksen jälkeen."
     />

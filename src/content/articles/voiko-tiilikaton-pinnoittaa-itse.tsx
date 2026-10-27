@@ -77,6 +77,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen"
+      ratio="3/4"
       alt="Kirkkaan punainen tiilikatto pinnoituksen jälkeen"
       caption="Tasainen pinta vaatii hyvät pohjatyöt ja kaksi maalikerrosta."
     />

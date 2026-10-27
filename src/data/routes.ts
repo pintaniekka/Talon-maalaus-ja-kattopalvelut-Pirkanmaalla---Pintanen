@@ -251,6 +251,10 @@ export const buildLlmsTxt = (now: Date = new Date()): string => {
     "",
     ...allCities.flatMap(cityLines),
     "",
+    "## Koko sisältö",
+    "",
+    `- [llms-full.txt](${SITE_ORIGIN}/llms-full.txt): kaikkien sivujen teksti yhdessä tiedostossa.`,
+    "",
   ].join("\n");
 };
 

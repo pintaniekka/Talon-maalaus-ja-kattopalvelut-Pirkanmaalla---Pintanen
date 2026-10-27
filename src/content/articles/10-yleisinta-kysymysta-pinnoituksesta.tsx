@@ -120,6 +120,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-sastamala-punainen-tiilikatto-jalkeen"
+      ratio="3/4"
       alt="Punainen tiilikatto pinnoituksen jälkeen Sastamalassa"
       caption="Pinnoitettu tiilikatto Sastamalassa 2026."
     />

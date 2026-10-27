@@ -53,6 +53,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-haalistunut-punainen-tiilikatto-ennen"
+      ratio="3/4"
       alt="Haalistunut punainen tiilikatto ennen pinnoitusta"
       caption="Haalistunut väri on ensimmäinen merkki kuluneesta pinnoitteesta."
     />
@@ -66,6 +67,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-sammaleinen-tiilikatto-ennen"
+      ratio="3/4"
       alt="Sammaloitunut tiilikatto ennen puhdistusta"
       caption="Nopeasti palaava sammal kertoo huokoiseksi kuluneesta tiilestä."
     />
@@ -107,6 +109,7 @@ const Body = () => (
     <Avainhuomio>Peruskohteen katto valmistuu 2–3 työpäivässä, ja takuu on 5 vuotta.</Avainhuomio>
     <Figure
       image="tiilikaton-pinnoitus-tummanharmaa-tiilikatto-pinnoitus-jalkeen"
+      ratio="3/4"
       alt="Tummanharmaa tiilikatto pinnoituksen jälkeen"
       caption="Pinnoitettu katto hylkii vettä ja pysyy puhtaana pidempään."
     />

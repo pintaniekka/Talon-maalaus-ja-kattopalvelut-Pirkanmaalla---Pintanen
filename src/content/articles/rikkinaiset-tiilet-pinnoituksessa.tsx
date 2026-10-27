@@ -80,6 +80,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-varatiilien-maalaus"
+      ratio="3/4"
       alt="Varatiilien maalaus tiilikaton pinnoituksen yhteydessä"
       caption="Varatiilet maalataan samalla kertaa, jotta ne sopivat kattoon myöhemmin."
     />

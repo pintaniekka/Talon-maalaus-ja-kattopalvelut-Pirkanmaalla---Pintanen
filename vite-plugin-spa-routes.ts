@@ -21,6 +21,7 @@
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
+import { execSync } from "child_process";
 import type { ViteDevServer } from "vite";
 import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt, buildLlmsFullTxt, buildRedirectsFile } from "./src/data/routes";
 import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
@@ -71,6 +72,31 @@ export const applySeo = (html: string, routePath: string, seo: RouteSeo): string
     );
   }
   return out;
+};
+
+/**
+ * Buildin commit-tunniste: Cloudflare Pages antaa CF_PAGES_COMMIT_SHA:n ja GitHub Actions GITHUB_SHA:n.
+ * Paikallisesti kysytään gitiltä; ilman gitiä "dev". E2E-työ odottaa esikatselua, kunnes sen
+ * build-commit on PR:n viimeisin commit (muuten se testaisi edellisen pushin buildia).
+ */
+export const resolveBuildCommit = (
+  env: Record<string, string | undefined> = process.env,
+  git: () => string = () => execSync("git rev-parse HEAD", { stdio: ["ignore", "pipe", "ignore"] }).toString().trim(),
+): string => {
+  const fromEnv = env.CF_PAGES_COMMIT_SHA || env.GITHUB_SHA;
+  if (fromEnv) return fromEnv;
+  try {
+    return git() || "dev";
+  } catch {
+    return "dev";
+  }
+};
+
+/** Kirjoittaa <meta name="build-commit"> viewport-metan perään. src/main.tsx ei poista sitä. */
+export const applyBuildCommit = (html: string, commit: string): string => {
+  const re = /<meta\s+name="viewport"[^>]*>/;
+  if (!re.test(html)) throw new Error('[spa-routes] index.html: <meta name="viewport"> puuttuu');
+  return html.replace(re, (tag) => `${tag}\n    <meta name="build-commit" content="${esc(commit)}" />`);
 };
 
 const EMPTY_ROOT = '<div id="root"></div>';
@@ -175,7 +201,7 @@ export default function spaRoutes() {
       if (!fs.existsSync(indexPath)) return;
 
       const fontTags = fontPreloadTags(distDir);
-      const baseHtml = applyAreaServed(fs.readFileSync(indexPath, "utf-8")).replace(
+      const baseHtml = applyBuildCommit(applyAreaServed(fs.readFileSync(indexPath, "utf-8")), resolveBuildCommit()).replace(
         "</title>",
         () => `</title>${fontTags ? `\n    ${fontTags}` : ""}`,
       );

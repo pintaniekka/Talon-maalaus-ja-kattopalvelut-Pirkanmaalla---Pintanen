@@ -87,6 +87,7 @@ const Body = () => (
     </p>
     <Figure
       image="talon-maalaus-keltainen-omakotitalo-huoltomaalaus-ennen"
+      ratio="3/4"
       alt="Keltainen omakotitalo ennen huoltomaalausta"
       caption="Keltainen puutalo ennen huoltomaalausta. Varjoisat kohdat ovat tummuneet ensin."
     />

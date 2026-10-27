@@ -67,6 +67,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-sastamala-sammaleinen-tiilikatto-ennen"
+      ratio="3/4"
       alt="Sammaloitunut tiilikatto Sastamalassa ennen pinnoitusta"
       caption="Jäkälälaikkuja tiilissä ja sammalta harjatiilillä. Kasvusto viihtyy siellä, missä katto pysyy pisimpään märkänä."
     />
@@ -111,6 +112,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-sammaleenpoisto"
+      ratio="3/4"
       alt="Tiilikatto kesken pesun: etummainen lape on pesty, takimmainen vielä sammaleinen"
       caption="Pesu kesken: etummainen lape on pesty, takimmainen odottaa vuoroaan. Pesun jälkeen katto saa kuivua, ja sitten se maalataan."
     />
@@ -137,6 +139,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pesu-ja-pinnoitus-orivesi-puoliksi-pesty"
+      ratio="3/4"
       alt="Tiilikatto Orivedellä, puolet katosta pesty"
       caption="Puolet katosta on pesty. Pesun jälkeen tiili saa kuivua, ja sitten se maalataan kahteen kertaan."
     />
@@ -178,6 +181,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-tummanharmaa-tiilikatto-pinnoitus-jalkeen"
+      ratio="3/4"
       alt="Tummanharmaa tiilikatto pinnoituksen jälkeen"
       caption="Pinnoitettu katto hylkii vettä ja pysyy puhtaana pidempään."
     />

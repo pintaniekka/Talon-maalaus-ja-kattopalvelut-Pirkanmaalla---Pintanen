@@ -71,6 +71,7 @@ const Body = () => (
     </p>
     <Figure
       image="tiilikaton-pinnoitus-tampere-eerik-pitkanen-katolla"
+      ratio="3/4"
       alt="Eerik Pitkänen tiilikatolla Tampereella"
       caption="Eerik tarkistaa katon itse ja tekee myös tarjouksen itse."
     />

@@ -83,6 +83,7 @@ const Body = () => (
     </ol>
     <Figure
       image="talon-maalaus-ulkoverhous-pensselilla-maalari"
+      ratio="3/2"
       alt="Maalari maalaa puutalon ulkoverhousta pensselillä"
       caption="Pintamaali vedetään pensselillä laudan suuntaan."
     />

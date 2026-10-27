@@ -6,6 +6,8 @@ import { ArticleFaq, Avainhuomio, KeyPoints, Sources, Table } from "@/components
  * yhdessä läpi; tarjous sisältää kaiken, ei piilokuluja; sade ei nosta hintaa; työn osuus laskussa eriteltynä), company.ts
  * (kotitalousvähennys), CLAUDE.md (ei rahoitusta: ei mainita). Verohallinto, Näin ilmoitat kotitalousvähennyksen (luettu
  * 26.10.2026): laskun loppusumma ja työn osuus ilmoitetaan, yrityksen pitää olla ennakkoperintärekisterissä. Ei laskuesimerkkejä.
+ * Eerik 27.10.2026: lasku voidaan kirjoittaa toisen henkilön nimiin (esim. aikuinen lapsi maksaa vanhempien talon), ja
+ * näin on tehty.
  */
 const faq = [
   {
@@ -24,6 +26,11 @@ const faq = [
     question: "Mitä laskussa pitää olla kotitalousvähennystä varten?",
     answer: "Laskun loppusumma, työn osuus eriteltynä ja yrityksen Y-tunnus. Kaikki nämä ovat laskussamme valmiina.",
   },
+  {
+    question: "Voiko laskun kirjoittaa toisen henkilön nimiin?",
+    answer:
+      "Voi. Esimerkiksi aikuinen lapsi voi maksaa vanhempiensa katon tai maalauksen ja saada kotitalousvähennyksen. Olemme kirjoittaneet laskuja näin. Kerro ennen laskutusta, kenen nimiin lasku tulee.",
+  },
 ];
 
 const Body = () => (
@@ -34,6 +41,7 @@ const Body = () => (
         <li>Loput laskutetaan, kun työ on valmis ja käyty yhdessä läpi.</li>
         <li>Tarjouksen hinta on kiinteä. Sade tai venyminen ei nosta sitä.</li>
         <li>Laskussa on työn osuus eriteltynä kotitalousvähennystä varten.</li>
+        <li>Laskun voi kirjoittaa myös toisen henkilön nimiin, esimerkiksi aikuiselle lapselle, joka maksaa vanhempiensa talon.</li>
       </ul>
     </KeyPoints>
 
@@ -73,8 +81,10 @@ const Body = () => (
       Laskussa on tarjouksen hinta, työn osuus eriteltynä ja yrityksen Y-tunnus. Työn osuus on se summa, josta
       saat kotitalousvähennyksen. Verohallinnon ohjeen mukaan ilmoitukseen tarvitaan laskun loppusumma
       arvonlisäveroineen ja työn osuus siitä, ja yrityksen pitää kuulua ennakkoperintärekisteriin. Pintanen Oy
-      kuuluu. Jos haluat jakaa laskun puolison kanssa, kerro se ennen laskutusta, niin kirjoitamme laskun sen
-      mukaan. Jakamisesta kerromme artikkelissa{" "}
+      kuuluu. Laskun voi kirjoittaa myös toisen henkilön nimiin, esimerkiksi kun aikuinen lapsi maksaa
+      vanhempiensa talon ja saa vähennyksen. Olemme kirjoittaneet laskuja näin. Jos haluat laskun toisen
+      nimiin tai jaettuna puolison kanssa, kerro se ennen laskutusta, niin kirjoitamme laskun sen mukaan.
+      Jakamisesta kerromme artikkelissa{" "}
       <Link to="/artikkelit/kotitalousvahennys-vanhempien-talo-ja-puoliso/">kotitalousvähennys vanhempien talossa ja puolisoiden kesken</Link>.
     </p>
     <Avainhuomio>Laskussa on valmiina kaikki kolme asiaa, jotka vähennyksen ilmoittamiseen tarvitaan.</Avainhuomio>

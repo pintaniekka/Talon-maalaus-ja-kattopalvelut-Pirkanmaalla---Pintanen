@@ -6,7 +6,8 @@ import { MAALAUS_HINTA } from "@/data/tyovaiheet";
  * sivuston omat faktat (tyovaiheet.ts, faqData.ts, UKK); yleiset faktat rintamamiestaloista, hirrestä ja
  * sivellinmaalauksesta on tarkistettu lähteistä, jotka on kirjattu docs/lahteet-talotyypit-2026-10-26.md.
  * Lautojen vaihdosta tai lahosta ei sanota mitään (CLAUDE.md). Kivitalon puuosat (räystäät, ikkunat, kuistit)
- * maalataan (Eerik 27.10.2026). Hinta vain haarukkana ja linkkinä hintasivulle.
+ * maalataan (Eerik 27.10.2026). Hirsitaloihin teemme sekä kuullotteen että peittomaalin (Eerik 27.10.2026).
+ * Hinta vain haarukkana ja linkkinä hintasivulle.
  */
 const talotyypit = [
   {
@@ -21,7 +22,7 @@ const talotyypit = [
     title: "Hirsitalo",
     paragraphs: [
       "Hirsi elää kosteuden mukana enemmän kuin paneeli. Siksi hirsipintaan suositellaan talomaalin sijasta kuullotetta tai peittosuojaa, jotka ovat ohuempia ja hengittävämpiä. Kuullotteen väripigmentit suojaavat auringolta ja estävät puun harmaantumisen, joten väritöntä kuullotetta ei suositella ulos.",
-      "Maalaamme hirsitaloja samoilla työvaiheilla: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintakäsittely pensselillä. Vanhaan pintaan kannattaa valita sama tuotetyyppi kuin ennen. Katsomme sen arviokäynnillä.",
+      "Teemme hirsitaloihin sekä kuullotteen että peittomaalin. Työvaiheet ovat samat kuin muissa puutaloissa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintakäsittely pensselillä. Vanhaan pintaan kannattaa valita sama tuotetyyppi kuin ennen. Katsomme sen arviokäynnillä.",
     ],
   },
   {

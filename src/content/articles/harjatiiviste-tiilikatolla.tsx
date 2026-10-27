@@ -3,8 +3,9 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Sources } from "@/component
 
 /**
  * Yrityksen faktat sivuston omia: projects.ts (harjatiivisteen asennus pinnoituksen yhteydessä, Kangasala 2026),
- * tyovaiheet.ts (saumat ja harja tarkistetaan kuntotarkastuksessa). Hintaa ei kerrota: Eerik ei ole antanut sitä
- * (asiakaskysymykset K1). Yleiset faktat: Meltex tuulettuva harjatiiviste, tuotekuvaus (luettu 26.10.2026):
+ * tyovaiheet.ts (saumat ja harja tarkistetaan kuntotarkastuksessa). Eerik 27.10.2026: asennus on lisätyö lisähintaan,
+ * harjatiilet nostetaan pois ja laitetaan takaisin, ne menevät harvoin rikki, harjatiili maksaa saman kuin lapetiili ja
+ * asiakkaalla on yleensä varatiiliä. Euromääräistä hintaa ei kerrota. Yleiset faktat: Meltex tuulettuva harjatiiviste, tuotekuvaus (luettu 26.10.2026):
  * "Harjatiiviste vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle", "keskeltä tuulettuva ja reunoilta
  * itsekiinnittyvä", "asennetaan harjapuun yli ja harjatiilen alle". K-Rauta, tiilikaton asennus: aluskate suojaa
  * sadevettä, tuulta, vetoa ja pölyä vastaan.
@@ -27,7 +28,12 @@ const faq = [
   },
   {
     question: "Vaikuttaako harjatiiviste pinnoituksen hintaan?",
-    answer: "Harjatiivisteen asennus on erillinen työ, joka kirjataan tarjoukseen omana rivinään. Pinnoituksen hinta ei muutu.",
+    answer: "Harjatiivisteen asennus on lisätyö, jonka teemme lisähintaan. Se kirjataan tarjoukseen omana rivinään, eikä pinnoituksen hinta muutu.",
+  },
+  {
+    question: "Meneekö harjatiiliä rikki asennuksessa?",
+    answer:
+      "Harvoin. Nostamme harjatiilet pois ja laitamme samat tiilet takaisin. Jos jokin harjatiili on jo rikki, vaihdamme sen. Harjatiili maksaa saman verran kuin lapetiili, ja asiakkaalla on yleensä varatiiliä.",
   },
 ];
 
@@ -38,7 +44,8 @@ const Body = () => (
         <li>Harjatiiviste on nauha harjatiilen alla. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle.</li>
         <li>Tiiviste on keskeltä tuulettuva, joten katon tuuletus toimii edelleen.</li>
         <li>Tarkistamme harjan jokaisessa kuntotarkastuksessa ja asennamme tiivisteen tarvittaessa pinnoituksen yhteydessä.</li>
-        <li>Asennus kirjataan tarjoukseen erikseen. Pinnoituksen hinta ei muutu.</li>
+        <li>Asennus on lisätyö lisähintaan. Se kirjataan tarjoukseen erikseen, eikä pinnoituksen hinta muutu.</li>
+        <li>Harjatiilet nostetaan pois ja laitetaan takaisin. Ne menevät harvoin rikki.</li>
       </ul>
     </KeyPoints>
 
@@ -72,7 +79,7 @@ const Body = () => (
     <p>
       Paras hetki on pinnoituksen yhteydessä. Olemme silloin katolla joka tapauksessa, katto on pesty ja
       harjatiilet irrotetaan helposti. Tarkistamme saumat ja harjan jokaisessa kuntotarkastuksessa. Jos tiiviste
-      puuttuu tai on rikki, ehdotamme asennusta ja kirjaamme sen tarjoukseen omana rivinään. Olemme asentaneet
+      puuttuu tai on rikki, ehdotamme asennusta lisähintaan ja kirjaamme sen tarjoukseen omana rivinään. Olemme asentaneet
       harjatiivisteitä pinnoituksen yhteydessä esimerkiksi{" "}
       <Link to="/tiilikaton-pinnoitus-kangasala/">Kangasalla</Link>.
     </p>
@@ -86,13 +93,15 @@ const Body = () => (
 
     <h2>Miten asennus tehdään?</h2>
     <ol>
-      <li>Harjatiilet irrotetaan ja harjapuu tarkistetaan.</li>
+      <li>Harjatiilet nostetaan pois ja harjapuu tarkistetaan.</li>
       <li>Tiiviste levitetään harjapuun yli ja painetaan tiilen profiilin mukaan.</li>
       <li>Reunat kiinnitetään tiiliin.</li>
-      <li>Harjatiilet asennetaan takaisin ja kiinnitetään.</li>
+      <li>Samat harjatiilet laitetaan takaisin ja kiinnitetään.</li>
     </ol>
     <p>
-      Työ tehdään samalla käynnillä kuin pinnoitus, joten se ei pidennä aikataulua paljoa. Kaikki työvaiheet
+      Harjatiilet menevät asennuksessa harvoin rikki. Jos jokin tiili on jo rikki, vaihdamme sen. Harjatiili
+      maksaa saman verran kuin lapetiili, ja asiakkaalla on yleensä varatiiliä. Työ tehdään samalla käynnillä
+      kuin pinnoitus, joten se ei pidennä aikataulua paljoa. Kaikki työvaiheet
       kuvaamme artikkelissa{" "}
       <Link to="/artikkelit/tiilikaton-pinnoituksen-tyovaiheet/">näin tiilikaton pinnoitus etenee</Link>.
     </p>
@@ -100,12 +109,12 @@ const Body = () => (
 
     <h2>Mitä harjatiivisteen asennus maksaa?</h2>
     <p>
-      Hinta riippuu harjan pituudesta ja siitä, kuinka monta harjaa katolla on. Kerromme hinnan
-      kuntotarkastuksessa, ja se on tarjouksessa erillisenä rivinä. Pinnoituksen oma hinta, yleensä 2 850–7 000
+      Asennus on lisätyö, jonka teemme lisähintaan. Hinta riippuu harjan pituudesta ja siitä, kuinka monta
+      harjaa katolla on. Kerromme hinnan kuntotarkastuksessa, ja se on tarjouksessa erillisenä rivinä. Pinnoituksen oma hinta, yleensä 2 850–7 000
       euroa, ei muutu. Katso palvelu sivulta{" "}
       <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
-    <Avainhuomio>Harjatiivisteen hinta kerrotaan kuntotarkastuksessa, ja pinnoituksen hinta pysyy 2 850–7 000 eurossa.</Avainhuomio>
+    <Avainhuomio>Harjatiiviste asennetaan lisähintaan, joka kerrotaan kuntotarkastuksessa. Pinnoituksen hinta pysyy 2 850–7 000 eurossa.</Avainhuomio>
 
     <ArticleFaq items={faq} />
 

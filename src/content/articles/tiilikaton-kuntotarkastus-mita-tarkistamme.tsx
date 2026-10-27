@@ -3,8 +3,9 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/
 
 /**
  * Yrityksen faktat sivuston omia: tyovaiheet.ts (kuntotarkastus: tiilet, saumat, piipun ympärys, läpiviennit, aluskate;
- * kirjallinen tarjous kiinteällä hinnalla), faqData.ts (samalla viikolla, iltaisin ja viikonloppuisin, asiakas paikalla),
- * docs/seo-suunnitelma-2026-10-25.md (ei erillistä raporttia). Ei ulkoisia faktoja.
+ * kirjallinen tarjous kiinteällä hinnalla), faqData.ts (samalla viikolla, iltaisin ja viikonloppuisin, asiakkaan on hyvä
+ * olla paikalla), docs/seo-suunnitelma-2026-10-25.md (ei erillistä raporttia). Etätarjous on mahdollinen (Eerik 27.10.2026):
+ * kuvat ja arvio katon koosta riittävät yleensä, tarkat mitat tai kuntoraportti ovat iso plussa. Ei ulkoisia faktoja.
  */
 const faq = [
   {
@@ -14,7 +15,7 @@ const faq = [
   {
     question: "Pitääkö minun olla paikalla kuntotarkastuksessa?",
     answer:
-      "Kyllä. Käymme katon läpi yhdessä, ja kerromme heti, mitä näemme. Tulemme yleensä samalla viikolla, myös iltaisin ja viikonloppuisin.",
+      "Ei välttämättä, mutta se on hyvä. Käymme katon läpi yhdessä, ja kerromme heti, mitä näemme. Tulemme yleensä samalla viikolla, myös iltaisin ja viikonloppuisin.",
   },
   {
     question: "Saanko kuntotarkastuksesta raportin?",
@@ -92,8 +93,9 @@ const Body = () => (
     <p>
       Heti, kun katto on lumeton. Keväällä teemme tarkastuksia paljon, koska kesän työt sovitaan silloin.
       Tulemme Pirkanmaalla ja lähikunnissa yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Sinun
-      on hyvä olla paikalla, koska käymme katon läpi yhdessä. Etätarjousta kuvista ei tehdä, koska aluskatetta
-      ja saumoja ei näe kuvasta. Varaa aika sivulta{" "}
+      on hyvä olla paikalla, koska käymme katon läpi yhdessä. Tarjouksen saat myös etänä: yleensä kuvat katosta
+      ja arvio katon koosta riittävät, ja tarkat mitat tai kuntoraportti ovat iso plussa. Kuntotarkastus paikan
+      päällä on silti tarkin tapa, koska aluskatetta ja saumoja ei näe kuvasta. Varaa aika sivulta{" "}
       <Link to="/ilmainen-kuntotarkastus/">ilmainen kuntotarkastus</Link> tai soita Eerikille.
     </p>
     <Avainhuomio>Tulemme yleensä samalla viikolla, ja keväällä tarkastuksen kannattaa varata ajoissa.</Avainhuomio>

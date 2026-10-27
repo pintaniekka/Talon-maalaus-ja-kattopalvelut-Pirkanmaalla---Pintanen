@@ -12,7 +12,8 @@ import { PINNOITUS_HINTA } from "@/data/tyovaiheet";
 
 /**
  * Ilmainen tiilikaton kuntotarkastus (yöajo 27.10.2026, paketti 5). Kaikki tiedot ovat samoja kuin
- * pinnoitus- ja hintasivuilla: mitä tarkastetaan, mitä asiakas saa ja milloin tulemme.
+ * pinnoitus- ja hintasivuilla: mitä tarkastetaan, mitä asiakas saa ja milloin tulemme. Etätarjous on mahdollinen
+ * (Eerik 27.10.2026): kuvat ja arvio katon koosta riittävät yleensä, tarkat mitat tai kuntoraportti ovat iso plussa.
  */
 const tarkastettavat = [
   "Tiilet: kuluneisuus, halkeamat ja lohkeamat. Rikkinäiset tiilet vaihdamme uusiin pinnoituksen yhteydessä.",
@@ -31,7 +32,12 @@ const faqItems = [
   },
   {
     question: "Pitääkö minun olla paikalla?",
-    answer: "Kyllä. Käymme katon ja tarjouksen läpi yhdessä, joten sovimme ajan, joka sopii sinulle. Tulemme myös iltaisin ja viikonloppuisin.",
+    answer: "Ei välttämättä. On hyvä olla paikalla, koska käymme katon ja tarjouksen läpi yhdessä. Sovimme ajan, joka sopii sinulle, myös iltaisin ja viikonloppuisin.",
+  },
+  {
+    question: "Saanko tarjouksen etänä kuvien perusteella?",
+    answer:
+      "Kyllä. Yleensä kuvat katosta ja arvio katon koosta riittävät. Tarkat mitat tai kuntoraportti ovat iso plussa. Ilmainen kuntotarkastus paikan päällä on silti tarkin tapa.",
   },
   {
     question: "Saanko hinta-arvion jo ennen käyntiä?",

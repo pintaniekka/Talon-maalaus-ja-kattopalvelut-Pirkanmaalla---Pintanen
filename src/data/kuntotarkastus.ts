@@ -201,7 +201,7 @@ export const kuntotarkastukset: Record<KuntotarkastusService, KuntotarkastusSisa
     ],
     schemaName: "Ilmainen julkisivun kuntoarvio",
     schemaAlternate: ["Ilmainen arviokäynti", "Talon maalauksen arviokäynti", "Julkisivun kuntotarkastus", "Talon kuntoarvio"],
-    hero: { base: "talon-maalaus-parkano-hilseileva-puutalo-ennen", alt: "Maalari tikkailla hilseilevän puutalon seinän luona Parkanossa" },
+    hero: { base: "talon-maalaus-orivesi-rintamamiestalo-paaty-ennen", alt: "Rintamamiestalon pääty ennen maalausta ja arviokäyntiä, Orivesi" },
     badge: { title: "Eemil katsoo seinät", text: "Käy seinät läpi itse ja vastaa jäljestä." },
     cta: { to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" },
     laskuri: "/hintalaskuri/?palvelu=maalaus",

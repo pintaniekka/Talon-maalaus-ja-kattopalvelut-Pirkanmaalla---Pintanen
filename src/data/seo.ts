@@ -78,7 +78,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/referenssit": cardHero(HERO_BASE.referenssit),
   "/kokemuksia": cardHero(HERO_BASE.kokemuksia),
   "/ilmainen-katon-kuntotarkastus": cardHero(HERO_BASE.meista),
-  "/ilmainen-julkisivun-kuntoarvio": cardHero("talon-maalaus-parkano-hilseileva-puutalo-ennen"),
+  "/ilmainen-julkisivun-kuntoarvio": cardHero("talon-maalaus-orivesi-rintamamiestalo-paaty-ennen"),
   "/kotitalousvahennys": cardHero(HERO_BASE.alue),
 };
 

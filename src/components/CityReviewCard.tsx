@@ -39,7 +39,8 @@ interface Props {
 }
 
 /**
- * Asiakkaan Google-arvostelu ja sama kohde kuvina (ennen ja jälkeen tai yksi kuva).
+ * Asiakkaan Google-arvostelu ja sama kohde kuvina (ennen ja jälkeen tai yksi kuva). Kuvat vasemmalla
+ * kapeana palstana ja teksti oikealla (Eerik 28.10.2026), jotta kortti pysyy matalana.
  * Arvostelun teksti sanasta sanaan; kertomus on Eerikin. Alkukirjainpallo on profiilikuvan tilalla.
  */
 const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
@@ -54,8 +55,8 @@ const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
       : [];
 
   return (
-    <article className="lehti-kortti overflow-hidden grid md:grid-cols-[1fr_minmax(0,40%)] md:gap-6">
-      <div className="pb-6 flex flex-col">
+    <article className="kortti overflow-hidden grid md:grid-cols-[16rem_1fr]">
+      <div className="p-6 flex flex-col md:order-2">
         <div className="flex items-center gap-3 mb-2.5">
           <span
             className="w-11 h-11 rounded-full flex items-center justify-center text-white text-lg font-medium flex-shrink-0"
@@ -80,13 +81,13 @@ const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
         )}
       </div>
       {photos.length > 0 && (
-        <div className={`grid ${photos.length === 2 ? "grid-cols-2" : "grid-cols-1"} gap-0.5 md:h-full`}>
+        <div className={`grid ${photos.length === 2 ? "grid-cols-2" : "grid-cols-1"} gap-0.5 md:order-1 md:h-full`}>
           {photos.map((p) => (
             <div key={p.base} className="relative">
               <ResponsiveImage
                 baseName={p.base}
                 alt={`${review.category === "seina" ? "Maalattu talo" : "Pinnoitettu tiilikatto"}${cityIn ? ` ${cityIn}` : ""}${p.label ? `, ${p.label.toLowerCase()}` : ""}: ${review.name}n kohde`}
-                className="w-full h-full min-h-[200px] aspect-[3/4] md:aspect-auto object-cover"
+                className="w-full h-full min-h-[200px] aspect-[4/3] md:aspect-auto object-cover"
                 sizes="(max-width: 768px) 50vw, 240px"
                 width={400}
                 height={533}

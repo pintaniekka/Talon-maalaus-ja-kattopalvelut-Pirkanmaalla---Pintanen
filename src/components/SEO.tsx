@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { merkitse } from "@/components/Rytmi";
 import { useLocation } from 'react-router-dom';
 import { DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, SITE_URL, canonicalUrl, withBrand } from '@/data/seo';
 import type { Crumb } from '@/components/Breadcrumbs';
@@ -85,5 +86,7 @@ const SEO = ({
     </Helmet>
   );
 };
+
+merkitse(SEO, "ohita");
 
 export default SEO;

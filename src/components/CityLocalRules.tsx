@@ -20,7 +20,7 @@ const CityLocalRules = ({ citySlug, cityIn, showHousing }: CityLocalRulesProps) 
   const housing = showHousing ? housingFactsText(citySlug, cityIn, "pinnoitus") : undefined;
 
   return (
-    <section className="section-padding bg-card">
+    <section className="section-padding osio">
       <div className="section-container">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">

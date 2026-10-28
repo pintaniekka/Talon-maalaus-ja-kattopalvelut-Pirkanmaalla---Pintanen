@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
@@ -41,6 +42,7 @@ const Meista = () => {
   const crumbs = [{ name: "Meistä" }];
   return (
     <div>
+      <Rytmi>
       <SEO {...staticSeo["/meista"]} breadcrumbs={crumbs} />
 
       <PageHero
@@ -63,7 +65,7 @@ const Meista = () => {
         breadcrumbs={crumbs}
       />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-6">Mikä on Pintanen?</h2>
@@ -90,12 +92,12 @@ const Meista = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-accent-light">
+      <section className="section-padding osio">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center">Kaksi veljestä, kaksi työtä</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-card rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm">
+              <div className="kortti p-6 md:p-8">
                 <img loading="lazy" decoding="async" src={eerikImage} alt="Eerik Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" />
                 <h3 className="text-xl font-bold text-foreground mb-2">Eerik pinnoittaa tiilikatot</h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -104,7 +106,7 @@ const Meista = () => {
                   ja se on yrityksen omaa. Vakuutukset ja työturvallisuuskortti ovat kunnossa.
                 </p>
               </div>
-              <div className="bg-card rounded-2xl p-6 md:p-8 border border-border/50 shadow-sm">
+              <div className="kortti p-6 md:p-8">
                 <img loading="lazy" decoding="async" src={eemilImage} alt="Eemil Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" />
                 <h3 className="text-xl font-bold text-foreground mb-2">Eemil maalaa talojen ulkoseinät</h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -122,11 +124,11 @@ const Meista = () => {
 
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {facts.map((fact) => (
-              <div key={fact.label} className="card-elevated text-center">
+              <div key={fact.label} className="kortti p-6 md:p-8 text-center">
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{fact.number}</div>
                 <div className="text-sm text-muted-foreground">{fact.label}</div>
               </div>
@@ -135,7 +137,7 @@ const Meista = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-accent-light">
+      <section className="section-padding osio">
         <div className="section-container">
           <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
             <div>
@@ -147,7 +149,7 @@ const Meista = () => {
             </div>
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-6">Faktat</h2>
-              <dl className="bg-card rounded-2xl border border-border/50 divide-y divide-border">
+              <dl className="kortti overflow-hidden divide-y divide-border">
                 {faktalaatikko.map(([k, v]) => (
                   <div key={k} className="grid grid-cols-[7rem_1fr] gap-3 px-4 py-3 text-sm">
                     <dt className="text-muted-foreground">{k}</dt>
@@ -162,6 +164,7 @@ const Meista = () => {
 
       <FAQSection items={generalFAQ} />
       <ServiceContactSection variant="general" />
+      </Rytmi>
     </div>
   );
 };

@@ -42,7 +42,7 @@ const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsP
     : headings[service ?? "all"](tampere ? "muualla Pirkanmaalla" : "lähikunnista");
 
   return (
-    <section className="py-16 md:py-20 bg-background">
+    <section className="py-16 md:py-20 osio">
       <div className="section-container">
         <div className="max-w-3xl mx-auto text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading mb-3">{heading}</h2>

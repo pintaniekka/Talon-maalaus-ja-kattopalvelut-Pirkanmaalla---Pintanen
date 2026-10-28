@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
@@ -50,6 +51,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
 
   return (
     <div>
+      <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
       <ServiceSchema
         name="Talon ulkomaalaus"
@@ -83,7 +85,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
 
       <Lyhyesti content={maalausLyhyesti} />
 
-      <section className="section-padding bg-card">
+      <section className="section-padding osio">
         <div className="section-container">
           <div className={`mx-auto ${kartta ? "max-w-5xl grid lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 items-center" : "max-w-3xl"}`}>
             <div>
@@ -122,6 +124,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}
       <ServiceContactSection variant="maalaus" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
       <ToimintaAlueetBanner activeCity={cityData.slug} service="maalaus" showNeighbors />
+      </Rytmi>
     </div>
   );
 };

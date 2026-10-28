@@ -22,7 +22,7 @@ const RelatedArticles = ({ categories, title = "Lue lisää aiheesta", max = 3 }
   if (articles.length === 0) return null;
 
   return (
-    <section className="py-14 md:py-16 bg-background" aria-labelledby="related-articles-title">
+    <section className="py-14 md:py-16 osio" aria-labelledby="related-articles-title">
       <div className="section-container max-w-4xl mx-auto">
         <h2 id="related-articles-title" className="text-2xl md:text-3xl font-bold font-heading text-foreground mb-6">
           {title}

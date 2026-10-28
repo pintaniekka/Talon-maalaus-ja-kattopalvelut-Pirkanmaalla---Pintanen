@@ -16,7 +16,7 @@ const items = [
   .filter((p): p is ProjectItem => Boolean(p));
 
 const Gallery = () => (
-  <section id="referenssit" className="section-padding bg-accent-light">
+  <section id="referenssit" className="section-padding osio">
     <div className="section-container">
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h2 className="heading-style text-3xl md:text-4xl text-accent-ink mb-4">Esimerkkikohteita</h2>

@@ -1,4 +1,5 @@
 import PageHero from "@/components/PageHero";
+import Rytmi from "@/components/Rytmi";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
 import ReferenssiGalleria from "@/components/ReferenssiGalleria";
@@ -30,8 +31,10 @@ const Referenssit = () => (
       image={{ base: HERO_BASE.referenssit, alt: "Vastamaalattu tiilikatto pinnoituksen jälkeen" }}
       breadcrumbs={[{ name: "Referenssit" }]}
     />
-    <ReferenssiGalleria />
-    <ServiceContactSection variant="general" />
+    <Rytmi>
+      <ReferenssiGalleria />
+      <ServiceContactSection variant="general" />
+    </Rytmi>
   </div>
 );
 

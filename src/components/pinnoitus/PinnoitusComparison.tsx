@@ -16,7 +16,7 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
   const artikkeli = getArticleBySlug(ARTIKKELI_SLUG);
   const artikkeliJulkaistu = !!artikkeli && isPublished(artikkeli);
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding osio">
       <div className="section-container">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-10 items-center">

@@ -9,6 +9,8 @@ interface BeforeAfterSliderProps {
   aspectRatio?: string;
   beforeSrcSet?: string;
   afterSrcSet?: string;
+  /** Lisäluokat kehykselle, esimerkiksi suurempi pyöristys tai kortin sisällä "rounded-none shadow-none". */
+  className?: string;
 }
 
 /**
@@ -27,6 +29,7 @@ const BeforeAfterSlider = ({
   aspectRatio = "4/3",
   beforeSrcSet,
   afterSrcSet,
+  className,
 }: BeforeAfterSliderProps) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -119,7 +122,7 @@ const BeforeAfterSlider = ({
 
   return (
     <div
-      className="relative w-full rounded-2xl overflow-hidden cursor-ew-resize select-none touch-pan-y bg-muted min-h-[260px] sm:min-h-0 shadow-lg"
+      className={`relative w-full rounded-2xl overflow-hidden cursor-ew-resize select-none touch-pan-y bg-muted min-h-[260px] sm:min-h-0 shadow-lg ${className ?? ""}`}
       style={{ aspectRatio }}
       ref={containerRef}
       onMouseDown={(e) => {

@@ -13,12 +13,13 @@ const ProjectGrid = ({ items, featureFirst = false }: { items: ProjectItem[]; fe
     {items.map((item, index) => (
       <figure
         key={item.pair ?? item.image ?? item.after}
-        className={`lehti-kortti overflow-hidden ${
+        className={`kortti overflow-hidden ${
           featureFirst && index === 0 ? "sm:col-span-2 lg:row-span-2" : ""
         }`}
       >
         {item.pair ? (
           <BeforeAfterSlider
+            className="rounded-none shadow-none"
             beforeImage={getResponsiveSrc(`${item.pair}-ennen`)}
             beforeSrcSet={getResponsiveSrcSet(`${item.pair}-ennen`)}
             afterImage={getResponsiveSrc(`${item.pair}-jalkeen`)}
@@ -58,7 +59,7 @@ const ProjectGrid = ({ items, featureFirst = false }: { items: ProjectItem[]; fe
             height={600}
           />
         )}
-        <figcaption className="pt-3 text-sm font-medium text-foreground">{item.caption}</figcaption>
+        <figcaption className="px-4 py-3 text-sm font-medium text-foreground">{item.caption}</figcaption>
       </figure>
     ))}
   </div>

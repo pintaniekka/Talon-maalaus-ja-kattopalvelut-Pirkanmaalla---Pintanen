@@ -24,6 +24,8 @@
   }
 
   :root {
+    /* Viiston korkeus (Rytmi): loiva, 20 px puhelimessa ja 40 px leveällä näytöllä. */
+    --viisto: 20px;
     /* Primary - Smoky Dark Blue */
     --primary: 210 25% 18%;
     --primary-foreground: 210 20% 95%;
@@ -217,6 +219,12 @@
   }
 }
 
+@media (min-width: 768px) {
+  :root {
+    --viisto: 40px;
+  }
+}
+
 @layer components {
   /* Tumma tausta: sininen teksti pysyy brändin kirkkaana sinisenä. */
   .on-dark,
@@ -268,19 +276,14 @@
     @apply py-16 md:py-24;
   }
 
-  /* Tyyli "lehtitaitto" (Eerik 28.10.2026, korvaa tyylin A): ei laatikoita, ei varjoja eikä pyöristyksiä.
-     Kortti on tekstipalsta, jonka yläreunassa on 2 px tummansininen viiva. Numero on iso otsikkofontin luku ja
-     merkki pelkkä kuvake. Osiot vuorottelevat valkoinen, vaaleansininen, sininen ja tummansininen; sininen ja
-     tummansininen osio leikataan vinosti (viisto-ala, viisto-yla). Tummassa osiossa värimuuttujat vaihtuvat,
-     joten samat komponentit toimivat sellaisinaan. */
-  .lehti-kortti {
-    @apply relative border-t-2 border-navy pt-4;
-  }
-  .lehti-numero {
-    @apply block font-heading text-3xl font-extrabold leading-none text-navy;
-  }
-  .lehti-merkki {
-    @apply inline-flex h-7 w-7 flex-none items-center justify-center text-navy;
+  /* Ulkoasu 28.10.2026 (Eerik, ehdotus 2): kolme lohkotyyppiä ja yksi kortti.
+     - .osio: lohkon tausta tulee Rytmi-kääreeltä (--osio-bg), ilman käärettä valkoinen.
+     - .osio-sininen ja .osio-navy: näyttämö, jossa värimuuttujat vaihtuvat vaaleiksi; Rytmi lisää viiston.
+     - .kortti: valkoinen pyöristetty kortti pehmeällä varjolla; kortin sisällä värit palautuvat tummiksi,
+       joten sama kortti toimii myös sinisellä ja tummansinisellä taustalla.
+     - .kortti-numero: sininen numeropallo, .kortti-merkki: vaaleansininen pallo kuvakkeelle. */
+  .osio {
+    background: var(--osio-bg, hsl(var(--background)));
   }
   .osio-sininen,
   .osio-navy {
@@ -295,18 +298,44 @@
     color: hsl(var(--foreground));
   }
   .osio-sininen {
-    background: hsl(203 100% 46%);
+    background: linear-gradient(115deg, hsl(203 100% 43%), hsl(202 100% 57%));
   }
   .osio-navy {
     background: hsl(222 64% 11%);
   }
-  .viisto-ala {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5vw), 0 100%);
-    padding-bottom: calc(4rem + 5vw);
+  .viisto {
+    clip-path: polygon(0 var(--viisto), 100% 0, 100% calc(100% - var(--viisto)), 0 100%);
+    padding-top: var(--viisto);
+    padding-bottom: var(--viisto);
   }
-  .viisto-yla {
-    clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%);
-    padding-top: calc(4rem + 5vw);
+  .kortti {
+    @apply relative bg-card rounded-3xl shadow-[0_14px_40px_rgba(10,25,47,0.08)] ring-1 ring-navy/5;
+    --foreground: 215 25% 15%;
+    --muted-foreground: 215 15% 45%;
+    --navy: 222 64% 11%;
+    --heading-navy: 230 95% 14%;
+    --accent-ink: 203 100% 37%;
+    --primary: 210 25% 18%;
+    --border: 210 20% 88%;
+    --accent: 202 100% 61%;
+    color: hsl(var(--foreground));
+  }
+  .osio-sininen .kortti,
+  .osio-navy .kortti {
+    @apply ring-0 shadow-[0_18px_44px_rgba(5,20,45,0.22)];
+  }
+  .kortti-numero {
+    @apply inline-flex h-11 w-11 flex-none items-center justify-center rounded-full bg-accent-strong font-heading text-lg font-extrabold text-accent-foreground;
+  }
+  .kortti-merkki {
+    @apply inline-flex h-11 w-11 flex-none items-center justify-center rounded-full bg-accent-light text-accent-strong;
+  }
+  .lohko-otsake {
+    @apply block font-heading text-xs font-extrabold uppercase tracking-[0.2em] text-accent-ink;
+  }
+  .osio-sininen .lohko-otsake,
+  .osio-navy .lohko-otsake {
+    @apply text-paint-yellow;
   }
 
   .card-elevated {

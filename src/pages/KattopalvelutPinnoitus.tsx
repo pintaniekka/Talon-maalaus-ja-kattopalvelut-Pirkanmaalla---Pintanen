@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
@@ -28,6 +29,7 @@ const KattopalvelutPinnoitus = () => {
   const seo = staticSeo["/tiilikaton-pinnoitus-pirkanmaa"];
   return (
     <div>
+      <Rytmi>
       <SEO {...seo} breadcrumbs={[{ name: "Tiilikaton pinnoitus" }]} />
       <ServiceSchema
         name="Tiilikaton pinnoitus"
@@ -86,6 +88,7 @@ const KattopalvelutPinnoitus = () => {
       <TestimonialsMarquee testimonials={roofTestimonials} title="Mitä kattoasiakkaat sanovat meistä?" />
       <RelatedArticles categories={["katto", "raha"]} />
       <ServiceContactSection variant="katto" />
+      </Rytmi>
     </div>
   );
 };

@@ -66,7 +66,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service, hideMap }: CityHousingFac
   const c = copy[service];
 
   return (
-    <section className="section-padding bg-accent-light">
+    <section className="section-padding osio">
       <div className="section-container">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
@@ -77,7 +77,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service, hideMap }: CityHousingFac
               alt="Pintasen toiminta-alue kartalla: Pirkanmaa ja Kanta-Häme"
               width={200}
               height={200}
-              className="float-right ml-4 mb-3 w-32 md:w-44"
+              className="float-right ml-4 mb-3 w-32 md:w-44 rounded-2xl border border-border/50 shadow-md bg-card"
             />}
             <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{c.title(cityIn)}</h2>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">{text}</p>
@@ -91,7 +91,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service, hideMap }: CityHousingFac
             </Link>
           </div>
 
-          <figure className="lehti-kortti">
+          <figure className="kortti p-5 md:p-6">
             <figcaption className="text-sm font-semibold text-foreground mb-4">
               Omakoti- ja paritalot {cityIn} rakennusvuoden mukaan
             </figcaption>

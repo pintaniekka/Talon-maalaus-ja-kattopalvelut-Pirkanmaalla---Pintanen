@@ -20,8 +20,8 @@ interface FAQSectionProps {
  * Avaaminen on React-ohjattu (Eerik 14.10.2026: vastaus avautuu liukumalla): natiivi <details> ei osaa
  * animoida korkeutta, joten kysymys on painike (aria-expanded, aria-controls) ja vastaus liukuu auki
  * grid-template-rows-siirtymällä 0fr → 1fr. Liikettä vähentäville ei animoida.
- * Ulkoasu lehtitaitto (Eerik 28.10.2026): lista alkaa tummansinisellä viivalla, kysymykset erotetaan
- * ohuilla viivoilla ja plus-merkki kääntyy ristiksi.
+ * Ulkoasu 28.10.2026: lista alkaa tummansinisellä viivalla, kysymykset erotetaan ohuilla viivoilla ja
+ * plus-merkki on vaaleansininen pallo, joka kääntyy ristiksi.
  */
 const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
   const baseId = useId();
@@ -49,7 +49,7 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
       <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-24 osio">
         <div className="section-container max-w-[820px] mx-auto">
           <h2 className="heading-style text-3xl md:text-4xl mb-8 md:mb-12 text-center" style={{ color: 'hsl(var(--heading-navy))' }}>
             {title || 'Usein kysytyt kysymykset'}
@@ -70,10 +70,10 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
                     >
                       <span>{item.question}</span>
                       <span
-                        className={`lehti-merkki mt-0.5 transition-transform duration-300 motion-reduce:transition-none ${isOpen ? 'rotate-45' : ''}`}
+                        className={`kortti-merkki mt-0.5 !h-8 !w-8 transition-transform duration-300 motion-reduce:transition-none ${isOpen ? 'rotate-45' : ''}`}
                         aria-hidden="true"
                       >
-                        <Plus className="h-5 w-5" strokeWidth={2.5} />
+                        <Plus className="h-4 w-4" strokeWidth={2.25} />
                       </span>
                     </button>
                   </h3>

@@ -75,14 +75,15 @@ const Suurennus = ({ avattu, onClose }: { avattu: Avattu; onClose: () => void })
 
 const kortinOtsikko = (k: ReferenssiNakyma) => `${k.title}, ${k.cityName}${k.year ? ` ${k.year}` : ""}`;
 
-/** Yksi kortti: liukusäädin, kuvapari tai yksi kuva, alla otsikko ja yksi lause. Tyyli lehtitaitto. */
+/** Yksi kortti: liukusäädin, kuvapari tai yksi kuva, alla otsikko ja yksi lause. */
 const Kortti = ({ k, iso, onOpen }: { k: ReferenssiNakyma; iso: boolean; onOpen: (a: Avattu) => void }) => {
   const otsikko = kortinOtsikko(k);
   const sizes = iso ? "(max-width: 1023px) 100vw, 760px" : "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 380px";
   return (
-    <figure className={`lehti-kortti flex flex-col overflow-hidden ${iso ? "sm:col-span-2" : ""}`}>
+    <figure className={`kortti flex flex-col overflow-hidden ${iso ? "sm:col-span-2" : ""}`}>
       {k.pair ? (
         <BeforeAfterSlider
+          className="rounded-none shadow-none"
           beforeImage={getResponsiveSrc(`${k.pair}-ennen`)}
           beforeSrcSet={getResponsiveSrcSet(`${k.pair}-ennen`)}
           afterImage={getResponsiveSrc(`${k.pair}-jalkeen`)}
@@ -173,7 +174,7 @@ const ReferenssiGalleria = () => {
   };
 
   return (
-    <section className="section-padding bg-background" aria-labelledby="referenssit-otsikko">
+    <section className="section-padding osio" aria-labelledby="referenssit-otsikko">
       <div className="section-container max-w-6xl">
         <div className="mb-8 text-center">
           <h2 id="referenssit-otsikko" className="font-heading text-3xl font-extrabold text-navy md:text-4xl">

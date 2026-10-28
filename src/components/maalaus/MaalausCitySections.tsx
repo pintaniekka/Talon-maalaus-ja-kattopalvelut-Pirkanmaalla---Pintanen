@@ -3,6 +3,7 @@ import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { MAALAUS_HINTA } from "@/data/tyovaiheet";
+import { merkitse } from "@/components/Rytmi";
 
 /**
  * Talon maalauksen kaupunkisivujen omat osiot. Pääsivulla (/talon-maalaus-pirkanmaa)
@@ -44,7 +45,7 @@ const signs = [
 ];
 
 export const MaalausCitySigns = ({ cityIn }: CityProps) => (
-  <section className="section-padding bg-accent-light">
+  <section className="section-padding osio">
     <div className="section-container">
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Mistä tiedät, että talosi {cityIn} pitää maalata?</h2>
@@ -57,6 +58,7 @@ export const MaalausCitySigns = ({ cityIn }: CityProps) => (
       <div className="grid lg:grid-cols-2 gap-10 items-start max-w-6xl mx-auto">
         <div className="lg:sticky lg:top-28">
           <BeforeAfterSlider
+            className="rounded-3xl"
             beforeImage={getResponsiveSrc(beforeBase)}
             afterImage={getResponsiveSrc(afterBase)}
             beforeSrcSet={getResponsiveSrcSet(beforeBase)}
@@ -70,7 +72,7 @@ export const MaalausCitySigns = ({ cityIn }: CityProps) => (
           <ol className="space-y-5">
             {signs.map((s, i) => (
               <li key={s.sign} className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent-strong text-accent-foreground font-bold flex items-center justify-center">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-paint-yellow text-paint-yellow-foreground font-heading font-extrabold flex items-center justify-center">
                   {i + 1}
                 </span>
                 <div>
@@ -91,8 +93,7 @@ export const MaalausCitySigns = ({ cityIn }: CityProps) => (
 
           <Link
             to="/tarjouspyynto/?palvelu=maalaus"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
-            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-heading font-extrabold bg-paint-yellow text-paint-yellow-foreground transition-colors hover:bg-paint-yellow-hover"
           >
             Pyydä ilmainen arviokäynti {cityIn}
           </Link>
@@ -102,10 +103,12 @@ export const MaalausCitySigns = ({ cityIn }: CityProps) => (
   </section>
 );
 
+merkitse(MaalausCitySigns, "sininen");
+
 const comparisonBase = "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen";
 
 export const MaalausCityComparison = ({ cityIn }: CityProps) => (
-  <section className="section-padding bg-background">
+  <section className="section-padding osio">
     <div className="section-container">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
         <div>

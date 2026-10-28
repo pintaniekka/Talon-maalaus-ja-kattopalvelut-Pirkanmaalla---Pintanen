@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { merkitse } from "@/components/Rytmi";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { allCities, pinnoitusCities, maalausCities, getCityBySlug, type CityData } from "@/data/cityData";
@@ -160,10 +161,10 @@ const ToimintaAlueetBanner = ({ activeCity, service = "alue", showNeighbors = fa
   const city = activeCity ? getCityBySlug(activeCity) : undefined;
 
   return (
-    <section className="osio-navy viisto-yla pb-10 md:pb-14" aria-labelledby="toiminta-alueet-otsikko">
+    <section className="bg-background py-8 md:py-12" aria-labelledby="toiminta-alueet-otsikko">
       <div className="section-container">
-        <div className="mx-auto max-w-5xl text-navy-foreground">
-          <div className="grid gap-6 lg:grid-cols-[1fr_minmax(0,190px)] lg:gap-10">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl bg-navy text-navy-foreground md:rounded-3xl">
+          <div className="grid gap-6 p-5 md:p-7 lg:grid-cols-[1fr_minmax(0,190px)] lg:gap-10 lg:p-8">
             <div>
               <h2 id="toiminta-alueet-otsikko" className="heading-style text-2xl leading-[1.1] text-white md:text-3xl">
                 Toiminta-alueet
@@ -236,5 +237,7 @@ const ToimintaAlueetBanner = ({ activeCity, service = "alue", showNeighbors = fa
     </section>
   );
 };
+
+merkitse(ToimintaAlueetBanner, "oma");
 
 export default ToimintaAlueetBanner;

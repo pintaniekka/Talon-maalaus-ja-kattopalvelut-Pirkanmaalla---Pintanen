@@ -13,7 +13,7 @@ const pricingIncludes = ['Homepesu', 'Irtoavan maalin kaavinta', 'Pohjamaali pal
 
 const MaalausPricingCards = ({ cityName = 'Pirkanmaa', cityIn, calculatorHref = '/hintalaskuri/?palvelu=maalaus', calculatorLabel }: { cityName?: string; cityIn?: string; calculatorHref?: string; calculatorLabel?: string }) => {
   return (
-    <section className="section-padding bg-accent-light">
+    <section className="section-padding osio">
       <div className="section-container max-w-5xl mx-auto">
         <div
           className="text-center mb-10"
@@ -30,13 +30,15 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', cityIn, calculatorHref = 
           {cards.map((card, i) => (
             <div
               key={i}
-              className="lehti-kortti flex flex-col"
+              className={`kortti flex flex-col overflow-hidden ${card.featured ? 'ring-2 ring-accent-strong md:-translate-y-2' : ''}`}
             >
               {card.featured && (
-                <p className="text-xs font-extrabold uppercase tracking-wider text-accent-ink mb-1">{FEATURED_RIBBON}</p>
+                <div className="bg-accent-strong text-accent-foreground text-xs font-extrabold uppercase tracking-wider text-center py-1.5">
+                  {FEATURED_RIBBON}
+                </div>
               )}
 
-              <div className="flex flex-col flex-1">
+              <div className="p-5 md:p-6 flex flex-col flex-1">
                 <p className={`text-xl md:text-2xl font-bold text-foreground ${card.featured && card.label === FEATURED_RIBBON ? 'mb-4' : ''}`}>{card.size}</p>
                 {!(card.featured && card.label === FEATURED_RIBBON) && (
                   <p className="text-sm text-muted-foreground mb-4">{card.label}</p>

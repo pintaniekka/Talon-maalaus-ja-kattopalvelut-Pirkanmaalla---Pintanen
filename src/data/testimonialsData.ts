@@ -66,6 +66,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Jukka Loukkola",
+    city: "tampere",
     stars: 5,
     text: "Maalauspalvelu, talon maalaus sujui jouhevasti ja sopimuksen mukaisesti. Työn jälki oli erinomainen, tekijät ammattilaisia nuoresta iästä huolimatta. Kommunikointi yrittäjän kanssa oli helppoa. Lämpimästi voi suositella!",
     category: "seina",
@@ -127,6 +128,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Päivi Tuominen",
+    city: "orivesi",
     stars: 5,
     text: "Hirsimökin maalausurakka sujui todella sujuvasti ja hyvin alusta loppuun asti. Vahva suositus.",
     category: "seina",
@@ -164,6 +166,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Ari Reunanen",
+    city: "akaa",
     stars: 5,
     text: "Talon ulkomaalaus tehtiin sovittua nopeammin, mutta myös tarkasti - todella hyvä työnjälki. Yhteydenpito oli sujuvaa ja herrojen kanssa oli mukava asioida. Suosittelen!",
     category: "seina",
@@ -182,6 +185,7 @@ export const allTestimonials: Testimonial[] = [
   },
   {
     name: "Lotta Härkönen",
+    city: "nokia",
     stars: 5,
     text: "Talon maalaus sujui sovitusti, työn jälki erittäin hyvää. Kaikki meni kuten pitikin, maalarit kohteliaita ja viestivät suunnitelmista hyvissä ajoin. Toivat tarvikkeensa tullessaan ja veivät mennessään, meille ei jäänyt mitään siivottavaa tai kaatopaikalle vietävää.",
     category: "seina",

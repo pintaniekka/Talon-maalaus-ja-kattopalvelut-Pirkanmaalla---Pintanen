@@ -24,6 +24,39 @@ export interface ReferenssiKohde {
 }
 
 const lisakohteet: ReferenssiKohde[] = [
+  // Eemilin kohde 9 (27.10.2026): toiminta-alueen ulkopuolella, paikkakuntaa ei kerrota.
+  {
+    city: "muu",
+    services: ["maalaus"],
+    title: "Talon maalaus",
+    text: "Talossa on paljon nurkkia ja kulmia, joten jokainen nurkka tarkistettiin erikseen. Korkeimpiin kohtiin vuokrattiin nostin.",
+    alt: "Valkoinen puutalo ja erkkeri ennen ja jälkeen maalauksen",
+    pair: "talon-maalaus-valkoinen-puutalo-erkkeri",
+  },
+  {
+    city: "muu",
+    services: ["maalaus"],
+    title: "Talon maalaus",
+    text: "Parvekkeen puoli ennen ja jälkeen maalauksen.",
+    alt: "Valkoisen puutalon parveke ennen ja jälkeen maalauksen",
+    pair: "talon-maalaus-valkoinen-puutalo-parveke",
+  },
+  {
+    city: "muu",
+    services: ["maalaus"],
+    title: "Talon maalaus",
+    text: "Sivuseinä ennen ja jälkeen maalauksen.",
+    alt: "Valkoisen puutalon sivuseinä ennen ja jälkeen maalauksen",
+    pair: "talon-maalaus-valkoinen-puutalo-sivuseina",
+  },
+  {
+    city: "muu",
+    services: ["maalaus"],
+    title: "Talon maalaus",
+    text: "Pihan puoli keväällä ennen maalausta ja syksyllä maalauksen jälkeen.",
+    alt: "Valkoinen puutalo pihan puolelta ennen ja jälkeen maalauksen",
+    pair: "talon-maalaus-valkoinen-puutalo-piha",
+  },
   {
     city: "tampere",
     services: ["maalaus"],
@@ -154,7 +187,7 @@ const projektista = (p: ProjectItem): ReferenssiKohde => {
         ? "Sama katto ennen ja jälkeen. Vedä liukusäädintä."
         : ""
       : kuvateksti;
-  return { city: p.city, services: p.services, title: service, text, alt: p.alt, pair: p.pair, before: p.before, after: p.after, image: p.image };
+  return { city: p.city, services: p.services, title: service, text: p.kertomus ?? text, alt: p.alt, pair: p.pair, before: p.before, after: p.after, image: p.image };
 };
 
 const vuosi = (p: ProjectItem): string | undefined => p.caption.match(/(20\d\d)\s*$/)?.[1];
@@ -166,7 +199,8 @@ export interface ReferenssiNakyma extends ReferenssiKohde {
   ennenJalkeen: boolean;
 }
 
-export const cityLabel = (slug: string): string => (slug === "pirkanmaa" ? "Pirkanmaa" : (getCityBySlug(slug)?.name ?? slug));
+export const cityLabel = (slug: string): string =>
+  slug === "pirkanmaa" ? "Pirkanmaa" : slug === "muu" ? "Pirkanmaan ulkopuolella" : (getCityBySlug(slug)?.name ?? slug);
 
 /** Kaikki referenssikohteet: ennen–jälkeen-parit ensin, sitten muut, kaupunkisivujen kohteet mukana. */
 export const referenssit: ReferenssiNakyma[] = [

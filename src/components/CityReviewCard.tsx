@@ -75,7 +75,7 @@ const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
         <blockquote className="text-[15px] text-foreground leading-snug">{review.text}</blockquote>
         {reviewCase.story && (
           <p className="mt-4 text-sm text-muted-foreground leading-relaxed border-l-2 border-accent pl-3">
-            <span className="font-semibold text-foreground">Eerik kertoo kohteesta: </span>
+            <span className="font-semibold text-foreground">{reviewCase.kertoja ?? "Eerik"} kertoo kohteesta: </span>
             {reviewCase.story}
           </p>
         )}

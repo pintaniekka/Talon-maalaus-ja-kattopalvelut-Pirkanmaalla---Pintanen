@@ -137,7 +137,7 @@ const Hintalaskuri = () => {
             <p className={pClass}>
               Laskuri antaa haarukan. Tarjous on kiinteä hinta, ja saat sen kirjallisena ilmaisen kuntotarkastuksen tai arviokäynnin
               jälkeen. Käynnillä katsomme katon tai seinät ja käymme tarjouksen läpi yhdessä. Hintaan kuuluu koko työ: suojaus,
-              pohjatyöt, pohjamaalaus, pintamaalaus, siivous ja takuu. Matkasta ei tule lisäkulua. Jos sovit katon ja seinät samalla
+              pohjatyöt, pohjamaalaus, pintamaalaus, siivous ja takuu. Jos sovit katon ja seinät samalla
               kertaa, saat edullisemman pakettihinnan.
             </p>
           </div>

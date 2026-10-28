@@ -51,7 +51,7 @@ const faqItems = [
   },
   {
     question: "Milloin pääsette katsomaan katon?",
-    answer: 'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen. Lue, mitä <a href="/ilmainen-kuntotarkastus/">ilmaisessa kuntotarkastuksessa</a> katsotaan.',
+    answer: 'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen. Lue, mitä <a href="/ilmainen-katon-kuntotarkastus/">ilmaisessa kuntotarkastuksessa</a> katsotaan.',
   },
   {
     question: "Kuinka pitkään pinnoitettu katto kestää?",

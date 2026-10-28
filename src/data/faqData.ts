@@ -93,7 +93,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   },
   {
     question: 'Kattoremontti vai pinnoitus?',
-    // Aluskatteen pienet vauriot: sama tieto kuin sivulla /ilmainen-kuntotarkastus/ (Eerik 26.10.2026).
+    // Aluskatteen pienet vauriot: sama tieto kuin sivulla /ilmainen-katon-kuntotarkastus/ (Eerik 26.10.2026).
     answer:
       'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.',
   },
@@ -273,7 +273,7 @@ export const generalFAQ: FAQItem[] = [
   {
     question: 'Toimitteko Pirkanmaan ulkopuolella?',
     answer:
-      'Toimimme Pirkanmaalla ja lähikunnissa. Matkasta ei tule lisäkulua. Jos kohde on kauempana, kysy, niin katsomme, onnistuuko se.',
+      'Toimimme Pirkanmaalla ja lähikunnissa. Jos kohde on kauempana, kysy, niin katsomme, onnistuuko se.',
   },
   {
     question: 'Saanko työstä kotitalousvähennyksen?',

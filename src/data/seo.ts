@@ -77,7 +77,8 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/toiminta-alueet": cardHero(HERO_BASE.toimintaAlueet),
   "/referenssit": cardHero(HERO_BASE.referenssit),
   "/kokemuksia": cardHero(HERO_BASE.kokemuksia),
-  "/ilmainen-kuntotarkastus": cardHero(HERO_BASE.meista),
+  "/ilmainen-katon-kuntotarkastus": cardHero(HERO_BASE.meista),
+  "/ilmainen-julkisivun-kuntoarvio": cardHero("talon-maalaus-parkano-hilseileva-puutalo-ennen"),
   "/kotitalousvahennys": cardHero(HERO_BASE.alue),
 };
 
@@ -166,9 +167,15 @@ export const staticSeo: Record<string, RouteSeo> = {
     title: "Talon maalaus Pirkanmaa – ulkomaalaus, 2 v takuu",
     description: `Talon maalaus Pirkanmaalla. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin ja maalaamme pensselillä. Hinta yleensä ${MAALAUS_HINTA}, 2 v takuu.`,
   },
-  "/ilmainen-kuntotarkastus": {
-    title: "Ilmainen tiilikaton kuntotarkastus Pirkanmaalla",
-    description: "Pyydä ilmainen tiilikaton kuntotarkastus. Eerik katsoo tiilet, saumat, läpiviennit ja aluskatteen, yleensä samalla viikolla. Saat kirjallisen tarjouksen heti.",
+  "/ilmainen-katon-kuntotarkastus": {
+    title: "Ilmainen katon kuntotarkastus Pirkanmaalla – 0 €",
+    description:
+      "Ilmainen katon kuntotarkastus: Eerik katsoo tiilet, saumat, läpiviennit ja aluskatteen, yleensä samalla viikolla. Kirjallinen tarjous kiinteällä hinnalla.",
+  },
+  "/ilmainen-julkisivun-kuntoarvio": {
+    title: "Ilmainen julkisivun kuntoarvio ja arviokäynti Pirkanmaalla",
+    description:
+      "Ilmainen arviokäynti ennen talon maalausta: Eemil katsoo maalipinnan, paljaat puukohdat ja pohjatöiden määrän. Kirjallinen tarjous kiinteällä hinnalla.",
   },
   "/kotitalousvahennys": {
     title: "Kotitalousvähennys 2026 ja 2027: katto ja maalaus",

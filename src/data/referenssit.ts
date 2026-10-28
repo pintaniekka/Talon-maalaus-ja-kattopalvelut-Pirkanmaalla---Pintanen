@@ -29,7 +29,7 @@ const lisakohteet: ReferenssiKohde[] = [
     city: "muu",
     services: ["maalaus"],
     title: "Talon maalaus",
-    text: "Talossa on paljon nurkkia ja kulmia, joten jokainen nurkka tarkistettiin erikseen. Korkeimpiin kohtiin vuokrattiin nostin.",
+    text: "Talossa oli paljon nurkkia ja kulmia, joten jokainen nurkka tarkistettiin erikseen. Korkeimpiin kohtiin vuokrattiin nostin.",
     alt: "Valkoinen puutalo ja erkkeri ennen ja jälkeen maalauksen",
     pair: "talon-maalaus-valkoinen-puutalo-erkkeri",
   },
@@ -182,12 +182,14 @@ const projektista = (p: ProjectItem): ReferenssiKohde => {
       : "Tiilikaton pinnoitus";
   const kuvateksti = p.caption.replace(/,\s*[^,]+$/, "");
   // Kun kuvateksti olisi sama kuin otsikko ("Tiilikaton pinnoitus"), parille kerrotaan liukusäätimestä ja yksittäiselle kuvalle ei toisteta.
-  const text =
-    kuvateksti.toLowerCase() === service.toLowerCase()
-      ? p.pair
-        ? "Sama katto ennen ja jälkeen. Vedä liukusäädintä."
-        : ""
-      : kuvateksti;
+  // Ei "sama katto": sen näkee kuvasta (Eerik 28.10.2026).
+  const liukuteksti =
+    service === "Katto ja seinät"
+      ? "Katto pinnoitettiin ja seinät maalattiin. Vedä liukusäädintä."
+      : service === "Talon maalaus"
+        ? "Seinät ennen ja jälkeen maalauksen. Vedä liukusäädintä."
+        : "Katto ennen ja jälkeen pinnoituksen. Vedä liukusäädintä.";
+  const text = kuvateksti.toLowerCase() === service.toLowerCase() ? (p.pair ? liukuteksti : "") : kuvateksti;
   return { city: p.city, services: p.services, title: service, text: p.kertomus ?? text, alt: p.alt, pair: p.pair, before: p.before, after: p.after, image: p.image };
 };
 

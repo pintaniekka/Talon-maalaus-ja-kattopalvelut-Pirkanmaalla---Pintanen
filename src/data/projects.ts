@@ -27,10 +27,10 @@ export const projectItems: ProjectItem[] = [
   // Tampere
   {
     city: "tampere",
-    services: ["pinnoitus"],
+    services: ["pinnoitus", "maalaus"],
     pair: "tiilikaton-pinnoitus-tampere-tiilitalo",
-    caption: "Tiilikaton pinnoitus, Tampere 2026",
-    alt: "Tiilikatto Tampereella ennen ja jälkeen pinnoituksen",
+    caption: "Katto pinnoitettiin ja seinät maalattiin, Tampere 2026",
+    alt: "Tiilitalo Tampereella ennen ja jälkeen katon pinnoituksen ja seinien maalauksen",
   },
   {
     city: "tampere",
@@ -50,7 +50,7 @@ export const projectItems: ProjectItem[] = [
     city: "tampere",
     services: ["pinnoitus", "maalaus"],
     image: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
-    caption: "Katon ja seinien maalaus samaan taloon, Tampere 2026",
+    caption: "Katto pinnoitettiin ja seinät maalattiin, Tampere 2026",
     alt: "Puutalo Tampereella katon ja seinien maalauksen jälkeen",
   },
   {
@@ -79,7 +79,7 @@ export const projectItems: ProjectItem[] = [
     city: "ylojarvi",
     services: ["pinnoitus"],
     image: "tiilikaton-pesu-ja-pinnoitus-ylojarvi-puoliksi-pesty",
-    caption: "Työ kesken: vasen puoli on vielä käsittelemättä, Ylöjärvi 2026",
+    caption: "Pesu kesken: oikea puoli pesty, vasen vielä pesemättä, Ylöjärvi 2026",
     alt: "Tiilikatto puoliksi pestynä Ylöjärvellä",
   },
   {
@@ -167,7 +167,7 @@ export const projectItems: ProjectItem[] = [
     city: "orivesi",
     services: ["pinnoitus"],
     image: "tiilikaton-pesu-ja-pinnoitus-orivesi-puoliksi-pesty",
-    caption: "Työ kesken: vasen puoli on vielä käsittelemättä, Orivesi 2026",
+    caption: "Pesu kesken: oikea puoli pesty, vasen vielä pesemättä, Orivesi 2026",
     alt: "Tiilikatto puoliksi pestynä Orivedellä",
   },
   {
@@ -203,7 +203,7 @@ export const projectItems: ProjectItem[] = [
     city: "parkano",
     services: ["maalaus"],
     image: "talon-maalaus-parkano-keltainen-puutalo-maalauksen-jalkeen",
-    caption: "Sama talo maalauksen jälkeen, Parkano 2026",
+    caption: "Keltainen puutalo maalauksen jälkeen, Parkano 2026",
     alt: "Keltainen puutalo maalauksen jälkeen Parkanossa",
   },
   // Lokakuussa 2026 lisätyt kohteet (vuotta ei kuvateksteissä, koska sitä ei ole vahvistettu)
@@ -275,7 +275,7 @@ export const projectItems: ProjectItem[] = [
     city: "valkeakoski",
     services: ["pinnoitus"],
     image: "tiilikaton-pinnoitus-valkeakoski-aurinkopaneelit-ennen",
-    caption: "Sama katto ennen pinnoitusta, Valkeakoski",
+    caption: "Tiilikatto ja aurinkopaneelit ennen pinnoitusta, Valkeakoski",
     alt: "Sammaleinen tiilikatto ja aurinkopaneelit ennen pinnoitusta Valkeakoskella",
   },
   {
@@ -429,7 +429,7 @@ export const projectItems: ProjectItem[] = [
     pair: "talon-maalaus-akaa-keltainen-omakotitalo-paaty",
     caption: "Keltaisen talon pääty ennen ja jälkeen huoltomaalauksen, Akaa",
     alt: "Keltaisen omakotitalon pääty Akaassa ennen ja jälkeen huoltomaalauksen",
-    kertomus: "Uusi keltainen oli hieman vanhaa tummempi, joten pensselinjäljet viimeisteltiin tarkasti. Lopputulos on erittäin hyvä.",
+    kertomus: "Uusi keltainen oli hieman vanhaa tummempi, joten pensselinjäljet viimeisteltiin tarkasti. Lopputulos oli erittäin hyvä.",
   },
   {
     city: "akaa",

@@ -387,7 +387,8 @@ export const projectItems: ProjectItem[] = [
   {
     city: "orivesi",
     services: ["maalaus"],
-    pair: "talon-maalaus-orivesi-hirsimokki-ikkuna",
+    before: "talon-maalaus-orivesi-hirsimokki-ikkuna-ennen",
+    after: "talon-maalaus-orivesi-hirsimokki-ikkuna-jalkeen",
     caption: "Hirsimökin ikkuna ja puitteet ennen ja jälkeen maalauksen, Orivesi",
     alt: "Hirsimökin ikkuna Orivedellä ennen ja jälkeen puitteiden maalauksen",
   },
@@ -433,7 +434,8 @@ export const projectItems: ProjectItem[] = [
   {
     city: "akaa",
     services: ["maalaus"],
-    pair: "talon-maalaus-akaa-keltainen-omakotitalo-terassi",
+    before: "talon-maalaus-akaa-keltainen-omakotitalo-terassi-ennen",
+    after: "talon-maalaus-akaa-keltainen-omakotitalo-terassi-jalkeen",
     caption: "Terassi ja seinä ennen ja jälkeen maalauksen, Akaa",
     alt: "Keltaisen omakotitalon terassi Akaassa ennen ja jälkeen maalauksen",
   },
@@ -473,7 +475,8 @@ export const projectItems: ProjectItem[] = [
   {
     city: "virrat",
     services: ["maalaus"],
-    pair: "talon-maalaus-virrat-hirsimokki-terassi",
+    before: "talon-maalaus-virrat-hirsimokki-terassi-ennen",
+    after: "talon-maalaus-virrat-hirsimokki-terassi-jalkeen",
     caption: "Hirsimökin terassi ja kuisti ennen ja jälkeen maalauksen, Virrat",
     alt: "Hirsimökin terassi ja kuisti Virroilla ennen ja jälkeen maalauksen",
   },
@@ -487,7 +490,8 @@ export const projectItems: ProjectItem[] = [
   {
     city: "virrat",
     services: ["maalaus"],
-    pair: "talon-maalaus-virrat-hirsimokki-raystas",
+    before: "talon-maalaus-virrat-hirsimokki-raystas-ennen",
+    after: "talon-maalaus-virrat-hirsimokki-raystas-jalkeen",
     caption: "Räystään alapinta ennen ja jälkeen maalauksen, Virrat",
     alt: "Hirsimökin räystään alapinta Virroilla ennen ja jälkeen maalauksen",
   },

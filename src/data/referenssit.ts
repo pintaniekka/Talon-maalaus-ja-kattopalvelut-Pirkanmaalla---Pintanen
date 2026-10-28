@@ -39,7 +39,8 @@ const lisakohteet: ReferenssiKohde[] = [
     title: "Talon maalaus",
     text: "Parvekkeen puoli ennen ja jälkeen maalauksen.",
     alt: "Valkoisen puutalon parveke ennen ja jälkeen maalauksen",
-    pair: "talon-maalaus-valkoinen-puutalo-parveke",
+    before: "talon-maalaus-valkoinen-puutalo-parveke-ennen",
+    after: "talon-maalaus-valkoinen-puutalo-parveke-jalkeen",
   },
   {
     city: "muu",

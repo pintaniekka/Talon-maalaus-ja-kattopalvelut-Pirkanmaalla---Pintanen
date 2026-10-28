@@ -1,4 +1,5 @@
 import { Navigate, Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import { Helmet } from "react-helmet-async";
 import { ChevronRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
@@ -113,6 +114,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
   return (
     <div>
+      <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
       <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(serviceJsonLd)}</script>
@@ -141,7 +143,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       />
 
       {/* ══ PALVELUT HETI HERON ALLE ══ */}
-      <section className="pb-16 md:pb-24 bg-background">
+      <section className="pb-16 md:pb-24 osio">
         <div className="section-container">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3">
@@ -155,7 +157,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
               <Link
                 key={service.title}
                 to={service.href}
-                className="group bg-card rounded-2xl border border-border/50 shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-shadow"
+                className="group kortti overflow-hidden flex flex-col transition-transform hover:-translate-y-1 motion-reduce:hover:translate-y-0 transition-shadow"
               >
                 <ResponsiveImage
                   baseName={service.baseName}
@@ -194,7 +196,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       </section>
 
       {/* ══ PAIKALLINEN TEKSTI ══ */}
-      <section className="section-padding bg-card">
+      <section className="section-padding osio">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{areaContent.alueLocalHookTitle}</h2>
@@ -206,6 +208,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       <ServiceContactSection variant="general" cityIn={cityIn} />
 
       <ToimintaAlueetBanner activeCity={citySlug} />
+      </Rytmi>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import { Link, useSearchParams } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import { Star } from "lucide-react";
 import SEO from "@/components/SEO";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FAQSection from "@/components/FAQSection";
 import PriceWizard, { type WizardService } from "@/components/laskuri/PriceWizard";
 import { PriceExampleTable } from "@/components/hinnat/PriceExamples";
@@ -54,7 +56,7 @@ const Hintalaskuri = () => {
   const initialService = toService(params.get("palvelu"));
 
   return (
-    <>
+    <Rytmi>
       <SEO {...staticSeo["/hintalaskuri"]} preloadImage={bgSrc} />
 
       <section className="hero-critical on-dark relative min-h-[100svh] flex items-center overflow-hidden isolate" style={{ backgroundColor: "hsl(215,30%,10%)" }}>
@@ -105,7 +107,7 @@ const Hintalaskuri = () => {
       </section>
 
       {/* Teksti laskurin ympärillä, ei sen tilalla (brief 5, 26.10.2026; Eerik: liidiportti pysyy). */}
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto space-y-14">
           <div>
             <h2 className={h2Class}>Tiilikaton pinnoituksen hintalaskuri</h2>
@@ -158,7 +160,8 @@ const Hintalaskuri = () => {
       <FAQSection items={laskuriFaq} title="Usein kysyttyä hintalaskurista" />
 
       <ServiceContactSection variant="general" />
-    </>
+      <ToimintaAlueetBanner />
+    </Rytmi>
   );
 };
 

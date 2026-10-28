@@ -26,7 +26,7 @@ const defaults: Record<WizardService, { title: string; image: string; bullets: s
 const CalculatorCta = ({ service, title, imageBase }: CalculatorCtaProps) => {
   const d = defaults[service];
   return (
-    <section id="hintalaskuri" className="section-padding bg-accent-light scroll-mt-24">
+    <section id="hintalaskuri" className="section-padding osio scroll-mt-24">
       <div className="section-container">
         <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-xl min-h-[360px] flex items-center">
           <ResponsiveImage baseName={imageBase ?? d.image} alt="" className="absolute inset-0 w-full h-full object-cover" sizes="(max-width: 1024px) 100vw, 1000px" width={1200} height={900} />

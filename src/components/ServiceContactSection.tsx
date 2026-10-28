@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Send, Check, Loader2 } from "lucide-react";
 import { Phone, Mail, User } from "@/components/icons/BrandIcons";
-import PintanenMark from "@/components/icons/PintanenMark";
 import { toast } from '@/hooks/use-toast';
 import { getStorageUrl } from '@/lib/storage';
 import { VASTAUSLUPAUS } from '@/data/company';
@@ -184,19 +183,14 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
           <p className="text-muted-foreground text-lg">{VASTAUSLUPAUS}</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto lg:items-stretch">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto lg:items-stretch">
           {/* Form (left) */}
-          <div className="h-full flex justify-center">
+          <div className="h-full">
             <form
               onSubmit={handleSubmit}
-              className="kortti p-8 md:p-10 w-full max-w-md h-full flex flex-col"
+              className="kortti p-7 md:p-9 w-full h-full flex flex-col"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <span className="kortti-merkki" aria-hidden="true">
-                  <PintanenMark className="h-6 w-6" />
-                </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading">{formHeading}</h3>
-              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-6">{formHeading}</h3>
 
               <div className="space-y-4 flex flex-col flex-1">
                 <div className="relative">

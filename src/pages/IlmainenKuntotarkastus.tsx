@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import FAQSection from "@/components/FAQSection";
@@ -70,7 +71,7 @@ const crumbs = [{ name: "Tiilikaton pinnoitus", path: "/tiilikaton-pinnoitus-pir
 const IlmainenKuntotarkastus = () => {
   const seo = staticSeo["/ilmainen-kuntotarkastus"];
   return (
-    <>
+    <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
 
       <PageHero
@@ -95,7 +96,7 @@ const IlmainenKuntotarkastus = () => {
         breadcrumbs={crumbs}
       />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <PriceSectionHeading
             title="Mitä kuntotarkastuksessa katsotaan?"
@@ -105,7 +106,7 @@ const IlmainenKuntotarkastus = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-accent-light">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <PriceSectionHeading title="Mitä saat käynnin jälkeen?" />
           <div className="space-y-4 text-muted-foreground leading-relaxed text-base md:text-lg">
@@ -135,7 +136,7 @@ const IlmainenKuntotarkastus = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <PriceSectionHeading title="Milloin tulemme?" />
           <div className="space-y-4 text-muted-foreground leading-relaxed text-base md:text-lg">
@@ -151,13 +152,11 @@ const IlmainenKuntotarkastus = () => {
         </div>
       </section>
 
-      <FAQSection items={faqItems} />
-
       <RelatedArticles categories={["katto"]} />
-
-      <ToimintaAlueetBanner service="pinnoitus" />
+      <FAQSection items={faqItems} />
       <ServiceContactSection variant="katto" />
-    </>
+      <ToimintaAlueetBanner service="pinnoitus" />
+    </Rytmi>
   );
 };
 

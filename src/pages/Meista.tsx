@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
+import { merkitse } from "@/components/Rytmi";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
@@ -23,6 +25,23 @@ const facts = [
   { number: "30–40", label: "kattoa kesässä" },
   { number: "5 v / 2 v", label: "takuu: katto / seinät" },
 ];
+
+/** Luvut tummansinisenä näyttämönä (Rytmi): keltaiset luvut ja valkoiset selitteet. */
+const MeistaLuvut = () => (
+  <section className="section-padding osio" aria-label="Pintanen lukuina">
+    <div className="section-container">
+      <dl className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
+        {facts.map((fact) => (
+          <div key={fact.label}>
+            <dd className="luku-korostus font-heading text-4xl md:text-5xl font-extrabold leading-none">{fact.number}</dd>
+            <dt className="mt-2 text-[11px] md:text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">{fact.label}</dt>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+);
+merkitse(MeistaLuvut, "navy");
 
 const faktalaatikko = [
   ["Yritys", "Pintanen Oy"],
@@ -97,18 +116,20 @@ const Meista = () => {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center">Kaksi veljestä, kaksi työtä</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="kortti p-6 md:p-8">
-                <img loading="lazy" decoding="async" src={eerikImage} alt="Eerik Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" />
-                <h3 className="text-xl font-bold text-foreground mb-2">Eerik pinnoittaa tiilikatot</h3>
+              <div className="kortti p-7 md:p-9 text-center">
+                <img loading="lazy" decoding="async" src={eerikImage} alt="Eerik Pitkänen" width={144} height={144} className="w-36 h-36 rounded-full object-cover ring-4 ring-accent-light mx-auto mb-5" />
+                <span className="lohko-otsake mb-2">Katot</span>
+                <h3 className="font-heading text-xl md:text-2xl font-extrabold text-navy mb-3">Eerik pinnoittaa tiilikatot</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Pesen ja maalaan kattoja kesäkaudet, noin 30–40 kattoa kesässä. Talvet kuluvat koulun penkillä ja urakoita myydessä.
                   Aloitin kattotyöt 2022 toisen yrityksen työntekijänä ja perustin Pintanen Oy:n 2025. Kattokaluston olen hankkinut itse,
                   ja se on yrityksen omaa. Vakuutukset ja työturvallisuuskortti ovat kunnossa.
                 </p>
               </div>
-              <div className="kortti p-6 md:p-8">
-                <img loading="lazy" decoding="async" src={eemilImage} alt="Eemil Pitkänen" width={112} height={112} className="w-28 h-28 rounded-full object-cover border-4 border-primary/20 mb-4" />
-                <h3 className="text-xl font-bold text-foreground mb-2">Eemil maalaa talojen ulkoseinät</h3>
+              <div className="kortti p-7 md:p-9 text-center">
+                <img loading="lazy" decoding="async" src={eemilImage} alt="Eemil Pitkänen" width={144} height={144} className="w-36 h-36 rounded-full object-cover ring-4 ring-accent-light mx-auto mb-5" />
+                <span className="lohko-otsake mb-2">Seinät</span>
+                <h3 className="font-heading text-xl md:text-2xl font-extrabold text-navy mb-3">Eemil maalaa talojen ulkoseinät</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Maalaan kaikki Pintasen talot, aina maalausparini kanssa. Aloitin maalauksen muualla, ja pian taito riitti yrittämiseen.
                   Talvella opiskelen ja valmistaudun seuraavaan kesään. Seinäkalusto on omaa. Vakuutukset ja rekisterit ovat kunnossa.
@@ -124,18 +145,7 @@ const Meista = () => {
 
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
 
-      <section className="section-padding osio">
-        <div className="section-container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {facts.map((fact) => (
-              <div key={fact.label} className="kortti p-6 md:p-8 text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{fact.number}</div>
-                <div className="text-sm text-muted-foreground">{fact.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <MeistaLuvut />
 
       <section className="section-padding osio">
         <div className="section-container">
@@ -164,6 +174,7 @@ const Meista = () => {
 
       <FAQSection items={generalFAQ} />
       <ServiceContactSection variant="general" />
+      <ToimintaAlueetBanner />
       </Rytmi>
     </div>
   );

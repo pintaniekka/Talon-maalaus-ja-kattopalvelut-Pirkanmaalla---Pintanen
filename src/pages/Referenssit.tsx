@@ -1,5 +1,6 @@
 import PageHero from "@/components/PageHero";
 import Rytmi from "@/components/Rytmi";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
 import ReferenssiGalleria from "@/components/ReferenssiGalleria";
@@ -34,6 +35,7 @@ const Referenssit = () => (
     <Rytmi>
       <ReferenssiGalleria />
       <ServiceContactSection variant="general" />
+      <ToimintaAlueetBanner />
     </Rytmi>
   </div>
 );

@@ -36,7 +36,7 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
   ];
 
   return (
-    <section className="section-padding bg-accent-light">
+    <section className="section-padding osio">
       <div className="section-container">
         <m.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-heading">Palvelut {cityGenitive} alueella</h2>
@@ -51,10 +51,11 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
                 tabIndex={0}
                 onClick={() => navigate(service.href)}
                 onKeyDown={(e) => { if (e.key === 'Enter') navigate(service.href); }}
-                className="card-elevated group block hover:bg-muted/50 transition-colors duration-300 cursor-pointer"
+                className="kortti p-6 md:p-8 group block transition-transform duration-300 hover:-translate-y-1 motion-reduce:hover:translate-y-0 cursor-pointer"
               >
                 <div className="mb-6">
                   <BeforeAfterSlider
+                    className="rounded-2xl"
                     beforeImage={getResponsiveSrc(service.beforeBase)}
                     afterImage={getResponsiveSrc(service.afterBase)}
                     beforeSrcSet={getResponsiveSrcSet(service.beforeBase)}

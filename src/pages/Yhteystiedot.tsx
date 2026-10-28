@@ -1,7 +1,9 @@
 import SEO from "@/components/SEO";
+import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FaktaNauha from "@/components/FaktaNauha";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { Building2, FileText, Mail, MapPin } from "lucide-react";
 import { staticSeo, HERO_BASE } from "@/data/seo";
 import { TOIMINTA_ALUE, VASTAUSLUPAUS, YHTEYSTIEDOT } from "@/data/company";
@@ -38,6 +40,7 @@ const Yhteystiedot = () => {
   const crumbs = [{ name: "Yhteystiedot" }];
   return (
     <div>
+      <Rytmi>
       <SEO {...staticSeo["/yhteystiedot"]} breadcrumbs={crumbs} />
 
       <PageHero
@@ -74,6 +77,8 @@ const Yhteystiedot = () => {
       <FaktaNauha items={faktat} ariaLabel="Yrityksen tiedot" />
 
       <ServiceContactSection variant="general" />
+      <ToimintaAlueetBanner />
+      </Rytmi>
     </div>
   );
 };

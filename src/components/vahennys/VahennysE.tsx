@@ -34,13 +34,16 @@ const rivit: { label: string; value: string; muted?: boolean }[] = [
 
 /**
  * Vaihtoehto E (?vahennys=e): vasemmalla muutaman lauseen teoria, oikealla yksi esimerkkilaskelma.
+ * Ulkoasu 28.10.2026: yksi leveä kortti, jonka sisällä esimerkki on vaaleansinisellä paneelilla;
+ * tausta tulee sivun rytmistä (.osio).
  */
 const VahennysE = () => (
-  <section className="bg-card py-10 md:py-12">
+  <section className="section-padding osio">
     <div className="section-container max-w-5xl">
-      <div className="grid gap-6 rounded-3xl bg-accent-light p-6 md:grid-cols-[1.15fr_1fr] md:gap-10 md:p-8">
+      <div className="kortti grid gap-8 p-6 md:grid-cols-[1.15fr_1fr] md:gap-12 md:p-10">
         <div className="flex flex-col gap-3">
-          <h2 className="font-heading text-xl font-extrabold leading-tight text-foreground md:text-2xl">{VAHENNYS_OTSIKKO}.</h2>
+          <span className="lohko-otsake mb-1">Kotitalousvähennys</span>
+          <h2 className="font-heading text-2xl font-extrabold leading-tight text-foreground md:text-3xl">{VAHENNYS_OTSIKKO}.</h2>
           <p className="text-[15px] leading-relaxed text-muted-foreground md:text-base">
             {KOTITALOUSVAHENNYS} {VAHENNYS_ERITTELY}
           </p>
@@ -55,11 +58,11 @@ const VahennysE = () => (
         </div>
 
         <div className="flex flex-col gap-2">
-          <div className="rounded-2xl bg-card p-5 shadow-sm md:p-6">
+          <div className="rounded-2xl bg-accent-light p-5 md:p-6">
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">Esimerkki</p>
             <dl className="text-[15px]">
               {rivit.map((r) => (
-                <div key={r.label} className="flex items-baseline justify-between gap-4 border-b border-border py-2">
+                <div key={r.label} className="flex items-baseline justify-between gap-4 border-b border-navy/10 py-2">
                   <dt className={r.muted ? "text-muted-foreground" : "text-foreground"}>{r.label}</dt>
                   <dd className={`tabular-nums ${r.muted ? "text-muted-foreground" : "font-semibold text-foreground"}`}>{r.value}</dd>
                 </div>

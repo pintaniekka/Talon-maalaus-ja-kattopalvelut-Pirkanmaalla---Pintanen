@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import OptimizedImage from "./OptimizedImage";
+import EnnenJalkeenMerkki from "./EnnenJalkeenMerkki";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -178,12 +179,8 @@ const BeforeAfterSlider = ({
         </svg>
       </div>
 
-      <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-navy/85 text-navy-foreground font-heading font-extrabold uppercase tracking-[0.14em] text-[11px]">
-        Ennen
-      </div>
-      <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-accent-strong text-accent-foreground font-heading font-extrabold uppercase tracking-[0.14em] text-[11px] shadow-md">
-        Jälkeen
-      </div>
+      <EnnenJalkeenMerkki label="Ennen" className="absolute top-3 left-3" />
+      <EnnenJalkeenMerkki label="Jälkeen" className="absolute top-3 right-3" />
     </div>
   );
 };

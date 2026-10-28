@@ -1,4 +1,5 @@
 import { Children, isValidElement, type CSSProperties, type ReactElement, type ReactNode } from "react";
+import { Helmet } from "react-helmet-async";
 
 /**
  * Sivun värirytmi (Eerik 28.10.2026, ehdotus 2). Sivulla on kolme lohkotyyppiä:
@@ -28,7 +29,13 @@ const NAVY = "hsl(var(--navy))";
 
 const lajiOf = (el: ReactElement): RytmiLaji => {
   const t = el.type as unknown;
-  if (typeof t === "string") return t === "section" ? "tausta" : "ohita";
+  if (typeof t === "string") {
+    if (t !== "section") return "ohita";
+    // Sivun oma hero-osio (hintalaskuri, tarjouspyyntö) pitää oman taustansa.
+    const cls = String((el.props as { className?: string })?.className ?? "");
+    return cls.includes("hero-critical") ? "oma" : "tausta";
+  }
+  if (t === Helmet) return "ohita";
   return (t as Merkitty | null)?.rytmi ?? "tausta";
 };
 

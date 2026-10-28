@@ -1,6 +1,8 @@
 import PageHero from "@/components/PageHero";
+import Rytmi from "@/components/Rytmi";
 import ReviewCard from "@/components/ReviewCard";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
 import { HERO_BASE, staticSeo } from "@/data/seo";
 import { allTestimonials, matchesCategory, REVIEW_COUNT, type TestimonialCategory } from "@/data/testimonialsData";
@@ -19,6 +21,7 @@ const Kokemuksia = () => {
   const seo = staticSeo["/kokemuksia"];
   return (
     <div>
+      <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
 
       <PageHero
@@ -45,7 +48,7 @@ const Kokemuksia = () => {
         const reviews = allTestimonials.filter((t) => matchesCategory(t, g.category));
         if (reviews.length === 0) return null;
         return (
-          <section key={g.category} className={`section-padding ${gi % 2 === 1 ? "bg-accent-light" : "bg-background"}`}>
+          <section key={g.category} className="section-padding osio">
             <div className="section-container max-w-6xl mx-auto">
               <div className="max-w-3xl mx-auto text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3 font-heading">{g.title}</h2>
@@ -61,7 +64,7 @@ const Kokemuksia = () => {
         );
       })}
 
-      <section className="py-12 bg-background">
+      <section className="py-12 osio">
         <div className="section-container max-w-3xl mx-auto text-center text-muted-foreground">
           <p>
             Arvostelut ovat Googlen yritysprofiilistamme.{" "}
@@ -74,6 +77,8 @@ const Kokemuksia = () => {
       </section>
 
       <ServiceContactSection variant="general" />
+      <ToimintaAlueetBanner />
+      </Rytmi>
     </div>
   );
 };

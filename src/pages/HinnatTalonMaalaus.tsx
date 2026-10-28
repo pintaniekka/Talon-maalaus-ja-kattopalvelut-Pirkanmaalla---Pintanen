@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
@@ -85,7 +86,7 @@ const crumbs = [{ name: "Talon maalaus", path: "/talon-maalaus-pirkanmaa" }, { n
 const HinnatTalonMaalaus = () => {
   const seo = staticSeo["/talon-maalaus-hinta-pirkanmaa"];
   return (
-    <>
+    <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
       <ServiceSchema
         name="Talon ulkomaalaus"
@@ -128,7 +129,7 @@ const HinnatTalonMaalaus = () => {
       {/* Kolme esimerkkitaloa laskurin kaavoilla (brief 3, 26.10.2026); "Mitä hintaan kuuluu" seuraa heti alla. */}
       <PriceExamplesSection service="maalaus" />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <div>
             <PriceIncludes
@@ -140,7 +141,7 @@ const HinnatTalonMaalaus = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-4xl mx-auto">
           <PriceSectionHeading title="Mistä talon maalauksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." />
           <PriceFactors factors={priceFactors} />
@@ -149,7 +150,7 @@ const HinnatTalonMaalaus = () => {
 
       <MaalausComparison />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container">
           <PriceSectionHeading
             title="Mitä tarjouksesta kannattaa katsoa?"
@@ -173,13 +174,11 @@ const HinnatTalonMaalaus = () => {
 
       <FeaturedProjects service="maalaus" title="Talon maalauksia Pirkanmaalla" />
 
-      <FAQSection items={faqItems} />
-
       <RelatedArticles categories={["maalaus", "raha"]} />
-
-      <ToimintaAlueetBanner service="maalaus" />
+      <FAQSection items={faqItems} />
       <ServiceContactSection variant="maalaus" />
-    </>
+      <ToimintaAlueetBanner service="maalaus" />
+    </Rytmi>
   );
 };
 

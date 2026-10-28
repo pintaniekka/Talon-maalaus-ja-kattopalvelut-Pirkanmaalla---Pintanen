@@ -20,7 +20,7 @@ interface FAQSectionProps {
  * Avaaminen on React-ohjattu (Eerik 14.10.2026: vastaus avautuu liukumalla): natiivi <details> ei osaa
  * animoida korkeutta, joten kysymys on painike (aria-expanded, aria-controls) ja vastaus liukuu auki
  * grid-template-rows-siirtymällä 0fr → 1fr. Liikettä vähentäville ei animoida.
- * Ulkoasu 28.10.2026: lista alkaa tummansinisellä viivalla, kysymykset erotetaan ohuilla viivoilla ja
+ * Ulkoasu 28.10.2026: koko lista yhdessä valkoisessa kortissa, kysymykset erotetaan ohuilla viivoilla ja
  * plus-merkki on vaaleansininen pallo, joka kääntyy ristiksi.
  */
 const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
@@ -54,7 +54,7 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
           <h2 className="heading-style text-3xl md:text-4xl mb-8 md:mb-12 text-center" style={{ color: 'hsl(var(--heading-navy))' }}>
             {title || 'Usein kysytyt kysymykset'}
           </h2>
-          <div className="border-t-2 border-navy divide-y divide-navy/20">
+          <div className="kortti px-5 md:px-8 divide-y divide-border">
             {items.map((item, index) => {
               const isOpen = open[index] ?? index < openCount;
               const answerId = `${baseId}-faq-${index}`;

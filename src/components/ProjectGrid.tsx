@@ -1,5 +1,6 @@
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import ResponsiveImage from "@/components/ResponsiveImage";
+import EnnenJalkeenMerkki from "@/components/EnnenJalkeenMerkki";
 import type { ProjectItem } from "@/data/projects";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
@@ -43,9 +44,7 @@ const ProjectGrid = ({ items, featureFirst = false }: { items: ProjectItem[]; fe
                   width={400}
                   height={533}
                 />
-                <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-foreground/70 text-primary-foreground text-xs font-semibold">
-                  {side.label}
-                </span>
+                <EnnenJalkeenMerkki label={side.label} className="absolute top-3 left-3" />
               </div>
             ))}
           </div>

@@ -47,7 +47,7 @@ const contactPersons = {
 };
 
 const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
-  <div className="kortti-a p-6 flex flex-col items-center text-center">
+  <div className="kortti p-6 flex flex-col items-center text-center">
     <div className="w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden bg-muted mb-4 ring-4 ring-background shadow-sm">
       <img
         loading="lazy"
@@ -177,7 +177,7 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
     'w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent';
 
   return (
-    <section id="yhteystiedot" className="section-padding bg-background">
+    <section id="yhteystiedot" className="section-padding osio">
       <div className="section-container">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="heading-style text-3xl md:text-4xl text-foreground mb-4">{title}</h2>
@@ -189,10 +189,10 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
           <div className="h-full flex justify-center">
             <form
               onSubmit={handleSubmit}
-              className="kortti-a p-8 md:p-10 w-full max-w-md h-full flex flex-col"
+              className="kortti p-8 md:p-10 w-full max-w-md h-full flex flex-col"
             >
               <div className="flex items-center gap-3 mb-6">
-                <span className="kortti-a-merkki" aria-hidden="true">
+                <span className="kortti-merkki" aria-hidden="true">
                   <PintanenMark className="h-6 w-6" />
                 </span>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading">{formHeading}</h3>

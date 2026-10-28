@@ -12,24 +12,25 @@ interface ProcessListProps {
 
 /**
  * Työvaiheet avoimena numeroituna listana (korjaus 5, V12): sisältö on HTML:ssä ilman haitaria.
- * Tyyli A (Eerik 26.10.2026): kortit paksulla ääriviivalla ja keltaisella numerolaatalla kolmessa
- * sarakkeessa. Jos viimeinen kortti jäisi yksin riville, se levenee koko rivin leveydeksi.
+ * Ulkoasu 28.10.2026 (Eerikin kuva): valkoiset pyöristetyt kortit, sininen numeropallo ja keskitetty teksti
+ * kolmessa sarakkeessa. Jos viimeinen kortti jäisi yksin riville, se levenee koko rivin leveydeksi.
  */
 const ProcessList = ({ title, intro, steps, cta, id }: ProcessListProps) => (
-  <section id={id} className="section-padding bg-background">
+  <section id={id} className="section-padding osio">
     <div className="section-container max-w-5xl mx-auto">
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">{title}</h2>
+        <span className="lohko-otsake mb-3">Näin työ etenee</span>
+        <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4 font-heading">{title}</h2>
         {intro && <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{intro}</p>}
       </div>
 
-      <ol className="grid gap-x-7 gap-y-9 pt-3 md:grid-cols-2 lg:grid-cols-3 md:[&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(3n+1)]:col-span-3 lg:[&>li:last-child:nth-child(3n+2)]:col-span-1">
+      <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 md:[&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(3n+1)]:col-span-3 lg:[&>li:last-child:nth-child(3n+1)]:w-full lg:[&>li:last-child:nth-child(3n+1)]:max-w-sm lg:[&>li:last-child:nth-child(3n+1)]:justify-self-center lg:[&>li:last-child:nth-child(3n+2)]:col-span-1">
         {steps.map((step, i) => (
-          <li key={step.title} className="kortti-a px-6 pb-6 pt-8">
-            <span className="kortti-a-numero" aria-hidden="true">
+          <li key={step.title} className="kortti p-6 md:p-7 text-center">
+            <span className="kortti-numero mb-4" aria-hidden="true">
               {i + 1}
             </span>
-            <h3 className="font-heading text-lg font-extrabold text-navy mb-1.5">
+            <h3 className="font-heading text-lg font-extrabold text-navy mb-2">
               <span className="sr-only">Vaihe {i + 1}: </span>
               {step.title}
             </h3>

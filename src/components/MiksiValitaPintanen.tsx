@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { merkitse } from "@/components/Rytmi";
 import { LUVUT, TAKUU } from "@/data/company";
 
 type Service = "pinnoitus" | "maalaus";
@@ -16,7 +17,7 @@ interface Reason {
 const reasons: Record<Service, Reason[]> = {
   pinnoitus: [
     { title: "Yrittäjä tekee työn itse", text: "Eerik käy katsomassa katon, tekee tarjouksen ja pinnoittaa katon itse. Sama mies alusta loppuun." },
-    { title: "Kokemus näkyy jäljessä", text: `Eerik on tehnyt kattotöitä ${LUVUT.kokemusVuotta} vuotta ja pinnoittanut ${LUVUT.pinnoitetutKatot} kattoa.` },
+    { title: "Kokemus näkyy jäljessä", text: `Eerik on tehnyt kattotöitä vuodesta 2022 ja pinnoittanut ${LUVUT.pinnoitetutKatot} kattoa.` },
     { title: "Maalia aina tarpeeksi", text: "Katto saa maalia niin paljon kuin se tarvitsee. Pohjamaali ja pintamaali, aina kaksi kerrosta." },
     { title: "Kiinteä ja kilpailukykyinen hinta", text: "Saat kirjallisen tarjouksen heti kuntotarkastuksen jälkeen. Hinta sisältää työn, materiaalit ja siivouksen." },
     { title: "Sovitussa pysytään", text: "Teemme kirjallisen sopimuksen ja sovimme ajankohdan. Otamme yhteyttä ennen aloituspäivää." },
@@ -33,26 +34,29 @@ const reasons: Record<Service, Reason[]> = {
 };
 
 const MiksiValitaPintanen = ({ service, cityIn }: { service: Service; cityIn?: string }) => (
-  <section className="section-padding bg-background">
+  <section className="section-padding osio">
     <div className="section-container max-w-5xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-10 text-center font-heading">
-        Miksi valita Pintanen{cityIn ? ` ${cityIn}` : ""}?
-      </h2>
-      <ul className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="text-center mb-10">
+        <span className="lohko-otsake mb-3">Miksi me</span>
+        <h2 className="text-3xl md:text-4xl font-bold text-accent-ink font-heading">
+          Miksi valita Pintanen{cityIn ? ` ${cityIn}` : ""}?
+        </h2>
+      </div>
+      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {reasons[service].map((r) => (
-          <li key={r.title} className="kortti-a p-5 flex gap-3.5">
-            <span className="kortti-a-merkki mt-0.5" aria-hidden="true">
-              <Check className="w-5 h-5" strokeWidth={3} />
+          <li key={r.title} className="kortti p-6 md:p-7 text-center">
+            <span className="kortti-merkki mb-5" aria-hidden="true">
+              <Check className="w-5 h-5" strokeWidth={2.5} />
             </span>
-            <div>
-              <h3 className="font-extrabold text-navy font-heading mb-1">{r.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{r.text}</p>
-            </div>
+            <h3 className="font-extrabold text-navy font-heading mb-1.5">{r.title}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">{r.text}</p>
           </li>
         ))}
       </ul>
     </div>
   </section>
 );
+
+merkitse(MiksiValitaPintanen, "sininen");
 
 export default MiksiValitaPintanen;

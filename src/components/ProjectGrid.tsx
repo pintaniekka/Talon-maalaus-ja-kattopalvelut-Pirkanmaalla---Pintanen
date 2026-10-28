@@ -13,12 +13,13 @@ const ProjectGrid = ({ items, featureFirst = false }: { items: ProjectItem[]; fe
     {items.map((item, index) => (
       <figure
         key={item.pair ?? item.image ?? item.after}
-        className={`bg-card rounded-2xl overflow-hidden shadow-sm border border-border/50 ${
+        className={`kortti overflow-hidden ${
           featureFirst && index === 0 ? "sm:col-span-2 lg:row-span-2" : ""
         }`}
       >
         {item.pair ? (
           <BeforeAfterSlider
+            className="rounded-none shadow-none"
             beforeImage={getResponsiveSrc(`${item.pair}-ennen`)}
             beforeSrcSet={getResponsiveSrcSet(`${item.pair}-ennen`)}
             afterImage={getResponsiveSrc(`${item.pair}-jalkeen`)}

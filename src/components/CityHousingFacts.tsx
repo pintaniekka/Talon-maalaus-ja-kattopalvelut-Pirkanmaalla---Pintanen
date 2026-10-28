@@ -66,7 +66,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service, hideMap }: CityHousingFac
   const c = copy[service];
 
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding osio">
       <div className="section-container">
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
           <div>
@@ -91,7 +91,7 @@ const CityHousingFacts = ({ citySlug, cityIn, service, hideMap }: CityHousingFac
             </Link>
           </div>
 
-          <figure className="bg-card rounded-2xl border border-border/50 shadow-sm p-5 md:p-6">
+          <figure className="kortti p-5 md:p-6">
             <figcaption className="text-sm font-semibold text-foreground mb-4">
               Omakoti- ja paritalot {cityIn} rakennusvuoden mukaan
             </figcaption>

@@ -60,12 +60,12 @@ const headings: Record<Service, (cityIn: string) => string> = {
 const CityServiceSummary = ({ service, cityIn }: { service: Service; cityIn: string }) => {
   const items = cards[service](cityIn);
   return (
-  <section className="section-padding bg-background">
+  <section className="section-padding osio">
     <div className="section-container">
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-10 text-center font-heading">{headings[service](cityIn)}</h2>
       <div className={`grid gap-6 mx-auto ${items.length === 2 ? "md:grid-cols-2 max-w-4xl" : "md:grid-cols-3 max-w-6xl"}`}>
         {items.map((card) => (
-          <article key={card.title} className="bg-card rounded-2xl border border-border/50 shadow-sm p-6 flex flex-col">
+          <article key={card.title} className="kortti p-6 md:p-7 flex flex-col">
             <h3 className="text-xl font-bold text-foreground font-heading mb-3 leading-snug">{card.title}</h3>
             <p className="text-muted-foreground leading-relaxed flex-1">{card.text}</p>
             <div className="mt-5 flex flex-col gap-2">

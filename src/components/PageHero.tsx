@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { merkitse } from "@/components/Rytmi";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import PintanenMark from "@/components/icons/PintanenMark";
@@ -214,5 +215,7 @@ const PageHero = ({
     </section>
   );
 };
+
+merkitse(PageHero, "oma");
 
 export default PageHero;

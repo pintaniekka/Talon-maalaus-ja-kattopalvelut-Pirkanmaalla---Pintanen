@@ -1,4 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
@@ -51,6 +52,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
 
   return (
     <div>
+      <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
       <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} areaSameAs={getCityWikipediaUrl(cityData)} description={seo.description} priceRange={pinnoitusPrices.general} />
 
@@ -81,7 +83,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <Lyhyesti content={pinnoitusLyhyesti} />
 
       {cityData.pinnoitusLocalHookTitle && cityData.pinnoitusLocalHookText && (
-        <section className="section-padding bg-card">
+        <section className="section-padding osio">
           <div className="section-container">
             <div className={`mx-auto ${kartta ? "max-w-5xl grid lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 items-center" : "max-w-3xl"}`}>
               <div>
@@ -116,9 +118,10 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name, cityData.cityIn)]}
         title={`Usein kysyttyä tiilikaton pinnoituksesta ${cityData.cityIn}`}
       />
-      {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
+      {getTestimonialsByCity(cityData.slug, "katto").length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
       <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
       <ToimintaAlueetBanner activeCity={cityData.slug} service="pinnoitus" showNeighbors />
+      </Rytmi>
     </div>
   );
 };

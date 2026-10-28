@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { merkitse } from "@/components/Rytmi";
 import { useLocation } from 'react-router-dom';
 import { canonicalUrl } from '@/data/seo';
 import { GOOGLE_PROFILE_URL } from '@/data/company';
@@ -41,5 +42,7 @@ const ServiceSchema = ({ name, alternateNames, description, area, areaType = 'Ci
     </Helmet>
   );
 };
+
+merkitse(ServiceSchema, "ohita");
 
 export default ServiceSchema;

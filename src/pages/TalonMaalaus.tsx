@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
@@ -29,6 +30,7 @@ const TalonMaalaus = () => {
   const seo = staticSeo["/talon-maalaus-pirkanmaa"];
   return (
     <div>
+      <Rytmi>
       <SEO {...seo} breadcrumbs={[{ name: "Talon maalaus" }]} />
       <ServiceSchema name="Talon ulkomaalaus" alternateNames={["Talon maalaus", "Julkisivumaalaus", "Huoltomaalaus", "Puutalon maalaus"]} area="Pirkanmaa" areaType="AdministrativeArea" description={seo.description} priceRange={maalausPrices.general} />
 
@@ -56,7 +58,7 @@ const TalonMaalaus = () => {
       <Lyhyesti content={maalausLyhyesti} />
 
       {/* Ulkomaalaus ja julkisivumaalaus näkyvään tekstiin (korjaus 2) */}
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Ulkomaalaus, julkisivumaalaus ja huoltomaalaus</h2>
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
@@ -100,6 +102,7 @@ const TalonMaalaus = () => {
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
       <RelatedArticles categories={["maalaus", "raha"]} />
       <ServiceContactSection variant="maalaus" />
+      </Rytmi>
     </div>
   );
 };

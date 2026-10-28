@@ -1,4 +1,5 @@
 import ResponsiveImage from "./ResponsiveImage";
+import { merkitse } from "@/components/Rytmi";
 import { TOIMINTA_ALUE } from "@/data/company";
 
 const sideBase = "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen";
@@ -6,7 +7,7 @@ const sideBase = "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen"
 /** Etusivun "Miksi Pintanen?" lyhennettynä puoleen (8.3, S32). Vain yksi lihavointi (tarkastus 12.10.2026). */
 const MiksiPintanen = () => {
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding osio">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div>
@@ -25,15 +26,15 @@ const MiksiPintanen = () => {
                 Katolle käytämme Nowocoatin kattomaalia ja seiniin pääsääntöisesti Tikkurilan maaleja. Pinnoitettu katto
                 kestää jopa 15 vuotta pidempään, ja työn osuudesta saat kotitalousvähennyksen.
               </p>
-              <p className="font-semibold text-primary">– Eerik &amp; Eemil</p>
+              <p className="font-semibold text-foreground">– Eerik &amp; Eemil</p>
             </div>
           </div>
 
-          <div className="kortti-a overflow-hidden">
+          <div className="rounded-3xl overflow-hidden shadow-[0_18px_44px_rgba(5,20,45,0.25)]">
             <ResponsiveImage
               baseName={sideBase}
               alt="Pintasen maalaama puutalo Tampereella: sekä tiilikatto että seinät maalattu"
-              className="w-full h-full object-cover rounded-2xl"
+              className="w-full h-full object-cover"
               sizes="(max-width: 768px) 100vw, 600px"
               width={1200}
               height={1600}
@@ -44,5 +45,7 @@ const MiksiPintanen = () => {
     </section>
   );
 };
+
+merkitse(MiksiPintanen, "sininen");
 
 export default MiksiPintanen;

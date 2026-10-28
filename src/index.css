@@ -24,6 +24,8 @@
   }
 
   :root {
+    /* Viiston korkeus (Rytmi): loiva, 20 px puhelimessa ja 40 px leveällä näytöllä. */
+    --viisto: 20px;
     /* Primary - Smoky Dark Blue */
     --primary: 210 25% 18%;
     --primary-foreground: 210 20% 95%;
@@ -217,6 +219,12 @@
   }
 }
 
+@media (min-width: 768px) {
+  :root {
+    --viisto: 40px;
+  }
+}
+
 @layer components {
   /* Tumma tausta: sininen teksti pysyy brändin kirkkaana sinisenä. */
   .on-dark,
@@ -268,20 +276,66 @@
     @apply py-16 md:py-24;
   }
 
-  /* Tyyli A, "sarjakuva" (Eerik 26.10.2026): valkoinen kortti, paksu tummansininen ääriviiva ja kova sininen
-     varjo oikealle alas. Numero tai kuvake on keltainen, hieman kallistettu laatta mustalla varjolla.
-     Sama kaava kaikissa palikoissa: faktat, työvaiheet, hintakortit, UKK, arvostelut, yhteydenotto, miksi Pintanen. */
-  .kortti-a {
-    @apply relative bg-card border-[3px] border-navy rounded-[18px] shadow-[8px_8px_0_hsl(var(--accent-strong))];
+  /* Ulkoasu 28.10.2026 (Eerik, ehdotus 2): kolme lohkotyyppiä ja yksi kortti.
+     - .osio: lohkon tausta tulee Rytmi-kääreeltä (--osio-bg), ilman käärettä valkoinen.
+     - .osio-sininen ja .osio-navy: näyttämö, jossa värimuuttujat vaihtuvat vaaleiksi; Rytmi lisää viiston.
+     - .kortti: valkoinen pyöristetty kortti pehmeällä varjolla; kortin sisällä värit palautuvat tummiksi,
+       joten sama kortti toimii myös sinisellä ja tummansinisellä taustalla.
+     - .kortti-numero: sininen numeropallo, .kortti-merkki: vaaleansininen pallo kuvakkeelle. */
+  .osio {
+    background: var(--osio-bg, hsl(var(--background)));
   }
-  .kortti-a-keltainen {
-    @apply shadow-[8px_8px_0_hsl(var(--paint-yellow))];
+  .osio-sininen,
+  .osio-navy {
+    --foreground: 0 0% 100%;
+    --muted-foreground: 210 50% 92%;
+    --navy: 0 0% 100%;
+    --heading-navy: 0 0% 100%;
+    --accent-ink: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --border: 0 0% 100%;
+    --accent: 54 100% 65%;
+    color: hsl(var(--foreground));
   }
-  .kortti-a-numero {
-    @apply absolute -top-[18px] left-5 flex h-11 w-11 -rotate-6 items-center justify-center rounded-xl border-[3px] border-navy bg-paint-yellow font-heading text-xl font-black text-navy shadow-[3px_3px_0_hsl(var(--navy))];
+  .osio-sininen {
+    background: linear-gradient(115deg, hsl(203 100% 43%), hsl(202 100% 57%));
   }
-  .kortti-a-merkki {
-    @apply inline-flex h-9 w-9 flex-none -rotate-3 items-center justify-center rounded-[10px] border-[3px] border-navy bg-paint-yellow text-navy shadow-[2px_2px_0_hsl(var(--navy))];
+  .osio-navy {
+    background: hsl(222 64% 11%);
+  }
+  .viisto {
+    clip-path: polygon(0 var(--viisto), 100% 0, 100% calc(100% - var(--viisto)), 0 100%);
+    padding-top: var(--viisto);
+    padding-bottom: var(--viisto);
+  }
+  .kortti {
+    @apply relative bg-card rounded-3xl shadow-[0_14px_40px_rgba(10,25,47,0.08)] ring-1 ring-navy/5;
+    --foreground: 215 25% 15%;
+    --muted-foreground: 215 15% 45%;
+    --navy: 222 64% 11%;
+    --heading-navy: 230 95% 14%;
+    --accent-ink: 203 100% 37%;
+    --primary: 210 25% 18%;
+    --border: 210 20% 88%;
+    --accent: 202 100% 61%;
+    color: hsl(var(--foreground));
+  }
+  .osio-sininen .kortti,
+  .osio-navy .kortti {
+    @apply ring-0 shadow-[0_18px_44px_rgba(5,20,45,0.22)];
+  }
+  .kortti-numero {
+    @apply inline-flex h-11 w-11 flex-none items-center justify-center rounded-full bg-accent-strong font-heading text-lg font-extrabold text-accent-foreground;
+  }
+  .kortti-merkki {
+    @apply inline-flex h-11 w-11 flex-none items-center justify-center rounded-full bg-accent-light text-accent-strong;
+  }
+  .lohko-otsake {
+    @apply block font-heading text-xs font-extrabold uppercase tracking-[0.2em] text-accent-ink;
+  }
+  .osio-sininen .lohko-otsake,
+  .osio-navy .lohko-otsake {
+    @apply text-paint-yellow;
   }
 
   .card-elevated {

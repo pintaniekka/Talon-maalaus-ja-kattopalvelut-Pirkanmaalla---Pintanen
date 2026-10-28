@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { merkitse } from "@/components/Rytmi";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { allCities, pinnoitusCities, maalausCities, getCityBySlug, type CityData } from "@/data/cityData";
@@ -236,5 +237,7 @@ const ToimintaAlueetBanner = ({ activeCity, service = "alue", showNeighbors = fa
     </section>
   );
 };
+
+merkitse(ToimintaAlueetBanner, "oma");
 
 export default ToimintaAlueetBanner;

@@ -8,6 +8,7 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import SEO from "@/components/SEO";
+import Rytmi from "@/components/Rytmi";
 
 
 const ChatPriceCalculator = lazyWithRetry(() => import("@/components/ChatPriceCalculator"));
@@ -21,7 +22,7 @@ const Gallery = lazyWithRetry(() => import("@/components/Gallery"));
  */
 const Index = () => {
   return (
-    <>
+    <Rytmi>
       <SEO />
       <Hero />
       <Services />
@@ -36,7 +37,7 @@ const Index = () => {
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />
-    </>
+    </Rytmi>
   );
 };
 

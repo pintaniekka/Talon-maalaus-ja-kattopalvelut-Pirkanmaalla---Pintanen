@@ -44,7 +44,7 @@ const VerifiedBadge = () => (
 );
 
 const ReviewHighlights = () => (
-  <section className="py-6 md:py-8 bg-background" aria-label="Asiakkaiden arvosteluja">
+  <section className="py-6 md:py-8 osio" aria-label="Asiakkaiden arvosteluja">
     <div className="section-container max-w-6xl mx-auto">
       {/* Puhelimessa kortit vieritetään sivusuunnassa, jotta palvelut pysyvät lähellä. */}
       <div
@@ -56,7 +56,7 @@ const ReviewHighlights = () => (
         {reviews.map((r, i) => (
           <figure
             key={r.name}
-            className="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-auto rounded-2xl border border-border bg-card p-5 shadow-sm"
+            className="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-auto kortti p-5"
           >
             <figcaption className="flex items-center gap-3 mb-2.5">
               <span

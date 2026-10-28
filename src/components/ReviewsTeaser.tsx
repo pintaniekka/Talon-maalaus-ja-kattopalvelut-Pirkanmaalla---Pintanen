@@ -19,7 +19,7 @@ const ReviewsTeaser = ({ citySlug, category }: Props) => {
   if (reviews.length === 0) return null;
 
   return (
-    <section className="section-padding bg-background" aria-label="Asiakasarvostelut">
+    <section className="section-padding osio" aria-label="Asiakasarvostelut">
       <div className="section-container max-w-4xl mx-auto">
         <h2 className="heading-style text-2xl md:text-3xl text-accent-ink text-center mb-8">Mitä asiakkaat sanovat meistä?</h2>
         <div className="grid sm:grid-cols-2 gap-7">

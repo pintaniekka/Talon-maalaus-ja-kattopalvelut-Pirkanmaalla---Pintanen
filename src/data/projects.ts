@@ -19,6 +19,8 @@ export interface ProjectItem {
   /** Ennen- ja jälkeen-kuvat vierekkäin, kun kuvakulma ei ole sama. */
   before?: string;
   after?: string;
+  /** Tekijän lyhyt kertomus kohteesta referenssisivulle (Eemilin kommentit 27.10.2026). */
+  kertomus?: string;
 }
 
 export const projectItems: ProjectItem[] = [
@@ -346,6 +348,148 @@ export const projectItems: ProjectItem[] = [
     image: "tiilikaton-pinnoitus-urjala-punainen-tiilikatto-lahikuva",
     caption: "Pinnoitettu pinta läheltä, Urjala",
     alt: "Pinnoitettu punainen tiilikatto läheltä Urjalassa",
+  },
+  // Eemilin kohteet 1–9 (sähköpostit myynti@pintanen.fi 27.10.2026, lisätty 28.10.2026). Kertomukset ovat Eemilin
+  // kommentteja lyhennettyinä. Arvostelun antaneiden asiakkaiden kohteet ovat reviewCases.ts:ssä; tässä ovat muut kuvat.
+  // Vuotta ei kuvateksteissä (sama käytäntö kuin lokakuun 2026 lisäyksissä).
+  // 1: Orivesi, Hirsilä, rintamamiestalo (arvostelu: Satu Junkkila)
+  {
+    city: "orivesi",
+    services: ["maalaus"],
+    pair: "talon-maalaus-orivesi-rintamamiestalo-sivuseina",
+    caption: "Rintamamiestalon sivuseinä ennen ja jälkeen maalauksen, Orivesi",
+    alt: "Rintamamiestalon sivuseinä Orivedellä ennen ja jälkeen maalauksen",
+    kertomus: "Seinät pestiin perusteellisesti homepesuaineella, hilseilevä maali kaavittiin ja paljaat puupinnat pohjamaalattiin ennen pintamaalia.",
+  },
+  {
+    city: "orivesi",
+    services: ["maalaus"],
+    image: "talon-maalaus-orivesi-rintamamiestalo-kuisti-jalkeen",
+    caption: "Rintamamiestalo ja kuisti maalauksen jälkeen, Orivesi",
+    alt: "Vaalea rintamamiestalo ja kuisti maalauksen jälkeen Orivedellä",
+  },
+  {
+    city: "orivesi",
+    services: ["maalaus"],
+    image: "talon-maalaus-orivesi-homepesu-ja-suojaus-kaynnissa",
+    caption: "Homepesu käynnissä, sokkeli suojattuna, Orivesi",
+    alt: "Puutalon seinän homepesu käynnissä Orivedellä, sokkeli suojattu muovilla",
+  },
+  // 3: Orivesi, hirsimökki (arvostelu: Päivi Tuominen)
+  {
+    city: "orivesi",
+    services: ["maalaus"],
+    pair: "talon-maalaus-orivesi-hirsimokki-paaty",
+    caption: "Hirsimökin pääty ennen ja jälkeen maalauksen, Orivesi",
+    alt: "Hirsimökin pääty Orivedellä ennen ja jälkeen maalauksen",
+    kertomus: "Mökistä maalattiin kaikki: seinät, kaiteet, ikkunanpuitteet ja ovet. Tummat listat maalattiin tarkasti niin, ettei maalia päässyt hirrelle.",
+  },
+  {
+    city: "orivesi",
+    services: ["maalaus"],
+    pair: "talon-maalaus-orivesi-hirsimokki-ikkuna",
+    caption: "Hirsimökin ikkuna ja puitteet ennen ja jälkeen maalauksen, Orivesi",
+    alt: "Hirsimökin ikkuna Orivedellä ennen ja jälkeen puitteiden maalauksen",
+  },
+  {
+    city: "orivesi",
+    services: ["maalaus"],
+    image: "talon-maalaus-orivesi-hirsimokki-kaide-ja-terassi-jalkeen",
+    caption: "Hirsimökin kaide ja terassi maalauksen jälkeen, Orivesi",
+    alt: "Hirsimökin maalattu kaide ja öljytty terassi Orivedellä",
+  },
+  // 2: Nokia, vaaleansininen omakotitalo (arvostelu: Lotta Härkönen)
+  {
+    city: "nokia",
+    services: ["maalaus"],
+    pair: "talon-maalaus-nokia-vaaleansininen-talo-paaty",
+    caption: "Vaaleansinisen talon pääty ennen ja jälkeen huoltomaalauksen, Nokia",
+    alt: "Vaaleansinisen puutalon pääty Nokialla ennen ja jälkeen huoltomaalauksen",
+    kertomus: "Seinät pestiin ja huoltomaalattiin samalla värillä.",
+  },
+  {
+    city: "nokia",
+    services: ["maalaus"],
+    image: "talon-maalaus-nokia-vaaleansininen-talo-sivuseina-jalkeen",
+    caption: "Vaaleansininen puutalo huoltomaalauksen jälkeen, Nokia",
+    alt: "Vaaleansininen puutalo Nokialla huoltomaalauksen jälkeen",
+  },
+  {
+    city: "nokia",
+    services: ["maalaus"],
+    image: "talon-maalaus-nokia-vaaleansininen-talo-kuisti-jalkeen",
+    caption: "Kuisti ja ovi maalauksen jälkeen, Nokia",
+    alt: "Vaaleansinisen puutalon kuisti ja valkoinen ovi maalauksen jälkeen Nokialla",
+  },
+  // 4: Akaa, keltainen omakotitalo (arvostelu: Ari Reunanen)
+  {
+    city: "akaa",
+    services: ["maalaus"],
+    pair: "talon-maalaus-akaa-keltainen-omakotitalo-paaty",
+    caption: "Keltaisen talon pääty ennen ja jälkeen huoltomaalauksen, Akaa",
+    alt: "Keltaisen omakotitalon pääty Akaassa ennen ja jälkeen huoltomaalauksen",
+    kertomus: "Uusi keltainen oli hieman vanhaa tummempi, joten pensselinjäljet viimeisteltiin tarkasti. Lopputulos on erittäin hyvä.",
+  },
+  {
+    city: "akaa",
+    services: ["maalaus"],
+    pair: "talon-maalaus-akaa-keltainen-omakotitalo-terassi",
+    caption: "Terassi ja seinä ennen ja jälkeen maalauksen, Akaa",
+    alt: "Keltaisen omakotitalon terassi Akaassa ennen ja jälkeen maalauksen",
+  },
+  {
+    city: "akaa",
+    services: ["maalaus"],
+    image: "talon-maalaus-akaa-keltainen-omakotitalo-sivuseina-jalkeen",
+    caption: "Keltainen omakotitalo huoltomaalauksen jälkeen, Akaa",
+    alt: "Keltainen omakotitalo Akaassa huoltomaalauksen jälkeen",
+  },
+  // 5: Tampere, hilseilevä pääty (arvostelu: Jukka Loukkola)
+  {
+    city: "tampere",
+    services: ["maalaus"],
+    pair: "talon-maalaus-tampere-hilseileva-ulkoverhous-lahikuva",
+    caption: "Hilseilevä ulkoverhous ennen ja jälkeen maalauksen, Tampere",
+    alt: "Hilseilevä ulkoverhous Tampereella ennen kaavintaa ja maalauksen jälkeen",
+  },
+  // 6: Ylöjärvi, vaalea puurakennus (yritysasiakas)
+  {
+    city: "ylojarvi",
+    services: ["maalaus"],
+    pair: "talon-maalaus-ylojarvi-vaalea-puurakennus-paaty",
+    caption: "Puurakennuksen pääty ennen ja jälkeen maalauksen, Ylöjärvi",
+    alt: "Vaalean puurakennuksen pääty Ylöjärvellä ennen ja jälkeen maalauksen",
+    kertomus: "Pesu, hilseilevän maalin kaavinta, pohjamaalaus ja pintamaalaus. Työmaalla oli samaan aikaan muitakin urakoitsijoita, ja työ sovitettiin heidän kanssaan.",
+  },
+  // 7: Virrat, hirsimökki
+  {
+    city: "virrat",
+    services: ["maalaus"],
+    pair: "talon-maalaus-virrat-hirsimokki-paaty",
+    caption: "Hirsimökin pääty ennen ja jälkeen maalauksen, Virrat",
+    alt: "Hirsimökin pääty Virroilla ennen ja jälkeen maalauksen",
+    kertomus: "Hirsimökki maalattiin Virtasen 4 öljyn maalilla. Tuulisesta säästä ja ampiaisista huolimatta työ tehtiin loppuun suunnitellusti.",
+  },
+  {
+    city: "virrat",
+    services: ["maalaus"],
+    pair: "talon-maalaus-virrat-hirsimokki-terassi",
+    caption: "Hirsimökin terassi ja kuisti ennen ja jälkeen maalauksen, Virrat",
+    alt: "Hirsimökin terassi ja kuisti Virroilla ennen ja jälkeen maalauksen",
+  },
+  {
+    city: "virrat",
+    services: ["maalaus"],
+    pair: "talon-maalaus-virrat-hirsimokki-ikkuna",
+    caption: "Ikkunan puitteet ennen ja jälkeen maalauksen, Virrat",
+    alt: "Hirsimökin ikkunan puitteet Virroilla ennen ja jälkeen maalauksen",
+  },
+  {
+    city: "virrat",
+    services: ["maalaus"],
+    pair: "talon-maalaus-virrat-hirsimokki-raystas",
+    caption: "Räystään alapinta ennen ja jälkeen maalauksen, Virrat",
+    alt: "Hirsimökin räystään alapinta Virroilla ennen ja jälkeen maalauksen",
   },
 ];
 

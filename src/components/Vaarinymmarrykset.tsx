@@ -42,14 +42,14 @@ const items: Record<Service, Item[]> = {
 };
 
 const Vaarinymmarrykset = ({ service }: { service: Service }) => (
-  <section className="section-padding bg-background">
+  <section className="section-padding osio">
     <div className="section-container max-w-4xl mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center font-heading">
         {service === "pinnoitus" ? "Kolme yleistä luuloa tiilikatosta" : "Kolme yleistä luuloa talon maalauksesta"}
       </h2>
-      <dl className="grid gap-7 md:grid-cols-3">
+      <dl className="grid gap-6 md:grid-cols-3">
         {items[service].map((it) => (
-          <div key={it.luulo} className="kortti-a p-5">
+          <div key={it.luulo} className="kortti p-6">
             <dt className="font-extrabold text-navy font-heading mb-2">”{it.luulo}”</dt>
             <dd className="text-muted-foreground text-sm leading-relaxed">{it.totuus}</dd>
           </div>

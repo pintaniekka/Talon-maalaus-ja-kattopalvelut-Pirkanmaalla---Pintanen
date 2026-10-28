@@ -31,7 +31,7 @@ const Fakta = ({ value, label, divider = false }: { value: string; label: string
  * kortin sisällä. Hiiren päällä kortti nousee hieman ja kuvan yli pyyhkäisee kiilto.
  */
 const PalvelutA = () => (
-  <section id="palvelut" className="section-padding bg-accent-light">
+  <section id="palvelut" className="section-padding osio">
     <div className="section-container max-w-6xl">
       <div className="mb-9 grid gap-4 md:grid-cols-2 md:items-end md:gap-12">
         <div className="flex flex-col gap-4">

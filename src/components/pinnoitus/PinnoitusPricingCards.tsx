@@ -21,7 +21,7 @@ interface PinnoitusPricingCardsProps {
 
 const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvelu=pinnoitus", calculatorLabel }: PinnoitusPricingCardsProps) => {
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding osio">
       <div className="section-container max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Mitä tiilikaton pinnoitus maksaa {cityIn}?</h2>
@@ -34,10 +34,10 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
           {cards.map((card, i) => (
             <div
               key={i}
-              className={`kortti-a flex flex-col overflow-hidden ${card.featured ? 'kortti-a-keltainen md:-translate-y-2' : ''}`}
+              className={`kortti flex flex-col overflow-hidden ${card.featured ? 'ring-2 ring-accent-strong md:-translate-y-2' : ''}`}
             >
               {card.featured && (
-                <div className="bg-navy text-navy-foreground text-xs font-extrabold uppercase tracking-wider text-center py-1.5">
+                <div className="bg-accent-strong text-accent-foreground text-xs font-extrabold uppercase tracking-wider text-center py-1.5">
                   {FEATURED_RIBBON}
                 </div>
               )}

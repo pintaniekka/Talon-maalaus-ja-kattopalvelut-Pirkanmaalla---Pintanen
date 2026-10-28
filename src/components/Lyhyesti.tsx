@@ -1,4 +1,5 @@
 import type { LyhyestiSisalto } from "@/data/tyovaiheet";
+import { merkitse } from "@/components/Rytmi";
 import { cn } from "@/lib/utils";
 
 /**
@@ -38,5 +39,7 @@ const Lyhyesti = ({ content, title = "Lyhyesti" }: { content: LyhyestiSisalto; t
     </div>
   </section>
 );
+
+merkitse(Lyhyesti, "oma");
 
 export default Lyhyesti;

@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
  * "Julkisivumaalaus" putosi hauista, kun sana katosi sivuilta; nyt se on H2-tasolla joka kaupunkisivulla.
  */
 const MaalausSanasto = ({ cityIn }: { cityIn?: string }) => (
-  <section className="section-padding bg-background">
-    <div className="section-container max-w-3xl mx-auto">
+  <section className="section-padding osio">
+    <div className="section-container grid gap-10 lg:grid-cols-[minmax(0,42rem)_16rem] lg:justify-center lg:gap-16 items-start">
+      <div>
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">
         Ulkomaalaus, julkisivumaalaus ja huoltomaalaus{cityIn ? ` ${cityIn}` : ""}
       </h2>
@@ -25,6 +26,12 @@ const MaalausSanasto = ({ cityIn }: { cityIn?: string }) => (
           .
         </p>
       </div>
+      </div>
+      <aside className="border-t-2 border-navy pt-4" aria-label="Maali">
+        <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Maali</span>
+        <span className="block font-heading text-3xl font-extrabold text-accent-ink mt-1">Tikkurila</span>
+        <p className="text-sm text-muted-foreground mt-2 leading-relaxed">Pintamaali pensselillä, ei ruiskulla. Paljaat kohdat pohjamaalataan.</p>
+      </aside>
     </div>
   </section>
 );

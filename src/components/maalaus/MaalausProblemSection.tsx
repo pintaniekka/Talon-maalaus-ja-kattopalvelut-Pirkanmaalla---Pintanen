@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { merkitse } from "@/components/Rytmi";
 import { Search } from "@/components/icons/BrandIcons";
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
@@ -15,7 +16,7 @@ const warningSignsData = [
 
 const MaalausProblemSection = () => {
   return (
-    <section className="section-padding bg-accent-light">
+    <section className="section-padding osio">
       <div className="section-container">
         <div
           className="text-center mb-10">
@@ -31,6 +32,7 @@ const MaalausProblemSection = () => {
           {/* Left: Before/After slider (sticky on desktop) */}
           <div className="lg:sticky lg:top-28">
             <BeforeAfterSlider
+              className="rounded-3xl"
               beforeImage={getResponsiveSrc(beforeBase)}
               afterImage={getResponsiveSrc(afterBase)}
               beforeSrcSet={getResponsiveSrcSet(beforeBase)}
@@ -79,8 +81,7 @@ const MaalausProblemSection = () => {
 
             <Link
               to="/tarjouspyynto/?palvelu=maalaus"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
-              style={{ backgroundColor: "hsl(var(--accent-strong))" }}
+              className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-heading font-extrabold bg-paint-yellow text-paint-yellow-foreground transition-colors hover:bg-paint-yellow-hover"
             >
               Pyydä ilmainen arviokäynti
             </Link>
@@ -90,5 +91,7 @@ const MaalausProblemSection = () => {
     </section>
   );
 };
+
+merkitse(MaalausProblemSection, "sininen");
 
 export default MaalausProblemSection;

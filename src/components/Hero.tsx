@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { merkitse } from "@/components/Rytmi";
 import { ArrowRight } from "lucide-react";
 import PintanenMark from "@/components/icons/PintanenMark";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
@@ -72,9 +73,9 @@ const Hero = () => {
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">{LUVUT.kokemusVuotta} v</span>
+              <span className="text-foreground font-heading font-extrabold text-2xl md:text-3xl">5 v / 2 v</span>
               <span className="text-[10px] md:text-xs text-muted-foreground uppercase font-bold tracking-widest">
-                Kokemusta
+                Takuu katto / seinät
               </span>
             </div>
             <div className="flex flex-col">
@@ -127,5 +128,7 @@ const Hero = () => {
     </section>
   );
 };
+
+merkitse(Hero, "oma");
 
 export default Hero;

@@ -42,7 +42,7 @@ const talotyypit = [
 ];
 
 const MaalausTalotyypit = () => (
-  <section className="section-padding bg-background">
+  <section className="section-padding osio">
     <div className="section-container">
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Millaisia taloja maalaamme?</h2>
@@ -54,7 +54,7 @@ const MaalausTalotyypit = () => (
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {talotyypit.map((t) => (
-          <div key={t.title} className="bg-card rounded-2xl p-6 md:p-8 border border-border">
+          <div key={t.title} className="kortti p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">{t.title}</h3>
             <div className="space-y-3">
               {t.paragraphs.map((p) => (

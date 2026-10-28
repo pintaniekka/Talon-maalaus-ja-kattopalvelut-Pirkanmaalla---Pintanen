@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Search } from "@/components/icons/BrandIcons";
+import { merkitse } from "@/components/Rytmi";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
@@ -10,12 +10,16 @@ const warningSigns = [
   { sign: "Pinta tuntuu karhealta", desc: "karhea tiili imee vettä jokaisella sateella." },
 ];
 
+const isoAlku = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
 /**
  * "Miksi tiilikatto kannattaa pinnoittaa ajoissa": sama osio Pirkanmaa-sivulla ja kaikilla pinnoituksen
  * kaupunkisivuilla (SEO-suunnitelma 25.10.2026, vaihe 1). Kaupunkisivulla kaupungin nimi on otsikossa.
+ * Ulkoasu 28.10.2026 (Eerik, ehdotus 2): sininen näyttämö. Ensin neljä merkkiä rivissä numeroituina,
+ * sitten ennen–jälkeen-kuva ja kaksi selitystä vierekkäin. Tekstit ovat ennallaan.
  */
 const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
-  <section className="section-padding bg-accent-light">
+  <section className="section-padding osio">
     <div className="section-container">
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
@@ -27,9 +31,23 @@ const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-10 items-start max-w-6xl mx-auto">
-        <div className="lg:sticky lg:top-28">
+      <h3 className="lohko-otsake text-center mb-6">Merkit, että katto pitää pinnoittaa</h3>
+      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto">
+        {warningSigns.map((w, i) => (
+          <li key={w.sign} className="border-t border-border/60 pt-4">
+            <span className="block font-heading text-3xl font-extrabold text-paint-yellow leading-none mb-2" aria-hidden="true">
+              0{i + 1}
+            </span>
+            <strong className="block text-foreground font-heading mb-1">{w.sign}</strong>
+            <p className="text-sm text-muted-foreground leading-relaxed">{isoAlku(w.desc)}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div className="grid lg:grid-cols-2 gap-10 items-start max-w-6xl mx-auto mt-12">
+        <div>
           <BeforeAfterSlider
+            className="rounded-3xl"
             beforeImage={getResponsiveSrc("tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen")}
             afterImage={getResponsiveSrc("tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen")}
             beforeSrcSet={getResponsiveSrcSet("tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen")}
@@ -56,27 +74,9 @@ const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
             </p>
           </div>
 
-          <div>
-            <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-              <Search className="w-5 h-5 text-accent-ink" />
-              Merkit, että katto pitää pinnoittaa
-            </h4>
-            <ul className="space-y-3">
-              {warningSigns.map((w) => (
-                <li key={w.sign} className="flex items-start gap-3">
-                  <span className="mt-1 w-2 h-2 rounded-full bg-accent flex-shrink-0" />
-                  <span className="text-muted-foreground">
-                    <strong className="text-foreground">{w.sign}:</strong> {w.desc}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           <Link
             to="/tarjouspyynto/?palvelu=pinnoitus"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
-            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-heading font-extrabold bg-paint-yellow text-paint-yellow-foreground transition-colors hover:bg-paint-yellow-hover"
           >
             Pyydä ilmainen kuntotarkastus
           </Link>
@@ -85,5 +85,7 @@ const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
     </div>
   </section>
 );
+
+merkitse(PinnoitusWhyNow, "sininen");
 
 export default PinnoitusWhyNow;

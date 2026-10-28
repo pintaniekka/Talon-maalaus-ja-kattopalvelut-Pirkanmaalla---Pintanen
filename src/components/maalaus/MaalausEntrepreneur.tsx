@@ -1,4 +1,5 @@
 import { getStorageUrl } from '@/lib/storage';
+import { merkitse } from "@/components/Rytmi";
 import { LUVUT } from '@/data/company';
 
 const eemilImage = getStorageUrl('Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp');
@@ -11,7 +12,7 @@ const eemilImage = getStorageUrl('Pictures-200/Eemil-Pitkanen-talon-maalaus-pint
 const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
   const paikka = cityIn ?? 'Pirkanmaalla ja lähikunnissa';
   return (
-    <section className="section-padding bg-accent-light">
+    <section className="section-padding osio">
       <div className="section-container">
         <div className="max-w-4xl mx-auto grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-start">
           <img
@@ -21,14 +22,13 @@ const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
             alt="Eemil Pitkänen, Pintanen Oy"
             width={200}
             height={200}
-            className="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover"
+            className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-white/20"
           />
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Eemil maalaa</h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Olen Eemil. Maalaan talot {paikka} itse alusta loppuun. Olen tehnyt tätä työtä yli viisi vuotta ja maalannut{' '}
-                {LUVUT.maalatutTalot} taloa.
+                Olen Eemil. Maalaan talot {paikka} itse alusta loppuun. Olen maalannut {LUVUT.maalatutTalot} taloa.
               </p>
               <p>Maalataan seinät aina kahdestaan maalausparin kanssa.</p>
               <p>Annan työlle 2 vuoden kirjallisen takuun.</p>
@@ -39,5 +39,7 @@ const MaalausEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
     </section>
   );
 };
+
+merkitse(MaalausEntrepreneur, "navy");
 
 export default MaalausEntrepreneur;

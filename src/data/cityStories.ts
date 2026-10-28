@@ -17,7 +17,7 @@ export const cityStories: Record<string, CityStory[]> = {
     },
     {
       service: "maalaus",
-      text: "Tampereella maalasimme samaan taloon sekä katon että seinät. Katolla on aurinkopaneelit, jotka pysyivät puhtaina koko työn ajan. Katon pinnoitukseen meni kolme päivää.",
+      text: "Tampereella pinnoitimme katon ja maalasimme seinät samalla kertaa. Katolla on aurinkopaneelit, jotka pysyivät puhtaina koko työn ajan. Katon pinnoitukseen meni kolme päivää.",
     },
   ],
   hameenkyro: [

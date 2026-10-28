@@ -178,7 +178,7 @@ const ReferenssiGalleria = () => {
             Tiilikaton pinnoituksia ja talon maalauksia
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-lg text-muted-foreground">
-            Kaikki kuvat ovat omista kohteistamme. Vedä liukusäädintä, niin näet saman katon ennen ja jälkeen.
+            Kaikki kuvat ovat omista kohteistamme. Vedä liukusäädintä, niin näet kohteen ennen ja jälkeen.
           </p>
         </div>
 

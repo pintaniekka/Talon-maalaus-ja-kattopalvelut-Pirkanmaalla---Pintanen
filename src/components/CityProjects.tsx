@@ -29,10 +29,12 @@ const headings: Record<ProjectService | "all", (place: string) => string> = {
  * ainoa arvostelulohko (tarkastus 12.10.2026, 8.2), joten arvosanarivi ja linkki kaikkiin ovat tässä.
  */
 const CityProjects = ({ citySlug, cityIn, service, featureFirst }: CityProjectsProps) => {
-  const cases = getReviewCases(citySlug);
-  const { items, hasNearby, hasOwn } = getProjectItemsWithNearby(citySlug, service, reviewCaseImages(citySlug));
+  // Kattosivulla vain kattoarviot ja seinäsivulla vain seinäarviot (Eerik 28.10.2026); "molemmat" näkyy kummallakin.
+  const category = service === "pinnoitus" ? "katto" : service === "maalaus" ? "seina" : undefined;
+  const cases = getReviewCases(citySlug, service);
+  const { items, hasNearby, hasOwn } = getProjectItemsWithNearby(citySlug, service, reviewCaseImages(citySlug, service));
   const story = getCityStory(citySlug, service);
-  const reviews = getTestimonialsByCity(citySlug);
+  const reviews = getTestimonialsByCity(citySlug, category);
   if (items.length === 0 && cases.length === 0 && reviews.length === 0) return null;
   // Muiden kuntien sivuilla Pirkanmaa mainitaan leipätekstissä enintään kerran (Eerik 27.10.2026),
   // joten täytekohteet ovat "lähikunnista". Tampereen sivulla sanotaan edelleen "muualla Pirkanmaalla".

@@ -11,6 +11,8 @@ export interface ReviewCase {
   story?: string;
   /** Kuka kertoo: oletus Eerik; seinäkohteissa Eemil (sähköpostit 27.10.2026). */
   kertoja?: string;
+  /** Kattosivulla vain Eerikin kortti ja seinäsivulla vain Eemilin (Eerik 28.10.2026). Ilman arvoa näkyy molemmilla. */
+  service?: "pinnoitus" | "maalaus";
   /** Kuvien perusnimet: ennen, jälkeen tai yksittäinen kuva. */
   before?: string;
   after?: string;
@@ -31,11 +33,20 @@ export const reviewCases: ReviewCase[] = [
     story: "Katto oli todella kulunut. Se pestiin ja maalattiin kahteen kertaan. Harjalle asennettiin myös harjatiiviste.",
     image: "tiilikaton-pinnoitus-tampere-tummanharmaa-tiilikatto-lahikuva",
   },
+  // Sama kohde kahdesti: kattosivulla Eerikin kortti ja seinäsivulla Eemilin (Eerik 28.10.2026).
   {
     name: "Toni Reunanen",
     city: "tampere",
-    kertoja: "Eerik ja Eemil",
-    story: "Samaan taloon maalattiin sekä katto että seinät. Pihan ampiaispesät asiakas poisti ennen työtä. Talon koristeikkunat ovat harvinaisen hienot, ja ne maalattiin tarkasti.",
+    service: "pinnoitus",
+    story: "Samaan taloon maalattiin sekä katto että seinät.",
+    image: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
+  },
+  {
+    name: "Toni Reunanen",
+    city: "tampere",
+    service: "maalaus",
+    kertoja: "Eemil",
+    story: "Pihan ampiaispesät asiakas poisti ennen työtä. Talon koristeikkunat ovat harvinaisen hienot, ja ne maalattiin tarkasti.",
     before: "talon-maalaus-tampere-koristeikkunat-puutalo-ennen",
     after: "talon-maalaus-tampere-koristeikkunat-puutalo-jalkeen",
   },
@@ -89,8 +100,9 @@ export const reviewCases: ReviewCase[] = [
   },
 ];
 
-export const getReviewCases = (city: string): ReviewCase[] => reviewCases.filter((c) => c.city === city);
+export const getReviewCases = (city: string, service?: "pinnoitus" | "maalaus"): ReviewCase[] =>
+  reviewCases.filter((c) => c.city === city && (!service || !c.service || c.service === service));
 
 /** Kuvien perusnimet, jotka arvostelukortit jo näyttävät paikkakunnalla. */
-export const reviewCaseImages = (city: string): Set<string> =>
-  new Set(getReviewCases(city).flatMap((c) => [c.before, c.after, c.image].filter((x): x is string => Boolean(x))));
+export const reviewCaseImages = (city: string, service?: "pinnoitus" | "maalaus"): Set<string> =>
+  new Set(getReviewCases(city, service).flatMap((c) => [c.before, c.after, c.image].filter((x): x is string => Boolean(x))));

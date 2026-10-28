@@ -242,8 +242,9 @@ export const getTestimonialsForCity = (
 };
 
 /** Arvostelut, joiden kohde on tietyllä paikkakunnalla. */
-export const getTestimonialsByCity = (citySlug: string): Testimonial[] =>
-  allTestimonials.filter((t) => t.city === citySlug);
+/** Paikkakunnan arvostelut; kategorialla rajattuna kattoarviot kattosivulle ja seinäarviot seinäsivulle (Eerik 28.10.2026). */
+export const getTestimonialsByCity = (citySlug: string, category?: TestimonialCategory): Testimonial[] =>
+  allTestimonials.filter((t) => t.city === citySlug && (!category || matchesCategory(t, category)));
 
 /** Arvostelujen määrä (näytetään Kokemuksia-sivulla ja arvostelunostoissa). */
 export const REVIEW_COUNT = allTestimonials.length;

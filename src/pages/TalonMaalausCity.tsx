@@ -121,7 +121,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}
       />
-      {getTestimonialsByCity(cityData.slug).length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}
+      {getTestimonialsByCity(cityData.slug, "seina").length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}
       <ServiceContactSection variant="maalaus" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
       <ToimintaAlueetBanner activeCity={cityData.slug} service="maalaus" showNeighbors />
       </Rytmi>

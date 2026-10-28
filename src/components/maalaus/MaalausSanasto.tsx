@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import MaaliMerkki from "@/components/MaaliMerkki";
 
 /**
  * Rinnakkaissanat samalle työlle (SEO-suunnitelma 25.10.2026) ja kohteet asiakkaiden omilla sanoilla
@@ -27,11 +28,7 @@ const MaalausSanasto = ({ cityIn }: { cityIn?: string }) => (
         </p>
       </div>
       </div>
-      <aside className="border-t-2 border-navy pt-4" aria-label="Maali">
-        <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Maali</span>
-        <span className="block font-heading text-3xl font-extrabold text-accent-ink mt-1">Tikkurila</span>
-        <p className="text-sm text-muted-foreground mt-2 leading-relaxed">Pintamaali pensselillä, ei ruiskulla. Paljaat kohdat pohjamaalataan.</p>
-      </aside>
+      <MaaliMerkki merkki="tikkurila" teksti="Pintamaali pensselillä, ei ruiskulla. Paljaat kohdat pohjamaalataan." />
     </div>
   </section>
 );

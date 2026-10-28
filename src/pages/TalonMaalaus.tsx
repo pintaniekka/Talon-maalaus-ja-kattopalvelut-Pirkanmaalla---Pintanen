@@ -11,6 +11,7 @@ import MaalausEntrepreneur from "@/components/maalaus/MaalausEntrepreneur";
 import MaalausTalotyypit from "@/components/maalaus/MaalausTalotyypit";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
+import VarinVaihto from "@/components/VarinVaihto";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
@@ -89,6 +90,7 @@ const TalonMaalaus = () => {
 
       {/* Talotyypit työvaiheiden jälkeen (brief 4, 26.10.2026): rintamamiestalo, hirsitalo, mökki ja piharakennukset. */}
       <MaalausTalotyypit />
+      <VarinVaihto service="maalaus" />
 
       <MaalausComparison />
       <MaalausPricingCards />

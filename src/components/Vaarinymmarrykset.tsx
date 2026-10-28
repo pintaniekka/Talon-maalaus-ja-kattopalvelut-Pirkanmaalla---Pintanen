@@ -1,8 +1,11 @@
+import ResponsiveImage from "@/components/ResponsiveImage";
 type Service = "pinnoitus" | "maalaus";
 
 interface Item {
   luulo: string;
   totuus: string;
+  /** Pieni kuva, joka näyttää sen, mistä puhutaan (kuvasuunnitelma 28.10.2026). */
+  kuva: { base: string; alt: string };
 }
 
 /**
@@ -14,28 +17,34 @@ const items: Record<Service, Item[]> = {
   pinnoitus: [
     {
       luulo: "Haalistunut katto on vain ulkonäköasia.",
+      kuva: { base: "tiilikaton-pinnoitus-haalistunut-punainen-tiilikatto-ennen", alt: "Haalistunut punainen tiilikatto ennen pinnoitusta" },
       totuus: "Haalistuminen kertoo, että tiilen tehdaspinta on kulunut pois. Kulunut tiili imee vettä, ja talvella vesi jäätyy ja rikkoo tiilen.",
     },
     {
       luulo: "Sammaleinen tiilikatto pitää uusia.",
+      kuva: { base: "tiilikaton-pesu-sammaleinen-tiilikatto-ennen", alt: "Sammaleinen tiilikatto ennen pesua" },
       totuus: "Usein pinnoitus riittää. Jos aluskate ja katon rakenteet ovat kunnossa, katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan. Katsomme sen kuntotarkastuksessa.",
     },
     {
       luulo: "Pesu riittää, kun sammal on pois.",
+      kuva: { base: "tiilikaton-pesu-ja-pinnoitus-ylojarvi-puoliksi-pesty", alt: "Tiilikatto, jonka toinen puoli on pesty ja toinen ei, Ylöjärvi" },
       totuus: "Pesu poistaa kasvuston, mutta kulunut pinta imee vettä heti seuraavalla sateella. Siksi pesun jälkeen katto maalataan kahteen kertaan.",
     },
   ],
   maalaus: [
     {
       luulo: "Hilseilevän maalin päälle voi maalata.",
+      kuva: { base: "talon-maalaus-tampere-hilseileva-ulkoverhous-lahikuva-ennen", alt: "Hilseilevä ulkoverhous läheltä" },
       totuus: "Irtoava maali ei pidä uutta maalia kiinni. Se kaavitaan pois, ja paljaat kohdat pohjamaalataan ennen pintamaalia.",
     },
     {
       luulo: "Kun maali vielä pysyy kiinni, ei ole kiire.",
+      kuva: { base: "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen", alt: "Keltainen ulkoverhous huoltomaalauksen jälkeen" },
       totuus: "Silloin maalaus on halvin. Mitä pidempään odotat, sitä enemmän pohjatöitä seinä vaatii.",
     },
     {
       luulo: "Tummat pilkut peittyvät maalilla.",
+      kuva: { base: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta", alt: "Harmaantunut ja likainen puuverhous ennen maalausta" },
       totuus: "Pilkut ovat hometta tai likaa, ja ne tulevat maalin läpi. Seinä pestään ensin homepesuaineella ja harjoilla.",
     },
   ],
@@ -49,9 +58,19 @@ const Vaarinymmarrykset = ({ service }: { service: Service }) => (
       </h2>
       <dl className="grid gap-6 md:grid-cols-3">
         {items[service].map((it) => (
-          <div key={it.luulo} className="kortti p-6">
-            <dt className="font-extrabold text-navy font-heading mb-2">”{it.luulo}”</dt>
-            <dd className="text-muted-foreground text-sm leading-relaxed">{it.totuus}</dd>
+          <div key={it.luulo} className="kortti overflow-hidden">
+            <ResponsiveImage
+              baseName={it.kuva.base}
+              alt={it.kuva.alt}
+              className="aspect-[16/10] w-full object-cover"
+              sizes="(max-width: 768px) 100vw, 300px"
+              width={600}
+              height={375}
+            />
+            <div className="p-6">
+              <dt className="font-extrabold text-navy font-heading mb-2">”{it.luulo}”</dt>
+              <dd className="text-muted-foreground text-sm leading-relaxed">{it.totuus}</dd>
+            </div>
           </div>
         ))}
       </dl>

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Plus } from "lucide-react";
 import type { Tyovaihe } from "@/data/tyovaiheet";
+import ResponsiveImage from "@/components/ResponsiveImage";
 
 interface ProcessListProps {
   title: string;
@@ -43,7 +44,20 @@ const ProcessList = ({ title, intro, steps, cta, id }: ProcessListProps) => (
                   aria-hidden="true"
                 />
               </summary>
-              <p className="px-5 pb-5 pl-[4.25rem] text-[15px] leading-relaxed text-muted-foreground">{step.text}</p>
+              <div className="px-5 pb-5 pl-[4.25rem]">
+                {/* Kuva vain avatussa vaiheessa (kuvasuunnitelma 28.10.2026): ei kuvatulvaa, selain lataa kuvan vasta avattaessa. */}
+                {step.kuva && (
+                  <ResponsiveImage
+                    baseName={step.kuva.base}
+                    alt={step.kuva.alt}
+                    className="mb-3 aspect-[16/10] w-full rounded-xl object-cover"
+                    sizes="(max-width: 768px) 100vw, 300px"
+                    width={800}
+                    height={500}
+                  />
+                )}
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{step.text}</p>
+              </div>
             </details>
           </li>
         ))}

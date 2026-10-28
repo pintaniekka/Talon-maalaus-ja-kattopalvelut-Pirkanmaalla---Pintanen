@@ -71,7 +71,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   {
     title: "Homepesu",
     text: "Pesemme seinät homepesuaineella ja harjoilla. Lika ja home lähtevät pois.",
-    kuva: { base: "talon-maalaus-orivesi-homepesu-ja-suojaus-kaynnissa", alt: "Homepesu käynnissä, sokkeli suojattuna, Orivesi" },
+    kuva: { base: "talon-maalaus-parkano-hilseileva-puutalo-ennen", alt: "Eemil pesee hilseilevää seinää harjalla tikkailta, Parkano" },
   },
   {
     title: "Kaavinta",

@@ -30,7 +30,7 @@ const talotyypit: { title: string; kuva?: { base: string; alt: string }; paragra
   },
   {
     title: "Mökki ja piharakennukset",
-    kuva: { base: "talon-maalaus-akaa-keltainen-omakotitalo-autokatos-jalkeen", alt: "Keltainen talo ja autokatos maalauksen jälkeen, Akaa" },
+    kuva: { base: "talon-maalaus-orivesi-hirsimokki-terassi-jalkeen", alt: "Hirsimökki ja terassi maalauksen jälkeen, Orivesi" },
     paragraphs: [
       "Maalaamme myös mökit, autotallit ja autokatokset. Työvaiheet ovat samat kuin talossa, ja hinta riippuu koosta.",
       "Matkasta ei tule lisäkulua, ja maalaamme myös kauempana Tampereelta. Katon ja seinät samalla kertaa saat edullisempana pakettihintana.",

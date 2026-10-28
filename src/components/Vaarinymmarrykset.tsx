@@ -34,17 +34,17 @@ const items: Record<Service, Item[]> = {
   maalaus: [
     {
       luulo: "Hilseilevän maalin päälle voi maalata.",
-      kuva: { base: "talon-maalaus-tampere-hilseileva-ulkoverhous-lahikuva-ennen", alt: "Hilseilevä ulkoverhous läheltä" },
+      kuva: { base: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta", alt: "Hilseilevä keltainen puuverhous ennen maalausta" },
       totuus: "Irtoava maali ei pidä uutta maalia kiinni. Se kaavitaan pois, ja paljaat kohdat pohjamaalataan ennen pintamaalia.",
     },
     {
       luulo: "Kun maali vielä pysyy kiinni, ei ole kiire.",
-      kuva: { base: "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen", alt: "Keltainen ulkoverhous huoltomaalauksen jälkeen" },
+      kuva: { base: "talon-maalaus-nokia-vaaleansininen-omakotitalo-ennen", alt: "Vaaleansininen puutalo, jonka maali pysyy vielä kiinni, Nokia" },
       totuus: "Silloin maalaus on halvin. Mitä pidempään odotat, sitä enemmän pohjatöitä seinä vaatii.",
     },
     {
       luulo: "Tummat pilkut peittyvät maalilla.",
-      kuva: { base: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta", alt: "Harmaantunut ja likainen puuverhous ennen maalausta" },
+      kuva: { base: "talon-maalaus-orivesi-rintamamiestalo-paaty-ennen", alt: "Tummia pilkkuja ja likaa rintamamiestalon päädyssä ennen pesua, Orivesi" },
       totuus: "Pilkut ovat hometta tai likaa, ja ne tulevat maalin läpi. Seinä pestään ensin homepesuaineella ja harjoilla.",
     },
   ],

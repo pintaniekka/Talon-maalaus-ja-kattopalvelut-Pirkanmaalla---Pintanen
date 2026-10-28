@@ -38,6 +38,7 @@ const talotyypit: { title: string; kuva?: { base: string; alt: string }; paragra
   },
   {
     title: "Kivitalon puuosat",
+    kuva: { base: "tiilikaton-pinnoitus-tampere-tiilitalo-jalkeen", alt: "Tiilitalo, jonka ruskeat puuosat maalattiin harmaiksi ja katto pinnoitettiin, Tampere" },
     paragraphs: [
       "Kivitalossa maalattavaa ovat räystäät, ikkunat ja kuistit. Maalaamme ne samoilla työvaiheilla: pesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
       "Hinta riippuu puuosien määrästä ja kunnosta. Arviokäynnillä katsomme, mitä maalia pinnassa on, ja annamme kirjallisen tarjouksen.",
@@ -59,7 +60,7 @@ const MaalausTalotyypit = () => (
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {talotyypit.map((t) => (
           <div key={t.title} className="kortti overflow-hidden">
-            {/* Kuva kortin yläreunassa (kuvasuunnitelma 28.10.2026); kivitalon puuosista ei ole vielä kuvaa. */}
+            {/* Kuva kortin yläreunassa (kuvasuunnitelma 28.10.2026). Kivitalon puuosat: Tampereen tiilitalo, jonka ruskeat puuosat maalattiin harmaiksi (Eerik 28.10.2026). */}
             {t.kuva && (
               <ResponsiveImage
                 baseName={t.kuva.base}

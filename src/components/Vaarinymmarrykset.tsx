@@ -44,7 +44,7 @@ const items: Record<Service, Item[]> = {
     },
     {
       luulo: "Tummat pilkut peittyvät maalilla.",
-      kuva: { base: "talon-maalaus-orivesi-rintamamiestalo-paaty-ennen", alt: "Tummia pilkkuja ja likaa rintamamiestalon päädyssä ennen pesua, Orivesi" },
+      kuva: { base: "talon-maalaus-vihrea-puutalo-ennen-ulkomaalausta", alt: "Vihreä puutalo, jonka seinissä on hometta ja likaa ennen maalausta" },
       totuus: "Pilkut ovat hometta tai likaa, ja ne tulevat maalin läpi. Seinä pestään ensin homepesuaineella ja harjoilla.",
     },
   ],

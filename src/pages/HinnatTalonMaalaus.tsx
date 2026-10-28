@@ -14,7 +14,7 @@ import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausComparison from "@/components/maalaus/MaalausComparison";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
-import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
+import HintaKohteet from "@/components/hinnat/HintaKohteet";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist } from "@/components/hinnat/PriceSections";
 import { PriceExamplesSection } from "@/components/hinnat/PriceExamples";
 import { maalausPrices, fmtRange } from "@/data/prices";
@@ -128,6 +128,7 @@ const HinnatTalonMaalaus = () => {
 
       {/* Kolme esimerkkitaloa laskurin kaavoilla (brief 3, 26.10.2026); "Mitä hintaan kuuluu" seuraa heti alla. */}
       <PriceExamplesSection service="maalaus" />
+      <HintaKohteet service="maalaus" />
 
       <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
@@ -172,7 +173,6 @@ const HinnatTalonMaalaus = () => {
       </section>
       <Vaarinymmarrykset service="maalaus" />
 
-      <FeaturedProjects service="maalaus" title="Talon maalauksia Pirkanmaalla" />
 
       <RelatedArticles categories={["maalaus", "raha"]} />
       <FAQSection items={faqItems} />

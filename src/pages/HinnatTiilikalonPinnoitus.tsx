@@ -13,7 +13,7 @@ import CalculatorCta from "@/components/hinnat/CalculatorCta";
 import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
-import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
+import HintaKohteet from "@/components/hinnat/HintaKohteet";
 import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist, CompareCards } from "@/components/hinnat/PriceSections";
 import { PriceExamplesSection } from "@/components/hinnat/PriceExamples";
 import { pinnoitusPrices, fmtRange } from "@/data/prices";
@@ -143,6 +143,7 @@ const HinnatTiilikalonPinnoitus = () => {
 
       {/* Kolme esimerkkikattoa laskurin kaavoilla (brief 3, 26.10.2026); "Mitä hintaan kuuluu" seuraa heti alla. */}
       <PriceExamplesSection service="pinnoitus" />
+      <HintaKohteet service="pinnoitus" />
 
       {/* Mitä hintaan kuuluu */}
       <section className="section-padding osio">
@@ -202,7 +203,6 @@ const HinnatTiilikalonPinnoitus = () => {
       </section>
       <Vaarinymmarrykset service="pinnoitus" />
 
-      <FeaturedProjects service="pinnoitus" title="Tiilikaton pinnoituksia Pirkanmaalla" />
 
       <RelatedArticles categories={["katto", "raha"]} />
       <FAQSection items={faqItems} />

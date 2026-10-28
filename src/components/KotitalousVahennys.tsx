@@ -1,5 +1,4 @@
 import { usePreviewVariant } from "@/lib/previewVariant";
-import { merkitse } from "@/components/Rytmi";
 import VahennysA from "./vahennys/VahennysA";
 import VahennysB from "./vahennys/VahennysB";
 import VahennysC from "./vahennys/VahennysC";
@@ -23,7 +22,5 @@ const KotitalousVahennys = ({ defaultVariant = "e" }: { defaultVariant?: Vahenny
   const Vahennys = vaihtoehdot[variant];
   return <Vahennys />;
 };
-
-merkitse(KotitalousVahennys, "oma");
 
 export default KotitalousVahennys;

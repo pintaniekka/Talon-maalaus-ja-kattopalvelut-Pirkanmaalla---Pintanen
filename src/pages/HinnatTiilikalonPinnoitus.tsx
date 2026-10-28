@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
@@ -99,7 +100,7 @@ const crumbs = [{ name: "Tiilikaton pinnoitus", path: "/tiilikaton-pinnoitus-pir
 const HinnatTiilikalonPinnoitus = () => {
   const seo = staticSeo["/tiilikaton-pinnoitus-hinta-pirkanmaa"];
   return (
-    <>
+    <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
       <ServiceSchema
         name="Tiilikaton pinnoitus"
@@ -144,7 +145,7 @@ const HinnatTiilikalonPinnoitus = () => {
       <PriceExamplesSection service="pinnoitus" />
 
       {/* Mitä hintaan kuuluu */}
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <div>
             <PriceIncludes
@@ -157,7 +158,7 @@ const HinnatTiilikalonPinnoitus = () => {
       </section>
 
       {/* Mistä hinta syntyy */}
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-4xl mx-auto">
           <PriceSectionHeading title="Mistä tiilikaton pinnoituksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." />
           <PriceFactors factors={priceFactors} />
@@ -165,7 +166,7 @@ const HinnatTiilikalonPinnoitus = () => {
       </section>
 
       {/* Pinnoitus vai uusi katto */}
-      <section className="section-padding bg-accent-light">
+      <section className="section-padding osio">
         <div className="section-container max-w-4xl mx-auto">
           <PriceSectionHeading
             title="Kannattaako pinnoitus vai uusi katto?"
@@ -190,7 +191,7 @@ const HinnatTiilikalonPinnoitus = () => {
       </section>
 
       {/* Tarjouksen vertailu */}
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container">
           <PriceSectionHeading
             title="Mitä tarjouksesta kannattaa katsoa?"
@@ -203,13 +204,11 @@ const HinnatTiilikalonPinnoitus = () => {
 
       <FeaturedProjects service="pinnoitus" title="Tiilikaton pinnoituksia Pirkanmaalla" />
 
-      <FAQSection items={faqItems} />
-
       <RelatedArticles categories={["katto", "raha"]} />
-
-      <ToimintaAlueetBanner service="pinnoitus" />
+      <FAQSection items={faqItems} />
       <ServiceContactSection variant="katto" />
-    </>
+      <ToimintaAlueetBanner service="pinnoitus" />
+    </Rytmi>
   );
 };
 

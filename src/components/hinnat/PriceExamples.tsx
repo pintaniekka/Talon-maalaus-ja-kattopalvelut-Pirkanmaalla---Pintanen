@@ -60,7 +60,7 @@ export const PriceExampleTable = ({ service }: { service: ExampleService }) => {
     <div>
       {/* Vierivä kääre on kohdistettava näppäimistöllä (axe scrollable-region-focusable), kuten ArticleKitin Table. */}
       <div
-        className="overflow-x-auto rounded-2xl border border-border bg-card"
+        className="kortti overflow-x-auto"
         role="region"
         aria-label={s.taulukko}
         tabIndex={0}
@@ -117,7 +117,7 @@ export const PriceExampleTable = ({ service }: { service: ExampleService }) => {
 export const PriceExamplesSection = ({ service }: { service: ExampleService }) => {
   const s = sisalto[service];
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding osio">
       <div className="section-container max-w-4xl mx-auto">
         <PriceSectionHeading title={s.title} intro={`${s.intro} ${s.kaynti}`} />
         <PriceExampleTable service={service} />

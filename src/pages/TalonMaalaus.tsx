@@ -92,16 +92,14 @@ const TalonMaalaus = () => {
 
       <MaalausComparison />
       <MaalausPricingCards />
-      <KotitalousVahennys />
       <MiksiValitaPintanen service="maalaus" />
+      <KotitalousVahennys />
       <MaalausEntrepreneur />
-      <FAQSection items={maalausFAQ} title="Usein kysyttyä talon maalauksesta" />
-
-      <ToimintaAlueetBanner service="maalaus" />
-
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
       <RelatedArticles categories={["maalaus", "raha"]} />
+      <FAQSection items={maalausFAQ} title="Usein kysyttyä talon maalauksesta" />
       <ServiceContactSection variant="maalaus" />
+      <ToimintaAlueetBanner service="maalaus" />
       </Rytmi>
     </div>
   );

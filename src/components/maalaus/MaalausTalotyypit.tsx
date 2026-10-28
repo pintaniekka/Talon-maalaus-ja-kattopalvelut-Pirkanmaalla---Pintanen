@@ -52,10 +52,10 @@ const MaalausTalotyypit = () => (
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {talotyypit.map((t) => (
           <div key={t.title} className="kortti p-6 md:p-8">
-            <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">{t.title}</h3>
+            <h3 className="font-heading text-xl md:text-2xl font-extrabold text-navy mb-3">{t.title}</h3>
             <div className="space-y-3">
               {t.paragraphs.map((p) => (
                 <p key={p} className="text-muted-foreground leading-relaxed">

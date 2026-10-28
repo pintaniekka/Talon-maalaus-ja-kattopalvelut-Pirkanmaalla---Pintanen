@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import Rytmi from "@/components/Rytmi";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
@@ -13,6 +14,7 @@ import { allCities, hasPinnoitusPage, hasMaalausPage } from '@/data/cityData';
 const ToimintaAlueet = () => {
   return (
     <div>
+      <Rytmi>
       <SEO {...staticSeo["/toiminta-alueet"]} breadcrumbs={[{ name: "Toiminta-alueet" }]} />
       <PageHero
         eyebrow="Toiminta-alueet"
@@ -35,7 +37,7 @@ const ToimintaAlueet = () => {
 
       <ToimintaAlueetBanner />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-4xl">
           <div className="text-base md:text-lg text-muted-foreground mb-12 space-y-4">
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 text-center">Missä toimimme?</h2>
@@ -53,7 +55,7 @@ const ToimintaAlueet = () => {
             </h2>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {allCities.map((city) => (
-                <li key={city.slug} className="bg-card rounded-xl border border-border/50 p-4">
+                <li key={city.slug} className="kortti !rounded-2xl p-4">
                   {/* Aluesivun ainoa linkki sivustolla (sivuroolit 26.10.2026): ankkuri "Maalausliike <kunta>", näkyvissä kunnan nimi. */}
                   <Link to={`/maalauspalvelut-${city.slug}/`} className="flex items-center justify-between gap-1 font-bold text-foreground hover:text-accent-ink transition-colors group">
                     <span>
@@ -83,6 +85,7 @@ const ToimintaAlueet = () => {
       </section>
 
       <ServiceContactSection variant="general" />
+      </Rytmi>
     </div>
   );
 };

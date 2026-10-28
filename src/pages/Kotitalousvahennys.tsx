@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import Rytmi from "@/components/Rytmi";
 import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import FAQSection from "@/components/FAQSection";
 import RelatedArticles from "@/components/RelatedArticles";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
 import { staticSeo, HERO_BASE } from "@/data/seo";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
@@ -52,7 +54,7 @@ const crumbs = [{ name: "Kotitalousvähennys" }];
 const Kotitalousvahennys = () => {
   const seo = staticSeo["/kotitalousvahennys"];
   return (
-    <>
+    <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
 
       <PageHero
@@ -76,7 +78,7 @@ const Kotitalousvahennys = () => {
         breadcrumbs={crumbs}
       />
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <PriceSectionHeading title="Paljonko kotitalousvähennys on vuosina 2026 ja 2027?" />
           <div className="space-y-4 text-muted-foreground leading-relaxed text-base md:text-lg">
@@ -93,7 +95,7 @@ const Kotitalousvahennys = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-accent-light">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <PriceSectionHeading title="Mistä töistä vähennyksen saa?" />
           <div className="space-y-4 text-muted-foreground leading-relaxed text-base md:text-lg">
@@ -125,7 +127,7 @@ const Kotitalousvahennys = () => {
         </div>
       </section>
 
-      <section className="section-padding bg-background">
+      <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <PriceSectionHeading title="Miten kotitalousvähennystä haetaan?" />
           <div className="space-y-4 text-muted-foreground leading-relaxed text-base md:text-lg">
@@ -151,7 +153,7 @@ const Kotitalousvahennys = () => {
 
       <FAQSection items={faqItems} />
 
-      <section className="pb-12 md:pb-16 bg-background">
+      <section className="pb-12 md:pb-16 osio">
         <div className="section-container max-w-3xl mx-auto">
           <h2 className="text-lg font-bold font-heading mb-3">Lähteet</h2>
           <ul className="space-y-1 text-sm text-muted-foreground">
@@ -168,7 +170,8 @@ const Kotitalousvahennys = () => {
 
       <RelatedArticles categories={["raha"]} />
       <ServiceContactSection />
-    </>
+      <ToimintaAlueetBanner />
+    </Rytmi>
   );
 };
 

@@ -77,17 +77,15 @@ const KattopalvelutPinnoitus = () => {
 
       <PinnoitusComparison />
       <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" />
-      <KotitalousVahennys />
       <MiksiValitaPintanen service="pinnoitus" />
+      <KotitalousVahennys />
       <PinnoitusEntrepreneur />
-
-      <FAQSection items={pinnoitusFAQ} title="Usein kysyttyä tiilikaton pinnoituksesta" />
-
-      <ToimintaAlueetBanner service="pinnoitus" />
 
       <TestimonialsMarquee testimonials={roofTestimonials} title="Mitä kattoasiakkaat sanovat meistä?" />
       <RelatedArticles categories={["katto", "raha"]} />
+      <FAQSection items={pinnoitusFAQ} title="Usein kysyttyä tiilikaton pinnoituksesta" />
       <ServiceContactSection variant="katto" />
+      <ToimintaAlueetBanner service="pinnoitus" />
       </Rytmi>
     </div>
   );

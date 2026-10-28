@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import EnnenJalkeenMerkki from "@/components/EnnenJalkeenMerkki";
 import { X } from "lucide-react";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import ResponsiveImage from "@/components/ResponsiveImage";
@@ -17,11 +18,7 @@ const suodattimet: { key: Suodatin; label: string }[] = [
 const ERA = 12;
 
 /** Keltainen laatta kuvan päällä: "Ennen" tai "Jälkeen". */
-const Merkki = ({ children }: { children: string }) => (
-  <span className="absolute left-3 top-3 inline-flex -rotate-3 items-center rounded-[10px] border-[3px] border-navy bg-paint-yellow px-2.5 py-0.5 font-heading text-xs font-black uppercase tracking-wide text-navy shadow-[2px_2px_0_hsl(var(--navy))]">
-    {children}
-  </span>
-);
+const Merkki = ({ children }: { children: string }) => <EnnenJalkeenMerkki label={children} className="absolute left-3 top-3" />;
 
 interface Avattu {
   title: string;

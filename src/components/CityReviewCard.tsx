@@ -1,4 +1,5 @@
 import ResponsiveImage from "@/components/ResponsiveImage";
+import EnnenJalkeenMerkki from "@/components/EnnenJalkeenMerkki";
 import type { ReviewCase } from "@/data/reviewCases";
 import { getCityBySlug } from "@/data/cityData";
 import type { Testimonial } from "@/data/testimonialsData";
@@ -92,11 +93,7 @@ const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
                 width={400}
                 height={533}
               />
-              {p.label && (
-                <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-foreground/70 text-primary-foreground text-xs font-semibold">
-                  {p.label}
-                </span>
-              )}
+              {p.label && <EnnenJalkeenMerkki label={p.label} className="absolute top-3 left-3" />}
             </div>
           ))}
         </div>

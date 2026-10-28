@@ -11,7 +11,7 @@ export const PriceSectionHeading = ({ title, intro }: { title: string; intro?: R
 
 /** Lista "mitä hintaan kuuluu" ruksimerkeillä. */
 export const PriceIncludes = ({ title, items, note }: { title: string; items: string[]; note?: ReactNode }) => (
-  <div className="bg-card rounded-2xl p-6 md:p-8 border border-border">
+  <div className="kortti p-6 md:p-8">
     <h3 className="text-lg font-bold text-foreground mb-4">{title}</h3>
     <ul className="grid sm:grid-cols-2 gap-3">
       {items.map((item) => (
@@ -48,8 +48,8 @@ export const PriceFactors = ({ factors }: { factors: PriceFactor[] }) => (
 export const Checklist = ({ items }: { items: string[] }) => (
   <ol className="max-w-2xl mx-auto space-y-3">
     {items.map((item, i) => (
-      <li key={item} className="flex gap-4 bg-card rounded-xl border border-border px-5 py-4">
-        <span className="w-7 h-7 rounded-full bg-accent/20 text-foreground font-bold text-sm flex items-center justify-center flex-shrink-0">
+      <li key={item} className="flex gap-4 kortti !rounded-2xl px-5 py-4">
+        <span className="kortti-numero !h-8 !w-8 !text-sm">
           {i + 1}
         </span>
         <span className="text-foreground">{item}</span>
@@ -67,12 +67,12 @@ export const CompareCards = ({
   right: { title: string; price: string; note: string };
 }) => (
   <div className="grid md:grid-cols-2 gap-6">
-    <div className="bg-card rounded-2xl p-6 border border-accent/30">
+    <div className="kortti p-6 md:p-8 ring-2 ring-accent-strong">
       <h3 className="text-lg font-bold text-foreground mb-2">{left.title}</h3>
       <p className="text-3xl font-bold text-accent-ink mb-1">{left.price}</p>
       <p className="text-sm text-muted-foreground">{left.note}</p>
     </div>
-    <div className="bg-card rounded-2xl p-6 border border-border">
+    <div className="kortti p-6 md:p-8">
       <h3 className="text-lg font-bold text-foreground mb-2">{right.title}</h3>
       <p className="text-3xl font-bold text-foreground/60 mb-1">{right.price}</p>
       <p className="text-sm text-muted-foreground">{right.note}</p>

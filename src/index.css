@@ -330,6 +330,14 @@
   .kortti-merkki {
     @apply inline-flex h-11 w-11 flex-none items-center justify-center rounded-full bg-accent-light text-accent-strong;
   }
+  /* Korostettu luku: sininen vaalealla, keltainen näyttämöllä. Toimii, vaikka Rytmi pudottaisi lohkon taustaksi. */
+  .luku-korostus {
+    @apply text-accent-ink;
+  }
+  .osio-sininen .luku-korostus,
+  .osio-navy .luku-korostus {
+    @apply text-paint-yellow;
+  }
   .lohko-otsake {
     @apply block font-heading text-xs font-extrabold uppercase tracking-[0.2em] text-accent-ink;
   }

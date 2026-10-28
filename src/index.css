@@ -268,20 +268,45 @@
     @apply py-16 md:py-24;
   }
 
-  /* Tyyli A, "sarjakuva" (Eerik 26.10.2026): valkoinen kortti, paksu tummansininen ääriviiva ja kova sininen
-     varjo oikealle alas. Numero tai kuvake on keltainen, hieman kallistettu laatta mustalla varjolla.
-     Sama kaava kaikissa palikoissa: faktat, työvaiheet, hintakortit, UKK, arvostelut, yhteydenotto, miksi Pintanen. */
-  .kortti-a {
-    @apply relative bg-card border-[3px] border-navy rounded-[18px] shadow-[8px_8px_0_hsl(var(--accent-strong))];
+  /* Tyyli "lehtitaitto" (Eerik 28.10.2026, korvaa tyylin A): ei laatikoita, ei varjoja eikä pyöristyksiä.
+     Kortti on tekstipalsta, jonka yläreunassa on 2 px tummansininen viiva. Numero on iso otsikkofontin luku ja
+     merkki pelkkä kuvake. Osiot vuorottelevat valkoinen, vaaleansininen, sininen ja tummansininen; sininen ja
+     tummansininen osio leikataan vinosti (viisto-ala, viisto-yla). Tummassa osiossa värimuuttujat vaihtuvat,
+     joten samat komponentit toimivat sellaisinaan. */
+  .lehti-kortti {
+    @apply relative border-t-2 border-navy pt-4;
   }
-  .kortti-a-keltainen {
-    @apply shadow-[8px_8px_0_hsl(var(--paint-yellow))];
+  .lehti-numero {
+    @apply block font-heading text-3xl font-extrabold leading-none text-navy;
   }
-  .kortti-a-numero {
-    @apply absolute -top-[18px] left-5 flex h-11 w-11 -rotate-6 items-center justify-center rounded-xl border-[3px] border-navy bg-paint-yellow font-heading text-xl font-black text-navy shadow-[3px_3px_0_hsl(var(--navy))];
+  .lehti-merkki {
+    @apply inline-flex h-7 w-7 flex-none items-center justify-center text-navy;
   }
-  .kortti-a-merkki {
-    @apply inline-flex h-9 w-9 flex-none -rotate-3 items-center justify-center rounded-[10px] border-[3px] border-navy bg-paint-yellow text-navy shadow-[2px_2px_0_hsl(var(--navy))];
+  .osio-sininen,
+  .osio-navy {
+    --foreground: 0 0% 100%;
+    --muted-foreground: 210 50% 92%;
+    --navy: 0 0% 100%;
+    --heading-navy: 0 0% 100%;
+    --accent-ink: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --border: 0 0% 100%;
+    --accent: 54 100% 65%;
+    color: hsl(var(--foreground));
+  }
+  .osio-sininen {
+    background: hsl(203 100% 46%);
+  }
+  .osio-navy {
+    background: hsl(222 64% 11%);
+  }
+  .viisto-ala {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5vw), 0 100%);
+    padding-bottom: calc(4rem + 5vw);
+  }
+  .viisto-yla {
+    clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%);
+    padding-top: calc(4rem + 5vw);
   }
 
   .card-elevated {

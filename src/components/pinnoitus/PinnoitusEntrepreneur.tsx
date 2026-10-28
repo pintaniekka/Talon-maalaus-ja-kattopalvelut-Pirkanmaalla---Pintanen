@@ -12,7 +12,7 @@ const eerikImage = getStorageUrl('Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoit
 const PinnoitusEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
   const paikka = cityIn ?? 'Pirkanmaalla ja lähikunnissa';
   return (
-    <section className="section-padding bg-accent-light">
+    <section className="section-padding osio-navy viisto-yla">
       <div className="section-container">
         <div className="max-w-4xl mx-auto grid md:grid-cols-[auto_1fr] gap-8 md:gap-10 items-start">
           <img
@@ -22,7 +22,7 @@ const PinnoitusEntrepreneur = ({ cityIn }: { cityIn?: string }) => {
             alt="Eerik Pitkänen, Pintanen Oy"
             width={200}
             height={200}
-            className="w-40 h-40 md:w-48 md:h-48 rounded-2xl object-cover"
+            className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover"
           />
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4 font-heading">Eerik tekee työn</h2>

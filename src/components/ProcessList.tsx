@@ -12,7 +12,7 @@ interface ProcessListProps {
 
 /**
  * Työvaiheet avoimena numeroituna listana (korjaus 5, V12): sisältö on HTML:ssä ilman haitaria.
- * Tyyli A (Eerik 26.10.2026): kortit paksulla ääriviivalla ja keltaisella numerolaatalla kolmessa
+ * Tyyli lehtitaitto (Eerik 28.10.2026): palstat yläviivalla ja isolla numerolla kolmessa
  * sarakkeessa. Jos viimeinen kortti jäisi yksin riville, se levenee koko rivin leveydeksi.
  */
 const ProcessList = ({ title, intro, steps, cta, id }: ProcessListProps) => (
@@ -23,10 +23,10 @@ const ProcessList = ({ title, intro, steps, cta, id }: ProcessListProps) => (
         {intro && <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{intro}</p>}
       </div>
 
-      <ol className="grid gap-x-7 gap-y-9 pt-3 md:grid-cols-2 lg:grid-cols-3 md:[&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(3n+1)]:col-span-3 lg:[&>li:last-child:nth-child(3n+2)]:col-span-1">
+      <ol className="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3 md:[&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(3n+1)]:col-span-3 lg:[&>li:last-child:nth-child(3n+2)]:col-span-1">
         {steps.map((step, i) => (
-          <li key={step.title} className="kortti-a px-6 pb-6 pt-8">
-            <span className="kortti-a-numero" aria-hidden="true">
+          <li key={step.title} className="lehti-kortti">
+            <span className="lehti-numero mb-3" aria-hidden="true">
               {i + 1}
             </span>
             <h3 className="font-heading text-lg font-extrabold text-navy mb-1.5">

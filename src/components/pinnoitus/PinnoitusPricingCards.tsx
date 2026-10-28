@@ -21,7 +21,7 @@ interface PinnoitusPricingCardsProps {
 
 const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvelu=pinnoitus", calculatorLabel }: PinnoitusPricingCardsProps) => {
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding bg-accent-light">
       <div className="section-container max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Mitä tiilikaton pinnoitus maksaa {cityIn}?</h2>
@@ -34,15 +34,13 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
           {cards.map((card, i) => (
             <div
               key={i}
-              className={`kortti-a flex flex-col overflow-hidden ${card.featured ? 'kortti-a-keltainen md:-translate-y-2' : ''}`}
+              className="lehti-kortti flex flex-col"
             >
               {card.featured && (
-                <div className="bg-navy text-navy-foreground text-xs font-extrabold uppercase tracking-wider text-center py-1.5">
-                  {FEATURED_RIBBON}
-                </div>
+                <p className="text-xs font-extrabold uppercase tracking-wider text-accent-ink mb-1">{FEATURED_RIBBON}</p>
               )}
 
-              <div className="p-5 md:p-6 flex flex-col flex-1">
+              <div className="flex flex-col flex-1">
                 <p className={`text-2xl font-bold text-foreground ${card.featured && card.label === FEATURED_RIBBON ? 'mb-4' : ''}`}>{card.size}</p>
                 {!(card.featured && card.label === FEATURED_RIBBON) && (
                   <p className="text-sm text-muted-foreground mb-4">{card.label}</p>

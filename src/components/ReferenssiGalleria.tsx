@@ -75,12 +75,12 @@ const Suurennus = ({ avattu, onClose }: { avattu: Avattu; onClose: () => void })
 
 const kortinOtsikko = (k: ReferenssiNakyma) => `${k.title}, ${k.cityName}${k.year ? ` ${k.year}` : ""}`;
 
-/** Yksi kortti: liukusäädin, kuvapari tai yksi kuva, alla otsikko ja yksi lause. Tyyli A. */
+/** Yksi kortti: liukusäädin, kuvapari tai yksi kuva, alla otsikko ja yksi lause. Tyyli lehtitaitto. */
 const Kortti = ({ k, iso, onOpen }: { k: ReferenssiNakyma; iso: boolean; onOpen: (a: Avattu) => void }) => {
   const otsikko = kortinOtsikko(k);
   const sizes = iso ? "(max-width: 1023px) 100vw, 760px" : "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 380px";
   return (
-    <figure className={`kortti-a flex flex-col overflow-hidden ${iso ? "sm:col-span-2" : ""}`}>
+    <figure className={`lehti-kortti flex flex-col overflow-hidden ${iso ? "sm:col-span-2" : ""}`}>
       {k.pair ? (
         <BeforeAfterSlider
           beforeImage={getResponsiveSrc(`${k.pair}-ennen`)}

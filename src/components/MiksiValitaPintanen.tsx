@@ -38,10 +38,10 @@ const MiksiValitaPintanen = ({ service, cityIn }: { service: Service; cityIn?: s
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-10 text-center font-heading">
         Miksi valita Pintanen{cityIn ? ` ${cityIn}` : ""}?
       </h2>
-      <ul className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
         {reasons[service].map((r) => (
-          <li key={r.title} className="kortti-a p-5 flex gap-3.5">
-            <span className="kortti-a-merkki mt-0.5" aria-hidden="true">
+          <li key={r.title} className="lehti-kortti flex gap-3">
+            <span className="lehti-merkki mt-0.5" aria-hidden="true">
               <Check className="w-5 h-5" strokeWidth={3} />
             </span>
             <div>

@@ -56,7 +56,7 @@ const ReviewHighlights = () => (
         {reviews.map((r, i) => (
           <figure
             key={r.name}
-            className="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-auto rounded-2xl border border-border bg-card p-5 shadow-sm"
+            className="snap-center shrink-0 w-[85%] sm:w-[60%] md:w-auto lehti-kortti"
           >
             <figcaption className="flex items-center gap-3 mb-2.5">
               <span

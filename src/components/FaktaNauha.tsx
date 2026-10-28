@@ -13,15 +13,15 @@ interface FaktaNauhaProps {
 }
 
 /**
- * Faktanauha tyylillä A (Eerik 26.10.2026): yksi leveä kortti paksulla ääriviivalla ja kovalla sinisellä
- * varjolla valkoisella taustalla, solut pystyviivoilla erotettuina, keltainen kuvakelaatta ja versaalinen otsake.
+ * Faktanauha lehtitaittona (Eerik 28.10.2026): tummansiniset viivat ylä- ja alapuolella, solut pystyviivoilla
+ * erotettuina, kuvake ja versaalinen otsake.
  */
 const FaktaNauha = ({ items, ariaLabel }: FaktaNauhaProps) => (
   <section className="bg-background py-8 md:py-11">
     <div className="section-container">
       <dl
         aria-label={ariaLabel}
-        className="kortti-a mx-auto max-w-6xl overflow-hidden grid sm:grid-cols-2 lg:grid-cols-4"
+        className="border-y-2 border-navy mx-auto max-w-6xl grid sm:grid-cols-2 lg:grid-cols-4"
       >
         {items.map(({ label, value, icon: Icon }, i) => (
           <div
@@ -36,7 +36,7 @@ const FaktaNauha = ({ items, ariaLabel }: FaktaNauhaProps) => (
             ].join(" ")}
           >
             <dt className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-              <span className="kortti-a-merkki">
+              <span className="lehti-merkki">
                 <Icon className="h-[18px] w-[18px]" strokeWidth={2.4} aria-hidden />
               </span>
               {label}

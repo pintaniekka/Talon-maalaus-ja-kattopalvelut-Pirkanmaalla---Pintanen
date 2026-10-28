@@ -34,7 +34,7 @@ const Index = () => {
       </Suspense>
       <MiksiPintanen />
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
-      <ServiceContactSection variant="general" />
+      <ServiceContactSection variant="general" tausta="vaalea" />
       <ToimintaAlueetBanner />
     </>
   );

@@ -20,8 +20,8 @@ interface FAQSectionProps {
  * Avaaminen on React-ohjattu (Eerik 14.10.2026: vastaus avautuu liukumalla): natiivi <details> ei osaa
  * animoida korkeutta, joten kysymys on painike (aria-expanded, aria-controls) ja vastaus liukuu auki
  * grid-template-rows-siirtymällä 0fr → 1fr. Liikettä vähentäville ei animoida.
- * Ulkoasu tyylillä A (Eerik 26.10.2026): koko lista yhdessä kortissa, jolla on paksu ääriviiva ja kova
- * sininen varjo; kysymykset erotetaan viivoilla, plus-merkki on keltainen laatta ja kääntyy ristiksi.
+ * Ulkoasu lehtitaitto (Eerik 28.10.2026): lista alkaa tummansinisellä viivalla, kysymykset erotetaan
+ * ohuilla viivoilla ja plus-merkki kääntyy ristiksi.
  */
 const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
   const baseId = useId();
@@ -54,7 +54,7 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
           <h2 className="heading-style text-3xl md:text-4xl mb-8 md:mb-12 text-center" style={{ color: 'hsl(var(--heading-navy))' }}>
             {title || 'Usein kysytyt kysymykset'}
           </h2>
-          <div className="kortti-a px-5 md:px-7 divide-y-2 divide-navy/15">
+          <div className="border-t-2 border-navy divide-y divide-navy/20">
             {items.map((item, index) => {
               const isOpen = open[index] ?? index < openCount;
               const answerId = `${baseId}-faq-${index}`;
@@ -70,10 +70,10 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
                     >
                       <span>{item.question}</span>
                       <span
-                        className={`kortti-a-merkki mt-0.5 !h-8 !w-8 transition-transform duration-300 motion-reduce:transition-none ${isOpen ? '!rotate-45' : ''}`}
+                        className={`lehti-merkki mt-0.5 transition-transform duration-300 motion-reduce:transition-none ${isOpen ? 'rotate-45' : ''}`}
                         aria-hidden="true"
                       >
-                        <Plus className="h-4 w-4" strokeWidth={2.25} />
+                        <Plus className="h-5 w-5" strokeWidth={2.5} />
                       </span>
                     </button>
                   </h3>

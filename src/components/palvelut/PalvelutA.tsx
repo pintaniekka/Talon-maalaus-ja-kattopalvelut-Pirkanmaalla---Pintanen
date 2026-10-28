@@ -51,7 +51,7 @@ const PalvelutA = () => (
           <Link
             key={p.key}
             to={p.href}
-            className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-[0_14px_40px_rgba(10,25,47,0.10)] ring-1 ring-navy/5 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(10,25,47,0.16)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            className="group lehti-kortti flex flex-col overflow-hidden transition-transform duration-300 ease-out hover:-translate-y-1.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             <div className="relative overflow-hidden">
               <ResponsiveImage
@@ -82,7 +82,7 @@ const PalvelutA = () => (
                 <span className="text-[13px] font-bold text-foreground">{p.tekija.pilleri}</span>
               </div>
             </div>
-            <div className="flex flex-1 flex-col gap-4 p-6 md:px-8 md:pb-8 md:pt-7">
+            <div className="flex flex-1 flex-col gap-4 pt-5">
               <h3 className="flex items-center justify-between gap-4 font-heading text-2xl font-extrabold leading-[1.15] text-foreground md:text-[26px]">
                 {p.title}
                 <ArrowRight
@@ -91,7 +91,7 @@ const PalvelutA = () => (
                 />
               </h3>
               <p className="text-base leading-relaxed text-muted-foreground">{kuvaukset[p.key]}</p>
-              <div className="mt-auto flex flex-wrap gap-x-6 gap-y-4 rounded-2xl bg-accent-light/70 px-5 py-4 sm:grid sm:grid-cols-[auto_auto_auto] sm:justify-between sm:gap-0">
+              <div className="mt-auto flex flex-wrap gap-x-6 gap-y-4 border-t border-navy/20 pt-4 sm:grid sm:grid-cols-[auto_auto_auto] sm:justify-between sm:gap-0">
                 <Fakta value={p.hinta} label="Hinta yleensä" />
                 <Fakta value={p.takuu} label="Takuu" divider />
                 <Fakta value={p.kesto} label="Kesto" divider />
@@ -117,7 +117,7 @@ const PalvelutA = () => (
       </p>
 
       {/* Pakettihinta tummansinisenä palkkina (vrt. hintasivun "Laske oman kattosi hinta minuutissa"). */}
-      <div className="mt-8 flex flex-col gap-5 overflow-hidden rounded-3xl bg-navy px-6 py-6 text-navy-foreground shadow-xl sm:flex-row sm:items-center sm:justify-between md:px-9 md:py-7">
+      <div className="mt-8 flex flex-col gap-5 overflow-hidden bg-navy px-6 py-6 text-navy-foreground sm:flex-row sm:items-center sm:justify-between md:px-9 md:py-7">
         <div className="flex flex-col gap-1">
           <p className="font-heading text-xl font-extrabold leading-tight md:text-2xl">{PAKETTI_KYSYMYS}</p>
           <p className="text-base text-white/80">{PAKETTI_VASTAUS} Sovitaan siitä arviokäynnillä.</p>

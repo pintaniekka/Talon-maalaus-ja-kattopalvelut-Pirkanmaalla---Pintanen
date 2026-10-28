@@ -47,9 +47,9 @@ const Vaarinymmarrykset = ({ service }: { service: Service }) => (
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center font-heading">
         {service === "pinnoitus" ? "Kolme yleistä luuloa tiilikatosta" : "Kolme yleistä luuloa talon maalauksesta"}
       </h2>
-      <dl className="grid gap-7 md:grid-cols-3">
+      <dl className="grid gap-x-8 gap-y-9 md:grid-cols-3">
         {items[service].map((it) => (
-          <div key={it.luulo} className="kortti-a p-5">
+          <div key={it.luulo} className="lehti-kortti">
             <dt className="font-extrabold text-navy font-heading mb-2">”{it.luulo}”</dt>
             <dd className="text-muted-foreground text-sm leading-relaxed">{it.totuus}</dd>
           </div>

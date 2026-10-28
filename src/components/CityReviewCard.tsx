@@ -54,8 +54,8 @@ const CityReviewCard = ({ review, reviewCase, index = 0 }: Props) => {
       : [];
 
   return (
-    <article className="kortti-a overflow-hidden grid md:grid-cols-[1fr_minmax(0,40%)]">
-      <div className="p-6 flex flex-col">
+    <article className="lehti-kortti overflow-hidden grid md:grid-cols-[1fr_minmax(0,40%)] md:gap-6">
+      <div className="pb-6 flex flex-col">
         <div className="flex items-center gap-3 mb-2.5">
           <span
             className="w-11 h-11 rounded-full flex items-center justify-center text-white text-lg font-medium flex-shrink-0"

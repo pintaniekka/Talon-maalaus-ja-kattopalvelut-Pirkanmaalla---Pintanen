@@ -15,7 +15,7 @@ const warningSigns = [
  * kaupunkisivuilla (SEO-suunnitelma 25.10.2026, vaihe 1). Kaupunkisivulla kaupungin nimi on otsikossa.
  */
 const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
-  <section className="section-padding bg-accent-light">
+  <section className="section-padding osio-sininen viisto-ala">
     <div className="section-container">
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">
@@ -75,8 +75,7 @@ const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
 
           <Link
             to="/tarjouspyynto/?palvelu=pinnoitus"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
-            style={{ backgroundColor: "hsl(var(--accent-strong))" }}
+            className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-heading font-extrabold bg-paint-yellow text-paint-yellow-foreground transition-colors hover:bg-paint-yellow-hover"
           >
             Pyydä ilmainen kuntotarkastus
           </Link>

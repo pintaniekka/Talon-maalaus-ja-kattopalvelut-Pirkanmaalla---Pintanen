@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const Lyhyesti = ({ content, title = "Lyhyesti" }: { content: LyhyestiSisalto; title?: string }) => (
   <section className="bg-background pb-10 md:pb-14" aria-labelledby="lyhyesti-otsikko">
     <div className="section-container">
-      <div className="mx-auto max-w-4xl border-y border-border py-5 md:py-6">
+      <div className="mx-auto max-w-4xl border-y-2 border-navy py-5 md:py-6">
         <h2 id="lyhyesti-otsikko" className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           {title}
         </h2>

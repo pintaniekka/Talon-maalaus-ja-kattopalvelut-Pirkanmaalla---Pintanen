@@ -32,7 +32,7 @@ export const TestimonialCard = ({ name, stars, text }: { name: string; stars: nu
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="flex-shrink-0 w-[300px] sm:w-[340px] self-start bg-card rounded-xl p-5 shadow-sm border border-border/50 mx-2 [scroll-snap-align:center]">
+    <div className="flex-shrink-0 w-[300px] sm:w-[340px] self-start lehti-kortti mx-3 [scroll-snap-align:center]">
       <div className="flex items-center gap-3 mb-3">
         <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-semibold font-heading" aria-hidden="true">
           {getInitials(name)}

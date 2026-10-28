@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
  * paikkakunnan mukaan (Eerik 26.10.2026, yöajon kysymys 14), jotta sama teksti ei toistu 24 sivulla.
  */
 const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
-  <section className="section-padding bg-background">
+  <section className="section-padding bg-accent-light">
     <div className="section-container max-w-3xl mx-auto">
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">
         Tiilikaton maalaus ja pinnoitus tarkoittavat samaa työtä

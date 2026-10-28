@@ -36,7 +36,7 @@ interface Props {
 const ReviewCard = ({ review, index = 0 }: Props) => {
   const city = review.city ? getCityBySlug(review.city) : undefined;
   return (
-    <figure className="kortti-a h-full p-5 flex flex-col">
+    <figure className="lehti-kortti h-full flex flex-col">
       <figcaption className="flex items-center gap-3 mb-2.5">
         <span
           className="w-10 h-10 rounded-full flex items-center justify-center text-white text-base font-medium flex-shrink-0"

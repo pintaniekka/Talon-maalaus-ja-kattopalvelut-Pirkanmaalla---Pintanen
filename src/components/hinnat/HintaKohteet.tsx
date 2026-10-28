@@ -46,7 +46,7 @@ const HintaKohteet = ({ service }: { service: ProjectService }) => {
           </h2>
           <p className="text-lg text-muted-foreground">{s.intro}</p>
         </div>
-        <ul className="mx-auto grid max-w-6xl list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className={`mx-auto grid list-none gap-6 p-0 sm:grid-cols-2 ${items.length < 3 ? "max-w-4xl" : "max-w-6xl lg:grid-cols-3"}`}>
           {items.map((k) => {
             const cityName = getCityBySlug(k.city)?.name ?? k.city;
             const tyo =

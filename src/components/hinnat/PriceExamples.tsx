@@ -119,7 +119,7 @@ export const PriceExamplesSection = ({ service }: { service: ExampleService }) =
   return (
     <section className="section-padding osio">
       <div className="section-container max-w-4xl mx-auto">
-        <PriceSectionHeading title={s.title} intro={`${s.intro} ${s.kaynti}`} />
+        <PriceSectionHeading eyebrow="Esimerkit" title={s.title} intro={`${s.intro} ${s.kaynti}`} />
         <PriceExampleTable service={service} />
       </div>
     </section>

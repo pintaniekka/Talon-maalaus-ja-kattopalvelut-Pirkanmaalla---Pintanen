@@ -40,15 +40,6 @@ export const hintakohteet: HintaKohde[] = [
     alt: "Pinnoitettu tummanharmaa tiilikatto Tampereella läheltä",
     image: "tiilikaton-pinnoitus-tampere-tummanharmaa-tiilikatto-lahikuva",
   },
-  // Katto ja seinät samalla kertaa
-  {
-    services: ["pinnoitus", "maalaus"],
-    city: "tampere",
-    hinta: 11470,
-    kuvaus: "Katto ja seinät samalla kertaa. Katon pinnoitus ja puutalon maalaus koristeikkunoineen.",
-    alt: "Puutalo Tampereella katon pinnoituksen ja seinien maalauksen jälkeen",
-    image: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
-  },
   // Seinät
   {
     services: ["maalaus"],
@@ -84,7 +75,7 @@ export const hintakohteet: HintaKohde[] = [
   },
 ];
 
-/** Hintasivun kohteet: oman palvelun kohteet ensin halvimmasta, katto + seinät -paketti viimeisenä. */
+/** Hintasivun kohteet halvimmasta kalleimpaan. Katto + seinät -paketti jätettiin pois (Eerik 28.10.2026: kuvassa oli toinenkin rakennus). */
 export const getHintakohteet = (service: ProjectService): HintaKohde[] =>
   hintakohteet
     .filter((k) => k.services.includes(service))

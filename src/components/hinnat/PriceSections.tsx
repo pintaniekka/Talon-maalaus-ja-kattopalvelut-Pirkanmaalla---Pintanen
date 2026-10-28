@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 import { Check } from "lucide-react";
+import { merkitse } from "@/components/Rytmi";
 
 /** Osion otsikko ja ingressi samalla tyylillä kaikilla hintasivuilla. */
-export const PriceSectionHeading = ({ title, intro }: { title: string; intro?: ReactNode }) => (
+export const PriceSectionHeading = ({ title, intro, eyebrow }: { title: string; intro?: ReactNode; eyebrow?: string }) => (
   <div className="max-w-3xl mx-auto text-center mb-10">
+    {eyebrow && <span className="lohko-otsake mb-3">{eyebrow}</span>}
     <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading mb-4">{title}</h2>
     {intro && <p className="text-lg text-muted-foreground leading-relaxed">{intro}</p>}
   </div>
@@ -34,14 +36,33 @@ export interface PriceFactor {
 
 /** "Mistä hinta syntyy": kaksipalstainen lista ilman ikoneita (tarkastus 12.10.2026, luku 3). */
 export const PriceFactors = ({ factors }: { factors: PriceFactor[] }) => (
-  <dl className="grid sm:grid-cols-2 gap-x-10 gap-y-6 max-w-3xl mx-auto">
-    {factors.map((factor) => (
-      <div key={factor.title} className="border-l-2 border-accent pl-4">
-        <dt className="font-bold text-foreground mb-1">{factor.title}</dt>
-        <dd className="text-muted-foreground leading-relaxed">{factor.description}</dd>
-      </div>
+  <ol className="grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-5 max-w-6xl mx-auto list-none p-0">
+    {factors.map((factor, i) => (
+      <li key={factor.title} className="border-t border-border/60 pt-4">
+        <span className="luku-korostus block font-heading text-3xl font-extrabold leading-none mb-2" aria-hidden="true">
+          0{i + 1}
+        </span>
+        <strong className="block font-heading text-foreground mb-1">{factor.title}</strong>
+        <p className="text-sm text-muted-foreground leading-relaxed">{factor.description}</p>
+      </li>
     ))}
-  </dl>
+  </ol>
+);
+
+/**
+ * "Mistä hinta syntyy" tummansinisenä näyttämönä: viisi numeroitua tekijää, numerot keltaisina (.luku-korostus).
+ * Sama muoto kuin pinnoitussivun merkkilistassa (Eerik 28.10.2026: hintasivujen ulkoasu samaan rytmiin).
+ */
+export const HintaTekijatLohko = merkitse(
+  ({ title, intro, factors }: { title: string; intro?: ReactNode; factors: PriceFactor[] }) => (
+    <section className="section-padding osio">
+      <div className="section-container">
+        <PriceSectionHeading eyebrow="Hinnan tekijät" title={title} intro={intro} />
+        <PriceFactors factors={factors} />
+      </div>
+    </section>
+  ),
+  "navy",
 );
 
 /** Numeroitu tarkistuslista, esim. "mitä tarjouksesta kannattaa katsoa". */

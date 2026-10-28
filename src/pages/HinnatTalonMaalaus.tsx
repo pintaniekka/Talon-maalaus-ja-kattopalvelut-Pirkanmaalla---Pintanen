@@ -7,7 +7,7 @@ import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
-import KotitalousVahennys from "@/components/KotitalousVahennys";
+import { KotitalousVahennysNayttamo } from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
@@ -15,7 +15,7 @@ import MaalausComparison from "@/components/maalaus/MaalausComparison";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import HintaKohteet from "@/components/hinnat/HintaKohteet";
-import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist } from "@/components/hinnat/PriceSections";
+import { Checklist, HintaTekijatLohko, PriceIncludes, PriceSectionHeading } from "@/components/hinnat/PriceSections";
 import { PriceExamplesSection } from "@/components/hinnat/PriceExamples";
 import { maalausPrices, fmtRange } from "@/data/prices";
 import { HERO_BASE } from "@/data/seo";
@@ -122,7 +122,7 @@ const HinnatTalonMaalaus = () => {
       />
 
       <MaalausPricingCards cityName="Pirkanmaa" calculatorHref="/hintalaskuri/?palvelu=maalaus" calculatorLabel="Laske oman talosi hinta" />
-      <KotitalousVahennys />
+      <KotitalousVahennysNayttamo />
 
       <CalculatorCta service="maalaus" />
 
@@ -142,18 +142,14 @@ const HinnatTalonMaalaus = () => {
         </div>
       </section>
 
-      <section className="section-padding osio">
-        <div className="section-container max-w-4xl mx-auto">
-          <PriceSectionHeading title="Mistä talon maalauksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." />
-          <PriceFactors factors={priceFactors} />
-        </div>
-      </section>
+      <HintaTekijatLohko title="Mistä talon maalauksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." factors={priceFactors} />
 
       <MaalausComparison />
 
       <section className="section-padding osio">
         <div className="section-container">
           <PriceSectionHeading
+            eyebrow="Tarjouksen vertailu"
             title="Mitä tarjouksesta kannattaa katsoa?"
             intro="Kun vertaat tarjouksia, katso muutakin kuin loppusummaa. Kysy ainakin nämä:"
           />

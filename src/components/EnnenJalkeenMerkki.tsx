@@ -9,7 +9,7 @@ const EnnenJalkeenMerkki = ({ label, className = "" }: { label: string; classNam
   return (
     <span
       className={`inline-flex items-center rounded-full px-3 py-1.5 font-heading text-[11px] font-extrabold uppercase tracking-[0.14em] text-white shadow-[0_2px_8px_rgba(0,0,0,0.35)] ${
-        jalkeen ? "bg-[#0A8BDD]" : "bg-[#0B1F3A]/90"
+        jalkeen ? "bg-[#0074bd]" : "bg-[#0B1F3A]/90"
       } ${className}`}
     >
       {label}

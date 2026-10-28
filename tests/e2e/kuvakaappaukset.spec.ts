@@ -20,9 +20,20 @@ for (const route of sitemapPaths()) {
 
     await page.goto(route);
     await settle(page);
-    // Kelluvat osat (chat-nappi, sivureunan nappi, alapalkki) peitetään: ne eivät kuulu sivun sisältöön
-    // ja niiden sijainti riippuu vierityksestä koko sivun kuvassa.
-    const mask = [page.getByRole("button", { name: "Avaa chat" }), page.getByRole("navigation", { name: "Mobiilitoiminnot" })];
-    await expect(page).toHaveScreenshot(file, { fullPage: true, mask });
+    // Kiinteät osat: otsake kiinnitetään sivun yläreunaan ja muut (chat-nappi, sivureunan nappi, alapalkki,
+    // evästebanneri) piilotetaan. Kiinteä elementti piirtyy koko sivun kuvaan eri kohtaan joka otolla, eikä
+    // kuva vakiinnu (perusajo 28.10.2026: "Failed to take two consecutive stable screenshots").
+    await page.evaluate(() => {
+      for (const el of Array.from(document.body.querySelectorAll<HTMLElement>("*"))) {
+        if (getComputedStyle(el).position !== "fixed") continue;
+        if (el.tagName === "HEADER") {
+          el.style.setProperty("position", "absolute", "important");
+          el.style.setProperty("top", "0", "important");
+        } else {
+          el.style.setProperty("visibility", "hidden", "important");
+        }
+      }
+    });
+    await expect(page).toHaveScreenshot(file, { fullPage: true });
   });
 }

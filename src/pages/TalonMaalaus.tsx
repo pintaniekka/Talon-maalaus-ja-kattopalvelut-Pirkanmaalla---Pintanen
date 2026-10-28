@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
+import Kuvanosto from "@/components/Kuvanosto";
 import ProcessList from "@/components/ProcessList";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import MaalausProblemSection from "@/components/maalaus/MaalausProblemSection";
@@ -62,7 +63,13 @@ const TalonMaalaus = () => {
       <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">Ulkomaalaus, julkisivumaalaus ja huoltomaalaus</h2>
-          <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+          <div className="flow-root space-y-4 text-lg text-muted-foreground leading-relaxed">
+            <Kuvanosto
+              base="talon-maalaus-moderni-tumma-puutalo-julkisivumaalaus-valmis"
+              alt="Moderni tumma puutalo julkisivumaalauksen jälkeen"
+              caption="Moderni puutalo julkisivumaalauksen jälkeen."
+              ratio="16/9"
+            />
             <p>
               Ulkomaalaus, julkisivumaalaus, huoltomaalaus ja puutalon maalaus tarkoittavat samaa työtä. Maalaamme omakotitalojen,
               paritalojen ja mökkien puiset ulkoseinät Pirkanmaalla ja lähikunnissa. Talon maalaus onnistuu myös kauempana Tampereelta.

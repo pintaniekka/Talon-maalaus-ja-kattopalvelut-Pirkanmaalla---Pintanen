@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import MaaliMerkki from "@/components/MaaliMerkki";
+import Kuvanosto from "@/components/Kuvanosto";
 
 /**
  * Rinnakkaissanat samalle työlle (SEO-suunnitelma 25.10.2026) ja kohteet asiakkaiden omilla sanoilla
@@ -13,7 +14,13 @@ const MaalausSanasto = ({ cityIn }: { cityIn?: string }) => (
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">
         Ulkomaalaus, julkisivumaalaus ja huoltomaalaus{cityIn ? ` ${cityIn}` : ""}
       </h2>
-      <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+      <div className="flow-root space-y-4 text-lg text-muted-foreground leading-relaxed">
+        <Kuvanosto
+          base="talon-maalaus-nokia-vaaleansininen-talo-sivuseina-jalkeen"
+          alt="Vaaleansinisen puutalon sivuseinä huoltomaalauksen jälkeen, Nokia"
+          caption="Huoltomaalattu sivuseinä, Nokia. Pintamaali maalattiin pensselillä."
+          ratio="16/9"
+        />
         <p>
           Talon maalaus, ulkomaalaus, julkisivumaalaus ja huoltomaalaus tarkoittavat samaa työtä. Seinät pestään homepesuaineella,
           irtoava maali kaavitaan, paljaat kohdat pohjamaalataan ja pintamaali maalataan pensselillä.

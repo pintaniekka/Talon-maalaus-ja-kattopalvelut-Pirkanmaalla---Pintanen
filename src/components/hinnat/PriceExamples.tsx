@@ -3,15 +3,17 @@ import { VAHENNYS_SAANTO, hintaVahennyksenJalkeen } from "@/components/vahennys/
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
 
 /**
- * Hintasivujen esimerkkikohteet koon mukaan (hakutulosanalyysi 26.10.2026, brief 3). Eerik 27.10.2026:
- * hintalaskurin luvut ovat laskurin omia ja hintakortit omia, esimerkeissä käytetään hintakorttien lukuja.
- * Rivit luetaan suoraan prices.ts:n korteista, joten taulukko ei voi erota korteista. Hinta vähennyksen
- * jälkeen lasketaan samalla kaavalla kuin korttien "alk."-luvut (hintaVahennyksenJalkeen).
- * Neliöhinta näytetään pinnoitukselle katon koon mukaan (Eerik 27.10.2026). Ei minimihintaa, ei laskuesimerkkiä.
+ * Hintasivujen esimerkkihinnat (hakutulosanalyysi 26.10.2026, brief 3). Eerik 27.10.2026: hintalaskurin luvut
+ * ovat laskurin omia ja hintakortit omia, esimerkeissä käytetään hintakorttien lukuja. Luvut johdetaan
+ * prices.ts:n korteista, joten ne eivät voi erota korteista. Ei minimihintaa, ei laskuesimerkkiä.
  *
- * Ulkoasu 28.10.2026 (Eerik: hintaesimerkit uusiksi): hintasivuilla kolme palstaa yhdessä kortissa, jokaisessa
- * koon mukaan kasvava talo- tai kattokuvake, koko, hinta isolla ja pienet rivit (neliöhinta, vähennyksen
- * jälkeen, kesto). Yleisin koko on korostettu vaaleansinisellä. Hintalaskurisivulla sama tieto on taulukkona.
+ * Eerik 28.10.2026: kolme esimerkkiä on jo hintakorteissa, joten hintasivulla on useamman esimerkin ruudukko
+ * (malli: kilpailijan vihreät hintaruudut). Pinnoitus: kahdeksan kattokokoa 150–325 m², hinta kunkin koon
+ * kohdalla interpoloidaan korttien haarukoiden keskikohdista (165 m² → 3 025 €, 215 → 3 500, 275 → 4 315),
+ * joten jokainen luku osuu oman korttinsa haarukkaan. Maalaus: talotyyppi × seinän kunto, luvut korttien
+ * alaraja, keskikohta ja yläraja (ei neliöhintoja maalaukselle, Eerik 27.10.2026). Luvut ovat ehdotus
+ * esikatseluun: hintoihin liittyvää ei julkaista ilman Eerikin lupaa.
+ * Hintalaskurisivun taulukko (PriceExampleTable) on ennallaan.
  */
 export type ExampleService = "pinnoitus" | "maalaus";
 
@@ -30,8 +32,8 @@ interface Sisalto {
 
 const sisalto: Record<ExampleService, Sisalto> = {
   pinnoitus: {
-    title: "Tiilikaton pesun ja pinnoituksen hinta: kolme esimerkkiä",
-    intro: "Kolme tavallista kattokokoa ja niiden hinta. Katon koko ja jyrkkyys vaikuttavat hintaan eniten.",
+    title: "Tiilikaton pesun ja pinnoituksen hinta katon koon mukaan",
+    intro: "Hinta tavallisella jyrkkyydellä ja ehjillä tiilillä. Katon koko ja jyrkkyys vaikuttavat hintaan eniten.",
     kokoOtsikko: "Katon koko",
     taulukko: "Tiilikaton pinnoituksen hintaesimerkit",
     rivit: pinnoitusPrices.cards,
@@ -40,9 +42,9 @@ const sisalto: Record<ExampleService, Sisalto> = {
     kaynti: "Tarkan hinnan saat kirjallisena ilmaisen kuntotarkastuksen jälkeen.",
   },
   maalaus: {
-    title: "Talon maalauksen hinta: kolme esimerkkitaloa",
+    title: "Talon maalauksen hinta talon koon ja seinän kunnon mukaan",
     intro:
-      "Kolme tavallista talokokoa ja niiden hinta. Jos vanha maali hilseilee, pohjatöitä on enemmän ja hinta on haarukan yläpäässä.",
+      "Hinta riippuu talon koosta ja pohjatöiden määrästä. Jos vanha maali hilseilee, pesua ja kaavintaa on enemmän.",
     kokoOtsikko: "Talon koko",
     taulukko: "Talon maalauksen hintaesimerkit",
     rivit: maalausPrices.cards,
@@ -61,101 +63,95 @@ const td = "px-4 py-3 text-foreground";
 const vahennyksenJalkeen = (card: PriceCard) =>
   fmtRange(hintaVahennyksenJalkeen(card.normalMin), hintaVahennyksenJalkeen(card.normalMax));
 
-/**
- * Koon mukaan kasvava kuvake: pinnoituksella katto levenee (pieni, yleisin, suuri), maalauksella talo
- * saa kerroksia (1, 1,5 ja 2 kerrosta). Pelkkä koriste, ruudunlukijalle piilossa.
- */
-const KokoKuvake = ({ service, koko }: { service: ExampleService; koko: 0 | 1 | 2 }) => {
-  const w = 96;
-  const h = 56;
-  if (service === "pinnoitus") {
-    // Katon leveys 56 / 72 / 92 px, harja keskellä, piippu oikealla.
-    const leveys = [56, 72, 92][koko];
-    const x0 = (w - leveys) / 2;
-    const x1 = x0 + leveys;
-    const harja = 10;
-    const rays = 50;
-    return (
-      <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} aria-hidden="true" className="mb-4 text-accent-ink">
-        <path d={`M${x0} ${rays} L${w / 2} ${harja} L${x1} ${rays}`} fill="hsl(var(--accent-light))" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
-        <path d={`M${w / 2 + 12} ${harja + 10} v-9 h8 v16`} fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
-        <path d={`M${x0 - 4} ${rays} H${x1 + 4}`} stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  // Talo: 1 kerros, 1,5 kerrosta (ikkuna päädyssä) ja 2 kerrosta. Korkeus 28 / 36 / 44 px.
-  const korkeus = [26, 34, 44][koko];
-  const leveys = 52;
-  const x0 = (w - leveys) / 2;
-  const lattia = h - 4;
-  const raysY = lattia - korkeus;
-  const harjaY = raysY - 16;
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} aria-hidden="true" className="mb-4 text-accent-ink">
-      <path
-        d={`M${x0} ${lattia} V${raysY} L${w / 2} ${harjaY} L${x0 + leveys} ${raysY} V${lattia} Z`}
-        fill="hsl(var(--accent-light))"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinejoin="round"
-      />
-      {/* Ikkunat: alakerta aina, puolitoistakerroksisessa päätyikkuna, kaksikerroksisessa toinen rivi. */}
-      <rect x={x0 + 10} y={lattia - 16} width="9" height="9" fill="currentColor" rx="1" />
-      <rect x={x0 + leveys - 19} y={lattia - 16} width="9" height="9" fill="currentColor" rx="1" />
-      {koko === 1 && <rect x={w / 2 - 4} y={raysY - 7} width="8" height="8" fill="currentColor" rx="1" />}
-      {koko === 2 && (
-        <>
-          <rect x={x0 + 10} y={lattia - 34} width="9" height="9" fill="currentColor" rx="1" />
-          <rect x={x0 + leveys - 19} y={lattia - 34} width="9" height="9" fill="currentColor" rx="1" />
-        </>
-      )}
-      <path d={`M${x0 - 6} ${lattia} H${x0 + leveys + 6}`} stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
+const pyorista10 = (n: number) => Math.round(n / 10) * 10;
+
+/** Kortin koon "150–180 m²" keskikohta neliöinä. */
+const kokoKeskikohta = (size: string): number => {
+  const [a, b] = size.replace(/\s*m².*$/, "").split("–").map((s) => Number(s));
+  return (a + (Number.isFinite(b) ? b : a)) / 2;
 };
 
-/** Kolme esimerkkiä palstoina yhdessä kortissa (hintasivut). */
-export const PriceExampleCards = ({ service }: { service: ExampleService }) => {
+/** Katon koot ruudukossa (Sorcolor-malli, Eerik 28.10.2026). */
+const KATTOKOOT = [150, 175, 200, 225, 250, 275, 300, 325] as const;
+
+/**
+ * Katon hinta koon mukaan: korttien haarukoiden keskikohdat katon koon keskikohdissa, väliin lineaarinen
+ * interpolointi ja päihin viereisen välin kulmakerroin. Pyöristys kymmeneen euroon, ei alle pienimmän kortin alarajan.
+ */
+const kattoHintaKoolle = (m2: number): number => {
+  const pisteet = pinnoitusPrices.cards.map((c) => ({ m2: kokoKeskikohta(c.size), hinta: (c.normalMin + c.normalMax) / 2 }));
+  const vali = (i: number) => (pisteet[i + 1].hinta - pisteet[i].hinta) / (pisteet[i + 1].m2 - pisteet[i].m2);
+  let hinta: number;
+  if (m2 <= pisteet[0].m2) hinta = pisteet[0].hinta + (m2 - pisteet[0].m2) * vali(0);
+  else if (m2 >= pisteet[pisteet.length - 1].m2) {
+    const i = pisteet.length - 2;
+    hinta = pisteet[i + 1].hinta + (m2 - pisteet[i + 1].m2) * vali(i);
+  } else {
+    const i = pisteet.findIndex((p, k) => m2 >= p.m2 && m2 <= pisteet[k + 1].m2);
+    hinta = pisteet[i].hinta + (m2 - pisteet[i].m2) * vali(i);
+  }
+  return Math.max(pinnoitusPrices.cards[0].normalMin, pyorista10(hinta));
+};
+
+/** Seinän kunto sarakkeina: korttien alaraja, keskikohta ja yläraja. */
+const SEINAN_KUNTO = ["Maali pysyy kiinni", "Hilseilee vähän", "Hilseilee paljon"] as const;
+
+const seinaHinta = (card: PriceCard, kunto: number): number =>
+  [card.normalMin, pyorista10((card.normalMin + card.normalMax) / 2), card.normalMax][kunto];
+
+const ruutu = "flex flex-col justify-between rounded-2xl bg-navy p-3 text-white sm:p-4 md:p-5";
+const ruutuKoko = "text-xs font-semibold text-white/80 sm:text-sm";
+const ruutuHinta = "mt-3 whitespace-nowrap font-heading text-xl font-extrabold leading-none text-paint-yellow sm:text-2xl md:text-[1.7rem]";
+
+/** Hintaruudukko hintasivuille: kattokoot tai talotyyppi × seinän kunto. */
+export const PriceExampleGrid = ({ service }: { service: ExampleService }) => {
   const s = sisalto[service];
+  if (service === "pinnoitus") {
+    return (
+      <div>
+        <ul className="grid list-none grid-cols-2 gap-3 p-0 sm:grid-cols-3 md:gap-4 lg:grid-cols-4" aria-label={s.taulukko}>
+          {KATTOKOOT.map((m2) => (
+            <li key={m2} className={ruutu}>
+              <span className={ruutuKoko}>
+                Katto {m2} m²
+              </span>
+              <span className={ruutuHinta}>
+                <span className="sr-only">hinta noin </span>
+                {fmtEur(kattoHintaKoolle(m2))}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+          Hinnat ovat tavallisen jyrkkyyden kattoja, ja ne johdetaan hintakorteistamme. Jyrkkä katto, monta jiiriä tai paljon rikkinäisiä
+          tiiliä nostaa hintaa. {s.kuuluu} {VAHENNYS_LAUSE}
+        </p>
+      </div>
+    );
+  }
   return (
     <div>
-      <ol className="kortti grid list-none overflow-hidden p-0 md:grid-cols-3" aria-label={s.taulukko}>
-        {s.rivit.map((card, i) => (
-          <li
-            key={card.size}
-            className={`flex flex-col p-6 md:p-7 ${i > 0 ? "border-t border-border md:border-l md:border-t-0" : ""} ${
-              card.featured ? "bg-accent-light" : ""
-            }`}
-          >
-            <KokoKuvake service={service} koko={i as 0 | 1 | 2} />
-            <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">{card.label}</span>
-            {/* Kahden rivin korkeus tietokoneella, jotta hinnat ovat palstoissa samalla tasolla ("1-kerroksinen omakotitalo" rivittyy). */}
-            <strong className="mt-1 block font-heading text-xl font-extrabold leading-tight text-foreground md:min-h-[2.6em] md:text-2xl">{card.size}</strong>
-            <p className="mt-4 font-heading text-2xl font-extrabold leading-tight text-accent-ink md:text-3xl">
-              <span className="sr-only">Hinta yleensä </span>
-              <span className="whitespace-nowrap">{fmtRange(card.normalMin, card.normalMax)}</span>
+      <ul className="list-none space-y-5 p-0" aria-label={s.taulukko}>
+        {s.rivit.map((card) => (
+          <li key={card.size}>
+            <p className="mb-2">
+              <span className="font-heading text-lg font-extrabold leading-tight text-foreground">{card.size}</span>
+              <span className="ml-2 text-sm text-muted-foreground">{card.label}</span>
             </p>
-            <dl className="mt-5 space-y-2 border-t border-border pt-4 text-sm">
-              {s.neliohinnat && (
-                <div className="flex items-baseline justify-between gap-3">
-                  <dt className="text-muted-foreground">Neliöhinta</dt>
-                  <dd className="whitespace-nowrap font-semibold tabular-nums text-foreground">{s.neliohinnat[i]}</dd>
-                </div>
-              )}
-              <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Vähennyksen jälkeen</dt>
-                <dd className="whitespace-nowrap font-semibold tabular-nums text-foreground">{vahennyksenJalkeen(card)}</dd>
-              </div>
-              <div className="flex items-baseline justify-between gap-3">
-                <dt className="text-muted-foreground">Kesto</dt>
-                <dd className="whitespace-nowrap font-semibold text-foreground">{card.duration}</dd>
-              </div>
-            </dl>
+            <ul className="grid list-none grid-cols-3 gap-2 p-0 sm:gap-3 md:gap-4">
+              {SEINAN_KUNTO.map((k, i) => (
+                <li key={k} className={ruutu}>
+                  <span className={ruutuKoko}>{k}</span>
+                  <span className={ruutuHinta}>{fmtEur(seinaHinta(card, i))}</span>
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
-      </ol>
+      </ul>
       <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-        Luvut ovat samat kuin hintakorteissamme. {s.kuuluu} {VAHENNYS_LAUSE}
+        Luvut johdetaan hintakorteistamme: hyväkuntoinen seinä on haarukan alapäässä ja paljon hilseilevä yläpäässä. {s.kuuluu}{" "}
+        {VAHENNYS_LAUSE}
       </p>
     </div>
   );
@@ -226,7 +222,7 @@ export const PriceExamplesSection = ({ service }: { service: ExampleService }) =
     <section className="section-padding osio">
       <div className="section-container max-w-5xl mx-auto">
         <PriceSectionHeading eyebrow="Esimerkit" title={s.title} intro={`${s.intro} ${s.kaynti}`} />
-        <PriceExampleCards service={service} />
+        <PriceExampleGrid service={service} />
       </div>
     </section>
   );

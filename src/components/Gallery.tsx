@@ -2,15 +2,12 @@ import { Link } from "react-router-dom";
 import ProjectGrid from "@/components/ProjectGrid";
 import { projectItems, type ProjectItem } from "@/data/projects";
 
-/** Etusivun kohteet: kesän 2026 omia töitä, ennen–jälkeen-parit ensin. Lisää kohteita referenssisivulla. */
+/** Etusivun kohteet (Eerik 29.10.2026): vain kolme ennen–jälkeen-paria ja nappi referenssisivulle. */
 const pick = (key: string): ProjectItem | undefined => projectItems.find((p) => (p.pair ?? p.image) === key);
 const items = [
   "tiilikaton-pinnoitus-tampere-tiilitalo",
   "talon-maalaus-parkano-keltainen-puutalo",
   "tiilikaton-pinnoitus-ylojarvi-punainen-katto",
-  "tiilikaton-pinnoitus-kangasala-vaalea-talo-jalkeen",
-  "tiilikaton-pinnoitus-ylojarvi-musta-tiilikatto-jalkeen",
-  "tiilikaton-pinnoitus-orivesi-punainen-tiilikatto-jalkeen",
 ]
   .map(pick)
   .filter((p): p is ProjectItem => Boolean(p));

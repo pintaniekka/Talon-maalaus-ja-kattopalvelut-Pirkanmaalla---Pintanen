@@ -75,6 +75,12 @@ const PalvelutA = () => (
         <Link to="/talon-maalaus-tampere/" className="font-bold text-accent-ink hover:underline underline-offset-4">
           Talon maalaus Tampere
         </Link>
+        <span className="mx-2 text-accent/60" aria-hidden="true">
+          ·
+        </span>
+        <Link to="/taloyhtiot/" className="font-bold text-accent-ink hover:underline underline-offset-4">
+          Taloyhtiöille
+        </Link>
       </p>
 
       {/* Pakettihinta sinisenä palkkina, sama liukuväri kuin sinisillä näyttämöillä (Eerik 29.10.2026: tummansiniset

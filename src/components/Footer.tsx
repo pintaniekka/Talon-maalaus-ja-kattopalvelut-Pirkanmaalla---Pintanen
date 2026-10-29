@@ -44,6 +44,7 @@ const palstat = [
       { to: "/kokemuksia/", label: "Kokemuksia" },
       { to: "/artikkelit/", label: "Artikkelit" },
       { to: "/kotitalousvahennys/", label: "Kotitalousvähennys" },
+      { to: "/taloyhtiot/", label: "Taloyhtiöille" },
     ],
   },
 ];

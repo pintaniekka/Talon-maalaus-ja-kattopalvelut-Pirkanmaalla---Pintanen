@@ -46,6 +46,7 @@ const Header = () => {
         { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=pinnoitus", text: "Arvio minuutissa" },
         { label: "Ilmainen kuntotarkastus", href: "/ilmainen-katon-kuntotarkastus/", text: "Eerik katsoo katon paikan päällä" },
         { label: "Harjatiiviste", href: "/harjatiivisteen-asennus/", text: "Asennus pinnoituksen yhteydessä tai erikseen" },
+        { label: "Taloyhtiöille", href: "/taloyhtiot/", text: "Rivi-, pari- ja kerrostalojen katot" },
       ],
       promo: {
         eyebrow: "Nyt 0 € · muualla noin 280 €",
@@ -64,6 +65,7 @@ const Header = () => {
         { label: "Hinnat", href: "/talon-maalaus-hinta-pirkanmaa/", text: "Hinta talon koon ja seinän kunnon mukaan" },
         { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=maalaus", text: "Arvio minuutissa" },
         { label: "Ilmainen arviokäynti", href: "/ilmainen-julkisivun-kuntoarvio/", text: "Eemil katsoo seinät paikan päällä" },
+        { label: "Taloyhtiöille", href: "/taloyhtiot/", text: "Rivi-, pari- ja kerrostalojen seinät" },
       ],
       promo: {
         eyebrow: "Nyt 0 € · muualla noin 180 €",

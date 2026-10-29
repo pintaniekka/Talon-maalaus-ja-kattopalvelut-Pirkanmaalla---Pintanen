@@ -34,7 +34,7 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
         <p>
           Pinnoitamme betonitiilikattoja. Tavallisin tiili 2000-luvun taloissa on Ormax, vanhemmissa katoissa profiileja on monia.
           Katsomme tiilen{" "}
-          <Link to="/ilmainen-kuntotarkastus/" className="text-primary font-semibold hover:underline">
+          <Link to="/ilmainen-katon-kuntotarkastus/" className="text-primary font-semibold hover:underline">
             ilmaisessa kuntotarkastuksessa
           </Link>
           .{" "}

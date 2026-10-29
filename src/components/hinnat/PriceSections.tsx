@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import { Check } from "lucide-react";
 
 /** Osion otsikko ja ingressi samalla tyylillä kaikilla hintasivuilla. */
-export const PriceSectionHeading = ({ title, intro }: { title: string; intro?: ReactNode }) => (
+export const PriceSectionHeading = ({ title, intro, eyebrow }: { title: string; intro?: ReactNode; eyebrow?: string }) => (
   <div className="max-w-3xl mx-auto text-center mb-10">
+    {eyebrow && <span className="lohko-otsake mb-3">{eyebrow}</span>}
     <h2 className="text-3xl md:text-4xl font-bold text-foreground font-heading mb-4">{title}</h2>
     {intro && <p className="text-lg text-muted-foreground leading-relaxed">{intro}</p>}
   </div>

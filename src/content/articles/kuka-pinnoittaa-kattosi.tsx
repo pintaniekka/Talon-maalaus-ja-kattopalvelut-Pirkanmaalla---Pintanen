@@ -22,7 +22,7 @@ const faq = [
   },
   {
     question: "Mistä olette?",
-    answer: "Olemme tamperelainen yritys. Toimimme Pirkanmaalla ja lähikunnissa, eikä matkasta tule lisäkulua.",
+    answer: "Olemme tamperelainen yritys. Toimimme Pirkanmaalla ja lähikunnissa.",
   },
 ];
 

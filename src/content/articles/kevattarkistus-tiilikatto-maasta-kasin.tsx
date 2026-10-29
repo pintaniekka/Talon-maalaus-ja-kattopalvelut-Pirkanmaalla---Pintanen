@@ -92,7 +92,7 @@ const Body = () => (
       Kun yksikin listan kohta näkyy. Kuntotarkastus on ilmainen, ja tulemme yleensä samalla viikolla, myös
       iltaisin ja viikonloppuisin. Tarkistamme katolla tiilet, saumat, piipun ympäryksen, läpiviennit ja
       aluskatteen ja kerromme suoraan, mitä katto tarvitsee. Jos pinnoitus on ajankohtainen, se maksaa yleensä
-      2 850–7 000 euroa. Varaa aika sivulta <Link to="/ilmainen-kuntotarkastus/">ilmainen kuntotarkastus</Link>,
+      2 850–7 000 euroa. Varaa aika sivulta <Link to="/ilmainen-katon-kuntotarkastus/">ilmainen kuntotarkastus</Link>,
       ja lue, mitä tarkastuksessa katsomme, artikkelista{" "}
       <Link to="/artikkelit/tiilikaton-kuntotarkastus-mita-tarkistamme/">tiilikaton kuntotarkastus</Link>.
     </p>

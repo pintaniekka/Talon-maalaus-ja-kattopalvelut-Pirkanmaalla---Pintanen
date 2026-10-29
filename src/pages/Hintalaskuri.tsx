@@ -6,7 +6,6 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FAQSection from "@/components/FAQSection";
 import PriceWizard, { type WizardService } from "@/components/laskuri/PriceWizard";
-import { PriceExampleTable } from "@/components/hinnat/PriceExamples";
 import { staticSeo } from "@/data/seo";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
 import { getRoofAndWallTestimonials } from "@/data/testimonialsData";
@@ -116,9 +115,6 @@ const Hintalaskuri = () => {
               vaikuttavat hintaan eniten, koska jyrkällä katolla työ on hitaampaa. Rikkinäisten tiilien määrä kertoo, paljonko tiiliä
               vaihdamme. Aluskatteen kunto ratkaisee, riittääkö pinnoitus vai kannattaako katto uusia.
             </p>
-            <div className="mt-6">
-              <PriceExampleTable service="pinnoitus" />
-            </div>
           </div>
 
           <div>
@@ -127,9 +123,6 @@ const Hintalaskuri = () => {
               Laskuri kysyy talon pohjapinta-alan, kerrosten määrän ja vanhan maalin kunnon. Pohjaneliöt ja kerrokset kertovat, paljonko
               seinää maalataan. Jos maali hilseilee, kaavintaa ja pohjamaalia tarvitaan enemmän, ja se nostaa hintaa.
             </p>
-            <div className="mt-6">
-              <PriceExampleTable service="maalaus" />
-            </div>
           </div>
 
           <div>
@@ -137,7 +130,7 @@ const Hintalaskuri = () => {
             <p className={pClass}>
               Laskuri antaa haarukan. Tarjous on kiinteä hinta, ja saat sen kirjallisena ilmaisen kuntotarkastuksen tai arviokäynnin
               jälkeen. Käynnillä katsomme katon tai seinät ja käymme tarjouksen läpi yhdessä. Hintaan kuuluu koko työ: suojaus,
-              pohjatyöt, pohjamaalaus, pintamaalaus, siivous ja takuu. Matkasta ei tule lisäkulua. Jos sovit katon ja seinät samalla
+              pohjatyöt, pohjamaalaus, pintamaalaus, siivous ja takuu. Jos sovit katon ja seinät samalla
               kertaa, saat edullisemman pakettihinnan.
             </p>
           </div>
@@ -146,7 +139,7 @@ const Hintalaskuri = () => {
             <h2 className={h2Class}>Kotitalousvähennys laskurin tuloksessa</h2>
             <p className={pClass}>
               Laskurin arvio on hinta ilman kotitalousvähennystä. Vähennyksen saat työn osuudesta, ja se tehdään verotuksessa.{" "}
-              {KOTITALOUSVAHENNYS} Esimerkkitaulukoissa näytämme myös hinnan vähennyksen jälkeen. Erittelemme työn osuuden laskulle
+              {KOTITALOUSVAHENNYS} Erittelemme työn osuuden laskulle
               valmiiksi. Lue lisää:{" "}
               <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/" className="text-primary font-semibold hover:underline">
                 kotitalousvähennys katto- ja maalaustöissä

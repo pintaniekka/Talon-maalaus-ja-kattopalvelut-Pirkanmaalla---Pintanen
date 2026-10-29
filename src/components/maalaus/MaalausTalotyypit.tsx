@@ -33,7 +33,7 @@ const talotyypit: { title: string; kuva?: { base: string; alt: string }; paragra
     kuva: { base: "talon-maalaus-orivesi-hirsimokki-terassi-jalkeen", alt: "Hirsimökki ja terassi maalauksen jälkeen, Orivesi" },
     paragraphs: [
       "Maalaamme myös mökit, autotallit ja autokatokset. Työvaiheet ovat samat kuin talossa, ja hinta riippuu koosta.",
-      "Matkasta ei tule lisäkulua, ja maalaamme myös kauempana Tampereelta. Katon ja seinät samalla kertaa saat edullisempana pakettihintana.",
+      "Maalaamme myös kauempana Tampereelta. Katon ja seinät samalla kertaa saat edullisempana pakettihintana.",
     ],
   },
   {

@@ -103,12 +103,15 @@ export const settle = async (page: Page) => {
       await new Promise((r) => setTimeout(r, 30));
     }
     window.scrollTo(0, 0);
+    // Laiskat kuvat ladataan heti: loading="eager" käynnistää latauksen myös näkymän ulkopuolella. Ilman tätä
+    // esimerkiksi alatunnisteen logo jäi lataamatta, kun sivu vieritettiin takaisin ylös, ja odotus jumitti
+    // koko testin (perusajo 28.10.2026: jokainen sivu kaatui 60 s aikakatkaisuun).
     const images = Array.from(document.images);
-    await Promise.all(
-      images.map((img) =>
-        img.complete ? Promise.resolve() : new Promise<void>((r) => { img.addEventListener("load", () => r(), { once: true }); img.addEventListener("error", () => r(), { once: true }); }),
-      ),
-    );
+    for (const img of images) if (img.loading === "lazy") img.loading = "eager";
+    const odota = (img: HTMLImageElement) =>
+      img.complete ? Promise.resolve() : new Promise<void>((r) => { img.addEventListener("load", () => r(), { once: true }); img.addEventListener("error", () => r(), { once: true }); });
+    // Enintään 10 s: kuva, joka ei koskaan valmistu, ei saa kaataa kuvakaappausta.
+    await Promise.race([Promise.all(images.map(odota)), new Promise<void>((r) => setTimeout(r, 10_000))]);
   });
   await page.waitForLoadState("networkidle");
 };

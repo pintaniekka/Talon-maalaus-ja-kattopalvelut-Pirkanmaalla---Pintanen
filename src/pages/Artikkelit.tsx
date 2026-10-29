@@ -199,7 +199,7 @@ export const ArtikkelitListaus = ({ artikkelit }: ListausProps) => {
               </span>
             </h1>
             <p className="mb-3 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Tietoa tiilikaton pinnoituksesta ja talon maalauksesta. Kirjoittajat Eerik ja Eemil tekevät työt itse.
+              Tietoa tiilikaton pinnoituksesta ja talon maalauksesta.
             </p>
             <a
               href={GOOGLE_PROFILE_URL}

@@ -59,9 +59,8 @@
        tummennuksen saavutettavuuden takia 26.10.2026). Brändin #38b6ff on 2,3:1. */
     --accent-strong: 203 100% 39%;
     /* Vaalea taustaväri (Rytmin joka toinen lohko, kortin merkkipallo, laskelmapaneelit, chatin tausta).
-       Eerik 28.10.2026: vanha vaaleansininen #ecf7ff pois. Esikatselun vaihtoehdot ?tausta=a|b|c|d
-       (TaustaVariantti.tsx): a sumu (oletus), b hiekka, c vaaleanharmaa, d vanha vaaleansininen vertailuun. */
-    --accent-light: 216 33% 97%; /* a: sumu #f5f7fa */
+       Eerik 28.10.2026: vanha vaaleansininen #ecf7ff pois; sumu valittu 29.10.2026 (Eerik: "valitse itse"). */
+    --accent-light: 216 33% 97%; /* sumu #f5f7fa */
     /* Sininen tekstinä: vaalealla pohjalla #0074bd (4,6:1 vaaleansinisellä #ecf7ff-pohjalla ja 5,0:1
        valkoisella; 26.10.2026, aiemmin #007bc7, joka jäi vaaleansinisellä pohjalla 4,1:1:een),
        tummalla pohjalla brändin kirkas sininen. */
@@ -121,16 +120,6 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  html[data-tausta="b"] {
-    --accent-light: 40 33% 96%; /* hiekka #f7f4ee */
-  }
-  html[data-tausta="c"] {
-    --accent-light: 210 16% 93%; /* vaaleanharmaa #e9edf1 */
-  }
-  html[data-tausta="d"] {
-    --accent-light: 205 100% 96%; /* vanha vaaleansininen #ecf7ff */
   }
 
   .dark {

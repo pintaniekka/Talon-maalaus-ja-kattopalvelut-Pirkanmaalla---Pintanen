@@ -283,24 +283,29 @@ const Header = () => {
                   <AnimatePresence>
                     {openDropdown === item.label && (
                       <m.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.98, transition: { duration: 0.15, ease: "easeIn" } }}
+                        transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ transformOrigin: "top left" }}
                         // Näkymätön reunus (padding) pitää hiiren valikon alueella myös otsikon ja listan välissä ja sivuilla.
                         className="absolute top-full -left-6 pt-2 px-6 pb-6 z-50"
                       >
-                        {/* Kaksi palstaa: linkit (ilman selitteitä, Eerik 29.10.2026) ja nostokortti (ilmainen tarkastus). Oma navy-pohja ja keltainen korostus, ei kopio. */}
-                        <div className={`grid overflow-hidden rounded-2xl border border-white/10 bg-navy shadow-2xl ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>
+                        {/* Kaksi palstaa: linkit (ilman selitteitä) ja nostokortti (ilmainen tarkastus). Eerik 29.10.2026: pehmeä avaus ja viimeistellympi paneeli. Oma navy-pohja ja keltainen korostus, ei kopio. */}
+                        <div className={`relative grid overflow-hidden rounded-2xl border border-white/10 bg-navy/95 shadow-[0_28px_60px_-20px_rgba(0,0,0,0.65)] ring-1 ring-white/5 backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-gradient-to-r before:from-paint-yellow/80 before:to-accent/60 ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>
                           <ul className="list-none p-3">
                             {item.dropdown.map((subItem) => (
                               <li key={subItem.href}>
                                 <Link
                                   to={subItem.href}
                                   onClick={handleNavigationLinkClick}
-                                  className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5"
+                                  className="group/linkki flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-[background-color,transform] duration-150 ease-out hover:translate-x-0.5 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus-visible:outline-none"
                                 >
-                                  <span className="block font-heading font-bold text-white/90">{subItem.label}</span>
+                                  <span className="block font-heading font-bold text-white/90 transition-colors group-hover/linkki:text-white">{subItem.label}</span>
+                                  <ChevronDown
+                                    className="h-3.5 w-3.5 -rotate-90 text-paint-yellow opacity-0 transition-[opacity,transform] duration-150 group-hover/linkki:translate-x-0.5 group-hover/linkki:opacity-100"
+                                    aria-hidden="true"
+                                  />
                                 </Link>
                               </li>
                             ))}
@@ -424,6 +429,28 @@ const Header = () => {
                               {subItem.label}
                             </Link>
                           ))}
+                          {/* Nostokortti myös mobiilivalikossa (Eerik 29.10.2026: kuten LummeCo), linkkilistan alla. */}
+                          {item.promo && (
+                            <Link
+                              to={item.promo.href}
+                              onClick={closeNavigationMenus}
+                              className="mx-4 mb-2 mt-2 flex overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10"
+                            >
+                              <ResponsiveImage
+                                baseName={item.promo.image}
+                                alt=""
+                                className="w-24 flex-none self-stretch object-cover"
+                                sizes="96px"
+                                width={400}
+                                height={300}
+                              />
+                              <span className="flex flex-col gap-0.5 p-3">
+                                <span className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-paint-yellow">{item.promo.eyebrow}</span>
+                                <span className="font-heading text-sm font-extrabold leading-tight text-white">{item.promo.title}</span>
+                                <span className="text-xs font-bold text-accent-ink">Pyydä käynti</span>
+                              </span>
+                            </Link>
+                          )}
                         </m.div>
                       )}
                     </AnimatePresence>

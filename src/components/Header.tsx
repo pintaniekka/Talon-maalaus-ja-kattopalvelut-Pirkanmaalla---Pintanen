@@ -283,25 +283,29 @@ const Header = () => {
                   <AnimatePresence>
                     {openDropdown === item.label && (
                       <m.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.98, transition: { duration: 0.15, ease: "easeIn" } }}
+                        transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ transformOrigin: "top left" }}
                         // Näkymätön reunus (padding) pitää hiiren valikon alueella myös otsikon ja listan välissä ja sivuilla.
                         className="absolute top-full -left-6 pt-2 px-6 pb-6 z-50"
                       >
-                        {/* Kaksi palstaa: linkit (ilman selitteitä, Eerik 29.10.2026) ja nostokortti (ilmainen tarkastus). Oma navy-pohja ja keltainen korostus, ei kopio. */}
-                        <div className={`grid overflow-hidden rounded-2xl border border-white/10 bg-navy shadow-2xl ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>
+                        {/* Kaksi palstaa: linkit (ilman selitteitä) ja nostokortti (ilmainen tarkastus). Eerik 29.10.2026: pehmeä avaus ja viimeistellympi paneeli. Oma navy-pohja ja keltainen korostus, ei kopio. */}
+                        <div className={`relative grid overflow-hidden rounded-2xl border border-white/10 bg-navy/95 shadow-[0_28px_60px_-20px_rgba(0,0,0,0.65)] ring-1 ring-white/5 backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-gradient-to-r before:from-paint-yellow/80 before:to-accent/60 ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>
                           <ul className="list-none p-3">
-                            {/* Eerik 29.10.2026: nostokortin sivua ei toisteta linkkilistassa (mobiilivalikossa ei ole korttia, siellä linkki jää). */}
-                            {item.dropdown.filter((subItem) => subItem.href !== item.promo?.href).map((subItem) => (
+                            {item.dropdown.map((subItem) => (
                               <li key={subItem.href}>
                                 <Link
                                   to={subItem.href}
                                   onClick={handleNavigationLinkClick}
-                                  className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5"
+                                  className="group/linkki flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-[background-color,transform] duration-150 ease-out hover:translate-x-0.5 hover:bg-white/[0.07] focus-visible:bg-white/[0.07] focus-visible:outline-none"
                                 >
-                                  <span className="block font-heading font-bold text-white/90">{subItem.label}</span>
+                                  <span className="block font-heading font-bold text-white/90 transition-colors group-hover/linkki:text-white">{subItem.label}</span>
+                                  <ChevronDown
+                                    className="h-3.5 w-3.5 -rotate-90 text-paint-yellow opacity-0 transition-[opacity,transform] duration-150 group-hover/linkki:translate-x-0.5 group-hover/linkki:opacity-100"
+                                    aria-hidden="true"
+                                  />
                                 </Link>
                               </li>
                             ))}
@@ -415,7 +419,7 @@ const Header = () => {
                           exit={{ opacity: 0, height: 0 }}
                           className="ml-4 border-l-2 border-accent/40"
                         >
-                          {item.dropdown.filter((subItem) => subItem.href !== item.promo?.href).map((subItem) => (
+                          {item.dropdown.map((subItem) => (
                             <Link
                               key={subItem.href}
                               to={subItem.href}

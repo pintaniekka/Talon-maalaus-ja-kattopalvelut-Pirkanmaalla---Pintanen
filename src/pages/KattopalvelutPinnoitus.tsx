@@ -10,6 +10,7 @@ import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
 import PinnoitusSamaTyo from "@/components/pinnoitus/PinnoitusSamaTyo";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
+import VarinVaihto from "@/components/VarinVaihto";
 import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
@@ -74,6 +75,7 @@ const KattopalvelutPinnoitus = () => {
 
       <PinnoitusSamaTyo />
       <Vaarinymmarrykset service="pinnoitus" />
+      <VarinVaihto service="pinnoitus" />
 
       <PinnoitusComparison />
       <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" />

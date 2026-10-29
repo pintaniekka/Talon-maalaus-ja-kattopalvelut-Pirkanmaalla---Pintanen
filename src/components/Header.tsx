@@ -5,6 +5,7 @@ import { AnimatePresence, m } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Phone } from "@/components/icons/BrandIcons";
 import { getStorageUrl } from "@/lib/storage";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import OptimizedImage from "./OptimizedImage";
 import WhatsAppIcon from "./WhatsAppIcon";
 
@@ -16,7 +17,10 @@ const logoUrl = getStorageUrl("Pintanen-logo.png");
  * Palkki näkyy työpöydällä (xl) ja painuu piiloon alas skrollattaessa, kuten yhteystietopalkki ennen.
  * Pienemmillä näytöillä palkkia ei näytetä, jotta otsikko ei jää sen alle. Vaihda tekstit tästä.
  */
-type NavItem = { label: string; href: string; dropdown?: { label: string; href: string }[] };
+type NavLink = { label: string; href: string; text?: string };
+/** Nostokortti alavalikon oikeassa reunassa (Eerik 28.10.2026: ilmainen kuntotarkastus näkyviin valikkoon). */
+type NavPromo = { eyebrow: string; title: string; text: string; href: string; image: string; alt: string };
+type NavItem = { label: string; href: string; dropdown?: NavLink[]; promo?: NavPromo };
 
 const KAUSIPALKKI = {
   teksti: "Täytämme nyt kalenteria ensi kauden parhaille maalausajoille.",
@@ -37,19 +41,37 @@ const Header = () => {
       label: "Tiilikaton pinnoitus",
       href: "/tiilikaton-pinnoitus-pirkanmaa/",
       dropdown: [
-        { label: "Lue lisää", href: "/tiilikaton-pinnoitus-pirkanmaa/" },
-        { label: "Hintalaskuri", href: "/hintalaskuri/" },
-        { label: "Hinnat", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/" },
+        { label: "Tiilikaton pinnoitus", href: "/tiilikaton-pinnoitus-pirkanmaa/", text: "Pesu, tiilien vaihto ja kaksi kerrosta maalia" },
+        { label: "Hinnat", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", text: "Hinta katon koon mukaan ja toteutuneita hintoja" },
+        { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=pinnoitus", text: "Arvio minuutissa" },
+        { label: "Ilmainen kuntotarkastus", href: "/ilmainen-katon-kuntotarkastus/", text: "Eerik katsoo katon paikan päällä" },
       ],
+      promo: {
+        eyebrow: "Nyt 0 € · muualla noin 280 €",
+        title: "Ilmainen katon kuntotarkastus",
+        text: "Eerik käy katon läpi ja kertoo, riittääkö pinnoitus. Kirjallinen tarjous kiinteällä hinnalla.",
+        href: "/ilmainen-katon-kuntotarkastus/",
+        image: "tiilikaton-pinnoitus-tampere-eerik-pitkanen-katolla",
+        alt: "Eerik Pitkänen tiilikatolla kuntotarkastuksessa",
+      },
     },
     {
       label: "Talon maalaus",
       href: "/talon-maalaus-pirkanmaa/",
       dropdown: [
-        { label: "Lue lisää", href: "/talon-maalaus-pirkanmaa/" },
-        { label: "Hintalaskuri", href: "/hintalaskuri/" },
-        { label: "Hinnat", href: "/talon-maalaus-hinta-pirkanmaa/" },
+        { label: "Talon maalaus", href: "/talon-maalaus-pirkanmaa/", text: "Homepesu, kaavinta ja pintamaali pensselillä" },
+        { label: "Hinnat", href: "/talon-maalaus-hinta-pirkanmaa/", text: "Hinta talon koon ja seinän kunnon mukaan" },
+        { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=maalaus", text: "Arvio minuutissa" },
+        { label: "Ilmainen arviokäynti", href: "/ilmainen-julkisivun-kuntoarvio/", text: "Eemil katsoo seinät paikan päällä" },
       ],
+      promo: {
+        eyebrow: "Nyt 0 € · muualla noin 180 €",
+        title: "Ilmainen julkisivun kuntoarvio",
+        text: "Eemil katsoo seinät ja pohjatöiden määrän. Kirjallinen tarjous kiinteällä hinnalla.",
+        href: "/ilmainen-julkisivun-kuntoarvio/",
+        image: "talon-maalaus-orivesi-rintamamiestalo-paaty-ennen",
+        alt: "Rintamamiestalon pääty ennen maalausta, Orivesi",
+      },
     },
     { label: "Referenssit", href: "/referenssit/" },
     { label: "Artikkelit", href: "/artikkelit/" },
@@ -265,17 +287,47 @@ const Header = () => {
                         // Näkymätön reunus (padding) pitää hiiren valikon alueella myös otsikon ja listan välissä ja sivuilla.
                         className="absolute top-full -left-6 pt-2 px-6 pb-6 z-50"
                       >
-                        <div className="w-60 bg-navy rounded-xl shadow-2xl border border-white/10 overflow-hidden">
-                          {item.dropdown.map((subItem) => (
+                        {/* Kaksi palstaa: linkit selitteineen ja nostokortti (ilmainen tarkastus). Oma navy-pohja ja keltainen korostus, ei kopio. */}
+                        <div className={`grid overflow-hidden rounded-2xl border border-white/10 bg-navy shadow-2xl ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>
+                          <ul className="list-none p-3">
+                            {item.dropdown.map((subItem) => (
+                              <li key={subItem.href}>
+                                <Link
+                                  to={subItem.href}
+                                  onClick={handleNavigationLinkClick}
+                                  className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5"
+                                >
+                                  <span className="block font-heading font-bold text-white/90">{subItem.label}</span>
+                                  {subItem.text && <span className="mt-0.5 block text-xs leading-snug text-white/55">{subItem.text}</span>}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                          {item.promo && (
                             <Link
-                              key={subItem.href}
-                              to={subItem.href}
+                              to={item.promo.href}
                               onClick={handleNavigationLinkClick}
-                              className="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-accent-ink transition-colors font-medium"
+                              className="group/nosto m-3 ml-0 flex flex-col overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10 transition-colors hover:bg-white/10"
                             >
-                              {subItem.label}
+                              <ResponsiveImage
+                                baseName={item.promo.image}
+                                alt={item.promo.alt}
+                                className="aspect-[16/9] w-full object-cover"
+                                sizes="360px"
+                                width={800}
+                                height={450}
+                              />
+                              <span className="flex flex-1 flex-col gap-1.5 p-4">
+                                <span className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-paint-yellow">{item.promo.eyebrow}</span>
+                                <span className="font-heading text-base font-extrabold leading-tight text-white">{item.promo.title}</span>
+                                <span className="text-xs leading-snug text-white/65">{item.promo.text}</span>
+                                <span className="mt-auto inline-flex items-center gap-1 pt-2 text-xs font-bold text-accent-ink group-hover/nosto:underline">
+                                  Pyydä käynti
+                                  <ChevronDown className="h-3.5 w-3.5 -rotate-90" aria-hidden="true" />
+                                </span>
+                              </span>
                             </Link>
-                          ))}
+                          )}
                         </div>
                       </m.div>
                     )}

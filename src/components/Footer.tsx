@@ -25,7 +25,7 @@ const palstat = [
     links: [
       { to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Tiilikaton pinnoitus" },
       { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Hinta ja hintalaskuri" },
-      { to: "/ilmainen-kuntotarkastus/", label: "Ilmainen kuntotarkastus" },
+      { to: "/ilmainen-katon-kuntotarkastus/", label: "Ilmainen kuntotarkastus" },
     ],
   },
   {
@@ -33,7 +33,7 @@ const palstat = [
     links: [
       { to: "/talon-maalaus-pirkanmaa/", label: "Talon maalaus" },
       { to: "/talon-maalaus-hinta-pirkanmaa/", label: "Hinta ja hintalaskuri" },
-      { to: "/tarjouspyynto/?palvelu=maalaus", label: "Ilmainen arviokäynti" },
+      { to: "/ilmainen-julkisivun-kuntoarvio/", label: "Ilmainen arviokäynti" },
     ],
   },
   {

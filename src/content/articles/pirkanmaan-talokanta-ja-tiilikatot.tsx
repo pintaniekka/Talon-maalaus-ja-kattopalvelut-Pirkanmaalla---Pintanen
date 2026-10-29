@@ -105,12 +105,11 @@ const Body = () => (
     <h2>Missä kunnissa pinnoitamme?</h2>
     <p>
       Pinnoitamme tiilikattoja Pirkanmaalla ja lähikunnissa: Tampereella, Ylöjärvellä, Kangasalla, Nokialla,
-      Lempäälässä, Pirkkalassa, Sastamalassa, Hämeenkyrössä ja muissa Pirkanmaan kunnissa. Matkasta ei tule
-      lisäkulua. Kuntakohtaiset sivut ja kohteet löydät sivulta{" "}
+      Lempäälässä, Pirkkalassa, Sastamalassa, Hämeenkyrössä ja muissa Pirkanmaan kunnissa. Kuntakohtaiset sivut ja kohteet löydät sivulta{" "}
       <Link to="/toiminta-alueet/">toiminta-alueet</Link>, ja palvelun esittelemme sivulla{" "}
       <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoitus Pirkanmaalla</Link>.
     </p>
-    <Avainhuomio>Toimimme kaikissa taulukon kunnissa, eikä matkasta tule lisäkulua.</Avainhuomio>
+    <Avainhuomio>Toimimme kaikissa taulukon kunnissa.</Avainhuomio>
 
     <ArticleFaq items={faq} />
 

@@ -4,7 +4,7 @@ import ArvosteluNosto from "@/components/ArvosteluNosto";
 import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import FAQSection from "@/components/FAQSection";
-import RelatedArticles from "@/components/RelatedArticles";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
@@ -169,7 +169,7 @@ const Kotitalousvahennys = () => {
         </div>
       </section>
 
-      <RelatedArticles categories={["raha"]} />
+      <ArtikkeliRivit categories={["raha"]} />
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
       <ArvosteluNosto polku="/kotitalousvahennys" />
 

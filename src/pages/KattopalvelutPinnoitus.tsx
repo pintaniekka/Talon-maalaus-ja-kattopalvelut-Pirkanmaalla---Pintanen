@@ -17,7 +17,7 @@ import KotitalousVahennys from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
-import RelatedArticles from "@/components/RelatedArticles";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
@@ -90,7 +90,7 @@ const KattopalvelutPinnoitus = () => {
       <PinnoitusEntrepreneur />
 
       <TestimonialsMarquee testimonials={roofTestimonials} title="Mitä kattoasiakkaat sanovat meistä?" />
-      <RelatedArticles categories={["katto", "raha"]} />
+      <ArtikkeliRivit categories={["katto", "raha"]} />
       <FAQSection items={pinnoitusFAQ} title="Usein kysyttyä tiilikaton pinnoituksesta" />
       <ServiceContactSection variant="katto" />
       <ToimintaAlueetBanner service="pinnoitus" />

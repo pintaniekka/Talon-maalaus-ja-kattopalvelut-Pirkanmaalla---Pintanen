@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
 import FAQSection from "@/components/FAQSection";
-import RelatedArticles from "@/components/RelatedArticles";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading, Checklist } from "@/components/hinnat/PriceSections";
@@ -159,7 +159,7 @@ const Kuntotarkastus = ({ service }: { service: KuntotarkastusService }) => {
         </div>
       </section>
 
-      <RelatedArticles categories={s.articleCategories} />
+      <ArtikkeliRivit categories={s.articleCategories} />
       <FAQSection items={s.faq} title={`Usein kysyttyä: ${s.h1.toLowerCase()}`} />
       <ServiceContactSection variant={s.contactVariant} />
       <ToimintaAlueetBanner service={service} />

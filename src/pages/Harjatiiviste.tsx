@@ -8,7 +8,7 @@ import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import FAQSection from "@/components/FAQSection";
-import RelatedArticles from "@/components/RelatedArticles";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
@@ -192,7 +192,7 @@ const Harjatiiviste = () => {
         </div>
       </section>
 
-      <RelatedArticles categories={["katto"]} />
+      <ArtikkeliRivit categories={["katto"]} />
       <FAQSection items={faq} title="Usein kysyttyä harjatiivisteestä" />
       <ServiceContactSection variant="katto" />
       <ToimintaAlueetBanner service="pinnoitus" />

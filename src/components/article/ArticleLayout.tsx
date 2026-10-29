@@ -2,13 +2,13 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import { getResponsiveSrc, getResponsiveSrcSet, toAbsoluteUrl } from "@/lib/storage";
 import { authors } from "@/data/authors";
 import {
   type ArticleMeta,
   categoryLabels,
   formatDateFi,
-  getPublishedArticles,
 } from "@/data/articles";
 
 interface TocEntry {
@@ -62,7 +62,7 @@ interface ArticleLayoutProps {
 
 /**
  * Artikkelipohja: murupolku, otsikko, ingressi, kirjoittaja ja päiväys,
- * pääkuva, sisällysluettelo, leipäteksti, kirjoittajalaatikko ja "Lue myös".
+ * pääkuva, sisällysluettelo, leipäteksti, kirjoittajalaatikko ja "Lue myös" (ArtikkeliRivit).
  * Tarkoituksella tekstivetoinen: ei heroa, ei CTA-nappeja, ei lomaketta.
  */
 const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) => {
@@ -71,7 +71,6 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
   const [toc, setToc] = useState<TocEntry[]>([]);
   const url = `https://pintanen.fi/artikkelit/${meta.slug}/`;
   const heroUrl = getResponsiveSrc(meta.heroImage);
-  const related = getPublishedArticles().filter((a) => a.slug !== meta.slug).slice(0, 3);
 
   // Sisällysluettelo väliotsikoista. Leipäteksti ladataan laiskasti, joten
   // otsikot poimitaan vasta kun ne ilmestyvät DOMiin.
@@ -264,48 +263,13 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
               </div>
             </div>
 
-            {related.length > 0 && (
-              <div className="mt-12">
-                <h2 className="font-heading font-bold text-xl text-foreground mb-4">Lue myös</h2>
-                {/* Eerik 29.10.2026: artikkelilinkkeihin kansikuva. */}
-                <ul className="divide-y divide-border border-y border-border">
-                  {related.map((a) => (
-                    <li key={a.slug}>
-                      <Link to={`/artikkelit/${a.slug}/`} className="group flex items-center gap-4 py-4">
-                        <img
-                          src={getResponsiveSrc(a.heroImage)}
-                          srcSet={getResponsiveSrcSet(a.heroImage)}
-                          sizes="112px"
-                          alt=""
-                          width={112}
-                          height={84}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-[84px] w-28 shrink-0 rounded-xl object-cover"
-                        />
-                        <span className="flex min-w-0 flex-1 flex-col gap-1">
-                          <span className="font-semibold leading-snug text-foreground group-hover:text-[#006ead] transition-colors">
-                            {a.title}
-                          </span>
-                          <time dateTime={a.publishedAt} className="text-sm text-muted-foreground">
-                            {formatDateFi(a.publishedAt)}
-                          </time>
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
 
-            <p className="mt-10">
-              <Link to="/artikkelit/" className="text-[#006ead] font-semibold underline underline-offset-2">
-                ← Kaikki artikkelit
-              </Link>
-            </p>
           </footer>
         </div>
       </article>
+
+      {/* "Lue myös" samana ohuena rivinä kuin muut artikkelilistat (29.10.2026); tekstipainotteinen, ei CTA:ta. */}
+      <ArtikkeliRivit title="Lue myös" excludeSlug={meta.slug} />
     </div>
   );
 };

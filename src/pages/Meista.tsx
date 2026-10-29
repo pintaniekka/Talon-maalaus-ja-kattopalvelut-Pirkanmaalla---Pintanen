@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { merkitse } from "@/components/Rytmi";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import FAQSection from "@/components/FAQSection";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import SEO from "@/components/SEO";

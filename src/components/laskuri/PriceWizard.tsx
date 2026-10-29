@@ -8,7 +8,7 @@ import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactForm } from "@/lib/contactForm";
 import { trackEvent } from "@/lib/analytics";
-import { calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
+import { calculateRidgeSealPrice, calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
 import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
 import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
 
@@ -27,6 +27,12 @@ export interface CalculatorQuestion {
   kind: "number" | "options";
   placeholder?: string;
   options?: CalculatorOption[];
+  /** Lukukysymyksen yksikkö ja rajat (oletus m², 10–2000). */
+  unit?: string;
+  min?: number;
+  max?: number;
+  /** Kysytään vain, jos aiemmat vastaukset täyttävät ehdon (harjan pituus vain, jos harjatiiviste puuttuu). */
+  showIf?: (answers: Record<string, string>) => boolean;
 }
 
 /*
@@ -65,6 +71,29 @@ export const calculatorQuestions: Record<WizardService, CalculatorQuestion[]> = 
         { label: "Normaali jyrkkyys, valjailla pärjää", value: "normaali" },
         { label: "Todella jyrkkä", value: "jyrkka" },
       ],
+    },
+    // Eerik 29.10.2026: harjatiiviste laskuriin, 15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä.
+    {
+      key: "ridgeSeal",
+      title: "Puuttuuko katolta harjatiiviste?",
+      help: "Harjatiiviste on nauha harjatiilen alla. Jos et tiedä, katsomme sen kuntotarkastuksessa.",
+      kind: "options",
+      options: [
+        { label: "Kyllä puuttuu", value: "kylla" },
+        { label: "Ei puutu", value: "ei" },
+        { label: "En tiedä", value: "en-tieda" },
+      ],
+    },
+    {
+      key: "ridgeMeters",
+      title: "Kuinka pitkä katon harja on?",
+      help: "Arvio metreinä riittää. Harja on katon ylin sauma päädystä päätyyn.",
+      kind: "number",
+      placeholder: "esim. 12",
+      unit: "m",
+      min: 1,
+      max: 200,
+      showIf: (a) => a.ridgeSeal === "kylla",
     },
     {
       key: "utilities",
@@ -123,10 +152,13 @@ const labelOf = (q: CalculatorQuestion, value: string) => q.options?.find((o) =>
 /** Laskurin vastaukset yhdeksi riviksi myynnin sähköpostiin ja CRM:ään. */
 // eslint-disable-next-line react-refresh/only-export-components -- jaettu etusivun laskurille
 export const buildCalculatorDetails = (service: WizardService, answers: Record<string, string>, city: string) => {
-  const parts = calculatorQuestions[service].map((q) => {
+  const parts = calculatorQuestions[service].filter((q) => !q.showIf || q.showIf(answers)).map((q) => {
     const v = answers[q.key] ?? "-";
-    if (q.kind === "number") return `${service === "pinnoitus" ? "Katon koko" : "Pohjaneliöt"}: ${v} m²`;
-    const names: Record<string, string> = { brokenTiles: "Rikkinäiset tiilet", underlayment: "Aluskate", slope: "Jyrkkyys", utilities: "Vesi/sähkö", stories: "Kerrokset", peeling: "Hilseily" };
+    if (q.kind === "number") {
+      if (q.key === "ridgeMeters") return `Harjan pituus: ${v} m`;
+      return `${service === "pinnoitus" ? "Katon koko" : "Pohjaneliöt"}: ${v} m²`;
+    }
+    const names: Record<string, string> = { brokenTiles: "Rikkinäiset tiilet", underlayment: "Aluskate", slope: "Jyrkkyys", ridgeSeal: "Harjatiiviste", utilities: "Vesi/sähkö", stories: "Kerrokset", peeling: "Hilseily" };
     return `${names[q.key] ?? q.key}: ${labelOf(q, v)}`;
   });
   parts.push(`Kaupunki: ${city || "-"}`);
@@ -155,9 +187,10 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [resultAfterDeduction, setResultAfterDeduction] = useState<string | null>(null);
+  const [resultHarja, setResultHarja] = useState(0);
   const topRef = useRef<HTMLDivElement>(null);
 
-  const qs = service ? calculatorQuestions[service] : [];
+  const qs = service ? calculatorQuestions[service].filter((q) => !q.showIf || q.showIf(answers)) : [];
   const totalSteps = qs.length + 2;
   const stepNumber = Math.min(index + 1, totalSteps);
   const current = index < qs.length ? qs[index] : null;
@@ -176,7 +209,10 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     if (!service) return null;
     const m2 = Number(answers.squareMeters);
     if (!m2) return null;
-    return service === "pinnoitus" ? calculateRoofPrice(m2, answers.slope) : calculateWallPrice(m2, answers.stories, answers.peeling);
+    const base = service === "pinnoitus" ? calculateRoofPrice(m2, answers.slope) : calculateWallPrice(m2, answers.stories, answers.peeling);
+    // Harjatiiviste lisätään loppuhintaan eriteltynä (Eerik 29.10.2026).
+    const harja = service === "pinnoitus" && answers.ridgeSeal === "kylla" && Number(answers.ridgeMeters) > 0 ? calculateRidgeSealPrice(Number(answers.ridgeMeters)) : 0;
+    return { min: base.min + harja, max: base.max + harja, harja };
   }, [service, answers]);
 
   // GA4: laskurin aloitus, jokainen askel ja valmistuminen, jotta liidiportin (nimi ja
@@ -196,12 +232,20 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   };
 
   const submitNumber = () => {
+    if (!current) return;
     const n = Number(numberInput.replace(",", "."));
-    if (!n || n < 10 || n > 2000) {
-      toast({ title: "Tarkista neliöt", description: "Anna pinta-ala numerona, esimerkiksi 150.", variant: "destructive" });
+    const min = current.min ?? 10;
+    const max = current.max ?? 2000;
+    if (!n || n < min || n > max) {
+      toast({
+        title: current.unit === "m" ? "Tarkista pituus" : "Tarkista neliöt",
+        description: current.unit === "m" ? `Anna harjan pituus metreinä, ${min}–${max}.` : "Anna pinta-ala numerona, esimerkiksi 150.",
+        variant: "destructive",
+      });
       return;
     }
-    answer("squareMeters", String(Math.round(n)));
+    setNumberInput("");
+    answer(current.key, String(Math.round(n)));
   };
 
   const back = () => {
@@ -240,6 +284,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
         "hintalaskuri"
       );
       setResult(priceStr);
+      setResultHarja(price.harja);
       // Eerik 26.10.2026 (yöajon kysymys 13): hinta myös kotitalousvähennyksen jälkeen.
       setResultAfterDeduction(formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) }));
       trackEvent("laskuri_valmis", { palvelu: service });
@@ -261,6 +306,11 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           </div>
           <p className="text-muted-foreground mb-2">Hinta-arvio</p>
           <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>
+          {resultHarja > 0 && (
+            <p className="text-muted-foreground mb-4">
+              Sisältää harjatiivisteen: <strong className="text-foreground">{resultHarja.toLocaleString("fi-FI")} €</strong>
+            </p>
+          )}
           {resultAfterDeduction && (
             <div className="mb-4">
               <p className="text-muted-foreground">
@@ -323,8 +373,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                         <input
                           type="number"
                           inputMode="numeric"
-                          min={10}
-                          max={2000}
+                          min={current.min ?? 10}
+                          max={current.max ?? 2000}
                           value={numberInput}
                           onChange={(e) => setNumberInput(e.target.value)}
                           placeholder={current.placeholder}
@@ -332,7 +382,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                           autoFocus
                           className="w-full rounded-xl border border-border bg-background px-5 py-4 pr-14 text-lg text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                         />
-                        <span className="absolute right-5 top-1/2 -translate-y-1/2 text-muted-foreground">m²</span>
+                        <span className="absolute right-5 top-1/2 -translate-y-1/2 text-muted-foreground">{current.unit ?? "m²"}</span>
                       </div>
                       <button type="submit" className="btn-hero !py-4 !text-base">
                         Jatka

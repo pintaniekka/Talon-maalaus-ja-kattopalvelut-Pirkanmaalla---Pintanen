@@ -26,6 +26,7 @@ const Tarjouspyynto = lazyWithRetry(() => import("./pages/Tarjouspyynto"));
 const HinnatTiilikalonPinnoitus = lazyWithRetry(() => import("./pages/HinnatTiilikalonPinnoitus"));
 const HinnatTalonMaalaus = lazyWithRetry(() => import("./pages/HinnatTalonMaalaus"));
 const Kuntotarkastus = lazyWithRetry(() => import("./pages/Kuntotarkastus"));
+const Harjatiiviste = lazyWithRetry(() => import("./pages/Harjatiiviste"));
 const Kotitalousvahennys = lazyWithRetry(() => import("./pages/Kotitalousvahennys"));
 const Meista = lazyWithRetry(() => import("./pages/Meista"));
 const Yhteystiedot = lazyWithRetry(() => import("./pages/Yhteystiedot"));
@@ -57,6 +58,7 @@ export const AppContent = () => (
               <Route path="/talon-maalaus-hinta-pirkanmaa" element={<HinnatTalonMaalaus />} />
               <Route path="/ilmainen-katon-kuntotarkastus" element={<Kuntotarkastus service="pinnoitus" />} />
               <Route path="/ilmainen-julkisivun-kuntoarvio" element={<Kuntotarkastus service="maalaus" />} />
+              <Route path="/harjatiivisteen-asennus" element={<Harjatiiviste />} />
               <Route path="/kotitalousvahennys" element={<Kotitalousvahennys />} />
               <Route path="/toiminta-alueet" element={<ToimintaAlueet />} />
               <Route path="/referenssit" element={<Referenssit />} />

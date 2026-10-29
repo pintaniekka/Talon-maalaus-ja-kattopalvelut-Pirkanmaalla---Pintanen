@@ -8,6 +8,7 @@ import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards"
 import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur";
 import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
 import PinnoitusSamaTyo from "@/components/pinnoitus/PinnoitusSamaTyo";
+import HarjatiivisteNosto from "@/components/pinnoitus/HarjatiivisteNosto";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import VarinVaihto from "@/components/VarinVaihto";
@@ -74,6 +75,7 @@ const KattopalvelutPinnoitus = () => {
       />
 
       <PinnoitusSamaTyo />
+      <HarjatiivisteNosto />
       <Vaarinymmarrykset service="pinnoitus" />
       <VarinVaihto service="pinnoitus" />
 

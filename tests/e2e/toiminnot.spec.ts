@@ -21,6 +21,7 @@ test.describe("Hintalaskuri", () => {
     await wizard.getByRole("button", { name: "Ei ole" }).click();
     await wizard.getByRole("button", { name: "Löytyy kyllä" }).click();
     await wizard.getByRole("button", { name: /Normaali jyrkkyys/ }).click();
+    await wizard.getByRole("button", { name: "Ei puutu" }).click();
     await wizard.getByRole("button", { name: "Kyllä löytyy" }).click();
 
     await expect(wizard.getByRole("heading", { name: "Millä paikkakunnalla kohde on?" })).toBeVisible();
@@ -72,6 +73,7 @@ test.describe("Hintalaskuri", () => {
     await wizard.getByRole("button", { name: "Ei ole" }).click();
     await wizard.getByRole("button", { name: "Löytyy kyllä" }).click();
     await wizard.getByRole("button", { name: /Normaali jyrkkyys/ }).click();
+    await wizard.getByRole("button", { name: "Ei puutu" }).click();
     await wizard.getByRole("button", { name: "Kyllä löytyy" }).click();
     await wizard.getByRole("button", { name: "Jatka" }).click();
     await wizard.getByRole("textbox", { name: "Nimi" }).fill("Testi Testaaja");

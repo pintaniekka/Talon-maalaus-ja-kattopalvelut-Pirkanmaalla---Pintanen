@@ -8,7 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import CityCombobox from '@/components/CityCombobox';
 import PhoneInput from '@/components/PhoneInput';
 import { YHTEYSTIEDOT } from '@/data/company';
-import { calculateWallPrice, calculateRoofPrice, formatPriceRange } from '@/lib/priceCalc';
+import { calculateWallPrice, calculateRoofPrice, calculateRidgeSealPrice, formatPriceRange } from '@/lib/priceCalc';
 import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from '@/components/vahennys/vahennysData';
 import {
   isValidFinnishMobile,
@@ -260,14 +260,27 @@ const ChatPriceCalculator = () => {
             { label: 'Todella jyrkkä', value: 'jyrkka' },
           ] });
           break;
+        // Eerik 29.10.2026: harjatiiviste laskuriin (15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä).
         case 6:
+          await addBotMessage('Puuttuuko katolta harjatiiviste? Se on nauha harjatiilen alla. Jos et tiedä, katsomme sen kuntotarkastuksessa.');
+          setStepUI({ kind: 'options', options: [
+            { label: 'Kyllä puuttuu', value: 'kylla' },
+            { label: 'Ei puutu', value: 'ei' },
+            { label: 'En tiedä', value: 'en-tieda' },
+          ] });
+          break;
+        case 7:
+          await addBotMessage('Kuinka pitkä katon harja on metreinä? Arvio riittää.');
+          setStepUI({ kind: 'number', placeholder: 'esim. 12', suffix: 'm' });
+          break;
+        case 8:
           await addBotMessage('Vielä pari käytännön asiaa: löytyykö pihalta vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
           setStepUI({ kind: 'options', options: [
             { label: 'Kyllä löytyy', value: 'kylla' },
             { label: 'Ei löydy', value: 'ei' },
           ] });
           break;
-        case 7:
+        case 9:
           if (dataRef.current.utilities === 'ei') {
             await addBotMessage('Selvä, sovitaan käytännöt paikan päällä. Millä paikkakunnalla kohde on?');
           } else {
@@ -275,7 +288,7 @@ const ChatPriceCalculator = () => {
           }
           setStepUI({ kind: 'city' });
           break;
-        case 8:
+        case 10:
           await addBotMessage('Kiitos! Laskin raksuttaa jo. 🔢 Jätä vielä nimi ja puhelinnumero, niin näytän arvion.');
           setStepUI({ kind: 'contact' });
           break;
@@ -309,11 +322,13 @@ const ChatPriceCalculator = () => {
       if (step === 3) dataRef.current.brokenTiles = value;
       if (step === 4) dataRef.current.underlayment = value;
       if (step === 5) dataRef.current.slope = value;
-      if (step === 6) dataRef.current.utilities = value;
+      if (step === 6) dataRef.current.ridgeSeal = value;
+      if (step === 8) dataRef.current.utilities = value;
     }
 
     setStepUI(null);
-    const nextStep = step + 1;
+    // Harjan pituus kysytään vain, jos harjatiiviste puuttuu.
+    const nextStep = currentPath === 'pinnoitus' && step === 6 && value !== 'kylla' ? 8 : step + 1;
     setCurrentStep(nextStep);
     await advanceFlow(nextStep, currentPath);
   }, [addUserMessage, currentStep, path, advanceFlow]);
@@ -321,17 +336,24 @@ const ChatPriceCalculator = () => {
   const handleNumberSubmit = useCallback(async () => {
     const val = numberInput.trim();
     if (!val || isNaN(Number(val)) || Number(val) <= 0) return;
-    if (Number(val) < MIN_M2 || Number(val) > MAX_M2) {
-      addUserMessage(`${val} m²`);
+    const harja = path === 'pinnoitus' && currentStep === 7;
+    const unit = harja ? 'm' : 'm²';
+    const min = harja ? 1 : MIN_M2;
+    const max = harja ? 200 : MAX_M2;
+    if (Number(val) < min || Number(val) > max) {
+      addUserMessage(`${val} ${unit}`);
       setNumberInput('');
       const ui = stepUI;
       setStepUI(null);
-      await addBotMessage(`Hmm, tarkista vielä luku 🙂 Anna pinta-ala neliöinä väliltä ${MIN_M2}–${MAX_M2}, esimerkiksi 200.`);
+      await addBotMessage(harja
+        ? `Hmm, tarkista vielä luku 🙂 Anna harjan pituus metreinä väliltä ${min}–${max}, esimerkiksi 12.`
+        : `Hmm, tarkista vielä luku 🙂 Anna pinta-ala neliöinä väliltä ${min}–${max}, esimerkiksi 200.`);
       setStepUI(ui);
       return;
     }
-    addUserMessage(`${val} m²`);
-    dataRef.current.squareMeters = val;
+    addUserMessage(`${val} ${unit}`);
+    if (harja) dataRef.current.ridgeMeters = val;
+    else dataRef.current.squareMeters = val;
     setNumberInput('');
     setStepUI(null);
     const nextStep = currentStep + 1;
@@ -391,6 +413,7 @@ const ChatPriceCalculator = () => {
     let priceStr = '';
     let afterStr = '';
     let details = '';
+    let harjaHinta = 0;
     // Sama rivi kuin /hintalaskuri-sivulla: hinta kotitalousvähennyksen jälkeen (Eerik 26.10.2026, yöajon kysymys 20).
     const withAfter = (p: { min: number; max: number }) => {
       priceStr = formatPriceRange(p);
@@ -403,10 +426,14 @@ const ChatPriceCalculator = () => {
       const peelingLabels: Record<string, string> = { none: 'Ei hilseilyä', '1-2': '1–2 seinällä', '3+': 'Yli 3 seinällä' };
       details = `Pohjaneliöt: ${d.squareMeters} m², Kerrokset: ${storyLabels[d.stories] || d.stories}, Hilseily: ${peelingLabels[d.peeling] || d.peeling}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä löytyy' : 'Ei löydy'}, Kaupunki: ${d.city || '-'}`;
     } else {
-      withAfter(calculateRoofPrice(Number(d.squareMeters), d.slope));
+      const base = calculateRoofPrice(Number(d.squareMeters), d.slope);
+      harjaHinta = d.ridgeSeal === 'kylla' && Number(d.ridgeMeters) > 0 ? calculateRidgeSealPrice(Number(d.ridgeMeters)) : 0;
+      withAfter({ min: base.min + harjaHinta, max: base.max + harjaHinta });
       const brokenLabels: Record<string, string> = { ei: 'Ei rikkinäisiä', '1-5': '1–5 rikkinäistä', '5-20': '5–20 rikkinäistä' };
       const slopeLabels: Record<string, string> = { loiva: 'Loiva', normaali: 'Normaali', jyrkka: 'Todella jyrkkä' };
-      details = `Katon koko: ${d.squareMeters} m², Rikkinäiset tiilet: ${brokenLabels[d.brokenTiles] || d.brokenTiles}, Aluskate: ${d.underlayment === 'kylla' ? 'Löytyy' : 'Epävarma'}, Jyrkkyys: ${slopeLabels[d.slope] || d.slope}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä löytyy' : 'Ei löydy'}, Kaupunki: ${d.city || '-'}`;
+      const harjaLabels: Record<string, string> = { kylla: 'Kyllä puuttuu', ei: 'Ei puutu', 'en-tieda': 'En tiedä' };
+      const harjaTeksti = `Harjatiiviste: ${harjaLabels[d.ridgeSeal] || d.ridgeSeal || '-'}${d.ridgeSeal === 'kylla' ? `, Harjan pituus: ${d.ridgeMeters || '-'} m` : ''}`;
+      details = `Katon koko: ${d.squareMeters} m², Rikkinäiset tiilet: ${brokenLabels[d.brokenTiles] || d.brokenTiles}, Aluskate: ${d.underlayment === 'kylla' ? 'Löytyy' : 'Epävarma'}, Jyrkkyys: ${slopeLabels[d.slope] || d.slope}, ${harjaTeksti}, Vesi/sähkö: ${d.utilities === 'kylla' ? 'Kyllä löytyy' : 'Ei löydy'}, Kaupunki: ${d.city || '-'}`;
     }
 
     try {
@@ -428,6 +455,7 @@ const ChatPriceCalculator = () => {
       await addBotMessage(
         `Kiitos ${firstName}! 🎉 Alustava hinta-arvio ${tyo} on ${priceStr}. Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.`,
       );
+      if (harjaHinta > 0) await addBotMessage(`Hinta sisältää harjatiivisteen: ${harjaHinta.toLocaleString('fi-FI')} €.`);
       await addBotMessage(`Kotitalousvähennyksen jälkeen: ${afterStr}. ${VAHENNYS_OMAVASTUU_HUOMAUTUS}`);
     } catch (err) {
       // Lomake ei väitä onnistuneensa: virhe kerrotaan chatissa ja yhteystietokentät jäävät näkyviin.

@@ -45,6 +45,7 @@ const Header = () => {
         { label: "Hinnat", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", text: "Hinta katon koon mukaan ja toteutuneita hintoja" },
         { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=pinnoitus", text: "Arvio minuutissa" },
         { label: "Ilmainen kuntotarkastus", href: "/ilmainen-katon-kuntotarkastus/", text: "Eerik katsoo katon paikan päällä" },
+        { label: "Harjatiiviste", href: "/harjatiivisteen-asennus/", text: "Asennus pinnoituksen yhteydessä tai erikseen" },
       ],
       promo: {
         eyebrow: "Nyt 0 € · muualla noin 280 €",

@@ -267,16 +267,30 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
             {related.length > 0 && (
               <div className="mt-12">
                 <h2 className="font-heading font-bold text-xl text-foreground mb-4">Lue myös</h2>
+                {/* Eerik 29.10.2026: artikkelilinkkeihin kansikuva. */}
                 <ul className="divide-y divide-border border-y border-border">
                   {related.map((a) => (
                     <li key={a.slug}>
-                      <Link to={`/artikkelit/${a.slug}/`} className="group flex items-baseline justify-between gap-4 py-4">
-                        <span className="font-semibold text-foreground group-hover:text-[#006ead] transition-colors">
-                          {a.title}
+                      <Link to={`/artikkelit/${a.slug}/`} className="group flex items-center gap-4 py-4">
+                        <img
+                          src={getResponsiveSrc(a.heroImage)}
+                          srcSet={getResponsiveSrcSet(a.heroImage)}
+                          sizes="112px"
+                          alt=""
+                          width={112}
+                          height={84}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-[84px] w-28 shrink-0 rounded-xl object-cover"
+                        />
+                        <span className="flex min-w-0 flex-1 flex-col gap-1">
+                          <span className="font-semibold leading-snug text-foreground group-hover:text-[#006ead] transition-colors">
+                            {a.title}
+                          </span>
+                          <time dateTime={a.publishedAt} className="text-sm text-muted-foreground">
+                            {formatDateFi(a.publishedAt)}
+                          </time>
                         </span>
-                        <time dateTime={a.publishedAt} className="text-sm text-muted-foreground shrink-0">
-                          {formatDateFi(a.publishedAt)}
-                        </time>
                       </Link>
                     </li>
                   ))}

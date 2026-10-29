@@ -48,12 +48,13 @@ const PinnoitusWhyNow = ({ cityIn }: { cityIn?: string }) => (
         <div>
           <BeforeAfterSlider
             className="rounded-3xl"
-            beforeImage={getResponsiveSrc("tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen")}
-            afterImage={getResponsiveSrc("tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen")}
-            beforeSrcSet={getResponsiveSrcSet("tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen")}
-            afterSrcSet={getResponsiveSrcSet("tiilikaton-pinnoitus-uudenveroinen-punainen-tiilikatto-jalkeen")}
-            beforeAlt="Likainen tiilikatto ennen pesua"
-            afterAlt="Punainen tiilikatto maalauksen jälkeen"
+            // Eerik 29.10.2026: sama pari kuin etusivulla, "Tiilikaton pinnoitus, Ylöjärvi 2026".
+            beforeImage={getResponsiveSrc("tiilikaton-pinnoitus-ylojarvi-punainen-katto-ennen")}
+            afterImage={getResponsiveSrc("tiilikaton-pinnoitus-ylojarvi-punainen-katto-jalkeen")}
+            beforeSrcSet={getResponsiveSrcSet("tiilikaton-pinnoitus-ylojarvi-punainen-katto-ennen")}
+            afterSrcSet={getResponsiveSrcSet("tiilikaton-pinnoitus-ylojarvi-punainen-katto-jalkeen")}
+            beforeAlt="Punainen tiilikatto ennen pinnoitusta, Ylöjärvi"
+            afterAlt="Punainen tiilikatto pinnoituksen jälkeen, Ylöjärvi"
           />
         </div>
 

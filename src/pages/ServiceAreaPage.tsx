@@ -1,12 +1,12 @@
 import { Navigate, Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
 import { Helmet } from "react-helmet-async";
-import { ChevronRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
-import ResponsiveImage from "@/components/ResponsiveImage";
+import PalveluKortti from "@/components/PalveluKortti";
+import { PALVELUKORTTI_KUVAT } from "@/data/palvelukortit";
 import { getStorageUrl } from "@/lib/storage";
 import { getCityBySlug, hasPinnoitusPage, hasMaalausPage } from "@/data/cityData";
 import { getAreaCityContent } from "@/data/areaCityContent";
@@ -61,8 +61,8 @@ const getAreaFAQ = (citySlug: string, cityIn: string, pinnoitusHref: string, maa
 
 /**
  * Aluesivu /maalauspalvelut-{kunta}: kokoava sivu, jonka tehtävä on ohjata palvelusivuille
- * (korjaus 2). Palvelukortit heti heron alle (8.3) valkoisina kortteina ilman liukuväriä
- * (tarkastus 12.10.2026, luku 3); paikallinen teksti lyhyenä ja arkikielellä (S17–S18).
+ * (korjaus 2). Palvelukortit heti heron alle (8.3) tummansinisinä PalveluKortti-kortteina
+ * (Eerik 29.10.2026, malli B); paikallinen teksti lyhyenä ja arkikielellä (S17–S18).
  * Katon puhdistus on loppunut, joten sitä ei tarjota (B6–B7).
  */
 const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
@@ -88,7 +88,9 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       price: PINNOITUS_HINTA,
       warranty: TAKUU.pinnoitus,
       duration: "2–3 päivää",
-      baseName: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
+      image: PALVELUKORTTI_KUVAT.pinnoitus,
+      tekija: "Eerik tekee työn itse",
+      cta: "Katso pinnoitus",
     },
     {
       title: `Talon maalaus ${cityName}`,
@@ -97,7 +99,9 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       price: MAALAUS_HINTA,
       warranty: TAKUU.maalaus,
       duration: "3–7 päivää",
-      baseName: "talon-maalaus-vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
+      image: PALVELUKORTTI_KUVAT.maalaus,
+      tekija: "Eemil maalaa",
+      cta: "Katso maalaus",
     },
   ];
 
@@ -154,42 +158,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
 
           <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
             {services.map((service) => (
-              <Link
-                key={service.title}
-                to={service.href}
-                className="group kortti overflow-hidden flex flex-col transition-transform hover:-translate-y-1 motion-reduce:hover:translate-y-0 transition-shadow"
-              >
-                <ResponsiveImage
-                  baseName={service.baseName}
-                  alt=""
-                  className="w-full aspect-[4/3] object-cover"
-                  sizes="(max-width: 768px) 100vw, 480px"
-                  width={1200}
-                  height={900}
-                />
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-xl font-bold text-foreground font-heading mb-2">{service.title}</h3>
-                  <p className="text-muted-foreground mb-5 flex-1">{service.description}</p>
-                  <dl className="grid grid-cols-3 gap-3 text-sm mb-5">
-                    <div>
-                      <dt className="text-muted-foreground">Hinta yleensä</dt>
-                      <dd className="font-semibold text-foreground">{service.price}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-muted-foreground">Takuu</dt>
-                      <dd className="font-semibold text-foreground">{service.warranty}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-muted-foreground">Kesto</dt>
-                      <dd className="font-semibold text-foreground">{service.duration}</dd>
-                    </div>
-                  </dl>
-                  <span className="inline-flex items-center gap-1 font-semibold text-accent-ink group-hover:underline">
-                    Lue lisää
-                    <ChevronRight className="w-4 h-4" aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
+              <PalveluKortti key={service.title} {...service} />
             ))}
           </div>
         </div>

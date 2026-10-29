@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import ResponsiveImage from "@/components/ResponsiveImage";
+import PalveluKortti from "@/components/PalveluKortti";
+import { PALVELUKORTTI_KUVAT } from "@/data/palvelukortit";
 import {
   LINKIT,
   PAKETTI_KYSYMYS,
@@ -16,19 +17,17 @@ const kuvaukset: Record<PalveluKey, string> = {
   maalaus: "Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Terassit ja ympäristö suojataan.",
 };
 
-const Fakta = ({ value, label, divider = false }: { value: string; label: string; divider?: boolean }) => (
-  <div className={`flex flex-col gap-1 ${divider ? "sm:border-l sm:border-border sm:pl-5" : ""}`}>
-    <span className="whitespace-nowrap font-heading text-lg font-extrabold leading-none text-foreground md:text-xl">{value}</span>
-    <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
-  </div>
-);
+/** Kortin keltainen yläotsake ja napin teksti (Eerik 29.10.2026, malli B). */
+const korttiTekstit: Record<PalveluKey, { tekija: string; cta: string }> = {
+  pinnoitus: { tekija: "Eerik tekee työn itse", cta: "Katso pinnoitus" },
+  maalaus: { tekija: "Eemil maalaa", cta: "Katso maalaus" },
+};
 
 /**
- * Vaihtoehto A (?palvelut=a), hiottu 13.10.2026 Eerikin palautteen mukaan ("A on raikkain, mutta vaatii parannusta"):
- * vaaleansininen osio ja valkoiset kortit, tekijän nimi valkoisena pillerinä kuvan päällä, isommat faktaluvut
- * (hinta, takuu, kesto) ja alla tummansininen pakettihintapalkki hintasivun laskurinoston tyyliin.
- * Eerik 14.10.2026: koko kortti on yksi linkki palvelusivulle, ei erillistä "Lue lisää" -riviä eikä nappia
- * kortin sisällä. Hiiren päällä kortti nousee hieman ja kuvan yli pyyhkäisee kiilto.
+ * Vaihtoehto A (?palvelut=a), hiottu 13.10.2026 Eerikin palautteen mukaan ("A on raikkain, mutta vaatii parannusta").
+ * Eerik 29.10.2026: kortit vaihdettiin tummansiniseen PalveluKortti-korttiin (malli B, sama kuin aluesivuilla),
+ * jossa kuva leikkautuu vinosti, luvut ovat keltaisia ja alla on keltainen nappi. Koko kortti on yksi linkki
+ * (Eerik 14.10.2026). Alla tummansininen pakettihintapalkki hintasivun laskurinoston tyyliin.
  */
 const PalvelutA = () => (
   <section id="palvelut" className="section-padding osio">
@@ -48,56 +47,18 @@ const PalvelutA = () => (
 
       <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         {palvelut.map((p) => (
-          <Link
+          <PalveluKortti
             key={p.key}
-            to={p.href}
-            className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-[0_14px_40px_rgba(10,25,47,0.10)] ring-1 ring-navy/5 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(10,25,47,0.16)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-          >
-            <div className="relative overflow-hidden">
-              <ResponsiveImage
-                baseName={p.imageBase}
-                alt={p.imageAlt}
-                className="block h-[220px] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100 sm:h-[260px] lg:h-[250px]"
-                sizes="(max-width: 1023px) 100vw, 560px"
-                width={p.imageWidth}
-                height={p.imageHeight}
-                style={p.imagePosition ? { objectPosition: p.imagePosition } : undefined}
-              />
-              {/* Kiilto: vino, läpikuultava valkoinen raita pyyhkäisee kuvan yli hiiren päällä. */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-white/0 via-white/45 to-white/0 opacity-0 transition-[transform,opacity] duration-700 ease-out group-hover:translate-x-[300%] group-hover:opacity-100 motion-reduce:transition-none motion-reduce:group-hover:opacity-0"
-              />
-              {/* Tekijä valkoisena pillerinä kuvan päällä: näyttää tarralta, ei tekstiriviltä. */}
-              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2.5 rounded-full bg-card py-1.5 pl-1.5 pr-4 shadow-lg">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src={p.tekija.image}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 rounded-full object-cover ring-2 ring-accent-light"
-                />
-                <span className="text-[13px] font-bold text-foreground">{p.tekija.pilleri}</span>
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col gap-4 p-6 md:px-8 md:pb-8 md:pt-7">
-              <h3 className="flex items-center justify-between gap-4 font-heading text-2xl font-extrabold leading-[1.15] text-foreground md:text-[26px]">
-                {p.title}
-                <ArrowRight
-                  className="h-6 w-6 shrink-0 text-accent-ink transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none"
-                  aria-hidden="true"
-                />
-              </h3>
-              <p className="text-base leading-relaxed text-muted-foreground">{kuvaukset[p.key]}</p>
-              <div className="mt-auto flex flex-wrap gap-x-6 gap-y-4 rounded-2xl bg-accent-light/70 px-5 py-4 sm:grid sm:grid-cols-[auto_auto_auto] sm:justify-between sm:gap-0">
-                <Fakta value={p.hinta} label="Hinta yleensä" />
-                <Fakta value={p.takuu} label="Takuu" divider />
-                <Fakta value={p.kesto} label="Kesto" divider />
-              </div>
-            </div>
-          </Link>
+            href={p.href}
+            title={p.title}
+            description={kuvaukset[p.key]}
+            price={p.hinta}
+            warranty={p.takuu}
+            duration={p.kesto}
+            image={PALVELUKORTTI_KUVAT[p.key]}
+            tekija={korttiTekstit[p.key].tekija}
+            cta={korttiTekstit[p.key].cta}
+          />
         ))}
       </div>
 
@@ -116,11 +77,12 @@ const PalvelutA = () => (
         </Link>
       </p>
 
-      {/* Pakettihinta tummansinisenä palkkina (vrt. hintasivun "Laske oman kattosi hinta minuutissa"). */}
-      <div className="mt-8 flex flex-col gap-5 overflow-hidden rounded-3xl bg-navy px-6 py-6 text-navy-foreground shadow-xl sm:flex-row sm:items-center sm:justify-between md:px-9 md:py-7">
+      {/* Pakettihinta sinisenä palkkina, sama liukuväri kuin sinisillä näyttämöillä (Eerik 29.10.2026: tummansiniset
+          kortit yllä, joten palkki siniseksi). */}
+      <div className="mt-8 flex flex-col gap-5 overflow-hidden rounded-3xl bg-[linear-gradient(115deg,hsl(203_100%_43%),hsl(202_100%_57%))] px-6 py-6 text-white shadow-xl sm:flex-row sm:items-center sm:justify-between md:px-9 md:py-7">
         <div className="flex flex-col gap-1">
           <p className="font-heading text-xl font-extrabold leading-tight md:text-2xl">{PAKETTI_KYSYMYS}</p>
-          <p className="text-base text-white/80">{PAKETTI_VASTAUS} Sovitaan siitä arviokäynnillä.</p>
+          <p className="text-base text-white/90">{PAKETTI_VASTAUS} Sovitaan siitä arviokäynnillä.</p>
         </div>
         <Link
           to={LINKIT.tarjouspyynto}

@@ -90,7 +90,6 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       warranty: TAKUU.pinnoitus,
       duration: "2–3 päivää",
       image: PALVELUKORTTI_KUVAT.pinnoitus,
-      tekija: "Eerik",
       cta: "Katso pinnoitus",
     },
     {
@@ -101,7 +100,6 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       warranty: TAKUU.maalaus,
       duration: "3–7 päivää",
       image: PALVELUKORTTI_KUVAT.maalaus,
-      tekija: "Eemil",
       cta: "Katso maalaus",
     },
   ];

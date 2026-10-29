@@ -17,10 +17,10 @@ const kuvaukset: Record<PalveluKey, string> = {
   maalaus: "Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Terassit ja ympäristö suojataan.",
 };
 
-/** Kortin keltainen yläotsake ja napin teksti (Eerik 29.10.2026, malli B). */
-const korttiTekstit: Record<PalveluKey, { tekija: string; cta: string }> = {
-  pinnoitus: { tekija: "Eerik", cta: "Katso pinnoitus" },
-  maalaus: { tekija: "Eemil", cta: "Katso maalaus" },
+/** Kortin napin teksti (Eerik 29.10.2026, malli B). */
+const korttiTekstit: Record<PalveluKey, { cta: string }> = {
+  pinnoitus: { cta: "Katso pinnoitus" },
+  maalaus: { cta: "Katso maalaus" },
 };
 
 /**
@@ -56,7 +56,6 @@ const PalvelutA = () => (
             warranty={p.takuu}
             duration={p.kesto}
             image={PALVELUKORTTI_KUVAT[p.key]}
-            tekija={korttiTekstit[p.key].tekija}
             cta={korttiTekstit[p.key].cta}
           />
         ))}

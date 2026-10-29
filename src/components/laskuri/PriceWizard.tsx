@@ -72,8 +72,8 @@ export const calculatorQuestions: Record<WizardService, CalculatorQuestion[]> = 
         { label: "Todella jyrkkä", value: "jyrkka" },
       ],
     },
-    // Eerik 29.10.2026: harjatiiviste laskuriin, kyllä/ei ja kyllä-vastauksesta kevyt pudotusvalikko harjan
-    // pituudelle samassa vaiheessa (ei omaa vaihetta). 15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä.
+    // Eerik 29.10.2026: harjatiiviste laskuriin, kyllä/ei; kyllä avaa kevyen kentän harjan pituudelle samaan
+    // vaiheeseen (ei omaa vaihetta). 15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä.
     {
       key: "ridgeSeal",
       title: "Puuttuuko katolta harjatiiviste?",
@@ -135,10 +135,6 @@ export const calculatorServices: { value: WizardService; label: string; imageBas
   { value: "pinnoitus", label: "Tiilikaton pinnoitus", imageBase: "tiilikaton-pesu-ja-pinnoitus-puhdas-tiilenpunainen-tiilikatto" },
   { value: "maalaus", label: "Talon maalaus", imageBase: "talon-maalaus-moderni-tumma-puutalo-julkisivumaalaus-valmis" },
 ];
-
-/** Harjan pituuden vaihtoehdot pudotusvalikossa, metreinä. */
-// eslint-disable-next-line react-refresh/only-export-components -- jaettu etusivun laskurille
-export const HARJAN_PITUUDET = [4, 6, 8, 10, 12, 14, 16, 18, 20, 25, 30, 40] as const;
 
 const labelOf = (q: CalculatorQuestion, value: string) => q.options?.find((o) => o.value === value)?.label ?? value;
 
@@ -239,6 +235,18 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     }
     setNumberInput("");
     answer(current.key, String(Math.round(n)));
+  };
+
+  /** Harjan pituus kyllä-valinnan kentästä: 1–200 m, sitten seuraava vaihe. */
+  const jatkaHarja = () => {
+    const n = Number(String(answers.ridgeMeters ?? "").replace(",", "."));
+    if (!n || n < 1 || n > 200) {
+      toast({ title: "Tarkista pituus", description: "Anna harjan pituus metreinä, 1–200.", variant: "destructive" });
+      return;
+    }
+    setAnswers((a) => ({ ...a, ridgeMeters: String(Math.round(n)) }));
+    setIndex((i) => i + 1);
+    if (service) trackEvent("laskuri_askel", { palvelu: service, askel: "ridgeSeal" });
   };
 
   const back = () => {
@@ -386,49 +394,64 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                       </button>
                     </form>
                   ) : current.key === "ridgeSeal" ? (
-                    // Kyllä avaa kevyen pudotusvalikon harjan pituudelle samaan vaiheeseen (Eerik 29.10.2026).
+                    // Kyllä avaa UKK:n tapaan kevyen kentän harjan pituudelle kyllä- ja ei-napin väliin (Eerik 29.10.2026).
                     <div className="flex flex-col gap-3 mt-4">
                       {current.options!.map((o) => (
-                        <button
-                          key={o.value}
-                          type="button"
-                          onClick={() => (o.value === "kylla" ? setAnswers((a) => ({ ...a, ridgeSeal: "kylla" })) : answer(current.key, o.value))}
-                          className={`${optionButton} ${answers.ridgeSeal === o.value ? "border-accent bg-accent-light" : ""}`}
-                        >
-                          {o.label}
-                        </button>
-                      ))}
-                      {answers.ridgeSeal === "kylla" && (
-                        <div className="flex flex-col gap-3 rounded-xl border border-accent bg-accent-light px-5 py-4 sm:flex-row sm:items-center">
-                          <label htmlFor="harjan-pituus" className="flex-1 text-foreground">
-                            Katon harjan pituus, arvio riittää
-                          </label>
-                          <select
-                            id="harjan-pituus"
-                            value={answers.ridgeMeters ?? ""}
-                            onChange={(e) => setAnswers((a) => ({ ...a, ridgeMeters: e.target.value }))}
-                            className="rounded-lg border border-border bg-background px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-                          >
-                            <option value="">Valitse</option>
-                            {HARJAN_PITUUDET.map((m) => (
-                              <option key={m} value={m}>
-                                {m} m
-                              </option>
-                            ))}
-                          </select>
+                        <div key={o.value}>
                           <button
                             type="button"
-                            disabled={!answers.ridgeMeters}
-                            onClick={() => {
-                              setIndex((i) => i + 1);
-                              if (service) trackEvent("laskuri_askel", { palvelu: service, askel: "ridgeSeal" });
-                            }}
-                            className="btn-hero !py-3 !text-base disabled:opacity-60"
+                            onClick={() => (o.value === "kylla" ? setAnswers((a) => ({ ...a, ridgeSeal: "kylla" })) : answer(current.key, o.value))}
+                            aria-expanded={o.value === "kylla" ? answers.ridgeSeal === "kylla" : undefined}
+                            className={`${optionButton} ${answers.ridgeSeal === o.value ? "border-accent bg-accent-light" : ""}`}
                           >
-                            Jatka
+                            {o.label}
                           </button>
+                          {o.value === "kylla" && (
+                            <AnimatePresence initial={false}>
+                              {answers.ridgeSeal === "kylla" && (
+                                <m.div
+                                  key="harjan-pituus"
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="overflow-hidden"
+                                >
+                                  <form
+                                    onSubmit={(e) => {
+                                      e.preventDefault();
+                                      jatkaHarja();
+                                    }}
+                                    className="mt-2 flex flex-col gap-3 rounded-xl border border-accent/40 bg-accent-light px-4 py-3 sm:flex-row sm:items-center"
+                                  >
+                                    <label htmlFor="harjan-pituus" className="flex-1 text-sm text-foreground">
+                                      Harjan pituus metreinä, arvio riittää
+                                    </label>
+                                    <div className="relative">
+                                      <input
+                                        id="harjan-pituus"
+                                        type="number"
+                                        inputMode="numeric"
+                                        min={1}
+                                        max={200}
+                                        value={answers.ridgeMeters ?? ""}
+                                        onChange={(e) => setAnswers((a) => ({ ...a, ridgeMeters: e.target.value }))}
+                                        placeholder="12"
+                                        autoFocus
+                                        className="w-28 rounded-lg border border-border bg-background px-3 py-2 pr-8 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                                      />
+                                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">m</span>
+                                    </div>
+                                    <button type="submit" className="btn-hero !px-5 !py-2.5 !text-sm">
+                                      Jatka
+                                    </button>
+                                  </form>
+                                </m.div>
+                              )}
+                            </AnimatePresence>
+                          )}
                         </div>
-                      )}
+                      ))}
                     </div>
                   ) : (
                     <div className="flex flex-col gap-3 mt-4">

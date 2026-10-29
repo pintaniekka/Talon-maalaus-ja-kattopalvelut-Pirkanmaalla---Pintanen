@@ -22,7 +22,8 @@ import type { Tyovaihe, LyhyestiSisalto } from "@/data/tyovaiheet";
  * aluskatteelle, tuulettuva), tyovaiheet.ts (saumat ja harja tarkistetaan kuntotarkastuksessa), projects.ts
  * (asennus Kangasalla 2026), Eerik 29.10.2026 (harjatiilet säilyvät ehjinä asennuksessa, rikkinäiset harjatiilet
  * vaihdetaan samalla; harjatiili on kalliimpi kuin lapetiili, mutta sitä ei sanota). Hinta: Eerik 29.10.2026,
- * 15 €/m pinnoituksen yhteydessä, 25 €/m erikseen.
+ * 15 €/m pinnoituksen yhteydessä, 25 €/m erikseen. Tuote (Eerik 29.10.2026): hengittävä harjatiiviste, alumiinireuna
+ * butyyliliimanauhalla, värit musta, ruskea ja tiilenpunainen. Ostohintaa ei kerrota missään.
  */
 const PATH = "/harjatiivisteen-asennus";
 const hinta = HARJATIIVISTE_HINTA;
@@ -31,8 +32,8 @@ const lyhyesti: LyhyestiSisalto = {
   facts: [
     { label: "Pinnoituksen yhteydessä", value: `${hinta.pinnoituksenYhteydessa} €/m` },
     { label: "Erikseen tilattuna", value: `${hinta.erikseen} €/m` },
-    { label: "Mitä se on", value: "Nauha\nharjatiilen alla" },
-    { label: "Tarkistus", value: "Joka\nkuntotarkastuksessa" },
+    { label: "Mitä se tekee", value: "Tiivistää\nkaton harjan" },
+    { label: "Ominaisuus", value: "Hengittävä" },
   ],
   note: "Hinta lasketaan harjan pituuden mukaan. Harjan pituus on katon ylin sauma päädystä päätyyn.",
 };
@@ -40,7 +41,7 @@ const lyhyesti: LyhyestiSisalto = {
 const vaiheet: Tyovaihe[] = [
   { title: "Harja tarkistetaan", text: "Katsomme kuntotarkastuksessa, onko harjatiiviste paikallaan ja ehjä. Jos se puuttuu tai on rikki, kirjaamme asennuksen tarjoukseen." },
   { title: "Harjatiilet irrotetaan", text: "Nostamme harjatiilet pois. Ne säilyvät asennuksessa ehjinä. Jos jokin harjatiili on jo valmiiksi rikki, vaihdamme sen samalla." },
-  { title: "Tiiviste asennetaan", text: "Tiiviste asennetaan harjapuun yli ja harjatiilen alle. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi." },
+  { title: "Tiiviste asennetaan", text: "Tiiviste asennetaan harjapuun yli ja harjatiilen alle, ja alumiinireunat painetaan tiiliin kiinni. Se estää lumen, roskien ja veden pääsyn aluskatteelle, mutta päästää ilman läpi." },
   { title: "Harjatiilet takaisin", text: "Laitamme harjatiilet takaisin paikoilleen. Pinnoituksen yhteydessä harja maalataan samalla kahteen kertaan." },
 ];
 
@@ -49,7 +50,8 @@ const faq = [
   { question: "Mitä harjatiivisteen asennus maksaa?", answer: `Pinnoituksen yhteydessä ${hinta.pinnoituksenYhteydessa} euroa metriltä ja erikseen tilattuna ${hinta.erikseen} euroa metriltä. Hinta lasketaan harjan pituuden mukaan, ja se näkyy tarjouksessa eriteltynä.` },
   { question: "Asennatteko harjatiivisteen pinnoituksen yhteydessä?", answer: "Kyllä, jos se puuttuu tai on rikki. Olemme asentaneet harjatiivisteitä pinnoituksen yhteydessä esimerkiksi Kangasalla. Tarve katsotaan kuntotarkastuksessa, ja se kirjataan tarjoukseen." },
   { question: "Voiko harjatiivisteen tilata ilman pinnoitusta?", answer: `Voi. Erikseen tilattuna hinta on ${hinta.erikseen} euroa metriltä. Kysy tarjous, niin katsomme harjan samalla käynnillä.` },
-  { question: "Mistä tiedän, puuttuuko harjatiiviste?", answer: "Harjatiilen alta näkyy rako, tai ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla. Varmin tapa on antaa meidän katsoa se kuntotarkastuksessa." },
+  { question: "Mistä tiedän, puuttuuko harjatiiviste?", answer: "Harjatiilen alta näkyy rako. Jos ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla, aluskate on jo rikki. Varmin tapa on antaa meidän katsoa harja ja aluskate kuntotarkastuksessa." },
+  { question: "Millainen tiiviste asennetaan?", answer: "Hengittävä harjatiiviste, jonka alumiinireunat kiinnittyvät tiiliin butyyliliimalla. Väri valitaan katon mukaan: musta, ruskea tai tiilenpunainen." },
   { question: "Menevätkö harjatiilet rikki asennuksessa?", answer: "Eivät. Harjatiilet säilyvät ehjinä harjatiivisteen asennuksessa. Jos jokin harjatiili on jo valmiiksi rikki, vaihdamme sen samalla." },
 ];
 
@@ -121,13 +123,14 @@ const Harjatiiviste = () => {
             <h2 className="mb-5 font-heading text-3xl font-bold text-navy md:text-4xl">Miksi harjatiiviste tarvitaan?</h2>
             <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
               <p>
-                Harjatiilet eivät ole tiiviisti kiinni toisissaan, ja niiden alle jää rako. Ilman tiivistettä tuiskulumi, vesi ja roskat
-                pääsevät raosta aluskatteelle. Tiiviste sulkee raon, mutta on keskeltä tuulettuva, joten katon alla oleva ilma pääsee
-                edelleen liikkumaan.
+                Harjatiilet eivät ole tiiviisti kiinni toisissaan, ja niiden alle jää rako. Harjatiiviste estää lumen, roskien ja veden
+                pääsyn raosta aluskatteelle. Jos roskaa tai lunta pääsee aluskatteelle, ne vaurioittavat sitä, ja vaurioitunut aluskate on
+                aina riski vesivahingolle. Tiiviste on keskeltä hengittävä, joten katon alla oleva ilma pääsee edelleen liikkumaan.
               </p>
               <p>
-                Jos harjatiilen alta näkyy rako tai ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla, tiiviste puuttuu tai on
-                rikki. Katsomme sen{" "}
+                Jos ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla, aluskate on jo rikki. Käytämme hengittävää
+                harjatiivistettä, jonka alumiinireunat kiinnittyvät tiiliin butyyliliimalla. Väri valitaan katon mukaan: musta, ruskea
+                tai tiilenpunainen. Katsomme harjan ja aluskatteen{" "}
                 <Link to="/ilmainen-katon-kuntotarkastus/" className="font-semibold text-primary hover:underline">
                   ilmaisessa kuntotarkastuksessa
                 </Link>
@@ -157,7 +160,7 @@ const Harjatiiviste = () => {
             </dl>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Hinta lasketaan harjan pituuden mukaan ja sisältää työn ja tiivisteen. Hintalaskuri laskee sen pinnoituksen hintaan
-              mukaan, kun vastaat, että harjatiiviste puuttuu.
+              mukaan, kun vastaat, että harjatiiviste puuttuu, ja kerrot harjan pituuden.
             </p>
           </aside>
         </div>

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { calculateRidgeSealPrice, calculateRoofPrice, HARJATIIVISTE_HINTA } from "@/lib/priceCalc";
-import { calculatorQuestions, HARJAN_PITUUDET } from "@/components/laskuri/PriceWizard";
+import { calculatorQuestions } from "@/components/laskuri/PriceWizard";
 
 /*
  * Harjatiiviste laskurissa (Eerik 29.10.2026): 15 €/m pinnoituksen yhteydessä, 25 €/m erikseen, harjan pituus
@@ -19,12 +19,11 @@ describe("harjatiiviste", () => {
     expect(calculateRoofPrice(200, "normaali")).toEqual({ min: 3600, max: 4200 });
   });
 
-  it("kysyy harjatiivisteen kyllä/ei jyrkkyyden jälkeen, pituus pudotusvalikosta samassa vaiheessa", () => {
+  it("kysyy harjatiivisteen kyllä/ei jyrkkyyden jälkeen, pituus kentästä samassa vaiheessa", () => {
     const qs = calculatorQuestions.pinnoitus;
     const ridge = qs.find((q) => q.key === "ridgeSeal");
     expect(ridge?.options?.map((o) => o.value)).toEqual(["kylla", "ei"]);
     expect(qs.some((q) => q.key === "ridgeMeters")).toBe(false);
-    expect(HARJAN_PITUUDET).toContain(12);
     // Harjatiiviste kysytään jyrkkyyden jälkeen ja ennen vettä ja sähköä.
     const keys = qs.map((q) => q.key);
     expect(keys.indexOf("ridgeSeal")).toBe(keys.indexOf("slope") + 1);

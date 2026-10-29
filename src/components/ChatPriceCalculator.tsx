@@ -9,7 +9,6 @@ import CityCombobox from '@/components/CityCombobox';
 import PhoneInput from '@/components/PhoneInput';
 import { YHTEYSTIEDOT } from '@/data/company';
 import { calculateWallPrice, calculateRoofPrice, calculateRidgeSealPrice, formatPriceRange } from '@/lib/priceCalc';
-import { HARJAN_PITUUDET } from '@/components/laskuri/PriceWizard';
 import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from '@/components/vahennys/vahennysData';
 import {
   isValidFinnishMobile,
@@ -53,7 +52,6 @@ type StepUI =
   | { kind: 'image-options'; options: ImageOption[] }
   | { kind: 'options'; options: { label: string; value: string }[] }
   | { kind: 'number'; placeholder: string; suffix?: string }
-  | { kind: 'select'; label: string; options: { label: string; value: string }[] }
   | { kind: 'text'; placeholder: string }
   | { kind: 'city' }
   | { kind: 'contact' }
@@ -271,9 +269,8 @@ const ChatPriceCalculator = () => {
           ] });
           break;
         case 7:
-          // Kevyt pudotusvalikko harjan pituudelle (Eerik 29.10.2026), ei numerokenttää.
-          await addBotMessage('Kuinka pitkä katon harja on? Arvio riittää.');
-          setStepUI({ kind: 'select', label: 'Harjan pituus', options: HARJAN_PITUUDET.map((m) => ({ label: `${m} m`, value: String(m) })) });
+          await addBotMessage('Kuinka pitkä katon harja on metreinä? Arvio riittää.');
+          setStepUI({ kind: 'number', placeholder: 'esim. 12', suffix: 'm' });
           break;
         case 8:
           await addBotMessage('Vielä pari käytännön asiaa: löytyykö pihalta vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
@@ -338,33 +335,31 @@ const ChatPriceCalculator = () => {
   const handleNumberSubmit = useCallback(async () => {
     const val = numberInput.trim();
     if (!val || isNaN(Number(val)) || Number(val) <= 0) return;
-    if (Number(val) < MIN_M2 || Number(val) > MAX_M2) {
-      addUserMessage(`${val} m²`);
+    // Harjan pituus (vaihe 7) kysytään samalla kentällä kuin neliöt, mutta metreinä 1–200.
+    const harja = path === 'pinnoitus' && currentStep === 7;
+    const unit = harja ? 'm' : 'm²';
+    const min = harja ? 1 : MIN_M2;
+    const max = harja ? 200 : MAX_M2;
+    if (Number(val) < min || Number(val) > max) {
+      addUserMessage(`${val} ${unit}`);
       setNumberInput('');
       const ui = stepUI;
       setStepUI(null);
-      await addBotMessage(`Hmm, tarkista vielä luku 🙂 Anna pinta-ala neliöinä väliltä ${MIN_M2}–${MAX_M2}, esimerkiksi 200.`);
+      await addBotMessage(harja
+        ? `Hmm, tarkista vielä luku 🙂 Anna harjan pituus metreinä väliltä ${min}–${max}, esimerkiksi 12.`
+        : `Hmm, tarkista vielä luku 🙂 Anna pinta-ala neliöinä väliltä ${min}–${max}, esimerkiksi 200.`);
       setStepUI(ui);
       return;
     }
-    addUserMessage(`${val} m²`);
-    dataRef.current.squareMeters = val;
+    addUserMessage(`${val} ${unit}`);
+    if (harja) dataRef.current.ridgeMeters = val;
+    else dataRef.current.squareMeters = val;
     setNumberInput('');
     setStepUI(null);
     const nextStep = currentStep + 1;
     setCurrentStep(nextStep);
     await advanceFlow(nextStep, path);
   }, [numberInput, addUserMessage, addBotMessage, stepUI, currentStep, path, advanceFlow]);
-
-  const handleSelectSubmit = useCallback(async (value: string, label: string) => {
-    if (!value) return;
-    addUserMessage(label);
-    dataRef.current.ridgeMeters = value;
-    setStepUI(null);
-    const nextStep = currentStep + 1;
-    setCurrentStep(nextStep);
-    await advanceFlow(nextStep, path);
-  }, [addUserMessage, currentStep, path, advanceFlow]);
 
   const handleTextSubmit = useCallback(async () => {
     const val = textInput.trim();
@@ -602,29 +597,8 @@ const ChatPriceCalculator = () => {
             </div>
 
             {/* Input area — only for text/number/contact inputs */}
-            {chatStarted && stepUI && !isTyping && (stepUI.kind === 'number' || stepUI.kind === 'select' || stepUI.kind === 'text' || stepUI.kind === 'city' || stepUI.kind === 'contact') && (
+            {chatStarted && stepUI && !isTyping && (stepUI.kind === 'number' || stepUI.kind === 'text' || stepUI.kind === 'city' || stepUI.kind === 'contact') && (
               <div className="px-4 py-3 border-t border-border/30 bg-white/80">
-
-                {stepUI.kind === 'select' && (
-                  <form
-                    onSubmit={e => { e.preventDefault(); const sel = (e.currentTarget.elements.namedItem('harjan-pituus-chat') as HTMLSelectElement); handleSelectSubmit(sel.value, sel.selectedOptions[0]?.text ?? sel.value); }}
-                    className="flex gap-2"
-                  >
-                    <select
-                      name="harjan-pituus-chat"
-                      aria-label={stepUI.label}
-                      defaultValue=""
-                      required
-                      className="flex-1 px-4 py-2.5 rounded-xl border border-border/60 bg-white text-base focus:outline-none focus:border-primary transition-colors"
-                    >
-                      <option value="" disabled>Valitse pituus</option>
-                      {stepUI.options.map(o => (
-                        <option key={o.value} value={o.value}>{o.label}</option>
-                      ))}
-                    </select>
-                    <button type="submit" className="px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold">Jatka</button>
-                  </form>
-                )}
 
                 {stepUI.kind === 'number' && (
                   <form

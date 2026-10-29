@@ -153,17 +153,21 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     expect(sentBody().calculatorDetails).toContain("Jyrkkyys: Normaali");
     expect(sentBody().calculatorDetails).toContain("Kaupunki: Tampere");
 
-    const reply = screen.getByText(shown(expected), { exact: false });
-    expect(reply.textContent).toContain("Kiitos Testi!");
-    expect(reply.textContent).toContain("Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.");
+    // Tulos on navy-kortti (29.10.2026); tekstit ovat samat kuin aiemmin botin viesteinä.
+    const tulos = document.querySelector("[data-tulos]")!;
+    expect(tulos).not.toBeNull();
+    const reply = shown(tulos.textContent ?? "");
+    expect(reply).toContain("Kiitos Testi!");
+    expect(reply).toContain(shown(expected));
+    expect(reply).toContain("Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.");
     expect(screen.queryByRole("button", { name: "Lähetä ja näytä hinta-arvio" })).not.toBeInTheDocument();
-    // Sama vähennysrivi kuin /hintalaskuri-sivulla (Eerik 26.10.2026, yöajon kysymys 20), omana viestinään.
-    await tick();
+    // Sama vähennysrivi kuin /hintalaskuri-sivulla (Eerik 26.10.2026, yöajon kysymys 20), kortin tummemmalla rivillä.
     const price = calculateRoofPrice(200, "normaali");
     const after = formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) });
     const deduction = screen.getByText(/Kotitalousvähennyksen jälkeen:/);
     expect(shown(deduction.textContent ?? "")).toContain(shown(after));
     expect(shown(deduction.textContent ?? "")).toContain("Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.");
+    expect(screen.getByRole("link", { name: "Pyydä ilmainen kuntotarkastus" })).toHaveAttribute("href", "/ilmainen-katon-kuntotarkastus/");
   });
 
   it("maalaus: hinta lasketaan seinäkaavalla kerrosten ja hilseilyn mukaan", async () => {
@@ -183,7 +187,8 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     expect(sentBody()).toMatchObject({ service: "ulkomaalaus", city: "Nokia", priceEstimate: expected });
     expect(sentBody().calculatorDetails).toContain("Pohjaneliöt: 150 m²");
     expect(sentBody().calculatorDetails).toContain("Vesi/sähkö: Ei löydy");
-    expect(screen.getByText(shown(expected), { exact: false })).toBeInTheDocument();
+    expect(shown(document.querySelector("[data-tulos]")?.textContent ?? "")).toContain(shown(expected));
+    expect(screen.getByRole("link", { name: "Pyydä ilmainen arviokäynti" })).toHaveAttribute("href", "/ilmainen-julkisivun-kuntoarvio/");
   });
 
   it("liian pieni pinta-ala pyydetään uudestaan, ja virheellinen puhelinnumero ei lähde", async () => {
@@ -224,7 +229,97 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(screen.getByText(/Hups, lähetys ei onnistunut \(Sähköpostin lähetys epäonnistui\)/)).toBeInTheDocument();
     expect(screen.queryByText(shown(expected), { exact: false })).not.toBeInTheDocument();
+    expect(document.querySelector("[data-tulos]")).toBeNull();
     expect(screen.getByRole("button", { name: "Lähetä ja näytä hinta-arvio" })).toBeEnabled();
+  });
+
+  /* Reset-nappi (Eerik 29.10.2026): otsikkopalkin oikeassa yläkulmassa, vain kun chat on alkanut. */
+  const resetButton = () => screen.queryByRole("button", { name: "Aloita alusta" });
+
+  it("reset-nappi ei näy ennen kuin chat on alkanut, ja näkyy sen jälkeen", async () => {
+    renderCalculator();
+    expect(resetButton()).toBeNull();
+    await tick();
+    expect(resetButton()).not.toBeNull();
+  });
+
+  it("reset tyhjentää viestit ja botti aloittaa alusta", async () => {
+    await start();
+    await pick(/Tiilikaton pinnoitus/);
+    expect(screen.getByText(/Kuinka suuri katto on neliöinä/)).toBeInTheDocument();
+    fireEvent.click(resetButton()!);
+    expect(screen.queryByText(/Kuinka suuri katto on neliöinä/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Moikka!/)).not.toBeInTheDocument();
+    await tick();
+    await tick();
+    expect(screen.getAllByText(/Moikka!/)).toHaveLength(1);
+    expect(screen.getByText("Kumpaa lähdetään laskemaan?")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Tiilikaton pinnoitus/ })).toBeInTheDocument();
+    expect(screen.queryByText(/Kuinka suuri katto on neliöinä/)).not.toBeInTheDocument();
+  });
+
+  it("reset kesken botin kirjoittamisen ei jätä kummitusviestejä eikä vanhan ajon vaihetta", async () => {
+    await start();
+    fireEvent.click(screen.getByRole("button", { name: /Tiilikaton pinnoitus/ }));
+    await tick(300); // botti kirjoittaa vielä (viive 1 s)
+    fireEvent.click(resetButton()!);
+    await tick(); // vanhan ajon viive laukeaa: ei saa lisätä viestiä
+    await tick();
+    const moikat = screen.getAllByText(/Moikka!/);
+    expect(moikat).toHaveLength(1);
+    expect(screen.queryByText(/Kuinka suuri katto on neliöinä/)).not.toBeInTheDocument();
+    expect(screen.queryByLabelText("esim. 200")).not.toBeInTheDocument(); // vanhan ajon numerokenttä ei ilmesty
+    expect(screen.getByRole("button", { name: /Talon maalaus/ })).toBeInTheDocument();
+  });
+
+  it("reset ei lähetä mitään ja tyhjentää nimen ja puhelinnumeron", async () => {
+    await start();
+    await pick(/Talon maalaus/);
+    await send("esim. 150", "150");
+    await pick("1 kerros");
+    await pick("Ei ollenkaan");
+    await pick("Kyllä löytyy");
+    await send("Paikkakunta", "Tampere");
+    contact("Testi", "0401234567");
+    expect((screen.getByLabelText("Nimi") as HTMLInputElement).value).toBe("Testi");
+    fireEvent.click(resetButton()!);
+    await tick();
+    await tick();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.queryByLabelText("Nimi")).not.toBeInTheDocument();
+    // Uusi laskenta kysyy nimen ja numeron uudelleen tyhjinä (liidiportti pysyy).
+    await pick(/Talon maalaus/);
+    await send("esim. 150", "120");
+    await pick("1 kerros");
+    await pick("Ei ollenkaan");
+    await pick("Kyllä löytyy");
+    await send("Paikkakunta", "Nokia");
+    expect((screen.getByLabelText("Nimi") as HTMLInputElement).value).toBe("");
+    expect((screen.getByLabelText("Puhelinnumero") as HTMLInputElement).value).toBe("");
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("reset tuloksen jälkeen tyhjentää näkymän eikä lähetä uudelleen", async () => {
+    await start();
+    await pick(/Tiilikaton pinnoitus/);
+    await send("esim. 200", "200");
+    await pick("Ei ole");
+    await pick("Löytyy kyllä");
+    await pick("Normaali jyrkkyys, valjailla pärjää");
+    await pick("Ei puutu");
+    await pick("Kyllä löytyy");
+    await send("Paikkakunta", "Tampere");
+    contact("Testi", "40 123 4567");
+    showPrice();
+    await tick();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(document.querySelector("[data-tulos]")).not.toBeNull();
+    fireEvent.click(resetButton()!);
+    expect(document.querySelector("[data-tulos]")).toBeNull();
+    await tick();
+    await tick();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("Kumpaa lähdetään laskemaan?")).toBeInTheDocument();
   });
 });
 

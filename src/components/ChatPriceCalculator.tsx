@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useId } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, RotateCcw } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
 import { submitContactForm, formErrorMessage } from '@/lib/contactForm';
 import FormPrivacyNote, { HoneypotField } from '@/components/FormPrivacyNote';
@@ -22,6 +23,13 @@ import {
  * Kysymykset ja kaavat ovat samat kuin /hintalaskuri-sivun laskurissa (src/lib/priceCalc.ts).
  * Liidiportti: nimi ja puhelinnumero kysytään ennen hinnan näyttämistä, ja tiedot lähtevät
  * myyntiin ja CRM:ään submitContactForm-funktion kautta. Emojit ovat chatissa sallittuja.
+ *
+ * Navy-väriversio ja reset-nappi (Eerik 29.10.2026). Värit: navy ja sumunharmaa tausta ovat tokeneita
+ * (bg-navy, --tausta-harmaansininen); keltainen #ffd23f, haaleansininen #9fb0c7, vähennysrivin #13294d,
+ * kenttien reunus #c7d1de ja kirjoituspisteet #b4bcc9 ovat tämän laskurin omia arvoja.
+ * Reset: jokaisella ajolla on tunniste (runIdRef). Reset kasvattaa sitä, ja vanhan ajon viiveet (botin
+ * kirjoitus, vaiheen siirto) tarkistavat tunnisteen jokaisen odotuksen jälkeen ja palaavat hiljaa, jos ajo
+ * on vanhentunut. Reset ei lähetä eikä peru liidiä; uusi laskenta kysyy nimen ja numeron uudelleen.
  */
 
 // ── Avatar ─────────────────────────────────────────────────────────────────
@@ -62,11 +70,11 @@ type StepUI =
 const TypingIndicator = () => (
   <div className="flex items-end gap-2 mb-3">
     <img src={eerikImage} alt="Eerik" className="w-7 h-7 rounded-full object-cover shrink-0" />
-    <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1 items-center">
+    <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-[0_2px_6px_rgba(11,26,51,0.1)] flex gap-1 items-center">
       {[0, 1, 2].map(i => (
         <span
           key={i}
-          className="w-2 h-2 bg-foreground/30 rounded-full"
+          className="w-2 h-2 bg-[#b4bcc9] rounded-full"
           style={{
             animation: 'chatBounce 1.2s ease-in-out infinite',
             animationDelay: `${i * 0.15}s`,
@@ -85,8 +93,8 @@ const BotBubble = ({ text }: { text: string }) => (
     className="flex items-end gap-2 mb-3"
   >
     <img src={eerikImage} alt="Eerik" className="w-7 h-7 rounded-full object-cover shrink-0" />
-    <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm max-w-[85%]">
-      <p className="text-sm text-foreground leading-relaxed">{text}</p>
+    <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-[0_2px_6px_rgba(11,26,51,0.1)] max-w-[85%]">
+      <p className="text-sm text-navy leading-relaxed">{text}</p>
     </div>
   </m.div>
 );
@@ -98,7 +106,7 @@ const UserBubble = ({ text, imageBase }: { text: string; imageBase?: string }) =
     animate={{ opacity: 1, y: 0 }}
     className="flex justify-end mb-3"
   >
-    <div className="bg-primary text-primary-foreground rounded-2xl rounded-br-sm shadow-sm max-w-[85%] overflow-hidden">
+    <div className="bg-navy text-white rounded-2xl rounded-br-sm shadow-[0_2px_6px_rgba(11,26,51,0.15)] max-w-[85%] overflow-hidden">
       {imageBase && (
         <div className="aspect-[16/9] overflow-hidden max-h-28">
           <img
@@ -112,6 +120,47 @@ const UserBubble = ({ text, imageBase }: { text: string; imageBase?: string }) =
         </div>
       )}
       <p className="text-sm leading-relaxed px-4 py-3">{text}</p>
+    </div>
+  </m.div>
+);
+
+// ── Tuloskortti ───────────────────────────────────────────────────────────
+interface Tulos {
+  /** Botin viestit sanasta sanaan: kiitos ja hinta, mahdollinen harjatiivisterivi, vähennysrivi. */
+  kiitos: string;
+  harja?: string;
+  vahennys: string;
+  /** Hintahaarukka, joka korostetaan keltaisella kiitosviestistä. */
+  hinta: string;
+  cta: { to: string; label: string };
+}
+
+/** Korostaa hintahaarukan keltaisella muuttamatta tekstiä. */
+const korostaHinta = (text: string, hinta: string) => {
+  const i = text.indexOf(hinta);
+  if (i < 0) return text;
+  return (
+    <>
+      {text.slice(0, i)}
+      <strong className="font-heading text-xl font-extrabold text-[#ffd23f]">{hinta}</strong>
+      {text.slice(i + hinta.length)}
+    </>
+  );
+};
+
+const TulosKortti = ({ tulos }: { tulos: Tulos }) => (
+  <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-3 overflow-hidden rounded-2xl bg-navy text-white shadow-[0_10px_24px_-8px_rgba(11,26,51,0.45)]" data-tulos>
+    <div className="px-4 py-4">
+      <p className="text-sm leading-relaxed">{korostaHinta(tulos.kiitos, tulos.hinta)}</p>
+      {tulos.harja && <p className="mt-2 text-sm leading-relaxed text-white/90">{tulos.harja}</p>}
+    </div>
+    <div className="bg-[#13294d] px-4 py-3">
+      <p className="text-sm leading-relaxed text-white">{tulos.vahennys}</p>
+    </div>
+    <div className="px-4 pb-4 pt-3">
+      <Link to={tulos.cta.to} className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#ffd23f] px-5 font-heading text-sm font-extrabold text-navy transition-colors hover:bg-[#f2c62e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+        {tulos.cta.label}
+      </Link>
     </div>
   </m.div>
 );
@@ -134,6 +183,9 @@ const ChatPriceCalculator = () => {
   const [isCheckingPhone, setIsCheckingPhone] = useState(false);
   const phoneCheckTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [chatStarted, setChatStarted] = useState(false);
+  const [tulos, setTulos] = useState<Tulos | null>(null);
+  /** Ajon tunniste: reset kasvattaa, vanhan ajon viiveet tarkistavat ja palaavat hiljaa. */
+  const runIdRef = useRef(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
@@ -155,10 +207,15 @@ const ChatPriceCalculator = () => {
   }, []);
 
   const addBotMessage = useCallback((text: string): Promise<void> => {
+    const run = runIdRef.current;
     return new Promise(resolve => {
       setIsTyping(true);
       scrollToBottom();
       setTimeout(() => {
+        if (run !== runIdRef.current) {
+          resolve();
+          return;
+        }
         setIsTyping(false);
         setMessages(prev => [...prev, { id: `bot-${Date.now()}-${Math.random()}`, from: 'bot', text }]);
         scrollToBottom();
@@ -175,10 +232,13 @@ const ChatPriceCalculator = () => {
 
   // ── Flow definitions ──────────────────────────────────────────────────
   const startChat = useCallback(async () => {
+    const run = runIdRef.current;
     setChatStarted(true);
     setStepUI(null);
     await addBotMessage('Moikka! 👋 Mietitkö, mitä katon pinnoitus tai talon maalaus maksaisi? Lasketaan se yhdessä, vie noin minuutin.');
+    if (run !== runIdRef.current) return;
     await addBotMessage('Kumpaa lähdetään laskemaan?');
+    if (run !== runIdRef.current) return;
     setStepUI({
       kind: 'image-options',
       options: [
@@ -190,16 +250,20 @@ const ChatPriceCalculator = () => {
   }, [addBotMessage]);
 
   const advanceFlow = useCallback(async (step: number, selectedPath: ServicePath) => {
+    const run = runIdRef.current;
+    const vanhentunut = () => run !== runIdRef.current;
     setStepUI(null);
 
     if (selectedPath === 'maalaus') {
       switch (step) {
         case 2:
           await addBotMessage('Hyvä valinta! 🏡 Kuinka monta pohjaneliötä talossa on suunnilleen? Pelkkä numero riittää.');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'number', placeholder: 'esim. 150', suffix: 'm²' });
           break;
         case 3:
           await addBotMessage('Selvä. Entä montako kerrosta talossa on?');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: '1 kerros', value: '1' },
             { label: '1,5 kerrosta', value: '1.5' },
@@ -208,6 +272,7 @@ const ChatPriceCalculator = () => {
           break;
         case 4:
           await addBotMessage('Missä kunnossa nykyinen maali on? Hilseileekö tai lohkeileeko se?');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: 'Ei ollenkaan', value: 'none' },
             { label: 'Vähän (1–2 seinällä)', value: '1-2' },
@@ -216,6 +281,7 @@ const ChatPriceCalculator = () => {
           break;
         case 5:
           await addBotMessage('Hyvä tietää. Vielä pari käytännön asiaa: löytyykö pihalta vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: 'Kyllä löytyy', value: 'kylla' },
             { label: 'Ei löydy', value: 'ei' },
@@ -227,10 +293,12 @@ const ChatPriceCalculator = () => {
           } else {
             await addBotMessage('Hienoa. Millä paikkakunnalla kohde on?');
           }
+          if (vanhentunut()) return;
           setStepUI({ kind: 'city' });
           break;
         case 7:
           await addBotMessage('Kiitos! Laskin raksuttaa jo. 🔢 Jätä vielä nimi ja puhelinnumero, niin näytän arvion ja voimme palata asiaan.');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'contact' });
           break;
         default:
@@ -240,10 +308,12 @@ const ChatPriceCalculator = () => {
       switch (step) {
         case 2:
           await addBotMessage('Hyvä valinta! 🏠 Kuinka suuri katto on neliöinä? Katto on yleensä isompi kuin talon pohja, arvio riittää.');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'number', placeholder: 'esim. 200', suffix: 'm²' });
           break;
         case 3:
           await addBotMessage('Miltä katto näyttää? Onko siinä rikkinäisiä tiiliä?');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: 'Ei ole', value: 'ei' },
             { label: '1–5 rikkinäistä', value: '1-5' },
@@ -252,6 +322,7 @@ const ChatPriceCalculator = () => {
           break;
         case 4:
           await addBotMessage('Entä onko tiilien alla ehjä aluskate?');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: 'Löytyy kyllä', value: 'kylla' },
             { label: 'En ole varma, parempi tulla tarkastamaan', value: 'epävarma' },
@@ -259,6 +330,7 @@ const ChatPriceCalculator = () => {
           break;
         case 5:
           await addBotMessage('Vielä yksi tärkeä: kuinka jyrkkä katto on?');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: 'Loiva, melkein tasakatto', value: 'loiva' },
             { label: 'Normaali jyrkkyys, valjailla pärjää', value: 'normaali' },
@@ -268,6 +340,7 @@ const ChatPriceCalculator = () => {
         // Eerik 29.10.2026: harjatiiviste laskuriin (15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä).
         case 6:
           await addBotMessage('Puuttuuko katolta harjatiiviste? Se on tiiviste harjatiilen alla. Jos et tiedä, vastaa ei: katsomme sen kuntotarkastuksessa.');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: 'Kyllä puuttuu', value: 'kylla' },
             { label: 'Ei puutu', value: 'ei' },
@@ -275,10 +348,12 @@ const ChatPriceCalculator = () => {
           break;
         case 7:
           await addBotMessage('Kuinka pitkä katon harja on metreinä? Arvio riittää.');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'number', placeholder: 'esim. 12', suffix: 'm' });
           break;
         case 8:
           await addBotMessage('Vielä pari käytännön asiaa: löytyykö pihalta vettä (vesiposti) ja sähköä (tavallinen pistorasia)?');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'options', options: [
             { label: 'Kyllä löytyy', value: 'kylla' },
             { label: 'Ei löydy', value: 'ei' },
@@ -290,10 +365,12 @@ const ChatPriceCalculator = () => {
           } else {
             await addBotMessage('Hienoa. Millä paikkakunnalla kohde on?');
           }
+          if (vanhentunut()) return;
           setStepUI({ kind: 'city' });
           break;
         case 10:
           await addBotMessage('Kiitos! Laskin raksuttaa jo. 🔢 Jätä vielä nimi ja puhelinnumero, niin näytän arvion.');
+          if (vanhentunut()) return;
           setStepUI({ kind: 'contact' });
           break;
         default:
@@ -410,6 +487,7 @@ const ChatPriceCalculator = () => {
     setPhoneError(false);
     const internationalPhone = formatToInternational(contactPhone);
 
+    const run = runIdRef.current;
     addUserMessage(`${contactName}, ${internationalPhone}`);
     setStepUI(null);
     setIsSubmitting(true);
@@ -455,21 +533,73 @@ const ChatPriceCalculator = () => {
         "etusivun chat-laskuri"
       );
 
+      if (run !== runIdRef.current) return;
       const firstName = contactName.trim().split(/\s+/)[0];
       const tyo = path === 'maalaus' ? 'maalaukselle' : 'pinnoitukselle';
-      await addBotMessage(
-        `Kiitos ${firstName}! 🎉 Alustava hinta-arvio ${tyo} on ${priceStr}. Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.`,
-      );
-      if (harjaHinta > 0) await addBotMessage(`Hinta sisältää harjatiivisteen: ${harjaHinta.toLocaleString('fi-FI')} €. Ilman pinnoitusta harjatiivisteen asennus maksaisi ${calculateRidgeSealPrice(Number(d.ridgeMeters), true).toLocaleString('fi-FI')} €.`);
-      await addBotMessage(`Kotitalousvähennyksen jälkeen: ${afterStr}. ${VAHENNYS_OMAVASTUU_HUOMAUTUS}`);
+      // Tulos näytetään navy-korttina (Eerik 29.10.2026); tekstit ovat samat kuin aiemmin botin viesteinä.
+      // Botin kirjoitusviive pysyy ennallaan ennen korttia.
+      await new Promise<void>(resolve => {
+        setIsTyping(true);
+        setTimeout(resolve, TYPING_DELAY_MS);
+      });
+      if (run !== runIdRef.current) return;
+      setIsTyping(false);
+      setTulos({
+        kiitos: `Kiitos ${firstName}! 🎉 Alustava hinta-arvio ${tyo} on ${priceStr}. Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.`,
+        harja: harjaHinta > 0 ? `Hinta sisältää harjatiivisteen: ${harjaHinta.toLocaleString('fi-FI')} €. Ilman pinnoitusta harjatiivisteen asennus maksaisi ${calculateRidgeSealPrice(Number(d.ridgeMeters), true).toLocaleString('fi-FI')} €.` : undefined,
+        vahennys: `Kotitalousvähennyksen jälkeen: ${afterStr}. ${VAHENNYS_OMAVASTUU_HUOMAUTUS}`,
+        hinta: priceStr,
+        cta: path === 'maalaus'
+          ? { to: '/ilmainen-julkisivun-kuntoarvio/', label: 'Pyydä ilmainen arviokäynti' }
+          : { to: '/ilmainen-katon-kuntotarkastus/', label: 'Pyydä ilmainen kuntotarkastus' },
+      });
+      scrollToBottom();
     } catch (err) {
+      if (run !== runIdRef.current) return;
       // Lomake ei väitä onnistuneensa: virhe kerrotaan chatissa ja yhteystietokentät jäävät näkyviin.
       await addBotMessage(`Hups, lähetys ei onnistunut (${formErrorMessage(err)}). Kokeile uudelleen tai soita meille: ${YHTEYSTIEDOT.eerik.phone}.`);
+      if (run !== runIdRef.current) return;
       setStepUI({ kind: 'contact' });
     } finally {
-      setIsSubmitting(false);
+      if (run === runIdRef.current) setIsSubmitting(false);
     }
-  }, [contactName, contactPhone, website, path, addBotMessage, toast, addUserMessage]);
+  }, [contactName, contactPhone, website, path, addBotMessage, toast, addUserMessage, scrollToBottom]);
+
+  // Reset: tyhjentää kaiken tilan ja aloittaa alusta. Ei lähetä eikä peru liidiä. Kevyt toiminto, ei vahvistusta.
+  const handleReset = useCallback(() => {
+    runIdRef.current += 1;
+    if (phoneCheckTimer.current) {
+      clearTimeout(phoneCheckTimer.current);
+      phoneCheckTimer.current = null;
+    }
+    setMessages([]);
+    setIsTyping(false);
+    setCurrentStep(0);
+    setPath(null);
+    setStepUI(null);
+    setIsSubmitting(false);
+    setNumberInput('');
+    setTextInput('');
+    setCityInput('');
+    setContactName('');
+    setContactPhone('');
+    setWebsite('');
+    setPhoneError(false);
+    setIsCheckingPhone(false);
+    setTulos(null);
+    dataRef.current = {};
+    const el = scrollRef.current;
+    if (el && typeof el.scrollTo === 'function') el.scrollTo({ top: 0 });
+    startChat();
+  }, [startChat]);
+
+  // Unmount: vanhat viiveet eivät enää muuta tilaa.
+  useEffect(() => {
+    return () => {
+      runIdRef.current += 1;
+      if (phoneCheckTimer.current) clearTimeout(phoneCheckTimer.current);
+    };
+  }, []);
 
   // Auto-start on scroll into view
   useEffect(() => {
@@ -540,22 +670,33 @@ const ChatPriceCalculator = () => {
 
           {/* Chat container */}
           <div ref={chatRef} className="bg-card rounded-2xl shadow-lg border border-border/40 overflow-hidden">
-            {/* Chat header bar */}
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-border/30 bg-white/80">
+            {/* Chat header bar: navy, oikeassa yläkulmassa reset (vain kun chat on alkanut) */}
+            <div className="flex items-center gap-3 px-4 py-3 bg-navy text-white">
               <div className="relative">
                 <img src={eerikImage} alt="Eerik Pitkänen" className="w-10 h-10 rounded-full object-cover" />
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-navy" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground">Eerik Pitkänen</p>
-                <p className="text-xs text-muted-foreground">Pintanen Oy</p>
+                <p className="text-sm font-semibold text-white">Eerik Pitkänen</p>
+                <p className="text-xs text-[#9fb0c7]">Pintanen Oy</p>
               </div>
+              {chatStarted && messages.length > 0 && (
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  aria-label="Aloita alusta"
+                  title="Aloita alusta"
+                  className="ml-auto flex h-11 w-11 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd23f] lg:h-10 lg:w-10"
+                >
+                  <RotateCcw className="h-[18px] w-[18px]" aria-hidden="true" />
+                </button>
+              )}
             </div>
 
             {/* Messages area */}
             <div
               ref={scrollRef}
-              className="px-4 py-4 min-h-[280px] max-h-[480px] overflow-y-auto bg-accent-light"
+              className="px-4 py-4 min-h-[280px] max-h-[480px] overflow-y-auto bg-[hsl(var(--tausta-harmaansininen))]"
             >
               <AnimatePresence>
                 {messages.map(msg =>
@@ -567,6 +708,7 @@ const ChatPriceCalculator = () => {
                 )}
               </AnimatePresence>
               {isTyping && <TypingIndicator />}
+              {tulos && !isTyping && <TulosKortti tulos={tulos} />}
 
               {/* Inline bubble-style options */}
               {!isTyping && stepUI && (stepUI.kind === 'image-options' || stepUI.kind === 'options') && (
@@ -581,7 +723,7 @@ const ChatPriceCalculator = () => {
                         <button
                           key={opt.value}
                           onClick={() => handleImageOption(opt)}
-                          className="group flex flex-col rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all border border-white/80"
+                          className="group flex flex-col rounded-2xl overflow-hidden bg-white shadow-[0_2px_8px_rgba(11,26,51,0.12)] ring-2 ring-transparent transition-all hover:ring-[#ffd23f] hover:shadow-md focus-visible:outline-none focus-visible:ring-[#ffd23f] active:ring-[#ffd23f]"
                         >
                           <div className="aspect-[16/9] overflow-hidden max-h-24">
                             <img
@@ -593,7 +735,7 @@ const ChatPriceCalculator = () => {
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           </div>
-                          <span className="py-2 px-3 text-sm font-semibold text-foreground text-center">
+                          <span className="py-2 px-3 text-sm font-semibold text-navy text-center">
                             {opt.label}
                           </span>
                         </button>
@@ -606,7 +748,7 @@ const ChatPriceCalculator = () => {
                         <button
                           key={opt.value}
                           onClick={() => handleOption(opt.label, opt.value)}
-                          className="px-4 py-2.5 rounded-2xl bg-white text-sm font-medium text-foreground shadow-sm hover:shadow-md transition-all"
+                          className="px-4 py-2.5 rounded-2xl bg-white text-sm font-medium text-navy border-[1.5px] border-navy transition-colors hover:bg-[#ffd23f] hover:border-[#ffd23f] active:bg-[#ffd23f] focus-visible:outline-none focus-visible:bg-[#ffd23f] focus-visible:border-[#ffd23f]"
                         >
                           {opt.label}
                         </button>
@@ -619,7 +761,7 @@ const ChatPriceCalculator = () => {
 
             {/* Input area — only for text/number/contact inputs */}
             {chatStarted && stepUI && !isTyping && (stepUI.kind === 'number' || stepUI.kind === 'text' || stepUI.kind === 'city' || stepUI.kind === 'contact') && (
-              <div className="px-4 py-3 border-t border-border/30 bg-white/80">
+              <div className="px-4 py-3 border-t border-[#c7d1de] bg-white">
 
                 {stepUI.kind === 'number' && (
                   <form
@@ -634,11 +776,11 @@ const ChatPriceCalculator = () => {
                         value={numberInput}
                         onChange={e => setNumberInput(e.target.value)}
                         placeholder={stepUI.placeholder} aria-label={stepUI.placeholder}
-                        className="w-full px-4 py-2.5 rounded-xl border border-border/60 bg-white text-base focus:outline-none focus:border-primary transition-colors"
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#c7d1de] bg-white text-base text-navy focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors"
                         autoFocus
                       />
                       {stepUI.suffix && (
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#4a5668]">
                           {stepUI.suffix}
                         </span>
                       )}
@@ -647,7 +789,7 @@ const ChatPriceCalculator = () => {
                       type="submit"
                       aria-label="Lähetä"
                       disabled={!numberInput.trim()}
-                      className="px-4 py-2.5 bg-primary text-primary-foreground rounded-xl disabled:opacity-40 hover:bg-primary/90 transition-colors"
+                      className="px-4 py-2.5 bg-[#ffd23f] text-navy rounded-xl hover:bg-[#f2c62e] disabled:bg-[#f6e9a8] disabled:text-navy/60 transition-colors"
                     >
                       <Send className="w-4 h-4" />
                     </button>
@@ -664,14 +806,14 @@ const ChatPriceCalculator = () => {
                       value={textInput}
                       onChange={e => setTextInput(e.target.value)}
                       placeholder={stepUI.placeholder} aria-label={stepUI.placeholder}
-                      className="flex-1 px-4 py-2.5 rounded-xl border border-border/60 bg-white text-base focus:outline-none focus:border-primary transition-colors"
+                      className="flex-1 px-4 py-2.5 rounded-xl border border-[#c7d1de] bg-white text-base text-navy focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors"
                       autoFocus
                     />
                     <button
                       type="submit"
                       aria-label="Lähetä"
                       disabled={!textInput.trim()}
-                      className="px-4 py-2.5 bg-primary text-primary-foreground rounded-xl disabled:opacity-40 hover:bg-primary/90 transition-colors"
+                      className="px-4 py-2.5 bg-[#ffd23f] text-navy rounded-xl hover:bg-[#f2c62e] disabled:bg-[#f6e9a8] disabled:text-navy/60 transition-colors"
                     >
                       <Send className="w-4 h-4" />
                     </button>
@@ -698,7 +840,7 @@ const ChatPriceCalculator = () => {
                         }
                       }}
                       disabled={!cityInput.trim()}
-                      className="px-4 py-2.5 bg-primary text-primary-foreground rounded-xl disabled:opacity-40 hover:bg-primary/90 transition-colors"
+                      className="px-4 py-2.5 bg-[#ffd23f] text-navy rounded-xl hover:bg-[#f2c62e] disabled:bg-[#f6e9a8] disabled:text-navy/60 transition-colors"
                     >
                       <Send className="w-4 h-4" />
                     </button>
@@ -713,7 +855,7 @@ const ChatPriceCalculator = () => {
                       value={contactName}
                       onChange={e => setContactName(e.target.value)}
                       placeholder="Nimi *" aria-label="Nimi"
-                      className="w-full px-4 py-2.5 rounded-xl border border-border/60 bg-white text-base focus:outline-none focus:border-primary transition-colors"
+                      className="w-full px-4 py-2.5 rounded-xl border border-[#c7d1de] bg-white text-base text-navy focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors"
                       autoFocus
                     />
                     <PhoneInput
@@ -729,7 +871,7 @@ const ChatPriceCalculator = () => {
                     <button
                       onClick={handleContactSubmit}
                       disabled={isSubmitting || isCheckingPhone || !contactName.trim() || !contactPhone.trim()}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground font-semibold rounded-xl disabled:opacity-40 hover:bg-primary/90 transition-colors text-sm"
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#ffd23f] text-navy font-semibold rounded-xl hover:bg-[#f2c62e] disabled:bg-[#f6e9a8] disabled:text-navy/60 transition-colors text-sm"
                     >
                       {isSubmitting ? (
                         <>

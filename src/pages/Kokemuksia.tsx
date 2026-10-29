@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import Rytmi from "@/components/Rytmi";
 import ReviewCard from "@/components/ReviewCard";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
 import { HERO_BASE, staticSeo } from "@/data/seo";
@@ -61,6 +62,7 @@ const Kokemuksia = () => {
         image={{ base: HERO_BASE.kokemuksia, alt: "Keltainen talo ja pinnoitettu tiilikatto Kangasalla" }}
         breadcrumbs={crumbs}
       />
+      <LaskuriPalkki />
 
       {groups.map((g, gi) => {
         const reviews = allTestimonials.filter((t) => matchesCategory(t, g.category));
@@ -114,6 +116,7 @@ const Kokemuksia = () => {
           </p>
         </div>
       </section>
+      <KayntiPalkki />
 
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />

@@ -3,6 +3,7 @@ import Rytmi from "@/components/Rytmi";
 import ArvosteluNosto from "@/components/ArvosteluNosto";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import SEO from "@/components/SEO";
 import ReferenssiGalleria from "@/components/ReferenssiGalleria";
 import { HERO_BASE, staticSeo } from "@/data/seo";
@@ -35,8 +36,10 @@ const Referenssit = () => (
     />
     <Rytmi>
       <ReferenssiGalleria />
+      <LaskuriPalkki />
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
       <ArvosteluNosto polku="/referenssit" />
+      <KayntiPalkki />
 
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />

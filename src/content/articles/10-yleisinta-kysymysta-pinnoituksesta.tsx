@@ -105,7 +105,7 @@ const Body = () => (
 
     <h2>9. Milloin pääsette katsomaan katon?</h2>
     <p>
-      Yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Kuntotarkastus on ilmainen, ja sinun on hyvä
+      Yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Kuntotarkastus on ilmainen, ja sinun on hyvä
       olla paikalla. Tarjouksen saat myös etänä, kun lähetät kuvat katosta ja arvion sen koosta. Saat
       kirjallisen tarjouksen kiinteällä hinnalla. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun.
     </p>

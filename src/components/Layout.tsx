@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import MobileBottomBar from './MobileBottomBar';
 import DesktopQuoteDrawer from './DesktopQuoteDrawer';
 import ChatLeadForm from './ChatLeadForm';
 import CookieBanner from './CookieBanner';
@@ -18,7 +17,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-/** Sivut, joilla on oma lomake: kelluva alapalkki ja chat eivät saa peittää sitä (auditointi 8.4). */
+/** Sivut, joilla on oma lomake: chat ei saa peittää sitä (auditointi 8.4). Mobiilin alapalkki poistettiin 29.10.2026 (Eki): chat riittää. */
 const LOMAKESIVUT = ["/tarjouspyynto", "/hintalaskuri"];
 
 const Layout = () => {
@@ -36,12 +35,10 @@ const Layout = () => {
         Siirry sisältöön
       </a>
       <Header />
-      {/* Puhelimella footerin viimeinen rivi jäisi kiinteän alapalkin alle ilman alatäytettä. */}
-      <main id="sisalto" tabIndex={-1} className={`flex-1 outline-none ${lomakesivu ? "" : "pb-[5.25rem] lg:pb-0"}`}>
+      <main id="sisalto" tabIndex={-1} className="flex-1 outline-none">
         <Outlet />
       </main>
       <Footer />
-      {!lomakesivu && <MobileBottomBar />}
       <DesktopQuoteDrawer />
       {!lomakesivu && <ChatLeadForm />}
       <CookieBanner />

@@ -136,6 +136,10 @@ const ChatPriceCalculator = () => {
   const [chatStarted, setChatStarted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
+  // Eki 29.10.2026: kun käyttäjä on vastannut, sivu vieritetään niin, että chatin alareuna (tekstikenttä tai
+  // vaihtoehdot) on juuri chat-kuplan yläpuolella. Lippu nousee vastauksesta ja laukeaa, kun botin vuoro on ohi.
+  const seuraaVastausta = useRef(false);
   const hasAutoStarted = useRef(false);
   const { toast } = useToast();
   const headingId = useId();
@@ -165,6 +169,7 @@ const ChatPriceCalculator = () => {
 
   const addUserMessage = useCallback((text: string, imageBase?: string) => {
     setMessages(prev => [...prev, { id: `user-${Date.now()}`, from: 'user', text, imageBase }]);
+    seuraaVastausta.current = true;
     scrollToBottom();
   }, [scrollToBottom]);
 
@@ -492,6 +497,22 @@ const ChatPriceCalculator = () => {
     scrollToBottom();
   }, [messages, isTyping, scrollToBottom]);
 
+  // Sivun vieritys vastauksen jälkeen: chatin alareuna kuplan (48–56 px + marginaalit) yläpuolelle.
+  useEffect(() => {
+    if (!seuraaVastausta.current || isTyping || !stepUI) return;
+    seuraaVastausta.current = false;
+    const timer = setTimeout(() => {
+      const el = chatRef.current;
+      if (!el || typeof window.scrollTo !== 'function') return;
+      const KUPLAN_TILA = 96;
+      const alareuna = el.getBoundingClientRect().bottom;
+      const siirto = alareuna - (window.innerHeight - KUPLAN_TILA);
+      if (Math.abs(siirto) < 8) return;
+      window.scrollTo({ top: window.scrollY + siirto, behavior: 'smooth' });
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [isTyping, stepUI]);
+
   return (
     <section id="hintalaskuri" ref={sectionRef} aria-labelledby={headingId} className="section-padding osio scroll-mt-24">
       <style>{`
@@ -518,7 +539,7 @@ const ChatPriceCalculator = () => {
           </div>
 
           {/* Chat container */}
-          <div className="bg-card rounded-2xl shadow-lg border border-border/40 overflow-hidden">
+          <div ref={chatRef} className="bg-card rounded-2xl shadow-lg border border-border/40 overflow-hidden">
             {/* Chat header bar */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-border/30 bg-white/80">
               <div className="relative">

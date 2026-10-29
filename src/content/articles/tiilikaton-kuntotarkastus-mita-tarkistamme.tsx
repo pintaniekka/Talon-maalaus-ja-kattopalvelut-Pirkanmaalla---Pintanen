@@ -15,7 +15,7 @@ const faq = [
   {
     question: "Pitääkö minun olla paikalla kuntotarkastuksessa?",
     answer:
-      "Ei välttämättä, mutta se on hyvä. Käymme katon läpi yhdessä, ja kerromme heti, mitä näemme. Tulemme yleensä samalla viikolla, myös iltaisin ja viikonloppuisin.",
+      "Ei välttämättä, mutta se on hyvä. Käymme katon läpi yhdessä, ja kerromme heti, mitä näemme. Tulemme yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin.",
   },
   {
     question: "Saanko kuntotarkastuksesta raportin?",
@@ -92,7 +92,7 @@ const Body = () => (
     <h2>Milloin kuntotarkastuksen voi tehdä?</h2>
     <p>
       Heti, kun katto on lumeton. Keväällä teemme tarkastuksia paljon, koska kesän työt sovitaan silloin.
-      Tulemme Pirkanmaalla ja lähikunnissa yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Sinun
+      Tulemme Pirkanmaalla ja lähikunnissa yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Sinun
       on hyvä olla paikalla, koska käymme katon läpi yhdessä. Tarjouksen saat myös etänä: yleensä kuvat katosta
       ja arvio katon koosta riittävät, ja tarkat mitat tai kuntoraportti ovat iso plussa. Kuntotarkastus paikan
       päällä on silti tarkin tapa, koska aluskatetta ja saumoja ei näe kuvasta. Varaa aika sivulta{" "}

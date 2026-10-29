@@ -5,6 +5,7 @@ import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
 import ServiceContactSection from '@/components/ServiceContactSection';
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from '@/components/ToimintaAlueetBanner';
 import SEO from '@/components/SEO';
 import { HERO_BASE, staticSeo } from "@/data/seo";
@@ -84,9 +85,11 @@ const ToimintaAlueet = () => {
           </div>
         </div>
       </section>
+      <LaskuriPalkki />
 
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
       <ArvosteluNosto polku="/toiminta-alueet" />
+      <KayntiPalkki />
 
       <ServiceContactSection variant="general" />
       </Rytmi>

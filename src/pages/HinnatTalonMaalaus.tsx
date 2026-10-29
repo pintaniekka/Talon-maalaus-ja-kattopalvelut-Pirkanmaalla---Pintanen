@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
+import { KayntiPalkki } from "@/components/KutsuPalkit";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
@@ -57,7 +59,7 @@ const faqItems = [
   },
   {
     question: "Milloin pääsette katsomaan talon?",
-    answer: "Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen.",
+    answer: "Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen.",
   },
   { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme seinät ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sovitut asiat ovat kunnossa." },
   { question: "Kuinka usein talo pitää maalata?", answer: "Yleensä 10–15 vuoden välein. Väli riippuu maalista ja säästä. Eteläseinä kuluu ensin." },
@@ -133,6 +135,7 @@ const HinnatTalonMaalaus = () => {
       <ArvosteluNosto polku="/talon-maalaus-hinta-pirkanmaa" />
 
       <HintaKohteet service="maalaus" />
+      <KayntiPalkki palvelu="maalaus" />
 
       <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
@@ -172,6 +175,7 @@ const HinnatTalonMaalaus = () => {
         </div>
       </section>
       <Vaarinymmarrykset service="maalaus" />
+      <ToimintaKutsu palvelu="maalaus" nappi="laskuri" n={1} />
 
 
       <ArtikkeliRivit categories={["maalaus", "raha"]} />

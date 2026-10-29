@@ -102,7 +102,7 @@ const Body = () => (
     <p>
       Suuntaa antavan arvion saat heti <Link to="/hintalaskuri/?palvelu=maalaus">hintalaskurilla</Link>. Tarkan
       hinnan saat ilmaisesta arviokäynnistä. Eemil tulee katsomaan talon Pirkanmaalla ja lähikunnissa yleensä
-      samalla viikolla, myös iltaisin ja viikonloppuisin. Hän katsoo, mitä maalia seinässä on ja paljonko
+      samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Hän katsoo, mitä maalia seinässä on ja paljonko
       pohjatöitä tarvitaan. Saat kirjallisen tarjouksen, jossa on kiinteä hinta. Hintaesimerkit ovat sivulla{" "}
       <Link to="/talon-maalaus-hinta-pirkanmaa/">talon maalauksen hinta</Link>.
     </p>

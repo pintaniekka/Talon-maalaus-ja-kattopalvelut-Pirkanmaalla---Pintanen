@@ -3,6 +3,7 @@ import Rytmi from "@/components/Rytmi";
 import { Star } from "lucide-react";
 import SEO from "@/components/SEO";
 import ServiceContactSection from "@/components/ServiceContactSection";
+import { KayntiPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FAQSection from "@/components/FAQSection";
 import PriceWizard, { type WizardService } from "@/components/laskuri/PriceWizard";
@@ -150,6 +151,7 @@ const Hintalaskuri = () => {
         </div>
       </section>
 
+      <KayntiPalkki />
       <FAQSection items={laskuriFaq} title="Usein kysyttyä hintalaskurista" />
 
       <ServiceContactSection variant="general" />

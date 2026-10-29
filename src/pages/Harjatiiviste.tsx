@@ -9,6 +9,7 @@ import ProcessList from "@/components/ProcessList";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import FAQSection from "@/components/FAQSection";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
@@ -168,6 +169,7 @@ const Harjatiiviste = () => {
       </section>
 
       <Kuvat />
+      <LaskuriPalkki palvelu="pinnoitus" />
 
       <ProcessList title="Näin harjatiiviste asennetaan" steps={vaiheet} cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }} />
 
@@ -193,6 +195,7 @@ const Harjatiiviste = () => {
       </section>
 
       <ArtikkeliRivit categories={["katto"]} />
+      <KayntiPalkki palvelu="pinnoitus" />
       <FAQSection items={faq} title="Usein kysyttyä harjatiivisteestä" />
       <ServiceContactSection variant="katto" />
       <ToimintaAlueetBanner service="pinnoitus" />

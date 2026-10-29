@@ -201,9 +201,13 @@ export default function spaRoutes() {
       if (!fs.existsSync(indexPath)) return;
 
       const fontTags = fontPreloadTags(distDir);
+      // Animaatiopaketti esiladataan: ilman sitä m.div-elementit jäävät initial-tilaan (opacity 0), kunnes
+      // paketti on ladattu, ja chat tai valikko aukeaa näkymättömänä hitaalla yhteydellä (29.10.2026).
+      const motionChunk = fs.readdirSync(path.join(distDir, "assets")).find((f) => /^motionFeatures\..*\.js$/.test(f));
+      const motionTag = motionChunk ? `<link rel="modulepreload" crossorigin href="/assets/${motionChunk}">` : "";
       const baseHtml = applyBuildCommit(applyAreaServed(fs.readFileSync(indexPath, "utf-8")), resolveBuildCommit()).replace(
         "</title>",
-        () => `</title>${fontTags ? `\n    ${fontTags}` : ""}`,
+        () => `</title>${fontTags ? `\n    ${fontTags}` : ""}${motionTag ? `\n    ${motionTag}` : ""}`,
       );
       const subpageHtml = baseHtml.replace(HOME_ONLY_TAG, "");
       const routes = getAllRoutePaths();

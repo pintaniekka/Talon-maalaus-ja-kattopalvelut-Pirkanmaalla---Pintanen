@@ -20,8 +20,9 @@ import type { Tyovaihe, LyhyestiSisalto } from "@/data/tyovaiheet";
  * Harjatiivisteen asennus palveluna (Eerik 29.10.2026). Faktat: artikkeli harjatiiviste-tiilikatolla (Meltexin
  * tuotekuvaus: nauha harjapuun yli ja harjatiilen alle, vähentää tuiskulumen, veden ja roskien pääsyä
  * aluskatteelle, tuulettuva), tyovaiheet.ts (saumat ja harja tarkistetaan kuntotarkastuksessa), projects.ts
- * (asennus Kangasalla 2026), Eerik 27.10.2026 (harjatiilet irrotetaan ja laitetaan takaisin, harvoin rikki,
- * harjatiili maksaa saman kuin lapetiili). Hinta: Eerik 29.10.2026, 15 €/m pinnoituksen yhteydessä, 25 €/m erikseen.
+ * (asennus Kangasalla 2026), Eerik 29.10.2026 (harjatiilet säilyvät ehjinä asennuksessa, rikkinäiset harjatiilet
+ * vaihdetaan samalla; harjatiili on kalliimpi kuin lapetiili, mutta sitä ei sanota). Hinta: Eerik 29.10.2026,
+ * 15 €/m pinnoituksen yhteydessä, 25 €/m erikseen.
  */
 const PATH = "/harjatiivisteen-asennus";
 const hinta = HARJATIIVISTE_HINTA;
@@ -38,7 +39,7 @@ const lyhyesti: LyhyestiSisalto = {
 
 const vaiheet: Tyovaihe[] = [
   { title: "Harja tarkistetaan", text: "Katsomme kuntotarkastuksessa, onko harjatiiviste paikallaan ja ehjä. Jos se puuttuu tai on rikki, kirjaamme asennuksen tarjoukseen." },
-  { title: "Harjatiilet irrotetaan", text: "Nostamme harjatiilet pois. Ne menevät harvoin rikki, ja harjatiili maksaa saman kuin lapetiili, jos jokin pitää vaihtaa." },
+  { title: "Harjatiilet irrotetaan", text: "Nostamme harjatiilet pois. Ne säilyvät asennuksessa ehjinä. Jos jokin harjatiili on jo valmiiksi rikki, vaihdamme sen samalla." },
   { title: "Tiiviste asennetaan", text: "Tiiviste asennetaan harjapuun yli ja harjatiilen alle. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi." },
   { title: "Harjatiilet takaisin", text: "Laitamme harjatiilet takaisin paikoilleen. Pinnoituksen yhteydessä harja maalataan samalla kahteen kertaan." },
 ];
@@ -49,7 +50,7 @@ const faq = [
   { question: "Asennatteko harjatiivisteen pinnoituksen yhteydessä?", answer: "Kyllä, jos se puuttuu tai on rikki. Olemme asentaneet harjatiivisteitä pinnoituksen yhteydessä esimerkiksi Kangasalla. Tarve katsotaan kuntotarkastuksessa, ja se kirjataan tarjoukseen." },
   { question: "Voiko harjatiivisteen tilata ilman pinnoitusta?", answer: `Voi. Erikseen tilattuna hinta on ${hinta.erikseen} euroa metriltä. Kysy tarjous, niin katsomme harjan samalla käynnillä.` },
   { question: "Mistä tiedän, puuttuuko harjatiiviste?", answer: "Harjatiilen alta näkyy rako, tai ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla. Varmin tapa on antaa meidän katsoa se kuntotarkastuksessa." },
-  { question: "Menevätkö harjatiilet rikki asennuksessa?", answer: "Harvoin. Nostamme ne varovasti pois ja laitamme takaisin. Jos jokin tiili on jo rikki, vaihdamme sen, ja harjatiili maksaa saman kuin lapetiili." },
+  { question: "Menevätkö harjatiilet rikki asennuksessa?", answer: "Eivät. Harjatiilet säilyvät ehjinä harjatiivisteen asennuksessa. Jos jokin harjatiili on jo valmiiksi rikki, vaihdamme sen samalla." },
 ];
 
 const Kuvat = merkitse(

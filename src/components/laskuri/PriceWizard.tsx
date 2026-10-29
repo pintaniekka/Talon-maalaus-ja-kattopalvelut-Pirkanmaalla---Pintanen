@@ -72,28 +72,17 @@ export const calculatorQuestions: Record<WizardService, CalculatorQuestion[]> = 
         { label: "Todella jyrkkä", value: "jyrkka" },
       ],
     },
-    // Eerik 29.10.2026: harjatiiviste laskuriin, 15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä.
+    // Eerik 29.10.2026: harjatiiviste laskuriin, kyllä/ei ja kyllä-vastauksesta kevyt pudotusvalikko harjan
+    // pituudelle samassa vaiheessa (ei omaa vaihetta). 15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä.
     {
       key: "ridgeSeal",
       title: "Puuttuuko katolta harjatiiviste?",
-      help: "Harjatiiviste on nauha harjatiilen alla. Jos et tiedä, katsomme sen kuntotarkastuksessa.",
+      help: "Harjatiiviste on nauha harjatiilen alla. Jos et tiedä, vastaa ei: katsomme sen kuntotarkastuksessa.",
       kind: "options",
       options: [
         { label: "Kyllä puuttuu", value: "kylla" },
         { label: "Ei puutu", value: "ei" },
-        { label: "En tiedä", value: "en-tieda" },
       ],
-    },
-    {
-      key: "ridgeMeters",
-      title: "Kuinka pitkä katon harja on?",
-      help: "Arvio metreinä riittää. Harja on katon ylin sauma päädystä päätyyn.",
-      kind: "number",
-      placeholder: "esim. 12",
-      unit: "m",
-      min: 1,
-      max: 200,
-      showIf: (a) => a.ridgeSeal === "kylla",
     },
     {
       key: "utilities",
@@ -147,6 +136,10 @@ export const calculatorServices: { value: WizardService; label: string; imageBas
   { value: "maalaus", label: "Talon maalaus", imageBase: "talon-maalaus-moderni-tumma-puutalo-julkisivumaalaus-valmis" },
 ];
 
+/** Harjan pituuden vaihtoehdot pudotusvalikossa, metreinä. */
+// eslint-disable-next-line react-refresh/only-export-components -- jaettu etusivun laskurille
+export const HARJAN_PITUUDET = [4, 6, 8, 10, 12, 14, 16, 18, 20, 25, 30, 40] as const;
+
 const labelOf = (q: CalculatorQuestion, value: string) => q.options?.find((o) => o.value === value)?.label ?? value;
 
 /** Laskurin vastaukset yhdeksi riviksi myynnin sähköpostiin ja CRM:ään. */
@@ -154,12 +147,10 @@ const labelOf = (q: CalculatorQuestion, value: string) => q.options?.find((o) =>
 export const buildCalculatorDetails = (service: WizardService, answers: Record<string, string>, city: string) => {
   const parts = calculatorQuestions[service].filter((q) => !q.showIf || q.showIf(answers)).map((q) => {
     const v = answers[q.key] ?? "-";
-    if (q.kind === "number") {
-      if (q.key === "ridgeMeters") return `Harjan pituus: ${v} m`;
-      return `${service === "pinnoitus" ? "Katon koko" : "Pohjaneliöt"}: ${v} m²`;
-    }
+    if (q.kind === "number") return `${service === "pinnoitus" ? "Katon koko" : "Pohjaneliöt"}: ${v} m²`;
     const names: Record<string, string> = { brokenTiles: "Rikkinäiset tiilet", underlayment: "Aluskate", slope: "Jyrkkyys", ridgeSeal: "Harjatiiviste", utilities: "Vesi/sähkö", stories: "Kerrokset", peeling: "Hilseily" };
-    return `${names[q.key] ?? q.key}: ${labelOf(q, v)}`;
+    const rivi = `${names[q.key] ?? q.key}: ${labelOf(q, v)}`;
+    return q.key === "ridgeSeal" && v === "kylla" ? `${rivi}, Harjan pituus: ${answers.ridgeMeters ?? "-"} m` : rivi;
   });
   parts.push(`Kaupunki: ${city || "-"}`);
   return parts.join(", ");
@@ -188,6 +179,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const [result, setResult] = useState<string | null>(null);
   const [resultAfterDeduction, setResultAfterDeduction] = useState<string | null>(null);
   const [resultHarja, setResultHarja] = useState(0);
+  const [resultHarjaErikseen, setResultHarjaErikseen] = useState(0);
   const topRef = useRef<HTMLDivElement>(null);
 
   const qs = service ? calculatorQuestions[service].filter((q) => !q.showIf || q.showIf(answers)) : [];
@@ -212,7 +204,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     const base = service === "pinnoitus" ? calculateRoofPrice(m2, answers.slope) : calculateWallPrice(m2, answers.stories, answers.peeling);
     // Harjatiiviste lisätään loppuhintaan eriteltynä (Eerik 29.10.2026).
     const harja = service === "pinnoitus" && answers.ridgeSeal === "kylla" && Number(answers.ridgeMeters) > 0 ? calculateRidgeSealPrice(Number(answers.ridgeMeters)) : 0;
-    return { min: base.min + harja, max: base.max + harja, harja };
+    const harjaErikseen = harja > 0 ? calculateRidgeSealPrice(Number(answers.ridgeMeters), true) : 0;
+    return { min: base.min + harja, max: base.max + harja, harja, harjaErikseen };
   }, [service, answers]);
 
   // GA4: laskurin aloitus, jokainen askel ja valmistuminen, jotta liidiportin (nimi ja
@@ -285,6 +278,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
       );
       setResult(priceStr);
       setResultHarja(price.harja);
+      setResultHarjaErikseen(price.harjaErikseen);
       // Eerik 26.10.2026 (yöajon kysymys 13): hinta myös kotitalousvähennyksen jälkeen.
       setResultAfterDeduction(formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) }));
       trackEvent("laskuri_valmis", { palvelu: service });
@@ -307,9 +301,12 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
           <p className="text-muted-foreground mb-2">Hinta-arvio</p>
           <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>
           {resultHarja > 0 && (
-            <p className="text-muted-foreground mb-4">
-              Sisältää harjatiivisteen: <strong className="text-foreground">{resultHarja.toLocaleString("fi-FI")} €</strong>
-            </p>
+            <div className="mb-4 text-muted-foreground">
+              <p>
+                Sisältää harjatiivisteen: <strong className="text-foreground">{resultHarja.toLocaleString("fi-FI")} €</strong>
+              </p>
+              <p className="text-sm mt-1">Harjatiivisteen asennus ilman pinnoitusta: {resultHarjaErikseen.toLocaleString("fi-FI")} €</p>
+            </div>
           )}
           {resultAfterDeduction && (
             <div className="mb-4">
@@ -388,6 +385,51 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                         Jatka
                       </button>
                     </form>
+                  ) : current.key === "ridgeSeal" ? (
+                    // Kyllä avaa kevyen pudotusvalikon harjan pituudelle samaan vaiheeseen (Eerik 29.10.2026).
+                    <div className="flex flex-col gap-3 mt-4">
+                      {current.options!.map((o) => (
+                        <button
+                          key={o.value}
+                          type="button"
+                          onClick={() => (o.value === "kylla" ? setAnswers((a) => ({ ...a, ridgeSeal: "kylla" })) : answer(current.key, o.value))}
+                          className={`${optionButton} ${answers.ridgeSeal === o.value ? "border-accent bg-accent-light" : ""}`}
+                        >
+                          {o.label}
+                        </button>
+                      ))}
+                      {answers.ridgeSeal === "kylla" && (
+                        <div className="flex flex-col gap-3 rounded-xl border border-accent bg-accent-light px-5 py-4 sm:flex-row sm:items-center">
+                          <label htmlFor="harjan-pituus" className="flex-1 text-foreground">
+                            Katon harjan pituus, arvio riittää
+                          </label>
+                          <select
+                            id="harjan-pituus"
+                            value={answers.ridgeMeters ?? ""}
+                            onChange={(e) => setAnswers((a) => ({ ...a, ridgeMeters: e.target.value }))}
+                            className="rounded-lg border border-border bg-background px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                          >
+                            <option value="">Valitse</option>
+                            {HARJAN_PITUUDET.map((m) => (
+                              <option key={m} value={m}>
+                                {m} m
+                              </option>
+                            ))}
+                          </select>
+                          <button
+                            type="button"
+                            disabled={!answers.ridgeMeters}
+                            onClick={() => {
+                              setIndex((i) => i + 1);
+                              if (service) trackEvent("laskuri_askel", { palvelu: service, askel: "ridgeSeal" });
+                            }}
+                            className="btn-hero !py-3 !text-base disabled:opacity-60"
+                          >
+                            Jatka
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   ) : (
                     <div className="flex flex-col gap-3 mt-4">
                       {current.options!.map((o) => (

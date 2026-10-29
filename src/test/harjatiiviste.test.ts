@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { calculateRidgeSealPrice, calculateRoofPrice, HARJATIIVISTE_HINTA } from "@/lib/priceCalc";
-import { calculatorQuestions } from "@/components/laskuri/PriceWizard";
+import { calculatorQuestions, HARJAN_PITUUDET } from "@/components/laskuri/PriceWizard";
 
 /*
  * Harjatiiviste laskurissa (Eerik 29.10.2026): 15 €/m pinnoituksen yhteydessä, 25 €/m erikseen, harjan pituus
@@ -19,20 +19,16 @@ describe("harjatiiviste", () => {
     expect(calculateRoofPrice(200, "normaali")).toEqual({ min: 3600, max: 4200 });
   });
 
-  it("kysyy harjan pituuden vain, kun harjatiiviste puuttuu", () => {
+  it("kysyy harjatiivisteen kyllä/ei jyrkkyyden jälkeen, pituus pudotusvalikosta samassa vaiheessa", () => {
     const qs = calculatorQuestions.pinnoitus;
     const ridge = qs.find((q) => q.key === "ridgeSeal");
-    const meters = qs.find((q) => q.key === "ridgeMeters");
-    expect(ridge?.options?.map((o) => o.value)).toEqual(["kylla", "ei", "en-tieda"]);
-    expect(meters?.kind).toBe("number");
-    expect(meters?.unit).toBe("m");
-    expect(meters?.showIf?.({ ridgeSeal: "kylla" })).toBe(true);
-    expect(meters?.showIf?.({ ridgeSeal: "ei" })).toBe(false);
-    expect(meters?.showIf?.({})).toBe(false);
+    expect(ridge?.options?.map((o) => o.value)).toEqual(["kylla", "ei"]);
+    expect(qs.some((q) => q.key === "ridgeMeters")).toBe(false);
+    expect(HARJAN_PITUUDET).toContain(12);
     // Harjatiiviste kysytään jyrkkyyden jälkeen ja ennen vettä ja sähköä.
     const keys = qs.map((q) => q.key);
     expect(keys.indexOf("ridgeSeal")).toBe(keys.indexOf("slope") + 1);
-    expect(keys.indexOf("utilities")).toBe(keys.indexOf("ridgeMeters") + 1);
+    expect(keys.indexOf("utilities")).toBe(keys.indexOf("ridgeSeal") + 1);
     // Maalauksen laskuri ei kysy harjatiivistettä.
     expect(calculatorQuestions.maalaus.some((q) => q.key === "ridgeSeal")).toBe(false);
   });

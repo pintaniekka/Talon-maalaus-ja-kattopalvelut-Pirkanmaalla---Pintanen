@@ -148,10 +148,11 @@ const Header = () => {
     setOpenDropdown(label);
   };
 
-  // Pieni viive sulkemiseen: valikko ei katoa, vaikka hiiri käy hetken sen ulkopuolella matkalla alas.
+  // Lyhyt viive sulkemiseen (Eerik 29.10.2026: valikon pitää kadota lähes heti, kun hiiri lähtee): 70 ms riittää
+  // siihen, ettei valikko välähdä kiinni otsikon ja listan välisessä raossa.
   const handleDesktopDropdownClose = () => {
     cancelDesktopDropdownClose();
-    closeTimer.current = setTimeout(() => setOpenDropdown(null), 220);
+    closeTimer.current = setTimeout(() => setOpenDropdown(null), 70);
   };
 
   useEffect(() => cancelDesktopDropdownClose, []);
@@ -285,11 +286,12 @@ const Header = () => {
                       <m.div
                         initial={{ opacity: 0, y: 8, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 6, scale: 0.98, transition: { duration: 0.15, ease: "easeIn" } }}
-                        transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+                        exit={{ opacity: 0, transition: { duration: 0.08, ease: "easeIn" } }}
+                        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                         style={{ transformOrigin: "top left" }}
-                        // Näkymätön reunus (padding) pitää hiiren valikon alueella myös otsikon ja listan välissä ja sivuilla.
-                        className="absolute top-full -left-6 pt-2 px-6 pb-6 z-50"
+                        // Kapea näkymätön reunus (padding) siltaa otsikon ja listan välin; sivuilla ja alla vain 8 px,
+                        // jotta valikko sulkeutuu heti, kun hiiri lähtee siitä (Eerik 29.10.2026).
+                        className="absolute top-full -left-2 pt-2 px-2 pb-2 z-50"
                       >
                         {/* Kaksi palstaa: linkit (ilman selitteitä) ja nostokortti (ilmainen tarkastus). Eerik 29.10.2026: pehmeä avaus ja viimeistellympi paneeli. Oma navy-pohja ja keltainen korostus, ei kopio. */}
                         <div className={`relative grid overflow-hidden rounded-2xl border border-white/10 bg-navy/95 shadow-[0_28px_60px_-20px_rgba(0,0,0,0.65)] ring-1 ring-white/5 backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-gradient-to-r before:from-paint-yellow/80 before:to-accent/60 ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>

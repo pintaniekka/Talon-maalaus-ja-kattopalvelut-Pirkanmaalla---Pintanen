@@ -19,23 +19,22 @@ const Rivi = ({ a }: { a: ArticleMeta }) => (
   <li>
     <Link
       to={`/artikkelit/${a.slug}/`}
-      className="group flex min-h-[84px] overflow-hidden rounded-[14px] border-[0.5px] border-[#d9dfe8] bg-card shadow-[0_8px_18px_-8px_rgba(11,26,51,0.22)] transition-[transform,box-shadow] duration-150 ease-out hover:-translate-y-1 hover:shadow-[0_14px_26px_-8px_rgba(11,26,51,0.32)] focus-visible:-translate-y-1 focus-visible:shadow-[0_14px_26px_-8px_rgba(11,26,51,0.32)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/70 motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 md:h-[84px]"
+      className="group flex min-h-[140px] overflow-hidden rounded-[14px] md:min-h-0 md:h-[84px] border-[0.5px] border-[#d9dfe8] bg-card shadow-[0_8px_18px_-8px_rgba(11,26,51,0.22)] transition-[transform,box-shadow] duration-150 ease-out hover:-translate-y-1 hover:shadow-[0_14px_26px_-8px_rgba(11,26,51,0.32)] focus-visible:-translate-y-1 focus-visible:shadow-[0_14px_26px_-8px_rgba(11,26,51,0.32)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/70 motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:focus-visible:translate-y-0 md:h-[84px]"
       data-rivi={a.slug}
     >
-      <span className="flex min-w-0 flex-1 flex-col justify-center gap-[5px] px-4 py-2.5">
-        <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-          <span className={`inline-flex items-center rounded-full px-2 py-0.5 font-heading text-[10px] font-extrabold tracking-[0.08em] ${PASTELLI[a.category]}`}>
-            {TAGI[a.category]}
-          </span>
-          <span className="text-[11px] text-[#4a5668]" data-meta>
-            {authors[a.author].name.split(" ")[0]} · <time dateTime={a.publishedAt}>{formatDateFi(a.publishedAt)}</time> · {a.readingMinutes} min
-          </span>
+      {/* Puhelimella tagi, otsikko (3 riviä) ja metarivi allekkain; työpöydällä tagi ja metarivi samalla rivillä, otsikko alla (order). */}
+      <span className="flex min-w-0 flex-1 flex-wrap content-center items-center gap-x-2.5 gap-y-1.5 px-4 py-3.5 md:gap-y-[5px] md:py-2.5">
+        <span className={`order-1 inline-flex items-center rounded-full px-2 py-0.5 font-heading text-[10px] font-extrabold tracking-[0.08em] ${PASTELLI[a.category]}`}>
+          {TAGI[a.category]}
         </span>
-        <span className="line-clamp-2 text-[16px] font-medium leading-[1.25] text-[#0b1a33] transition-colors group-hover:text-accent-ink visited:text-[#0b1a33]" data-otsikko>
+        <span className="order-2 line-clamp-3 basis-full text-[16px] font-medium leading-[1.25] text-[#0b1a33] transition-colors group-hover:text-accent-ink visited:text-[#0b1a33] md:line-clamp-2" data-otsikko>
           {a.title}
         </span>
+        <span className="order-3 basis-full text-[12px] text-[#4a5668] md:order-1 md:basis-auto md:text-[11px]" data-meta>
+          {authors[a.author].name.split(" ")[0]} · <time dateTime={a.publishedAt}>{formatDateFi(a.publishedAt)}</time> · {a.readingMinutes} min
+        </span>
       </span>
-      {/* Kuva absoluuttisena kehyksessä: rivin korkeus tulee tekstistä (min 84 px), ei kuvan kuvasuhteesta. */}
+      {/* Kuva absoluuttisena kehyksessä: rivin korkeus tulee tekstistä, ei kuvan kuvasuhteesta. */}
       <span className="relative w-[120px] flex-none self-stretch">
         <ResponsiveImage baseName={a.heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" sizes="120px" width={240} height={168} />
       </span>
@@ -46,11 +45,11 @@ const Rivi = ({ a }: { a: ArticleMeta }) => (
 /**
  * Lyhyt artikkelilista samana ohuena rivinä kaikkialla (Eerik 29.10.2026): etusivun "Uusimmat artikkelit",
  * palvelu-, hinta-, kuntotarkastus-, harjatiiviste-, vähennys- ja taloyhtiösivujen "Lue lisää aiheesta" ja
- * artikkelisivun "Lue myös". Rivi on noin 84 px korkea työpöydällä, kuva 120 px päädyssä. Ei renderöi mitään,
+ * artikkelisivun "Lue myös". Neljä riviä (Eerik 29.10.2026). Rivi on 84 px työpöydällä ja väljempi puhelimella, kuva 120 px päädyssä. Ei renderöi mitään,
  * jos artikkeleita ei ole. /artikkelit-listaussivun korttiruudukko on erillinen (Artikkelit.tsx).
  * Lohko on tavallinen Rytmi-lohko (className="osio"), kortit pysyvät valkoisina myös näyttämöllä.
  */
-const ArtikkeliRivit = ({ categories, excludeSlug, title = "Lue lisää aiheesta", max = 3 }: ArtikkeliRivitProps) => {
+const ArtikkeliRivit = ({ categories, excludeSlug, title = "Lue lisää aiheesta", max = 4 }: ArtikkeliRivitProps) => {
   const published = getPublishedArticles().filter((a) => a.slug !== excludeSlug);
   const articles = (
     categories

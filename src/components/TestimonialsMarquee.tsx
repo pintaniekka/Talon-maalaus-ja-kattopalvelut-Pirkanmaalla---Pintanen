@@ -245,6 +245,7 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
 
   return (
     <section
+      data-arvostelu="karuselli"
       className={`overflow-hidden osio ${headingText ? "section-padding pt-28 md:pt-16" : "py-8"}`}
       aria-label="Asiakasarvostelut"
     >

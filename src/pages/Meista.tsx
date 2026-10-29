@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import PageHero from "@/components/PageHero";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { merkitse } from "@/components/Rytmi";
@@ -142,6 +143,9 @@ const Meista = () => {
           </div>
         </div>
       </section>
+
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/meista" />
 
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
 

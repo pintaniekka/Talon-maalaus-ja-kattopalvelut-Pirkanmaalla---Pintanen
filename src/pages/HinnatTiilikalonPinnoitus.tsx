@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
@@ -143,6 +144,9 @@ const HinnatTiilikalonPinnoitus = () => {
 
       {/* Kolme esimerkkikattoa laskurin kaavoilla (brief 3, 26.10.2026); "Mitä hintaan kuuluu" seuraa heti alla. */}
       <PriceExamplesSection service="pinnoitus" />
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/tiilikaton-pinnoitus-hinta-pirkanmaa" />
+
       <HintaKohteet service="pinnoitus" />
 
       {/* Mitä hintaan kuuluu */}

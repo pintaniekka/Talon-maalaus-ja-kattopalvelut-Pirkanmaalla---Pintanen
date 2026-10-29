@@ -57,6 +57,10 @@ for r in routes:
     if p.p<2: problems.append(f"{r}: kappaleita vain {p.p}")
     if len(p.links)<10: problems.append(f"{r}: sisäisiä linkkejä vain {len(p.links)}")
     if p.words<120: problems.append(f"{r}: sanoja vain {p.words}")
+    # Jokaisella sivulla vähintään yksi Google-arvostelu (29.10.2026), paitsi artikkelit ja tietosuoja
+    # (poikkeukset ja perustelut: src/data/arvostelusijoitus.ts, ARVOSTELUTTOMAT).
+    # Merkki data-arvostelu on jokaisessa arvostelulohkossa (nosto, karuselli, kortti, lomake); pelkkä "Google-arvostelu"-teksti on myös alatunnisteessa.
+    if not (r.startswith("/artikkelit") or r=="/tietosuoja/") and 'data-arvostelu="' not in h: problems.append(f"{r}: ei arvostelua")
     lds = re.findall(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', h, flags=re.S)
     types=[]
     for x in lds:

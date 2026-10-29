@@ -44,7 +44,7 @@ const VerifiedBadge = () => (
 );
 
 const ReviewHighlights = () => (
-  <section className="py-6 md:py-8 osio" aria-label="Asiakkaiden arvosteluja">
+  <section className="py-6 md:py-8 osio" aria-label="Asiakkaiden arvosteluja" data-arvostelu="nostot">
     <div className="section-container max-w-6xl mx-auto">
       {/* Puhelimessa kortit vieritetään sivusuunnassa, jotta palvelut pysyvät lähellä. */}
       <div

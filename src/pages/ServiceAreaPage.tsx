@@ -1,5 +1,6 @@
 import { Navigate, Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import { Helmet } from "react-helmet-async";
 import PageHero from "@/components/PageHero";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
@@ -173,6 +174,9 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
           </div>
         </div>
       </section>
+
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku={`/maalauspalvelut-${citySlug}`} />
 
       <ServiceContactSection variant="general" cityIn={cityIn} />
 

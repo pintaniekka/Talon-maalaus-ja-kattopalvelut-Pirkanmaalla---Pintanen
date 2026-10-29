@@ -1,7 +1,7 @@
 {
   "/": {
-    "hash": "be6f7305aca060b9",
-    "lastmod": "2026-10-28"
+    "hash": "34693cc26ca5ae64",
+    "lastmod": "2026-10-29"
   },
   "/artikkelit": {
     "hash": "7aa47cc91a68a390",
@@ -36,12 +36,12 @@
     "lastmod": "2026-10-29"
   },
   "/ilmainen-julkisivun-kuntoarvio": {
-    "hash": "0a33c34710bfa8d1",
+    "hash": "8c9319213ed47ed2",
     "lastmod": "2026-10-29"
   },
   "/ilmainen-katon-kuntotarkastus": {
-    "hash": "43f9e11199c9c22d",
-    "lastmod": "2026-10-28"
+    "hash": "731dc0df9d06ef0f",
+    "lastmod": "2026-10-29"
   },
   "/kokemuksia": {
     "hash": "12f8cfda881cc024",
@@ -148,116 +148,116 @@
     "lastmod": "2026-10-28"
   },
   "/meista": {
-    "hash": "dc0708e2dd2da654",
-    "lastmod": "2026-10-28"
+    "hash": "dae690172f29c015",
+    "lastmod": "2026-10-29"
   },
   "/referenssit": {
     "hash": "8064bb4f7d97ed75",
     "lastmod": "2026-10-28"
   },
   "/talon-maalaus-akaa": {
-    "hash": "ec409c6e47c8587a",
-    "lastmod": "2026-10-28"
+    "hash": "ee568f7a3dacbdab",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-forssa": {
-    "hash": "927c8e50ad03b6dc",
-    "lastmod": "2026-10-28"
+    "hash": "a7d2924b3709fe12",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-hameenkyro": {
-    "hash": "adef1ac7babffa16",
-    "lastmod": "2026-10-28"
+    "hash": "cf241f2253c9f1e2",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-hameenlinna": {
-    "hash": "da76f61360f7acff",
-    "lastmod": "2026-10-28"
+    "hash": "c386c03f23e8f364",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-hinta-pirkanmaa": {
-    "hash": "1cb5d6a4c2d5069b",
-    "lastmod": "2026-10-28"
+    "hash": "647b67ed8633ec33",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-huittinen": {
-    "hash": "205e12bd4f96dde2",
-    "lastmod": "2026-10-28"
+    "hash": "12cfb2244a33f263",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-ikaalinen": {
-    "hash": "ea51c844935478be",
-    "lastmod": "2026-10-28"
+    "hash": "e461545276deb246",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-juupajoki": {
-    "hash": "034e7f925ffcf319",
-    "lastmod": "2026-10-28"
+    "hash": "4bd5f505ac2dc073",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-kangasala": {
-    "hash": "307eca0a5fc87f10",
-    "lastmod": "2026-10-28"
+    "hash": "ecb0d313abeeaa5d",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-kihnio": {
-    "hash": "22daafd869eb2757",
-    "lastmod": "2026-10-28"
+    "hash": "0e20a158cd2d5aa4",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-lempaala": {
-    "hash": "b511fc8047e4dd04",
-    "lastmod": "2026-10-28"
+    "hash": "e9ccf563ac4d47ba",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-mantta-vilppula": {
-    "hash": "e2be46bfb0644d99",
-    "lastmod": "2026-10-28"
+    "hash": "e9c63a6da706fe45",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-nokia": {
-    "hash": "57925e80ae60e011",
-    "lastmod": "2026-10-28"
+    "hash": "dfbdb4132ec8601d",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-orivesi": {
-    "hash": "c9ccf38ed852ab9c",
-    "lastmod": "2026-10-28"
+    "hash": "ff9f99fd2d8cff6e",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-palkane": {
-    "hash": "26cf429067748516",
-    "lastmod": "2026-10-28"
+    "hash": "5acedc3fac0536b9",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-parkano": {
-    "hash": "0d5e927418a7459b",
-    "lastmod": "2026-10-28"
+    "hash": "050ee20c8bb6923e",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-pirkanmaa": {
-    "hash": "2f27cdfd5e0a45c9",
-    "lastmod": "2026-10-28"
+    "hash": "1c680c1500db837a",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-pirkkala": {
-    "hash": "48fe8319a7d99dbf",
-    "lastmod": "2026-10-28"
+    "hash": "3d2f7fc9aa71c178",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-ruovesi": {
-    "hash": "401f639e97ac75f0",
-    "lastmod": "2026-10-28"
+    "hash": "f9d9061b36710974",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-sastamala": {
-    "hash": "125a02da2ebaa313",
-    "lastmod": "2026-10-28"
+    "hash": "eb4cca9495194130",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-tampere": {
-    "hash": "3ff2d3956552f77b",
-    "lastmod": "2026-10-28"
+    "hash": "8e260ccd287c2655",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-urjala": {
-    "hash": "7cae87790a4ba6c0",
-    "lastmod": "2026-10-28"
+    "hash": "520dded5eef37f0b",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-valkeakoski": {
-    "hash": "4ac3f1757cc462e3",
-    "lastmod": "2026-10-28"
+    "hash": "d2587c3bd13d023a",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-vesilahti": {
-    "hash": "2098025308311ae5",
-    "lastmod": "2026-10-28"
+    "hash": "09bb2b4eb52678fe",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-virrat": {
-    "hash": "5449a8e91edd1472",
-    "lastmod": "2026-10-28"
+    "hash": "6b543a617c6ba6e6",
+    "lastmod": "2026-10-29"
   },
   "/talon-maalaus-ylojarvi": {
-    "hash": "74dad24798d0e28e",
-    "lastmod": "2026-10-28"
+    "hash": "5cc87d2edabaa07e",
+    "lastmod": "2026-10-29"
   },
   "/tarjouspyynto": {
     "hash": "0299c5ed32c6c161",
@@ -268,108 +268,108 @@
     "lastmod": "2026-10-14"
   },
   "/tiilikaton-pinnoitus-akaa": {
-    "hash": "dc5a5db89d74fec0",
-    "lastmod": "2026-10-28"
+    "hash": "2cbc28b11746de06",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-forssa": {
-    "hash": "36cfa51a46c1ea07",
-    "lastmod": "2026-10-28"
+    "hash": "998f23174b17e567",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-hameenkyro": {
-    "hash": "f3c0aa2f10e3df3c",
-    "lastmod": "2026-10-28"
+    "hash": "f3c0a643331f1d0a",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-hameenlinna": {
-    "hash": "3d88f1a5ffba0fc0",
-    "lastmod": "2026-10-28"
+    "hash": "3c7cef5ff4178ddd",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": {
-    "hash": "1e629a9e255f5176",
-    "lastmod": "2026-10-28"
+    "hash": "5f26f9a8d5cdc6e8",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-huittinen": {
-    "hash": "13f2086bbef9e66f",
-    "lastmod": "2026-10-28"
+    "hash": "2180a13318138f48",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-ikaalinen": {
-    "hash": "51f3e31648cff7c4",
-    "lastmod": "2026-10-28"
+    "hash": "99c5d62185d5ce97",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-juupajoki": {
-    "hash": "2dfe103826bc15fd",
-    "lastmod": "2026-10-28"
+    "hash": "c7db08783c621f3f",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-kangasala": {
-    "hash": "0460c51ec10d47c0",
-    "lastmod": "2026-10-28"
+    "hash": "42c9b77ce326d23c",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-kihnio": {
-    "hash": "71cb35c67510b4b3",
-    "lastmod": "2026-10-28"
+    "hash": "98185e3613676f5d",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-lempaala": {
-    "hash": "df1fc77ef489e9dc",
-    "lastmod": "2026-10-28"
+    "hash": "4a92b59073f93402",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-mantta-vilppula": {
-    "hash": "5ed6455391e64c9d",
-    "lastmod": "2026-10-28"
+    "hash": "098284e59ce59834",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-nokia": {
-    "hash": "a27f236f95149610",
-    "lastmod": "2026-10-28"
+    "hash": "2b177e98bc5ff943",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-orivesi": {
-    "hash": "5135bb9257b0622b",
-    "lastmod": "2026-10-28"
+    "hash": "e713f6dfcb9015c6",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-palkane": {
-    "hash": "83282f1f4280d5e6",
-    "lastmod": "2026-10-28"
+    "hash": "9d9ce7679e924051",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-parkano": {
-    "hash": "376feb304df4328c",
-    "lastmod": "2026-10-28"
+    "hash": "bbd3684f845e37ed",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-pirkanmaa": {
-    "hash": "2d5d4056386d5f02",
-    "lastmod": "2026-10-28"
+    "hash": "7f49758035c096bb",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-pirkkala": {
-    "hash": "1b3b035cb3b0e4ec",
-    "lastmod": "2026-10-28"
+    "hash": "93701b41f75881c4",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-ruovesi": {
-    "hash": "957f19685830c809",
-    "lastmod": "2026-10-28"
+    "hash": "223115e5769b21f0",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-sastamala": {
-    "hash": "5a6a220243eeb550",
-    "lastmod": "2026-10-28"
+    "hash": "10bde845be465267",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-tampere": {
-    "hash": "e69181f7a7abf66f",
-    "lastmod": "2026-10-28"
+    "hash": "bb75a7f4fc38d093",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-urjala": {
-    "hash": "d3f12dcea34dd5b3",
-    "lastmod": "2026-10-28"
+    "hash": "d43ff5cd0cac60a9",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-valkeakoski": {
-    "hash": "fa7b7adec04738ae",
-    "lastmod": "2026-10-28"
+    "hash": "6b5e3a8c3e87d5d4",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-vesilahti": {
-    "hash": "af22c3d9b25af8d3",
-    "lastmod": "2026-10-28"
+    "hash": "96956e1fe61b9abd",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-virrat": {
-    "hash": "c68fdae171d710af",
-    "lastmod": "2026-10-28"
+    "hash": "020fd6dd8cee9a2c",
+    "lastmod": "2026-10-29"
   },
   "/tiilikaton-pinnoitus-ylojarvi": {
-    "hash": "bf83b2b3fe9bfccc",
-    "lastmod": "2026-10-28"
+    "hash": "14251bcaaf259ec4",
+    "lastmod": "2026-10-29"
   },
   "/toiminta-alueet": {
     "hash": "4611738709f0b10c",

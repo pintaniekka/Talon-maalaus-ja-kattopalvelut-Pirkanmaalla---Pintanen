@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { allTestimonials, type Testimonial } from "@/data/testimonialsData";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const defaultTestimonials: Testimonial[] = allTestimonials;
 
+/** Tätä pidempi arvostelu leikataan kortissa ja avataan kokonaisena ikkunaan. */
 const LONG_TEXT_THRESHOLD = 180;
+/** Kahdelle riville jaetaan vasta, kun arvosteluja on tämän verran; pienempi setti pysyy yhdellä rivillä. */
+const MIN_FOR_TWO_ROWS = 6;
 
 const getInitials = (name: string) => {
   const parts = name.trim().split(/\s+/);
@@ -26,42 +31,70 @@ const GoogleIcon = () => (
   </svg>
 );
 
-/** Yksi arvostelu karusellissa: nimikirjaimet, nimi, tähdet, teksti ja Google-merkki. */
+const Stars = ({ stars }: { stars: number }) => (
+  <div className="flex gap-0.5" role="img" aria-label={`${stars} tähteä viidestä`}>
+    {Array.from({ length: 5 }, (_, i) => (
+      <StarIcon key={i} filled={i < stars} />
+    ))}
+  </div>
+);
+
+/**
+ * Yksi arvostelu karusellissa: nimikirjaimet, nimi, tähdet, teksti ja Google-merkki.
+ * Pitkä arvostelu leikataan viiteen riviin ja avataan kokonaisena ikkunaan (Eerik 28.10.2026: kortit
+ * samankorkuisia kahdella rivillä, pitkät arvostelut silti luettavissa sanasta sanaan).
+ */
 export const TestimonialCard = ({ name, stars, text }: { name: string; stars: number; text: string }) => {
   const isLong = text.length > LONG_TEXT_THRESHOLD;
-  const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex-shrink-0 w-[300px] sm:w-[340px] self-start kortti p-5 mx-2 [scroll-snap-align:center]">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-semibold font-heading" aria-hidden="true">
+    <div className="kortti mx-2 flex w-[260px] flex-shrink-0 flex-col p-5 sm:w-[300px] [scroll-snap-align:center]">
+      <div className="mb-3 flex items-center gap-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 font-heading text-sm font-semibold text-primary" aria-hidden="true">
           {getInitials(name)}
         </div>
-        <span className="font-semibold text-sm text-foreground font-heading">{name}</span>
+        <span className="font-heading text-sm font-semibold text-foreground">{name}</span>
       </div>
-      <div className="flex gap-0.5 mb-2" role="img" aria-label={`${stars} tähteä viidestä`}>
-        {Array.from({ length: 5 }, (_, i) => (
-          <StarIcon key={i} filled={i < stars} />
-        ))}
+      <div className="mb-2">
+        <Stars stars={stars} />
       </div>
-      <p
-        className={`text-sm text-muted-foreground leading-relaxed mb-2 ${
-          isLong && !expanded ? "line-clamp-4" : ""
-        }`}
-      >
-        "{text}"
-      </p>
+      <p className={`mb-2 text-sm leading-relaxed text-muted-foreground ${isLong ? "line-clamp-5" : ""}`}>"{text}"</p>
       {isLong && (
-        <button
-          type="button"
-          onClick={() => setExpanded((v) => !v)}
-          aria-expanded={expanded}
-          className="mb-3 text-xs font-medium text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 rounded"
-        >
-          {expanded ? "Näytä vähemmän" : "Lue lisää"}
-        </button>
+        <>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="mb-3 self-start rounded text-xs font-medium text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+          >
+            Lue koko arvostelu
+          </button>
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogContent className="max-w-lg rounded-3xl">
+              <DialogHeader className="text-left">
+                <DialogTitle className="flex items-center gap-3 font-heading">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary" aria-hidden="true">
+                    {getInitials(name)}
+                  </span>
+                  {name}
+                </DialogTitle>
+                <Stars stars={stars} />
+              </DialogHeader>
+              <DialogDescription className="text-[15px] leading-relaxed text-foreground">"{text}"</DialogDescription>
+              <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <GoogleIcon />
+                  Google-arvostelu
+                </span>
+                <Link to="/kokemuksia/" className="font-semibold text-primary hover:underline">
+                  Kaikki arvostelut
+                </Link>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </>
       )}
-      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+      <div className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">
         <GoogleIcon />
         <span>Google-arvostelu</span>
       </div>
@@ -69,28 +102,8 @@ export const TestimonialCard = ({ name, stars, text }: { name: string; stars: nu
   );
 };
 
-interface TestimonialsMarqueeProps {
-  /** Arvostelut, jotka näytetään karusellissa. Jos puuttuu, käytetään master-listaa. */
-  testimonials?: Testimonial[];
-  /** Otsikko karusellin yläpuolelle. Jos `null`, otsikko piilotetaan. */
-  title?: string | null;
-  /** Animaation kesto sekunteina (oletus skaalautuu korttien määrästä). */
-  durationSec?: number;
-}
-
-const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsMarqueeProps = {}) => {
-  const data = useMemo(
-    () => (testimonials && testimonials.length > 0 ? testimonials : defaultTestimonials),
-    [testimonials]
-  );
-  // Duplicoidaan riittävästi, jotta marquee toimii myös pienellä setillä
-  const minLoopCount = Math.max(2, Math.ceil(8 / data.length));
-  const baseItems = useMemo(
-    () => Array.from({ length: minLoopCount }, () => data).flat(),
-    [data, minLoopCount]
-  );
-
-  // Reduced-motion detection (live)
+/** Tunnistaa prefers-reduced-motion-asetuksen ja seuraa sen muutoksia. */
+const useReducedMotion = () => {
   const [reducedMotion, setReducedMotion] = useState(false);
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
@@ -100,13 +113,30 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     mq.addEventListener?.("change", update);
     return () => mq.removeEventListener?.("change", update);
   }, []);
+  return reducedMotion;
+};
 
-  // Esirenderöintiin ja ensimmäiseen renderöintiin vain yksi sarja arvosteluja (V13: kopiot
-  // paisuttivat HTML:ää ja toistivat saman tekstin neljästi). Saumattoman loopin kopiot
-  // lisätään vasta selaimessa ja piilotetaan ruudunlukijoilta.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const loopLength = (reducedMotion ? 3 : 2) * baseItems.length;
+interface MarqueeRowProps {
+  data: Testimonial[];
+  /** Toinen rivi rullaa toiseen suuntaan. */
+  reverse?: boolean;
+  reducedMotion: boolean;
+  /** Kopiot lisätään vasta selaimessa (esirenderöinnissä vain yksi sarja). */
+  mounted: boolean;
+  durationSec?: number;
+  label: string;
+}
+
+/**
+ * Yksi rullaava rivi. Reduced motion -tilassa rivi on vieritettävä lista, jonka alku on keskimmäisessä
+ * kolmanneksessa ja joka kiertää päistä. Pysty-padding jättää tilaa kortin varjolle, jotta varjo ei
+ * leikkaudu rivin reunaan (Eerik 28.10.2026).
+ */
+const MarqueeRow = ({ data, reverse = false, reducedMotion, mounted, durationSec, label }: MarqueeRowProps) => {
+  // Duplicoidaan riittävästi, jotta marquee toimii myös pienellä setillä
+  const minLoopCount = Math.max(2, Math.ceil(8 / data.length));
+  const baseLength = minLoopCount * data.length;
+  const loopLength = (reducedMotion ? 3 : 2) * baseLength;
   const copies = mounted ? Math.max(0, loopLength - data.length) : 0;
   const items = useMemo(
     () => [
@@ -119,7 +149,6 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
   const viewportRef = useRef<HTMLDivElement>(null);
   const isWrappingRef = useRef(false);
 
-  // Aseta alkuscroll keskimmäiseen kolmannekseen reduced-motion -tilassa
   useEffect(() => {
     if (!reducedMotion) return;
     const el = viewportRef.current;
@@ -127,7 +156,6 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     const setStart = () => {
       el.scrollLeft = el.scrollWidth / 3;
     };
-    // Odota layoutin valmistumista
     const raf = requestAnimationFrame(setStart);
     return () => cancelAnimationFrame(raf);
   }, [reducedMotion, items.length]);
@@ -148,8 +176,72 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     }
   };
 
+  const duration = durationSec ?? Math.max(30, baseLength * 5);
+
+  return (
+    <div
+      ref={viewportRef}
+      onScroll={handleScroll}
+      className="marquee-viewport relative overflow-hidden py-5"
+      style={reducedMotion ? { scrollSnapType: "x proximity" } : undefined}
+      role="region"
+      aria-label={label}
+      tabIndex={0}
+    >
+      <div
+        className={reducedMotion ? "flex w-max items-stretch" : "flex w-max items-stretch animate-marquee"}
+        style={reducedMotion ? undefined : { animationDuration: `${duration}s`, animationDirection: reverse ? "reverse" : "normal" }}
+      >
+        {items.map(({ t, hidden }, i) =>
+          hidden ? (
+            // inert: kopioiden napit eivät saa fokusta (axe: fokusoitava sisältö aria-hidden-säiliössä).
+            <div key={i} className="flex" aria-hidden="true" {...({ inert: "" } as Record<string, string>)}>
+              <TestimonialCard {...t} />
+            </div>
+          ) : (
+            <TestimonialCard key={i} {...t} />
+          )
+        )}
+      </div>
+    </div>
+  );
+};
+
+interface TestimonialsMarqueeProps {
+  /** Arvostelut, jotka näytetään karusellissa. Jos puuttuu, käytetään master-listaa. */
+  testimonials?: Testimonial[];
+  /** Otsikko karusellin yläpuolelle. Jos `null`, otsikko piilotetaan. */
+  title?: string | null;
+  /** Animaation kesto sekunteina (oletus skaalautuu korttien määrästä). */
+  durationSec?: number;
+}
+
+/**
+ * Arvostelukaruselli kahdella rivillä (Eerik 28.10.2026): puolet arvosteluista ylärivillä vasemmalle,
+ * puolet alarivillä oikealle. Pienellä setillä (alle MIN_FOR_TWO_ROWS) vain yksi rivi.
+ */
+const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsMarqueeProps = {}) => {
+  const data = useMemo(
+    () => (testimonials && testimonials.length > 0 ? testimonials : defaultTestimonials),
+    [testimonials]
+  );
+  const rows = useMemo(
+    () =>
+      data.length >= MIN_FOR_TWO_ROWS
+        ? [data.filter((_, i) => i % 2 === 0), data.filter((_, i) => i % 2 === 1)]
+        : [data],
+    [data]
+  );
+
+  const reducedMotion = useReducedMotion();
+
+  // Esirenderöintiin ja ensimmäiseen renderöintiin vain yksi sarja arvosteluja (V13: kopiot
+  // paisuttivat HTML:ää ja toistivat saman tekstin neljästi). Saumattoman loopin kopiot
+  // lisätään vasta selaimessa ja piilotetaan ruudunlukijoilta.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const headingText = title === undefined ? "Mitä asiakkaat sanovat meistä?" : title;
-  const duration = durationSec ?? Math.max(30, baseItems.length * 5);
 
   return (
     <section
@@ -157,37 +249,25 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
       aria-label="Asiakasarvostelut"
     >
       {headingText && (
-        <div className="section-container mb-8 text-center">
+        <div className="section-container mb-4 text-center">
           <h2 className="heading-style text-2xl md:text-3xl text-accent-ink">
             {headingText}
           </h2>
         </div>
       )}
 
-      <div
-        ref={viewportRef}
-        onScroll={handleScroll}
-        className="marquee-viewport relative overflow-hidden"
-        style={reducedMotion ? { scrollSnapType: "x proximity" } : undefined}
-        role="region"
-        aria-label="Arvostelut, vieritettävä lista"
-        tabIndex={0}
-      >
-        <div
-          className={reducedMotion ? "flex w-max" : "flex w-max animate-marquee"}
-          style={reducedMotion ? undefined : { animationDuration: `${duration}s` }}
-        >
-          {items.map(({ t, hidden }, i) =>
-            hidden ? (
-              // inert: kopioiden "Lue lisää"-napit eivät saa fokusta (axe: fokusoitava sisältö aria-hidden-säiliössä).
-              <div key={i} aria-hidden="true" {...({ inert: "" } as Record<string, string>)}>
-                <TestimonialCard {...t} />
-              </div>
-            ) : (
-              <TestimonialCard key={i} {...t} />
-            )
-          )}
-        </div>
+      <div className="-my-5">
+        {rows.map((row, i) => (
+          <MarqueeRow
+            key={i}
+            data={row}
+            reverse={i % 2 === 1}
+            reducedMotion={reducedMotion}
+            mounted={mounted}
+            durationSec={durationSec}
+            label={rows.length > 1 ? `Arvostelut, vieritettävä lista ${i + 1}/${rows.length}` : "Arvostelut, vieritettävä lista"}
+          />
+        ))}
       </div>
     </section>
   );

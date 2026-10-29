@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import MaaliMerkki from "@/components/MaaliMerkki";
+import Kuvanosto from "@/components/Kuvanosto";
 
 /**
  * Rinnakkaissanat samalle työlle (SEO-suunnitelma 25.10.2026): asiakkaat hakevat katon pinnoitusta,
@@ -14,7 +16,12 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">
         Tiilikaton maalaus ja pinnoitus tarkoittavat samaa työtä
       </h2>
-      <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+      <div className="flow-root space-y-4 text-lg text-muted-foreground leading-relaxed">
+        <Kuvanosto
+          base="tiilikaton-pinnoitus-tampere-tummanharmaa-tiilikatto-lahikuva"
+          alt="Pinnoitettu tummanharmaa tiilikatto läheltä, Tampere"
+          caption="Pinnoitettu tiilikatto läheltä. Katto maalataan kahteen kertaan: pohjamaali ja pintamaali."
+        />
         <p>
           Asiakkaat kysyvät meiltä katon pinnoitusta, tiilikaton maalausta ja kattomaalausta{cityIn ? ` ${cityIn}` : ""}. Kaikki
           tarkoittavat samaa työtä. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin
@@ -38,11 +45,7 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
         </p>
       </div>
       </div>
-      <aside className="border-t-2 border-navy pt-4" aria-label="Maali">
-        <span className="block text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Maali</span>
-        <span className="block font-heading text-3xl font-extrabold text-accent-ink mt-1">Nowocoat</span>
-        <p className="text-sm text-muted-foreground mt-2 leading-relaxed">Katto maalataan kahteen kertaan: pohjamaali ja pintamaali.</p>
-      </aside>
+      <MaaliMerkki merkki="nowocoat" teksti="Katto maalataan kahteen kertaan: pohjamaali ja pintamaali." />
     </div>
   </section>
 );

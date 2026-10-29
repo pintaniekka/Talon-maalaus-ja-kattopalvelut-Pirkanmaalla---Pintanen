@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MAALAUS_HINTA } from "@/data/tyovaiheet";
+import ResponsiveImage from "@/components/ResponsiveImage";
 
 /**
  * Talotyypit talon maalauksen hub-sivulle (hakutulosanalyysi 26.10.2026, brief 4). Yrityksestä sanotaan vain
@@ -9,9 +10,10 @@ import { MAALAUS_HINTA } from "@/data/tyovaiheet";
  * maalataan (Eerik 27.10.2026). Hirsitaloihin teemme sekä kuullotteen että peittomaalin (Eerik 27.10.2026).
  * Hinta vain haarukkana ja linkkinä hintasivulle.
  */
-const talotyypit = [
+const talotyypit: { title: string; kuva?: { base: string; alt: string }; paragraphs: string[] }[] = [
   {
     title: "Puutalo ja rintamamiestalo",
+    kuva: { base: "talon-maalaus-orivesi-rintamamiestalo-paaty-jalkeen", alt: "Rintamamiestalon pääty maalauksen jälkeen, Orivesi" },
     paragraphs: [
       "Rintamamiestalot rakennettiin 1940- ja 1950-luvuilla. Ne ovat 1,5-kerroksisia harjakattoisia taloja, ja seinissä on usein pystylaudoitus. Korkea pääty vaatii telineet tai nostimen, ja ne kuuluvat hintaan.",
       "Vanhassa talossa pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Pesemme seinät homepesuaineella ja harjoilla, kaavimme irtoavan maalin ja pohjamaalaamme paljaat kohdat. Pintamaalin maalaamme pensselillä, pääsääntöisesti Tikkurilan ulkomaalilla.",
@@ -20,6 +22,7 @@ const talotyypit = [
   },
   {
     title: "Hirsitalo",
+    kuva: { base: "talon-maalaus-virrat-hirsimokki-paaty-jalkeen", alt: "Hirsitalon pääty maalauksen jälkeen, Virrat" },
     paragraphs: [
       "Hirsi elää kosteuden mukana enemmän kuin paneeli. Siksi hirsipintaan suositellaan talomaalin sijasta kuullotetta tai peittosuojaa, jotka ovat ohuempia ja hengittävämpiä. Kuullotteen väripigmentit suojaavat auringolta ja estävät puun harmaantumisen, joten väritöntä kuullotetta ei suositella ulos.",
       "Teemme hirsitaloihin sekä kuullotteen että peittomaalin. Työvaiheet ovat samat kuin muissa puutaloissa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintakäsittely pensselillä. Vanhaan pintaan kannattaa valita sama tuotetyyppi kuin ennen. Katsomme sen arviokäynnillä.",
@@ -27,6 +30,7 @@ const talotyypit = [
   },
   {
     title: "Mökki ja piharakennukset",
+    kuva: { base: "talon-maalaus-orivesi-hirsimokki-terassi-jalkeen", alt: "Hirsimökki ja terassi maalauksen jälkeen, Orivesi" },
     paragraphs: [
       "Maalaamme myös mökit, autotallit ja autokatokset. Työvaiheet ovat samat kuin talossa, ja hinta riippuu koosta.",
       "Maalaamme myös kauempana Tampereelta. Katon ja seinät samalla kertaa saat edullisempana pakettihintana.",
@@ -34,6 +38,7 @@ const talotyypit = [
   },
   {
     title: "Kivitalon puuosat",
+    kuva: { base: "tiilikaton-pinnoitus-tampere-tiilitalo-jalkeen", alt: "Tiilitalo, jonka ruskeat puuosat maalattiin harmaiksi ja katto pinnoitettiin, Tampere" },
     paragraphs: [
       "Kivitalossa maalattavaa ovat räystäät, ikkunat ja kuistit. Maalaamme ne samoilla työvaiheilla: pesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
       "Hinta riippuu puuosien määrästä ja kunnosta. Arviokäynnillä katsomme, mitä maalia pinnassa on, ja annamme kirjallisen tarjouksen.",
@@ -54,7 +59,19 @@ const MaalausTalotyypit = () => (
 
       <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {talotyypit.map((t) => (
-          <div key={t.title} className="kortti p-6 md:p-8">
+          <div key={t.title} className="kortti overflow-hidden">
+            {/* Kuva kortin yläreunassa (kuvasuunnitelma 28.10.2026). Kivitalon puuosat: Tampereen tiilitalo, jonka ruskeat puuosat maalattiin harmaiksi (Eerik 28.10.2026). */}
+            {t.kuva && (
+              <ResponsiveImage
+                baseName={t.kuva.base}
+                alt={t.kuva.alt}
+                className="aspect-[16/9] w-full object-cover"
+                sizes="(max-width: 768px) 100vw, 500px"
+                width={800}
+                height={450}
+              />
+            )}
+            <div className="p-6 md:p-8">
             <h3 className="font-heading text-xl md:text-2xl font-extrabold text-navy mb-3">{t.title}</h3>
             <div className="space-y-3">
               {t.paragraphs.map((p) => (
@@ -62,6 +79,7 @@ const MaalausTalotyypit = () => (
                   {p}
                 </p>
               ))}
+            </div>
             </div>
           </div>
         ))}

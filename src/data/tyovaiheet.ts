@@ -12,6 +12,8 @@ import { KATON_MAALAUS_LAUSE } from "./company";
 export interface Tyovaihe {
   title: string;
   text: string;
+  /** Valokuva vaiheesta pudotusvalikon sisällä (kuvasuunnitelma 28.10.2026). Perusnimi ja alt. */
+  kuva?: { base: string; alt: string };
 }
 
 export const PINNOITUS_HINTA = fmtRange(pinnoitusPrices.general.min, pinnoitusPrices.general.max);
@@ -21,6 +23,7 @@ export const pinnoitusTyovaiheet: Tyovaihe[] = [
   {
     title: "Ilmainen kuntotarkastus",
     text: "Tulemme katsomaan katon. Tarkistamme tiilet, saumat, piipun ympäryksen, läpiviennit ja aluskatteen. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
+    kuva: { base: "tiilikaton-pinnoitus-tampere-eerik-pitkanen-katolla", alt: "Eerik Pitkänen tiilikatolla kuntotarkastuksessa" },
   },
   {
     // Eerik 25.10.2026: kirjallinen sopimus ja aikataulu, yhteydenotto ennen aloituspäivää.
@@ -30,22 +33,27 @@ export const pinnoitusTyovaiheet: Tyovaihe[] = [
   {
     title: "Suojaus",
     text: "Suojaamme esimerkiksi aurinkopaneelit, lasiterassit ja valokatteet. Kourujen syöksyihin tulee suodatinkankaat.",
+    kuva: { base: "tiilikaton-pinnoitus-tampere-aurinkopaneelit-suojattu", alt: "Aurinkopaneelit suojattuna tiilikatolla pinnoituksen ajaksi" },
   },
   {
     title: "Pesu painepesulla",
     text: "Pesemme katon painepesulla ja huuhtelemme sadevesikourut. Lika ja sammal lähtevät pois.",
+    kuva: { base: "tiilikaton-pesu-ja-pinnoitus-tampere-pesu-kesken", alt: "Tiilikaton pesu kesken: toinen puoli pesty, toinen vielä likainen" },
   },
   {
     title: "Rikkinäisten tiilien vaihto",
     text: "Vaihdamme rikkinäiset tiilet uusiin. Ennen maalausta katto saa kuivua.",
+    kuva: { base: "tiilikaton-pinnoitus-varatiilien-maalaus", alt: "Varatiilet maalattuna pihalla ennen asennusta" },
   },
   {
     title: "Maalaus ruiskulla kahteen kertaan",
     text: `${KATON_MAALAUS_LAUSE} Käytämme Nowocoatin kattomaaleja.`,
+    kuva: { base: "tiilikaton-pinnoitus-valkeakoski-pinnoitettu-tiilikatto-lahikuva", alt: "Pinnoitettu tiilikatto läheltä" },
   },
   {
     title: "Lopputarkastus ja takuu",
     text: "Kierrämme katon yhdessä sinun kanssasi ja siivoamme jälkemme. Saat työlle 5 vuoden kirjallisen takuun.",
+    kuva: { base: "tiilikaton-pinnoitus-ylojarvi-keltainen-talo-jalkeen", alt: "Keltainen talo ja punainen tiilikatto pinnoituksen jälkeen, Ylöjärvi" },
   },
 ];
 
@@ -53,30 +61,37 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   {
     title: "Ilmainen arviokäynti ja tarjous",
     text: "Eemil tulee katsomaan talon. Hän käy seinät läpi ja katsoo, mitä maalia niissä on ja paljonko pohjatöitä tarvitaan. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
+    kuva: { base: "talon-maalaus-tampere-hilseileva-paaty-ennen", alt: "Hilseilevä puutalon pääty ennen maalausta, Tampere" },
   },
   {
     title: "Suojaus",
     text: "Suojaamme terassit ja ympäristön ennen työtä.",
+    kuva: { base: "talon-maalaus-ympariston-suojaus-ennen-maalausta", alt: "Terassi suojattuna muovilla ennen maalausta" },
   },
   {
     title: "Homepesu",
     text: "Pesemme seinät homepesuaineella ja harjoilla. Lika ja home lähtevät pois.",
+    kuva: { base: "talon-maalaus-parkano-hilseileva-puutalo-ennen", alt: "Eemil pesee hilseilevää seinää harjalla tikkailta, Parkano" },
   },
   {
     title: "Kaavinta",
     text: "Kaavimme irtoavan maalin pois.",
+    kuva: { base: "talon-maalaus-tampere-hilseileva-ulkoverhous-lahikuva-ennen", alt: "Hilseilevä ulkoverhous läheltä ennen kaavintaa" },
   },
   {
     title: "Pohjamaali paljaisiin kohtiin",
     text: "Pohjamaalaamme kohdat, joissa puu on paljaana.",
+    kuva: { base: "talon-maalaus-tampere-hilseileva-ulkoverhous-lahikuva-jalkeen", alt: "Ulkoverhous läheltä maalauksen jälkeen" },
   },
   {
     title: "Pintamaali pensselillä",
     text: "Maalaamme seinät pensselillä.",
+    kuva: { base: "talon-maalaus-tampere-puutalon-seinien-maalaus-kaynnissa", alt: "Puutalon seinien maalaus käynnissä telineiltä, Tampere" },
   },
   {
     title: "Lopputarkastus ja takuu",
     text: "Kierrämme talon yhdessä sinun kanssasi ja katsomme työn jäljen. Saat työlle 2 vuoden kirjallisen takuun.",
+    kuva: { base: "talon-maalaus-tampere-koristeikkunat-puutalo-jalkeen", alt: "Koristeikkunainen puutalo maalauksen jälkeen, Tampere" },
   },
 ];
 

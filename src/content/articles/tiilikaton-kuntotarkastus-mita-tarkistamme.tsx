@@ -96,7 +96,7 @@ const Body = () => (
       on hyvä olla paikalla, koska käymme katon läpi yhdessä. Tarjouksen saat myös etänä: yleensä kuvat katosta
       ja arvio katon koosta riittävät, ja tarkat mitat tai kuntoraportti ovat iso plussa. Kuntotarkastus paikan
       päällä on silti tarkin tapa, koska aluskatetta ja saumoja ei näe kuvasta. Varaa aika sivulta{" "}
-      <Link to="/ilmainen-kuntotarkastus/">ilmainen kuntotarkastus</Link> tai soita Eerikille.
+      <Link to="/ilmainen-katon-kuntotarkastus/">ilmainen kuntotarkastus</Link> tai soita Eerikille.
     </p>
     <Avainhuomio>Tulemme yleensä samalla viikolla, ja keväällä tarkastuksen kannattaa varata ajoissa.</Avainhuomio>
 

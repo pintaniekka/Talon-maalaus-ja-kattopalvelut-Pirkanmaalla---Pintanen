@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import EnnenJalkeenMerkki from "@/components/EnnenJalkeenMerkki";
+import TiiliVari from "@/components/TiiliVari";
 import { CITY_LOCAL_FACTS_CHECKED, getCityLocalFacts } from "@/data/cityLocalFacts";
 import { getArticleBySlug, isPublished } from "@/data/articles";
 import type { ProjectService } from "@/data/projects";
@@ -29,8 +30,7 @@ const sisalto: Record<ProjectService, Sisalto> = {
   pinnoitus: {
     otsikko: (cityIn) => `Katon värin voi vaihtaa pinnoituksessa${cityIn ? ` ${cityIn}` : ""}`,
     kappaleet: [
-      "Pinnoitus on maalaus, ja uusi väri peittää vanhan. Nowocoatin kattomaaleissa on laaja värivalikoima, ja pinta on puolihimmeä. Yleisimmät värit ovat tummanharmaa, musta, tiilenpunainen ja ruskea.",
-      "Väri valitaan kuntotarkastuksen yhteydessä. Katsomme seinien ja räystäiden värin ja naapuruston katot. Värin vaihto ei nosta hintaa, koska katto maalataan aina kahteen kertaan.",
+      "Pinnoitus on maalaus, ja uusi väri peittää vanhan. Nowocoatin värikartassa on 16 väriä, ja pinta on puolihimmeä. Väri valitaan kuntotarkastuksessa, ja värin vaihto ei nosta hintaa, koska katto maalataan aina kahteen kertaan.",
     ],
     // Nowocoatin värikartta, 16 tiilikattoväriä (Coating Source 29.10.2026, docs/nowocoat-lahteet-2026-10-29.md).
     // Hex-arvot ovat suuntaa antavia värikartasta luettuja.
@@ -126,20 +126,6 @@ const VarinVaihto = ({ service, citySlug, cityIn }: Props) => {
               </p>
             )}
           </div>
-          {s.varit.length > 0 && (
-            <>
-            <p className="mt-6 text-sm font-semibold text-foreground">Nowocoatin värikartta: 16 kattoväriä</p>
-            <ul className="mt-3 flex list-none flex-wrap gap-x-5 gap-y-3 p-0" aria-label="Nowocoatin kattovärit">
-              {s.varit.map((v) => (
-                <li key={v.nimi} className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <span className="h-5 w-5 rounded-full ring-2 ring-white shadow" style={{ backgroundColor: v.hex }} aria-hidden="true" />
-                  {v.nimi}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-2 text-xs text-muted-foreground">Värit ovat suuntaa antavia. Lopullinen väri valitaan kuntotarkastuksessa.</p>
-            </>
-          )}
         </div>
         <figure className="kortti overflow-hidden">
           <div className="grid grid-cols-2 gap-0.5">
@@ -163,6 +149,23 @@ const VarinVaihto = ({ service, citySlug, cityIn }: Props) => {
           <figcaption className="px-5 py-4 text-sm text-muted-foreground">{s.kuvateksti}</figcaption>
         </figure>
       </div>
+      {/* Nowocoatin värikartta tiilen muotoisina värimalleina yhtenä tiiviinä rivinä (Eerik 29.10.2026). */}
+      {s.varit.length > 0 && (
+        <div className="section-container mt-10">
+          <p className="mb-3 text-sm font-semibold text-foreground">
+            Nowocoatin värikartta: 16 kattoväriä
+            <span className="ml-2 font-normal text-muted-foreground">Värit ovat suuntaa antavia.</span>
+          </p>
+          <ul className="grid list-none grid-cols-4 gap-x-2 gap-y-3 p-0 sm:grid-cols-8 lg:gap-x-4" aria-label="Nowocoatin kattovärit">
+            {s.varit.map((v) => (
+              <li key={v.nimi} className="flex flex-col items-center text-center">
+                <TiiliVari hex={v.hex} className="w-full max-w-[64px] drop-shadow-sm" />
+                <span className="mt-1 text-[11px] leading-tight text-muted-foreground">{v.nimi}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 };

@@ -91,31 +91,6 @@ export const sitemapPaths = (): string[] => {
 /** Tiedostonimeksi kelpaava tunniste polusta: "/" → "etusivu", "/artikkelit/x/" → "artikkelit-x". */
 export const pathSlug = (p: string): string => p.replace(/^\/|\/$/g, "").replace(/\//g, "-") || "etusivu";
 
-/** Odottaa, että sivu on asettunut: verkko hiljenee, fontit ladattu ja laiskat kuvat haettu. */
-export const settle = async (page: Page) => {
-  await page.waitForLoadState("networkidle");
-  await page.evaluate(async () => {
-    await document.fonts.ready;
-    // Vieritä loppuun ja takaisin, jotta loading="lazy"-kuvat latautuvat koko sivun kuvaan.
-    const step = Math.max(400, window.innerHeight);
-    for (let y = 0; y < document.body.scrollHeight; y += step) {
-      window.scrollTo(0, y);
-      await new Promise((r) => setTimeout(r, 30));
-    }
-    window.scrollTo(0, 0);
-    // Laiskat kuvat ladataan heti: loading="eager" käynnistää latauksen myös näkymän ulkopuolella. Ilman tätä
-    // esimerkiksi alatunnisteen logo jäi lataamatta, kun sivu vieritettiin takaisin ylös, ja odotus jumitti
-    // koko testin (perusajo 28.10.2026: jokainen sivu kaatui 60 s aikakatkaisuun).
-    const images = Array.from(document.images);
-    for (const img of images) if (img.loading === "lazy") img.loading = "eager";
-    const odota = (img: HTMLImageElement) =>
-      img.complete ? Promise.resolve() : new Promise<void>((r) => { img.addEventListener("load", () => r(), { once: true }); img.addEventListener("error", () => r(), { once: true }); });
-    // Enintään 10 s: kuva, joka ei koskaan valmistu, ei saa kaataa kuvakaappausta.
-    await Promise.race([Promise.all(images.map(odota)), new Promise<void>((r) => setTimeout(r, 10_000))]);
-  });
-  await page.waitForLoadState("networkidle");
-};
-
 /** Varmistaa, ettei yksikään pyyntö suuntautunut oikeaan /api/contact-osoitteeseen (mockin ohi). */
 export const assertNoRealContactRequest = (requests: Request[]) => {
   const leaked = requests.filter((r) => /\/api\/contact/.test(r.url()) && !r.url().startsWith("http://127.0.0.1"));

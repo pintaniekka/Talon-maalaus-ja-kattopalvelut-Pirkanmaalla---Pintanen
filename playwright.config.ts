@@ -10,9 +10,6 @@ import { defineConfig, devices } from "@playwright/test";
  * Lomakkeet eivät koskaan lähetä oikeaa pyyntöä: tests/e2e/fixtures.ts korvaa /api/contact-vastauksen
  * jokaisessa testissä (page.route). Esikatselupalvelimella ei ole Pages-funktioita, joten pyyntö ei
  * edes voisi mennä perille, mutta mock on ensisijainen suoja.
- *
- * Vertailukuvat (toHaveScreenshot) otetaan vain CI:ssä Playwrightin Docker-kuvassa, jotta fontit
- * täsmäävät (.github/workflows/e2e.yml, syöte paivita-vertailukuvat). Polku: tests/e2e/vertailukuvat/<projekti>/.
  */
 const PORT = 4173;
 
@@ -26,16 +23,7 @@ export default defineConfig({
   timeout: 60_000,
   expect: {
     timeout: 10_000,
-    toHaveScreenshot: {
-      // Fontit ja kuvat ovat samat Docker-kuvassa, mutta reunanpehmennys voi heittää yksittäisiä pikseleitä.
-      maxDiffPixelRatio: 0.002,
-      animations: "disabled",
-      caret: "hide",
-      scale: "css",
-    },
   },
-  // Sama tiedostonimi joka alustalla: kuvat otetaan aina Linux-Dockerissa, joten alustapäätettä ei tarvita.
-  snapshotPathTemplate: "{testDir}/vertailukuvat/{projectName}/{arg}{ext}",
   use: {
     baseURL: `http://127.0.0.1:${PORT}`,
     trace: "retain-on-failure",

@@ -77,7 +77,7 @@ export const calculatorQuestions: Record<WizardService, CalculatorQuestion[]> = 
     {
       key: "ridgeSeal",
       title: "Puuttuuko katolta harjatiiviste?",
-      help: "Harjatiiviste on nauha harjatiilen alla. Jos et tiedä, vastaa ei: katsomme sen kuntotarkastuksessa.",
+      help: "Harjatiiviste on tiiviste harjatiilen alla. Jos et tiedä, vastaa ei: katsomme sen kuntotarkastuksessa.",
       kind: "options",
       options: [
         { label: "Kyllä puuttuu", value: "kylla" },

@@ -4,8 +4,6 @@ import ResponsiveImage from "@/components/ResponsiveImage";
 
 export interface PalveluKorttiProps {
   href: string;
-  /** Keltainen yläotsake: tekijän nimi (Eerik 29.10.2026: ei "tekee työn itse" -toistoa). */
-  tekija: string;
   title: string;
   description: string;
   price: string;
@@ -22,7 +20,7 @@ export interface PalveluKorttiProps {
  * Käytössä etusivun Palvelumme-osiossa ja aluesivuilla. Koko kortti on yksi linkki (Eerik 14.10.2026),
  * nappi on vain linkin osa. Kuvat: pinnoitus Ylöjärven keltainen talo, maalaus Oriveden hirsimökin terassi.
  */
-const PalveluKortti = ({ href, tekija, title, description, price, warranty, duration, image, cta }: PalveluKorttiProps) => (
+const PalveluKortti = ({ href, title, description, price, warranty, duration, image, cta }: PalveluKorttiProps) => (
   <Link
     to={href}
     className="group flex flex-col overflow-hidden rounded-3xl bg-navy text-navy-foreground shadow-[0_14px_40px_rgba(10,25,47,0.14)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(10,25,47,0.22)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/60 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
@@ -38,7 +36,8 @@ const PalveluKortti = ({ href, tekija, title, description, price, warranty, dura
       />
     </div>
     <div className="flex flex-1 flex-col px-6 pb-6 pt-2 md:px-7 md:pb-7">
-      <span className="font-heading text-xs font-extrabold uppercase tracking-[0.2em] text-paint-yellow">{tekija}</span>
+      {/* Keltainen koristeviiva tekijän nimen tilalla (Eerik 29.10.2026). */}
+      <span className="block h-1 w-10 rounded-full bg-paint-yellow" aria-hidden="true" />
       <h3 className="mt-1.5 font-heading text-2xl font-extrabold leading-[1.1] text-white md:text-[28px]">{title}</h3>
       <p className="mt-2 text-[15px] leading-relaxed text-white/75">{description}</p>
       {/* Puhelimella hinta omalle rivilleen, jotta "2–3 päivää" ei karkaa kortin reunan yli. */}

@@ -4,7 +4,8 @@ import Kuvanosto from "@/components/Kuvanosto";
 
 /**
  * Rinnakkaissanat samalle työlle (SEO-suunnitelma 25.10.2026): asiakkaat hakevat katon pinnoitusta,
- * tiilikaton maalausta, kattomaalausta sekä katon pesua ja pinnoitusta. Google ei yhdistä muotoja itse,
+ * tiilikaton maalausta, kattomaalausta sekä katon pesua ja pinnoitusta. "Katon maalaus" H2:een 29.10.2026 (OpenSEO:
+ * "katon maalaus tampere" 196 näyttöä ilman vastaavaa sivua). Google ei yhdistä muotoja itse,
  * joten ne sanotaan H2-tasolla. Tiilimerkit saa mainita (Eerik 25.10.2026). Hintasivun linkin ankkuri vaihtelee
  * paikkakunnan mukaan (Eerik 26.10.2026, yöajon kysymys 14), jotta sama teksti ei toistu 24 sivulla.
  * Tekstipalsta (28.10.2026): kapea palsta ja sivussa yksi fakta, jotta pitkä teksti pysyy luettavana.
@@ -14,7 +15,7 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
     <div className="section-container grid gap-10 lg:grid-cols-[minmax(0,42rem)_16rem] lg:justify-center lg:gap-16 items-start">
       <div>
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-5">
-        Tiilikaton maalaus ja pinnoitus tarkoittavat samaa työtä
+        Katon maalaus, tiilikaton maalaus ja pinnoitus tarkoittavat samaa työtä
       </h2>
       <div className="flow-root space-y-4 text-lg text-muted-foreground leading-relaxed">
         <Kuvanosto
@@ -23,7 +24,7 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
           caption="Pinnoitettu tiilikatto läheltä. Katto maalataan kahteen kertaan: pohjamaali ja pintamaali."
         />
         <p>
-          Asiakkaat kysyvät meiltä katon pinnoitusta, tiilikaton maalausta ja kattomaalausta{cityIn ? ` ${cityIn}` : ""}. Kaikki
+          Asiakkaat kysyvät meiltä katon maalausta, katon pinnoitusta, tiilikaton maalausta ja kattomaalausta{cityIn ? ` ${cityIn}` : ""}. Kaikki
           tarkoittavat samaa työtä. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin
           kattomaalilla.
         </p>

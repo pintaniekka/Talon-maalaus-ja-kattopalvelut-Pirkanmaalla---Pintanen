@@ -19,8 +19,8 @@ const kuvaukset: Record<PalveluKey, string> = {
 
 /** Kortin keltainen yläotsake ja napin teksti (Eerik 29.10.2026, malli B). */
 const korttiTekstit: Record<PalveluKey, { tekija: string; cta: string }> = {
-  pinnoitus: { tekija: "Eerik tekee työn itse", cta: "Katso pinnoitus" },
-  maalaus: { tekija: "Eemil maalaa", cta: "Katso maalaus" },
+  pinnoitus: { tekija: "Eerik", cta: "Katso pinnoitus" },
+  maalaus: { tekija: "Eemil", cta: "Katso maalaus" },
 };
 
 /**
@@ -40,7 +40,7 @@ const PalvelutA = () => (
               Palvelumme
             </span>
           </div>
-          <h2 className="heading-style text-3xl leading-[1.1] text-foreground md:text-4xl">Katot ja seinät. Teemme työn itse.</h2>
+          <h2 className="heading-style text-3xl leading-[1.1] text-foreground md:text-4xl">Katot ja seinät.</h2>
         </div>
         <p className="text-base leading-relaxed text-muted-foreground md:mb-1.5 md:text-lg">{PALVELUT_INTRO}</p>
       </div>

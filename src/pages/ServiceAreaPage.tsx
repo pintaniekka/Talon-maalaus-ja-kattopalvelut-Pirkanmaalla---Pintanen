@@ -29,7 +29,7 @@ const getAreaFAQ = (citySlug: string, cityIn: string, pinnoitusHref: string, maa
   },
   {
     question: `Kuka tekee työn ${cityIn}?`,
-    answer: "Eerik pinnoittaa tiilikatot ja Eemil maalaa talot. Teemme työn itse. Annamme työlle kirjallisen takuun: pinnoitukselle 5 vuotta, maalaukselle 2 vuotta.",
+    answer: "Eerik pinnoittaa tiilikatot ja Eemil maalaa talot. Annamme työlle kirjallisen takuun: pinnoitukselle 5 vuotta, maalaukselle 2 vuotta.",
   },
   {
     question: "Mitä arviokäynnillä tapahtuu?",
@@ -90,7 +90,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       warranty: TAKUU.pinnoitus,
       duration: "2–3 päivää",
       image: PALVELUKORTTI_KUVAT.pinnoitus,
-      tekija: "Eerik tekee työn itse",
+      tekija: "Eerik",
       cta: "Katso pinnoitus",
     },
     {
@@ -101,7 +101,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
       warranty: TAKUU.maalaus,
       duration: "3–7 päivää",
       image: PALVELUKORTTI_KUVAT.maalaus,
-      tekija: "Eemil maalaa",
+      tekija: "Eemil",
       cta: "Katso maalaus",
     },
   ];
@@ -134,7 +134,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         }
         lead={
           <>
-            Pinnoitamme tiilikattoja ja maalaamme taloja {cityIn}. <strong className="text-foreground">Teemme työn itse.</strong> Tiilikaton
+            Pinnoitamme tiilikattoja ja maalaamme taloja {cityIn}. Tiilikaton
             pinnoitus maksaa yleensä {PINNOITUS_HINTA} ja talon maalaus {MAALAUS_HINTA}. Tulemme katsomaan kohteen ilmaiseksi.
           </>
         }
@@ -143,7 +143,7 @@ const ServiceAreaPage = ({ citySlug }: { citySlug: string }) => {
         trust="yleinen"
         image={{ base: heroBase, alt: ownPhoto ? `Kohteemme ${cityIn}` : "Pintasen maalaama puutalo: katto ja seinät maalattu" }}
         // Muiden kuntien sivuilla Tampere mainitaan leipätekstissä enintään kerran (Eerik 27.10.2026): se on paikallisteksti.
-        badge={citySlug === "tampere" ? undefined : { title: "Perheyritys", text: "Eerik ja Eemil tekevät työn itse." }}
+        badge={citySlug === "tampere" ? undefined : { title: "Perheyritys", text: "Eerik pinnoittaa katot, Eemil maalaa talot." }}
         breadcrumbs={crumbs}
       />
 

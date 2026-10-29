@@ -32,6 +32,8 @@ export interface KuntotarkastusSisalto {
   saat: { title: string; text: string }[];
   eteneeOtsikko: string;
   etenee: Tyovaihe[];
+  /** Kolme kuvaa siitä, mitä käynnillä katsotaan (Eerik 29.10.2026: kuvia lisää arviokäyntisivuille). */
+  kuvat: { base: string; alt: string; caption: string }[];
   etaOtsikko: string;
   eta: string;
   hintaTeksti: string;
@@ -49,7 +51,7 @@ export interface KuntotarkastusSisalto {
 }
 
 const yhteiset = {
-  etenee: (kaynti: string, tekija: string): Tyovaihe[] => [
+  etenee: (kaynti: string, tekija: string, kuva: { base: string; alt: string }): Tyovaihe[] => [
     {
       title: "Pyydä käynti",
       text: `Täytä lomake tai soita. Sovimme ajan, joka sopii sinulle, yleensä samalla viikolla, myös iltaisin ja viikonloppuisin.`,
@@ -57,6 +59,7 @@ const yhteiset = {
     {
       title: `${kaynti} paikan päällä`,
       text: `${tekija} käy kohteen läpi itse ja kertoo havainnot heti. Sinun ei tarvitse olla paikalla, mutta se on hyvä, koska käymme tarjouksen läpi yhdessä.`,
+      kuva,
     },
     {
       title: "Kirjallinen tarjous",
@@ -113,7 +116,12 @@ export const kuntotarkastukset: Record<KuntotarkastusService, KuntotarkastusSisa
       { title: "Aikaa päättää rauhassa", text: "Tarjous ei sido sinua. Voit vertailla sitä muihin ja kysyä lisää." },
     ],
     eteneeOtsikko: "Näin kuntotarkastus etenee",
-    etenee: yhteiset.etenee("Kuntotarkastus", "Eerik"),
+    etenee: yhteiset.etenee("Kuntotarkastus", "Eerik", { base: "tiilikaton-pinnoitus-tampere-harmaa-tiilikatto-ennen", alt: "Harmaa tiilikatto ennen pinnoitusta, Tampere" }),
+    kuvat: [
+      { base: "tiilikaton-pinnoitus-kangasala-sammaleinen-tiilikatto-ennen", alt: "Sammaleinen tiilikatto ennen pinnoitusta, Kangasala", caption: "Sammal ja kulunut tiilen pinta: katsomme, riittääkö pinnoitus." },
+      { base: "tiilikaton-pinnoitus-varatiilien-maalaus", alt: "Varatiilet maalattuna pihalla ennen asennusta", caption: "Rikkinäiset tiilet lasketaan ja vaihdetaan uusiin pinnoituksen yhteydessä." },
+      { base: "tiilikaton-pinnoitus-valkeakoski-aurinkopaneelit-ennen", alt: "Tiilikatto ja aurinkopaneelit ennen pinnoitusta, Valkeakoski", caption: "Läpiviennit, piipun ympärys ja aurinkopaneelien suojaus katsotaan samalla." },
+    ],
     etaOtsikko: "Etätarjous kuvista",
     eta: "Jos haluat hinnan nopeasti, lähetä kuvat katosta ja arvio katon koosta. Yleensä ne riittävät tarjoukseen. Tarkat mitat tai aiempi kuntoraportti ovat iso plussa. Kuntotarkastus paikan päällä on silti tarkin tapa.",
     hintaTeksti: `Tiilikaton pinnoitus maksaa yleensä ${PINNOITUS_HINTA}. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta, ja tarkan hinnan saat kirjallisena kuntotarkastuksen jälkeen. Työn osuudesta saat kotitalousvähennyksen, ja erittelemme sen laskulle valmiiksi.`,
@@ -182,7 +190,12 @@ export const kuntotarkastukset: Record<KuntotarkastusService, KuntotarkastusSisa
       { title: "Aikaa päättää rauhassa", text: "Tarjous ei sido sinua. Voit vertailla sitä muihin ja kysyä lisää." },
     ],
     eteneeOtsikko: "Näin arviokäynti etenee",
-    etenee: yhteiset.etenee("Arviokäynti", "Eemil"),
+    etenee: yhteiset.etenee("Arviokäynti", "Eemil", { base: "talon-maalaus-tampere-koristeikkunat-puutalo-ennen", alt: "Puutalo ennen maalausta, Tampere" }),
+    kuvat: [
+      { base: "talon-maalaus-tampere-hilseileva-paaty-ennen", alt: "Hilseilevä puutalon pääty ennen maalausta, Tampere", caption: "Hilseilevä maali: katsomme, paljonko kaavintaa ja pohjamaalia tarvitaan." },
+      { base: "talon-maalaus-tampere-hilseileva-ulkoverhous-lahikuva-ennen", alt: "Hilseilevä ulkoverhous läheltä ennen maalausta", caption: "Läheltä näkyy, pitääkö vanha maali vielä kiinni puussa." },
+      { base: "talon-maalaus-vihrea-puutalo-ennen-ulkomaalausta", alt: "Vihreä puutalo, jonka seinissä on hometta ja likaa ennen maalausta", caption: "Home ja lika pestään pois ennen maalausta." },
+    ],
     etaOtsikko: "Etätarjous kuvista",
     eta: "Jos haluat hinnan nopeasti, lähetä kuvat seinistä ja arvio talon koosta. Yleensä ne riittävät tarjoukseen. Tarkat mitat ovat iso plussa. Arviokäynti paikan päällä on silti tarkin tapa, koska pohjatöiden määrä näkyy vasta läheltä.",
     hintaTeksti: `Talon maalaus maksaa yleensä ${MAALAUS_HINTA}. Hinta riippuu talon koosta, kerrosten määrästä ja pohjatöiden määrästä, ja tarkan hinnan saat kirjallisena arviokäynnin jälkeen. Työn osuudesta saat kotitalousvähennyksen, ja erittelemme sen laskulle valmiiksi.`,

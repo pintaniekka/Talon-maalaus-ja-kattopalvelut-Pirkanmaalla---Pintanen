@@ -10,6 +10,7 @@ import RelatedArticles from "@/components/RelatedArticles";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading, Checklist } from "@/components/hinnat/PriceSections";
+import ResponsiveImage from "@/components/ResponsiveImage";
 import { getRouteSeo } from "@/data/seo";
 import { kuntotarkastukset, type KuntotarkastusService } from "@/data/kuntotarkastus";
 import { fmtEur } from "@/data/prices";
@@ -90,6 +91,15 @@ const Kuntotarkastus = ({ service }: { service: KuntotarkastusService }) => {
           <PriceSectionHeading eyebrow="Tarkastus" title={s.katsommeOtsikko} intro={s.katsommeIntro} />
           <Checklist items={s.katsomme} />
         </div>
+        {/* Kuvia siitä, mitä käynnillä katsotaan (Eerik 29.10.2026). */}
+        <ul className="section-container mx-auto mt-10 grid max-w-5xl list-none gap-6 p-0 sm:grid-cols-3">
+          {s.kuvat.map((k) => (
+            <li key={k.base} className="kortti overflow-hidden">
+              <ResponsiveImage baseName={k.base} alt={k.alt} className="aspect-[4/3] w-full object-cover" sizes="(max-width: 640px) 100vw, 320px" width={800} height={600} />
+              <p className="px-5 py-4 text-sm text-muted-foreground">{k.caption}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="section-padding osio">

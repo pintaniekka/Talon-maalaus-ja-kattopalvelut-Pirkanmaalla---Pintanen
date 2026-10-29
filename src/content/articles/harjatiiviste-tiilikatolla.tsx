@@ -25,7 +25,7 @@ const faq = [
   {
     question: "Mistä tiedän, puuttuuko harjatiiviste?",
     answer:
-      "Harjatiilen alta näkyy rako, tai ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla. Varmin tapa on antaa meidän katsoa se kuntotarkastuksessa.",
+      "Harjatiilen alta näkyy rako. Jos ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla, aluskate on jo rikki. Varmin tapa on antaa meidän katsoa harja ja aluskate kuntotarkastuksessa.",
   },
   {
     question: "Vaikuttaako harjatiiviste pinnoituksen hintaan?",

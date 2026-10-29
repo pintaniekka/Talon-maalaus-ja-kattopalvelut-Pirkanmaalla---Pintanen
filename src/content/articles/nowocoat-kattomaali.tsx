@@ -8,6 +8,8 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Sources, Table } from "@/co
  * korkeapaineruisku, tela tai pensseli, ohennus vesi 10–20 %, riittoisuus 2–3 m²/l kahdella kerroksella, päälle
  * maalattavissa n. 2 h, täysin kuiva 24 h (20 °C, 60 % RH), puolihimmeä, "Saatavana kaikissa perusväreissä", hengittävä,
  * NowoClean-käsittely 2–4 vuoden välein suositellaan, NowoCoat A/S juuret vuoteen 1861. "Säästää jopa 75 %" ei lainata.
+ * Lisätty 29.10.2026 (docs/nowocoat-lahteet-2026-10-29.md): RT 103839 -tuotekortti (Rakennustieto, helmikuu 2025) ja
+ * valmistajan värikartta (16 väriä) NCS-sävyineen. Omat kokemukset: yli 130 kattoa vuodesta 2022, 5 v takuu (company.ts).
  */
 const faq = [
   {
@@ -27,7 +29,13 @@ const faq = [
   },
   {
     question: "Mitä värejä Nowocoatista saa?",
-    answer: "Valmistajan mukaan kaikki perusvärit. Yleisimmät ovat tummanharmaa, musta, tiilenpunainen ja ruskea. Pinta on puolihimmeä.",
+    answer:
+      "Valmistajan mukaan kaikki perusvärit. Tiilikattopinnoitteen värikartassa on 16 väriä: viisi harmaata, kaksi mustaa, seitsemän punaista ja kaksi ruskeaa. Pinta on puolihimmeä.",
+  },
+  {
+    question: "Millaisia kokemuksia teillä on Nowocoatista?",
+    answer:
+      "Olemme pinnoittaneet sillä yli 130 tiilikattoa vuodesta 2022, ja käytämme sitä jokaisessa katossa. Annamme työlle 5 vuoden kirjallisen takuun. Asiakkaiden arviot voit lukea Kokemuksia-sivulta.",
   },
 ];
 
@@ -86,6 +94,48 @@ const Body = () => (
     />
     <Avainhuomio>Käytämme Nowocoatia valmistajan ohjeen mukaan: ruiskulla, kahteen kertaan, pestylle ja käsitellylle katolle.</Avainhuomio>
 
+    <h2>Mitä värejä Nowocoatista saa?</h2>
+    <p>
+      Valmistajan mukaan kaikki perusvärit. Tiilikattopinnoitteen värikartassa on 16 väriä: viisi harmaata, kaksi
+      mustaa, seitsemän punaista ja kaksi ruskeaa, ja ne kattavat lähes kaikki Pirkanmaan katot. Väri
+      valitaan kuntotarkastuksessa, ja värin vaihto ei nosta hintaa, koska katto maalataan joka tapauksessa
+      kahteen kertaan. Lue lisää artikkelista{" "}
+      <Link to="/artikkelit/tiilikaton-varin-vaihto-pinnoituksessa/">tiilikaton värin vaihto pinnoituksessa</Link>.
+    </p>
+    <Table
+      head={["Väri", "Valmistajan koodi", "NCS-sävy"]}
+      rows={[
+        ["Vaaleanharmaa (Pale Grey)", "714", "2005-G60Y"],
+        ["Antrasiitti (Anthracite)", "701", "8005-R80B"],
+        ["Antrasiitti tumma (Anthracite Dark)", "709", "8502-B"],
+        ["Liuskeenharmaa (Slate Grey)", "719", "7502-B"],
+        ["Harmaa (Grey)", "716", "S 7000"],
+        ["Musta (Black)", "901", "9000-N"],
+        ["Sinimusta (Blue-Black)", "917", "9000-N"],
+        ["Tiilenpunainen (Tile Red)", "203", "4050-Y60R"],
+        ["Tupapunainen", "204", "S 4050-Y80R"],
+        ["Ruotsinpunainen (Swedish Red)", "314", "6030-Y70R"],
+        ["Erikoispunainen (Special Red)", "205", "5040-Y70R"],
+        ["Punaruskea (Red Brown)", "807", "6030-Y70R"],
+        ["Oksidinpunainen (Oxide Red)", "307", "5040-Y80R"],
+        ["Bordeaux", "312", "7020-Y90R"],
+        ["Mokka (Mocca)", "803", "7020-Y50R"],
+        ["Tummanruskea (Dark Brown)", "811", "8010-Y70R"],
+      ]}
+      caption="Nowocoatin tiilikattopinnoitteen värikartta, 16 väriä. NCS-sävyt ovat suuntaa antavia."
+    />
+    <Avainhuomio>Värikartan 16 väriä riittävät lähes kaikkiin kattoihin, ja väri valitaan kuntotarkastuksessa.</Avainhuomio>
+
+    <h2>Millaisia kokemuksia meillä on Nowocoatista?</h2>
+    <p>
+      Olemme pinnoittaneet Nowocoatilla yli 130 tiilikattoa vuodesta 2022, ja käytämme sitä jokaisessa katossa.
+      Kokemus on yksinkertainen: kun katto on pesty ja käsitelty kunnolla ja maalia on kaksi kerrosta, pinta on
+      tasainen ja puolihimmeä, ja tiili ei enää ime vettä. Annamme työlle 5 vuoden kirjallisen takuun, ja takuun
+      aikana korjaamme jäljet, jos niissä on vikaa. Kohteita voit katsoa sivulta{" "}
+      <Link to="/referenssit/">referenssit</Link> ja asiakkaiden arvioita sivulta <Link to="/kokemuksia/">kokemuksia</Link>.
+    </p>
+    <Avainhuomio>Yli 130 kattoa Nowocoatilla vuodesta 2022 ja 5 vuoden kirjallinen takuu.</Avainhuomio>
+
     <h2>Kuinka kauan Nowocoat-pinta kestää?</h2>
     <p>
       Pinnoitettu katto kestää jopa 15 vuotta pidempään. Valmistaja suosittelee pinnoituksen jälkeen
@@ -108,8 +158,16 @@ const Body = () => (
     <Sources
       items={[
         {
-          label: "NowoCoat: Kattopinnoitteet ammattilaisille, esite 2025 (luettu 26.10.2026)",
+          label: "NowoCoat: Kattopinnoitteet ammattilaisille, esite 2025–26 (luettu 26.10. ja 29.10.2026)",
           url: "https://rakennusfakta.fi/nowocoat-2025-esite-1420239/tiedosto-files/NowoCoat_Esite_A4_2025.pdf",
+        },
+        {
+          label: "Rakennustieto: RT 103839 tuotetieto, Coating Source Oy, helmikuu 2025 (luettu 29.10.2026)",
+          url: "https://www.rakennustieto.fi/",
+        },
+        {
+          label: "NowoCoat Roof Coating: värikartta, 16 väriä NCS-sävyineen (Coating Source, luettu 29.10.2026)",
+          url: "https://www.nowocoat.com/",
         },
       ]}
     />

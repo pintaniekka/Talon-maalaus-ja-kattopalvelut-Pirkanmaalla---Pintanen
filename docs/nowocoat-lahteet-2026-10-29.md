@@ -43,25 +43,29 @@ maahantuojan, ja ne sanotaan sivustolla "valmistajan mukaan".
   matalapaineruiskulla kertalevityksenä, riittoisuus 4–5 m²/l, sateenkestävä 6 h.
 - Pintanen ei tällä hetkellä markkinoi tätä. Mahdollinen lisäpalvelu, Eerik päättää.
 
-## Värit (NowoCoat värit top 10, tiilikatot)
+## Värit (NowoCoat-värikartta, tiilikattopinnoite, 16 väriä; Eerik 29.10.2026 + top 10 -PDF)
 
-Valmistajan "top 10" tiilikaton pinnoitusvärit koodeineen (NCS-sävyt ovat suuntaa antavia):
+| Suomeksi | Valmistajan nimi | Koodi | NCS |
+| --- | --- | --- | --- |
+| Vaaleanharmaa | Pale Grey | 714 | 2005-G60Y |
+| Antrasiitti | Anthracite | 701 | 8005-R80B |
+| Antrasiitti tumma | Anthracite Dark | 709 | 8502-B |
+| Liuskeenharmaa | Slate Grey | 719 | 7502-B |
+| Harmaa | Grey | 716 | S 7000 |
+| Musta | Black | 901 | 9000-N |
+| Sinimusta | Blue-Black | 917 | 9000-N |
+| Tiilenpunainen | Tile Red | 203 | 4050-Y60R |
+| Tupapunainen | Tupapunainen | 204 | S 4050-Y80R |
+| Ruotsinpunainen | Swedish Red | 314 | 6030-Y70R |
+| Erikoispunainen | Special Red | 205 | 5040-Y70R |
+| Punaruskea | Red Brown | 807 | 6030-Y70R |
+| Oksidinpunainen | Oxide Red | 307 | 5040-Y80R |
+| Bordeaux | Bordeaux | 312 | 7020-Y90R |
+| Mokka | Mocca | 803 | 7020-Y50R |
+| Tummanruskea | Dark Brown | 811 | 8010-Y70R |
 
-| Nimi | Koodi | NCS |
-| --- | --- | --- |
-| Black | 901 | 9000-N |
-| Anthracite Dark | 709 | 8502-B |
-| Anthracite | 701 | 8005-R80B |
-| Slate Grey | 719 | 7502-B |
-| Dark Brown | 811 | 8010-Y70R |
-| Red Brown | 807 | 6030-Y70R |
-| Oxide Red | 307 | 5040-Y80R |
-| Tupapunainen | 204 | S 4050-Y80R |
-| Special Red | 205 | 5040-Y70R |
-| Tile Red | 203 | 4050-Y60R |
-
-Esitteessä lisäksi Grey 716. Sivuston "Värin vaihto" -lohko näyttää nyt neljä yleisintä (tummanharmaa,
-musta, tiilenpunainen, ruskea); nämä kymmenen voi lisätä nimineen.
+Suomenkieliset nimet ovat sivuston omia käännöksiä. Sivuston "Värin vaihto" -lohko ja Nowocoat-artikkeli
+näyttävät kaikki 16. Hex-arvot komponentissa ovat värikartasta luettuja, suuntaa antavia.
 
 ## MDM VR -harjatiiviste (RT 103839)
 

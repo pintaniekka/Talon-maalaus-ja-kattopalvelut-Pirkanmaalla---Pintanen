@@ -32,11 +32,25 @@ const sisalto: Record<ProjectService, Sisalto> = {
       "Pinnoitus on maalaus, ja uusi väri peittää vanhan. Nowocoatin kattomaaleissa on laaja värivalikoima, ja pinta on puolihimmeä. Yleisimmät värit ovat tummanharmaa, musta, tiilenpunainen ja ruskea.",
       "Väri valitaan kuntotarkastuksen yhteydessä. Katsomme seinien ja räystäiden värin ja naapuruston katot. Värin vaihto ei nosta hintaa, koska katto maalataan aina kahteen kertaan.",
     ],
+    // Nowocoatin värikartta, 16 tiilikattoväriä (Coating Source 29.10.2026, docs/nowocoat-lahteet-2026-10-29.md).
+    // Hex-arvot ovat suuntaa antavia värikartasta luettuja.
     varit: [
-      { nimi: "Tummanharmaa", hex: "#3d4146" },
-      { nimi: "Musta", hex: "#1f2124" },
-      { nimi: "Tiilenpunainen", hex: "#9c3b2a" },
-      { nimi: "Ruskea", hex: "#5a3a2a" },
+      { nimi: "Vaaleanharmaa", hex: "#e4e2d6" },
+      { nimi: "Antrasiitti", hex: "#4a5058" },
+      { nimi: "Antrasiitti tumma", hex: "#3a3d42" },
+      { nimi: "Liuskeenharmaa", hex: "#54595e" },
+      { nimi: "Harmaa", hex: "#777a7c" },
+      { nimi: "Musta", hex: "#1f2022" },
+      { nimi: "Sinimusta", hex: "#26292d" },
+      { nimi: "Tiilenpunainen", hex: "#c9562a" },
+      { nimi: "Tupapunainen", hex: "#a3432f" },
+      { nimi: "Ruotsinpunainen", hex: "#8f3a2e" },
+      { nimi: "Erikoispunainen", hex: "#a4402f" },
+      { nimi: "Punaruskea", hex: "#7a3b2b" },
+      { nimi: "Oksidinpunainen", hex: "#a13d2c" },
+      { nimi: "Bordeaux", hex: "#6b2f28" },
+      { nimi: "Mokka", hex: "#6b4330" },
+      { nimi: "Tummanruskea", hex: "#4a3128" },
     ],
     before: "tiilikaton-pinnoitus-lempaala-harmaa-tiilikatto-ennen",
     after: "tiilikaton-pinnoitus-lempaala-tummanharmaa-tiilikatto-jalkeen",
@@ -113,14 +127,18 @@ const VarinVaihto = ({ service, citySlug, cityIn }: Props) => {
             )}
           </div>
           {s.varit.length > 0 && (
-            <ul className="mt-6 flex list-none flex-wrap gap-x-6 gap-y-3 p-0" aria-label="Yleisimmät kattovärit">
+            <>
+            <p className="mt-6 text-sm font-semibold text-foreground">Nowocoatin värikartta: 16 kattoväriä</p>
+            <ul className="mt-3 flex list-none flex-wrap gap-x-5 gap-y-3 p-0" aria-label="Nowocoatin kattovärit">
               {s.varit.map((v) => (
                 <li key={v.nimi} className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                  <span className="h-6 w-6 rounded-full ring-2 ring-white shadow" style={{ backgroundColor: v.hex }} aria-hidden="true" />
+                  <span className="h-5 w-5 rounded-full ring-2 ring-white shadow" style={{ backgroundColor: v.hex }} aria-hidden="true" />
                   {v.nimi}
                 </li>
               ))}
             </ul>
+            <p className="mt-2 text-xs text-muted-foreground">Värit ovat suuntaa antavia. Lopullinen väri valitaan kuntotarkastuksessa.</p>
+            </>
           )}
         </div>
         <figure className="kortti overflow-hidden">

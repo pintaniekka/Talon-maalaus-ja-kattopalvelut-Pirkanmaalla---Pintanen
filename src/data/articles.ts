@@ -33,6 +33,11 @@ export interface ArticleMeta {
   heroImage: string;
   heroAlt: string;
   heroCaption?: string;
+  /**
+   * Listaussivun navy-kortti keltaisella tagilla (29.10.2026). Merkitään käsin, ei automaattisesti:
+   * esirenderöity HTML ja selain näyttävät saman. Enintään noin kolmannes näkyvistä korteista.
+   */
+  tarkea?: boolean;
 }
 
 export const categoryLabels: Record<ArticleCategory, string> = {
@@ -61,6 +66,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: "kotitalousvahennys-katto-ja-maalaustyot",
     title: "Kotitalousvähennys katto- ja maalaustöissä 2027: paljonko saat takaisin?",
+    tarkea: true,
     seoTitle: "Kotitalousvähennys 2027 katto- ja maalaustöissä",
     description:
       "Kotitalousvähennys 2027: 40 % työn osuudesta, enintään 2 100 € henkilöltä. Lue, miten saat vähennyksen tiilikaton pinnoituksesta ja talon maalauksesta.",
@@ -106,6 +112,7 @@ export const articles: ArticleMeta[] = [
   {
     slug: "tiilikaton-pinnoituksen-tyovaiheet",
     title: "Näin tiilikaton pinnoitus etenee: 6 työvaihetta",
+    tarkea: true,
     seoTitle: "Tiilikaton pinnoitus: työvaiheet ja kesto",
     description:
       "Tiilikaton pinnoituksessa on kuusi työvaihetta kuntotarkastuksesta lopputarkastukseen. Lue, mitä kussakin vaiheessa tehdään ja kauanko työ kestää.",

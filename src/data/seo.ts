@@ -81,6 +81,8 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/ilmainen-julkisivun-kuntoarvio": cardHero("talon-maalaus-orivesi-rintamamiestalo-paaty-ennen"),
   "/harjatiivisteen-asennus": cardHero("tiilikaton-pinnoitus-harjatiivisteen-asennus"),
   "/kotitalousvahennys": cardHero(HERO_BASE.alue),
+  // Artikkelilistauksen oma hero (29.10.2026): kuva oikealla sarakkeella, enintään 520 px.
+  "/artikkelit": { base: HERO_BASE.alue, sizes: "(min-width: 1024px) 520px, 100vw" },
 };
 
 /** Preload-linkin attribuutit pääkuvalle. */

@@ -61,6 +61,7 @@
     /* Vaalea taustaväri (Rytmin joka toinen lohko, kortin merkkipallo, laskelmapaneelit, chatin tausta).
        Eerik 28.10.2026: vanha vaaleansininen #ecf7ff pois; sumu valittu 29.10.2026 (Eerik: "valitse itse"). */
     --accent-light: 216 33% 97%; /* sumu #f5f7fa */
+    --tausta-harmaansininen: 214 38% 94%; /* #e9eef5, artikkelilistauksen tausta (29.10.2026) */
     /* Sininen tekstinä: vaalealla pohjalla #0074bd (4,6:1 vaaleansinisellä #ecf7ff-pohjalla ja 5,0:1
        valkoisella; 26.10.2026, aiemmin #007bc7, joka jäi vaaleansinisellä pohjalla 4,1:1:een),
        tummalla pohjalla brändin kirkas sininen. */

@@ -293,7 +293,8 @@ const Header = () => {
                         {/* Kaksi palstaa: linkit (ilman selitteitä, Eerik 29.10.2026) ja nostokortti (ilmainen tarkastus). Oma navy-pohja ja keltainen korostus, ei kopio. */}
                         <div className={`grid overflow-hidden rounded-2xl border border-white/10 bg-navy shadow-2xl ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>
                           <ul className="list-none p-3">
-                            {item.dropdown.map((subItem) => (
+                            {/* Eerik 29.10.2026: nostokortin sivua ei toisteta linkkilistassa (mobiilivalikossa ei ole korttia, siellä linkki jää). */}
+                            {item.dropdown.filter((subItem) => subItem.href !== item.promo?.href).map((subItem) => (
                               <li key={subItem.href}>
                                 <Link
                                   to={subItem.href}

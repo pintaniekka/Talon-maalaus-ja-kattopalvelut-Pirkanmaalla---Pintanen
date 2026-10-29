@@ -5,6 +5,7 @@ import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import FAQSection from "@/components/FAQSection";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
@@ -95,6 +96,7 @@ const Kotitalousvahennys = () => {
           </div>
         </div>
       </section>
+      <LaskuriPalkki />
 
       <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
@@ -153,6 +155,7 @@ const Kotitalousvahennys = () => {
       </section>
 
       <FAQSection items={faqItems} />
+      <KayntiPalkki />
 
       <section className="pb-12 md:pb-16 osio">
         <div className="section-container max-w-3xl mx-auto">

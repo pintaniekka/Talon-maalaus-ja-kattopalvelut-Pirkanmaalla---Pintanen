@@ -110,7 +110,7 @@ const Body = () => (
 
     <h2>10. Milloin pääsette katsomaan talon?</h2>
     <p>
-      Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Se on ilmainen, ja sinun
+      Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Se on ilmainen, ja sinun
       on hyvä olla paikalla. Tarjouksen saat myös etänä, kun lähetät kuvat seinistä ja arvion niiden koosta.
       Saat kirjallisen tarjouksen kiinteällä hinnalla. Hyväksymisen jälkeen tulee 10
       prosentin ennakkolasku, ja loput laskutamme valmiista työstä. Palvelun esittelemme sivulla{" "}

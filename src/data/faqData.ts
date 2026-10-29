@@ -137,7 +137,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Milloin pääsette katsomaan katon?',
     answer:
-      'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+      'Kuntotarkastus onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
   },
   {
     question: 'Pinnoitatteko myös autotallin tai autokatoksen katon?',
@@ -224,7 +224,7 @@ export const maalausFAQ: FAQItem[] = [
   {
     question: 'Milloin pääsette maalaamaan?',
     answer:
-      'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
+      'Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
   },
   {
     question: 'Miten hyväksyn tarjouksen ja mitä sen jälkeen tapahtuu?',
@@ -345,7 +345,7 @@ export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityI
     {
       question: `Milloin pääsette maalaamaan ${paikka}?`,
       answer:
-        'Arviokäynti onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
+        'Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
         tampereLinkki(cityName, TAMPERE_MAALAUS_LINKIT),
     },
     {
@@ -412,7 +412,7 @@ export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[
     {
       question: `Milloin pääsette katsomaan katon ${paikka}?`,
       answer:
-        'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
+        'Kuntotarkastus onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
         tampereLinkki(cityName, TAMPERE_PINNOITUS_LINKIT),
     },
     {

@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
+import { KayntiPalkki } from "@/components/KutsuPalkit";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
 import { KotitalousVahennysNayttamo } from "@/components/KotitalousVahennys";
@@ -52,7 +54,7 @@ const faqItems = [
   },
   {
     question: "Milloin pääsette katsomaan katon?",
-    answer: 'Kuntotarkastus onnistuu yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen. Lue, mitä <a href="/ilmainen-katon-kuntotarkastus/">ilmaisessa kuntotarkastuksessa</a> katsotaan.',
+    answer: 'Kuntotarkastus onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen. Lue, mitä <a href="/ilmainen-katon-kuntotarkastus/">ilmaisessa kuntotarkastuksessa</a> katsotaan.',
   },
   {
     question: "Kuinka pitkään pinnoitettu katto kestää?",
@@ -148,6 +150,7 @@ const HinnatTiilikalonPinnoitus = () => {
       <ArvosteluNosto polku="/tiilikaton-pinnoitus-hinta-pirkanmaa" />
 
       <HintaKohteet service="pinnoitus" />
+      <ToimintaKutsu palvelu="pinnoitus" nappi="kaynti" n={0} />
 
       {/* Mitä hintaan kuuluu */}
       <section className="section-padding osio">
@@ -165,6 +168,7 @@ const HinnatTiilikalonPinnoitus = () => {
       {/* Mistä hinta syntyy */}
       <HintaTekijatLohko title="Mistä tiilikaton pinnoituksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." factors={priceFactors} />
 
+      <KayntiPalkki palvelu="pinnoitus" />
       {/* Pinnoitus vai uusi katto */}
       <section className="section-padding osio">
         <div className="section-container max-w-4xl mx-auto">
@@ -202,10 +206,12 @@ const HinnatTiilikalonPinnoitus = () => {
           <Checklist items={offerChecklist} />
         </div>
       </section>
+      <ToimintaKutsu palvelu="pinnoitus" nappi="laskuri" n={1} />
       <Vaarinymmarrykset service="pinnoitus" />
 
 
       <ArtikkeliRivit categories={["katto", "raha"]} />
+      <ToimintaKutsu palvelu="pinnoitus" nappi="kaynti" n={2} />
       <FAQSection items={faqItems} />
       <ServiceContactSection variant="katto" />
       <ToimintaAlueetBanner service="pinnoitus" />

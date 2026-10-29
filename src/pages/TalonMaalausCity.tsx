@@ -21,6 +21,8 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
 import ReviewsTeaser from "@/components/ReviewsTeaser";
 import ServiceSchema from "@/components/ServiceSchema";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import { maalausCitySeo, cityHeroBase, HERO_BASE } from "@/data/seo";
 import { getCityBySlug } from "@/data/cityData";
 import { getCityWikipediaUrl } from "@/data/cityWikipedia";
@@ -118,11 +120,15 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
 
       <MaalausSanasto cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" featureFirst />
+      <ToimintaKutsu palvelu="maalaus" nappi="laskuri" n={0} />
       <CityServiceSummary service="maalaus" cityIn={cityData.cityIn} />
       <MiksiValitaPintanen service="maalaus" cityIn={cityData.cityIn} />
+      <KayntiPalkki palvelu="maalaus" />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" hideMap={kartta} />
       <VarinVaihto service="maalaus" citySlug={cityData.slug} cityIn={cityData.cityIn} />
+      <ToimintaKutsu palvelu="maalaus" nappi="kaynti" n={1} />
       <MaalausEntrepreneur cityIn={cityData.cityIn} />
+      <LaskuriPalkki palvelu="maalaus" />
       <FAQSection
         items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}

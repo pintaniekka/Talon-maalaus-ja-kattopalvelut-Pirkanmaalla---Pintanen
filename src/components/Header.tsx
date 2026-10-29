@@ -106,6 +106,16 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Sivu ei vieri valikon alla, kun mobiilivalikko on auki (vieritys tapahtuu valikon sisällä).
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isMobileMenuOpen]);
+
   useEffect(() => {
     setOpenDropdown(null);
     setIsMobileMenuOpen(false);
@@ -378,7 +388,13 @@ const Header = () => {
             exit={{ opacity: 0, height: 0 }}
             className="xl:hidden bg-navy border-t border-white/10"
           >
-            <nav aria-label="Mobiilinavigaatio" className="section-container py-4 flex flex-col gap-2">
+            {/* Eki 29.10.2026: valikko on kiinteän headerin sisällä, joten pitkä lista (alavalikot auki) meni ruudun
+                alareunan yli eikä sitä voinut vierittää. Lista vierii nyt omassa laatikossaan, jonka korkeus on
+                ruutu miinus headerin palkki. */}
+            <nav
+              aria-label="Mobiilinavigaatio"
+              className="section-container flex max-h-[calc(100dvh-5.5rem)] flex-col gap-2 overflow-y-auto overscroll-contain py-4"
+            >
               {navItems.map((item) => {
                 if (!item.dropdown) {
                   return (

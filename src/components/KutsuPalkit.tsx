@@ -6,7 +6,7 @@ import { KAYNTI_POLKU, LASKURI_POLKU, type KutsuPalvelu } from "@/data/kutsupolu
 
 /**
  * Kaksi laajempaa kutsupalkkia (Eki 29.10.2026, malli LummeColta mutta kapeampana ja meidän väreillä):
- * `KayntiPalkki` (ilmainen kuntotarkastus tai arviokäynti) ja `LaskuriPalkki` (hintalaskuri).
+ * `KayntiPalkki` (navy: ilmainen kuntotarkastus tai arviokäynti) ja `LaskuriPalkki` (sininen: hintalaskuri).
  * Kumpaakin on yksi per sivu; muut välit ovat kevyitä `ToimintaKutsu`-lohkoja. Tavallisia taustalohkoja.
  * Laskurista ei sanota mitään yhteystiedoista (laskuri kysyy nimen ja numeron, Eki: ei mainita).
  */
@@ -24,26 +24,27 @@ const KAYNTI: Record<KutsuPalvelu, { eyebrow: string; otsikko: string; teksti: s
   pinnoitus: {
     eyebrow: "Ilmainen kuntotarkastus",
     otsikko: "Pyydä katon kuntotarkastus",
-    teksti: "Käymme katsomassa kattosi. Tarkistamme tiilet, saumat, läpiviennit ja aluskatteen ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
+    teksti: "Tulemme katsomaan kattosi. Tarkistamme tiilet, saumat, läpiviennit ja aluskatteen ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
     nappi: "Pyydä ilmainen kuntotarkastus",
     lisaa: { to: "/ilmainen-katon-kuntotarkastus/", label: "Mitä kuntotarkastuksessa katsotaan?" },
   },
   maalaus: {
     eyebrow: "Ilmainen arviokäynti",
     otsikko: "Pyydä julkisivun arviokäynti",
-    teksti: "Käymme katsomassa talosi. Katsomme julkisivun kunnon paikan päällä ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
+    teksti: "Tulemme katsomaan talosi. Katsomme julkisivun kunnon paikan päällä ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
     nappi: "Pyydä ilmainen arviokäynti",
     lisaa: { to: "/ilmainen-julkisivun-kuntoarvio/", label: "Mitä arviokäynnillä katsotaan?" },
   },
   yleinen: {
     eyebrow: "Ilmainen arviokäynti",
     otsikko: "Pyydä ilmainen arviokäynti",
-    teksti: "Käymme katsomassa katon tai talon kunnon paikan päällä ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
+    teksti: "Tulemme katsomaan katon tai talon kunnon paikan päällä ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
     nappi: "Pyydä ilmainen arviokäynti",
   },
 };
 
-const KAYNTI_EDUT = ["Ei maksa mitään eikä sido mihinkään", "Käynti samalla viikolla, myös iltaisin ja viikonloppuisin", "Kirjallinen tarjous kiinteällä hinnalla"];
+// Eki 29.10.2026: "samalla viikolla" riittää, iltoja ja viikonloppuja ei mainita (vain UKK:ssa "mahdollisesti jopa").
+const KAYNTI_EDUT = ["Ei maksa mitään eikä sido mihinkään", "Käynti yleensä samalla viikolla", "Kirjallinen tarjous kiinteällä hinnalla"];
 
 interface KayntiProps {
   palvelu?: KutsuPalvelu;
@@ -105,9 +106,9 @@ export const KayntiPalkki = ({ palvelu = "yleinen", nappi, otsikko, teksti }: Ka
 };
 
 const LASKURI: Record<KutsuPalvelu, { otsikko: string; edut: string[] }> = {
-  pinnoitus: { otsikko: "Laske kattosi pinnoituksen hinta minuutissa", edut: ["Viisi kysymystä katostasi", "Hinta-arvio heti, myös kotitalousvähennyksen jälkeen", "Ilmainen ja nopea"] },
-  maalaus: { otsikko: "Laske talosi maalauksen hinta minuutissa", edut: ["Neljä kysymystä talostasi", "Hinta-arvio heti, myös kotitalousvähennyksen jälkeen", "Ilmainen ja nopea"] },
-  yleinen: { otsikko: "Laske hinta alle minuutissa", edut: ["Muutama kysymys katosta tai talosta", "Hinta-arvio heti, myös kotitalousvähennyksen jälkeen", "Ilmainen ja nopea"] },
+  pinnoitus: { otsikko: "Laske kattosi pinnoituksen hinta minuutissa", edut: ["Viisi kysymystä katostasi", "Hinta-arvio heti", "Ilmainen ja nopea"] },
+  maalaus: { otsikko: "Laske talosi maalauksen hinta minuutissa", edut: ["Neljä kysymystä talostasi", "Hinta-arvio heti", "Ilmainen ja nopea"] },
+  yleinen: { otsikko: "Laske hinta alle minuutissa", edut: ["Muutama kysymys katosta tai talosta", "Hinta-arvio heti", "Ilmainen ja nopea"] },
 };
 
 export const LaskuriPalkki = ({ palvelu = "yleinen" }: { palvelu?: KutsuPalvelu }) => {
@@ -115,21 +116,21 @@ export const LaskuriPalkki = ({ palvelu = "yleinen" }: { palvelu?: KutsuPalvelu 
   return (
     <section className="osio py-10 md:py-14" aria-labelledby="laskuri-palkki-otsikko">
       <div className="section-container">
-        <div className="kortti mx-auto max-w-2xl border-2 border-accent/25 p-6 md:p-8">
-          <h2 id="laskuri-palkki-otsikko" className="font-heading text-2xl font-extrabold text-accent-ink md:text-3xl">
+        <div className="osio-sininen mx-auto max-w-2xl rounded-3xl p-6 text-white shadow-xl md:p-8">
+          <h2 id="laskuri-palkki-otsikko" className="font-heading text-2xl font-extrabold md:text-3xl">
             {l.otsikko}
           </h2>
           <ul className="mt-5 space-y-2.5">
             {l.edut.map((e) => (
-              <li key={e} className="flex items-start gap-3 font-semibold text-foreground">
-                <Merkki />
+              <li key={e} className="flex items-start gap-3 font-semibold">
+                <Merkki tumma />
                 <span>{e}</span>
               </li>
             ))}
           </ul>
           <Link
             to={LASKURI_POLKU[palvelu]}
-            className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-paint-yellow px-6 py-3.5 font-heading font-extrabold text-paint-yellow-foreground shadow-lg shadow-paint-yellow/30 transition-all hover:scale-[1.02] hover:bg-paint-yellow-hover"
+            className="group mt-7 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-paint-yellow px-6 py-3.5 font-heading font-extrabold text-paint-yellow-foreground shadow-lg shadow-black/15 transition-all hover:scale-[1.02] hover:bg-paint-yellow-hover"
           >
             Kokeile hintalaskuria
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

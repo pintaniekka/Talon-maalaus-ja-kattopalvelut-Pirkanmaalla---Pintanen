@@ -54,7 +54,7 @@ const yhteiset = {
   etenee: (kaynti: string, tekija: string, kuva: { base: string; alt: string }): Tyovaihe[] => [
     {
       title: "Pyydä käynti",
-      text: `Täytä lomake tai soita. Sovimme ajan, joka sopii sinulle, yleensä samalla viikolla, myös iltaisin ja viikonloppuisin.`,
+      text: `Täytä lomake tai soita. Sovimme ajan, joka sopii sinulle, yleensä samalla viikolla.`,
     },
     {
       title: `${kaynti} paikan päällä`,
@@ -130,7 +130,7 @@ export const kuntotarkastukset: Record<KuntotarkastusService, KuntotarkastusSisa
     faq: [
       { question: "Maksaako katon kuntotarkastus jotain?", answer: "Ei. Kuntotarkastus ja kirjallinen tarjous ovat ilmaisia. Maksullinen katon kuntotarkastus maksaa Suomessa yleensä noin 280 euroa." },
       { question: "Onko tarkastus puolueeton, kun te myös pinnoitatte kattoja?", answer: "Kuntotarkastus on samalla tarjouskäynti, ja sanomme sen suoraan. Silti kerromme rehellisesti, jos pinnoitus ei ole ajankohtainen tai jos katto kannattaa uusia. Huonosta työstä ei tule hyvää mainetta." },
-      { question: "Pitääkö minun olla paikalla?", answer: "Ei välttämättä. On hyvä olla paikalla, koska käymme katon ja tarjouksen läpi yhdessä. Sovimme ajan, joka sopii sinulle, myös iltaisin ja viikonloppuisin." },
+      { question: "Pitääkö minun olla paikalla?", answer: "Ei välttämättä. On hyvä olla paikalla, koska käymme katon ja tarjouksen läpi yhdessä. Sovimme ajan, joka sopii sinulle, mahdollisesti jopa iltaisin tai viikonloppuisin." },
       { question: "Saanko tarjouksen etänä kuvien perusteella?", answer: "Kyllä. Yleensä kuvat katosta ja arvio katon koosta riittävät. Tarkat mitat tai kuntoraportti ovat iso plussa. Ilmainen kuntotarkastus paikan päällä on silti tarkin tapa." },
       { question: "Saanko hinta-arvion jo ennen käyntiä?", answer: 'Kyllä. <a href="/hintalaskuri/?palvelu=pinnoitus">Hintalaskuri</a> antaa suuntaa antavan arvion katon koon ja jyrkkyyden mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa kuntotarkastuksen jälkeen.' },
       { question: "Mitä jos katto ei tarvitse pinnoitusta?", answer: "Sanomme sen suoraan. Jos tiilen pinta on vielä ehjä, pinnoitus ei ole ajankohtainen. Jos taas aluskate vuotaa tai tiiliä on rikki laajalti, kerromme, että katto kannattaa uusia." },
@@ -204,7 +204,7 @@ export const kuntotarkastukset: Record<KuntotarkastusService, KuntotarkastusSisa
     faq: [
       { question: "Maksaako arviokäynti jotain?", answer: "Ei. Arviokäynti ja kirjallinen tarjous ovat ilmaisia. Maksullinen julkisivun kuntoarvio maksaa yleensä noin 180 euroa." },
       { question: "Onko kuntoarvio puolueeton, kun te myös maalaatte?", answer: "Arviokäynti on samalla tarjouskäynti, ja sanomme sen suoraan. Silti kerromme rehellisesti, jos maalaus ei ole vielä ajankohtainen. Huonosta työstä ei tule hyvää mainetta." },
-      { question: "Pitääkö minun olla paikalla?", answer: "Ei välttämättä. On hyvä olla paikalla, koska käymme seinät ja tarjouksen läpi yhdessä. Sovimme ajan, joka sopii sinulle, myös iltaisin ja viikonloppuisin." },
+      { question: "Pitääkö minun olla paikalla?", answer: "Ei välttämättä. On hyvä olla paikalla, koska käymme seinät ja tarjouksen läpi yhdessä. Sovimme ajan, joka sopii sinulle, mahdollisesti jopa iltaisin tai viikonloppuisin." },
       { question: "Saanko tarjouksen etänä kuvien perusteella?", answer: "Kyllä. Yleensä kuvat seinistä ja arvio talon koosta riittävät. Tarkat mitat ovat iso plussa. Arviokäynti paikan päällä on silti tarkin tapa." },
       { question: "Saanko hinta-arvion jo ennen käyntiä?", answer: 'Kyllä. <a href="/hintalaskuri/?palvelu=maalaus">Hintalaskuri</a> antaa suuntaa antavan arvion talon koon, kerrosten ja maalin kunnon mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa arviokäynnin jälkeen.' },
       { question: "Mitä jos seinät eivät vielä tarvitse maalausta?", answer: "Sanomme sen suoraan. Jos maali vielä suojaa puuta eikä hilseile, maalaus voi odottaa. Kerromme, mitä merkkejä kannattaa seurata." },

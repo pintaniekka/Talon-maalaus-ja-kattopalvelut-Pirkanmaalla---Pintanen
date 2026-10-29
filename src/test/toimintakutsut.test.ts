@@ -26,6 +26,10 @@ const SIVUT = [
   "Kuntotarkastus",
   "Taloyhtiot",
   "Kotitalousvahennys",
+  "Kokemuksia",
+  "Referenssit",
+  "ToimintaAlueet",
+  "Hintalaskuri",
   "ServiceAreaPage",
 ];
 
@@ -165,7 +169,8 @@ describe("kutsupalkit: yksi käyntipalkki ja enintään yksi laskuripalkki per s
       const laskuri = l.filter((b) => ["LaskuriPalkki", "CalculatorCta", "ChatPriceCalculator"].includes(b.nimi)).length;
       expect(kaynti, `${sivu}: käyntipalkkeja ${kaynti}`).toBe(1);
       // Taloyhtiöillä ei ole laskuria (laskuri on omakotitaloille); muilla on yksi.
-      expect(laskuri, `${sivu}: laskuripalkkeja ${laskuri}`).toBe(sivu === "Taloyhtiot" ? 0 : 1);
+      // Hintalaskurisivu on itse laskuri (PriceWizard oman section-lohkon sisällä).
+      expect(laskuri, `${sivu}: laskuripalkkeja ${laskuri}`).toBe(sivu === "Taloyhtiot" || sivu === "Hintalaskuri" ? 0 : 1);
     });
   }
 });

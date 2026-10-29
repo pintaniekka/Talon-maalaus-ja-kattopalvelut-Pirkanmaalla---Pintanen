@@ -35,16 +35,16 @@ const KAYNTI_TEKSTIT: Record<KutsuPalvelu, Teksti[]> = {
   pinnoitus: [
     { lause: "Katsomme kattosi kunnon ilmaiseksi ja annamme kirjallisen tarjouksen.", nappi: "Pyydä ilmainen kuntotarkastus" },
     { lause: "Epävarma katon kunnosta? Kuntotarkastus ei maksa mitään.", nappi: "Varaa kuntotarkastus" },
-    { lause: "Kuntotarkastus samalla viikolla, myös iltaisin.", nappi: "Pyydä kuntotarkastus" },
+    { lause: "Kuntotarkastus yleensä samalla viikolla.", nappi: "Pyydä kuntotarkastus" },
   ],
   maalaus: [
     { lause: "Katsomme julkisivun kunnon ilmaiseksi ja annamme kirjallisen tarjouksen.", nappi: "Pyydä ilmainen arviokäynti" },
     { lause: "Mietitkö, pitäisikö talo jo maalata? Arviokäynti ei maksa mitään.", nappi: "Varaa arviokäynti" },
-    { lause: "Arviokäynti samalla viikolla, myös iltaisin.", nappi: "Pyydä arviokäynti" },
+    { lause: "Arviokäynti yleensä samalla viikolla.", nappi: "Pyydä arviokäynti" },
   ],
   yleinen: [
     { lause: "Ilmainen arviokäynti ja kirjallinen tarjous kiinteällä hinnalla.", nappi: "Pyydä ilmainen arviokäynti" },
-    { lause: "Käynti samalla viikolla, myös iltaisin ja viikonloppuisin.", nappi: "Varaa arviokäynti" },
+    { lause: "Käynti yleensä samalla viikolla.", nappi: "Varaa arviokäynti" },
   ],
 };
 

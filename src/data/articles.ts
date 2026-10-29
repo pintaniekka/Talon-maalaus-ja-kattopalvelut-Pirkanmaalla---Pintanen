@@ -268,7 +268,7 @@ export const articles: ArticleMeta[] = [
     lead: "Harjatiiviste on nauha harjapuun yli ja harjatiilen alla. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi. Tarkistamme harjan jokaisessa kuntotarkastuksessa ja asennamme tiivisteen tarvittaessa pinnoituksen yhteydessä.",
     category: "katto",
     author: "eerik",
-    publishedAt: "2026-12-10",
+    publishedAt: "2026-11-19", // Eerik 29.10.2026: nostettu jonossa (880 hakua/kk, OpenSEO-raportti),
     readingMinutes: 5,
     heroImage: "tiilikaton-pinnoitus-harjatiivisteen-asennus",
     heroAlt: "Harjatiivisteen asennus tiilikaton harjalle",

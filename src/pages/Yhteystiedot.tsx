@@ -1,5 +1,6 @@
 import SEO from "@/components/SEO";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import PageHero from "@/components/PageHero";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FaktaNauha from "@/components/FaktaNauha";
@@ -75,6 +76,9 @@ const Yhteystiedot = () => {
       />
 
       <FaktaNauha items={faktat} ariaLabel="Yrityksen tiedot" />
+
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/yhteystiedot" />
 
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />

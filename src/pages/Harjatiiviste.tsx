@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Rytmi, { merkitse } from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import PageHero from "@/components/PageHero";
@@ -169,6 +170,9 @@ const Harjatiiviste = () => {
       <Kuvat />
 
       <ProcessList title="Näin harjatiiviste asennetaan" steps={vaiheet} cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }} />
+
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/harjatiivisteen-asennus" />
 
       <section className="section-padding osio">
         <div className="section-container mx-auto max-w-3xl text-center">

@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
@@ -111,6 +112,9 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         steps={maalausTyovaiheet}
         cta={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
       />
+
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku={`/talon-maalaus-${cityData.slug}`} />
 
       <MaalausSanasto cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" featureFirst />

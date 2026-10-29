@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import Kuvanosto from "@/components/Kuvanosto";
@@ -96,6 +97,9 @@ const TalonMaalaus = () => {
       />
 
       {/* Talotyypit työvaiheiden jälkeen (brief 4, 26.10.2026): rintamamiestalo, hirsitalo, mökki ja piharakennukset. */}
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/talon-maalaus-pirkanmaa" />
+
       <MaalausTalotyypit />
       <VarinVaihto service="maalaus" />
 

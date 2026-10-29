@@ -12,8 +12,11 @@ import { Helmet } from "react-helmet-async";
  * laskee taustat lohkojen järjestyksestä, joten sivut, joilta puuttuu lohkoja (ei karttaa, ei arvosteluja),
  * pysyvät sopusoinnussa ilman käsityötä: kaksi samanväristä tai kaksi näyttämöä ei osu peräkkäin.
  * Viiston alle jäävä kolmio saa edellisen ja seuraavan lohkon värin, joten saumaan ei jää eri väriä.
+ * - nosto (29.10.2026): leijuva arvostelunosto kahden lohkon rajalla. Se ei kuluta väriä eikä katkaise
+ *   näyttämöketjua: kääre saa kaksiosaisen taustan (ylempi puoli edellisen, alempi seuraavan lohkon väri),
+ *   joten kortti istuu sauman päällä. Nostoa ei saa panna viiston näyttämön viereen (arvostelut.test.ts).
  */
-export type RytmiLaji = "tausta" | "sininen" | "navy" | "oma" | "ohita";
+export type RytmiLaji = "tausta" | "sininen" | "navy" | "oma" | "ohita" | "nosto";
 
 type Merkitty = { rytmi?: RytmiLaji };
 
@@ -26,6 +29,26 @@ export const merkitse = <T,>(komponentti: T, laji: RytmiLaji): T => {
 const VALKOINEN = "hsl(var(--background))";
 const VAALEA = "hsl(var(--accent-light))";
 const NAVY = "hsl(var(--navy))";
+const SININEN = "hsl(203 100% 43%)";
+
+const onNayttamo = (l: RytmiLaji) => l === "sininen" || l === "navy";
+
+/** Lajit, jotka eivät vaikuta väreihin eivätkä näyttämöketjuun. */
+const lapinakyva = (l: RytmiLaji) => l === "ohita" || l === "nosto";
+
+/** Nostojen indeksit, joiden vieressä (ohitettavat välistä) on viisto näyttämö. Testejä ja kehitysvaroitusta varten. */
+export const nostotViistonReunalla = (lajit: RytmiLaji[]): number[] => {
+  const naapuri = (i: number, suunta: 1 | -1): RytmiLaji | undefined => {
+    for (let j = i + suunta; j >= 0 && j < lajit.length; j += suunta) if (!lapinakyva(lajit[j])) return lajit[j];
+    return undefined;
+  };
+  return lajit.flatMap((l, i) => {
+    if (l !== "nosto") return [];
+    const e = naapuri(i, -1);
+    const s = naapuri(i, 1);
+    return (e && onNayttamo(e)) || (s && onNayttamo(s)) ? [i] : [];
+  });
+};
 
 const lajiOf = (el: ReactElement): RytmiLaji => {
   const t = el.type as unknown;
@@ -39,7 +62,6 @@ const lajiOf = (el: ReactElement): RytmiLaji => {
   return (t as Merkitty | null)?.rytmi ?? "tausta";
 };
 
-const onNayttamo = (l: RytmiLaji) => l === "sininen" || l === "navy";
 
 const Rytmi = ({ children }: { children: ReactNode }) => {
   const items = Children.toArray(children).filter(isValidElement) as ReactElement[];
@@ -47,7 +69,7 @@ const Rytmi = ({ children }: { children: ReactNode }) => {
   // Kaksi näyttämöä peräkkäin: jälkimmäinen muuttuu taustaksi (ohitettavat eivät katkaise ketjua).
   let edellinen: RytmiLaji = "oma";
   for (let i = 0; i < lajit.length; i++) {
-    if (lajit[i] === "ohita") continue;
+    if (lapinakyva(lajit[i])) continue;
     if (onNayttamo(lajit[i]) && onNayttamo(edellinen)) lajit[i] = "tausta";
     edellinen = lajit[i];
   }
@@ -61,17 +83,28 @@ const Rytmi = ({ children }: { children: ReactNode }) => {
   }
   const variKohdassa = (i: number, suunta: 1 | -1): string => {
     for (let j = i + suunta; j >= 0 && j < lajit.length; j += suunta) {
-      if (lajit[j] === "ohita") continue;
-      return varit[j] ?? VALKOINEN;
+      if (lapinakyva(lajit[j])) continue;
+      // Näyttämön väri vain noston naapurina (ei suositeltu paikka): lohkot eivät muuten ole näyttämön vieressä.
+      return varit[j] ?? (lajit[j] === "navy" ? NAVY : SININEN);
     }
     return suunta === 1 ? NAVY : VALKOINEN;
   };
+  if (import.meta.env.DEV && nostotViistonReunalla(lajit).length > 0) {
+    console.warn("Rytmi: arvostelunosto on viiston näyttämön reunalla, siirrä se tavalliseen väliin.");
+  }
 
   return (
     <>
       {items.map((el, i) => {
         const laji = lajit[i];
         if (laji === "ohita" || laji === "oma") return el;
+        if (laji === "nosto") {
+          return (
+            <div key={el.key ?? i} className="rytmi-nosto relative" style={{ background: `linear-gradient(${variKohdassa(i, -1)} 50%, ${variKohdassa(i, 1)} 50%)` }}>
+              {el}
+            </div>
+          );
+        }
         if (laji === "tausta") {
           return (
             <div key={el.key ?? i} className="rytmi-tausta" style={{ "--osio-bg": varit[i] } as CSSProperties}>

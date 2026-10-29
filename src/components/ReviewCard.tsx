@@ -26,6 +26,8 @@ interface Props {
   review: Testimonial;
   /** Järjestysnumero: valitsee alkukirjainpallon värin. */
   index?: number;
+  /** Ankkuri (arvosteluAnkkuri), johon arvostelunoston "Lue koko arvostelu" osoittaa. Vain kerran per sivu. */
+  id?: string;
 }
 
 /**
@@ -33,10 +35,10 @@ interface Props {
  * Alkukirjainpallo on Googlen profiilikuvan tilalla (Eerik 13.10.2026: kuvia ei voi hakea, kirjain riittää).
  * Käytetään Kokemuksia-sivun ruudukossa ja kaupunkisivujen arvostelunostossa.
  */
-const ReviewCard = ({ review, index = 0 }: Props) => {
+const ReviewCard = ({ review, index = 0, id }: Props) => {
   const city = review.city ? getCityBySlug(review.city) : undefined;
   return (
-    <figure className="kortti h-full p-5 flex flex-col">
+    <figure id={id} className="kortti h-full p-5 flex flex-col scroll-mt-28" data-arvostelu="kortti">
       <figcaption className="flex items-center gap-3 mb-2.5">
         <span
           className="w-10 h-10 rounded-full flex items-center justify-center text-white text-base font-medium flex-shrink-0"

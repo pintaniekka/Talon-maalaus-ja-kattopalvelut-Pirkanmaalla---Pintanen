@@ -1,5 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import { MapPin } from "@/components/icons/BrandIcons";
 import { Link } from 'react-router-dom';
 import PageHero from '@/components/PageHero';
@@ -83,6 +84,9 @@ const ToimintaAlueet = () => {
           </div>
         </div>
       </section>
+
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/toiminta-alueet" />
 
       <ServiceContactSection variant="general" />
       </Rytmi>

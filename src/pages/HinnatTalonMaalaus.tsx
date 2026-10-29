@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
@@ -128,6 +129,9 @@ const HinnatTalonMaalaus = () => {
 
       {/* Kolme esimerkkitaloa laskurin kaavoilla (brief 3, 26.10.2026); "Mitä hintaan kuuluu" seuraa heti alla. */}
       <PriceExamplesSection service="maalaus" />
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/talon-maalaus-hinta-pirkanmaa" />
+
       <HintaKohteet service="maalaus" />
 
       <section className="section-padding osio">

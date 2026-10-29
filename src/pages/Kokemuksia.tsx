@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import PageHero from "@/components/PageHero";
 import Rytmi from "@/components/Rytmi";
 import ReviewCard from "@/components/ReviewCard";
@@ -6,6 +8,7 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
 import { HERO_BASE, staticSeo } from "@/data/seo";
 import { allTestimonials, matchesCategory, REVIEW_COUNT, type TestimonialCategory } from "@/data/testimonialsData";
+import { arvosteluAnkkuri } from "@/data/arvostelusijoitus";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 
 /** Kaksi ryhmää Eerikin luokittelulla (12.10.2026). Ei "muut"-ryhmää: jokainen arvostelu kuuluu kattoon, seiniin tai molempiin. */
@@ -19,6 +22,21 @@ const crumbs = [{ name: "Kokemuksia" }];
 /** /kokemuksia: kaikki Google-arvostelut yhdellä sivulla, sanasta sanaan (Eerik 12.10.2026). */
 const Kokemuksia = () => {
   const seo = staticSeo["/kokemuksia"];
+  // Ankkuri-id vain arvostelun ensimmäiseen korttiin: "molemmat"-arvostelut ja Tampereen osio toistavat kortteja.
+  const annetut = new Set<string>();
+  const ankkuri = (t: (typeof allTestimonials)[number]) => {
+    const id = arvosteluAnkkuri(t);
+    if (annetut.has(id)) return undefined;
+    annetut.add(id);
+    return id;
+  };
+  // Arvostelunoston "Lue koko arvostelu" tuo tänne ankkurilla; sivu latautuu laiskasti, joten vieritetään itse.
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.getElementById(hash.slice(1));
+    el?.scrollIntoView({ block: "start" });
+  }, [hash]);
   return (
     <div>
       <Rytmi>
@@ -56,7 +74,7 @@ const Kokemuksia = () => {
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {reviews.map((r, i) => (
-                  <ReviewCard key={r.name} review={r} index={i} />
+                  <ReviewCard key={r.name} review={r} index={i} id={ankkuri(r)} />
                 ))}
               </div>
             </div>
@@ -77,7 +95,7 @@ const Kokemuksia = () => {
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {tampere.map((r, i) => (
-                  <ReviewCard key={`tampere-${r.name}`} review={r} index={i} />
+                  <ReviewCard key={`tampere-${r.name}`} review={r} index={i} id={ankkuri(r)} />
                 ))}
               </div>
             </div>

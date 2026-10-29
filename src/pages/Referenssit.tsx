@@ -1,5 +1,6 @@
 import PageHero from "@/components/PageHero";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import SEO from "@/components/SEO";
@@ -34,6 +35,9 @@ const Referenssit = () => (
     />
     <Rytmi>
       <ReferenssiGalleria />
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/referenssit" />
+
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />
     </Rytmi>

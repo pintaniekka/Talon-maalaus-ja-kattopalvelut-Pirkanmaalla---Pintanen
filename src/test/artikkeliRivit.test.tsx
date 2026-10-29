@@ -20,11 +20,11 @@ const renderoi = (props: Parameters<typeof ArtikkeliRivit>[0] = {}) =>
   );
 
 describe("ArtikkeliRivit", () => {
-  it("renderöi kolme uusinta julkaistua oikeassa järjestyksessä, kukin yhtenä linkkinä", () => {
+  it("renderöi neljä uusinta julkaistua oikeassa järjestyksessä, kukin yhtenä linkkinä", () => {
     const { container } = renderoi({ title: "Uusimmat artikkelit" });
-    const odotetut = getPublishedArticles().slice(0, 3);
+    const odotetut = getPublishedArticles().slice(0, 4);
     const rivit = [...container.querySelectorAll("ul > li")];
-    expect(rivit.length).toBe(3);
+    expect(rivit.length).toBe(4);
     rivit.forEach((li, i) => {
       const linkit = li.querySelectorAll("a");
       expect(linkit.length).toBe(1);
@@ -40,7 +40,7 @@ describe("ArtikkeliRivit", () => {
     const uusin = getPublishedArticles()[0];
     const toinen = renderoi({ title: "Lue myös", excludeSlug: uusin.slug }).container;
     expect(toinen.querySelector(`a[href="/artikkelit/${uusin.slug}/"]`)).toBeNull();
-    expect(toinen.querySelectorAll("ul > li").length).toBe(3);
+    expect(toinen.querySelectorAll("ul > li").length).toBe(4);
   });
 
   it("otsikko on tumma eikä käytä linkin väriä; metarivissä vain etunimi", () => {

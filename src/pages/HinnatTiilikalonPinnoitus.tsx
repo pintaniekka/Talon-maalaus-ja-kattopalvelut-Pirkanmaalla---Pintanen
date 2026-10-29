@@ -6,15 +6,15 @@ import ServiceSchema from "@/components/ServiceSchema";
 import RelatedArticles from "@/components/RelatedArticles";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
-import KotitalousVahennys from "@/components/KotitalousVahennys";
+import { KotitalousVahennysNayttamo } from "@/components/KotitalousVahennys";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
 import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
 import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
-import FeaturedProjects from "@/components/hinnat/FeaturedProjects";
-import { PriceSectionHeading, PriceIncludes, PriceFactors, Checklist, CompareCards } from "@/components/hinnat/PriceSections";
+import HintaKohteet from "@/components/hinnat/HintaKohteet";
+import { Checklist, CompareCards, HintaTekijatLohko, PriceIncludes, PriceSectionHeading } from "@/components/hinnat/PriceSections";
 import { PriceExamplesSection } from "@/components/hinnat/PriceExamples";
 import { pinnoitusPrices, fmtRange } from "@/data/prices";
 import { HERO_BASE } from "@/data/seo";
@@ -137,12 +137,13 @@ const HinnatTiilikalonPinnoitus = () => {
 
       {/* Hintaesimerkit: samat kortit kuin palvelu- ja kaupunkisivuilla */}
       <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" calculatorHref="/hintalaskuri/?palvelu=pinnoitus" calculatorLabel="Laske oman kattosi hinta" />
-      <KotitalousVahennys />
+      <KotitalousVahennysNayttamo />
 
       <CalculatorCta service="pinnoitus" />
 
       {/* Kolme esimerkkikattoa laskurin kaavoilla (brief 3, 26.10.2026); "Mitä hintaan kuuluu" seuraa heti alla. */}
       <PriceExamplesSection service="pinnoitus" />
+      <HintaKohteet service="pinnoitus" />
 
       {/* Mitä hintaan kuuluu */}
       <section className="section-padding osio">
@@ -158,17 +159,13 @@ const HinnatTiilikalonPinnoitus = () => {
       </section>
 
       {/* Mistä hinta syntyy */}
-      <section className="section-padding osio">
-        <div className="section-container max-w-4xl mx-auto">
-          <PriceSectionHeading title="Mistä tiilikaton pinnoituksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." />
-          <PriceFactors factors={priceFactors} />
-        </div>
-      </section>
+      <HintaTekijatLohko title="Mistä tiilikaton pinnoituksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." factors={priceFactors} />
 
       {/* Pinnoitus vai uusi katto */}
       <section className="section-padding osio">
         <div className="section-container max-w-4xl mx-auto">
           <PriceSectionHeading
+            eyebrow="Vertailu"
             title="Kannattaako pinnoitus vai uusi katto?"
             intro="Pinnoitus riittää, jos aluskate ja katon rakenteet ovat kunnossa. Jos tiilet ovat rikki laajalti tai aluskate vuotaa, katto kannattaa uusia. Pienet aluskatteen korjaukset teemme pinnoituksen yhteydessä."
           />
@@ -194,6 +191,7 @@ const HinnatTiilikalonPinnoitus = () => {
       <section className="section-padding osio">
         <div className="section-container">
           <PriceSectionHeading
+            eyebrow="Tarjouksen vertailu"
             title="Mitä tarjouksesta kannattaa katsoa?"
             intro="Kun vertaat tarjouksia, katso muutakin kuin loppusummaa. Kysy ainakin nämä:"
           />
@@ -202,7 +200,6 @@ const HinnatTiilikalonPinnoitus = () => {
       </section>
       <Vaarinymmarrykset service="pinnoitus" />
 
-      <FeaturedProjects service="pinnoitus" title="Tiilikaton pinnoituksia Pirkanmaalla" />
 
       <RelatedArticles categories={["katto", "raha"]} />
       <FAQSection items={faqItems} />

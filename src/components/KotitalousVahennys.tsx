@@ -1,4 +1,5 @@
 import { usePreviewVariant } from "@/lib/previewVariant";
+import { merkitse } from "@/components/Rytmi";
 import VahennysA from "./vahennys/VahennysA";
 import VahennysB from "./vahennys/VahennysB";
 import VahennysC from "./vahennys/VahennysC";
@@ -22,5 +23,10 @@ const KotitalousVahennys = ({ defaultVariant = "e" }: { defaultVariant?: Vahenny
   const Vahennys = vaihtoehdot[variant];
   return <Vahennys />;
 };
+
+/**
+ * Hintasivujen versio: sininen näyttämö, jossa laskelma on valkoinen kortti (Eerik 28.10.2026). Ei vaihtoehtoja.
+ */
+export const KotitalousVahennysNayttamo = merkitse(() => <VahennysE nayttamo />, "sininen");
 
 export default KotitalousVahennys;

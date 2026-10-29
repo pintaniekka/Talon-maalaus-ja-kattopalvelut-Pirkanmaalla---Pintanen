@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
@@ -133,6 +134,7 @@ const HinnatTalonMaalaus = () => {
       <ArvosteluNosto polku="/talon-maalaus-hinta-pirkanmaa" />
 
       <HintaKohteet service="maalaus" />
+      <ToimintaKutsu palvelu="maalaus" />
 
       <section className="section-padding osio">
         <div className="section-container max-w-3xl mx-auto">
@@ -172,6 +174,7 @@ const HinnatTalonMaalaus = () => {
         </div>
       </section>
       <Vaarinymmarrykset service="maalaus" />
+      <ToimintaKutsu palvelu="maalaus" />
 
 
       <ArtikkeliRivit categories={["maalaus", "raha"]} />

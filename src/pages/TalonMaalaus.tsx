@@ -18,6 +18,7 @@ import KotitalousVahennys from "@/components/KotitalousVahennys";
 import FAQSection from "@/components/FAQSection";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
@@ -107,8 +108,10 @@ const TalonMaalaus = () => {
       <MaalausPricingCards />
       <MiksiValitaPintanen service="maalaus" />
       <KotitalousVahennys />
+      <ToimintaKutsu palvelu="maalaus" />
       <MaalausEntrepreneur />
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
+      <ToimintaKutsu palvelu="maalaus" />
       <ArtikkeliRivit categories={["maalaus", "raha"]} />
       <FAQSection items={maalausFAQ} title="Usein kysyttyä talon maalauksesta" />
       <ServiceContactSection variant="maalaus" />

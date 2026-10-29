@@ -9,6 +9,7 @@ import ProcessList from "@/components/ProcessList";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import FAQSection from "@/components/FAQSection";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
@@ -219,6 +220,7 @@ const Taloyhtiot = () => {
           </aside>
         </div>
       </section>
+      <ToimintaKutsu laskuri={false} kaynti={{ to: "/tarjouspyynto/", label: "Pyydä tarjous taloyhtiölle" }} teksti="Haluatko tarjouksen taloyhtiönne katosta tai julkisivusta?" />
 
       <Kuvat />
 
@@ -251,6 +253,7 @@ const Taloyhtiot = () => {
       </section>
 
       <ArtikkeliRivit categories={["katto", "maalaus"]} />
+      <ToimintaKutsu laskuri={false} kaynti={{ to: "/tarjouspyynto/", label: "Pyydä tarjous taloyhtiölle" }} teksti="Haluatko tarjouksen taloyhtiönne katosta tai julkisivusta?" />
       <FAQSection items={faq} title="Usein kysyttyä taloyhtiöiltä" />
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />

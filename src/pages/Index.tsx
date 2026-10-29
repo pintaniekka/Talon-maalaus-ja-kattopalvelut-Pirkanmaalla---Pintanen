@@ -10,6 +10,7 @@ import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import SEO from "@/components/SEO";
 import Rytmi from "@/components/Rytmi";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
 
 
 const ChatPriceCalculator = lazyWithRetry(() => import("@/components/ChatPriceCalculator"));
@@ -35,6 +36,7 @@ const Index = () => {
         <Gallery />
       </Suspense>
       <MiksiPintanen />
+      <ToimintaKutsu />
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
       {/* Uusimmat artikkelit yhteydenoton edellä (29.10.2026): samat ohuet rivit kuin muualla, linkki /artikkelit/. */}
       <ArtikkeliRivit title="Uusimmat artikkelit" />

@@ -311,7 +311,7 @@ const ChatLeadForm = () => {
   return (
     <>
       {/* Floating button + bubble */}
-      <div className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] lg:bottom-4 right-4 z-[9998] flex flex-col items-end gap-2">
+      <div className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-[9998] flex flex-col items-end gap-2">
         <AnimatePresence>
           {bubbleVisible && !open && (
             <m.div
@@ -356,7 +356,7 @@ const ChatLeadForm = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] lg:bottom-4 right-4 z-[9999] w-[min(380px,calc(100vw-2rem))] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-[9999] w-[min(380px,calc(100vw-2rem))] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
             style={{ maxHeight: 'min(600px, calc(100vh - 120px))' }}
           >
             {/* Header */}

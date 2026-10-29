@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ToimintaKutsu from "@/components/ToimintaKutsu";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
 import { KotitalousVahennysNayttamo } from "@/components/KotitalousVahennys";
@@ -148,6 +149,7 @@ const HinnatTiilikalonPinnoitus = () => {
       <ArvosteluNosto polku="/tiilikaton-pinnoitus-hinta-pirkanmaa" />
 
       <HintaKohteet service="pinnoitus" />
+      <ToimintaKutsu palvelu="pinnoitus" />
 
       {/* Mitä hintaan kuuluu */}
       <section className="section-padding osio">
@@ -165,6 +167,7 @@ const HinnatTiilikalonPinnoitus = () => {
       {/* Mistä hinta syntyy */}
       <HintaTekijatLohko title="Mistä tiilikaton pinnoituksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." factors={priceFactors} />
 
+      <ToimintaKutsu palvelu="pinnoitus" />
       {/* Pinnoitus vai uusi katto */}
       <section className="section-padding osio">
         <div className="section-container max-w-4xl mx-auto">
@@ -202,10 +205,12 @@ const HinnatTiilikalonPinnoitus = () => {
           <Checklist items={offerChecklist} />
         </div>
       </section>
+      <ToimintaKutsu palvelu="pinnoitus" />
       <Vaarinymmarrykset service="pinnoitus" />
 
 
       <ArtikkeliRivit categories={["katto", "raha"]} />
+      <ToimintaKutsu palvelu="pinnoitus" />
       <FAQSection items={faqItems} />
       <ServiceContactSection variant="katto" />
       <ToimintaAlueetBanner service="pinnoitus" />

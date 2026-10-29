@@ -390,10 +390,10 @@ const Header = () => {
           >
             {/* Eki 29.10.2026: valikko on kiinteän headerin sisällä, joten pitkä lista (alavalikot auki) meni ruudun
                 alareunan yli eikä sitä voinut vierittää. Lista vierii nyt omassa laatikossaan, jonka korkeus on
-                ruutu miinus headerin palkki; alareunassa tilaa mobiilin alapalkille, ettei se peitä nappeja. */}
+                ruutu miinus headerin palkki. */}
             <nav
               aria-label="Mobiilinavigaatio"
-              className="section-container flex max-h-[calc(100dvh-5.5rem)] flex-col gap-2 overflow-y-auto overscroll-contain py-4 pb-[6.5rem] lg:pb-4"
+              className="section-container flex max-h-[calc(100dvh-5.5rem)] flex-col gap-2 overflow-y-auto overscroll-contain py-4"
             >
               {navItems.map((item) => {
                 if (!item.dropdown) {

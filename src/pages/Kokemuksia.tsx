@@ -64,6 +64,27 @@ const Kokemuksia = () => {
         );
       })}
 
+      {/* Tampere-osio (OpenSEO 29.10.2026: "tiilikaton pinnoitus kokemuksia Tampere" ei tuota mainintaa tekoälyvastauksissa). Samat arvostelut kuin yllä, Tampereen kohteet. */}
+      {(() => {
+        const tampere = allTestimonials.filter((t) => t.city === "tampere");
+        if (tampere.length < 2) return null;
+        return (
+          <section className="section-padding osio">
+            <div className="section-container max-w-6xl mx-auto">
+              <div className="max-w-3xl mx-auto text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-3 font-heading">Kokemuksia tiilikaton pinnoituksesta ja talon maalauksesta Tampereella</h2>
+                <p className="text-muted-foreground text-base md:text-lg">Nämä {tampere.length} arvostelua ovat Tampereen kohteista.</p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {tampere.map((r, i) => (
+                  <ReviewCard key={`tampere-${r.name}`} review={r} index={i} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
+
       <section className="py-12 osio">
         <div className="section-container max-w-3xl mx-auto text-center text-muted-foreground">
           <p>

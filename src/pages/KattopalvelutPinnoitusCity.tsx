@@ -5,6 +5,7 @@ import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
 import CityProjects from "@/components/CityProjects";
 import CityMap from "@/components/CityMap";
+import Kaupunginosat from "@/components/Kaupunginosat";
 import { hasKuntakartta } from "@/data/kartat";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
@@ -89,6 +90,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-accent-ink mb-4 font-heading">{cityData.pinnoitusLocalHookTitle}</h2>
                 <p className="text-muted-foreground leading-relaxed text-base md:text-lg">{cityData.pinnoitusLocalHookText}</p>
+                <Kaupunginosat slug={cityData.slug} cityGenitive={cityData.cityGenitive} service="pinnoitus" />
               </div>
               {kartta && <CityMap slug={cityData.slug} name={cityData.name} />}
             </div>

@@ -436,7 +436,7 @@ export const articles: ArticleMeta[] = [
     lead: "Nowocoat on vesiohenteinen kattopinnoite, joka on kehitetty ammattikäyttöön betonitiilikatoille. Se levitetään korkeapaineruiskulla kahteen kertaan, ja toinen kerros voidaan maalata noin kahden tunnin kuluttua. Käytämme sitä jokaisessa katossa.",
     category: "katto",
     author: "eerik",
-    publishedAt: "2027-01-21",
+    publishedAt: "2026-12-10", // Eerik 29.10.2026: nostettu jonossa (hakuun "nowocoat kokemuksia", harjatiivisteen vanha paikka),
     readingMinutes: 5,
     heroImage: "tiilikaton-pinnoitus-nokia-ruskea-tiilikatto-jalkeen",
     heroAlt: "Ruskea Nowocoatilla pinnoitettu tiilikatto Nokialla",

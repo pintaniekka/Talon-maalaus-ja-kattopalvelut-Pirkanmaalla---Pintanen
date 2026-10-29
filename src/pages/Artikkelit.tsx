@@ -248,14 +248,14 @@ export const ArtikkelitListaus = ({ artikkelit }: ListausProps) => {
               height={900}
               priority
             />
-            {/* Kelluva kirjoittajakortti kuvan alakulmassa. */}
+            {/* Kelluva kirjoittajakortti kuvan alakulmassa. Eerik 29.10.2026: vain nimet, "tekevät työn itse" on jo ingressissä. */}
             <div className="absolute -bottom-4 left-4 flex items-center gap-3 rounded-[14px] bg-card px-4 py-2.5 shadow-[0_10px_24px_-8px_rgba(11,26,51,0.35)] md:left-6">
               <span className="flex -space-x-2" aria-hidden="true">
                 {[authors.eerik, authors.eemil].map((k) => (
                   <img key={k.id} src={k.image} alt="" width={32} height={32} loading="lazy" decoding="async" className="h-8 w-8 rounded-full object-cover ring-2 ring-card" />
                 ))}
               </span>
-              <span className="text-[13px] font-semibold text-foreground">Kirjoittajat Eerik ja Eemil tekevät työt itse</span>
+              <span className="text-[13px] font-semibold text-foreground">Kirjoittajat: Eerik ja Eemil</span>
             </div>
           </div>
         </div>

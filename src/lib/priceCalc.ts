@@ -39,5 +39,13 @@ export const calculateRoofPrice = (m2: number, slope: string) => {
   return { min: Math.max(2850, m2 * minPer), max: Math.max(2850, m2 * maxPer) };
 };
 
+/**
+ * Harjatiiviste (Eerik 29.10.2026): 15 €/m pinnoituksen yhteydessä, 25 €/m erikseen tilattuna. Laskurin
+ * tulokseen vain euromäärä, ei metrihintaa. Harjan pituus on asiakkaan arvio metreinä.
+ */
+export const HARJATIIVISTE_HINTA = { pinnoituksenYhteydessa: 15, erikseen: 25 } as const;
+export const calculateRidgeSealPrice = (metres: number, erikseen = false): number =>
+  Math.round(Math.max(0, metres) * (erikseen ? HARJATIIVISTE_HINTA.erikseen : HARJATIIVISTE_HINTA.pinnoituksenYhteydessa));
+
 export const formatPriceRange = (p: { min: number; max: number }) =>
   `${p.min.toLocaleString('fi-FI')} – ${p.max.toLocaleString('fi-FI')} €`;

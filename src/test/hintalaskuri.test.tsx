@@ -125,6 +125,7 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     await pick("Ei ole");
     await pick("Löytyy kyllä");
     await pick("Normaali jyrkkyys, valjailla pärjää");
+    await pick("Ei puutu");
     await pick("Kyllä löytyy");
     expect(screen.getByText("Hienoa. Millä paikkakunnalla kohde on?")).toBeInTheDocument();
     await send("Paikkakunta", "Tampere");
@@ -194,6 +195,7 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     await pick("1–5 rikkinäistä");
     await pick("Löytyy kyllä");
     await pick("Todella jyrkkä");
+    await pick("Ei puutu");
     await pick("Kyllä löytyy");
     await send("Paikkakunta", "Tampere");
     contact("Testi", "12345678");
@@ -213,6 +215,7 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     await pick("Ei ole");
     await pick("Löytyy kyllä");
     await pick("Loiva, melkein tasakatto");
+    await pick("Ei puutu");
     await pick("Kyllä löytyy");
     await send("Paikkakunta", "Tampere");
     contact("Testi", "40 123 4567");
@@ -252,7 +255,7 @@ describe("/hintalaskuri-sivu", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Kuinka suuri katto on?" })).toBeInTheDocument();
     fireEvent.change(screen.getByLabelText("Kuinka suuri katto on?"), { target: { value: "200" } });
     fireEvent.click(screen.getByRole("button", { name: "Jatka" }));
-    for (const label of ["Ei ole", "Löytyy kyllä", "Normaali jyrkkyys, valjailla pärjää", "Kyllä löytyy"]) {
+    for (const label of ["Ei ole", "Löytyy kyllä", "Normaali jyrkkyys, valjailla pärjää", "Ei puutu", "Kyllä löytyy"]) {
       fireEvent.click(screen.getByRole("button", { name: label }));
     }
     expect(screen.getByRole("heading", { level: 2, name: "Millä paikkakunnalla kohde on?" })).toBeInTheDocument();
@@ -272,7 +275,7 @@ describe("/hintalaskuri-sivu", () => {
     );
     fireEvent.change(screen.getByLabelText("Kuinka suuri katto on?"), { target: { value: "200" } });
     fireEvent.click(screen.getByRole("button", { name: "Jatka" }));
-    for (const label of ["Ei ole", "Löytyy kyllä", "Normaali jyrkkyys, valjailla pärjää", "Kyllä löytyy"]) {
+    for (const label of ["Ei ole", "Löytyy kyllä", "Normaali jyrkkyys, valjailla pärjää", "Ei puutu", "Kyllä löytyy"]) {
       fireEvent.click(screen.getByRole("button", { name: label }));
     }
     fireEvent.click(screen.getByRole("button", { name: "Jatka" }));

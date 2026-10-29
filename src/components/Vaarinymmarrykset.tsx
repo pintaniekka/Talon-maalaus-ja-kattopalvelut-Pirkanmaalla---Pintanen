@@ -56,9 +56,10 @@ const Vaarinymmarrykset = ({ service }: { service: Service }) => (
       <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-8 text-center font-heading">
         {service === "pinnoitus" ? "Kolme yleistä luuloa tiilikatosta" : "Kolme yleistä luuloa talon maalauksesta"}
       </h2>
-      <dl className="grid gap-6 md:grid-cols-3">
+      {/* Lista eikä dl: dl:n ryhmässä ei saa olla kuvaa (Lighthouse definition-list, 29.10.2026). */}
+      <ul className="grid list-none gap-6 p-0 md:grid-cols-3">
         {items[service].map((it) => (
-          <div key={it.luulo} className="kortti overflow-hidden">
+          <li key={it.luulo} className="kortti overflow-hidden">
             <ResponsiveImage
               baseName={it.kuva.base}
               alt={it.kuva.alt}
@@ -68,12 +69,12 @@ const Vaarinymmarrykset = ({ service }: { service: Service }) => (
               height={375}
             />
             <div className="p-6">
-              <dt className="font-extrabold text-navy font-heading mb-2">”{it.luulo}”</dt>
-              <dd className="text-muted-foreground text-sm leading-relaxed">{it.totuus}</dd>
+              <h3 className="font-extrabold text-navy font-heading mb-2">”{it.luulo}”</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{it.totuus}</p>
             </div>
-          </div>
+          </li>
         ))}
-      </dl>
+      </ul>
     </div>
   </section>
 );

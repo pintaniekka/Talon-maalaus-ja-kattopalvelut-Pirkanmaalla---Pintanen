@@ -258,7 +258,7 @@ const Header = () => {
                   onMouseEnter={() => handleDesktopDropdownOpen(item.label)}
                   onMouseLeave={handleDesktopDropdownClose}
                 >
-                  <div className="flex items-center gap-1 py-7 -my-7">
+                  <div className="flex items-center gap-1 py-3 -my-3">
                     {/* Otsikko on linkki palvelusivulle; alavalikko avautuu hiirellä ja nuolinapista. */}
                     <Link
                       to={item.href}
@@ -286,9 +286,10 @@ const Header = () => {
                       <m.div
                         initial={{ opacity: 0, y: 8, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, transition: { duration: 0.08, ease: "easeIn" } }}
+                        // Ei poistumisanimaatiota (Eerik 29.10.2026: valikko välkkyi sulkeutuessa): paneeli poistuu heti.
+                        exit={{ opacity: 0, transition: { duration: 0 } }}
                         transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ transformOrigin: "top left" }}
+                        style={{ transformOrigin: "top left", pointerEvents: openDropdown === item.label ? "auto" : "none" }}
                         // Kapea näkymätön reunus (padding) siltaa otsikon ja listan välin; sivuilla ja alla vain 8 px,
                         // jotta valikko sulkeutuu heti, kun hiiri lähtee siitä (Eerik 29.10.2026).
                         className="absolute top-full -left-2 pt-2 px-2 pb-2 z-50"

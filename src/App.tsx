@@ -8,9 +8,12 @@ import { allCities, maalausCities, pinnoitusCities } from "./data/cityData";
 import { legacyRedirects } from "./data/routes";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
-// Animaatiokirjaston ominaisuudet ladataan omana pakettina vasta käynnistyksen jälkeen
-// (src/lib/motionFeatures.ts). Komponentit käyttävät m.div-elementtejä.
-const loadMotionFeatures = () => import("./lib/motionFeatures").then((mod) => mod.default);
+// Animaatiokirjaston ominaisuudet ladataan omana pakettina (src/lib/motionFeatures.ts). Komponentit käyttävät
+// m.div-elementtejä. Lataus alkaa heti tämän moduulin suorituksessa (ei vasta LazyMotionin mountissa) ja
+// vite-plugin-spa-routes lisää paketille modulepreload-linkin: ennen ominaisuuksien latautumista m.div jää
+// initial-tilaan (opacity 0), jolloin chat-ikkuna ja valikot aukesivat näkymättöminä (Eerik 29.10.2026).
+const motionFeaturesPromise = import("./lib/motionFeatures").then((mod) => mod.default);
+const loadMotionFeatures = () => motionFeaturesPromise;
 
 // Lazy-loaded subpages
 const KattopalvelutPinnoitus = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitus"));

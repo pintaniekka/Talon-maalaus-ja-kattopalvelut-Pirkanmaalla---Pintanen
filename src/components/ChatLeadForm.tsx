@@ -322,7 +322,7 @@ const ChatLeadForm = () => {
             >
               <button
                 onClick={handleOpen}
-                className="bg-white text-slate-800 text-sm rounded-2xl border-2 border-accent-strong px-4 py-2.5 pr-7 shadow-lg max-w-[220px] text-left cursor-pointer hover:shadow-xl transition-shadow"
+                className="bg-white text-slate-800 text-sm rounded-2xl px-4 py-2.5 pr-7 shadow-lg max-w-[220px] text-left cursor-pointer hover:shadow-xl transition-shadow"
               >
                 {BUBBLE_TEXT}
               </button>
@@ -356,7 +356,7 @@ const ChatLeadForm = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] lg:bottom-4 right-4 z-[9999] w-[min(380px,calc(100vw-2rem))] rounded-3xl border-2 border-accent-strong shadow-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] lg:bottom-4 right-4 z-[9999] w-[min(380px,calc(100vw-2rem))] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
             style={{ maxHeight: 'min(600px, calc(100vh - 120px))' }}
           >
             {/* Header */}

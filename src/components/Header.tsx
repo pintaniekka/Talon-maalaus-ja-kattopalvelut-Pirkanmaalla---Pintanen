@@ -415,7 +415,7 @@ const Header = () => {
                           exit={{ opacity: 0, height: 0 }}
                           className="ml-4 border-l-2 border-accent/40"
                         >
-                          {item.dropdown.map((subItem) => (
+                          {item.dropdown.filter((subItem) => subItem.href !== item.promo?.href).map((subItem) => (
                             <Link
                               key={subItem.href}
                               to={subItem.href}
@@ -425,6 +425,28 @@ const Header = () => {
                               {subItem.label}
                             </Link>
                           ))}
+                          {/* Nostokortti myös mobiilivalikossa (Eerik 29.10.2026: kuten LummeCo), linkkilistan alla. */}
+                          {item.promo && (
+                            <Link
+                              to={item.promo.href}
+                              onClick={closeNavigationMenus}
+                              className="mx-4 mb-2 mt-2 flex overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10"
+                            >
+                              <ResponsiveImage
+                                baseName={item.promo.image}
+                                alt=""
+                                className="w-24 flex-none self-stretch object-cover"
+                                sizes="96px"
+                                width={400}
+                                height={300}
+                              />
+                              <span className="flex flex-col gap-0.5 p-3">
+                                <span className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-paint-yellow">{item.promo.eyebrow}</span>
+                                <span className="font-heading text-sm font-extrabold leading-tight text-white">{item.promo.title}</span>
+                                <span className="text-xs font-bold text-accent-ink">Pyydä käynti</span>
+                              </span>
+                            </Link>
+                          )}
                         </m.div>
                       )}
                     </AnimatePresence>

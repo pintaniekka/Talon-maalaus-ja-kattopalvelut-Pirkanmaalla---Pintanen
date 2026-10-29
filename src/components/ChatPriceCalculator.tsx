@@ -262,7 +262,7 @@ const ChatPriceCalculator = () => {
           break;
         // Eerik 29.10.2026: harjatiiviste laskuriin (15 €/m pinnoituksen yhteydessä, tulokseen vain euromäärä).
         case 6:
-          await addBotMessage('Puuttuuko katolta harjatiiviste? Se on nauha harjatiilen alla. Jos et tiedä, vastaa ei: katsomme sen kuntotarkastuksessa.');
+          await addBotMessage('Puuttuuko katolta harjatiiviste? Se on tiiviste harjatiilen alla. Jos et tiedä, vastaa ei: katsomme sen kuntotarkastuksessa.');
           setStepUI({ kind: 'options', options: [
             { label: 'Kyllä puuttuu', value: 'kylla' },
             { label: 'Ei puutu', value: 'ei' },

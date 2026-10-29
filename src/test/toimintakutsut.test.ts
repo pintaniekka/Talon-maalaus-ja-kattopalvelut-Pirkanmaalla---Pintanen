@@ -26,6 +26,7 @@ const SIVUT = [
   "Kuntotarkastus",
   "Taloyhtiot",
   "Kotitalousvahennys",
+  "Meista",
   "Kokemuksia",
   "Referenssit",
   "ToimintaAlueet",
@@ -167,6 +168,11 @@ describe("kutsupalkit: yksi käyntipalkki ja enintään yksi laskuripalkki per s
       const l = lohkot(`src/pages/${sivu}.tsx`);
       const kaynti = l.filter((b) => b.nimi === "KayntiPalkki").length;
       const laskuri = l.filter((b) => ["LaskuriPalkki", "CalculatorCta", "ChatPriceCalculator"].includes(b.nimi)).length;
+      // Kuntotarkastussivuilla vain kevyet napit (Eki 29.10.2026): sivu on itse käynnin esittely.
+      if (sivu === "Kuntotarkastus") {
+        expect(kaynti + laskuri, `${sivu}: palkkeja ${kaynti + laskuri}`).toBe(0);
+        return;
+      }
       expect(kaynti, `${sivu}: käyntipalkkeja ${kaynti}`).toBe(1);
       // Taloyhtiöillä ei ole laskuria (laskuri on omakotitaloille); muilla on yksi.
       // Hintalaskurisivu on itse laskuri (PriceWizard oman section-lohkon sisällä).

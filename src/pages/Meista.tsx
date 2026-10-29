@@ -143,6 +143,7 @@ const Meista = () => {
           </div>
         </div>
       </section>
+      <LaskuriPalkki />
 
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
       <ArvosteluNosto polku="/meista" />
@@ -150,6 +151,7 @@ const Meista = () => {
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
 
       <MeistaLuvut />
+      <KayntiPalkki />
 
       <section className="section-padding osio">
         <div className="section-container">

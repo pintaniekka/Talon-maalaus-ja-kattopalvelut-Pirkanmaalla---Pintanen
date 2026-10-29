@@ -120,7 +120,7 @@ const Body = () => (
     <p>
       Suuntaa antavan arvion saat heti <Link to="/hintalaskuri/?palvelu=pinnoitus">hintalaskurilla</Link>. Tarkan
       hinnan saat ilmaisesta kuntotarkastuksesta. Tulemme katsomaan katon Pirkanmaalla ja lähikunnissa yleensä
-      samalla viikolla, myös iltaisin ja viikonloppuisin. Tarkistamme tiilet, saumat, piipun ympäryksen,
+      samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Tarkistamme tiilet, saumat, piipun ympäryksen,
       läpiviennit ja aluskatteen. Saat kirjallisen tarjouksen, jossa on kiinteä hinta. Hintaesimerkit ja
       vertailut ovat sivulla <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link>.
     </p>

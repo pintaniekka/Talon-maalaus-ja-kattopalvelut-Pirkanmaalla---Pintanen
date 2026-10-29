@@ -115,7 +115,7 @@ const Body = () => (
       Kun maali jää käteen, väri on haalistunut tai puu on harmaantunut. Merkit kerromme artikkelissa{" "}
       <Link to="/artikkelit/kuinka-usein-puutalo-maalataan/">kuinka usein puutalo pitää maalata</Link>. Kesän työt
       täyttyvät pitkälti jo keväällä, joten arviokäynti kannattaa pyytää ajoissa. Tulemme Pirkanmaalla ja
-      lähikunnissa yleensä samalla viikolla, myös iltaisin ja viikonloppuisin. Palvelun kuvaamme sivulla{" "}
+      lähikunnissa yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Palvelun kuvaamme sivulla{" "}
       <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.
     </p>
     <Avainhuomio>Arviokäynti onnistuu yleensä samalla viikolla, mutta kesän maalauspaikat varataan jo keväällä.</Avainhuomio>

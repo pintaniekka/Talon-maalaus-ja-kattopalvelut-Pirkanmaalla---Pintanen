@@ -20,20 +20,19 @@ const Merkki = ({ tumma }: { tumma?: boolean }) => (
   </span>
 );
 
-const KAYNTI: Record<KutsuPalvelu, { eyebrow: string; otsikko: string; teksti: string; nappi: string; lisaa?: { to: string; label: string } }> = {
+// Eki 29.10.2026: napit vievät tarjouspyyntösivulle, ei linkkiä kuntotarkastussivulle.
+const KAYNTI: Record<KutsuPalvelu, { eyebrow: string; otsikko: string; teksti: string; nappi: string }> = {
   pinnoitus: {
     eyebrow: "Ilmainen kuntotarkastus",
     otsikko: "Pyydä katon kuntotarkastus",
     teksti: "Tulemme katsomaan kattosi. Tarkistamme tiilet, saumat, läpiviennit ja aluskatteen ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
     nappi: "Pyydä ilmainen kuntotarkastus",
-    lisaa: { to: "/ilmainen-katon-kuntotarkastus/", label: "Mitä kuntotarkastuksessa katsotaan?" },
   },
   maalaus: {
     eyebrow: "Ilmainen arviokäynti",
     otsikko: "Pyydä julkisivun arviokäynti",
     teksti: "Tulemme katsomaan talosi. Katsomme julkisivun kunnon paikan päällä ja annamme kirjallisen tarjouksen kiinteällä hinnalla.",
     nappi: "Pyydä ilmainen arviokäynti",
-    lisaa: { to: "/ilmainen-julkisivun-kuntoarvio/", label: "Mitä arviokäynnillä katsotaan?" },
   },
   yleinen: {
     eyebrow: "Ilmainen arviokäynti",
@@ -57,6 +56,8 @@ interface KayntiProps {
 export const KayntiPalkki = ({ palvelu = "yleinen", nappi, otsikko, teksti }: KayntiProps) => {
   const k = KAYNTI[palvelu];
   const to = nappi?.to ?? KAYNTI_POLKU[palvelu];
+  // Maalaussivuilla WhatsApp menee Eemilille (seinämaalari), muuten Eerikille (Eki 29.10.2026).
+  const whatsapp = palvelu === "maalaus" ? YHTEYSTIEDOT.eemil.whatsapp : YHTEYSTIEDOT.eerik.whatsapp;
   return (
     <section className="osio py-10 md:py-14" aria-labelledby="kaynti-palkki-otsikko">
       <div className="section-container">
@@ -83,7 +84,7 @@ export const KayntiPalkki = ({ palvelu = "yleinen", nappi, otsikko, teksti }: Ka
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <a
-              href={YHTEYSTIEDOT.eerik.whatsapp}
+              href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-white/30 px-6 py-3.5 font-heading font-extrabold text-white transition-colors hover:bg-white/10"
@@ -92,13 +93,6 @@ export const KayntiPalkki = ({ palvelu = "yleinen", nappi, otsikko, teksti }: Ka
               Kysy WhatsAppissa
             </a>
           </div>
-          {k.lisaa && !nappi && (
-            <p className="mt-4 text-sm text-white/70">
-              <Link to={k.lisaa.to} className="underline underline-offset-4 hover:text-white">
-                {k.lisaa.label}
-              </Link>
-            </p>
-          )}
         </div>
       </div>
     </section>

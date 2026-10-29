@@ -15,7 +15,7 @@ const faq = [
   {
     question: "Mikä harjatiiviste on?",
     answer:
-      "Harjatiiviste on nauha, joka asennetaan harjapuun yli ja harjatiilen alle. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi.",
+      "Harjatiiviste on tiiviste, joka asennetaan harjapuun yli ja harjatiilen alle. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi.",
   },
   {
     question: "Asennatteko harjatiivisteen pinnoituksen yhteydessä?",
@@ -42,7 +42,7 @@ const Body = () => (
   <>
     <KeyPoints>
       <ul>
-        <li>Harjatiiviste on nauha harjatiilen alla. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle.</li>
+        <li>Harjatiiviste on tiiviste harjatiilen alla. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle.</li>
         <li>Tiiviste on keskeltä tuulettuva, joten katon tuuletus toimii edelleen.</li>
         <li>Tarkistamme harjan jokaisessa kuntotarkastuksessa ja asennamme tiivisteen tarvittaessa pinnoituksen yhteydessä.</li>
         <li>Asennus on lisätyö lisähintaan. Se kirjataan tarjoukseen erikseen, eikä pinnoituksen hinta muutu.</li>
@@ -59,7 +59,7 @@ const Body = () => (
     <h2>Mikä harjatiiviste on ja mitä se tekee?</h2>
     <p>
       Tiilikaton harjalla lappeet kohtaavat. Harjatiilet peittävät sauman päältä, mutta tiilen profiilin aaltojen
-      alle jää rakoja. Harjatiiviste on nauha, joka asennetaan harjapuun yli ja harjatiilen alle. Se muotoillaan
+      alle jää rakoja. Harjatiiviste on tiiviste, joka asennetaan harjapuun yli ja harjatiilen alle. Se muotoillaan
       tiilen profiilin mukaan ja kiinnitetään reunoistaan tiiliin. Valmistajan mukaan tiiviste vähentää
       tuiskulumen, veden ja roskien pääsyä aluskatteelle. Keskeltä se on tuulettuva, joten ilma pääsee edelleen
       kulkemaan katon alta ulos.

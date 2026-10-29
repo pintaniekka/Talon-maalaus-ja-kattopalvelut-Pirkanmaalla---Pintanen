@@ -22,7 +22,7 @@ const HarjatiivisteNosto = () => (
           <span className="lohko-otsake mb-3">Lisäpalvelu</span>
           <h2 className="mb-3 font-heading text-2xl font-bold text-navy md:text-3xl">Harjatiiviste pinnoituksen yhteydessä</h2>
           <p className="text-muted-foreground leading-relaxed">
-            Harjatiiviste on nauha harjatiilen alla. Se pitää tuiskulumen, veden ja roskat poissa aluskatteelta, mutta päästää ilman
+            Harjatiiviste on tiiviste harjatiilen alla. Se pitää tuiskulumen, veden ja roskat poissa aluskatteelta, mutta päästää ilman
             läpi. Tarkistamme harjan jokaisessa kuntotarkastuksessa ja asennamme tiivisteen tarvittaessa pinnoituksen yhteydessä.
             Hinta lasketaan harjan pituuden mukaan.
           </p>

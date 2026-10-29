@@ -19,7 +19,7 @@ import type { Tyovaihe, LyhyestiSisalto } from "@/data/tyovaiheet";
 
 /**
  * Harjatiivisteen asennus palveluna (Eerik 29.10.2026). Faktat: artikkeli harjatiiviste-tiilikatolla (Meltexin
- * tuotekuvaus: nauha harjapuun yli ja harjatiilen alle, vähentää tuiskulumen, veden ja roskien pääsyä
+ * tuotekuvaus: tiiviste harjapuun yli ja harjatiilen alle (Eerik 29.10.2026: ei sanaa nauha), vähentää tuiskulumen, veden ja roskien pääsyä
  * aluskatteelle, tuulettuva), tyovaiheet.ts (saumat ja harja tarkistetaan kuntotarkastuksessa), projects.ts
  * (asennus Kangasalla 2026), Eerik 29.10.2026 (harjatiilet säilyvät ehjinä asennuksessa, rikkinäiset harjatiilet
  * vaihdetaan samalla; harjatiili on kalliimpi kuin lapetiili, mutta sitä ei sanota). Hinta: Eerik 29.10.2026,
@@ -47,7 +47,7 @@ const vaiheet: Tyovaihe[] = [
 ];
 
 const faq = [
-  { question: "Mikä harjatiiviste on?", answer: "Harjatiiviste on nauha, joka asennetaan harjapuun yli ja harjatiilen alle. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi." },
+  { question: "Mikä harjatiiviste on?", answer: "Harjatiiviste on tiiviste, joka asennetaan harjapuun yli ja harjatiilen alle. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi." },
   { question: "Mitä harjatiivisteen asennus maksaa?", answer: `Pinnoituksen yhteydessä ${hinta.pinnoituksenYhteydessa} euroa metriltä ja erikseen tilattuna ${hinta.erikseen} euroa metriltä. Hinta lasketaan harjan pituuden mukaan, ja se näkyy tarjouksessa eriteltynä.` },
   { question: "Asennatteko harjatiivisteen pinnoituksen yhteydessä?", answer: "Kyllä, jos se puuttuu tai on rikki. Olemme asentaneet harjatiivisteitä pinnoituksen yhteydessä esimerkiksi Kangasalla. Tarve katsotaan kuntotarkastuksessa, ja se kirjataan tarjoukseen." },
   { question: "Voiko harjatiivisteen tilata ilman pinnoitusta?", answer: `Voi. Erikseen tilattuna hinta on ${hinta.erikseen} euroa metriltä. Kysy tarjous, niin katsomme harjan samalla käynnillä.` },
@@ -106,7 +106,7 @@ const Harjatiiviste = () => {
             Harjatiivisteen asennus <span className="text-accent-ink">tiilikattoon</span>
           </>
         }
-        lead={`Harjatiiviste on nauha harjatiilen alla. Se pitää tuiskulumen, veden ja roskat poissa aluskatteelta ja päästää ilman läpi. Tarkistamme harjan jokaisessa kuntotarkastuksessa ja asennamme tiivisteen tarvittaessa. Hinta on ${hinta.pinnoituksenYhteydessa} € metriltä pinnoituksen yhteydessä ja ${hinta.erikseen} € metriltä erikseen tilattuna.`}
+        lead={`Harjatiiviste on tiiviste harjatiilen alla. Se pitää tuiskulumen, veden ja roskat poissa aluskatteelta ja päästää ilman läpi. Tarkistamme harjan jokaisessa kuntotarkastuksessa ja asennamme tiivisteen tarvittaessa. Hinta on ${hinta.pinnoituksenYhteydessa} € metriltä pinnoituksen yhteydessä ja ${hinta.erikseen} € metriltä erikseen tilattuna.`}
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
         secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
         trust="pinnoitus"

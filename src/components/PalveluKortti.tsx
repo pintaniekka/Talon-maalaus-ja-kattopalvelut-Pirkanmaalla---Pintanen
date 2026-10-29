@@ -4,7 +4,7 @@ import ResponsiveImage from "@/components/ResponsiveImage";
 
 export interface PalveluKorttiProps {
   href: string;
-  /** Keltainen yläotsake, esim. "Eerik tekee työn itse". */
+  /** Keltainen yläotsake: tekijän nimi (Eerik 29.10.2026: ei "tekee työn itse" -toistoa). */
   tekija: string;
   title: string;
   description: string;

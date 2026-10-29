@@ -87,7 +87,8 @@ const toneClass: Record<NonNullable<TrustItem["tone"]>, string> = {
   default: "text-foreground",
 };
 
-const defaultBadge = { title: "Perheyritys Tampereelta", text: "Eerik ja Eemil tekevät työn itse." };
+// Eerik 29.10.2026: "tekevät työn itse" toistui joka sivulla, tarrassa nyt työnjako.
+const defaultBadge = { title: "Perheyritys Tampereelta", text: "Eerik pinnoittaa katot, Eemil maalaa talot." };
 
 const PageHero = ({
   eyebrow,

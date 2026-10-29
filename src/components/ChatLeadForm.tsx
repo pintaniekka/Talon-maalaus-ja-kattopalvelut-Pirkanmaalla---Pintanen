@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AnimatePresence, m } from 'framer-motion';
 import { X, Send, Loader2, RotateCcw } from 'lucide-react';
 import { getStorageUrl } from '@/lib/storage';
@@ -8,6 +9,11 @@ import { VASTAUSLUPAUS } from '@/data/company';
 import FormPrivacyNote from '@/components/FormPrivacyNote';
 
 const eerikImage = getStorageUrl('Pictures-200/Eerik-Pitkanen-tiilikaton-pinnoitus-pintanen.webp');
+const eemilImage = getStorageUrl('Pictures-200/Eemil-Pitkanen-talon-maalaus-pintanen.webp');
+
+/** Chatin kasvot (Eerik 29.10.2026): seinäsivuilla Eemil, muualla Eerik. */
+export const chatinTekija = (pathname: string) =>
+  /^\/(talon-maalaus-|ilmainen-julkisivun-kuntoarvio)/.test(pathname) ? { nimi: 'Eemil', image: eemilImage } : { nimi: 'Eerik', image: eerikImage };
 
 // ── Types ──────────────────────────────────────────────────────────────────
 type Path = 'tarjous' | 'arvio' | 'kysymys' | 'soitto' | 'maalaus_info' | 'katto_info';
@@ -37,9 +43,9 @@ const QUESTION_PLACEHOLDER = 'Kirjoita kysymyksesi tähän';
 const BUBBLE_TEXT = 'Moi! 👋 Pyydä tarjous tai kysy meiltä.';
 
 // ── Typing indicator ───────────────────────────────────────────────────────
-const TypingIndicator = () => (
+const TypingIndicator = ({ image, nimi }: { image: string; nimi: string }) => (
   <div className="flex items-end gap-2 mb-3">
-    <img src={eerikImage} alt="Eerik" className="w-8 h-8 rounded-full object-cover shrink-0" />
+    <img src={image} alt={nimi} className="w-8 h-8 rounded-full object-cover shrink-0" />
     <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm flex gap-1 items-center">
       <span className="w-2 h-2 rounded-full bg-slate-400 animate-pulse" style={{ animationDelay: '0ms' }} />
       <span className="w-2 h-2 rounded-full bg-slate-400 animate-pulse" style={{ animationDelay: '200ms' }} />
@@ -51,6 +57,7 @@ const TypingIndicator = () => (
 // ── Main component ─────────────────────────────────────────────────────────
 const ChatLeadForm = () => {
   const { toast } = useToast();
+  const tekija = chatinTekija(useLocation().pathname);
   const [bubbleVisible, setBubbleVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [typing, setTyping] = useState(false);
@@ -315,7 +322,7 @@ const ChatLeadForm = () => {
             >
               <button
                 onClick={handleOpen}
-                className="bg-white text-slate-800 text-sm rounded-2xl px-4 py-2.5 pr-7 shadow-lg max-w-[220px] text-left cursor-pointer hover:shadow-xl transition-shadow"
+                className="bg-white text-slate-800 text-sm rounded-2xl border-2 border-navy px-4 py-2.5 pr-7 shadow-lg max-w-[220px] text-left cursor-pointer hover:shadow-xl transition-shadow"
               >
                 {BUBBLE_TEXT}
               </button>
@@ -332,10 +339,10 @@ const ChatLeadForm = () => {
         {!open && (
           <button
             onClick={handleOpen}
-            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-white border-2 border-white hover:scale-105 transition-transform"
+            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-white border-2 border-navy hover:scale-105 transition-transform"
             aria-label="Avaa chat"
           >
-            <img src={eerikImage} alt="Eerik – Pintanen" className="w-full h-full rounded-full object-cover" />
+            <img src={tekija.image} alt={`${tekija.nimi} – Pintanen`} className="w-full h-full rounded-full object-cover" />
             <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white z-10" />
           </button>
         )}
@@ -349,17 +356,17 @@ const ChatLeadForm = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] lg:bottom-4 right-4 z-[9999] w-[min(380px,calc(100vw-2rem))] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] lg:bottom-4 right-4 z-[9999] w-[min(380px,calc(100vw-2rem))] rounded-3xl border-2 border-navy shadow-2xl overflow-hidden flex flex-col"
             style={{ maxHeight: 'min(600px, calc(100vh - 120px))' }}
           >
             {/* Header */}
             <div className="bg-accent-strong text-accent-foreground px-4 py-3 flex items-center gap-3">
               <div className="relative shrink-0">
-                <img src={eerikImage} alt="Eerik" className="w-10 h-10 rounded-full object-cover border-2 border-white/40" />
+                <img src={tekija.image} alt={tekija.nimi} className="w-10 h-10 rounded-full object-cover border-2 border-white/40" />
                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-accent-strong" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm leading-tight">Eerik – Pintanen Oy</p>
+                <p className="font-semibold text-sm leading-tight">{tekija.nimi} – Pintanen Oy</p>
               </div>
               <div className="flex items-center gap-1">
                 <button onClick={handleReset} className="p-1 rounded-full hover:bg-white/20 transition-colors" aria-label="Aloita alusta" title="Aloita alusta">
@@ -376,7 +383,7 @@ const ChatLeadForm = () => {
               {messages.map((msg, i) =>
                 msg.from === 'bot' ? (
                   <div key={i} className="flex items-end gap-2 mb-3">
-                    <img src={eerikImage} alt="Eerik" className="w-8 h-8 rounded-full object-cover shrink-0" />
+                    <img src={tekija.image} alt={tekija.nimi} className="w-8 h-8 rounded-full object-cover shrink-0" />
                     <div className="bg-white text-slate-800 text-[13px] leading-relaxed rounded-2xl rounded-tl-sm px-3.5 py-2.5 shadow-sm max-w-[85%]">
                       {msg.text}
                     </div>
@@ -390,7 +397,7 @@ const ChatLeadForm = () => {
                 )
               )}
 
-              {typing && <TypingIndicator />}
+              {typing && <TypingIndicator image={tekija.image} nimi={tekija.nimi} />}
 
               {/* Interactive step UI */}
               {!typing && currentStep && currentStep.kind !== 'done' && (

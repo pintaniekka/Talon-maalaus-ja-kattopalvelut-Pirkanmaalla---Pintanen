@@ -1,37 +1,29 @@
-# Päästä päähän -testit (Playwright) rakennettua sivustoa vastaan: toiminnot, saavutettavuus (axe)
-# ja koko sivun kuvakaappausvertailu kahdella leveydellä. Ajetaan Playwrightin omassa Docker-kuvassa,
-# jotta fontit ja renderöinti ovat joka ajossa samat kuin vertailukuvissa. Kuvan versio = @playwright/test
-# package.jsonissa (1.63.0): kun päivität paketin, päivitä myös tämä kuva ja ota vertailukuvat uudestaan.
+# Päästä päähän -testit (Playwright) rakennettua sivustoa vastaan: toiminnot ja saavutettavuus (axe)
+# kahdella leveydellä. Ajetaan Playwrightin omassa Docker-kuvassa; kuvan versio = @playwright/test
+# package.jsonissa (1.63.0): kun päivität paketin, päivitä myös tämä kuva.
+# Kuvakaappausvertailu poistettiin 29.10.2026 (Eerik): vertailukuvia ei koskaan saatu käyttöön ja ulkoasu
+# muuttuu niin usein, että kuvat vanhenisivat heti.
 #
-# Kaksi tapaa ajaa:
-# 1. Jokainen PR: testit ajetaan, erot ladataan artefaktiksi ja PR:ään tulee kommentti linkillä.
-#    Lisäksi odotetaan Cloudflare Pagesin esikatselua ja ajetaan scripts/verify_live.py sitä vastaan
-#    (rikkinäiset linkit ja kuvat).
-# 2. Actions-välilehdeltä käsin (workflow_dispatch) main-haarasta syötteellä paivita-vertailukuvat:
-#    kuvat otetaan uudestaan ja committataan haaraan vertailukuvat/<päivä>, josta avataan PR.
-#    Mainiin ei committata suoraan (CLAUDE.md: ei koskaan suoraan main-haaraan ilman PR:ää).
+# Jokainen PR: testit ajetaan, raportti ladataan artefaktiksi ja PR:ään tulee kommentti linkillä.
+# Lisäksi odotetaan Cloudflare Pagesin esikatselua ja ajetaan scripts/verify_live.py sitä vastaan
+# (rikkinäiset linkit ja kuvat).
 name: E2E
 
 on:
   pull_request:
   workflow_dispatch:
-    inputs:
-      paivita-vertailukuvat:
-        description: "Ota vertailukuvat uudestaan tästä haarasta ja avaa niistä PR"
-        type: boolean
-        default: false
 
 concurrency:
   group: e2e-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
-  contents: write
+  contents: read
   pull-requests: write
 
 jobs:
   testit:
-    name: Playwright (toiminnot, axe, kuvat)
+    name: Playwright (toiminnot, axe)
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
@@ -49,15 +41,10 @@ jobs:
         run: npm run build
 
       - name: Testit
-        if: ${{ github.event.inputs.paivita-vertailukuvat != 'true' }}
         id: testit
         run: npx playwright test
 
-      - name: Vertailukuvat uudestaan
-        if: ${{ github.event.inputs.paivita-vertailukuvat == 'true' }}
-        run: npx playwright test tests/e2e/kuvakaappaukset.spec.ts --update-snapshots
-
-      - name: Raportti ja erot artefaktiksi
+      - name: Raportti artefaktiksi
         if: always()
         uses: actions/upload-artifact@v4
         id: artefakti
@@ -85,9 +72,7 @@ jobs:
               `**E2E-testit: ${tulos}** (puhelin 390 px ja työpöytä 1280 px)`,
               '',
               `- [Ajon loki](${ajo})`,
-              process.env.ARTEFAKTI_URL ? `- [Raportti ja erokuvat (artefakti)](${process.env.ARTEFAKTI_URL})` : '- Artefaktia ei syntynyt',
-              '',
-              'Kuvakaappaustesti ohitetaan sivuilta, joilla ei ole vertailukuvaa. Uudet vertailukuvat: Actions → E2E → Run workflow → paivita-vertailukuvat.',
+              process.env.ARTEFAKTI_URL ? `- [Raportti (artefakti)](${process.env.ARTEFAKTI_URL})` : '- Artefaktia ei syntynyt',
             ].join('\n');
             const { data: comments } = await github.rest.issues.listComments({ ...context.repo, issue_number: context.issue.number, per_page: 100 });
             const vanha = comments.find((c) => c.user.type === 'Bot' && c.body.startsWith(tunnus));
@@ -96,19 +81,6 @@ jobs:
             } else {
               await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
             }
-
-      - name: Vertailukuvat PR:ksi
-        if: ${{ github.event.inputs.paivita-vertailukuvat == 'true' }}
-        uses: peter-evans/create-pull-request@v7
-        with:
-          add-paths: tests/e2e/vertailukuvat
-          branch: vertailukuvat/${{ github.run_number }}
-          commit-message: "Päivitä kuvakaappausten vertailukuvat"
-          title: "Päivitä kuvakaappausten vertailukuvat"
-          body: |
-            Vertailukuvat otettu uudestaan haarasta `${{ github.ref_name }}` Playwrightin Docker-kuvassa (E2E-työ, ajo ${{ github.run_number }}).
-            Tarkista erot ennen mergeä: nämä kuvat ovat jatkossa totuus, johon jokaisen PR:n kuvia verrataan.
-          draft: true
 
   esikatselu:
     name: Cloudflare-esikatselu (verify_live)

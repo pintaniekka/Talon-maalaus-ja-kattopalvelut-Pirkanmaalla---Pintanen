@@ -157,6 +157,10 @@ export const pinnoitusFAQ: FAQItem[] = [
   PESU_VAI_PINNOITUS_FAQ,
   PINNOITUS_MAALI_FAQ,
   PINNOITUS_SADE_FAQ,
+  {
+    question: "Pinnoitatteko myös taloyhtiöiden kattoja?",
+    answer: 'Kyllä. Pinnoitamme rivi-, pari- ja kerrostalojen tiilikatot rakennus kerrallaan. Kuntotarkastus on ilmainen, ja tarjous on kiinteä. Lue lisää: <a href="/taloyhtiot/">tiilikaton pinnoitus ja talon maalaus taloyhtiöille</a>.',
+  },
 ];
 
 export const puhdistusFAQ: FAQItem[] = [
@@ -234,6 +238,10 @@ export const maalausFAQ: FAQItem[] = [
   // Brief 10 (26.10.2026): pensseli, sade. "Millä maalilla" ("Mitä maalia käytätte?") ja "Miten maksu tapahtuu?" ovat jo yllä.
   MAALAUS_PENSSELI_FAQ,
   MAALAUS_SADE_FAQ,
+  {
+    question: "Maalaatteko myös taloyhtiöitä?",
+    answer: 'Kyllä. Maalaamme rivi-, pari- ja kerrostalojen ulkoseinät rakennus kerrallaan, ja katon voi pinnoittaa samalla. Lue lisää: <a href="/taloyhtiot/">tiilikaton pinnoitus ja talon maalaus taloyhtiöille</a>.',
+  },
 ];
 
 export const generalFAQ: FAQItem[] = [

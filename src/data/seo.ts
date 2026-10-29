@@ -80,6 +80,7 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/ilmainen-katon-kuntotarkastus": cardHero(HERO_BASE.meista),
   "/ilmainen-julkisivun-kuntoarvio": cardHero("talon-maalaus-orivesi-rintamamiestalo-paaty-ennen"),
   "/harjatiivisteen-asennus": cardHero("tiilikaton-pinnoitus-harjatiivisteen-asennus"),
+  "/taloyhtiot": cardHero(HERO_BASE.maalausHinta),
   "/kotitalousvahennys": cardHero(HERO_BASE.alue),
   // Artikkelilistauksen oma hero (29.10.2026): kuva oikealla sarakkeella, enintään 520 px.
   "/artikkelit": { base: HERO_BASE.alue, sizes: "(min-width: 1024px) 520px, 100vw" },
@@ -174,6 +175,11 @@ export const staticSeo: Record<string, RouteSeo> = {
     title: "Ilmainen katon kuntotarkastus Pirkanmaalla – 0 €",
     description:
       "Ilmainen katon kuntotarkastus: Eerik katsoo tiilet, saumat, läpiviennit ja aluskatteen, yleensä samalla viikolla. Kirjallinen tarjous kiinteällä hinnalla.",
+  },
+  "/taloyhtiot": {
+    title: "Tiilikaton pinnoitus ja talon maalaus taloyhtiöille",
+    description:
+      "Taloyhtiön tiilikaton pinnoitus ja ulkoseinien maalaus Pirkanmaalla: rivi-, pari- ja kerrostalot. Ilmainen kuntotarkastus, kiinteä hinta, samat tekijät.",
   },
   "/harjatiivisteen-asennus": {
     title: "Harjatiivisteen asennus tiilikattoon – hinta ja asennus",

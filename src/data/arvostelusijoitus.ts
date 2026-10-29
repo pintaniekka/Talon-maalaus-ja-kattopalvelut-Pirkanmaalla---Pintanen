@@ -14,7 +14,7 @@ import { allTestimonials, matchesCategory, type ArvosteluAihe, type Testimonial,
  *  - palvelusivut (pinnoitus, maalaus, myös kaupunkisivut): työvaiheiden jälkeen, ennen hintoja/sanastoa
  *  - hintasivut: hintataulukon (PriceExamplesSection) jälkeen; "Mistä hinta syntyy" on näyttämö
  *  - aluesivut: paikallisen tekstin jälkeen, ennen yhteydenottoa
- *  - kuntotarkastussivut ja harjatiiviste: prosessin kuvauksen (ProcessList) jälkeen
+ *  - kuntotarkastussivut, harjatiiviste ja taloyhtiöt: prosessin kuvauksen (ProcessList) jälkeen
  *  - Meistä: tekijäesittelyn jälkeen
  *  - muut (kotitalousvähennys, toiminta-alueet, yhteystiedot, referenssit): ennen yhteydenottoa
  */
@@ -54,6 +54,7 @@ const staattiset: Record<string, ArvosteluSivu> = {
   "/ilmainen-julkisivun-kuntoarvio": { luokka: "seina", aihe: "viestinta" },
   // Teppo Annilan arvostelu mainitsee harjatiivisteen asennuksen sanasta sanaan.
   "/harjatiivisteen-asennus": { luokka: "katto", aihe: "lopputulos", nimi: "Teppo Annila" },
+  "/taloyhtiot": { luokka: "yleinen", aihe: "viestinta" },
   "/kotitalousvahennys": { luokka: "yleinen", aihe: "hinta" },
   "/toiminta-alueet": { luokka: "yleinen", aihe: "aikataulu" },
   "/referenssit": { luokka: "yleinen", aihe: "lopputulos" },

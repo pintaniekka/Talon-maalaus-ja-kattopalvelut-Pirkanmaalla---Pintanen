@@ -39,7 +39,7 @@ export const PESU_VAI_PINNOITUS_FAQ: FAQItem = {
 export const PINNOITUS_MAALI_FAQ: FAQItem = {
   question: 'Millä maalilla pinnoitatte tiilikaton?',
   answer:
-    'Käytämme Nowocoatin kattomaaleja. Maalaamme katon korkeapaineruiskulla aina kahteen kertaan: ensin pohjamaali ja sitten pintamaali. Reunat ja ahtaat paikat maalaamme telalla tai käsin.',
+    'Käytämme Nowocoatin kattomaalia. Se on vesiohenteinen, ammattikäyttöön kehitetty betonitiilen pinnoite, jonka pinta on puolihimmeä ja hengittävä. Maalaamme katon korkeapaineruiskulla aina kahteen kertaan: ensin pohjamaali ja sitten pintamaali. Reunat ja ahtaat paikat maalaamme telalla tai käsin.',
 };
 
 export const PINNOITUS_SADE_FAQ: FAQItem = {
@@ -100,7 +100,13 @@ export const pinnoitusFAQ: FAQItem[] = [
   PESU_VAI_PINNOITUS_FAQ,
   {
     question: 'Voiko katon värin vaihtaa pinnoituksessa?',
-    answer: 'Kyllä voi. Nowocoatin kattomaaleissa on laaja värivalikoima.',
+    answer: 'Kyllä voi. Nowocoatin kattomaaleissa on laaja värivalikoima. Värikartassa on 16 väriä: viisi harmaata, kaksi mustaa, seitsemän punaista ja kaksi ruskeaa. Väri valitaan kuntotarkastuksessa.',
+  },
+  {
+    // Valmistajan huoltosuositus (NowoCoat-esite 2025–26, docs/nowocoat-lahteet-2026-10-29.md). Puhdistuspalvelu on loppunut, siksi "kysy meiltä".
+    question: 'Miten pinnoitettua kattoa huolletaan?',
+    answer:
+      'Pinnoitettu katto ei tarvitse säännöllistä pesua. Valmistaja suosittelee kasvustontorjunta-aineen levitystä 2–4 vuoden välein, jotta lika ja sammal eivät tartu pintaan. Jos haluat huoltokäsittelyn, kysy meiltä.',
   },
   {
     question: 'Voiko tiilikaton pinnoittaa itse?',

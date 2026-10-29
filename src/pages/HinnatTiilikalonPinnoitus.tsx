@@ -4,7 +4,7 @@ import ArvosteluNosto from "@/components/ArvosteluNosto";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
-import RelatedArticles from "@/components/RelatedArticles";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
 import { KotitalousVahennysNayttamo } from "@/components/KotitalousVahennys";
@@ -205,7 +205,7 @@ const HinnatTiilikalonPinnoitus = () => {
       <Vaarinymmarrykset service="pinnoitus" />
 
 
-      <RelatedArticles categories={["katto", "raha"]} />
+      <ArtikkeliRivit categories={["katto", "raha"]} />
       <FAQSection items={faqItems} />
       <ServiceContactSection variant="katto" />
       <ToimintaAlueetBanner service="pinnoitus" />

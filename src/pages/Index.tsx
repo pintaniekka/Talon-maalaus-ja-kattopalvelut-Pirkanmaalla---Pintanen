@@ -9,7 +9,7 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import SEO from "@/components/SEO";
 import Rytmi from "@/components/Rytmi";
-import RelatedArticles from "@/components/RelatedArticles";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 
 
 const ChatPriceCalculator = lazyWithRetry(() => import("@/components/ChatPriceCalculator"));
@@ -36,8 +36,8 @@ const Index = () => {
       </Suspense>
       <MiksiPintanen />
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
-      {/* Uusimmat artikkelit yhteydenoton edellä (29.10.2026): leveät rivit, linkki /artikkelit/. */}
-      <RelatedArticles title="Uusimmat artikkelit" variant="leveat" />
+      {/* Uusimmat artikkelit yhteydenoton edellä (29.10.2026): samat ohuet rivit kuin muualla, linkki /artikkelit/. */}
+      <ArtikkeliRivit title="Uusimmat artikkelit" />
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />
     </Rytmi>

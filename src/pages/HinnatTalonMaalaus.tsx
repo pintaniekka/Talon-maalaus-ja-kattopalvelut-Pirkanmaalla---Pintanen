@@ -4,7 +4,7 @@ import ArvosteluNosto from "@/components/ArvosteluNosto";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
-import RelatedArticles from "@/components/RelatedArticles";
+import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import { staticSeo } from "@/data/seo";
 import PageHero from "@/components/PageHero";
 import CalculatorCta from "@/components/hinnat/CalculatorCta";
@@ -174,7 +174,7 @@ const HinnatTalonMaalaus = () => {
       <Vaarinymmarrykset service="maalaus" />
 
 
-      <RelatedArticles categories={["maalaus", "raha"]} />
+      <ArtikkeliRivit categories={["maalaus", "raha"]} />
       <FAQSection items={faqItems} />
       <ServiceContactSection variant="maalaus" />
       <ToimintaAlueetBanner service="maalaus" />

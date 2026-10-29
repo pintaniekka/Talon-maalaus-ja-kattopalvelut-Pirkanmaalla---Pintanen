@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Rytmi, { merkitse } from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import PageHero from "@/components/PageHero";
@@ -126,6 +127,9 @@ const Kuntotarkastus = ({ service }: { service: KuntotarkastusService }) => {
       </section>
 
       <ProcessList title={s.eteneeOtsikko} steps={s.etenee} cta={s.cta} />
+
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku={s.path} />
 
       <section className="section-padding osio">
         <div className="section-container grid items-start gap-10 lg:grid-cols-2 lg:gap-16">

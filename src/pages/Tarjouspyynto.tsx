@@ -139,7 +139,7 @@ const Tarjouspyynto = () => {
             </a>
             <div className="grid sm:grid-cols-2 gap-4">
               {reviews.map((t) => (
-                <figure key={t.name} className="bg-primary/70 rounded-2xl p-5 text-primary-foreground">
+                <figure key={t.name} className="bg-primary/70 rounded-2xl p-5 text-primary-foreground" data-arvostelu="lomake">
                   <blockquote className="text-sm leading-relaxed text-primary-foreground/90">"{t.text}"</blockquote>
                   <figcaption className="mt-3 text-xs text-primary-foreground/70">{t.name} · Google-arvostelu</figcaption>
                 </figure>

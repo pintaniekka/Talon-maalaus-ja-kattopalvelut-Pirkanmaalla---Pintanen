@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Rytmi from "@/components/Rytmi";
+import ArvosteluNosto from "@/components/ArvosteluNosto";
 import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import FAQSection from "@/components/FAQSection";
@@ -169,6 +170,9 @@ const Kotitalousvahennys = () => {
       </section>
 
       <RelatedArticles categories={["raha"]} />
+      {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
+      <ArvosteluNosto polku="/kotitalousvahennys" />
+
       <ServiceContactSection />
       <ToimintaAlueetBanner />
     </Rytmi>

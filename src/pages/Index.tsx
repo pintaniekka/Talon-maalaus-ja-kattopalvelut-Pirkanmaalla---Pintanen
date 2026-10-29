@@ -36,8 +36,8 @@ const Index = () => {
       </Suspense>
       <MiksiPintanen />
       <TestimonialsMarquee title="Mitä asiakkaat sanovat meistä?" />
-      {/* Uusimmat artikkelit yhteydenoton edellä (29.10.2026): kompakti lohko, linkki /artikkelit/. */}
-      <RelatedArticles title="Uusimmat artikkelit" />
+      {/* Uusimmat artikkelit yhteydenoton edellä (29.10.2026): leveät rivit, linkki /artikkelit/. */}
+      <RelatedArticles title="Uusimmat artikkelit" variant="leveat" />
       <ServiceContactSection variant="general" />
       <ToimintaAlueetBanner />
     </Rytmi>

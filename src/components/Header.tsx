@@ -17,7 +17,7 @@ const logoUrl = getStorageUrl("Pintanen-logo.png");
  * Palkki näkyy työpöydällä (xl) ja painuu piiloon alas skrollattaessa, kuten yhteystietopalkki ennen.
  * Pienemmillä näytöillä palkkia ei näytetä, jotta otsikko ei jää sen alle. Vaihda tekstit tästä.
  */
-type NavLink = { label: string; href: string; text?: string };
+type NavLink = { label: string; href: string };
 /** Nostokortti alavalikon oikeassa reunassa (Eerik 28.10.2026: ilmainen kuntotarkastus näkyviin valikkoon). */
 type NavPromo = { eyebrow: string; title: string; text: string; href: string; image: string; alt: string };
 type NavItem = { label: string; href: string; dropdown?: NavLink[]; promo?: NavPromo };
@@ -41,12 +41,12 @@ const Header = () => {
       label: "Tiilikaton pinnoitus",
       href: "/tiilikaton-pinnoitus-pirkanmaa/",
       dropdown: [
-        { label: "Tiilikaton pinnoitus", href: "/tiilikaton-pinnoitus-pirkanmaa/", text: "Pesu, tiilien vaihto ja kaksi kerrosta maalia" },
-        { label: "Hinnat", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", text: "Hinta katon koon mukaan ja toteutuneita hintoja" },
-        { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=pinnoitus", text: "Arvio minuutissa" },
-        { label: "Ilmainen kuntotarkastus", href: "/ilmainen-katon-kuntotarkastus/", text: "Eerik katsoo katon paikan päällä" },
-        { label: "Harjatiiviste", href: "/harjatiivisteen-asennus/", text: "Asennus pinnoituksen yhteydessä tai erikseen" },
-        { label: "Taloyhtiöille", href: "/taloyhtiot/", text: "Rivi-, pari- ja kerrostalojen katot" },
+        { label: "Tiilikaton pinnoitus", href: "/tiilikaton-pinnoitus-pirkanmaa/" },
+        { label: "Hinnat", href: "/tiilikaton-pinnoitus-hinta-pirkanmaa/" },
+        { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=pinnoitus" },
+        { label: "Ilmainen kuntotarkastus", href: "/ilmainen-katon-kuntotarkastus/" },
+        { label: "Harjatiiviste", href: "/harjatiivisteen-asennus/" },
+        { label: "Taloyhtiöille", href: "/taloyhtiot/" },
       ],
       promo: {
         eyebrow: "Nyt 0 € · muualla noin 280 €",
@@ -61,11 +61,11 @@ const Header = () => {
       label: "Talon maalaus",
       href: "/talon-maalaus-pirkanmaa/",
       dropdown: [
-        { label: "Talon maalaus", href: "/talon-maalaus-pirkanmaa/", text: "Homepesu, kaavinta ja pintamaali pensselillä" },
-        { label: "Hinnat", href: "/talon-maalaus-hinta-pirkanmaa/", text: "Hinta talon koon ja seinän kunnon mukaan" },
-        { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=maalaus", text: "Arvio minuutissa" },
-        { label: "Ilmainen arviokäynti", href: "/ilmainen-julkisivun-kuntoarvio/", text: "Eemil katsoo seinät paikan päällä" },
-        { label: "Taloyhtiöille", href: "/taloyhtiot/", text: "Rivi-, pari- ja kerrostalojen seinät" },
+        { label: "Talon maalaus", href: "/talon-maalaus-pirkanmaa/" },
+        { label: "Hinnat", href: "/talon-maalaus-hinta-pirkanmaa/" },
+        { label: "Hintalaskuri", href: "/hintalaskuri/?palvelu=maalaus" },
+        { label: "Ilmainen arviokäynti", href: "/ilmainen-julkisivun-kuntoarvio/" },
+        { label: "Taloyhtiöille", href: "/taloyhtiot/" },
       ],
       promo: {
         eyebrow: "Nyt 0 € · muualla noin 180 €",
@@ -290,7 +290,7 @@ const Header = () => {
                         // Näkymätön reunus (padding) pitää hiiren valikon alueella myös otsikon ja listan välissä ja sivuilla.
                         className="absolute top-full -left-6 pt-2 px-6 pb-6 z-50"
                       >
-                        {/* Kaksi palstaa: linkit selitteineen ja nostokortti (ilmainen tarkastus). Oma navy-pohja ja keltainen korostus, ei kopio. */}
+                        {/* Kaksi palstaa: linkit (ilman selitteitä, Eerik 29.10.2026) ja nostokortti (ilmainen tarkastus). Oma navy-pohja ja keltainen korostus, ei kopio. */}
                         <div className={`grid overflow-hidden rounded-2xl border border-white/10 bg-navy shadow-2xl ${item.promo ? "w-[40rem] grid-cols-[1fr_1.15fr]" : "w-64"}`}>
                           <ul className="list-none p-3">
                             {item.dropdown.map((subItem) => (
@@ -301,7 +301,6 @@ const Header = () => {
                                   className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5"
                                 >
                                   <span className="block font-heading font-bold text-white/90">{subItem.label}</span>
-                                  {subItem.text && <span className="mt-0.5 block text-xs leading-snug text-white/55">{subItem.text}</span>}
                                 </Link>
                               </li>
                             ))}

@@ -43,6 +43,8 @@ jobs:
 
       - name: Buildin tarkistus (sivut, head, linkit, schema)
         run: python3 scripts/verify_dist.py dist
+      - name: Sisäiset linkit (verify_links.py)
+        run: python3 scripts/verify_links.py dist
 
       - name: Ohjaussääntöjen tarkistus
         run: python3 scripts/verify_redirects.py --file dist/_redirects --sitemap dist/sitemap.xml

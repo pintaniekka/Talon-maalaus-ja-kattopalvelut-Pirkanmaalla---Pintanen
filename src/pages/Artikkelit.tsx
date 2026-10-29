@@ -8,6 +8,7 @@ import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 import { authors } from "@/data/authors";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 import { categoryLabels, formatDateFi, getPublishedArticles, type ArticleCategory, type ArticleMeta } from "@/data/articles";
+import { PASTELLI, SUODATIN_NIMI, TAGI } from "@/data/artikkeliTagit";
 
 /*
  * Artikkelilistaus (Eerik 29.10.2026, ehdotuskuva): oma kevyt hero (teksti vasemmalla, kuva oikealla,
@@ -23,17 +24,6 @@ import { categoryLabels, formatDateFi, getPublishedArticles, type ArticleCategor
 type Suodatin = "kaikki" | ArticleCategory;
 
 const KATEGORIAT = Object.keys(categoryLabels) as ArticleCategory[];
-
-/** Lyhyet tagit korteissa ja suodatinnappien tekstit. categoryLabels pysyy artikkelisivuilla ja schemassa. */
-const TAGI: Record<ArticleCategory, string> = { katto: "KATTO", maalaus: "SEINÄ", raha: "HINTA" };
-const SUODATIN_NIMI: Record<ArticleCategory, string> = { katto: "Katot", maalaus: "Seinät", raha: "Hinta ja verotus" };
-
-/** Pastellitagit valkoisilla korteilla (teksti vähintään 4,5:1). */
-const PASTELLI: Record<ArticleCategory, string> = {
-  katto: "bg-[#dcecfa] text-[#0a4f8f]",
-  maalaus: "bg-[#fff1b8] text-[#6b5200]",
-  raha: "bg-[#e3e8ef] text-[#3d4a5e]",
-};
 
 /** Näkyviä kortteja ennen "Näytä lisää" ja montako nappi paljastaa kerralla. */
 export const KERRALLA = 8;

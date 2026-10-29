@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import { getResponsiveSrc, getResponsiveSrcSet, getResponsiveUrl } from "@/lib/storage";
-import { referenssit, type ReferenssiNakyma } from "@/data/referenssit";
+import { referenssit, referenssiKunnat, type ReferenssiNakyma } from "@/data/referenssit";
 import type { ProjectService } from "@/data/projects";
 
 type Suodatin = "kaikki" | ProjectService;
@@ -150,19 +150,23 @@ const Kortti = ({ k, iso, onOpen }: { k: ReferenssiNakyma; iso: boolean; onOpen:
  */
 const ReferenssiGalleria = () => {
   const [palvelu, setPalvelu] = useState<Suodatin>("kaikki");
+  const [kunta, setKunta] = useState("kaikki");
   const [maara, setMaara] = useState(ERA);
   const [avattu, setAvattu] = useState<Avattu | null>(null);
+  const kunnat = useMemo(referenssiKunnat, []);
 
   const lista = useMemo(
     () =>
-      referenssit.filter((k) => palvelu === "kaikki" || k.services.includes(palvelu)),
-    [palvelu],
+      referenssit.filter(
+        (k) => (palvelu === "kaikki" || k.services.includes(palvelu)) && (kunta === "kaikki" || k.city === kunta),
+      ),
+    [palvelu, kunta],
   );
   const nakyvat = lista.slice(0, maara);
 
-  // Eerik 29.10.2026: kuntavalikko pois, vain palvelusuodatin; napit sinisinä.
-  const valitse = (p: Suodatin) => {
+  const valitse = (p: Suodatin, c: string) => {
     setPalvelu(p);
+    setKunta(c);
     setMaara(ERA);
   };
 
@@ -184,16 +188,31 @@ const ReferenssiGalleria = () => {
               <button
                 key={s.key}
                 type="button"
-                onClick={() => valitse(s.key)}
+                onClick={() => valitse(s.key, kunta)}
                 aria-pressed={palvelu === s.key}
-                className={`rounded-xl border-[3px] border-accent-strong px-4 py-2 font-heading text-sm font-extrabold transition-colors ${
-                  palvelu === s.key ? "bg-accent-strong text-white" : "bg-card text-accent-ink hover:bg-accent-light"
+                className={`rounded-xl border-[3px] border-navy px-4 py-2 font-heading text-sm font-extrabold transition-colors ${
+                  palvelu === s.key ? "bg-navy text-white" : "bg-card text-navy hover:bg-accent-light"
                 }`}
               >
                 {s.label}
               </button>
             ))}
           </div>
+          <label className="flex items-center gap-2 font-heading text-sm font-extrabold text-navy">
+            <span className="sr-only">Kunta</span>
+            <select
+              value={kunta}
+              onChange={(e) => valitse(palvelu, e.target.value)}
+              className="rounded-xl border-[3px] border-navy bg-card px-3 py-2 text-sm font-extrabold text-navy"
+            >
+              <option value="kaikki">Kaikki kunnat</option>
+              {kunnat.map((c) => (
+                <option key={c.slug} value={c.slug}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
 
         <p className="mb-6 text-center text-sm text-muted-foreground" aria-live="polite">

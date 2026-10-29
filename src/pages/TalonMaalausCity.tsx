@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
 import CityMap from "@/components/CityMap";
+import Kaupunginosat from "@/components/Kaupunginosat";
 import CityProjects from "@/components/CityProjects";
 import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
@@ -94,6 +95,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
                 className="text-muted-foreground leading-relaxed text-base md:text-lg [&_strong]:text-foreground"
                 dangerouslySetInnerHTML={{ __html: cityData.maalausLocalHookText || "" }}
               />
+              <Kaupunginosat slug={cityData.slug} cityGenitive={cityData.cityGenitive} service="maalaus" />
             </div>
             {kartta && <CityMap slug={cityData.slug} name={cityData.name} />}
           </div>

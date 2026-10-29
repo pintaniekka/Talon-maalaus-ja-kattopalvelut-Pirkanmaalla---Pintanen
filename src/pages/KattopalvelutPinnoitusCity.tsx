@@ -23,6 +23,7 @@ import SEO from "@/components/SEO";
 import ReviewsTeaser from "@/components/ReviewsTeaser";
 import ServiceSchema from "@/components/ServiceSchema";
 import ToimintaKutsu from "@/components/ToimintaKutsu";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import { getPinnoitusCityFAQ } from "@/data/faqData";
 import { getLocalCityFaq } from "@/data/cityFaq";
 import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
@@ -116,13 +117,13 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <PinnoitusSamaTyo cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" featureFirst />
       <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
-      <ToimintaKutsu palvelu="pinnoitus" />
+      <ToimintaKutsu palvelu="pinnoitus" nappi="laskuri" n={0} />
       <MiksiValitaPintanen service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" hideMap={kartta} />
-      <ToimintaKutsu palvelu="pinnoitus" />
+      <KayntiPalkki palvelu="pinnoitus" />
       <VarinVaihto service="pinnoitus" citySlug={cityData.slug} cityIn={cityData.cityIn} />
       <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
-      <ToimintaKutsu palvelu="pinnoitus" />
+      <LaskuriPalkki palvelu="pinnoitus" />
 
       <FAQSection
         items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name, cityData.cityIn)]}

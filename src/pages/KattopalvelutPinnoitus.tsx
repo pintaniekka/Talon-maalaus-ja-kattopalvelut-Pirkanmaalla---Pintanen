@@ -19,6 +19,7 @@ import FAQSection from "@/components/FAQSection";
 import TestimonialsMarquee from "@/components/TestimonialsMarquee";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
 import ToimintaKutsu from "@/components/ToimintaKutsu";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import SEO from "@/components/SEO";
 import ServiceSchema from "@/components/ServiceSchema";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
@@ -82,18 +83,18 @@ const KattopalvelutPinnoitus = () => {
       <PinnoitusSamaTyo />
       <HarjatiivisteNosto />
       <Vaarinymmarrykset service="pinnoitus" />
-      <ToimintaKutsu palvelu="pinnoitus" />
+      <ToimintaKutsu palvelu="pinnoitus" nappi="laskuri" n={0} />
       <VarinVaihto service="pinnoitus" />
 
       <PinnoitusComparison />
       <PinnoitusPricingCards cityName="Pirkanmaa" cityIn="Pirkanmaalla" />
       <MiksiValitaPintanen service="pinnoitus" />
       <KotitalousVahennys />
-      <ToimintaKutsu palvelu="pinnoitus" />
+      <KayntiPalkki palvelu="pinnoitus" />
       <PinnoitusEntrepreneur />
 
       <TestimonialsMarquee testimonials={roofTestimonials} title="Mitä kattoasiakkaat sanovat meistä?" />
-      <ToimintaKutsu palvelu="pinnoitus" />
+      <LaskuriPalkki palvelu="pinnoitus" />
       <ArtikkeliRivit categories={["katto", "raha"]} />
       <FAQSection items={pinnoitusFAQ} title="Usein kysyttyä tiilikaton pinnoituksesta" />
       <ServiceContactSection variant="katto" />

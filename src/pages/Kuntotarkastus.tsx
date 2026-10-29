@@ -8,7 +8,7 @@ import Lyhyesti from "@/components/Lyhyesti";
 import ProcessList from "@/components/ProcessList";
 import FAQSection from "@/components/FAQSection";
 import ArtikkeliRivit from "@/components/ArtikkeliRivit";
-import ToimintaKutsu from "@/components/ToimintaKutsu";
+import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading, Checklist } from "@/components/hinnat/PriceSections";
@@ -87,7 +87,7 @@ const Kuntotarkastus = ({ service }: { service: KuntotarkastusService }) => {
       <Lyhyesti content={s.lyhyesti} />
 
       <Merkit service={service} />
-      <ToimintaKutsu palvelu={service} kaynti={s.cta} />
+      <LaskuriPalkki palvelu={service} />
 
       <section className="section-padding osio">
         <div className="section-container mx-auto max-w-3xl">
@@ -162,7 +162,7 @@ const Kuntotarkastus = ({ service }: { service: KuntotarkastusService }) => {
       </section>
 
       <ArtikkeliRivit categories={s.articleCategories} />
-      <ToimintaKutsu palvelu={service} kaynti={s.cta} />
+      <KayntiPalkki palvelu={service} nappi={s.cta} />
       <FAQSection items={s.faq} title={`Usein kysyttyä: ${s.h1.toLowerCase()}`} />
       <ServiceContactSection variant={s.contactVariant} />
       <ToimintaAlueetBanner service={service} />

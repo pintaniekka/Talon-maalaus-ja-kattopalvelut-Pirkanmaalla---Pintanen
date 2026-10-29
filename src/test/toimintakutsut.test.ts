@@ -34,7 +34,7 @@ const OHITA = new Set(["SEO", "ServiceSchema", "Helmet", "ArvosteluNosto", "Toim
 
 /** Lohkot, jotka ovat itse lomake tai laskuri. */
 /** PageHero: ensisijainen nappi (`primary`) vie aina laskuriin tai tarjouspyyntöön. */
-const OMA_NAPPI = new Set(["PageHero", "ServiceContactSection", "ChatPriceCalculator", "PriceWizard", "CalculatorCta", "ToimintaKutsu"]);
+const OMA_NAPPI = new Set(["PageHero", "ServiceContactSection", "ChatPriceCalculator", "PriceWizard", "CalculatorCta", "ToimintaKutsu", "KayntiPalkki", "LaskuriPalkki"]);
 
 const NAPPI = /to[=:]\s*\{?["'`]\/(hintalaskuri|tarjouspyynto|ilmainen-katon-kuntotarkastus|ilmainen-julkisivun-kuntoarvio)|href="#hintalaskuri"|openQuoteDrawer\(|\bcta=\{/;
 
@@ -154,6 +154,21 @@ export const pisinValiIlmanNappia = (l: Lohko[]): { pituus: number; jono: string
   }
   return paras;
 };
+
+describe("kutsupalkit: yksi käyntipalkki ja enintään yksi laskuripalkki per sivu (Eki 29.10.2026)", () => {
+  for (const sivu of SIVUT) {
+    it(sivu, () => {
+      // Aluesivut ovat lyhyitä (hero, palvelukortit, paikallinen teksti, yhteydenotto): ei palkkeja.
+      if (sivu === "ServiceAreaPage") return;
+      const l = lohkot(`src/pages/${sivu}.tsx`);
+      const kaynti = l.filter((b) => b.nimi === "KayntiPalkki").length;
+      const laskuri = l.filter((b) => ["LaskuriPalkki", "CalculatorCta", "ChatPriceCalculator"].includes(b.nimi)).length;
+      expect(kaynti, `${sivu}: käyntipalkkeja ${kaynti}`).toBe(1);
+      // Taloyhtiöillä ei ole laskuria (laskuri on omakotitaloille); muilla on yksi.
+      expect(laskuri, `${sivu}: laskuripalkkeja ${laskuri}`).toBe(sivu === "Taloyhtiot" ? 0 : 1);
+    });
+  }
+});
 
 describe("toimintakutsut: nappi enintään kahden lohkon välein", () => {
   for (const sivu of SIVUT) {

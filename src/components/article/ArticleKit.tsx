@@ -4,6 +4,7 @@
  * Ei nappeja, ei luottamuslukuja, ei lomakkeita: artikkeli on luettavaa tekstiä.
  */
 import type { ReactNode } from "react";
+import AvifKuva from "@/components/AvifKuva";
 import { Helmet } from "react-helmet-async";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
@@ -24,17 +25,19 @@ const FIGURE_SIZES: Record<FigureRatio, { width: number; height: number }> = {
 
 export const Figure = ({ image, alt, caption, ratio = "4/3" }: { image: string; alt: string; caption?: string; ratio?: FigureRatio }) => (
   <figure>
-    <img
-      loading="lazy"
-      decoding="async"
-      src={getResponsiveSrc(image)}
-      srcSet={getResponsiveSrcSet(image)}
-      sizes="(min-width: 768px) 720px, 100vw"
-      alt={alt}
-      className="w-full h-auto max-h-[30rem] object-cover rounded-xl bg-muted"
-      width={FIGURE_SIZES[ratio].width}
-      height={FIGURE_SIZES[ratio].height}
-    />
+    <AvifKuva>
+      <img
+        loading="lazy"
+        decoding="async"
+        src={getResponsiveSrc(image)}
+        srcSet={getResponsiveSrcSet(image)}
+        sizes="(min-width: 768px) 720px, 100vw"
+        alt={alt}
+        className="w-full h-auto max-h-[30rem] object-cover rounded-xl bg-muted"
+        width={FIGURE_SIZES[ratio].width}
+        height={FIGURE_SIZES[ratio].height}
+      />
+    </AvifKuva>
     {caption && <figcaption>{caption}</figcaption>}
   </figure>
 );

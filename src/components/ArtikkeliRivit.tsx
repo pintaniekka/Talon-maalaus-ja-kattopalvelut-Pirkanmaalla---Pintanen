@@ -36,7 +36,7 @@ const Rivi = ({ a }: { a: ArticleMeta }) => (
       </span>
       {/* Kuva absoluuttisena kehyksessä: rivin korkeus tulee tekstistä, ei kuvan kuvasuhteesta. */}
       <span className="relative w-[120px] flex-none self-stretch">
-        <ResponsiveImage baseName={a.heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" sizes="120px" width={240} height={168} />
+        <ResponsiveImage baseName={a.heroImage} alt={a.heroAlt} className="absolute inset-0 h-full w-full object-cover" sizes="120px" width={240} height={168} />
       </span>
     </Link>
   </li>

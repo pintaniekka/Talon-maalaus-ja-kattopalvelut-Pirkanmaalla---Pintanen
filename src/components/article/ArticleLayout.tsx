@@ -181,7 +181,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
           <div className="flex items-center gap-3 pb-8 border-b border-border">
             <img
               src={author.image}
-              alt=""
+              alt={author.name}
               width={44}
               height={44}
               className="w-11 h-11 rounded-full object-cover bg-muted shrink-0"

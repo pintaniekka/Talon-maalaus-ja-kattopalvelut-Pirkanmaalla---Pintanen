@@ -12,8 +12,17 @@ import { lazyWithRetry } from "./lib/lazyWithRetry";
 // m.div-elementtejä. Lataus alkaa heti tämän moduulin suorituksessa (ei vasta LazyMotionin mountissa) ja
 // vite-plugin-spa-routes lisää paketille modulepreload-linkin: ennen ominaisuuksien latautumista m.div jää
 // initial-tilaan (opacity 0), jolloin chat-ikkuna ja valikot aukesivat näkymättöminä (Eerik 29.10.2026).
-const motionFeaturesPromise = import("./lib/motionFeatures").then((mod) => mod.default);
+export const motionFeaturesPromise = import("./lib/motionFeatures").then((mod) => mod.default);
 const loadMotionFeatures = () => motionFeaturesPromise;
+type MotionFeatures = Awaited<typeof motionFeaturesPromise>;
+/**
+ * Valmiiksi ladatut ominaisuudet (main.tsx antaa ne hydraatiossa): LazyMotion ottaa ne käyttöön heti
+ * eikä päivitä tilaansa kesken hydraation. Ilman niitä paketin valmistuminen saattoi osua laiskan
+ * alasivun hydraatioon, jolloin React hylkäsi esirenderöidyn HTML:n (virheet #418/#421, 30.10.2026).
+ */
+interface AppProps {
+  motionFeatures?: MotionFeatures;
+}
 
 // Lazy-loaded subpages
 const KattopalvelutPinnoitus = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitus"));
@@ -45,8 +54,8 @@ const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
  * Suspensen latausnäkymä näkyy vain sivunvaihdossa, kun laiskasti ladattava sivu on vielä
  * tulossa. Ensimmäisellä latauksella esirenderöity HTML pysyy paikallaan (hydraatio, main.tsx).
  */
-export const AppContent = () => (
-  <LazyMotion features={loadMotionFeatures}>
+export const AppContent = ({ motionFeatures }: AppProps) => (
+  <LazyMotion features={motionFeatures ?? loadMotionFeatures}>
       <Toaster />
         <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
@@ -102,9 +111,9 @@ export const AppContent = () => (
   </LazyMotion>
 );
 
-const App = () => (
+const App = ({ motionFeatures }: AppProps) => (
   <BrowserRouter>
-    <AppContent />
+    <AppContent motionFeatures={motionFeatures} />
   </BrowserRouter>
 );
 

@@ -1,13 +1,10 @@
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import App from "./App.tsx";
+import App, { motionFeaturesPromise } from "./App.tsx";
 // Itse tarjoillut fontit (ei Google Fonts -kutsuja kävijän selaimesta).
-// Vain neljä painoa (P14): Montserrat 700/800 otsikoihin ja painikkeisiin, Open Sans 400/600 leipätekstiin.
-// Välipainot (500, Montserrat 400/600) selain johtaa lähimmästä ladatusta painosta.
-import "@fontsource/montserrat/latin-700.css";
-import "@fontsource/montserrat/latin-800.css";
-import "@fontsource/open-sans/latin-400.css";
-import "@fontsource/open-sans/latin-600.css";
+// Yksi muuttuva fontti (Figtree, kaikki painot 300–900 yhdessä 20 kt:n tiedostossa) otsikoihin ja leipätekstiin
+// (Eki 30.10.2026; aiemmin Montserrat 700/800 + Open Sans 400/600, neljä tiedostoa ja 73 kt).
+import "@fontsource-variable/figtree/wght.css";
 import "./index.css";
 
 // index.html sisältää sivukohtaiset title/description/og-tagit niitä lukijoita varten,
@@ -22,9 +19,9 @@ document.head
 
 const rootEl = document.getElementById("root")!;
 
-const app = (
+const app = (motionFeatures?: Parameters<typeof App>[0]["motionFeatures"]) => (
   <HelmetProvider>
-    <App />
+    <App motionFeatures={motionFeatures} />
   </HelmetProvider>
 );
 
@@ -39,10 +36,16 @@ const app = (
 // + setTimeout): nopealla yhteydellä koodi ehtii perille ennen ensimmäistä piirtoa, eikä
 // ensimmäisen piirron pidä odottaa Reactin työtä. Hinta on yksi ruudunpäivitys (noin 16 ms)
 // ennen kuin napit toimivat.
+//
+// Hydraatio odottaa animaatio-ominaisuuksien paketin (39 kt, esiladattu modulepreloadilla):
+// jos se valmistuu kesken hydraation, LazyMotionin tilapäivitys saa Reactin hylkäämään
+// esirenderöidyn HTML:n ja rakentamaan laiskan alasivun uudelleen (#418/#421, 30.10.2026).
 if (rootEl.firstElementChild) {
   requestAnimationFrame(() => {
-    setTimeout(() => hydrateRoot(rootEl, app), 0);
+    setTimeout(() => {
+      motionFeaturesPromise.then((features) => hydrateRoot(rootEl, app(features)));
+    }, 0);
   });
 } else {
-  createRoot(rootEl).render(app);
+  createRoot(rootEl).render(app());
 }

@@ -1,7 +1,7 @@
 import SEO from "@/components/SEO";
 import { staticSeo } from "@/data/seo";
 
-const UPDATED = "5.10.2026";
+const UPDATED = "30.10.2026";
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="mb-10">
@@ -160,10 +160,6 @@ const Tietosuoja = () => (
         <p>
           Tietoja käsittelee Google Ireland Limited. Tietoja voidaan siirtää Yhdysvaltoihin EU:n ja Yhdysvaltojen
           välisen tietosuojakehyksen (Data Privacy Framework) perusteella.
-        </p>
-        <p>
-          <strong>Cloudflare Web Analytics.</strong> Käytämme lisäksi Cloudflaren kävijätilastoa, joka ei käytä
-          evästeitä eikä tunnista yksittäistä kävijää.
         </p>
       </Section>
 

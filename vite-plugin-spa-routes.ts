@@ -122,6 +122,30 @@ export const fontPreloadTags = (distDir: string): string => {
 };
 
 /**
+ * Koko tyylitiedosto HTML:n sisään (Eki 30.10.2026). Erillinen CSS-tiedosto esti piirron, kunnes se oli ladattu
+ * (Lighthouse: noin 300 ms mobiilissa). Pelkän kriittisen osan upotus jätettiin tekemättä, koska sivu voisi
+ * välähtää muotoilemattomana; kun kaikki tyylit ovat HTML:ssä, välähdystä ei voi tulla. Hinta on noin 23 kt
+ * (gzip) jokaisessa HTML:ssä, mutta sovellus vaihtaa sivua ilman uutta HTML:ää.
+ */
+export const inlineStylesheet = (html: string, distDir: string): string => {
+  const re = /<link rel="stylesheet" crossorigin href="\/assets\/([\w.-]+\.css)">/;
+  const match = html.match(re);
+  if (!match) throw new Error("[spa-routes] index.html: tyylitiedoston link-tagia ei löytynyt");
+  const css = fs.readFileSync(path.join(distDir, "assets", match[1]), "utf-8");
+  if (css.includes("</style")) throw new Error("[spa-routes] CSS sisältää </style-merkkijonon");
+  return html.replace(re, () => `<style>${css}</style>`);
+};
+
+/**
+ * Sovelluksen JavaScript latautuu fontin ja pääkuvan jälkeen (fetchpriority="low"): sivu näkyy esirenderöitynä
+ * ilman sitä, ja se kilpaili samasta kaistasta piirtoon tarvittavien tiedostojen kanssa (Lighthouse 30.10.2026).
+ */
+export const applyScriptPriority = (html: string): string =>
+  html
+    .replace(/<script type="module" crossorigin src=/g, '<script type="module" crossorigin fetchpriority="low" src=')
+    .replace(/<link rel="modulepreload" crossorigin href=/g, '<link rel="modulepreload" crossorigin fetchpriority="low" href=');
+
+/**
  * Jonossa oleva artikkeli: hakemisto luodaan, mutta sivu on noindex eikä sillä ole
  * canonicalia ennen julkaisupäivää, jottei Google indeksoi tyhjää kuorta.
  */
@@ -212,9 +236,14 @@ export default function spaRoutes() {
       // paketti on ladattu, ja chat tai valikko aukeaa näkymättömänä hitaalla yhteydellä (29.10.2026).
       const motionChunk = fs.readdirSync(path.join(distDir, "assets")).find((f) => /^motionFeatures\..*\.js$/.test(f));
       const motionTag = motionChunk ? `<link rel="modulepreload" crossorigin href="/assets/${motionChunk}">` : "";
-      const baseHtml = applyBuildCommit(applyAreaServed(fs.readFileSync(indexPath, "utf-8")), resolveBuildCommit()).replace(
-        "</title>",
-        () => `</title>${fontTags ? `\n    ${fontTags}` : ""}${motionTag ? `\n    ${motionTag}` : ""}`,
+      const baseHtml = applyScriptPriority(
+        inlineStylesheet(
+          applyBuildCommit(applyAreaServed(fs.readFileSync(indexPath, "utf-8")), resolveBuildCommit()).replace(
+            "</title>",
+            () => `</title>${fontTags ? `\n    ${fontTags}` : ""}${motionTag ? `\n    ${motionTag}` : ""}`,
+          ),
+          distDir,
+        ),
       );
       const subpageHtml = baseHtml.replace(HOME_ONLY_TAG, "");
       const routes = getAllRoutePaths();

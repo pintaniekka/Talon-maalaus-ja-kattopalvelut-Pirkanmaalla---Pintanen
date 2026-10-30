@@ -1,0 +1,253 @@
+# Julkaisun jälkeen (Eki 30.10.2026, "ensin julkaistaan, sitten testataan"): jokaisen main-pushin jälkeen
+# odotetaan, että Cloudflare Pages palvelee tämän commitin tuotannossa, ja ajetaan sitä vastaan
+# verify_live.py + verify_dist.py ja koko Playwright-setti (toiminnot + axe kaikille sivuille, kaksi leveyttä).
+# Ennen mergeä ajetaan vain kevyt tarkistus ja savutesti, paitsi kriittisille muutoksille (ci.yml).
+#
+# Virhe → GitHub-issue "Julkaisun jälkeinen tarkistus epäonnistui" (epäonnistuneet testit, commit, ajo,
+# raportti ja ohje), Eki asetetaan vastuuhenkilöksi. Jos issue on jo auki, siihen lisätään kommentti.
+# Kun seuraava ajo menee läpi, issue suljetaan automaattisesti. Toimintaohje: CLAUDE.md, "Julkaisu".
+#
+# Turvallisuus: lomakkeet eivät lähetä mitään (tests/e2e/fixtures.ts korvaa /api/contact-vastauksen ja
+# katkaisee muut /api/-pyynnöt sekä Google Analyticsin), joten tuotantoa vastaan ajo ei synny liidejä
+# eikä GA-käyntejä.
+#
+# Lastmod-botin commit ("[skip ci]") ei käynnistä tätä, eikä Cloudflare rakenna sitä. Käsin: Actions →
+# "E2E julkaisun jälkeen" → Run workflow (osoite valittavissa, esim. haaran esikatselu).
+name: E2E julkaisun jälkeen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Testattava osoite"
+        default: "https://pintanen.fi"
+        required: true
+
+# Uudempi julkaisu korvaa vanhan ajon: testataan aina uusinta tuotantoa.
+concurrency:
+  group: e2e-julkaisun-jalkeen-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  julkaisu:
+    name: Odota julkaisua ja verify_live
+    runs-on: ubuntu-latest
+    outputs:
+      url: ${{ steps.kohde.outputs.url }}
+      tila: ${{ steps.odota.outputs.tila }}
+      palveltu: ${{ steps.odota.outputs.palveltu }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # git merge-base: palveleeko kohde tätä committia tai sen jälkeläistä
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Kohde
+        id: kohde
+        env:
+          TAPAHTUMA: ${{ github.event_name }}
+          SYOTE: ${{ inputs.url }}
+          HAARA: ${{ github.ref_name }}
+        run: |
+          if [ "$TAPAHTUMA" = "workflow_dispatch" ]; then
+            URL="${SYOTE%/}"
+          elif [ "$HAARA" = "main" ]; then
+            URL="https://pintanen.fi"
+          else
+            # Muu haara (vain kokeissa): haaran Cloudflare-esikatselu, sama alias kuin ci.yml:n esikatselu-työssä.
+            ALIAS=$(echo "$HAARA" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' | cut -c1-28)
+            URL="https://${ALIAS}.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev"
+          fi
+          echo "Kohde: $URL"; echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Odota, että kohde palvelee tämän commitin
+        id: odota
+        env:
+          URL: ${{ steps.kohde.outputs.url }}
+          COMMIT: ${{ github.sha }}
+          TAPAHTUMA: ${{ github.event_name }}
+        run: |
+          # Build kirjoittaa jokaiseen sivuun <meta name="build-commit"> (vite-plugin-spa-routes.ts). Tuotantobuild
+          # kestää yleensä 2–5 min; odotetaan enintään 20 min. Jos kohde palvelee jo uudemman commitin (esim.
+          # julkaise-jonossa-työnkulun deploy hook rakensi mainin kärjen), sekin kelpaa, kun se sisältää tämän.
+          for i in $(seq 1 80); do
+            PALVELTU=$(curl -s -H 'Cache-Control: no-cache' "$URL/?julkaisu=$i" | grep -o '<meta name="build-commit" content="[0-9a-f]*"' | head -1 | sed -E 's/.*content="([0-9a-f]*)"/\1/' || true)
+            if [ "$PALVELTU" = "$COMMIT" ]; then
+              echo "Kohde palvelee commitin $COMMIT."; echo "tila=ok" >> "$GITHUB_OUTPUT"; echo "palveltu=$PALVELTU" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            if [ -n "$PALVELTU" ] && git cat-file -e "$PALVELTU^{commit}" 2>/dev/null && git merge-base --is-ancestor "$COMMIT" "$PALVELTU"; then
+              echo "Kohde palvelee uudemman commitin $PALVELTU, joka sisältää tämän."; echo "tila=ok" >> "$GITHUB_OUTPUT"; echo "palveltu=$PALVELTU" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            if [ "$TAPAHTUMA" = "workflow_dispatch" ]; then
+              # Käsiajo testaa sen, mitä kohde palvelee nyt.
+              echo "Käsiajo: testataan kohteen nykyinen build (${PALVELTU:-tuntematon})."; echo "tila=ok" >> "$GITHUB_OUTPUT"; echo "palveltu=$PALVELTU" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            echo "odotetaan ($i/80), kohteen build-commit: ${PALVELTU:-ei vastausta}"; sleep 15
+          done
+          echo "::error::$URL ei palvellut commitia $COMMIT 20 minuutissa. Cloudflaren build on voinut epäonnistua."
+          echo "tila=ei-julkaistu" >> "$GITHUB_OUTPUT"; echo "palveltu=$PALVELTU" >> "$GITHUB_OUTPUT"; exit 1
+
+      - name: verify_live.py + verify_dist.py
+        run: |
+          python3 scripts/verify_live.py "${{ steps.kohde.outputs.url }}" live-julkaisu
+          python3 scripts/verify_dist.py live-julkaisu
+
+  e2e:
+    name: Playwright julkaistua sivustoa vastaan
+    needs: julkaisu
+    if: always() && needs.julkaisu.outputs.tila == 'ok'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+      options: --ipc=host
+    env:
+      CI: "1"
+      HOME: /root
+      E2E_BASE_URL: ${{ needs.julkaisu.outputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Riippuvuudet
+        run: npm ci
+
+      - name: Kohteen sitemap (axe ajetaan sen jokaiselle sivulle)
+        run: |
+          mkdir -p dist
+          node -e "fetch(process.env.E2E_BASE_URL + '/sitemap.xml').then(async (r) => { if (!r.ok) throw new Error('sitemap ' + r.status); require('fs').writeFileSync('dist/sitemap.xml', await r.text()); })"
+
+      - name: Testit
+        run: npx playwright test
+
+      - name: Raportti artefaktiksi
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-julkaisu-${{ github.run_number }}
+          path: |
+            playwright-report
+            test-results
+            e2e-tulos
+          retention-days: 30
+          if-no-files-found: ignore
+
+  ilmoitus:
+    name: Ilmoitus (issue)
+    needs: [julkaisu, e2e]
+    if: always() && !cancelled()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Epäonnistuneet testit raportista
+        if: needs.e2e.result == 'failure'
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: playwright-julkaisu-${{ github.run_number }}
+          path: raportti
+
+      - name: Avaa, päivitä tai sulje issue
+        uses: actions/github-script@v7
+        env:
+          URL: ${{ needs.julkaisu.outputs.url }}
+          TILA: ${{ needs.julkaisu.outputs.tila }}
+          PALVELTU: ${{ needs.julkaisu.outputs.palveltu }}
+          JULKAISU: ${{ needs.julkaisu.result }}
+          E2E: ${{ needs.e2e.result }}
+        with:
+          script: |
+            const fs = require('fs');
+            const { URL: kohde, TILA, PALVELTU, JULKAISU, E2E } = process.env;
+            const sha = context.sha;
+            const lyhyt = sha.slice(0, 7);
+            const ajo = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const commitUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/commit/${sha}`;
+            const viesti = (context.payload.head_commit?.message ?? '').split('\n')[0];
+            // Tunniste sitoo issuen kohteeseen: esikatselun koeajo ei sulje tuotannon issueta.
+            const tunnus = `<!-- e2e-julkaisun-jalkeen ${kohde} -->`;
+
+            const { data: avoimet } = await github.rest.issues.listForRepo({ ...context.repo, state: 'open', per_page: 100 });
+            const auki = avoimet.find((i) => !i.pull_request && i.body?.startsWith(tunnus));
+
+            const onnistui = TILA === 'ok' && JULKAISU === 'success' && E2E === 'success';
+            if (onnistui) {
+              if (auki) {
+                await github.rest.issues.createComment({ ...context.repo, issue_number: auki.number,
+                  body: `Korjattu: julkaisun jälkeinen tarkistus meni läpi commitissa [${lyhyt}](${commitUrl}) ([ajo](${ajo})). Suljetaan automaattisesti.` });
+                await github.rest.issues.update({ ...context.repo, issue_number: auki.number, state: 'closed', state_reason: 'completed' });
+                core.info(`Issue #${auki.number} suljettu.`);
+              } else {
+                core.info('Kaikki läpi, ei avointa issueta.');
+              }
+              return;
+            }
+
+            // Mikä epäonnistui?
+            let syy;
+            let testit = [];
+            if (TILA !== 'ok') {
+              syy = `Cloudflare ei julkaissut committia 20 minuutissa (${kohde} palvelee yhä ${PALVELTU ? PALVELTU.slice(0, 7) : 'tuntematonta buildia'}). Todennäköisesti Cloudflaren build epäonnistui: tuotannossa on yhä edellinen versio.`;
+            } else if (JULKAISU !== 'success') {
+              syy = `verify_live.py tai verify_dist.py löysi virheitä julkaistusta sivustosta (sivut, head-tiedot, linkit, kuvat, schema).`;
+            } else {
+              syy = 'Playwright-testit epäonnistuivat julkaistua sivustoa vastaan.';
+              const kaikki = [];
+              const kay = (suite, polku) => {
+                for (const s of suite.suites ?? []) kay(s, [...polku, s.title]);
+                for (const spec of suite.specs ?? []) {
+                  for (const t of spec.tests ?? []) {
+                    if (t.status === 'unexpected') kaikki.push(`[${t.projectName}] ${[...polku, spec.title].filter(Boolean).join(' › ')}`);
+                  }
+                }
+              };
+              try {
+                const tulos = JSON.parse(fs.readFileSync('raportti/e2e-tulos/tulos.json', 'utf-8'));
+                for (const s of tulos.suites ?? []) kay(s, [s.title]);
+              } catch (e) {
+                core.warning(`Tulostiedostoa ei voitu lukea: ${e.message}`);
+              }
+              testit = kaikki;
+            }
+
+            const lista = testit.length
+              ? ['', `**Epäonnistuneet testit (${testit.length}):**`, ...testit.slice(0, 40).map((t) => `- ${t}`), testit.length > 40 ? `- … ja ${testit.length - 40} muuta` : ''].filter((r) => r !== '')
+              : [];
+            const tiedot = [
+              `**${syy}**`,
+              '',
+              `- Kohde: ${kohde}`,
+              `- Commit: [${lyhyt}](${commitUrl})${viesti ? ` – ${viesti}` : ''}`,
+              `- [Ajon loki ja raportti (artefakti playwright-julkaisu-${context.runNumber})](${ajo})`,
+              ...lista,
+            ];
+
+            if (auki) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: auki.number, body: ['Epäonnistui uudestaan.', '', ...tiedot].join('\n') });
+              core.setFailed(`Julkaisun jälkeinen tarkistus epäonnistui (kommentti issueen #${auki.number}).`);
+              return;
+            }
+
+            const ohje = [
+              '',
+              '**Mitä tehdä**',
+              '1. Katso ajon lokista tai raportista, mikä meni rikki (raportti: lataa artefakti, avaa `playwright-report/index.html`).',
+              '2. Jos rikki on jotain, mikä maksaa liidejä (lomake, laskuri, chat), palauta edellinen versio heti: Cloudflare-hallinta → Workers & Pages → talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen → Deployments → edellinen toimiva Production-julkaisu → ⋯ → **Rollback to this deployment**. Palautus on välitön, eikä se muuta gitiä.',
+              '3. Korjaa virhe tavalliseen tapaan PR:llä. Kun korjaus on yhdistetty ja julkaistu, tämä tarkistus ajetaan uudestaan ja issue sulkeutuu itsestään, kun kaikki menee läpi. (Rollbackin jälkeen Cloudflare julkaisee seuraavan mainin commitin taas normaalisti.)',
+              '4. Jos testi itse on väärä (esim. sivun teksti muuttui tarkoituksella), korjaa testi PR:llä.',
+              '',
+              'Ohje myös CLAUDE.md:ssä, kohta "Julkaisu".',
+            ];
+            const { data: uusi } = await github.rest.issues.create({
+              ...context.repo,
+              title: `Julkaisun jälkeinen tarkistus epäonnistui (${lyhyt}${kohde === 'https://pintanen.fi' ? '' : `, ${kohde.replace(/^https:\/\//, '')}`})`,
+              body: [tunnus, ...tiedot, ...ohje].join('\n'),
+              assignees: [context.repo.owner],
+            });
+            core.setFailed(`Julkaisun jälkeinen tarkistus epäonnistui: issue #${uusi.number}.`);

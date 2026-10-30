@@ -16,6 +16,11 @@ export interface ContactMock {
  */
 export const mockContact = async (page: Page): Promise<ContactMock> => {
   const mock: ContactMock = { requests: [] };
+  // Varaverkko julkaistua sivustoa vastaan (E2E_BASE_URL): mikään muu /api/-pyyntö ei mene perille, eikä
+  // evästebannerin "Hyväksy"-testi lähetä käyntejä oikeaan GA4-ominaisuuteen. Kontekstitasolla, jotta
+  // sääntö koskee myös uusia välilehtiä. Sivutason /api/contact-mock alla menee näiden edelle.
+  await page.context().route("**/api/**", (route) => route.abort());
+  await page.context().route(/^https:\/\/([a-z0-9-]+\.)*(googletagmanager|google-analytics|doubleclick)\.(com|net)\//, (route) => route.abort());
   await page.route("**/api/contact", async (route) => {
     const request = route.request();
     if (request.method() === "POST") {

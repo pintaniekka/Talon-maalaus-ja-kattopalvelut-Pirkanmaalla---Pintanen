@@ -72,7 +72,7 @@ const Body = () => (
       syyt artikkelissa <Link to="/artikkelit/ruisku-vai-pensseli-talon-maalaus/">ruisku vai pensseli</Link>.
     </p>
     <Figure
-      image="talon-maalaus-keltainen-omakotitalo-julkisivumaalaus-jalkeen"
+      image="talon-maalaus-hameenlinna-keltainen-omakotitalo-jalkeen"
       ratio="3/4"
       alt="Keltainen omakotitalo julkisivumaalauksen jälkeen"
       caption="Keltainen puutalo maalauksen jälkeen. Rimat ja nurkkalaudat on maalattu erikseen."

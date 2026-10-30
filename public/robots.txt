@@ -2,6 +2,8 @@
 User-agent: *
 Allow: /
 # Cloudflaren tekniset polut (mm. sähköpostiosoitteiden suojaus) eivät ole sisältöä.
+# Poikkeus: kuvamuunnoksen kuvat (/cdn-cgi/image/) ovat sivuston kuvia, ja Googlen pitää löytää ne.
+Allow: /cdn-cgi/image/
 Disallow: /cdn-cgi/
 
 Sitemap: https://pintanen.fi/sitemap.xml

@@ -64,8 +64,8 @@ const lisakohteet: ReferenssiKohde[] = [
     title: "Talon maalaus ja värinvaihto",
     text: "Keltainen puutalo maalattiin violetiksi peittomaalilla.",
     alt: "Puutalo Tampereella ennen ja jälkeen värinvaihdon",
-    before: "talon-maalaus-keltainen-puutalo-varinvaihto-ennen",
-    after: "talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen",
+    before: "talon-maalaus-tampere-varinvaihto-keltainen-puutalo-ennen",
+    after: "talon-maalaus-tampere-varinvaihto-violetti-puutalo-jalkeen",
   },
   {
     city: "hameenkyro",
@@ -73,8 +73,7 @@ const lisakohteet: ReferenssiKohde[] = [
     title: "Talon maalaus",
     text: "Tummansininen puutalo sai uuden pinnan samalla värillä.",
     alt: "Tummansininen puutalo Hämeenkyrössä ennen ja jälkeen maalauksen",
-    before: "talon-maalaus-tummansininen-puutalo-ulkomaalaus-ennen",
-    after: "talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen",
+    pair: "talon-maalaus-hameenkyro-tummansininen-puutalo",
   },
   {
     city: "hameenkyro",
@@ -91,8 +90,8 @@ const lisakohteet: ReferenssiKohde[] = [
     title: "Talon maalaus",
     text: "Keltainen omakotitalo huoltomaalattiin samalla värillä.",
     alt: "Keltainen omakotitalo Hämeenlinnassa ennen ja jälkeen maalauksen",
-    before: "talon-maalaus-keltainen-omakotitalo-huoltomaalaus-ennen",
-    after: "talon-maalaus-keltainen-omakotitalo-julkisivumaalaus-jalkeen",
+    before: "talon-maalaus-hameenlinna-keltainen-omakotitalo-ennen",
+    after: "talon-maalaus-hameenlinna-keltainen-omakotitalo-jalkeen",
   },
   {
     city: "pirkanmaa",
@@ -100,8 +99,7 @@ const lisakohteet: ReferenssiKohde[] = [
     title: "Talon maalaus ja värinvaihto",
     text: "Punainen omakotitalo maalattiin harmaaksi.",
     alt: "Omakotitalo Pirkanmaalla ennen ja jälkeen värinvaihdon harmaaksi",
-    before: "talon-maalaus-punainen-omakotitalo-varinvaihto-ennen",
-    after: "talon-maalaus-harmaa-omakotitalo-varinvaihto-jalkeen",
+    pair: "talon-maalaus-pirkanmaa-varinvaihto-punaisesta-harmaaksi",
   },
   {
     city: "pirkanmaa",
@@ -109,8 +107,7 @@ const lisakohteet: ReferenssiKohde[] = [
     title: "Ulkoverhouksen huoltomaalaus",
     text: "Keltainen puuverhous ennen ja jälkeen huoltomaalauksen.",
     alt: "Keltainen puuverhous Pirkanmaalla ennen ja jälkeen huoltomaalauksen",
-    before: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta",
-    after: "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen",
+    pair: "talon-maalaus-pirkanmaa-keltainen-ulkoverhous-huoltomaalaus",
   },
   {
     city: "ylojarvi",
@@ -118,8 +115,7 @@ const lisakohteet: ReferenssiKohde[] = [
     title: "Parvekkeen ja julkisivun maalaus",
     text: "Puutalon ja parvekkeen puuosat ennen ja jälkeen huoltomaalauksen.",
     alt: "Puutalo ja parveke Ylöjärvellä ennen ja jälkeen huoltomaalauksen",
-    before: "talon-maalaus-puutalo-ja-parveke-ennen-maalausta",
-    after: "talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen",
+    pair: "talon-maalaus-ylojarvi-puutalo-ja-parveke",
   },
   {
     city: "valkeakoski",

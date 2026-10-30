@@ -52,7 +52,7 @@ const Body = () => (
       <Link to="/artikkelit/talon-maalaus-tilauksesta-valmiiseen/">talon maalaus tilauksesta valmiiseen</Link>.
     </p>
     <Figure
-      image="talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen"
+      image="talon-maalaus-tampere-varinvaihto-violetti-puutalo-jalkeen"
       ratio="3/4"
       alt="Violetti puutalo värinvaihdon ja peittomaalauksen jälkeen"
       caption="Puutalo värinvaihdon jälkeen. Uusi väri on violetti, ja peittävä maali peitti vanhan."
@@ -83,7 +83,7 @@ const Body = () => (
 
     <h2>Miltä vaihdettu väri näyttää?</h2>
     <Figure
-      image="talon-maalaus-harmaa-omakotitalo-varinvaihto-jalkeen"
+      image="talon-maalaus-pirkanmaa-varinvaihto-punaisesta-harmaaksi-jalkeen"
       ratio="3/4"
       alt="Harmaa omakotitalo värinvaihdon jälkeen"
       caption="Omakotitalo värinvaihdon jälkeen. Uusi väri on harmaa."

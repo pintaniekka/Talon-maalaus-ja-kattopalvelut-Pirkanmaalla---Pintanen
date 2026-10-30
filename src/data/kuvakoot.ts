@@ -8,20 +8,9 @@
  */
 export const puuttuvatKuvakoot: Record<number, readonly string[]> = {
   600: [
-    "talon-maalaus-harmaa-omakotitalo-varinvaihto-jalkeen",
-    "talon-maalaus-julkisivun-ja-ikkunoiden-suojaus",
-    "talon-maalaus-keltainen-omakotitalo-huoltomaalaus-ennen",
-    "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta",
-    "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen",
     "talon-maalaus-pensseli",
-    "talon-maalaus-punainen-omakotitalo-varinvaihto-ennen",
-    "talon-maalaus-puutalo-ja-parveke-ennen-maalausta",
-    "talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen",
-    "talon-maalaus-tummansininen-puutalo-ulkomaalaus-ennen",
-    "talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen",
     "talon-maalaus-ulkoverhous-pensselilla-maalari",
     "talon-maalaus-vihrea-puutalo-ennen-ulkomaalausta",
-    "talon-maalaus-ympariston-suojaus-ennen-maalausta",
     "tiilikaton-pesu-ja-pinnoitus-ennen-jalkeen",
     "tiilikaton-pesu-ja-pinnoitus-likainen-tiilikatto-ennen",
     "tiilikaton-pesu-ja-pinnoitus-puhdas-tiilenpunainen-tiilikatto",

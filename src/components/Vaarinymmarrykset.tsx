@@ -34,7 +34,7 @@ const items: Record<Service, Item[]> = {
   maalaus: [
     {
       luulo: "Hilseilevän maalin päälle voi maalata.",
-      kuva: { base: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta", alt: "Hilseilevä keltainen puuverhous ennen maalausta" },
+      kuva: { base: "talon-maalaus-pirkanmaa-keltainen-ulkoverhous-huoltomaalaus-ennen", alt: "Hilseilevä keltainen puuverhous ennen maalausta" },
       totuus: "Irtoava maali ei pidä uutta maalia kiinni. Se kaavitaan pois, ja paljaat kohdat pohjamaalataan ennen pintamaalia.",
     },
     {

@@ -83,7 +83,7 @@ const Body = () => (
       pensselillä. Lopputulos on tasainen, koska pintamaali peittää sekä pohjamaalatut kohdat että vanhan maalin.
     </p>
     <Figure
-      image="talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen"
+      image="talon-maalaus-ylojarvi-puutalo-ja-parveke-jalkeen"
       ratio="3/4"
       alt="Puutalo ja parveke huoltomaalauksen jälkeen"
       caption="Huoltomaalattu puutalo. Pohjamaalatut kohdat eivät erotu pintamaalin alta."

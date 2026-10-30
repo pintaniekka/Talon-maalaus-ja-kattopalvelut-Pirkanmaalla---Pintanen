@@ -9,10 +9,14 @@
  * Uusi kuva: lisää tiedostot kansioihin Pictures-400, -600, -800 ja -1200 nimellä
  * `<perusnimi>-<leveys>.webp` ja viittaa siihen perusnimellä.
  *
+ * Kuvat, joilla on täysikokoinen alkuperäinen kansiossa `alkuperaiset/` (scripts/lisaa_kuva.py
+ * --alkuperainen, 30.10.2026), haetaan tuotannossa Cloudflaren kuvamuunnoksen kautta.
+ *
  * @module storage
  */
 
 import { puuttuvatKuvakoot } from "../data/kuvakoot";
+import { alkuperaiset } from "../data/alkuperaiset";
 
 /** Sivuston osoite absoluuttisia kuvaosoitteita varten (og:image, JSON-LD, kuvasitemap). */
 export const SITE_ORIGIN = "https://pintanen.fi";
@@ -57,12 +61,48 @@ for (const [width, bases] of Object.entries(puuttuvatKuvakoot)) {
   for (const base of bases) (MISSING_VARIANTS[base] ??= []).push(Number(width) as ResponsiveWidth);
 }
 
+/* ═══════════════════════════════════════════════════════
+ *  CLOUDFLAREN KUVAMUUNNOS (30.10.2026)
+ *  Muunnos toimii vain pintanen.fi-domainilla, jolla Images > Transformations on päällä.
+ *  pages.dev-esikatseluissa se ei toimi (virhe 9524), eikä paikallisesti tai testeissä,
+ *  joten siellä käytetään samoista alkuperäisistä tehtyjä WebP-kokoja.
+ * ═══════════════════════════════════════════════════════ */
+
+const ALKUPERAISET = new Set(alkuperaiset);
+
+/**
+ * Onko kuvamuunnos käytössä tässä buildissa: Cloudflare Pagesin tuotantobuild (main-haara),
+ * ellei Pages-asetus KUVAMUUNNOS=0 kytke sitä pois. KUVAMUUNNOS=1 pakottaa sen päälle.
+ */
+export function kuvamuunnosKaytossa(env: Record<string, string | undefined> = {}): boolean {
+  if (env.KUVAMUUNNOS === "1") return true;
+  return env.CF_PAGES_BRANCH === "main" && env.KUVAMUUNNOS !== "0";
+}
+
+// vite.config.ts määrittää tämän selain- ja prerender-koodille; Node-puolella (build-plugin)
+// arvo luetaan suoraan ympäristömuuttujista.
+declare const __KUVAMUUNNOS__: boolean | undefined;
+const KUVAMUUNNOS =
+  typeof __KUVAMUUNNOS__ !== "undefined"
+    ? __KUVAMUUNNOS__
+    : kuvamuunnosKaytossa((globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env);
+
+/**
+ * Cloudflaren muunnososoite alkuperäiselle kuvalle. format=auto antaa selaimelle AVIF:n tai WebP:n;
+ * onerror=redirect näyttää alkuperäisen, jos muunnos epäonnistuu.
+ */
+export function kuvamuunnosUrl(baseName: string, width: number): string {
+  const asetukset = `width=${width},quality=82,format=auto,fit=scale-down,onerror=redirect`;
+  return `/cdn-cgi/image/${asetukset}${getStorageUrl(`alkuperaiset/${baseName}.jpg`)}`;
+}
+
 /**
  * Palauttaa URL:n yksittäiselle responsiiviselle kuvaversiolle.
  * @param baseName - Kuvan perusnimi ilman leveyssuffiksia tai tiedostopäätettä, esim. "talon-maalaus-vihrea-puutalo-ulkomaalaus-jalkeen"
  * @param width - Haluttu leveys (400, 600, 800, 1200 tai 1500)
  */
 export function getResponsiveUrl(baseName: string, width: ResponsiveWidth): string {
+  if (KUVAMUUNNOS && ALKUPERAISET.has(baseName)) return kuvamuunnosUrl(baseName, width);
   return getStorageUrl(`Pictures-${width}/${baseName}-${width}.webp`);
 }
 

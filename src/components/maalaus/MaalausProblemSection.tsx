@@ -4,8 +4,8 @@ import { Search } from "@/components/icons/BrandIcons";
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
 
-const beforeBase = "talon-maalaus-keltainen-puutalo-varinvaihto-ennen";
-const afterBase = "talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen";
+const beforeBase = "talon-maalaus-tampere-varinvaihto-keltainen-puutalo-ennen";
+const afterBase = "talon-maalaus-tampere-varinvaihto-violetti-puutalo-jalkeen";
 
 const warningSignsData = [
   { sign: 'Maali hilseilee tai lohkeilee', desc: 'Kosteus on päässyt maalin alle ja heikentänyt sen tartunnan puuhun.' },

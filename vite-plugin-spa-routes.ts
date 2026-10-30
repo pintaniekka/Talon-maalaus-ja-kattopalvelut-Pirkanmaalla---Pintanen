@@ -25,7 +25,8 @@ import crypto from "crypto";
 import { execSync } from "child_process";
 import type { ViteDevServer } from "vite";
 import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt, buildLlmsFullTxt, buildRedirectsFile } from "./src/data/routes";
-import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
+import { withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
+import { getRouteSeo } from "./src/data/routeSeo";
 import { allCities } from "./src/data/cityData";
 
 const HOME_ONLY_TAG = /\s*<link\s[^>]*data-home-only[^>]*>/g;
@@ -185,7 +186,9 @@ export const trackLastmod = (manifest: LastmodManifest, route: string, body: str
   const main = body.match(/<main[\s\S]*?<\/main>/)?.[0] ?? body;
   // Cloudflaren kuvamuunnoksen osoite (vain tuotantobuildissa) vastaa samaa WebP-kuvaa, joten
   // tiiviste on sama paikallisessa buildissa ja Cloudflaren tuotantobuildissa (src/lib/storage.ts).
+  // Suspense-rajojen merkit (<!--$-->, <!--/$-->) eivät ole sisältöä: laiskaksi muutettu lohko ei muuta sivua.
   const normalized = main
+    .replace(/<!--\/?\$[!?]?-->/g, "")
     .replace(/\s(?:id|for|aria-describedby|aria-labelledby|aria-controls)="[^"]*"/g, "")
     .replace(/\/cdn-cgi\/image\/width=(\d+),[^/]*\/images\/alkuperaiset\/([a-z0-9-]+)\.jpg/g, "/images/Pictures-$1/$2-$1.webp");
   const hash = crypto.createHash("sha1").update(normalized).digest("hex").slice(0, 16);

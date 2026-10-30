@@ -11,10 +11,13 @@
  * V22): sama luku ja sama lupaus joka paikkakunnalla, eikä kuvaus kasva yli 160 merkin.
  *
  * EI komponentti-importteja: tiedosto luetaan myös Nodessa build-aikana.
+ *
+ * Tämä tiedosto on jokaisen sivun pääpaketissa (SEO-komponentti), joten se EI saa tuoda artikkelilistaa
+ * (articles.ts) eikä kohdelistaa (projects.ts): ne kasvattivat jokaisen sivun JavaScriptiä noin 60 kt:lla
+ * (laaja auditointi 30.10.2026). Artikkeli- ja kaupunkisivujen pääkuvat ja kaikkien reittien haku ovat
+ * tiedostossa routeSeo.ts, jota käyttävät build ja kaupunkisivut.
  */
-import { type CityData, allCities, hasPinnoitusPage, maalausCities, pinnoitusCities } from "./cityData";
-import { articles } from "./articles";
-import { getCityHeroBase } from "./projects";
+import { type CityData, hasPinnoitusPage } from "./cityData";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
 import { getResponsiveSrc, getResponsiveSrcSet } from "../lib/storage";
 
@@ -42,9 +45,9 @@ export const DEFAULT_OG_IMAGE = {
 } as const;
 
 /** Koko ruudun hero (ServicePageHero, hintalaskurin ja tarjouspyynnön tausta). */
-const fullHero = (base: string) => ({ base, sizes: "100vw" });
+export const fullHero = (base: string) => ({ base, sizes: "100vw" });
 /** Korttihero (PageHero): kuva on oikealla kolmanneksella tietokoneella, koko leveydellä puhelimella. */
-const cardHero = (base: string) => ({ base, sizes: "(max-width: 1024px) 100vw, 34vw" });
+export const cardHero = (base: string) => ({ base, sizes: "(max-width: 1024px) 100vw, 34vw" });
 
 export const HERO_BASE = {
   pinnoitus: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
@@ -58,11 +61,6 @@ export const HERO_BASE = {
   referenssit: "tiilikaton-pinnoitus-vastamaalattu-tiilikatto-jalkeen",
   kokemuksia: "tiilikaton-pinnoitus-kangasala-keltainen-talo-jalkeen",
 } as const;
-
-/** Kaupunkisivun hero-kuva: paikkakunnan oma kohde, jos sellainen on, muuten palvelun vakiokuva. */
-export const cityHeroBase = (slug: string, service: "pinnoitus" | "maalaus" | "alue"): string =>
-  getCityHeroBase(slug, service === "alue" ? undefined : service) ??
-  (service === "pinnoitus" ? HERO_BASE.pinnoitus : service === "maalaus" ? HERO_BASE.maalaus : HERO_BASE.alue);
 
 /** Staattisten sivujen pääkuvat (samat kuin sivukomponenttien heroissa). */
 const staticHero: Record<string, RouteSeo["hero"]> = {
@@ -255,29 +253,8 @@ export const areaCitySeo = (city: CityData): RouteSeo => ({
     : `Tiilikaton pinnoitus ja talon maalaus ${city.cityIn}. Eerik ja Eemil tekevät työn itse. Ilmainen arviokäynti, kirjallinen takuu ja kotitalousvähennys.`,
 });
 
-/** SEO-tiedot mille tahansa kanoniselle polulle (ilman loppukauttaviivaa). */
-export const getRouteSeo = (path: string): RouteSeo | undefined => {
-  if (staticSeo[path]) return { ...staticSeo[path], hero: staticHero[path] };
-
-  const article = articles.find((a) => `/artikkelit/${a.slug}` === path);
-  if (article) {
-    return {
-      title: article.seoTitle ?? article.title,
-      description: article.description,
-      image: SITE_URL + getResponsiveSrc(article.heroImage),
-      type: "article",
-      hero: { base: article.heroImage, sizes: "(min-width: 896px) 848px, 100vw" },
-    };
-  }
-
-  for (const city of allCities) {
-    if (path === `/maalauspalvelut-${city.slug}`) return { ...areaCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "alue")) };
-  }
-  for (const city of pinnoitusCities) {
-    if (path === `/tiilikaton-pinnoitus-${city.slug}`) return { ...pinnoitusCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "pinnoitus")) };
-  }
-  for (const city of maalausCities) {
-    if (path === `/talon-maalaus-${city.slug}`) return { ...maalausCitySeo(city), hero: cardHero(cityHeroBase(city.slug, "maalaus")) };
-  }
-  return undefined;
-};
+/**
+ * Staattisen sivun SEO-tiedot pääkuvineen. Artikkelit ja kaupunkisivut: getRouteSeo tiedostossa routeSeo.ts.
+ */
+export const getStaticRouteSeo = (path: string): RouteSeo | undefined =>
+  staticSeo[path] ? { ...staticSeo[path], hero: staticHero[path] } : undefined;

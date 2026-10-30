@@ -14,7 +14,7 @@ import { KayntiPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
-import { getRouteSeo } from "@/data/seo";
+import { getStaticRouteSeo } from "@/data/seo";
 import { TAKUU } from "@/data/company";
 import type { Tyovaihe, LyhyestiSisalto } from "@/data/tyovaiheet";
 
@@ -141,7 +141,7 @@ const Kuvat = merkitse(
 const crumbs = [{ name: "Taloyhtiöille" }];
 
 const Taloyhtiot = () => {
-  const seo = getRouteSeo(PATH);
+  const seo = getStaticRouteSeo(PATH);
   return (
     <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />

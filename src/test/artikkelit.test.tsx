@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Artikkelit, { ArtikkelitListaus, KERRALLA } from "@/pages/Artikkelit";
 import { articles, getPublishedArticles, isPublished, type ArticleMeta } from "@/data/articles";
-import { getRouteSeo } from "@/data/seo";
+import { getRouteSeo } from "@/data/routeSeo";
 
 /*
  * Artikkelilistaus (29.10.2026): uusin nostona, tärkeät navyllä, kaikki julkaistut HTML:ssä ennen "Näytä lisää",

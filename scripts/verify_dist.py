@@ -72,6 +72,17 @@ for k,v in titles.items():
     if len(v)>1: problems.append(f"sama title {len(v)} sivulla: {v[:3]}")
 for k,v in descs.items():
     if len(v)>1: problems.append(f"sama description {len(v)} sivulla: {v[:4]}")
+# Pää-JavaScript (laaja auditointi 30.10.2026): artikkelilista oli jokaisen sivun pääpaketissa ja kasvatti sitä
+# jokaisella uudella artikkelilla. Tarkistetaan vain paikallisesta buildista (verify_live.py:n kopiossa ei ole pakettia).
+import gzip
+etusivu = (dist/"index.html").read_text()
+entry = re.search(r'<script type="module"[^>]*src="/(assets/index\.[\w-]+\.js)"', etusivu)
+if entry and (dist/entry.group(1)).exists():
+    js = (dist/entry.group(1)).read_bytes()
+    kt = len(gzip.compress(js, 9))/1000
+    print(f"pää-JS {entry.group(1)}: {len(js)/1000:.0f} kt, gzip {kt:.0f} kt")
+    if kt > 100: problems.append(f"pää-JS gzip {kt:.0f} kt > 100 kt: mikä uusi tiedosto tuli jokaisen sivun pakettiin?")
+    if b'publishedAt:"' in js: problems.append("pää-JS sisältää artikkelilistan (articles.ts): tuo se vain laiskasti ladattavista osista (ArtikkeliRivit, JulkaistuArtikkeli)")
 print("sivuja:", len(routes), "| uniikkeja titlejä:", len(titles), "| uniikkeja descriptioneja:", len(descs))
 print("sanoja min/mediaani/max:", min(x[6] for x in rows), sorted(x[6] for x in rows)[len(rows)//2], max(x[6] for x in rows))
 print("kappaleita min:", min(x[4] for x in rows), "| linkkejä min:", min(x[5] for x in rows))

@@ -13,7 +13,7 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading, Checklist } from "@/components/hinnat/PriceSections";
 import ResponsiveImage from "@/components/ResponsiveImage";
-import { getRouteSeo } from "@/data/seo";
+import { getStaticRouteSeo } from "@/data/seo";
 import { kuntotarkastukset, type KuntotarkastusService } from "@/data/kuntotarkastus";
 import { fmtEur } from "@/data/prices";
 
@@ -54,7 +54,7 @@ const Merkit = merkitse(
 
 const Kuntotarkastus = ({ service }: { service: KuntotarkastusService }) => {
   const s = kuntotarkastukset[service];
-  const seo = getRouteSeo(s.path);
+  const seo = getStaticRouteSeo(s.path);
   const crumbs = [{ name: s.parent.name, path: s.parent.path }, { name: s.h1 }];
   return (
     <Rytmi>

@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
+import AvifKuva from "./AvifKuva";
 
 interface OptimizedImageProps {
   src: string;
@@ -54,7 +55,7 @@ const OptimizedImage = ({
   // loading ja decoding ennen src-attribuuttia: React asettaa attribuutit tässä järjestyksessä,
   // ja Chrome aloittaa latauksen heti src-arvon saatuaan. Jos loading="lazy" tulee vasta sen
   // jälkeen, näkymän ulkopuolisetkin kuvat ladataan heti (26.10.2026).
-  return (
+  const img = (
     <img
       loading={priority ? undefined : "lazy"}
       decoding="async"
@@ -71,6 +72,8 @@ const OptimizedImage = ({
       height={height}
     />
   );
+  // Latausvirheen jälkeen pelkkä WebP-varakuva ilman AVIF-lähdettä.
+  return errored ? img : <AvifKuva>{img}</AvifKuva>;
 };
 
 export default OptimizedImage;

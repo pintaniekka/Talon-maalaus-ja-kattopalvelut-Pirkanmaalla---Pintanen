@@ -2,15 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import spaRoutes from "./vite-plugin-spa-routes";
-import { kuvamuunnosKaytossa } from "./src/lib/storage";
 
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
   base: '/',
-  // Cloudflaren kuvamuunnos vain tuotantobuildissa (src/lib/storage.ts).
-  define: {
-    __KUVAMUUNNOS__: JSON.stringify(kuvamuunnosKaytossa(process.env)),
-  },
   server: {
     host: "::",
     port: 8080,

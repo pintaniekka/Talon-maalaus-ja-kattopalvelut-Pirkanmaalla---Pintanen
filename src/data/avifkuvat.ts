@@ -1,9 +1,9 @@
 /**
- * GENEROITU TIEDOSTO: scripts/lisaa_kuva.py --alkuperainen kirjoittaa tämän, älä muokkaa käsin.
- * Kuvat, joiden täysikokoinen alkuperäinen on kansiossa public/images/alkuperaiset/<nimi>.jpg.
- * Tuotannossa ne haetaan Cloudflaren kuvamuunnoksen kautta (src/lib/storage.ts).
+ * GENEROITU TIEDOSTO: scripts/lisaa_kuva.py --avif kirjoittaa tämän, älä muokkaa käsin.
+ * Kuvat, joilla on AVIF-versiot (<perusnimi>-<leveys>.avif samoissa kansioissa kuin WebP).
+ * src/lib/storage.ts ja AvifKuva lisäävät niille <picture>-elementin AVIF-lähteen.
  */
-export const alkuperaiset: readonly string[] = [
+export const avifKuvat: readonly string[] = [
   "talon-maalaus-hameenkyro-tummansininen-puutalo-ennen",
   "talon-maalaus-hameenkyro-tummansininen-puutalo-jalkeen",
   "talon-maalaus-hameenlinna-keltainen-omakotitalo-ennen",

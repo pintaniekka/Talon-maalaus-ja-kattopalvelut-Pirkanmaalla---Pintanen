@@ -9,7 +9,7 @@ Eerik toimitti Eemilin seinäreferenssit täysikokoisina (iPhone, 3024×4032 ja 
 - Neljä paria kohdistettiin päällekkäin (OpenCV, SIFT + homografia; punainen–harmaa jäykällä muunnoksella, koska terassilautojen toistuva kuvio harhautti homografian) ja rajattiin samaan alueeseen. Ne ovat nyt liukusäätimiä (`pair`) Referenssit-sivulla. Tarkistus: 50/50-sekoituksessa ikkunat, tolpat ja kaiteet ovat teräviä.
 - Tampereen ja Hämeenlinnan parit on kuvattu eri kulmista, joten ne jäävät vierekkäin.
 - Paikkakunta lisättiin nimeen vain, kun se on jo `src/data/referenssit.ts`:ssä. Muuten nimessä on `pirkanmaa` tai ei paikkaa.
-- Täysikokoinen alkuperäinen (pidempi sivu 2400 px, JPEG 88) on kansiossa `public/images/alkuperaiset/`, ja tuotannossa kuvat haetaan Cloudflaren kuvamuunnoksen kautta (`src/lib/storage.ts`). WebP-koot (laatu 80) ovat esikatseluiden ja testien varaversiot.
+- Täysikokoinen alkuperäinen (pidempi sivu 2400 px, JPEG 88) on kansiossa `alkuperaiset/` repon juuressa (ei julkaista). Siitä on tehty AVIF-koot (laatu 56) ja WebP-koot (laatu 80, varamuoto); ks. alla.
 - Vanhat osoitteet ohjataan 301:llä uusiin (`public/_redirects`). 26.10. tehdyt ohjaukset osoittavat suoraan uusiin nimiin, joten ketjuja ei synny.
 
 ## Nimet
@@ -40,11 +40,22 @@ Uudet kuvat, joita ei vielä käytetä sivuilla (Eerik 30.10.2026: lisätään k
 | IMG_3776 | talon-maalaus-raystaan-ja-seinan-rajan-suojaus-teipilla |
 | IMG_3785 | talon-maalaus-seinan-alaosan-ja-pihan-suojaus-muovilla |
 
-## Cloudflaren kuvamuunnos
+## AVIF: oma koodaus Cloudflaren muunnoksen sijaan (Eki 30.10.2026)
 
-- Toimii vain pintanen.fi-domainilla, kun Images > Transformations on päällä (Cloudflaren hallintapaneeli). `pages.dev`-esikatseluissa se ei toimi (virhe 9524), joten esikatselu näyttää WebP-varakoot.
-- Ilmainen taso: 5 000 erilaista muunnosta kuukaudessa (`format` ja `quality` eivät lisää määrää). Rajan ylittyessä uudet muunnokset epäonnistuvat, mutta laskua ei tule; `onerror=redirect` näyttää silloin alkuperäisen.
-- Pages-ympäristömuuttuja `KUVAMUUNNOS=0` kytkee muunnoksen pois ilman koodimuutosta.
-- `robots.txt` sallii `/cdn-cgi/image/` (muu `/cdn-cgi/` on edelleen estetty).
-- `scripts/verify_live.py` tarkistaa tuotannossa, että jokainen muunnos palauttaa kuvan eikä ohjaa alkuperäiseen.
-- `lastmod.json`: tiiviste normalisoi muunnososoitteet WebP-osoitteiksi, joten paikallinen ja tuotantobuild antavat saman päivämäärän.
+Cloudflaren kuvamuunnos (`/cdn-cgi/image/`) oli käytössä 30.10. PR #202:sta ja korvattiin samana päivänä omilla AVIF-tiedostoilla, koska mittaus näytti oman koodauksen paremmaksi.
+
+**Mittaus** (neljä seinäkuvaa, SSIM alkuperäiseen verrattuna):
+
+- Cloudflaren AVIF:n laatu–koko-käyrän taitekohta oli laatu 65 (600 ja 1200 px).
+- Oma AVIF (Pillow 13 / libavif 1.4.2 / libaom, nopeus 2) oli samalla SSIM:llä keskimäärin **25 % pienempi** 600 px:ssä ja **26 % pienempi** 1200 px:ssä kuin Cloudflaren laatu 65. Oletusnopeudella ero oli 17–18 %.
+- Oman kooderin taitekohta on laatu 56 (viidessä kuvassa kuudesta, yhdessä 60). Esimerkki 600 px: Cloudflare q65 59 kt (SSIM 0,955), oma q54 48 kt (0,951), oma q58 57 kt (0,962).
+- `tune=iq` ei muuttanut tulosta; SVT- ja rav1e-kooderit eivät ole Pillowin libavifissa.
+
+**Miten se toimii:**
+
+- `scripts/lisaa_kuva.py --avif` tekee `<perusnimi>-<leveys>.avif`-tiedostot WebP-tiedostojen viereen ja päivittää `src/data/avifkuvat.ts`:n. `--vain-avif` lisää AVIF:n olemassa olevalle kuvalle.
+- `OptimizedImage`, `ResponsiveImage` ja `AvifKuva` (muille `srcSet`-kuville) lisäävät `<picture>`-elementin, jossa on `image/avif`-lähde samoilla leveyksillä ja `sizes`-arvolla. Noin 95 % selaimista (caniuse, 2026) saa AVIF:n, muut WebP:n.
+- Pääkuvan preload käyttää AVIF:ia (`type="image/avif"`), kun pääkuvalla on AVIF; kuvasitemap ja og:image pysyvät WebP:nä.
+- Esikatselu näyttää täsmälleen samat tiedostot kuin tuotanto, eikä Cloudflaren asetuksia tarvita. Cloudflaren Transformations-asetuksen voi kytkeä pois.
+
+**Lähteet:** Lighthouse ei aseta kilotavurajaa, vaan huomauttaa kuvista, joiden uudelleenpakkaus laatuun 85 säästäisi yli 4 KiB, ja näyttökokoonsa nähden liian suurista kuvista ([Chrome for Developers](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images)). Chrome ohittaa LCP:ssä vain alle 0,05 bittiä/pikseli -kuvat ([Chromium](https://chromium.googlesource.com/chromium/src/+/main/docs/speed/metrics_changelog/2023_04_lcp.md)).

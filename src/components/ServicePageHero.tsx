@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import AvifKuva from "@/components/AvifKuva";
 
 /** Vanha koko leveyden hero. Käytössä enää puhdistussivuilla; ei sisääntuloanimaatiota (teksti näkyy ilman JavaScriptiä). */
 interface ServicePageHeroProps {
@@ -16,16 +17,18 @@ const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, c
     <section className={`hero-critical on-dark relative ${compact ? "min-h-[38svh] min-h-[38vh]" : "min-h-[60svh] min-h-[60vh]"} flex items-center justify-center overflow-hidden isolate`} style={{ backgroundColor: 'hsl(215,30%,10%)' }}>
       {/* Background image – separate layer, no blend/filter/opacity */}
       {backgroundImage ? (
-        <img
-          src={backgroundImage}
-          srcSet={backgroundSrcSet}
-          sizes="100vw"
-          alt={title ? `${title} – Pintanen Oy` : ""}
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-          decoding="sync"
-          {...({ fetchpriority: "high" } as Record<string, string>)}
-        />
+        <AvifKuva>
+          <img
+            src={backgroundImage}
+            srcSet={backgroundSrcSet}
+            sizes="100vw"
+            alt={title ? `${title} – Pintanen Oy` : ""}
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+            decoding="sync"
+            {...({ fetchpriority: "high" } as Record<string, string>)}
+          />
+        </AvifKuva>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark" />
       )}

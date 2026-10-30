@@ -43,7 +43,7 @@ const CookieBanner = () => {
     <div
       role="region"
       aria-label="Evästeet"
-      className="fixed z-[70] left-3 right-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] lg:left-4 lg:right-auto lg:bottom-4 lg:w-[26rem] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl text-[13px]"
+      className="fixed z-[70] left-3 bottom-[calc(1rem+env(safe-area-inset-bottom))] w-[min(22rem,calc(100vw-6.5rem))] lg:left-4 lg:bottom-4 lg:w-[26rem] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl text-[13px]"
     >
       <div className="h-1 w-full bg-gradient-to-r from-accent via-paint-yellow to-accent" aria-hidden="true" />
       <div className="p-3 lg:p-5">
@@ -75,8 +75,8 @@ const CookieBanner = () => {
           </div>
         )}
 
-        {/* Puhelimessa oikea alakulma jää vapaaksi chat-napille. */}
-        <div className="mt-2.5 flex flex-wrap gap-2 pr-14 lg:pr-0">
+        {/* Banneri on vasemmalla alhaalla ja sen leveys on rajattu, ettei se peitä oikean alakulman chat-nappia. */}
+        <div className="mt-2.5 flex flex-wrap gap-2">
           <button type="button" onClick={() => close(true)} className={`${primary} flex-1 sm:flex-none`}>
             {settingsOpen ? "Hyväksy kaikki" : "Hyväksy"}
           </button>

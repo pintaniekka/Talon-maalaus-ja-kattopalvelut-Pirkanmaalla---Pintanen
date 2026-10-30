@@ -15,8 +15,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Open Sans', 'Open Sans Fallback', 'system-ui', 'sans-serif'],
-        heading: ['Montserrat', 'Montserrat Fallback', 'system-ui', 'sans-serif'],
+        sans: ['Figtree Variable', 'Figtree Fallback', 'system-ui', 'sans-serif'],
+        heading: ['Figtree Variable', 'Figtree Heading Fallback', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

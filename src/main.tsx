@@ -2,12 +2,9 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import App, { motionFeaturesPromise } from "./App.tsx";
 // Itse tarjoillut fontit (ei Google Fonts -kutsuja kävijän selaimesta).
-// Vain neljä painoa (P14): Montserrat 700/800 otsikoihin ja painikkeisiin, Open Sans 400/600 leipätekstiin.
-// Välipainot (500, Montserrat 400/600) selain johtaa lähimmästä ladatusta painosta.
-import "@fontsource/montserrat/latin-700.css";
-import "@fontsource/montserrat/latin-800.css";
-import "@fontsource/open-sans/latin-400.css";
-import "@fontsource/open-sans/latin-600.css";
+// Yksi muuttuva fontti (Figtree, kaikki painot 300–900 yhdessä 20 kt:n tiedostossa) otsikoihin ja leipätekstiin
+// (Eki 30.10.2026; aiemmin Montserrat 700/800 + Open Sans 400/600, neljä tiedostoa ja 73 kt).
+import "@fontsource-variable/figtree/wght.css";
 import "./index.css";
 
 // index.html sisältää sivukohtaiset title/description/og-tagit niitä lukijoita varten,

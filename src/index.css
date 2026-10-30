@@ -179,26 +179,28 @@
 
   /* Varafontit, joiden mitat on sovitettu Arialiin (capsize-metriikat), jotta teksti ei hypi, kun
      web-fontti vaihtuu piirron jälkeen (vaihe 5A: CLS 0,135 pinnoitussivulla). */
+  /* Figtreen arvot laskettu suomenkielisestä näytteestä painoilla 400 ja 700 (30.10.2026). */
   @font-face {
-    font-family: 'Open Sans Fallback';
+    font-family: 'Figtree Fallback';
     src: local('Arial');
-    size-adjust: 105.15%;
-    ascent-override: 101.65%;
-    descent-override: 27.86%;
+    size-adjust: 98.93%;
+    ascent-override: 96.03%;
+    descent-override: 25.27%;
     line-gap-override: 0%;
   }
   @font-face {
-    font-family: 'Montserrat Fallback';
-    src: local('Arial');
-    size-adjust: 112.83%;
-    ascent-override: 85.79%;
-    descent-override: 22.25%;
+    font-family: 'Figtree Heading Fallback';
+    src: local('Arial Bold'), local('Arial-BoldMT');
+    font-weight: 700;
+    size-adjust: 95.57%;
+    ascent-override: 99.41%;
+    descent-override: 26.16%;
     line-gap-override: 0%;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Open Sans', 'Open Sans Fallback', sans-serif;
+    font-family: 'Figtree Variable', 'Figtree Fallback', sans-serif;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -211,7 +213,7 @@
 
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    font-family: 'Figtree Variable', 'Figtree Heading Fallback', sans-serif;
     @apply font-bold tracking-tight;
   }
 

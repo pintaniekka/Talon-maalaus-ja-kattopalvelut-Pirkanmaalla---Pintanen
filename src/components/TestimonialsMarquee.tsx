@@ -1,7 +1,10 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { allTestimonials, type Testimonial } from "@/data/testimonialsData";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { lazyWithRetry } from "@/lib/lazyWithRetry";
+
+/** Koko arvostelun ikkuna (Radix Dialog) on oma pakettinsa: se ladataan vasta "Lue koko arvostelu" -napista (30.10.2026). */
+const ArvosteluIkkuna = lazyWithRetry(() => import("./ArvosteluIkkuna"));
 
 const defaultTestimonials: Testimonial[] = allTestimonials;
 
@@ -10,16 +13,16 @@ const LONG_TEXT_THRESHOLD = 180;
 /** Kahdelle riville jaetaan vasta, kun arvosteluja on tämän verran; pienempi setti pysyy yhdellä rivillä. */
 const MIN_FOR_TWO_ROWS = 6;
 
-const getInitials = (name: string) => {
+export const getInitials = (name: string) => {
   const parts = name.trim().split(/\s+/);
   if (parts.length === 1) return parts[0][0].toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 };
 
-const GoogleIcon = () => <span className="google-merkki" aria-hidden="true" />;
+export const GoogleIcon = () => <span className="google-merkki" aria-hidden="true" />;
 
 /** Tähdet ovat CSS-kuva (.tahdet, src/index.css), ei viittä SVG:tä per kortti. */
-const Stars = ({ stars }: { stars: number }) => (
+export const Stars = ({ stars }: { stars: number }) => (
   <span
     className="tahdet"
     role="img"
@@ -36,6 +39,8 @@ const Stars = ({ stars }: { stars: number }) => (
 export const TestimonialCard = ({ name, stars, text }: { name: string; stars: number; text: string }) => {
   const isLong = text.length > LONG_TEXT_THRESHOLD;
   const [open, setOpen] = useState(false);
+  // Ikkuna pysyy mukana ensimmäisen avauksen jälkeen, jotta sulkemisanimaatio ja fokuksen palautus toimivat.
+  const [avattu, setAvattu] = useState(false);
 
   return (
     <div className="kortti mx-2 flex w-[260px] flex-shrink-0 flex-col p-5 sm:w-[300px] [scroll-snap-align:center]">
@@ -53,34 +58,19 @@ export const TestimonialCard = ({ name, stars, text }: { name: string; stars: nu
         <>
           <button
             type="button"
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              setAvattu(true);
+              setOpen(true);
+            }}
             className="mb-3 self-start rounded text-xs font-medium text-primary hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
           >
             Lue koko arvostelu
           </button>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogContent className="max-w-lg rounded-3xl">
-              <DialogHeader className="text-left">
-                <DialogTitle className="flex items-center gap-3 font-heading">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary" aria-hidden="true">
-                    {getInitials(name)}
-                  </span>
-                  {name}
-                </DialogTitle>
-                <Stars stars={stars} />
-              </DialogHeader>
-              <DialogDescription className="text-[15px] leading-relaxed text-foreground">"{text}"</DialogDescription>
-              <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <GoogleIcon />
-                  Google-arvostelu
-                </span>
-                <Link to="/kokemuksia/" className="font-semibold text-primary hover:underline">
-                  Kaikki arvostelut
-                </Link>
-              </div>
-            </DialogContent>
-          </Dialog>
+          {avattu && (
+            <Suspense fallback={null}>
+              <ArvosteluIkkuna open={open} onOpenChange={setOpen} name={name} stars={stars} text={text} />
+            </Suspense>
+          )}
         </>
       )}
       <div className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">

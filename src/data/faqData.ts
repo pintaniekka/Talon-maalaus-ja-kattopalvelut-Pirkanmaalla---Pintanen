@@ -153,8 +153,7 @@ export const pinnoitusFAQ: FAQItem[] = [
     question: 'Miten maksu tapahtuu?',
     answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
   },
-  // Brief 10 (26.10.2026): pesu vai pinnoitus, maali, sade. "Miten maksu tapahtuu?" on jo yllä.
-  PESU_VAI_PINNOITUS_FAQ,
+  // Brief 10 (26.10.2026): maali ja sade. Pesukysymys ja "Miten maksu tapahtuu?" ovat jo yllä.
   PINNOITUS_MAALI_FAQ,
   PINNOITUS_SADE_FAQ,
   {

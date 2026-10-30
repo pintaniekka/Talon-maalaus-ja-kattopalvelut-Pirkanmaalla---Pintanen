@@ -26,6 +26,7 @@ const cards: Record<Service, (cityIn: string) => Card[]> = {
       links: [
         { to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" },
         { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: `Pinnoituksen hinta ${cityIn}` },
+        { to: "/harjatiivisteen-asennus/", label: "Harjatiivisteen asennus" },
       ],
     },
     {

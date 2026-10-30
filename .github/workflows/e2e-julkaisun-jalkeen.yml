@@ -217,7 +217,7 @@ jobs:
             }
 
             const lista = testit.length
-              ? ['', `**Epäonnistuneet testit (${testit.length}):**`, ...testit.slice(0, 40).map((t) => `- ${t}`), testit.length > 40 ? `- … ja ${testit.length - 40} muuta` : ''].filter((r) => r !== '')
+              ? ['', `**Epäonnistuneet testit (${testit.length}):**`, ...testit.slice(0, 40).map((t) => `- ${t}`), ...(testit.length > 40 ? [`- … ja ${testit.length - 40} muuta`] : [])]
               : [];
             const tiedot = [
               `**${syy}**`,

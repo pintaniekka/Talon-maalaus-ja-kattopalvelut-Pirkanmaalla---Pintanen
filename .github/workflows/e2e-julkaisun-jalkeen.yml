@@ -17,7 +17,7 @@ name: E2E julkaisun jälkeen
 
 on:
   push:
-    branches: [main, claude/project-thread-5s0bju] # KOE: poistetaan ennen mergeä
+    branches: [main]
   workflow_dispatch:
     inputs:
       url:

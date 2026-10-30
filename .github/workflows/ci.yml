@@ -260,6 +260,13 @@ jobs:
           # Vain eteenpäin: jos main ehti edetä, seuraavan pushin ajo laskee lastmodin uudestaan.
           if git push origin "HEAD:main"; then
             echo "lastmod.json päivitetty mainiin."
-          else
+            exit 0
+          fi
+          # Hylätty push on kunnossa vain, jos main eteni. Muuten (esim. oikeudet) työ kaatuu näkyvästi.
+          git fetch -q origin main
+          if [ "$(git rev-parse origin/main)" != "$GITHUB_SHA" ]; then
             echo "::warning::main eteni tämän ajon aikana. Seuraava main-ajo päivittää lastmod.json-tiedoston."
+          else
+            echo "::error::lastmod.json-tiedoston push mainiin epäonnistui, vaikka main ei edennyt. Tarkista Settings → Actions → Workflow permissions."
+            exit 1
           fi

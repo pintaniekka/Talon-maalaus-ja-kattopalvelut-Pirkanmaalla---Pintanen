@@ -3,7 +3,6 @@ import { LazyMotion } from "framer-motion";
 import { Toaster } from "@/components/ui/toaster";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
-import Index from "./pages/Index";
 import { allCities, maalausCities, pinnoitusCities } from "./data/cityData";
 import { legacyRedirects } from "./data/legacyRedirects";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
@@ -24,7 +23,8 @@ interface AppProps {
   motionFeatures?: MotionFeatures;
 }
 
-// Lazy-loaded subpages
+// Lazy-loaded pages. Etusivukin on laiska (30.10.2026): sen osat eivät kuulu alasivujen pääpakettiin.
+const Index = lazyWithRetry(() => import("./pages/Index"));
 const KattopalvelutPinnoitus = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitus"));
 const KattopalvelutPinnoitusCity = lazyWithRetry(() => import("./pages/KattopalvelutPinnoitusCity"));
 const TalonMaalaus = lazyWithRetry(() => import("./pages/TalonMaalaus"));

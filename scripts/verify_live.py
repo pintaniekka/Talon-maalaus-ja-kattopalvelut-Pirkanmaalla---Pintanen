@@ -73,6 +73,16 @@ rel = set(re.findall(r'(?:src|href|content)="(/images/[^"\s]+)"', allhtml)) | se
 pageimgs = sorted(rel)
 with cf.ThreadPoolExecutor(8) as ex: codes2 = list(ex.map(head, [BASE + i.replace("&amp;", "&") for i in pageimgs]))
 print(f"sivujen HTML:ssä viitatut kuvat: {len(pageimgs)}, ei-200: {[i for i, c in zip(pageimgs, codes2) if c != 200] or 'ei yhtään'}")
+# Cloudflaren kuvamuunnos (vain tuotannossa): onnistunut muunnos on 200 ja kuva, epäonnistunut ohjaa
+# (onerror=redirect) alkuperäiseen. Ohjausta ei seurata, jotta pois päältä oleva muunnos huomataan.
+muunnokset = sorted(set(re.findall(r'(/cdn-cgi/image/[^"\s)<]+?\.jpg)', allhtml)))
+if muunnokset:
+    def muunnos(u):
+        s, _, hd = get(BASE + u.replace("&amp;", "&"), follow=False)
+        return s, (hd.get("Content-Type") or hd.get("content-type") or "")
+    with cf.ThreadPoolExecutor(8) as ex: tulos = list(ex.map(muunnos, muunnokset))
+    vialliset = [u for u, (s, ct) in zip(muunnokset, tulos) if s != 200 or not ct.startswith("image/")]
+    print(f"Cloudflaren kuvamuunnokset: {len(muunnokset)}, epäonnistuneet: {vialliset[:10] or 'ei yhtään'}")
 ext = sorted(set(re.findall(r'https?://([a-z0-9.-]*(?:supabase|lovable)[a-z0-9.-]*)', allhtml)))
 print("supabase/lovable-osoitteita sivujen HTML:ssä:", ext or "ei yhtään")
 # llms.txt, robots

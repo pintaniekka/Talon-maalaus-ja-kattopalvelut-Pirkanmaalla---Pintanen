@@ -73,7 +73,7 @@ const Body = () => (
       <Link to="/artikkelit/milloin-talon-voi-maalata-saa/">milloin talon voi maalata</Link>.
     </p>
     <Figure
-      image="talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen"
+      image="talon-maalaus-pirkanmaa-keltainen-ulkoverhous-huoltomaalaus-jalkeen"
       ratio="3/4"
       alt="Keltainen ulkoverhous huoltomaalauksen jälkeen"
       caption="Keltainen ulkoverhous huoltomaalauksen jälkeen."

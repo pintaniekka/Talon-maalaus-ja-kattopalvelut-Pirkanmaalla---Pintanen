@@ -86,7 +86,7 @@ const Body = () => (
       artikkelissa <Link to="/artikkelit/miksi-vanha-maali-kaavitaan/">kaavinta ja homepesu</Link>.
     </p>
     <Figure
-      image="talon-maalaus-keltainen-omakotitalo-huoltomaalaus-ennen"
+      image="talon-maalaus-hameenlinna-keltainen-omakotitalo-ennen"
       ratio="3/4"
       alt="Keltainen omakotitalo ennen huoltomaalausta"
       caption="Keltainen puutalo ennen huoltomaalausta. Varjoisat kohdat ovat tummuneet ensin."

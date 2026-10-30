@@ -68,7 +68,7 @@ const Body = () => (
       <Link to="/artikkelit/miksi-vanha-maali-kaavitaan/">kaavinta ja homepesu</Link>.
     </p>
     <Figure
-      image="talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen"
+      image="talon-maalaus-hameenkyro-tummansininen-puutalo-jalkeen"
       ratio="3/4"
       alt="Tummansininen puutalo ulkomaalauksen jälkeen"
       caption="Tummansininen puutalo maalauksen jälkeen."

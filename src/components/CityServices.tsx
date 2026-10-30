@@ -27,8 +27,8 @@ const CityServices = ({ citySlug, cityGenitive }: CityServicesProps) => {
     {
       title: "Ulkomaalaus",
       href: `/talon-maalaus-${citySlug}/`,
-      beforeBase: "talon-maalaus-keltainen-puutalo-varinvaihto-ennen",
-      afterBase: "talon-maalaus-violetti-puutalo-varinvaihto-peittomaalaus-jalkeen",
+      beforeBase: "talon-maalaus-tampere-varinvaihto-keltainen-puutalo-ennen",
+      afterBase: "talon-maalaus-tampere-varinvaihto-violetti-puutalo-jalkeen",
       description: "Homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
       features: ["Homepesu ja kaavinta", "Pintamaali pensselillä", "2 v takuu"],
       warranty: "2 v takuu",

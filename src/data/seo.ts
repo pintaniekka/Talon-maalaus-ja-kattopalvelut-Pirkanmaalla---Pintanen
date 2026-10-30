@@ -49,12 +49,12 @@ const cardHero = (base: string) => ({ base, sizes: "(max-width: 1024px) 100vw, 3
 export const HERO_BASE = {
   pinnoitus: "tiilikaton-pinnoitus-kirkkaan-punainen-tiilikatto-jalkeen",
   puhdistus: "tiilikaton-pesu-puhdas-tiilikatto-jalkeen",
-  maalaus: "talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen",
+  maalaus: "talon-maalaus-hameenkyro-tummansininen-puutalo-jalkeen",
   alue: "talon-maalaus-ja-tiilikaton-pinnoitus-tampere-puutalo-jalkeen",
   pinnoitusHinta: "tiilikaton-pesu-ja-pinnoitus-sammaleenpoisto",
   maalausHinta: "talon-maalaus-vaalea-kartanomainen-puutalo-ulkomaalaus-jalkeen",
   meista: "tiilikaton-pinnoitus-tampere-eerik-pitkanen-katolla",
-  toimintaAlueet: "talon-maalaus-keltainen-omakotitalo-julkisivumaalaus-jalkeen",
+  toimintaAlueet: "talon-maalaus-hameenlinna-keltainen-omakotitalo-jalkeen",
   referenssit: "tiilikaton-pinnoitus-vastamaalattu-tiilikatto-jalkeen",
   kokemuksia: "tiilikaton-pinnoitus-kangasala-keltainen-talo-jalkeen",
 } as const;

@@ -182,7 +182,11 @@ const todayInFinland = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europ
 export const trackLastmod = (manifest: LastmodManifest, route: string, body: string, today = todayInFinland()): string => {
   // Vain <main>: headerin ja footerin muutos ei ole sivun sisällön muutos. Reactin tunnisteet eivät ole sisältöä.
   const main = body.match(/<main[\s\S]*?<\/main>/)?.[0] ?? body;
-  const normalized = main.replace(/\s(?:id|for|aria-describedby|aria-labelledby|aria-controls)="[^"]*"/g, "");
+  // Cloudflaren kuvamuunnoksen osoite (vain tuotantobuildissa) vastaa samaa WebP-kuvaa, joten
+  // tiiviste on sama paikallisessa buildissa ja Cloudflaren tuotantobuildissa (src/lib/storage.ts).
+  const normalized = main
+    .replace(/\s(?:id|for|aria-describedby|aria-labelledby|aria-controls)="[^"]*"/g, "")
+    .replace(/\/cdn-cgi\/image\/width=(\d+),[^/]*\/images\/alkuperaiset\/([a-z0-9-]+)\.jpg/g, "/images/Pictures-$1/$2-$1.webp");
   const hash = crypto.createHash("sha1").update(normalized).digest("hex").slice(0, 16);
   const prev = manifest[route];
   if (prev && prev.hash === hash) return prev.lastmod;

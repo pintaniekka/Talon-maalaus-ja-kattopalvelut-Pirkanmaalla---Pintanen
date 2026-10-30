@@ -76,7 +76,7 @@ export const articles: ArticleMeta[] = [
     publishedAt: "2026-09-30",
     updatedAt: "2026-10-26",
     readingMinutes: 6,
-    heroImage: "talon-maalaus-keltainen-omakotitalo-julkisivumaalaus-jalkeen",
+    heroImage: "talon-maalaus-hameenlinna-keltainen-omakotitalo-jalkeen",
     heroAlt: "Keltainen omakotitalo julkisivumaalauksen jälkeen",
   },
   {
@@ -91,7 +91,7 @@ export const articles: ArticleMeta[] = [
     publishedAt: "2026-10-04",
     updatedAt: "2026-10-26",
     readingMinutes: 7,
-    heroImage: "talon-maalaus-tummansininen-puutalo-ulkomaalaus-jalkeen",
+    heroImage: "talon-maalaus-hameenkyro-tummansininen-puutalo-jalkeen",
     heroAlt: "Tummansininen puutalo ulkomaalauksen jälkeen",
   },
   {
@@ -136,7 +136,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2026-10-27",
     readingMinutes: 5,
-    heroImage: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta",
+    heroImage: "talon-maalaus-pirkanmaa-keltainen-ulkoverhous-huoltomaalaus-ennen",
     heroAlt: "Keltainen puuverhous ennen julkisivumaalausta",
   },
   {
@@ -347,7 +347,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2026-12-28",
     readingMinutes: 6,
-    heroImage: "talon-maalaus-keltainen-puuverhous-ennen-julkisivumaalausta",
+    heroImage: "talon-maalaus-pirkanmaa-keltainen-ulkoverhous-huoltomaalaus-ennen",
     heroAlt: "Keltainen puuverhous ennen julkisivumaalausta",
   },
   {
@@ -431,7 +431,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2027-01-18",
     readingMinutes: 5,
-    heroImage: "talon-maalaus-puutalo-ja-parveke-ennen-maalausta",
+    heroImage: "talon-maalaus-ylojarvi-puutalo-ja-parveke-ennen",
     heroAlt: "Puutalo ja parveke ennen maalausta ja pohjatöitä",
   },
   {
@@ -459,7 +459,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2027-01-25",
     readingMinutes: 6,
-    heroImage: "talon-maalaus-punainen-omakotitalo-varinvaihto-ennen",
+    heroImage: "talon-maalaus-pirkanmaa-varinvaihto-punaisesta-harmaaksi-ennen",
     heroAlt: "Punainen omakotitalo ennen värinvaihtoa ja ulkomaalausta",
   },
   {
@@ -487,7 +487,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2027-02-01",
     readingMinutes: 5,
-    heroImage: "talon-maalaus-keltainen-puutalo-varinvaihto-ennen",
+    heroImage: "talon-maalaus-tampere-varinvaihto-keltainen-puutalo-ennen",
     heroAlt: "Keltainen puutalo ennen huoltomaalausta ja värinvaihtoa",
   },
   {
@@ -739,7 +739,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2027-04-05",
     readingMinutes: 5,
-    heroImage: "talon-maalaus-puutalo-ja-parveke-huoltomaalaus-jalkeen",
+    heroImage: "talon-maalaus-ylojarvi-puutalo-ja-parveke-jalkeen",
     heroAlt: "Puutalo ja parveke huoltomaalauksen jälkeen",
   },
   {
@@ -781,7 +781,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2027-04-15",
     readingMinutes: 5,
-    heroImage: "talon-maalaus-harmaa-omakotitalo-varinvaihto-jalkeen",
+    heroImage: "talon-maalaus-pirkanmaa-varinvaihto-punaisesta-harmaaksi-jalkeen",
     heroAlt: "Harmaa omakotitalo värinvaihdon jälkeen",
   },
   {
@@ -809,7 +809,7 @@ export const articles: ArticleMeta[] = [
     author: "eemil",
     publishedAt: "2027-04-22",
     readingMinutes: 4,
-    heroImage: "talon-maalaus-keltainen-ulkoverhous-huoltomaalaus-jalkeen",
+    heroImage: "talon-maalaus-pirkanmaa-keltainen-ulkoverhous-huoltomaalaus-jalkeen",
     heroAlt: "Keltainen ulkoverhous huoltomaalauksen jälkeen",
   },
   {

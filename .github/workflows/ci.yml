@@ -4,11 +4,18 @@
 #
 # Työt (30.10.2026, päivitysprosessin tehostus):
 # - tarkistus: tsc, lint, vitest, build, verify_*. Ajetaan aina (n. 1 min).
-# - e2e: Playwright (toiminnot, axe) kahdella leveydellä, CI:n buildia vastaan (dist-artefakti).
-#   Ajetaan vain valmiille PR:lle (ei luonnokselle) ja vain, jos PR muuttaa muutakin kuin sisältöä
-#   (docs/, src/data/, src/content/, src/test/, scripts/, public/images/, *.md). Luonnos-PR:n saa
-#   ajettua käsin: Actions → CI → Run workflow → haara. Ohitettu työ näkyy GitHubissa vihreänä
-#   ("skipped"), joten se ei jää odottamaan.
+# - e2e: Playwright kahdella leveydellä, CI:n buildia vastaan (dist-artefakti). Vain valmiille PR:lle
+#   (ei luonnokselle). Laajuus riippuu muutetuista tiedostoista (Eki 30.10.2026, "ensin julkaistaan,
+#   sitten testataan"):
+#     täysi  – lomakkeet, laskurit, chat, evästebanneri, valikot, liukusäädin, Pages-funktiot, build,
+#              riippuvuudet, testit ja workflowt (KRIITTISET alla): toiminnot + axe kaikille sivuille
+#              ennen julkaisua (n. 6 min).
+#     savu   – muu koodi ja ulkoasu: tests/e2e/savu.spec.ts (sivupohjat aukeavat ilman virheitä, n. 1,5 min).
+#     ei     – pelkkä sisältö (docs/, src/data/, src/content/, src/test/, scripts/, public/images/, *.md).
+#   Täysi ajo tehdään joka tapauksessa julkaisun jälkeen tuotantoa vastaan
+#   (.github/workflows/e2e-julkaisun-jalkeen.yml), ja virheestä tulee GitHub-issue.
+#   Luonnos-PR:n saa ajettua käsin (täysi): Actions → CI → Run workflow → haara. Ohitettu työ näkyy
+#   GitHubissa vihreänä ("skipped"), joten se ei jää odottamaan.
 # - esikatselu: odottaa Cloudflare-esikatselua ja ajaa verify_live.py + verify_dist.py sitä vastaan.
 # - lastmod: mainissa botti committaa buildin päivittämän src/data/lastmod.json-tiedoston, jotta
 #   PR:ien ei tarvitse committata sitä (ennen se riiteli melkein jokaisessa PR:ssä). Commit alkaa
@@ -50,10 +57,10 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
         run: |
           if [ "$TAPAHTUMA" = "workflow_dispatch" ]; then
-            echo "Käsin käynnistetty: E2E ajetaan."; echo "e2e=true" >> "$GITHUB_OUTPUT"; exit 0
+            echo "Käsin käynnistetty: täysi E2E."; echo "e2e=taysi" >> "$GITHUB_OUTPUT"; exit 0
           fi
           if [ "$TAPAHTUMA" != "pull_request" ]; then
-            echo "e2e=false" >> "$GITHUB_OUTPUT"; exit 0
+            echo "e2e=ei" >> "$GITHUB_OUTPUT"; exit 0
           fi
           TIEDOSTOT=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[].filename')
           echo "PR:n muuttamat tiedostot:"; echo "$TIEDOSTOT"
@@ -64,12 +71,19 @@ jobs:
           # vitest ja verify_dist kattavat ne. Kaikki muu (komponentit, sivut, CSS, kirjastot,
           # funktiot, riippuvuudet, asetukset, workflowt) ajaa E2E:n.
           MUUT=$(echo "$TIEDOSTOT" | grep -vE '^(docs/|src/data/|src/content/|src/test/|scripts/|public/images/)|\.md$' || true)
+          # Kriittiset: koodi, jonka rikkoutuminen maksaa liidejä (lomakkeet, laskurit, chat), evästebanneri,
+          # valikot, liukusäädin ja niiden UI-pohjat, Pages-funktiot, sovelluksen käynnistys ja build,
+          # riippuvuudet sekä itse testit ja workflowt. Nämä odottavat täyttä E2E:tä ennen julkaisua.
+          KRIITTISET='^(functions/|tests/e2e/|\.github/|playwright\.config\.ts$|package(-lock)?\.json$|bun\.lockb?$|vite\.config\.ts$|vite-plugin-spa-routes\.ts$|index\.html$|src/(main|App|entry-prerender)\.tsx$|src/lib/|src/components/(ui/|laskuri/|tarjous/|Chat|Tarjous|DesktopQuoteDrawer|ServiceContactSection|FormPrivacyNote|PhoneInput|CityCombobox|CookieBanner|Header|BeforeAfterSlider|ToimintaAlueetBanner)|src/pages/(Tarjouspyynto|Hintalaskuri)\.tsx$)'
+          KRIITTINEN=$(echo "$MUUT" | grep -E "$KRIITTISET" || true)
           if [ "$LUONNOS" = "true" ]; then
-            echo "Luonnos-PR: E2E ajetaan, kun PR merkitään valmiiksi (Ready for review)."; echo "e2e=false" >> "$GITHUB_OUTPUT"
+            echo "Luonnos-PR: E2E ajetaan, kun PR merkitään valmiiksi (Ready for review)."; echo "e2e=ei" >> "$GITHUB_OUTPUT"
           elif [ -z "$MUUT" ]; then
-            echo "Vain sisältömuutoksia: E2E ohitetaan."; echo "e2e=false" >> "$GITHUB_OUTPUT"
+            echo "Vain sisältömuutoksia: E2E vasta julkaisun jälkeen."; echo "e2e=ei" >> "$GITHUB_OUTPUT"
+          elif [ -n "$KRIITTINEN" ]; then
+            echo "Kriittisiä muutoksia, täysi E2E ennen julkaisua:"; echo "$KRIITTINEN"; echo "e2e=taysi" >> "$GITHUB_OUTPUT"
           else
-            echo "Koodi- tai ulkoasumuutoksia: E2E ajetaan."; echo "e2e=true" >> "$GITHUB_OUTPUT"
+            echo "Koodi- tai ulkoasumuutoksia: savutesti ennen julkaisua, täysi E2E julkaisun jälkeen."; echo "e2e=savu" >> "$GITHUB_OUTPUT"
           fi
 
       - uses: actions/checkout@v4
@@ -107,7 +121,7 @@ jobs:
         run: python3 scripts/verify_redirects.py --file dist/_redirects --sitemap dist/sitemap.xml
 
       - name: Build E2E:lle (artefakti)
-        if: steps.suodatin.outputs.e2e == 'true'
+        if: steps.suodatin.outputs.e2e != 'ei'
         uses: actions/upload-artifact@v4
         with:
           name: dist
@@ -128,7 +142,7 @@ jobs:
   e2e:
     name: Playwright (toiminnot, axe)
     needs: tarkistus
-    if: needs.tarkistus.outputs.e2e == 'true'
+    if: needs.tarkistus.outputs.e2e == 'taysi' || needs.tarkistus.outputs.e2e == 'savu'
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.63.0-noble
@@ -148,9 +162,12 @@ jobs:
           name: dist
           path: dist
 
-      - name: Testit
+      - name: Testit (${{ needs.tarkistus.outputs.e2e == 'savu' && 'savutesti' || 'täysi' }})
         id: testit
-        run: npx playwright test
+        env:
+          LAAJUUS: ${{ needs.tarkistus.outputs.e2e }}
+        run: |
+          if [ "$LAAJUUS" = "savu" ]; then npx playwright test savu; else npx playwright test; fi
 
       - name: Raportti artefaktiksi
         if: always()
@@ -161,6 +178,7 @@ jobs:
           path: |
             playwright-report
             test-results
+            e2e-tulos
           retention-days: 14
           if-no-files-found: ignore
 
@@ -169,6 +187,7 @@ jobs:
         uses: actions/github-script@v7
         env:
           TULOS: ${{ steps.testit.outcome }}
+          LAAJUUS: ${{ needs.tarkistus.outputs.e2e }}
           ARTEFAKTI_URL: ${{ steps.artefakti.outputs.artifact-url }}
         with:
           script: |
@@ -176,9 +195,12 @@ jobs:
             const tulos = tulokset[process.env.TULOS] ?? 'EPÄONNISTUI';
             const ajo = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             const tunnus = '<!-- e2e-kommentti -->';
+            const laajuus = process.env.LAAJUUS === 'savu'
+              ? 'savutesti; täysi ajo tehdään julkaisun jälkeen tuotantoa vastaan'
+              : 'täysi: toiminnot ja axe kaikille sivuille';
             const body = [
               tunnus,
-              `**E2E-testit: ${tulos}** (puhelin 390 px ja työpöytä 1280 px)`,
+              `**E2E-testit: ${tulos}** (${laajuus}; puhelin 390 px ja työpöytä 1280 px)`,
               '',
               `- [Ajon loki](${ajo})`,
               process.env.ARTEFAKTI_URL ? `- [Raportti (artefakti)](${process.env.ARTEFAKTI_URL})` : '- Artefaktia ei syntynyt',

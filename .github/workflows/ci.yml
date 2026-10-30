@@ -1,17 +1,77 @@
 # Jokaisessa PR:ssä ja main-haaran pushissa: tyypit, lint, testit, tuotantobuild ja buildin
 # tarkistus. Cloudflare Pagesin oma tarkistus kertoo vain, onnistuiko julkaisu; tämä kertoo,
 # ovatko testit ja sisältösäännöt kunnossa ennen mergeä (5.10.2026 suora commit kaatoi tuotannon).
+#
+# Työt (30.10.2026, päivitysprosessin tehostus):
+# - tarkistus: tsc, lint, vitest, build, verify_*. Ajetaan aina (n. 1 min).
+# - e2e: Playwright (toiminnot, axe) kahdella leveydellä, CI:n buildia vastaan (dist-artefakti).
+#   Ajetaan vain valmiille PR:lle (ei luonnokselle) ja vain, jos PR muuttaa muutakin kuin sisältöä
+#   (docs/, src/data/, src/content/, src/test/, scripts/, public/images/, *.md). Luonnos-PR:n saa
+#   ajettua käsin: Actions → CI → Run workflow → haara. Ohitettu työ näkyy GitHubissa vihreänä
+#   ("skipped"), joten se ei jää odottamaan.
+# - esikatselu: odottaa Cloudflare-esikatselua ja ajaa verify_live.py + verify_dist.py sitä vastaan.
+# - lastmod: mainissa botti committaa buildin päivittämän src/data/lastmod.json-tiedoston, jotta
+#   PR:ien ei tarvitse committata sitä (ennen se riiteli melkein jokaisessa PR:ssä). Commit alkaa
+#   "[skip ci]": GitHub ei aja workflow'ta uudestaan eikä Cloudflare tee uutta tuotantobuildia
+#   (tuotanto on jo rakennettu merge-commitista samoilla päivillä).
+#
+# Playwrightin Docker-kuvan versio = @playwright/test package.jsonissa (1.63.0): kun päivität
+# paketin, päivitä myös kuva. Kuvakaappausvertailu poistettiin 29.10.2026 (Eerik).
 name: CI
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
+  workflow_dispatch:
+
+# PR:ssä uusi push perii vanhan ajon. Mainissa ei peruta: lastmod-botin ajo saa valmistua.
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   tarkistus:
     runs-on: ubuntu-latest
+    outputs:
+      e2e: ${{ steps.suodatin.outputs.e2e }}
     steps:
+      - name: Tarvitaanko E2E (luonnos, muutetut tiedostot)
+        id: suodatin
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAPAHTUMA: ${{ github.event_name }}
+          LUONNOS: ${{ github.event.pull_request.draft }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          if [ "$TAPAHTUMA" = "workflow_dispatch" ]; then
+            echo "Käsin käynnistetty: E2E ajetaan."; echo "e2e=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          if [ "$TAPAHTUMA" != "pull_request" ]; then
+            echo "e2e=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          TIEDOSTOT=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[].filename')
+          echo "PR:n muuttamat tiedostot:"; echo "$TIEDOSTOT"
+          if echo "$TIEDOSTOT" | grep -qx 'src/data/lastmod.json'; then
+            echo "::warning::PR muuttaa src/data/lastmod.json-tiedostoa. Botti päivittää sen mainissa mergen jälkeen; palauta tiedosto (git checkout origin/main -- src/data/lastmod.json), niin PR ei riitele muiden kanssa."
+          fi
+          # Sisältömuutokset (tekstit, data, artikkelit, kuvat, dokumentit) eivät tarvitse E2E:tä:
+          # vitest ja verify_dist kattavat ne. Kaikki muu (komponentit, sivut, CSS, kirjastot,
+          # funktiot, riippuvuudet, asetukset, workflowt) ajaa E2E:n.
+          MUUT=$(echo "$TIEDOSTOT" | grep -vE '^(docs/|src/data/|src/content/|src/test/|scripts/|public/images/)|\.md$' || true)
+          if [ "$LUONNOS" = "true" ]; then
+            echo "Luonnos-PR: E2E ajetaan, kun PR merkitään valmiiksi (Ready for review)."; echo "e2e=false" >> "$GITHUB_OUTPUT"
+          elif [ -z "$MUUT" ]; then
+            echo "Vain sisältömuutoksia: E2E ohitetaan."; echo "e2e=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Koodi- tai ulkoasumuutoksia: E2E ajetaan."; echo "e2e=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -38,9 +98,6 @@ jobs:
       - name: Tuotantobuild
         run: npm run build
 
-      - name: lastmod.json on committattu buildin jälkeen
-        run: git diff --exit-code src/data/lastmod.json || (echo 'Aja npm run build ja committaa src/data/lastmod.json' && exit 1)
-
       - name: Buildin tarkistus (sivut, head, linkit, schema)
         run: python3 scripts/verify_dist.py dist
       - name: Sisäiset linkit (verify_links.py)
@@ -48,3 +105,161 @@ jobs:
 
       - name: Ohjaussääntöjen tarkistus
         run: python3 scripts/verify_redirects.py --file dist/_redirects --sitemap dist/sitemap.xml
+
+      - name: Build E2E:lle (artefakti)
+        if: steps.suodatin.outputs.e2e == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 1
+          compression-level: 0 # kuvat ovat jo pakattuja (WebP, AVIF)
+          if-no-files-found: error
+
+      - name: lastmod.json lastmod-botille
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: lastmod
+          path: src/data/lastmod.json
+          retention-days: 1
+          if-no-files-found: error
+
+  e2e:
+    name: Playwright (toiminnot, axe)
+    needs: tarkistus
+    if: needs.tarkistus.outputs.e2e == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.63.0-noble
+      options: --ipc=host
+    env:
+      CI: "1"
+      HOME: /root
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Riippuvuudet
+        run: npm ci
+
+      - name: CI:n build (artefakti)
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Testit
+        id: testit
+        run: npx playwright test
+
+      - name: Raportti artefaktiksi
+        if: always()
+        uses: actions/upload-artifact@v4
+        id: artefakti
+        with:
+          name: playwright-${{ github.run_number }}
+          path: |
+            playwright-report
+            test-results
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Kommentti PR:ään
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        env:
+          TULOS: ${{ steps.testit.outcome }}
+          ARTEFAKTI_URL: ${{ steps.artefakti.outputs.artifact-url }}
+        with:
+          script: |
+            const tulokset = { success: 'läpi', cancelled: 'peruttu (uudempi push korvasi ajon)', skipped: 'ei ajettu (aiempi vaihe epäonnistui)' };
+            const tulos = tulokset[process.env.TULOS] ?? 'EPÄONNISTUI';
+            const ajo = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const tunnus = '<!-- e2e-kommentti -->';
+            const body = [
+              tunnus,
+              `**E2E-testit: ${tulos}** (puhelin 390 px ja työpöytä 1280 px)`,
+              '',
+              `- [Ajon loki](${ajo})`,
+              process.env.ARTEFAKTI_URL ? `- [Raportti (artefakti)](${process.env.ARTEFAKTI_URL})` : '- Artefaktia ei syntynyt',
+            ].join('\n');
+            const { data: comments } = await github.rest.issues.listComments({ ...context.repo, issue_number: context.issue.number, per_page: 100 });
+            const vanha = comments.find((c) => c.user.type === 'Bot' && c.body.startsWith(tunnus));
+            if (vanha) {
+              await github.rest.issues.updateComment({ ...context.repo, comment_id: vanha.id, body });
+            } else {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
+            }
+
+  esikatselu:
+    name: Cloudflare-esikatselu (verify_live)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Odota Cloudflare Pagesin esikatselua
+        id: esikatselu
+        env:
+          HAARA: ${{ github.head_ref }}
+          COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          # Cloudflare muuttaa haaran nimen aliakseksi: pienet kirjaimet, muut kuin a–z0–9 viivaksi.
+          ALIAS=$(echo "$HAARA" | tr 'A-Z' 'a-z' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' | cut -c1-28)
+          URL="https://${ALIAS}.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          # Odotetaan, että esikatselu palvelee tämän commitin buildin: build kirjoittaa jokaiseen sivuun
+          # <meta name="build-commit"> (vite-plugin-spa-routes.ts, CF_PAGES_COMMIT_SHA). Pelkkä 200-vastaus
+          # ei riitä, koska edellisen pushin esikatselu vastaa samasta osoitteesta. Enintään 15 minuuttia.
+          for i in $(seq 1 60); do
+            SIVU=$(curl -s -H 'Cache-Control: no-cache' "$URL/?t=$i" || true)
+            if echo "$SIVU" | grep -q "<meta name=\"build-commit\" content=\"$COMMIT\""; then
+              echo "esikatselu palvelee commitin $COMMIT: $URL"; exit 0
+            fi
+            LOYTYI=$(echo "$SIVU" | grep -o '<meta name="build-commit" content="[0-9a-f]*"' | head -1 || true)
+            echo "odotetaan ($i/60), esikatselun build-commit: ${LOYTYI:-ei vastausta}"; sleep 15
+          done
+          echo "::warning::Esikatselu ei palvellut commitia $COMMIT 15 minuutissa: $URL. Ohitetaan verify_live."
+          echo "ohita=1" >> "$GITHUB_OUTPUT"
+
+      - name: verify_live.py esikatselua vastaan
+        if: steps.esikatselu.outputs.ohita != '1'
+        run: |
+          python3 scripts/verify_live.py "${{ steps.esikatselu.outputs.url }}" live-esikatselu
+          python3 scripts/verify_dist.py live-esikatselu
+
+  lastmod:
+    name: lastmod.json mainiin (botti)
+    needs: tarkistus
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Buildin lastmod.json
+        uses: actions/download-artifact@v4
+        with:
+          name: lastmod
+          path: src/data
+
+      - name: Committaa, jos muuttui
+        run: |
+          if git diff --quiet -- src/data/lastmod.json; then
+            echo "lastmod.json ei muuttunut."; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # "[skip ci]" alussa: GitHub Actions ja Cloudflare Pages (vain etuliitteenä) ohittavat commitin.
+          git commit -m "[skip ci] lastmod.json: sivujen päivityspäivät mainin buildista" -- src/data/lastmod.json
+          # Vain eteenpäin: jos main ehti edetä, seuraavan pushin ajo laskee lastmodin uudestaan.
+          if git push origin "HEAD:main"; then
+            echo "lastmod.json päivitetty mainiin."
+          else
+            echo "::warning::main eteni tämän ajon aikana. Seuraava main-ajo päivittää lastmod.json-tiedoston."
+          fi

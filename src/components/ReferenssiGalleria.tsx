@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import AvifKuva from "@/components/AvifKuva";
 import EnnenJalkeenMerkki from "@/components/EnnenJalkeenMerkki";
 import { X } from "lucide-react";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
@@ -54,13 +55,15 @@ const Suurennus = ({ avattu, onClose }: { avattu: Avattu; onClose: () => void })
       >
         {avattu.kuvat.map((k) => (
           <figure key={k.base} className="relative">
-            <img
-              src={getResponsiveUrl(k.base, 1200)}
-              srcSet={getResponsiveSrcSet(k.base)}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              alt={k.alt}
-              className="max-h-[80vh] w-full rounded-2xl object-contain"
-            />
+            <AvifKuva>
+              <img
+                src={getResponsiveUrl(k.base, 1200)}
+                srcSet={getResponsiveSrcSet(k.base)}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt={k.alt}
+                className="max-h-[80vh] w-full rounded-2xl object-contain"
+              />
+            </AvifKuva>
             {k.label && <Merkki>{k.label}</Merkki>}
           </figure>
         ))}

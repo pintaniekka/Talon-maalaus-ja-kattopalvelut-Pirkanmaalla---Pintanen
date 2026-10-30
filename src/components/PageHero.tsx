@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import AvifKuva from "@/components/AvifKuva";
 import { merkitse } from "@/components/Rytmi";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -182,17 +183,19 @@ const PageHero = ({
 
         <div className="relative w-full lg:w-1/3 min-h-[260px] md:min-h-[340px] lg:min-h-full overflow-hidden bg-muted">
           {src && (
-            <img
-              src={src}
-              srcSet={srcSet}
-              sizes={image.sizes ?? "(max-width: 1024px) 100vw, 34vw"}
-              alt={image.alt}
-              width={1200}
-              height={1600}
-              className="absolute inset-0 w-full h-full object-cover"
-              decoding="sync"
-              {...({ fetchpriority: "high" } as Record<string, string>)}
-            />
+            <AvifKuva>
+              <img
+                src={src}
+                srcSet={srcSet}
+                sizes={image.sizes ?? "(max-width: 1024px) 100vw, 34vw"}
+                alt={image.alt}
+                width={1200}
+                height={1600}
+                className="absolute inset-0 w-full h-full object-cover"
+                decoding="sync"
+                {...({ fetchpriority: "high" } as Record<string, string>)}
+              />
+            </AvifKuva>
           )}
           <div
             className="hidden lg:block absolute -left-16 inset-y-0 w-32 bg-card skew-x-[-7deg] shadow-[-15px_0_40px_rgba(0,0,0,0.08)]"

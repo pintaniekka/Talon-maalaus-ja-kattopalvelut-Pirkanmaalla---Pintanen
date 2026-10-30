@@ -16,7 +16,7 @@ import { type CityData, allCities, hasPinnoitusPage, maalausCities, pinnoitusCit
 import { articles } from "./articles";
 import { getCityHeroBase } from "./projects";
 import { PINNOITUS_HINTA, MAALAUS_HINTA } from "./tyovaiheet";
-import { getResponsiveSrc, getResponsiveSrcSet } from "../lib/storage";
+import { avifVastine, getResponsiveSrc, getResponsiveSrcSet } from "../lib/storage";
 
 export interface RouteSeo {
   title: string;
@@ -86,12 +86,25 @@ const staticHero: Record<string, RouteSeo["hero"]> = {
   "/artikkelit": { base: HERO_BASE.alue, sizes: "(min-width: 1024px) 520px, 100vw" },
 };
 
-/** Preload-linkin attribuutit pääkuvalle. */
-export const heroPreload = (hero: NonNullable<RouteSeo["hero"]>) => ({
-  href: getResponsiveSrc(hero.base),
-  imagesrcset: getResponsiveSrcSet(hero.base),
-  imagesizes: hero.sizes,
-});
+/**
+ * Preload-linkin attribuutit pääkuvalle. `href` on WebP (kuvasitemap käyttää sitä); `preload` on
+ * AVIF, jos kuvalla on AVIF-versiot, muuten WebP.
+ */
+export const heroPreload = (hero: NonNullable<RouteSeo["hero"]>) => {
+  const href = getResponsiveSrc(hero.base);
+  const imagesrcset = getResponsiveSrcSet(hero.base);
+  const avifHref = avifVastine(href);
+  const avifSrcset = avifVastine(imagesrcset);
+  return {
+    href,
+    imagesrcset,
+    imagesizes: hero.sizes,
+    preload:
+      avifHref && avifSrcset
+        ? { href: avifHref, imagesrcset: avifSrcset, type: "image/avif" }
+        : { href, imagesrcset, type: "image/webp" },
+  };
+};
 
 export const DEFAULT_TITLE = "Tiilikaton pinnoitus ja talon maalaus Pirkanmaa | Pintanen";
 // Search Console 26.10.2026 (paketti H): etusivu näkyy hauilla "maalausliike tampere", "julkisivumaalaus tampere" ja

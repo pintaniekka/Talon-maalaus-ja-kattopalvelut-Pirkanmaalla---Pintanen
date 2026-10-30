@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { getResponsiveSrc, getResponsiveSrcSet, getResponsiveUrl } from '@/lib/storage';
+import AvifKuva from './AvifKuva';
 
 interface ResponsiveImageProps {
   baseName: string;
@@ -72,7 +73,7 @@ const ResponsiveImage = ({
   // loading ja decoding ennen src-attribuuttia: React asettaa attribuutit tässä järjestyksessä,
   // ja Chrome aloittaa latauksen heti src-arvon saatuaan. Jos loading="lazy" tulee vasta sen
   // jälkeen, näkymän ulkopuolisetkin kuvat ladataan heti (26.10.2026).
-  return (
+  const img = (
     <img
       loading={priority ? undefined : 'lazy'}
       decoding={priority ? 'sync' : 'async'}
@@ -89,6 +90,8 @@ const ResponsiveImage = ({
       height={height}
     />
   );
+  // Latausvirheen jälkeen pelkkä WebP-varakuva ilman AVIF-lähdettä.
+  return fallbackLevel === 0 ? <AvifKuva>{img}</AvifKuva> : img;
 };
 
 export default ResponsiveImage;

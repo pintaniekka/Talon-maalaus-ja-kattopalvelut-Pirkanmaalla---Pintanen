@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import AvifKuva from "@/components/AvifKuva";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SEO from "@/components/SEO";
@@ -203,15 +204,17 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
         </header>
 
         <figure className="max-w-4xl mx-auto px-4 sm:px-6 mt-8 md:mt-10">
-          <img
-            src={heroUrl}
-            srcSet={getResponsiveSrcSet(meta.heroImage)}
-            sizes="(min-width: 896px) 848px, 100vw"
-            alt={meta.heroAlt}
-            className="w-full aspect-[16/9] object-cover rounded-2xl bg-muted"
-            decoding="async"
-            {...({ fetchpriority: "high" } as Record<string, string>)}
-          />
+          <AvifKuva>
+            <img
+              src={heroUrl}
+              srcSet={getResponsiveSrcSet(meta.heroImage)}
+              sizes="(min-width: 896px) 848px, 100vw"
+              alt={meta.heroAlt}
+              className="w-full aspect-[16/9] object-cover rounded-2xl bg-muted"
+              decoding="async"
+              {...({ fetchpriority: "high" } as Record<string, string>)}
+            />
+          </AvifKuva>
           {meta.heroCaption && (
             <figcaption className="text-sm text-muted-foreground mt-3 text-center">{meta.heroCaption}</figcaption>
           )}

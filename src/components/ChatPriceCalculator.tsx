@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useId } from 'react';
+import AvifKuva from "@/components/AvifKuva";
 import { AnimatePresence, m } from 'framer-motion';
 import { Send, Loader2, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -109,14 +110,16 @@ const UserBubble = ({ text, imageBase }: { text: string; imageBase?: string }) =
     <div className="bg-navy text-white rounded-2xl rounded-br-sm shadow-[0_2px_6px_rgba(11,26,51,0.15)] max-w-[85%] overflow-hidden">
       {imageBase && (
         <div className="aspect-[16/9] overflow-hidden max-h-28">
-          <img
-            loading="lazy"
-            src={getResponsiveSrc(imageBase)}
-            srcSet={getResponsiveSrcSet(imageBase)}
-            alt={text}
-            sizes="(max-width: 768px) 45vw, 250px"
-            className="w-full h-full object-cover"
-          />
+          <AvifKuva>
+            <img
+              loading="lazy"
+              src={getResponsiveSrc(imageBase)}
+              srcSet={getResponsiveSrcSet(imageBase)}
+              alt={text}
+              sizes="(max-width: 768px) 45vw, 250px"
+              className="w-full h-full object-cover"
+            />
+          </AvifKuva>
         </div>
       )}
       <p className="text-sm leading-relaxed px-4 py-3">{text}</p>
@@ -726,14 +729,16 @@ const ChatPriceCalculator = () => {
                           className="group flex flex-col rounded-2xl overflow-hidden bg-white shadow-[0_2px_8px_rgba(11,26,51,0.12)] ring-2 ring-transparent transition-all hover:ring-[#ffd23f] hover:shadow-md focus-visible:outline-none focus-visible:ring-[#ffd23f] active:ring-[#ffd23f]"
                         >
                           <div className="aspect-[16/9] overflow-hidden max-h-24">
-                            <img
-                              loading="lazy"
-                              src={getResponsiveSrc(opt.imageBase)}
-                              srcSet={getResponsiveSrcSet(opt.imageBase)}
-                              alt={opt.label}
-                              sizes="(max-width: 768px) 40vw, 240px"
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
+                            <AvifKuva>
+                              <img
+                                loading="lazy"
+                                src={getResponsiveSrc(opt.imageBase)}
+                                srcSet={getResponsiveSrcSet(opt.imageBase)}
+                                alt={opt.label}
+                                sizes="(max-width: 768px) 40vw, 240px"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </AvifKuva>
                           </div>
                           <span className="py-2 px-3 text-sm font-semibold text-navy text-center">
                             {opt.label}

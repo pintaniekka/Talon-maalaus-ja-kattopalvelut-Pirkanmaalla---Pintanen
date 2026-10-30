@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import AvifKuva from "@/components/AvifKuva";
 import { useSearchParams } from "react-router-dom";
 import { Star } from "lucide-react";
 import { Phone } from "@/components/icons/BrandIcons";
@@ -66,7 +67,7 @@ const Tarjouspyynto = () => {
       <SEO {...staticSeo["/tarjouspyynto"]} preloadImage={bgSrc} />
 
       <section className="hero-critical on-dark relative min-h-[100svh] flex items-center overflow-hidden isolate" style={{ backgroundColor: "hsl(215,30%,10%)" }}>
-        <img src={bgSrc} srcSet={bgSrcSet} sizes="100vw" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" />
+        <AvifKuva><img src={bgSrc} srcSet={bgSrcSet} sizes="100vw" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="eager" decoding="async" /></AvifKuva>
         <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(10,25,47,0.78) 0%, rgba(10,25,47,0.6) 50%, rgba(10,25,47,0.78) 100%)" }} />
 
         <div className="relative z-[2] section-container w-full pt-28 pb-28 md:pt-32 lg:pb-20">

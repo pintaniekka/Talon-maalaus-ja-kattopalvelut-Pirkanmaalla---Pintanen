@@ -16,7 +16,8 @@
  *  7. Merkitsee jonossa olevat (vielä julkaisemattomat) artikkelit noindexiksi.
  *  8. Sivukohtainen lastmod: jokaisen esirenderöidyn sivun sisällöstä lasketaan tiiviste ja
  *     verrataan tiedostoon src/data/lastmod.json. Jos sisältö muuttui, sivun lastmod on
- *     build-päivä; muuten vanha päivä säilyy. Tiedosto päivittyy buildissa: committaa se.
+ *     build-päivä; muuten vanha päivä säilyy. Tiedosto päivittyy buildissa; mainissa CI:n botti
+ *     committaa sen mergen jälkeen (.github/workflows/ci.yml, lastmod-työ), PR:issä sitä ei committata.
  */
 import fs from "fs";
 import path from "path";

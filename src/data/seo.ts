@@ -141,7 +141,7 @@ export const staticSeo: Record<string, RouteSeo> = {
   "/hintalaskuri": {
     title: "Hintalaskuri: tiilikaton pinnoitus, talon maalaus",
     description:
-      "Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Vastaa muutamaan kysymykseen ja saat suuntaa antavan hinta-arvion heti. Pirkanmaa.",
+      "Laske tiilikaton pinnoituksen tai talon maalauksen hinta minuutissa. Vastaa muutamaan kysymykseen, niin saat suuntaa antavan hinta-arvion. Pirkanmaa.",
   },
   "/tiilikaton-pinnoitus-hinta-pirkanmaa": {
     title: `Tiilikaton pinnoitus hinta 2027: ${PINNOITUS_HINTA}`,

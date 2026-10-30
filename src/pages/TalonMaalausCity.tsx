@@ -28,8 +28,7 @@ import { cityHeroBase } from "@/data/kaupunkiHero";
 import { getCityBySlug } from "@/data/cityData";
 import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { hasKuntakartta } from "@/data/kartat";
-import { getMaalausCityFAQ } from "@/data/faqData";
-import { getLocalCityFaq } from "@/data/cityFaq";
+import { getCityFaq } from "@/data/cityFaq";
 import { maalausPrices } from "@/data/prices";
 import { maalausLyhyesti, maalausTyovaiheet, MAALAUS_HINTA } from "@/data/tyovaiheet";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
@@ -131,7 +130,8 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       <MaalausEntrepreneur cityIn={cityData.cityIn} />
       <LaskuriPalkki palvelu="maalaus" />
       <FAQSection
-        items={[...getLocalCityFaq(cityData, "maalaus"), ...getMaalausCityFAQ(cityName, cityData.cityGenitive, cityData.cityIn)]}
+        items={getCityFaq(cityData, "maalaus")}
+        lisaa={{ to: "/talon-maalaus-pirkanmaa/#ukk", label: "Kaikki kysymykset talon maalauksesta" }}
         title={`Usein kysyttyä talon maalauksesta ${cityData.cityIn}`}
       />
       {getTestimonialsByCity(cityData.slug, "seina").length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}

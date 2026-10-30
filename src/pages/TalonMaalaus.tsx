@@ -113,7 +113,7 @@ const TalonMaalaus = () => {
       <TestimonialsMarquee testimonials={wallTestimonials} title="Mitä maalausasiakkaat sanovat meistä?" />
       <LaskuriPalkki palvelu="maalaus" />
       <ArtikkeliRivit categories={["maalaus", "raha"]} />
-      <FAQSection items={maalausFAQ} title="Usein kysyttyä talon maalauksesta" />
+      <FAQSection id="ukk" items={maalausFAQ} title="Usein kysyttyä talon maalauksesta" />
       <ServiceContactSection variant="maalaus" />
       <ToimintaAlueetBanner service="maalaus" />
       </Rytmi>

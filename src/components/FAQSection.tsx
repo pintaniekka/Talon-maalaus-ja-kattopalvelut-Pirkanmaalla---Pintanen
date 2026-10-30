@@ -1,6 +1,7 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Plus } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowRight, Plus } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -12,6 +13,10 @@ interface FAQSectionProps {
   title?: string;
   /** Montako ensimmäistä vastausta on auki heti (oletus 1). */
   openCount?: number;
+  /** Osion id (palvelun pääsivulla "ukk", jotta kaupunkisivut voivat linkittää koko listaan). */
+  id?: string;
+  /** Linkki listan alle (kaupunkisivulta palvelun pääsivun kaikkiin kysymyksiin, UKK-uudistus 30.10.2026). */
+  lisaa?: { to: string; label: string };
 }
 
 /**
@@ -23,9 +28,18 @@ interface FAQSectionProps {
  * Ulkoasu 28.10.2026: koko lista yhdessä valkoisessa kortissa, kysymykset erotetaan ohuilla viivoilla ja
  * plus-merkki on vaaleansininen pallo, joka kääntyy ristiksi.
  */
-const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
+const FAQSection = ({ items, title, openCount = 1, id, lisaa }: FAQSectionProps) => {
   const baseId = useId();
   const [open, setOpen] = useState<boolean[]>(() => items.map((_, i) => i < openCount));
+
+  // Kaupunkisivun "Kaikki kysymykset" -linkki tuo tänne ankkurilla (#ukk). Sivu latautuu laiskasti, ja Layoutin
+  // ScrollToTop vierittää ylös samassa päivityksessä, joten vieritetään vasta sen jälkeen.
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!id || hash !== `#${id}`) return;
+    const t = window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'instant' }), 0);
+    return () => window.clearTimeout(t);
+  }, [id, hash]);
 
   const toggle = (index: number) =>
     setOpen((prev) => {
@@ -49,7 +63,7 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
       <Helmet defer={false}>
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
-      <section className="py-16 md:py-24 osio">
+      <section id={id} className="scroll-mt-20 py-16 md:py-24 osio">
         <div className="section-container max-w-[820px] mx-auto">
           <h2 className="heading-style text-3xl md:text-4xl mb-8 md:mb-12 text-center" style={{ color: 'hsl(var(--heading-navy))' }}>
             {title || 'Usein kysytyt kysymykset'}
@@ -94,6 +108,14 @@ const FAQSection = ({ items, title, openCount = 1 }: FAQSectionProps) => {
               );
             })}
           </div>
+          {lisaa && (
+            <p className="mt-6 text-center">
+              <Link to={lisaa.to} className="inline-flex items-center gap-1 font-semibold text-accent-ink hover:underline">
+                {lisaa.label}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </p>
+          )}
         </div>
       </section>
     </>

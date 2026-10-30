@@ -3,7 +3,7 @@ import ResponsiveImage from "@/components/ResponsiveImage";
 import EnnenJalkeenMerkki from "@/components/EnnenJalkeenMerkki";
 import TiiliVari from "@/components/TiiliVari";
 import { CITY_LOCAL_FACTS_CHECKED, getCityLocalFacts } from "@/data/cityLocalFacts";
-import { getArticleBySlug, isPublished } from "@/data/articles";
+import JulkaistuArtikkeli from "@/components/JulkaistuArtikkeli";
 import type { ProjectService } from "@/data/projects";
 
 /**
@@ -83,8 +83,6 @@ interface Props {
 const VarinVaihto = ({ service, citySlug, cityIn }: Props) => {
   const s = sisalto[service];
   const facts = citySlug ? getCityLocalFacts(citySlug) : undefined;
-  const artikkeli = getArticleBySlug(s.artikkeli);
-  const artikkeliJulkaistu = !!artikkeli && isPublished(artikkeli);
   return (
     <section className="section-padding osio">
       <div className="section-container grid items-start gap-10 lg:grid-cols-[minmax(0,40rem)_minmax(18rem,26rem)] lg:justify-center lg:gap-16">
@@ -117,14 +115,14 @@ const VarinVaihto = ({ service, citySlug, cityIn }: Props) => {
                 päätät värin.
               </p>
             )}
-            {artikkeliJulkaistu && (
+            <JulkaistuArtikkeli slug={s.artikkeli}>
               <p>
                 <Link to={`/artikkelit/${s.artikkeli}/`} className="font-semibold text-primary hover:underline">
                   Lue lisää värin vaihdosta
                 </Link>
                 .
               </p>
-            )}
+            </JulkaistuArtikkeli>
           </div>
         </div>
         <figure className="kortti overflow-hidden">

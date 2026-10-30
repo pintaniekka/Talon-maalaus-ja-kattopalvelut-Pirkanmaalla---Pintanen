@@ -1,8 +1,10 @@
 import { test, expect, open, shortenChatTimers, CONSENT_KEY } from "./fixtures";
+import { articles, todayInFinland } from "../../src/data/articles";
 
 /**
  * Toimintatestit (CLAUDE.md: "jokainen työ päättyy toimintatestiin"): hintalaskuri, tarjouspyyntö,
- * sivun lopun lomake, chat-kupla, evästebanneri, valikot, Toiminta-alueet-haitari ja ennen–jälkeen-liukusäädin.
+ * sivun lopun lomake, chat-kupla, evästebanneri, valikot, Toiminta-alueet-haitari, ennen–jälkeen-liukusäädin ja
+ * artikkelien julkaisu selaimessa.
  * Ajetaan molemmilla leveyksillä (playwright.config.ts: puhelin 390 px, tyopoyta 1280 px).
  */
 
@@ -306,5 +308,51 @@ test.describe("Ennen–jälkeen-liukusäädin", () => {
     const value = Number(await slider.getAttribute("aria-valuenow"));
     expect(value).toBeGreaterThan(15);
     expect(value).toBeLessThan(35);
+  });
+});
+
+/**
+ * Jonossa oleva artikkeli tulee selaimessa näkyviin julkaisupäivänään ilman uutta buildia (CLAUDE.md: Scheduling).
+ * Sama build, selaimen kello päivää ennen ja julkaisupäivän aamuna. Artikkelilista latautuu laiskasti omana
+ * pakettinaan (ArtikkeliRivit, JulkaistuArtikkeli), joten tämä varmistaa, että laiska lataus ei riko julkaisua.
+ */
+test.describe("Artikkelien julkaisu", () => {
+  const paivaa = (iso: string, n: number) => new Date(Date.parse(`${iso}T12:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);
+  const aamulla = (iso: string) => new Date(`${iso}T08:00:00+02:00`);
+  const jarjestetty = [...articles].sort((a, b) => a.publishedAt.localeCompare(b.publishedAt));
+  // Seuraava jonossa oleva artikkeli; jos jono on tyhjä, uusin julkaistu.
+  const seuraava = jarjestetty.find((a) => a.publishedAt > todayInFinland()) ?? jarjestetty[jarjestetty.length - 1];
+  const linkki = `a[href="/artikkelit/${seuraava.slug}/"]`;
+
+  test("päivää ennen julkaisua artikkeli on 404 eikä näy listoissa", async ({ page, contact }) => {
+    await page.clock.setFixedTime(aamulla(paivaa(seuraava.publishedAt, -1)));
+    await open(page, `/artikkelit/${seuraava.slug}/`);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Sivua ei löytynyt");
+    await open(page, "/artikkelit/");
+    await expect(page.locator(`main ${linkki}`)).toHaveCount(0);
+    await open(page, "/");
+    await expect(page.locator(`[data-artikkelirivit] ${linkki}`)).toHaveCount(0);
+  });
+
+  test("julkaisupäivänä artikkeli aukeaa ja näkyy listauksessa ja etusivulla", async ({ page, contact }) => {
+    await page.clock.setFixedTime(aamulla(seuraava.publishedAt));
+    await open(page, `/artikkelit/${seuraava.slug}/`);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(seuraava.title);
+    await open(page, "/artikkelit/");
+    await expect(page.locator(`main ${linkki}`).first()).toBeVisible();
+    await open(page, "/");
+    await expect(page.locator("[data-artikkelirivit] ul > li a").first()).toHaveAttribute("href", `/artikkelit/${seuraava.slug}/`);
+  });
+
+  test("yksittäinen artikkelilinkki (harjatiivistesivu) ilmestyy julkaisupäivänä", async ({ page, contact }) => {
+    const harja = articles.find((a) => a.slug === "harjatiiviste-tiilikatolla");
+    if (!harja) throw new Error("artikkeli harjatiiviste-tiilikatolla puuttuu");
+    const lue = page.getByRole("link", { name: "Lue lisää harjatiivisteestä" });
+    await page.clock.setFixedTime(aamulla(paivaa(harja.publishedAt, -1)));
+    await open(page, "/harjatiivisteen-asennus/");
+    await expect(lue).toHaveCount(0);
+    await page.clock.setFixedTime(aamulla(harja.publishedAt));
+    await open(page, "/harjatiivisteen-asennus/");
+    await expect(lue).toBeVisible();
   });
 });

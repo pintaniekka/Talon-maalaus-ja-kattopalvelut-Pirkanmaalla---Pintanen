@@ -96,7 +96,7 @@ const KattopalvelutPinnoitus = () => {
       <TestimonialsMarquee testimonials={roofTestimonials} title="Mitä kattoasiakkaat sanovat meistä?" />
       <LaskuriPalkki palvelu="pinnoitus" />
       <ArtikkeliRivit categories={["katto", "raha"]} />
-      <FAQSection items={pinnoitusFAQ} title="Usein kysyttyä tiilikaton pinnoituksesta" />
+      <FAQSection id="ukk" items={pinnoitusFAQ} title="Usein kysyttyä tiilikaton pinnoituksesta" />
       <ServiceContactSection variant="katto" />
       <ToimintaAlueetBanner service="pinnoitus" />
       </Rytmi>

@@ -4,11 +4,13 @@
  * maalaus 3 500–11 000 €), ei "alkaen"-hintoja eikä neliöhintoja.
  * Vastaukset renderöidään näkyvään HTML:ään (FAQSection), joten ne saavat sisältää vain <strong>-tageja
  * ja sivuston sisäisiä <a href="/…/">-linkkejä (yöajo 3, 28.10.2026).
- * Karsittu 12.10.2026 (tarkastus): työnkulkua ei toisteta UKK:ssa, kotitalousvähennys on joka sarjassa
- * yhdessä kysymyksessä, ja kaupunkisivun sarja on yhdessä cityFaq.ts:n kanssa enintään 10 kysymystä.
+ * Karsittu 12.10.2026 (tarkastus): työnkulkua ei toisteta UKK:ssa, ja kotitalousvähennys on joka sarjassa
+ * yhdessä kysymyksessä.
+ * UKK-uudistus 30.10.2026 (laaja auditointi, luku 4): palvelun pääsivulla enintään 15 kysymystä, kukin kerran.
+ * Kaupunkisivujen kahdeksan kysymystä kootaan tiedostossa cityFaq.ts; ne käyttävät tämän tiedoston
+ * ydinvastauksia (hinta, kesto, kotitalousvähennys, takuu), jotta sama asia sanotaan joka sivulla samoin.
  */
 import { KOTITALOUSVAHENNYS as KOTITALOUSVAHENNYS_LAUSE } from "./company";
-import { allCities } from "./cityData";
 
 interface FAQItem {
   question: string;
@@ -16,7 +18,35 @@ interface FAQItem {
 }
 
 /** Kotitalousvähennyksen vastaus samassa muodossa joka sarjassa. */
-const KOTITALOUSVAHENNYS_VASTAUS = `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Työn osuus on laskussa eriteltynä. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`;
+export const KOTITALOUSVAHENNYS_VASTAUS = `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Työn osuus on laskussa eriteltynä. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`;
+
+/** Ydinvastaukset, jotka ovat sekä palvelun pääsivulla että kaupunkisivuilla (UKK-uudistus 30.10.2026). */
+export const PINNOITUS_KESTO_VASTAUS =
+  'Peruskohteen katto valmistuu yleensä <strong>2–3 työpäivässä</strong>, suuri tai jyrkkä katto 2–4. Pesun jälkeen katto saa kuivua ennen maalausta.';
+export const MAALAUS_KESTO_VASTAUS =
+  'Omakotitalo valmistuu yleensä <strong>3–7 päivässä</strong>. Aika riippuu talon koosta ja pohjatöiden määrästä. Työ ei estä normaalia asumista.';
+// Takuun sisältö: Eerik 27.10.2026.
+export const PINNOITUS_TAKUU_FAQ: FAQItem = {
+  question: 'Mitä takuu kattaa?',
+  answer:
+    'Annamme pinnoitukselle <strong>5 vuoden kirjallisen takuun</strong>. Se kattaa asennusvirheet ja maalin epänormaalin hilseilyn. Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen. Tulemme muutenkin vastaan, jos jokin ei ole kunnossa.',
+};
+export const MAALAUS_TAKUU_FAQ: FAQItem = {
+  question: 'Mitä takuu kattaa?',
+  answer:
+    'Annamme maalaukselle <strong>2 vuoden kirjallisen takuun</strong>. Se kattaa työvirheet ja maalin epänormaalin hilseilyn. Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen. Tulemme muutenkin vastaan, jos jokin ei ole kunnossa.',
+};
+/** Käynnin ajankohta; kaupunkisivu lisää perään linkin Tampereen sivulle (cityFaq.ts). */
+export const PINNOITUS_KAYNTI_VASTAUS =
+  'Kuntotarkastus onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun, ja kesän työt täyttyvät pitkälti jo keväällä. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.';
+export const MAALAUS_KAYNTI_VASTAUS =
+  'Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun, ja kesän työt täyttyvät pitkälti jo keväällä. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.';
+/** Tarjouksen hyväksyminen ja maksu yhtenä kysymyksenä (UKK-uudistus 30.10.2026: ennen kaksi peräkkäistä). */
+const HYVAKSYNTA_JA_MAKSU_FAQ: FAQItem = {
+  question: 'Miten hyväksyn tarjouksen ja miten maksu tapahtuu?',
+  answer:
+    'Hyväksyt tarjouksen vastaamalla tarjousviestiin. Sen jälkeen teemme kirjallisen sopimuksen ja sovimme aikataulun, ja otamme sinuun yhteyttä ennen aloituspäivää. Ennakkolasku on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
+};
 
 /**
  * UKK-täydennykset palvelu- ja hintasivuille (hakutulosanalyysi 26.10.2026, brief 10). Vastaukset ovat Eerikin jo
@@ -61,35 +91,28 @@ export const MAALAUS_SADE_FAQ: FAQItem = {
     'Sateella ei maalata, koska seinän pitää olla kuiva. Seuraamme sääennustetta ja siirrämme tarvittaessa päivää, eikä siitä tule lisäkuluja. Jos sade jättää jälkiä tuoreeseen maaliin, korjaamme ne ilman lisähintaa.',
 };
 
+/**
+ * Tiilikaton pinnoituksen pääsivu: 15 kysymystä (UKK-uudistus 30.10.2026). Pois jäivät kysymykset, joihin sivun oma
+ * lohko jo vastaa ("sama asia kuin maalaus", värin vaihto, "kannattaako" = "Miksi tiilikatto kannattaa pinnoittaa
+ * ajoissa?"), tuplana ollut pesukysymys, Ormax (sivulla ja hintasivulla) ja taloyhtiöt (oma sivu). Kaupunkisivuilta tänne siirtyivät sade, mökit ja pakettihinta; yhteydenoton
+ * ajankohta on käyntikysymyksessä. Maksu ja tarjouksen hyväksyminen ovat yhdessä kysymyksessä.
+ */
 export const pinnoitusFAQ: FAQItem[] = [
   {
     question: 'Mitä tiilikaton pinnoitus maksaa?',
     answer:
-      'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hinta sisältää työn, materiaalit ja siivouksen.',
+      'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hinta sisältää työn, materiaalit ja siivouksen. Jos teemme samalla kertaa myös seinät, saat edullisemman pakettihinnan.',
   },
-  {
-    question: 'Onko tiilikaton pinnoitus sama asia kuin tiilikaton maalaus?',
-    answer:
-      'Kyllä. Tiilikaton pinnoitus, tiilikaton maalaus ja katon maalaus tarkoittavat samaa työtä. Uusi maalipinta pitää veden tiilen ulkopuolella.',
-  },
+  { question: 'Kuinka kauan työ kestää?', answer: PINNOITUS_KESTO_VASTAUS },
   {
     question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
     answer: KOTITALOUSVAHENNYS_VASTAUS,
   },
-  {
-    question: 'Kuinka kauan työ kestää?',
-    answer:
-      'Peruskohteen katto valmistuu yleensä <strong>2–3 työpäivässä</strong>, suuri tai jyrkkä katto 2–4. Pesun jälkeen katto saa kuivua ennen maalausta.',
-  },
+  PINNOITUS_TAKUU_FAQ,
   {
     question: 'Milloin tiilikatto pitää pinnoittaa?',
     answer:
       'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 15 vuotta vanha. Ajoissa tehty pinnoitus estää pakkasrapautumisen.',
-  },
-  {
-    question: 'Kannattaako tiilikaton pinnoitus?',
-    answer:
-      'Kannattaa, jos tiilen pinta on kulunut mutta aluskate ja rakenteet ovat kunnossa. Kulunut tiili imee vettä, ja talvella vesi jäätyy ja murentaa tiiltä sisältäpäin. Pinnoituksen jälkeen tiili ei ime vettä, eikä sammal saa otetta. Katto kestää jopa 15 vuotta pidempään.',
   },
   {
     question: 'Kattoremontti vai pinnoitus?',
@@ -97,69 +120,35 @@ export const pinnoitusFAQ: FAQItem[] = [
     answer:
       'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.',
   },
-  PESU_VAI_PINNOITUS_FAQ,
   {
-    question: 'Voiko katon värin vaihtaa pinnoituksessa?',
-    answer: 'Kyllä voi. Nowocoatin kattomaaleissa on laaja värivalikoima. Värikartassa on 16 väriä: viisi harmaata, kaksi mustaa, seitsemän punaista ja kaksi ruskeaa. Väri valitaan kuntotarkastuksessa.',
+    question: 'Voiko tiilikaton pinnoittaa itse?',
+    answer:
+      'Katon voi pestä ja maalata itse, mutta ilman ruiskua ja kunnon kalustoa pinnasta on vaikea saada tasainen. Meiltä saat työlle <strong>5 vuoden kirjallisen takuun</strong>.',
   },
+  PINNOITUS_MAALI_FAQ,
   {
     // Valmistajan huoltosuositus (NowoCoat-esite 2025–26, docs/nowocoat-lahteet-2026-10-29.md). Puhdistuspalvelu on loppunut, siksi "kysy meiltä".
     question: 'Miten pinnoitettua kattoa huolletaan?',
     answer:
       'Pinnoitettu katto ei tarvitse säännöllistä pesua. Valmistaja suosittelee kasvustontorjunta-aineen levitystä 2–4 vuoden välein, jotta lika ja sammal eivät tartu pintaan. Jos haluat huoltokäsittelyn, kysy meiltä.',
   },
+  PINNOITUS_SADE_FAQ,
   {
-    question: 'Voiko tiilikaton pinnoittaa itse?',
-    answer:
-      'Katon voi pestä ja maalata itse, mutta ilman ruiskua ja kunnon kalustoa pinnasta on vaikea saada tasainen. Meiltä saat työlle <strong>5 vuoden kirjallisen takuun</strong>.',
+    question: 'Maalaatteko myös peltikattoja?',
+    answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
   },
   {
-    // Takuun sisältö: Eerik 27.10.2026.
-    question: 'Mitä takuu kattaa?',
+    question: 'Pinnoitatteko myös mökin, autotallin tai autokatoksen katon?',
     answer:
-      'Annamme pinnoitukselle <strong>5 vuoden kirjallisen takuun</strong>. Se kattaa asennusvirheet ja maalin epänormaalin hilseilyn. Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen. Tulemme muutenkin vastaan, jos jokin ei ole kunnossa.',
-  },
-    {
-      question: 'Maalaatteko myös peltikattoja?',
-      answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
-    },
-  {
-    // Ormax: Eerik 11.10. ja 26.10.2026, sama tieto kuin Ormax-artikkelissa.
-    question: 'Voiko Ormax-tiilikaton pinnoittaa?',
-    answer:
-      'Kyllä. Ormax on yleinen betonikattotiili. Pesemme katon, vaihdamme rikkinäiset tiilet ja maalaamme katon kahteen kertaan Nowocoatin kattomaalilla, kuten muutkin betonitiilikatot. Pinnoitus on ajankohtainen noin 15 vuoden iässä.',
+      'Kyllä. Pinnoitamme myös kesämökin, autotallin, autokatoksen ja muun piharakennuksen tiilikaton. Yleensä teemme sen samalla kertaa talon katon kanssa.',
   },
   {
     question: 'Saanko hinta-arvion ennen kuntotarkastusta?',
     answer:
       'Kyllä. Hintalaskuri antaa suuntaa antavan arvion katon koon ja jyrkkyyden mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa ilmaisen kuntotarkastuksen jälkeen. Kuntotarkastuksella sinun on hyvä olla paikalla. Tarjouksen saat myös etänä, kun lähetät kuvat katosta ja arvion sen koosta.',
   },
-  {
-    question: 'Milloin pääsette katsomaan katon?',
-    answer:
-      'Kuntotarkastus onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
-  },
-  {
-    question: 'Pinnoitatteko myös autotallin tai autokatoksen katon?',
-    answer:
-      'Kyllä. Pinnoitamme myös autotallin, autokatoksen ja muun piharakennuksen tiilikaton. Yleensä teemme sen samalla kertaa talon katon kanssa.',
-  },
-  {
-    question: 'Miten hyväksyn tarjouksen ja mitä sen jälkeen tapahtuu?',
-    answer:
-      'Hyväksyt tarjouksen vastaamalla tarjousviestiin. Sen jälkeen teemme kirjallisen sopimuksen ja sovimme aikataulun. Otamme sinuun yhteyttä ennen aloituspäivää.',
-  },
-  {
-    question: 'Miten maksu tapahtuu?',
-    answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
-  },
-  // Brief 10 (26.10.2026): maali ja sade. Pesukysymys ja "Miten maksu tapahtuu?" ovat jo yllä.
-  PINNOITUS_MAALI_FAQ,
-  PINNOITUS_SADE_FAQ,
-  {
-    question: "Pinnoitatteko myös taloyhtiöiden kattoja?",
-    answer: 'Kyllä. Pinnoitamme rivi-, pari- ja kerrostalojen tiilikatot rakennus kerrallaan. Kuntotarkastus on ilmainen, ja tarjous on kiinteä. Lue lisää: <a href="/taloyhtiot/">tiilikaton pinnoitus ja talon maalaus taloyhtiöille</a>.',
-  },
+  { question: 'Milloin pääsette katsomaan katon?', answer: PINNOITUS_KAYNTI_VASTAUS },
+  HYVAKSYNTA_JA_MAKSU_FAQ,
 ];
 
 export const puhdistusFAQ: FAQItem[] = [
@@ -177,21 +166,26 @@ export const puhdistusFAQ: FAQItem[] = [
   },
 ];
 
+/**
+ * Talon maalauksen pääsivu: 14 kysymystä (UKK-uudistus 30.10.2026). Maksu ja tarjouksen hyväksyminen ovat yhdessä
+ * kysymyksessä. Kaupunkisivuilta tänne siirtyi pakettihinta; sade ja mökit olivat jo täällä.
+ */
 export const maalausFAQ: FAQItem[] = [
   {
     question: 'Mitä talon ulkomaalaus maksaa?',
     answer:
-      'Omakotitalon maalaus maksaa meillä yleensä <strong>3 500–11 000 €</strong>. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.',
+      'Omakotitalon maalaus maksaa meillä yleensä <strong>3 500–11 000 €</strong>. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Jos teemme samalla kertaa myös katon, saat edullisemman pakettihinnan. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.',
   },
+  { question: 'Kuinka kauan talon maalaus kestää?', answer: MAALAUS_KESTO_VASTAUS },
+  {
+    question: 'Saako talon maalauksesta kotitalousvähennystä?',
+    answer: KOTITALOUSVAHENNYS_VASTAUS,
+  },
+  MAALAUS_TAKUU_FAQ,
   {
     question: 'Milloin talon ulkoverhous pitää maalata uudelleen?',
     answer:
       'Yleensä 10–15 vuoden välein. Maalaus on ajankohtainen, kun maali hilseilee, väri on haalistunut tai seinässä on homepilkkuja.',
-  },
-  {
-    question: 'Mitä maalia käytätte?',
-    answer:
-      'Käytämme pääsääntöisesti Tikkurilan ulkomaaleja. Valitsemme maalin vanhan maalin ja puun kunnon mukaan. Maalit ja materiaalit kirjataan tarjoukseen.',
   },
   {
     question: 'Milloin on paras aika maalata talo?',
@@ -199,44 +193,22 @@ export const maalausFAQ: FAQItem[] = [
       'Maalauskausi on huhti–toukokuusta elo–syyskuuhun. Maalaamme, kun seinä on kuiva ja ilman kosteusprosentti on alle 80. Sateella ei maalata, ja siirretystä päivästä ei tule lisäkuluja.',
   },
   {
+    question: 'Mitä maalia käytätte?',
+    answer:
+      'Käytämme pääsääntöisesti Tikkurilan ulkomaaleja. Valitsemme maalin vanhan maalin ja puun kunnon mukaan. Maalit ja materiaalit kirjataan tarjoukseen.',
+  },
+  MAALAUS_PENSSELI_FAQ,
+  {
+    question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
+    answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
+  },
+  {
     question: 'Maalaatteko myös mökkejä ja piharakennuksia?',
     answer: 'Kyllä. Mökissä ja piharakennuksessa työvaiheet ovat samat kuin talossa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Hinta riippuu koosta.',
   },
-  {
-    question: 'Saako talon maalauksesta kotitalousvähennystä?',
-    answer: KOTITALOUSVAHENNYS_VASTAUS,
-  },
-    {
-      question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
-      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
-    },
-  {
-    question: 'Kuinka kauan talon maalaus kestää?',
-    answer: 'Omakotitalo valmistuu yleensä <strong>3–7 päivässä</strong>. Aika riippuu talon koosta ja pohjatöiden määrästä. Työ ei estä normaalia asumista.',
-  },
-  {
-    // Takuun sisältö: Eerik 27.10.2026.
-    question: 'Mitä takuu kattaa?',
-    answer:
-      'Annamme maalaukselle <strong>2 vuoden kirjallisen takuun</strong>. Se kattaa työvirheet ja maalin epänormaalin hilseilyn. Jos pinnassa näkyy vikaa, joka johtuu työstämme, korjaamme sen. Tulemme muutenkin vastaan, jos jokin ei ole kunnossa.',
-  },
-  {
-    question: 'Milloin pääsette maalaamaan?',
-    answer:
-      'Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.',
-  },
-  {
-    question: 'Miten hyväksyn tarjouksen ja mitä sen jälkeen tapahtuu?',
-    answer:
-      'Hyväksyt tarjouksen vastaamalla tarjousviestiin. Sen jälkeen teemme kirjallisen sopimuksen ja sovimme aikataulun. Otamme sinuun yhteyttä ennen aloituspäivää.',
-  },
-  {
-    question: 'Miten maksu tapahtuu?',
-    answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
-  },
-  // Brief 10 (26.10.2026): pensseli, sade. "Millä maalilla" ("Mitä maalia käytätte?") ja "Miten maksu tapahtuu?" ovat jo yllä.
-  MAALAUS_PENSSELI_FAQ,
   MAALAUS_SADE_FAQ,
+  { question: 'Milloin pääsette maalaamaan?', answer: MAALAUS_KAYNTI_VASTAUS },
+  HYVAKSYNTA_JA_MAKSU_FAQ,
   {
     question: "Maalaatteko myös taloyhtiöitä?",
     answer: 'Kyllä. Maalaamme rivi-, pari- ja kerrostalojen ulkoseinät rakennus kerrallaan, ja katon voi pinnoittaa samalla. Lue lisää: <a href="/taloyhtiot/">tiilikaton pinnoitus ja talon maalaus taloyhtiöille</a>.',
@@ -293,133 +265,6 @@ export const generalFAQ: FAQItem[] = [
     answer: KOTITALOUSVAHENNYS_VASTAUS,
   },
 ];
-
-/**
- * Naapurikuntien sivuilta tekstilinkki Tampereen palvelusivulle (sisäinen linkitys 27.10.2026).
- * Ankkuri vaihtuu paikkakunnan nimen mukaan, jotta sama ankkuri ei toistu yli viidesti. Tampereen omalla sivulla ei linkkiä.
- */
-const TAMPERE_PINNOITUS_LINKIT = [
-  'Pinnoitamme kattoja myös <a href="/tiilikaton-pinnoitus-tampere/">Tampereen alueella</a>.',
-  'Katso myös <a href="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitus ja maalaus Tampereella</a>.',
-  'Sama työ ja sama hinta pätevät myös <a href="/tiilikaton-pinnoitus-tampere/">tiilikaton pinnoitukseen Tampereella</a>.',
-  'Lue, miten <a href="/tiilikaton-pinnoitus-tampere/">pinnoitamme tiilikattoja Tampereella</a>.',
-  'Kuvia näet sivulta, jolla esittelemme <a href="/tiilikaton-pinnoitus-tampere/">Tampereen kattokohteet</a>.',
-  'Samalla tavalla pinnoitamme <a href="/tiilikaton-pinnoitus-tampere/">Tampereen tiilikatot</a>.',
-  'Kotikaupungissamme teemme <a href="/tiilikaton-pinnoitus-tampere/">katon pinnoituksia Tampereella</a>.',
-];
-const TAMPERE_MAALAUS_LINKIT = [
-  'Maalaamme taloja myös <a href="/talon-maalaus-tampere/">Tampereen alueella</a>.',
-  'Katso myös <a href="/talon-maalaus-tampere/">ulkomaalaus Tampereella</a>.',
-  'Samat työvaiheet ja hinnat pätevät myös <a href="/talon-maalaus-tampere/">talon maalaukseen Tampereella</a>.',
-  'Lue, miten <a href="/talon-maalaus-tampere/">maalaamme puutaloja Tampereella</a>.',
-  'Kuvia näet sivulta, jolla esittelemme <a href="/talon-maalaus-tampere/">Tampereen maalauskohteet</a>.',
-  'Samalla tavalla maalaamme <a href="/talon-maalaus-tampere/">Tampereen puutalot</a>.',
-  'Kotikaupungissamme teemme <a href="/talon-maalaus-tampere/">julkisivumaalauksia Tampereella</a>.',
-];
-/**
- * Ankkuri kiertää paikkakuntalistan järjestyksessä, jolloin kukin toistuu enintään viidesti (29 paikkakuntaa, 7 ankkuria).
- * Linkki on kaupunkisivun ainoa Tampere-maininta leipätekstissä (Eerik 27.10.2026: enintään yksi sivua kohti),
- * joten sen edessä ei ole muuta Tampere-lausetta.
- */
-const tampereLinkki = (cityName: string, linkit: string[]): string => {
-  if (cityName === "Tampere") return "";
-  const i = allCities.findIndex((c) => c.name === cityName);
-  return ` ${linkit[(i < 0 ? 0 : i) % linkit.length]}`;
-};
-
-/** Maalauksen kaupunkisivu: yhdessä cityFaq.ts:n kuuden kysymyksen kanssa 9 kysymystä. */
-export const getMaalausCityFAQ = (cityName: string, cityGenitive?: string, cityIn?: string): FAQItem[] => {
-  const gen = cityGenitive || `${cityName}n`;
-  const paikka = cityIn || `${gen} alueella`;
-  return [
-    {
-      question: `Mitä omakotitalon maalaus maksaa ${paikka}?`,
-      answer:
-        'Omakotitalon maalaus maksaa meillä yleensä <strong>3 500–11 000 €</strong>. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Jos teemme samalla kertaa myös katon, saat edullisemman pakettihinnan. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.',
-    },
-    {
-      question: 'Mistä tiedän, että taloni pitää maalata?',
-      answer: `Maali hilseilee, väri on haalistunut tai seinässä on homepilkkuja. Puutalot ${paikka} tarvitsevat uuden maalin yleensä 10–15 vuoden välein.`,
-    },
-    {
-      question: `Milloin pääsette maalaamaan ${paikka}?`,
-      answer:
-        'Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
-        tampereLinkki(cityName, TAMPERE_MAALAUS_LINKIT),
-    },
-    {
-      question: 'Kuinka kauan talon maalaus kestää?',
-      answer: 'Omakotitalo valmistuu yleensä <strong>3–7 päivässä</strong>. Aika riippuu talon koosta ja pohjatöiden määrästä.',
-    },
-    {
-      question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
-      answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
-    },
-    {
-      question: 'Miten maksu tapahtuu?',
-      answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
-    },
-    {
-      question: 'Saako talon maalauksesta kotitalousvähennystä?',
-      answer: KOTITALOUSVAHENNYS_VASTAUS,
-    },
-  ];
-};
-
-/** Pinnoituksen kaupunkisivu: yhdessä cityFaq.ts:n kuuden kysymyksen kanssa 10 kysymystä. */
-export const getPinnoitusCityFAQ = (cityName: string, cityIn?: string): FAQItem[] => {
-  const paikka = cityIn || `${cityName}n alueella`;
-  return [
-    {
-      question: `Paljonko tiilikaton pinnoitus maksaa ${paikka}?`,
-      answer:
-        'Tiilikaton pinnoitus maksaa meillä yleensä <strong>2 850–7 000 €</strong>. Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hinta sisältää työn, materiaalit ja siivouksen. Jos teemme samalla kertaa myös seinät, saat edullisemman pakettihinnan.',
-    },
-    {
-      question: 'Kuinka kauan työ kestää?',
-      answer:
-        'Peruskohteen katto valmistuu <strong>2–3 työpäivässä</strong>. Pesun jälkeen katto saa kuivua ennen maalausta.',
-    },
-    {
-      question: `Onko tiilikaton pesu ja pinnoitus sama palvelu ${paikka}?`,
-      answer:
-        'Teemme pesun aina pinnoituksen yhteydessä. Pesemme katon painepesulla, levitämme kasvustontorjunta-aineen ja maalaamme katon kahteen kertaan. Painepesu irrottaa sammaleen ja jäkälän, ja pinnoitetulla katolla sammal ei saa enää otetta. Jos tiilen pinta on kulunut, pelkkä pesu ei riitä, koska tiili imee vettä heti seuraavalla sateella.',
-    },
-    {
-      question: 'Maalaatteko myös peltikattoja?',
-      answer: 'Pinnoitamme tiilikattoja. Peltikaton maalausta voit kysyä erikseen, niin katsomme kohteen.',
-    },
-    {
-      question: 'Miten maksu tapahtuu?',
-      answer: 'Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi.',
-    },
-    {
-      question: 'Mitä eroa on katon pinnoituksella ja tiilikaton maalauksella?',
-      answer:
-        'Ei mitään. Katon pinnoitus, tiilikaton maalaus ja kattomaalaus tarkoittavat samaa työtä. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin kattomaalilla.',
-    },
-    {
-      question: 'Milloin tiilikatto pitää pinnoittaa?',
-      answer:
-        'Katto kannattaa pinnoittaa, kun tiilen pinta on haalistunut tai tuntuu karhealta ja sammal kasvaa nopeasti. Yleensä tämä on ajankohtaista, kun katto on noin 15 vuotta vanha.',
-    },
-    {
-      question: 'Pitääkö katto uusia vai riittääkö pinnoitus?',
-      answer:
-        'Pinnoitus riittää, jos aluskate ja rakenteet ovat kunnossa ja tiilet ovat ehjiä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Tarkistamme aluskatteen, saumat ja läpiviennit ilmaisessa kuntotarkastuksessa. Lue lisää: <a href="/artikkelit/pinnoitus-vai-uusi-katto/">pinnoitus vai uusi katto</a>.',
-    },
-    {
-      question: `Milloin pääsette katsomaan katon ${paikka}?`,
-      answer:
-        'Kuntotarkastus onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Pinnoitukset teemme huhti–toukokuusta elo–syyskuuhun. Työn ajankohta sovitaan kirjallisesti, kun olet hyväksynyt tarjouksen.' +
-        tampereLinkki(cityName, TAMPERE_PINNOITUS_LINKIT),
-    },
-    {
-      question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
-      answer: KOTITALOUSVAHENNYS_VASTAUS,
-    },
-  ];
-};
 
 export const getPuhdistusCityFAQ = (cityName: string, cityGenitive?: string): FAQItem[] => [
   {

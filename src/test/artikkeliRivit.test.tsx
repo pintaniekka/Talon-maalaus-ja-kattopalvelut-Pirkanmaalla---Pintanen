@@ -3,7 +3,8 @@ import fs from "fs";
 import path from "path";
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import ArtikkeliRivit from "@/components/ArtikkeliRivit";
+import ArtikkeliRivit from "@/components/ArtikkeliRivitSisalto";
+import ArtikkeliRivitLaiska from "@/components/ArtikkeliRivit";
 import { articles, getPublishedArticles, isPublished } from "@/data/articles";
 import { authors } from "@/data/authors";
 
@@ -58,6 +59,17 @@ describe("ArtikkeliRivit", () => {
     expect(container.querySelector("ul > li img")).toHaveAttribute("sizes", "120px");
   });
 
+  it("sivuilla käytetty laiska kääre renderöi saman listan", async () => {
+    const { findAllByRole, container } = render(
+      <MemoryRouter>
+        <ArtikkeliRivitLaiska title="Uusimmat artikkelit" />
+      </MemoryRouter>,
+    );
+    await findAllByRole("listitem");
+    const odotetut = getPublishedArticles().slice(0, 4);
+    expect([...container.querySelectorAll("ul > li a")].map((a) => a.getAttribute("href"))).toEqual(odotetut.map((a) => `/artikkelit/${a.slug}/`));
+  });
+
   it("jonossa oleva artikkeli ei näy millään rajauksella", () => {
     const jonossa = articles.filter((a) => !isPublished(a));
     expect(jonossa.length).toBeGreaterThan(0);
@@ -79,7 +91,7 @@ describe("ArtikkeliRivit", () => {
     };
     kerää(src);
     // getPublishedArticles saa olla vain datassa, listaussivulla ja jaetussa rivikomponentissa.
-    const sallitut = ["data/articles.ts", "data/routes.ts", "pages/Artikkelit.tsx", "components/ArtikkeliRivit.tsx"].map((p) => path.resolve(src, p));
+    const sallitut = ["data/articles.ts", "data/routes.ts", "pages/Artikkelit.tsx", "components/ArtikkeliRivitSisalto.tsx"].map((p) => path.resolve(src, p));
     const kayttajat = tiedostot.filter((p) => fs.readFileSync(p, "utf-8").includes("getPublishedArticles("));
     expect(kayttajat.filter((p) => !sallitut.includes(p))).toEqual([]);
     expect(fs.existsSync(path.resolve(src, "components/RelatedArticles.tsx"))).toBe(false);

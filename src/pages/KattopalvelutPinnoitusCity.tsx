@@ -24,9 +24,9 @@ import ReviewsTeaser from "@/components/ReviewsTeaser";
 import ServiceSchema from "@/components/ServiceSchema";
 import ToimintaKutsu from "@/components/ToimintaKutsu";
 import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
-import { getPinnoitusCityFAQ } from "@/data/faqData";
-import { getLocalCityFaq } from "@/data/cityFaq";
-import { pinnoitusCitySeo, cityHeroBase } from "@/data/seo";
+import { getCityFaq } from "@/data/cityFaq";
+import { pinnoitusCitySeo } from "@/data/seo";
+import { cityHeroBase } from "@/data/kaupunkiHero";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
 import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { pinnoitusPrices } from "@/data/prices";
@@ -126,8 +126,9 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <LaskuriPalkki palvelu="pinnoitus" />
 
       <FAQSection
-        items={[...getLocalCityFaq(cityData, "pinnoitus"), ...getPinnoitusCityFAQ(cityData.name, cityData.cityIn)]}
+        items={getCityFaq(cityData, "pinnoitus")}
         title={`Usein kysyttyä tiilikaton pinnoituksesta ${cityData.cityIn}`}
+        lisaa={{ to: "/tiilikaton-pinnoitus-pirkanmaa/#ukk", label: "Kaikki kysymykset tiilikaton pinnoituksesta" }}
       />
       {getTestimonialsByCity(cityData.slug, "katto").length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
       <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />

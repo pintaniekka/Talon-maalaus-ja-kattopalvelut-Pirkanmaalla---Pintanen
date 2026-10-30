@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import { allCities, maalausCities, pinnoitusCities } from "./data/cityData";
-import { legacyRedirects } from "./data/routes";
+import { legacyRedirects } from "./data/legacyRedirects";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Animaatiokirjaston ominaisuudet ladataan omana pakettina (src/lib/motionFeatures.ts). Komponentit käyttävät

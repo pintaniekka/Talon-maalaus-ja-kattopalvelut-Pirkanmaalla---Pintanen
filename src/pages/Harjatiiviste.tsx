@@ -13,8 +13,8 @@ import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import ServiceContactSection from "@/components/ServiceContactSection";
 import { PriceSectionHeading } from "@/components/hinnat/PriceSections";
-import { getRouteSeo } from "@/data/seo";
-import { getArticleBySlug, isPublished } from "@/data/articles";
+import { getStaticRouteSeo } from "@/data/seo";
+import JulkaistuArtikkeli from "@/components/JulkaistuArtikkeli";
 import { HARJATIIVISTE_HINTA } from "@/lib/priceCalc";
 import type { Tyovaihe, LyhyestiSisalto } from "@/data/tyovaiheet";
 
@@ -86,9 +86,7 @@ const Kuvat = merkitse(
 const crumbs = [{ name: "Tiilikaton pinnoitus", path: "/tiilikaton-pinnoitus-pirkanmaa" }, { name: "Harjatiivisteen asennus" }];
 
 const Harjatiiviste = () => {
-  const seo = getRouteSeo(PATH);
-  const artikkeli = getArticleBySlug("harjatiiviste-tiilikatolla");
-  const artikkeliJulkaistu = !!artikkeli && isPublished(artikkeli);
+  const seo = getStaticRouteSeo(PATH);
   return (
     <Rytmi>
       <SEO {...seo} breadcrumbs={crumbs} />
@@ -138,14 +136,14 @@ const Harjatiiviste = () => {
                 </Link>
                 , ja asennus kirjataan tarjoukseen eriteltynä.
               </p>
-              {artikkeliJulkaistu && (
+              <JulkaistuArtikkeli slug="harjatiiviste-tiilikatolla">
                 <p>
                   <Link to="/artikkelit/harjatiiviste-tiilikatolla/" className="font-semibold text-primary hover:underline">
                     Lue lisää harjatiivisteestä
                   </Link>
                   .
                 </p>
-              )}
+              </JulkaistuArtikkeli>
             </div>
           </div>
           <aside className="kortti p-6" aria-label="Hinta">

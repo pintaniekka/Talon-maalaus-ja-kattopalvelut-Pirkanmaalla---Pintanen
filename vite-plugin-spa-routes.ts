@@ -25,7 +25,8 @@ import crypto from "crypto";
 import { execSync } from "child_process";
 import type { ViteDevServer } from "vite";
 import { getAllRoutePaths, getCanonicalRoutes, buildSitemapXml, buildImageSitemapXml, buildLlmsTxt, buildLlmsFullTxt, buildRedirectsFile } from "./src/data/routes";
-import { getRouteSeo, withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
+import { withBrand, canonicalUrl, heroPreload, type RouteSeo } from "./src/data/seo";
+import { getRouteSeo } from "./src/data/routeSeo";
 import { allCities } from "./src/data/cityData";
 
 const HOME_ONLY_TAG = /\s*<link\s[^>]*data-home-only[^>]*>/g;
@@ -185,7 +186,10 @@ const todayInFinland = () => new Intl.DateTimeFormat("sv-SE", { timeZone: "Europ
 export const trackLastmod = (manifest: LastmodManifest, route: string, body: string, today = todayInFinland()): string => {
   // Vain <main>: headerin ja footerin muutos ei ole sivun sisällön muutos. Reactin tunnisteet eivät ole sisältöä.
   const main = body.match(/<main[\s\S]*?<\/main>/)?.[0] ?? body;
-  const normalized = main.replace(/\s(?:id|for|aria-describedby|aria-labelledby|aria-controls)="[^"]*"/g, "");
+  // Suspense-rajojen merkit (<!--$-->, <!--/$-->) eivät ole sisältöä: laiskaksi muutettu lohko ei muuta sivua.
+  const normalized = main
+    .replace(/<!--\/?\$[!?]?-->/g, "")
+    .replace(/\s(?:id|for|aria-describedby|aria-labelledby|aria-controls)="[^"]*"/g, "");
   const hash = crypto.createHash("sha1").update(normalized).digest("hex").slice(0, 16);
   const prev = manifest[route];
   if (prev && prev.hash === hash) return prev.lastmod;

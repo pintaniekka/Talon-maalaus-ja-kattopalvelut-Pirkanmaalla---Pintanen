@@ -27,7 +27,7 @@ import { roofTestimonials } from "@/data/testimonialsData";
 import { pinnoitusFAQ } from "@/data/faqData";
 import { HERO_BASE, staticSeo } from "@/data/seo";
 import { pinnoitusPrices } from "@/data/prices";
-import { pinnoitusTyovaiheet, pinnoitusLyhyesti, PINNOITUS_HINTA } from "@/data/tyovaiheet";
+import { pinnoitusTyovaiheet, pinnoitusLyhyesti } from "@/data/tyovaiheet";
 
 
 const KattopalvelutPinnoitus = () => {
@@ -46,7 +46,7 @@ const KattopalvelutPinnoitus = () => {
       />
 
       <PageHero
-        eyebrow="Tiilikaton pinnoitus · Pirkanmaa"
+        eyebrow="Katon maalaus · Pirkanmaa"
         title={
           <>
             Tiilikaton pinnoitus <span className="text-accent-ink">Pirkanmaalla</span>
@@ -54,8 +54,8 @@ const KattopalvelutPinnoitus = () => {
         }
         lead={
           <>
-            Kulunutta tiilikattoa ei yleensä tarvitse uusia. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Hinta on yleensä{" "}
-            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, työ kestää 2–3 päivää ja takuu on 5 vuotta. Kuntotarkastus on ilmainen.
+            Pinnoitamme tiilikattoja Pirkanmaalla. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin
+            kattomaalilla. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Tiilikaton pinnoitus ja katon maalaus tarkoittavat samaa työtä.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}

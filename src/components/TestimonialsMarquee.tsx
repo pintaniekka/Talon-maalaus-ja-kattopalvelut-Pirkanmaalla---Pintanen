@@ -225,13 +225,15 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
   const [pysaytetty, setPysaytetty] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   useEffect(() => {
-    const onDown = (e: PointerEvent) => {
+    // click, ei pointerdown: sormella vieritys ei tuota clickiä, joten se ei pysäytä. Kopiokortit ovat inert,
+    // joten osuma voi tulla vain rivin säiliöön (.marquee-viewport); se lasketaan arvosteluksi.
+    const onDown = (e: MouseEvent) => {
       // Pysähtyy vain arvostelukorttia painamalla; painallus muualle (myös lohkon sisällä) jatkaa.
-      const kortti = (e.target as Element | null)?.closest?.(".kortti");
+      const kortti = (e.target as Element | null)?.closest?.(".kortti, .marquee-viewport");
       setPysaytetty(Boolean(kortti && sectionRef.current?.contains(kortti)));
     };
-    document.addEventListener("pointerdown", onDown);
-    return () => document.removeEventListener("pointerdown", onDown);
+    document.addEventListener("click", onDown);
+    return () => document.removeEventListener("click", onDown);
   }, []);
 
   const headingText = title === undefined ? "Mitä asiakkaat sanovat meistä?" : title;

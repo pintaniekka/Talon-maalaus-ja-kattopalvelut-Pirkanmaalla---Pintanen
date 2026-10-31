@@ -108,9 +108,9 @@ const ChatLeadForm = () => {
             onPointerEnter={() => void lataaIkkuna()}
             onFocus={() => void lataaIkkuna()}
             className="relative flex items-center w-14 h-14 lg:w-auto lg:h-[60px] lg:gap-2.5 lg:pr-5 rounded-full shadow-lg bg-white border-2 border-[#ffd23f] hover:scale-105 transition-transform"
-            aria-label="Avaa chat"
           >
-            <img src={tekija.image} alt={`${tekija.nimi} – Pintanen`} className="w-full h-full lg:w-[50px] lg:h-[50px] lg:shrink-0 rounded-full object-cover" />
+            <img src={tekija.image} alt="" className="w-full h-full lg:w-[50px] lg:h-[50px] lg:shrink-0 rounded-full object-cover" />
+            <span className="sr-only">Avaa chat: </span>
             <span className="hidden lg:flex flex-col text-left leading-tight">
               <span className="font-heading font-bold text-sm text-navy">{tekija.nimi}</span>
               <span className="text-xs text-accent-strong">Kysy hintaa chatissa</span>

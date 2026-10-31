@@ -36,7 +36,7 @@ export const Stars = ({ stars }: { stars: number }) => (
  * Pitkä arvostelu leikataan viiteen riviin ja avataan kokonaisena ikkunaan (Eerik 28.10.2026: kortit
  * samankorkuisia kahdella rivillä, pitkät arvostelut silti luettavissa sanasta sanaan).
  */
-export const TestimonialCard = ({ name, stars, text }: { name: string; stars: number; text: string }) => {
+export const TestimonialCard = ({ name, stars, text, kopio = false }: { name: string; stars: number; text: string; kopio?: boolean }) => {
   const isLong = text.length > LONG_TEXT_THRESHOLD;
   const [open, setOpen] = useState(false);
   // Ikkuna pysyy mukana ensimmäisen avauksen jälkeen, jotta sulkemisanimaatio ja fokuksen palautus toimivat.
@@ -58,6 +58,7 @@ export const TestimonialCard = ({ name, stars, text }: { name: string; stars: nu
         <>
           <button
             type="button"
+            tabIndex={kopio ? -1 : undefined}
             onClick={() => {
               setAvattu(true);
               setOpen(true);
@@ -173,9 +174,10 @@ const MarqueeRow = ({ data, reverse = false, reducedMotion, mounted, durationSec
       >
         {items.map(({ t, hidden }, i) =>
           hidden ? (
-            // inert: kopioiden napit eivät saa fokusta (axe: fokusoitava sisältö aria-hidden-säiliössä).
-            <div key={i} className="flex" aria-hidden="true" {...({ inert: "" } as Record<string, string>)}>
-              <TestimonialCard {...t} />
+            // Kopioiden napit ovat tabIndex -1 (axe: ei tabulaattoria aria-hidden-säiliössä), mutta ne toimivat
+            // hiirellä ja kosketuksella; inert esti "Lue koko arvostelu" -napin toiminnan (31.10.2026).
+            <div key={i} className="flex" aria-hidden="true">
+              <TestimonialCard {...t} kopio />
             </div>
           ) : (
             <TestimonialCard key={i} {...t} />

@@ -4,7 +4,8 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/
 /**
  * Yrityksen faktat sivuston omia: tyovaiheet.ts ("Suojaamme esimerkiksi aurinkopaneelit, lasiterassit ja valokatteet"),
  * projects.ts (aurinkopaneelit suojattuna, Tampere 2026; Sastamala ja Valkeakoski aurinkopaneelit ennen/jälkeen), hinta-artikkeli
- * (suojattavat kohteet vaikuttavat hintaan haarukan sisällä). Eerik 27.10.2026: paneeleita ei irroteta koskaan (hyvin
+ * tiilikaton-pinnoituksen-hinta-2027 (suojattavat kohteet vaikuttavat hintaan haarukan sisällä; artikkeli poistettiin
+ * jonosta 31.10.2026 päällekkäisenä hintasivun kanssa, teksti löytyy gitistä). Eerik 27.10.2026: paneeleita ei irroteta koskaan (hyvin
  * kallista), ne suojataan paikoilleen, kasvustontorjunta-aine ajetaan myös paneelien alle, paneelit suojaavat alla olevat
  * tiilet auringolta ja säältä. Paneeleja harkitsevalle: katto pinnoitetaan ennen asennusta.
  */

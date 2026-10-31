@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/article/ArticleKit";
 
 /**
- * Yrityksen faktat sivuston omia: faqData.ts (kausi huhti–toukokuusta elo–syyskuuhun, kuntotarkastus samalla viikolla),
- * artikkeli tiilikaton-pinnoituksen-hinta-2027 ("Kesän työt täyttyvät pitkälti jo keväällä"), tyovaiheet.ts (sopimus ja
+ * Yrityksen faktat sivuston omia: faqData.ts (kausi huhti–toukokuusta elo–syyskuuhun, kuntotarkastus samalla viikolla,
+ * "kesän työt täyttyvät pitkälti jo keväällä"), tyovaiheet.ts (sopimus ja
  * aikataulu, yhteydenotto ennen aloituspäivää), asiakaskysymykset 2026 (kysymys 28: milloin tilata). Ei ulkoisia faktoja.
  */
 const faq = [

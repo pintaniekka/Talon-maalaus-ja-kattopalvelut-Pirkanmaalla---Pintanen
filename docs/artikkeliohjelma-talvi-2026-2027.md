@@ -35,6 +35,8 @@ title-tunniste päivittyvät vasta seuraavassa buildissa.
 
 ## Julkaisukalenteri
 
+**Muutos 31.10.2026 (Eki):** hinta-artikkelit `tiilikaton-pinnoituksen-hinta-2027` (9.11.) ja `talon-maalauksen-hinta-2027` (25.1.) poistettiin jonosta, koska ne olivat lähes samat kuin hintasivut (`/mnt/project-files/tarkastus/linkit-toistot-faktat-2026-10-31.md`, luku 4.3). Tilalle: 9.11. `pinnoitus-aurinkopaneelit-katolla` (oli 26.4.), 25.1. `milloin-talon-maalaus-kannattaa-tilata` (oli 22.4.), ja `talon-maalauksen-10-yleisinta-kysymysta` siirtyi 29.4. → 22.4. Jono päättyy 22.4.2027.
+
 | # | Päivä | Aihe (otsikko) | Alue | Tekijä | Esikatselu |
 |---|-------|----------------|------|--------|------------|
 | 1 | to 3.12.2026 | Tiilikaton kuntotarkastus: mitä tarkistamme ja mitä saat? | katto | Eerik | [tiilikaton-kuntotarkastus-mita-tarkistamme](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/tiilikaton-kuntotarkastus-mita-tarkistamme/?esikatselu=1) |
@@ -52,7 +54,7 @@ title-tunniste päivittyvät vasta seuraavassa buildissa.
 | 13 | to 14.1.2027 | Autotallin ja piharakennuksen tiilikaton pinnoitus: kannattaako se tehdä samalla? | katto | Eerik | [autotallin-ja-piharakennuksen-tiilikaton-pinnoitus](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/autotallin-ja-piharakennuksen-tiilikaton-pinnoitus/?esikatselu=1) |
 | 14 | ma 18.1.2027 | Kaavinta ja homepesu: miksi pohjatyöt ratkaisevat talon maalauksen keston? | seinät | Eemil | [miksi-vanha-maali-kaavitaan](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/miksi-vanha-maali-kaavitaan/?esikatselu=1) |
 | 15 | to 21.1.2027 | Mikä Nowocoat on ja miksi käytämme sitä tiilikaton pinnoituksessa? | katto | Eerik | [nowocoat-kattomaali](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/nowocoat-kattomaali/?esikatselu=1) |
-| 16 | ma 25.1.2027 | Talon maalauksen hinta 2027 Pirkanmaalla: mitä omakotitalon ulkomaalaus maksaa? | raha | Eemil | [talon-maalauksen-hinta-2027](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/talon-maalauksen-hinta-2027/?esikatselu=1) |
+| 16 | ma 25.1.2027 | Milloin kesän 2027 talon maalaus kannattaa tilata? | seinät | Eemil | [milloin-talon-maalaus-kannattaa-tilata](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/milloin-talon-maalaus-kannattaa-tilata/?esikatselu=1) |
 | 17 | to 28.1.2027 | Mikä aluskate on ja miksi tarkistamme sen ennen pinnoitusta? | katto | Eerik | [aluskate-ja-pinnoitus](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/aluskate-ja-pinnoitus/?esikatselu=1) |
 | 18 | ma 1.2.2027 | Homepilkut puutalon seinässä: mistä ne tulevat ja milloin seinä pitää maalata? | seinät | Eemil | [homepilkut-puutalon-seinassa](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/homepilkut-puutalon-seinassa/?esikatselu=1) |
 | 19 | to 4.2.2027 | Miksi maalaamme tiilikaton kahteen kertaan? | katto | Eerik | [kaksi-maalikerrosta-tiilikatto](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/kaksi-maalikerrosta-tiilikatto/?esikatselu=1) |
@@ -77,9 +79,7 @@ title-tunniste päivittyvät vasta seuraavassa buildissa.
 | 38 | ma 12.4.2027 | Mitä pinnoitustarjouksesta kannattaa katsoa? 8 kohtaa ennen hyväksymistä | katto | Eerik | [mita-tarjouksesta-kannattaa-katsoa](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/mita-tarjouksesta-kannattaa-katsoa/?esikatselu=1) |
 | 39 | to 15.4.2027 | Talon värin vaihto huoltomaalauksessa: mitä kannattaa päättää etukäteen? | seinät | Eemil | [talon-maalaus-varin-vaihto](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/talon-maalaus-varin-vaihto/?esikatselu=1) |
 | 40 | ma 19.4.2027 | Tiilikaton läpiviennit ja piipun ympärys: miksi katto vuotaa juuri sieltä? | katto | Eerik | [tiilikaton-lapiviennit-ja-piippu](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/tiilikaton-lapiviennit-ja-piippu/?esikatselu=1) |
-| 41 | to 22.4.2027 | Milloin kesän 2027 talon maalaus kannattaa tilata? | seinät | Eemil | [milloin-talon-maalaus-kannattaa-tilata](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/milloin-talon-maalaus-kannattaa-tilata/?esikatselu=1) |
-| 42 | ma 26.4.2027 | Tiilikaton pinnoitus, kun katolla on aurinkopaneelit | katto | Eerik | [pinnoitus-aurinkopaneelit-katolla](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/pinnoitus-aurinkopaneelit-katolla/?esikatselu=1) |
-| 43 | to 29.4.2027 | Talon maalaus: 10 yleisintä kysymystä ja vastaukset | seinät | Eemil | [talon-maalauksen-10-yleisinta-kysymysta](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/talon-maalauksen-10-yleisinta-kysymysta/?esikatselu=1) |
+| 41 | to 22.4.2027 | Talon maalaus: 10 yleisintä kysymystä ja vastaukset | seinät | Eemil | [talon-maalauksen-10-yleisinta-kysymysta](https://claude-yo2-artikkelit.talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/artikkelit/talon-maalauksen-10-yleisinta-kysymysta/?esikatselu=1) |
 
 ## Lähteet artikkeleittain
 
@@ -104,7 +104,6 @@ Yrityksen faktat ovat aina sivuston omia tiedostoja (`faqData.ts`, `prices.ts`, 
 | autotallin-ja-piharakennuksen-tiilikaton-pinnoitus | <https://www.vero.fi/henkiloasiakkaat/vahennykset/kotitalousvahennys/mista-toista-vahennyksen-saa/> |
 | miksi-vanha-maali-kaavitaan | <https://tikkurila.fi/kotimaalarit/tuotteet/homeenpoisto>, <https://www.k-rauta.fi/inspiraatio-ja-ohjeet/maalaaminen/ulkomaalausohje> |
 | nowocoat-kattomaali | <https://rakennusfakta.fi/nowocoat-2025-esite-1420239/tiedosto-files/NowoCoat_Esite_A4_2025.pdf> |
-| talon-maalauksen-hinta-2027 | – (vain sivuston omat faktat) |
 | aluskate-ja-pinnoitus | <https://www.k-rauta.fi/inspiraatio-ja-ohjeet/rakentaminen/tiilikaton-asennus> |
 | homepilkut-puutalon-seinassa | <https://tikkurila.fi/kotimaalarit/tuotteet/homeenpoisto> |
 | kaksi-maalikerrosta-tiilikatto | <https://rakennusfakta.fi/nowocoat-2025-esite-1420239/tiedosto-files/NowoCoat_Esite_A4_2025.pdf>, <https://www.teknos.com/document/tds/fi_0510-00_4.pdf> |

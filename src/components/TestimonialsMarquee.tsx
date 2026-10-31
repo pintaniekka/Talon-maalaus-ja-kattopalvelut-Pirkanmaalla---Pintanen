@@ -221,10 +221,25 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
+  // Kosketuksella napautus pysäyttää molemmat rivit ja napautus muualle jatkaa (hiiri hoverilla CSS:llä).
+  const [pysaytetty, setPysaytetty] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") return;
+      const inside = sectionRef.current?.contains(e.target as Node);
+      setPysaytetty(Boolean(inside));
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+  }, []);
+
   const headingText = title === undefined ? "Mitä asiakkaat sanovat meistä?" : title;
 
   return (
     <section
+      ref={sectionRef}
+      data-pysaytetty={pysaytetty}
       data-arvostelu="karuselli"
       className={`overflow-hidden osio ${headingText ? "section-padding pt-28 md:pt-16" : "py-8"}`}
       aria-label="Asiakasarvostelut"

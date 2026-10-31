@@ -9,7 +9,6 @@ import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import FAQSection from "@/components/FAQSection";
 import PriceWizard, { type WizardService } from "@/components/laskuri/PriceWizard";
 import { staticSeo } from "@/data/seo";
-import { KOTITALOUSVAHENNYS } from "@/data/company";
 import { getRoofAndWallTestimonials } from "@/data/testimonialsData";
 import { getResponsiveSrc, getResponsiveSrcSet } from "@/lib/storage";
 
@@ -133,20 +132,16 @@ const Hintalaskuri = () => {
             <h2 className={h2Class}>Miten laskurin hinta suhtautuu tarjoukseen?</h2>
             <p className={pClass}>
               Laskuri antaa haarukan. Tarjous on kiinteä hinta, ja saat sen kirjallisena ilmaisen kuntotarkastuksen tai arviokäynnin
-              jälkeen. Käynnillä katsomme katon tai seinät ja käymme tarjouksen läpi yhdessä. Hintaan kuuluu koko työ: suojaus,
-              pohjatyöt, pohjamaalaus, pintamaalaus, siivous ja takuu. Jos sovit katon ja seinät samalla
-              kertaa, saat edullisemman pakettihinnan.
+              jälkeen. Jos sovit katon ja seinät samalla kertaa, saat edullisemman pakettihinnan.
             </p>
           </div>
 
           <div>
             <h2 className={h2Class}>Kotitalousvähennys laskurin tuloksessa</h2>
             <p className={pClass}>
-              Laskurin arvio on hinta ilman kotitalousvähennystä. Vähennyksen saat työn osuudesta, ja se tehdään verotuksessa.{" "}
-              {KOTITALOUSVAHENNYS} Erittelemme työn osuuden laskulle
-              valmiiksi. Lue lisää:{" "}
-              <Link to="/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/" className="text-primary font-semibold hover:underline">
-                kotitalousvähennys katto- ja maalaustöissä
+              Laskurin arvio on hinta ilman kotitalousvähennystä, joka tehdään verotuksessa. Lue säännöt:{" "}
+              <Link to="/kotitalousvahennys/" className="text-primary font-semibold hover:underline">
+                kotitalousvähennys
               </Link>
               .
             </p>

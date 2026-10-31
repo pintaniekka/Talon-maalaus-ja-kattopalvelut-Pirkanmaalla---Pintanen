@@ -136,6 +136,7 @@ export const kuntotarkastukset: Record<KuntotarkastusService, KuntotarkastusSisa
       { question: "Mitä jos katto ei tarvitse pinnoitusta?", answer: "Sanomme sen suoraan. Jos tiilen pinta on vielä ehjä, pinnoitus ei ole ajankohtainen. Jos taas aluskate vuotaa tai tiiliä on rikki laajalti, kerromme, että katto kannattaa uusia." },
       { question: "Milloin tiilikaton pinnoitus on ajankohtainen?", answer: "Yleensä noin 15 vuoden iässä, kun tiilen väri on haalistunut, pinta tuntuu karhealta ja sammal kasvaa nopeasti. Pinnoitettu katto kestää jopa 15 vuotta pidempään." },
       { question: "Katsotteko samalla myös seinät?", answer: 'Kyllä, jos haluat tarjouksen myös <a href="/talon-maalaus-pirkanmaa/">talon maalauksesta</a>. Katto ja seinät samalla kertaa on edullisempi pakettihinta.' },
+      { question: "Katsotteko samalla harjatiivisteen?", answer: 'Kyllä. Harjat kuuluvat aina tarkastukseen. Jos katolta puuttuu harjatiiviste, voimme asentaa sen pinnoituksen yhteydessä. Lue lisää <a href="/harjatiivisteen-asennus/">harjatiivisteen asennuksesta</a>.' },
       { question: "Miten maksu tapahtuu, jos tilaan pinnoituksen?", answer: "Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi." },
     ],
     schemaName: "Ilmainen katon kuntotarkastus",

@@ -175,6 +175,13 @@ const HinnatTiilikalonPinnoitus = () => {
             intro="Kun vertaat tarjouksia, katso muutakin kuin loppusummaa. Kysy ainakin nämä:"
           />
           <Checklist items={offerChecklist} />
+          <p className="text-center mt-8 text-muted-foreground">
+            Jos katolta puuttuu harjatiiviste, asennamme sen pinnoituksen yhteydessä. Lue lisää:{" "}
+            <Link to="/harjatiivisteen-asennus/" className="text-primary font-semibold hover:underline">
+              harjatiivisteen asennus ja hinta
+            </Link>
+            .
+          </p>
         </div>
       </section>
       <ToimintaKutsu palvelu="pinnoitus" nappi="laskuri" n={1} />

@@ -44,6 +44,13 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
           </Link>
           .
         </p>
+        <p>
+          Pinnoitamme myös rivi-, pari- ja kerrostalojen tiilikattoja. Lue lisää:{" "}
+          <Link to="/taloyhtiot/" className="text-primary font-semibold hover:underline">
+            tiilikaton pinnoitus taloyhtiöille
+          </Link>
+          .
+        </p>
       </div>
       </div>
       <MaaliMerkki merkki="nowocoat" teksti="Katto maalataan kahteen kertaan: pohjamaali ja pintamaali." />

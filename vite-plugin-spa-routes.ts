@@ -106,13 +106,13 @@ export const applyBuildCommit = (html: string, commit: string): string => {
 const EMPTY_ROOT = '<div id="root"></div>';
 
 /**
- * Fontin preload (vaihe 5A, CLS): Figtreen latin-tiedosto (kaikki painot, 30.10.2026)
- * löytyy dist/assets-kansiosta hash-nimellä vasta buildin jälkeen. Palauttaa link-tagit tai tyhjän.
+ * Fonttien preload (vaihe 5A, CLS): neljä käytettyä woff2-tiedostoa (Open Sans 400/600, Montserrat 700/800)
+ * löytyvät dist/assets-kansiosta hash-nimillä vasta buildin jälkeen. Palauttaa link-tagit tai tyhjän.
  */
 export const fontPreloadTags = (distDir: string): string => {
   const assetsDir = path.join(distDir, "assets");
   if (!fs.existsSync(assetsDir)) return "";
-  const wanted = /^figtree-latin-wght-normal\.[\w-]+\.woff2$/;
+  const wanted = /^(open-sans|montserrat)-latin-wght-normal\.[\w-]+\.woff2$/;
   return fs
     .readdirSync(assetsDir)
     .filter((f) => wanted.test(f))

@@ -5,12 +5,14 @@ import ResponsiveImage from "@/components/ResponsiveImage";
 import CityCombobox from "@/components/CityCombobox";
 import PhoneInput from "@/components/PhoneInput";
 import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
-import { useToast } from "@/hooks/use-toast";
+import KenttaVirhe from "@/components/lomake/KenttaVirhe";
+import { LahetysVirhe } from "@/components/lomake/LomakeIlmoitus";
+import { VIESTI, lukuViesti, nimiVirhe, fokusoiEnsimmainen } from "@/lib/lomakeViestit";
 import { submitContactForm } from "@/lib/contactForm";
 import { trackEvent } from "@/lib/analytics";
 import { calculateRidgeSealPrice, calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
 import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
-import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
+import { formatToInternational, phoneErrorMessage } from "@/lib/phoneValidation";
 
 export type WizardService = "pinnoitus" | "maalaus";
 
@@ -160,8 +162,12 @@ interface PriceWizardProps {
  * Hintalaskuri: palvelu → kysymykset → kaupunki → yhteystiedot → hinta-arvio.
  * Hinta näytetään yhteystietojen jälkeen samoin kuin etusivun laskurissa, ja tiedot lähtevät myyntiin ja CRM:ään.
  */
+/** Kenttien id:t fokusta ja aria-describedby-viittausta varten. */
+const ID = { luku: "laskuri-luku", harja: "harjan-pituus", kunta: "laskuri-kunta", nimi: "laskuri-nimi", puhelin: "laskuri-puhelin" } as const;
+type Kentta = keyof typeof ID;
+const virheId = (k: Kentta) => `${ID[k]}-virhe`;
+
 const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
-  const { toast } = useToast();
   const [service, setService] = useState<WizardService | null>(initialService);
   const [index, setIndex] = useState(0); // 0..n-1 kysymykset, n = kaupunki, n+1 = yhteystiedot
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -170,7 +176,9 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
-  const [phoneError, setPhoneError] = useState(false);
+  /** Kenttien virheet. Näkyvät vasta, kun kävijä yrittää jatkaa, ja poistuvat heti kun kenttä on kunnossa. */
+  const [virheet, setVirheet] = useState<Partial<Record<Kentta, string | null>>>({});
+  const [lahetysVirhe, setLahetysVirhe] = useState<unknown>(null);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [resultAfterDeduction, setResultAfterDeduction] = useState<string | null>(null);
@@ -191,7 +199,13 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
 
   useEffect(() => {
     topRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    setVirheet({});
   }, [index, service]);
+
+  const nayta = (uudet: Partial<Record<Kentta, string | null>>, jarjestys: Kentta[]) => {
+    setVirheet(uudet);
+    fokusoiEnsimmainen(uudet, jarjestys, ID);
+  };
 
   const price = useMemo(() => {
     if (!service) return null;
@@ -226,11 +240,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     const min = current.min ?? 10;
     const max = current.max ?? 2000;
     if (!n || n < min || n > max) {
-      toast({
-        title: current.unit === "m" ? "Tarkista pituus" : "Tarkista neliöt",
-        description: current.unit === "m" ? `Anna harjan pituus metreinä, ${min}–${max}.` : "Anna pinta-ala numerona, esimerkiksi 150.",
-        variant: "destructive",
-      });
+      const mika = current.unit === "m" ? "harjan pituus" : service === "pinnoitus" ? "katon koko" : "talon pohjapinta-ala";
+      nayta({ luku: lukuViesti(mika, current.unit === "m" ? "m" : "m²", min, max) }, ["luku"]);
       return;
     }
     setNumberInput("");
@@ -241,7 +252,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const jatkaHarja = () => {
     const n = Number(String(answers.ridgeMeters ?? "").replace(",", "."));
     if (!n || n < 1 || n > 200) {
-      toast({ title: "Tarkista pituus", description: "Anna harjan pituus metreinä, 1–200.", variant: "destructive" });
+      nayta({ harja: lukuViesti("harjan pituus", "m", 1, 200) }, ["harja"]);
       return;
     }
     setAnswers((a) => ({ ...a, ridgeMeters: String(Math.round(n)) }));
@@ -257,17 +268,24 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     setIndex((i) => i - 1);
   };
 
+  /** Paikkakunta on pakollinen (Eki 31.10.2026: laskurissa ei saa jatkaa ilman kuntaa). */
+  const jatkaKunta = () => {
+    if (!city) {
+      nayta({ kunta: VIESTI.kunta }, ["kunta"]);
+      return;
+    }
+    setIndex((i) => i + 1);
+  };
+
   const submit = async () => {
-    if (!service || !price) return;
-    if (!name.trim() || !phone.trim()) {
-      toast({ title: "Täytä tiedot", description: "Nimi ja puhelinnumero ovat pakollisia.", variant: "destructive" });
+    if (!service || !price || submitting) return;
+    const uudet = { nimi: nimiVirhe(name), puhelin: phoneErrorMessage(phone) };
+    if (uudet.nimi || uudet.puhelin) {
+      nayta(uudet, ["nimi", "puhelin"]);
       return;
     }
-    if (!isValidFinnishMobile(phone)) {
-      setPhoneError(true);
-      return;
-    }
-    setPhoneError(false);
+    setVirheet({});
+    setLahetysVirhe(null);
     setSubmitting(true);
     const priceStr = formatPriceRange(price);
     const details = buildCalculatorDetails(service, answers, city);
@@ -290,8 +308,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
       // Eerik 26.10.2026 (yöajon kysymys 13): hinta myös kotitalousvähennyksen jälkeen.
       setResultAfterDeduction(formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) }));
       trackEvent("laskuri_valmis", { palvelu: service });
-    } catch {
-      toast({ title: "Virhe", description: "Jokin meni pieleen. Yritä uudelleen tai soita meille.", variant: "destructive" });
+    } catch (err) {
+      setLahetysVirhe(err ?? new Error());
     } finally {
       setSubmitting(false);
     }
@@ -380,16 +398,23 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                           inputMode="numeric"
                           min={current.min ?? 10}
                           max={current.max ?? 2000}
+                          id={ID.luku}
                           value={numberInput}
-                          onChange={(e) => setNumberInput(e.target.value)}
+                          onChange={(e) => {
+                            setNumberInput(e.target.value);
+                            if (virheet.luku) setVirheet({});
+                          }}
                           placeholder={current.placeholder}
                           aria-label={current.title}
+                          aria-invalid={virheet.luku ? true : undefined}
+                          aria-describedby={virheet.luku ? virheId("luku") : undefined}
                           autoFocus
                           className="w-full rounded-xl border border-border bg-background px-5 py-4 pr-14 text-lg text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                         />
-                        <span className="absolute right-5 top-1/2 -translate-y-1/2 text-muted-foreground">{current.unit ?? "m²"}</span>
+                        <span className="absolute right-5 top-[1.85rem] -translate-y-1/2 text-muted-foreground">{current.unit ?? "m²"}</span>
+                        <KenttaVirhe id={virheId("luku")} viesti={virheet.luku} />
                       </div>
-                      <button type="submit" className="btn-hero !py-4 !text-base">
+                      <button type="submit" className="btn-hero !py-4 !text-base sm:self-start">
                         Jatka
                       </button>
                     </form>
@@ -422,8 +447,9 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                                       e.preventDefault();
                                       jatkaHarja();
                                     }}
-                                    className="mt-2 flex flex-col gap-3 rounded-xl border border-accent/40 bg-accent-light px-4 py-3 sm:flex-row sm:items-center"
+                                    className="mt-2 rounded-xl border border-accent/40 bg-accent-light px-4 py-3"
                                   >
+                                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                                     <label htmlFor="harjan-pituus" className="flex-1 text-sm text-foreground">
                                       Harjan pituus metreinä, arvio riittää
                                     </label>
@@ -435,7 +461,12 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                                         min={1}
                                         max={200}
                                         value={answers.ridgeMeters ?? ""}
-                                        onChange={(e) => setAnswers((a) => ({ ...a, ridgeMeters: e.target.value }))}
+                                        onChange={(e) => {
+                                          setAnswers((a) => ({ ...a, ridgeMeters: e.target.value }));
+                                          if (virheet.harja) setVirheet({});
+                                        }}
+                                        aria-invalid={virheet.harja ? true : undefined}
+                                        aria-describedby={virheet.harja ? virheId("harja") : undefined}
                                         placeholder="12"
                                         autoFocus
                                         className="w-28 rounded-lg border border-border bg-background px-3 py-2 pr-8 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
@@ -445,6 +476,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                                     <button type="submit" className="btn-hero !px-5 !py-2.5 !text-sm">
                                       Jatka
                                     </button>
+                                    </div>
+                                    <KenttaVirhe id={virheId("harja")} viesti={virheet.harja} />
                                   </form>
                                 </m.div>
                               )}
@@ -471,8 +504,18 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                   <p className="text-muted-foreground mb-6">
                     {answers.utilities === "ei" ? "Ilman vettä ja sähköä sovimme käytännöt paikan päällä." : "Toimimme Pirkanmaalla ja Kanta-Hämeessä."}
                   </p>
-                  <CityCombobox value={city} onChange={setCity} placeholder="Valitse kunta" />
-                  <button type="button" onClick={() => setIndex((i) => i + 1)} className="btn-hero !py-4 !text-base w-full mt-6">
+                  <CityCombobox
+                    id={ID.kunta}
+                    value={city}
+                    onChange={(v) => {
+                      setCity(v);
+                      setVirheet({});
+                    }}
+                    placeholder="Valitse kunta"
+                    errorId={virheet.kunta ? virheId("kunta") : null}
+                  />
+                  <KenttaVirhe id={virheId("kunta")} viesti={virheet.kunta} />
+                  <button type="button" onClick={jatkaKunta} className="btn-hero !py-4 !text-base w-full mt-6">
                     Jatka
                   </button>
                 </>
@@ -487,19 +530,39 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                       e.preventDefault();
                       submit();
                     }}
+                    noValidate
                     className="flex flex-col gap-4"
                   >
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Nimi"
-                      aria-label="Nimi"
-                      autoComplete="name"
-                      className="w-full rounded-xl border border-border bg-background px-5 py-4 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                    <div>
+                      <input
+                        id={ID.nimi}
+                        type="text"
+                        value={name}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                          if (virheet.nimi) setVirheet((v) => ({ ...v, nimi: nimiVirhe(e.target.value) }));
+                        }}
+                        placeholder="Nimi"
+                        aria-label="Nimi"
+                        autoComplete="name"
+                        aria-invalid={virheet.nimi ? true : undefined}
+                        aria-describedby={virheet.nimi ? virheId("nimi") : undefined}
+                        className="w-full rounded-xl border border-border bg-background px-5 py-4 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                      />
+                      <KenttaVirhe id={virheId("nimi")} viesti={virheet.nimi} />
+                    </div>
+                    <PhoneInput
+                      id={ID.puhelin}
+                      value={phone}
+                      onChange={(v) => {
+                        setPhone(v);
+                        if (virheet.puhelin) setVirheet((e) => ({ ...e, puhelin: phoneErrorMessage(v) }));
+                      }}
+                      error={virheet.puhelin}
+                      ariaLabel="Puhelinnumero"
                     />
-                    <PhoneInput value={phone} onChange={setPhone} hasError={phoneError} errorMessage={PHONE_ERROR_MESSAGE} ariaLabel="Puhelinnumero" />
                     <HoneypotField value={website} onChange={setWebsite} />
+                    {lahetysVirhe !== null && <LahetysVirhe virhe={lahetysVirhe} />}
                     <button type="submit" disabled={submitting} className="btn-hero !py-4 !text-base w-full disabled:opacity-60">
                       {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Näytä hinta-arvio"}
                     </button>

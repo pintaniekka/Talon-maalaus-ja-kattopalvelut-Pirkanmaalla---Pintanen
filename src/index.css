@@ -93,6 +93,12 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
+    /* Lomakkeiden virheet (31.10.2026): #b42318 on valkoisella 6,6:1 (AA), tausta #fef3f2, onnistui #067647 / #ecfdf3 */
+    --virhe: 4 76% 40%;
+    --virhe-tausta: 5 86% 97%;
+    --onnistui: 157 90% 24%;
+    --onnistui-tausta: 140 82% 96%;
+
     /* Borders */
     --border: 210 20% 88%;
     --input: 210 20% 88%;
@@ -179,28 +185,26 @@
 
   /* Varafontit, joiden mitat on sovitettu Arialiin (capsize-metriikat), jotta teksti ei hypi, kun
      web-fontti vaihtuu piirron jälkeen (vaihe 5A: CLS 0,135 pinnoitussivulla). */
-  /* Figtreen arvot laskettu suomenkielisestä näytteestä painoilla 400 ja 700 (30.10.2026). */
   @font-face {
-    font-family: 'Figtree Fallback';
+    font-family: 'Open Sans Fallback';
     src: local('Arial');
-    size-adjust: 98.93%;
-    ascent-override: 96.03%;
-    descent-override: 25.27%;
+    size-adjust: 105.15%;
+    ascent-override: 101.65%;
+    descent-override: 27.86%;
     line-gap-override: 0%;
   }
   @font-face {
-    font-family: 'Figtree Heading Fallback';
-    src: local('Arial Bold'), local('Arial-BoldMT');
-    font-weight: 700;
-    size-adjust: 95.57%;
-    ascent-override: 99.41%;
-    descent-override: 26.16%;
+    font-family: 'Montserrat Fallback';
+    src: local('Arial');
+    size-adjust: 112.83%;
+    ascent-override: 85.79%;
+    descent-override: 22.25%;
     line-gap-override: 0%;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Figtree Variable', 'Figtree Fallback', sans-serif;
+    font-family: 'Open Sans', 'Open Sans Fallback', sans-serif;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -213,7 +217,7 @@
 
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Figtree Variable', 'Figtree Heading Fallback', sans-serif;
+    font-family: 'Montserrat', 'Montserrat Fallback', sans-serif;
     @apply font-bold tracking-tight;
   }
 
@@ -231,6 +235,47 @@
 }
 
 @layer components {
+  /* Lomakkeiden virheet (31.10.2026). Kenttä, jolla on aria-invalid="true", saa punaisen reunan; viesti tulee
+     kentän alle (KenttaVirhe) ja lähetysvirhe tai kiitos lomakkeen loppuun (LomakeIlmoitus). */
+  .kentta-virhe {
+    @apply mt-1.5 flex items-start gap-1.5 text-sm font-medium leading-snug;
+    color: hsl(var(--virhe));
+    animation: virheEsiin 0.18s ease-out;
+  }
+  input[aria-invalid="true"]:not(.puhelin-kentta),
+  textarea[aria-invalid="true"],
+  button[aria-invalid="true"],
+  .puhelin-kehys:has(input[aria-invalid="true"]) {
+    border-color: hsl(var(--virhe)) !important;
+    box-shadow: 0 0 0 1px hsl(var(--virhe));
+  }
+  .valintaryhma[aria-invalid="true"] {
+    @apply rounded-xl;
+    outline: 1.5px solid hsl(var(--virhe));
+    outline-offset: 6px;
+  }
+  .lomake-ilmoitus {
+    @apply flex items-start gap-3 rounded-xl border px-4 py-3 text-left text-sm leading-relaxed;
+    animation: virheEsiin 0.18s ease-out;
+  }
+  .lomake-ilmoitus--virhe {
+    color: hsl(var(--virhe));
+    background: hsl(var(--virhe-tausta));
+    border-color: hsl(var(--virhe) / 0.35);
+  }
+  .lomake-ilmoitus--onnistui {
+    color: hsl(var(--onnistui));
+    background: hsl(var(--onnistui-tausta));
+    border-color: hsl(var(--onnistui) / 0.35);
+  }
+  @keyframes virheEsiin {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .kentta-virhe, .lomake-ilmoitus { animation: none; }
+  }
+
   /* Tumma tausta: sininen teksti pysyy brändin kirkkaana sinisenä. */
   .on-dark,
   .bg-primary,
@@ -445,15 +490,10 @@
   will-change: transform;
 }
 
-.animate-marquee:hover,
-.animate-marquee:focus-within {
+/* Molemmat rivit pysähtyvät yhdessä: näppäimistöfokuksella tai arvostelun klikkauksella (toggle) (data-pysaytetty, Eerik 31.10.2026). */
+[data-arvostelu="karuselli"]:has(:focus-visible) .animate-marquee,
+[data-arvostelu="karuselli"][data-pysaytetty="true"] .animate-marquee {
   animation-play-state: paused;
-}
-
-/* Reduced motion: pysäytetään animaatio mutta sallitaan käyttäjän selata vaakasuunnassa */
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; transform: none; }
-  .marquee-viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 
 .marquee-viewport::-webkit-scrollbar { display: none; }

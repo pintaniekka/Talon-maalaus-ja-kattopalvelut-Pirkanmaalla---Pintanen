@@ -19,7 +19,7 @@ export interface FAQItem {
 }
 
 /**
- * Kaupunkisivun usein kysytyt: kahdeksan kysymystä (UKK-uudistus 30.10.2026, laaja auditointi luku 4).
+ * Kaupunkisivun usein kysytyt: yhdeksän kysymystä, maalauksessa kymmenen (kahdeksan UKK-uudistuksessa 30.10.2026, yhdeksäs synonyymikysymys ja maalauksen kymmenes talotyyppikysymys 31.10.2026, laaja auditointi luku 4).
  * Ennen sivulla oli 14–17 kysymystä, joista 10–11 oli sanasta sanaan samoja kaikilla 24 paikkakunnalla.
  *
  * - Neljä ydinkysymystä: hinta ja kesto paikkakunnan nimellä, kotitalousvähennys ja takuu. Vastaukset ovat samat
@@ -70,8 +70,38 @@ export const getCityFaq = (city: CityData, service: ProjectService): FAQItem[] =
       answer: KOTITALOUSVAHENNYS_VASTAUS,
     },
     katto ? PINNOITUS_TAKUU_FAQ : MAALAUS_TAKUU_FAQ,
+    synonyymiKysymys(katto),
+    ...(katto ? [] : [talotyypitKysymys]),
   ];
 };
+
+/**
+ * Maalauksen kymmenes kysymys (Eki 31.10.2026): talotyypit, jotka luettelo oli ennen ulkomaalauslohkossa
+ * (MaalausSanasto, poistettu). Sama sisältö kuin poistetussa lohkossa (Eerik-hyväksytty teksti).
+ */
+const talotyypitKysymys: FAQItem = {
+  question: "Minkä tyyppisiä taloja maalaatte?",
+  answer:
+    "Maalaamme puutalojen ulkoseinät: omakotitalot, rintamamiestalot, hirsitalot, paritalot, mökit ja piharakennukset, kuten autotallit ja autokatokset.",
+};
+
+/**
+ * Yhdeksäs kysymys (Eki 31.10.2026): hakusanat, joilla asiakkaat hakevat samaa työtä. Kaikki synonyymit ovat
+ * vastauksessa luonnollisena lauseena. Sama jokaisella paikkakunnalla; kysymys on listan lopussa, jotta
+ * paikalliset kysymykset pysyvät paikoillaan (ukk.test.ts).
+ */
+const synonyymiKysymys = (katto: boolean): FAQItem =>
+  katto
+    ? {
+        question: "Onko katon maalaus ja pinnoitus sama asia?",
+        answer:
+          "Kyllä. Tiilikaton pinnoitus, katon maalaus, tiilikaton maalaus, kattomaalaus ja tiilikaton pesu ja pinnoitus tarkoittavat kaikki samaa työtä. Pesemme katon aina ennen maalausta, vaihdamme rikkinäiset tiilet ja maalaamme katon kahteen kertaan.",
+      }
+    : {
+        question: "Mitä eroa on ulkomaalauksella ja julkisivumaalauksella?",
+        answer:
+          "Ei eroa. Talon maalaus, ulkomaalaus, julkisivumaalaus ja huoltomaalaus tarkoittavat samaa työtä. Pesemme seinät homepesuaineella, kaavimme irtoavan maalin, pohjamaalaamme paljaat kohdat ja maalaamme pintamaalin pensselillä.",
+      };
 
 /** Kolme kylää tai kaupunginosaa nimetään vastauksessa (perusmuodossa, ei taivutuksia). */
 const alueet = (slug: string): string[] =>

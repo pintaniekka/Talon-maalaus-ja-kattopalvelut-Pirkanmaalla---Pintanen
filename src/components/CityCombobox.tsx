@@ -43,9 +43,14 @@ interface CityComboboxProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  /** Napin id, jotta lomake voi siirtää fokuksen tähän virheen kohdalla. */
+  id?: string;
+  /** Virheviestin id (KenttaVirhe); asettaa myös aria-invalid. */
+  errorId?: string | null;
+  ariaLabel?: string;
 }
 
-const CityCombobox = ({ value, onChange, placeholder = "Valitse kunta..." }: CityComboboxProps) => {
+const CityCombobox = ({ value, onChange, placeholder = "Valitse kunta...", id, errorId, ariaLabel = "Paikkakunta" }: CityComboboxProps) => {
   const [open, setOpen] = useState(false);
   const [kaikkiRivit, setKaikkiRivit] = useState(false);
 
@@ -72,9 +77,13 @@ const CityCombobox = ({ value, onChange, placeholder = "Valitse kunta..." }: Cit
       <PopoverTrigger asChild>
         <button
           type="button"
+          id={id}
           role="combobox"
           aria-expanded={open}
-          className="flex w-full items-center justify-between py-3 px-4 rounded-xl border border-border bg-background text-foreground font-normal text-base outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0"
+          aria-label={value ? `${ariaLabel}: ${value}` : ariaLabel}
+          aria-invalid={errorId ? true : undefined}
+          aria-describedby={errorId ?? undefined}
+          className="flex w-full items-center justify-between py-3 px-4 rounded-xl border border-border bg-background text-foreground font-normal text-base outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           {value || <span className="text-muted-foreground">{placeholder}</span>}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

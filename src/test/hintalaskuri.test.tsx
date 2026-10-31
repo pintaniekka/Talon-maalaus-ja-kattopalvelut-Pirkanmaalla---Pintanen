@@ -354,8 +354,20 @@ describe("/hintalaskuri-sivu", () => {
       fireEvent.click(screen.getByRole("button", { name: label }));
     }
     expect(screen.getByRole("heading", { level: 2, name: "Millä paikkakunnalla kohde on?" })).toBeInTheDocument();
+    // Ilman kuntaa ei pääse eteenpäin (Eki 31.10.2026): virhe näkyy kentän alla.
+    fireEvent.click(screen.getByRole("button", { name: "Jatka" }));
+    expect(screen.getByText("Valitse kunta listasta.")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Millä paikkakunnalla kohde on?" })).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText("Paikkakunta"), { target: { value: "Tampere" } });
+    expect(screen.queryByText("Valitse kunta listasta.")).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Jatka" }));
     expect(screen.getByText("Jätä vielä nimi ja puhelinnumero, niin näytämme arvion.")).toBeInTheDocument();
+    // Tyhjä lähetys: molemmat virheet kentän alla, mitään ei lähetetä.
+    fireEvent.click(screen.getByRole("button", { name: "Näytä hinta-arvio" }));
+    expect(screen.getByText("Kirjoita nimesi.")).toBeInTheDocument();
+    expect(screen.getByText("Kirjoita puhelinnumero, niin voimme soittaa sinulle.")).toBeInTheDocument();
+    expect(screen.getAllByLabelText("Nimi")[0]).toHaveAttribute("aria-invalid", "true");
+    expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByRole("button", { name: "Näytä hinta-arvio" })).toBeInTheDocument();
     expect(document.querySelector('input[name="website"]')).not.toBeNull(); // honeypot
   });
@@ -373,6 +385,7 @@ describe("/hintalaskuri-sivu", () => {
     for (const label of ["Ei ole", "Löytyy kyllä", "Normaali jyrkkyys, valjailla pärjää", "Ei puutu", "Kyllä löytyy"]) {
       fireEvent.click(screen.getByRole("button", { name: label }));
     }
+    fireEvent.change(screen.getByLabelText("Paikkakunta"), { target: { value: "Tampere" } });
     fireEvent.click(screen.getByRole("button", { name: "Jatka" }));
     // Sivulla on myös yhteydenottolomake, jossa on toinen Nimi-kenttä; laskurin kentät ovat ensimmäiset.
     fireEvent.change(screen.getAllByLabelText("Nimi")[0], { target: { value: "Testi Henkilö" } });

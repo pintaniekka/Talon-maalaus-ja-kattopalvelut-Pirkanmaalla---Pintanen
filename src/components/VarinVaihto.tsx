@@ -4,6 +4,7 @@ import EnnenJalkeenMerkki from "@/components/EnnenJalkeenMerkki";
 import TiiliVari from "@/components/TiiliVari";
 import { CITY_LOCAL_FACTS_CHECKED, getCityLocalFacts } from "@/data/cityLocalFacts";
 import JulkaistuArtikkeli from "@/components/JulkaistuArtikkeli";
+import { NOWOCOAT_VARIT } from "@/data/nowocoatVarit";
 import type { ProjectService } from "@/data/projects";
 
 /**
@@ -32,26 +33,7 @@ const sisalto: Record<ProjectService, Sisalto> = {
     kappaleet: [
       "Pinnoitus on maalaus, ja uusi väri peittää vanhan. Nowocoatin värikartassa on 16 väriä, ja pinta on puolihimmeä. Väri valitaan kuntotarkastuksessa, ja värin vaihto ei nosta hintaa, koska katto maalataan aina kahteen kertaan.",
     ],
-    // Nowocoatin värikartta, 16 tiilikattoväriä (Coating Source 29.10.2026, docs/nowocoat-lahteet-2026-10-29.md).
-    // Nimet valmistajan englanninkielisinä (Eerik 29.10.2026). Hex-arvot ovat suuntaa antavia värikartasta luettuja.
-    varit: [
-      { nimi: "Pale Grey", hex: "#e4e2d6" },
-      { nimi: "Anthracite", hex: "#4a5058" },
-      { nimi: "Anthracite Dark", hex: "#3a3d42" },
-      { nimi: "Slate Grey", hex: "#54595e" },
-      { nimi: "Grey", hex: "#777a7c" },
-      { nimi: "Black", hex: "#1f2022" },
-      { nimi: "Blue-Black", hex: "#26292d" },
-      { nimi: "Tile Red", hex: "#c9562a" },
-      { nimi: "Tupapunainen", hex: "#a3432f" },
-      { nimi: "Swedish Red", hex: "#8f3a2e" },
-      { nimi: "Special Red", hex: "#a4402f" },
-      { nimi: "Red Brown", hex: "#7a3b2b" },
-      { nimi: "Oxide Red", hex: "#a13d2c" },
-      { nimi: "Bordeaux", hex: "#6b2f28" },
-      { nimi: "Mocca", hex: "#6b4330" },
-      { nimi: "Dark Brown", hex: "#4a3128" },
-    ],
+    varit: NOWOCOAT_VARIT,
     before: "tiilikaton-pinnoitus-lempaala-harmaa-tiilikatto-ennen",
     after: "tiilikaton-pinnoitus-lempaala-tummanharmaa-tiilikatto-jalkeen",
     alt: "Harmaa tiilikatto ennen pinnoitusta ja tummanharmaana pinnoituksen jälkeen, Lempäälä",
@@ -84,7 +66,7 @@ const VarinVaihto = ({ service, citySlug, cityIn }: Props) => {
   const s = sisalto[service];
   const facts = citySlug ? getCityLocalFacts(citySlug) : undefined;
   return (
-    <section className="section-padding osio">
+    <section id="varin-vaihto" className="section-padding osio scroll-mt-24">
       <div className="section-container grid items-start gap-10 lg:grid-cols-[minmax(0,40rem)_minmax(18rem,26rem)] lg:justify-center lg:gap-16">
         <div>
           <span className="lohko-otsake mb-3">Värin vaihto</span>

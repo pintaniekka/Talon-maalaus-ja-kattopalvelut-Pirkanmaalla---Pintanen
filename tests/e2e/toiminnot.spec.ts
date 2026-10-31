@@ -8,6 +8,13 @@ import { articles, todayInFinland } from "../../src/data/articles";
  * Ajetaan molemmilla leveyksillä (playwright.config.ts: puhelin 390 px, tyopoyta 1280 px).
  */
 
+/** Kuntavalitsin (Radix Popover + cmdk): lista aukeaa portaaliin, joten vaihtoehto haetaan koko sivulta. */
+const valitseKunta = async (page: import("@playwright/test").Page, scope: import("@playwright/test").Locator, kunta: string) => {
+  await scope.getByRole("combobox", { name: /Paikkakunta/ }).click();
+  await page.getByRole("option", { name: kunta, exact: true }).click();
+  await expect(scope.getByRole("combobox", { name: `Paikkakunta: ${kunta}` })).toBeVisible();
+};
+
 test.describe("Hintalaskuri", () => {
   test("pinnoituksen laskuri: koko, vastaukset, nimi ja puhelin, hinta-arvio näkyy", async ({ page, contact }) => {
     await open(page, "/hintalaskuri/");
@@ -27,11 +34,20 @@ test.describe("Hintalaskuri", () => {
     await wizard.getByRole("button", { name: "Kyllä löytyy" }).click();
 
     await expect(wizard.getByRole("heading", { name: "Millä paikkakunnalla kohde on?" })).toBeVisible();
+    // Ilman kuntaa ei pääse eteenpäin (Eki 31.10.2026): virhe kentän alla ja fokus valitsimeen.
+    await wizard.getByRole("button", { name: "Jatka" }).click();
+    await expect(wizard.getByText("Valitse kunta listasta.")).toBeVisible();
+    await expect(wizard.getByRole("combobox", { name: /Paikkakunta/ })).toBeFocused();
+    await valitseKunta(page, wizard, "Tampere");
+    await expect(wizard.getByText("Valitse kunta listasta.")).toBeHidden();
     await wizard.getByRole("button", { name: "Jatka" }).click();
 
     await expect(wizard.getByRole("heading", { name: "Viimeinen vaihe" })).toBeVisible();
-    // Ilman nimeä ja numeroa hintaa ei näytetä (liidiportti, Eerik 11.10.2026).
+    // Ilman nimeä ja numeroa hintaa ei näytetä (liidiportti, Eerik 11.10.2026); virheet näkyvät kenttien alla.
     await wizard.getByRole("button", { name: "Näytä hinta-arvio" }).click();
+    await expect(wizard.getByText("Kirjoita nimesi.")).toBeVisible();
+    await expect(wizard.getByText("Kirjoita puhelinnumero, niin voimme soittaa sinulle.")).toBeVisible();
+    await expect(wizard.getByRole("textbox", { name: "Nimi" })).toBeFocused();
     await expect(wizard.getByText("Hinta-arvio", { exact: true })).toBeHidden();
     expect(contact.requests).toHaveLength(0);
 
@@ -44,7 +60,7 @@ test.describe("Hintalaskuri", () => {
     await expect(wizard.getByText(/Soitamme sinulle/)).toBeVisible();
 
     expect(contact.requests).toHaveLength(1);
-    expect(contact.requests[0]).toMatchObject({ name: "Testi Testaaja", service: "tiilikatto" });
+    expect(contact.requests[0]).toMatchObject({ name: "Testi Testaaja", service: "tiilikatto", city: "Tampere" });
     expect(String(contact.requests[0].message)).toContain("Hintalaskuri: Katon koko: 200 m²");
   });
 
@@ -58,6 +74,7 @@ test.describe("Hintalaskuri", () => {
     await wizard.getByRole("button", { name: "1,5 kerrosta" }).click();
     await wizard.getByRole("button", { name: /Vähän/ }).click();
     await wizard.getByRole("button", { name: "Kyllä löytyy" }).click();
+    await valitseKunta(page, wizard, "Nokia");
     await wizard.getByRole("button", { name: "Jatka" }).click();
     await wizard.getByRole("textbox", { name: "Nimi" }).fill("Testi Testaaja");
     await wizard.getByRole("textbox", { name: "Puhelinnumero" }).fill("401234567");
@@ -77,11 +94,18 @@ test.describe("Hintalaskuri", () => {
     await wizard.getByRole("button", { name: /Normaali jyrkkyys/ }).click();
     await wizard.getByRole("button", { name: "Ei puutu" }).click();
     await wizard.getByRole("button", { name: "Kyllä löytyy" }).click();
+    await valitseKunta(page, wizard, "Tampere");
     await wizard.getByRole("button", { name: "Jatka" }).click();
     await wizard.getByRole("textbox", { name: "Nimi" }).fill("Testi Testaaja");
     await wizard.getByRole("textbox", { name: "Puhelinnumero" }).fill("123");
     await wizard.getByRole("button", { name: "Näytä hinta-arvio" }).click();
-    await expect(wizard.getByRole("textbox", { name: "Puhelinnumero" })).toHaveAttribute("aria-invalid", "true");
+    const puhelin = wizard.getByRole("textbox", { name: "Puhelinnumero" });
+    await expect(puhelin).toHaveAttribute("aria-invalid", "true");
+    await expect(puhelin).toBeFocused();
+    await expect(wizard.getByText(/Numerosta puuttuu numeroita/)).toBeVisible();
+    // Viesti katoaa heti, kun numero on kunnossa.
+    await puhelin.fill("040 123 4567");
+    await expect(wizard.getByText(/Numerosta puuttuu numeroita/)).toBeHidden();
     expect(contact.requests).toHaveLength(0);
   });
 
@@ -94,9 +118,10 @@ test.describe("Tarjouspyyntö", () => {
     await open(page, "/tarjouspyynto/");
     await expect(page.getByRole("heading", { name: "Mihin haluat tarjouksen?" })).toBeVisible();
 
-    // Ilman valintaa ei pääse eteenpäin.
+    // Ilman valintaa ei pääse eteenpäin, ja syy näkyy valintojen alla.
     await page.getByRole("button", { name: "Jatka" }).click();
     await expect(page.getByRole("heading", { name: "Mihin haluat tarjouksen?" })).toBeVisible();
+    await expect(page.getByText("Valitse ainakin yksi palvelu.")).toBeVisible();
 
     const roof = page.getByRole("checkbox", { name: "Tiilikaton pinnoitus" });
     await roof.click();
@@ -105,6 +130,10 @@ test.describe("Tarjouspyyntö", () => {
 
     await expect(page.getByRole("heading", { name: "Missä kohde sijaitsee?" })).toBeVisible();
     await page.getByRole("textbox", { name: "Lisätiedot" }).fill("Testiviesti, ei oikea pyyntö");
+    // Kunta on pakollinen (Eki 31.10.2026).
+    await page.getByRole("button", { name: "Jatka" }).click();
+    await expect(page.getByText("Valitse kunta listasta.")).toBeVisible();
+    await valitseKunta(page, page.getByRole("main"), "Tampere");
     await page.getByRole("button", { name: "Jatka" }).click();
 
     await expect(page.getByRole("heading", { name: "Kenelle tarjous tehdään?" })).toBeVisible();
@@ -114,7 +143,7 @@ test.describe("Tarjouspyyntö", () => {
 
     await expect(page.getByRole("heading", { name: /Kiitos, Testi Testaaja/ })).toBeVisible();
     expect(contact.requests).toHaveLength(1);
-    expect(contact.requests[0]).toMatchObject({ name: "Testi Testaaja", service: "tiilikatto", phone: "+358401234567" });
+    expect(contact.requests[0]).toMatchObject({ name: "Testi Testaaja", service: "tiilikatto", phone: "+358401234567", city: "Tampere" });
     expect(String(contact.requests[0].message)).toContain("tarjouspyyntösivu");
   });
 });
@@ -139,12 +168,16 @@ test.describe("Sivun lopun lomake", () => {
     expect(String(contact.requests[0].message)).toContain("/tiilikaton-pinnoitus-tampere/");
   });
 
-  test("ilman puhelinta ja sähköpostia lomake näyttää virheen eikä lähetä", async ({ page, contact }) => {
+  test("puuttuvat tiedot näkyvät kenttien alla eikä mitään lähetetä", async ({ page, contact }) => {
     await open(page, "/talon-maalaus-tampere/");
     const form = page.locator("#yhteystiedot form");
     await form.getByRole("textbox", { name: "Nimi" }).fill("Testi Testaaja");
+    await form.getByRole("textbox", { name: "Sähköposti" }).fill("testi@");
     await form.getByRole("button", { name: "Lähetä" }).click();
-    await expect(form.getByRole("alert")).toContainText("puhelinnumero tai sähköposti");
+    await expect(form.getByText("Kirjoita puhelinnumero, niin voimme soittaa sinulle.")).toBeVisible();
+    await expect(form.getByText(/Tarkista sähköpostiosoite/)).toBeVisible();
+    await expect(form.getByText("Valitse ainakin yksi palvelu.")).toBeVisible();
+    await expect(form.getByRole("textbox", { name: "Puhelinnumero" })).toBeFocused();
     expect(contact.requests).toHaveLength(0);
   });
 });

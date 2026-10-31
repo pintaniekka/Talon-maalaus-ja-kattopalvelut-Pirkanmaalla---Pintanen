@@ -212,7 +212,8 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     [data]
   );
 
-  const reducedMotion = useReducedMotion();
+  // Kokeilu (31.10.2026): "Vähennä liikettä" ohitetaan, karuselli liikkuu aina ja pysähtyy hoverilla/kosketuksella/fokuksella.
+  const reducedMotion = false;
 
   // Esirenderöintiin ja ensimmäiseen renderöintiin vain yksi sarja arvosteluja (V13: kopiot
   // paisuttivat HTML:ää ja toistivat saman tekstin neljästi). Saumattoman loopin kopiot

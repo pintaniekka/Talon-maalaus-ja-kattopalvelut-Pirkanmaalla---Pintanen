@@ -450,12 +450,6 @@
   animation-play-state: paused;
 }
 
-/* Reduced motion: pysäytetään animaatio mutta sallitaan käyttäjän selata vaakasuunnassa */
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; transform: none; }
-  .marquee-viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-}
-
 .marquee-viewport::-webkit-scrollbar { display: none; }
 .marquee-viewport { scrollbar-width: none; }
 

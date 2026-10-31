@@ -38,7 +38,7 @@ const MaalausProblemSection = () => {
               beforeSrcSet={getResponsiveSrcSet(beforeBase)}
               afterSrcSet={getResponsiveSrcSet(afterBase)}
               beforeAlt="Keltainen puutalo ennen maalausta"
-              afterAlt="Sama puutalo violettina maalauksen jälkeen"
+              afterAlt="Keltainen puutalo violetiksi maalattuna maalauksen jälkeen"
             />
           </div>
 

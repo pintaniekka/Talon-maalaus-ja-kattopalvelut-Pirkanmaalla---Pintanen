@@ -17,14 +17,16 @@ interface PinnoitusPricingCardsProps {
   /** Hintasivulla linkki osoittaa laskuriin samalla sivulla. */
   calculatorHref?: string;
   calculatorLabel?: string;
+  /** Oma otsikko (kaupunkisivulla hinta-H2 synonyymeillä, Eki 31.10.2026). */
+  otsikko?: string;
 }
 
-const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvelu=pinnoitus", calculatorLabel }: PinnoitusPricingCardsProps) => {
+const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvelu=pinnoitus", calculatorLabel, otsikko }: PinnoitusPricingCardsProps) => {
   return (
     <section className="section-padding osio">
       <div className="section-container max-w-5xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">Mitä tiilikaton pinnoitus maksaa {cityIn}?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-accent-ink mb-4">{otsikko ?? `Mitä tiilikaton pinnoitus maksaa ${cityIn}?`}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Hinta riippuu katon koosta, jyrkkyydestä ja tiilien kunnosta. Hinta sisältää työn, materiaalit ja siivouksen. Piilokuluja ei ole.
           </p>

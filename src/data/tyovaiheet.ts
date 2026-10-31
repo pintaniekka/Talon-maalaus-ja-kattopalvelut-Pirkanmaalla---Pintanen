@@ -53,7 +53,7 @@ export const pinnoitusTyovaiheet: Tyovaihe[] = [
   {
     title: "Lopputarkastus ja takuu",
     text: "Kierrämme katon yhdessä sinun kanssasi ja siivoamme jälkemme. Saat työlle 5 vuoden kirjallisen takuun.",
-    kuva: { base: "tiilikaton-pinnoitus-ylojarvi-keltainen-talo-jalkeen", alt: "Keltainen talo ja punainen tiilikatto pinnoituksen jälkeen, Ylöjärvi" },
+    kuva: { base: "tiilikaton-pinnoitus-ylojarvi-keltainen-talo-jalkeen", alt: "Keltainen talo ja punainen tiilikatto pinnoituksen jälkeen" },
   },
 ];
 
@@ -61,7 +61,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   {
     title: "Ilmainen arviokäynti ja tarjous",
     text: "Eemil tulee katsomaan talon. Hän käy seinät läpi ja katsoo, mitä maalia niissä on ja paljonko pohjatöitä tarvitaan. Saat kirjallisen tarjouksen, jossa on kiinteä hinta.",
-    kuva: { base: "talon-maalaus-tampere-hilseileva-paaty-ennen", alt: "Hilseilevä puutalon pääty ennen maalausta, Tampere" },
+    kuva: { base: "talon-maalaus-tampere-hilseileva-paaty-ennen", alt: "Hilseilevä puutalon pääty ennen maalausta" },
   },
   {
     title: "Suojaus",
@@ -71,7 +71,7 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   {
     title: "Homepesu",
     text: "Pesemme seinät homepesuaineella ja harjoilla. Lika ja home lähtevät pois.",
-    kuva: { base: "talon-maalaus-parkano-hilseileva-puutalo-ennen", alt: "Eemil pesee hilseilevää seinää harjalla tikkailta, Parkano" },
+    kuva: { base: "talon-maalaus-parkano-hilseileva-puutalo-ennen", alt: "Eemil pesee hilseilevää seinää harjalla tikkailta" },
   },
   {
     title: "Kaavinta",
@@ -86,12 +86,12 @@ export const maalausTyovaiheet: Tyovaihe[] = [
   {
     title: "Pintamaali pensselillä",
     text: "Maalaamme seinät pensselillä.",
-    kuva: { base: "talon-maalaus-tampere-puutalon-seinien-maalaus-kaynnissa", alt: "Puutalon seinien maalaus käynnissä telineiltä, Tampere" },
+    kuva: { base: "talon-maalaus-tampere-puutalon-seinien-maalaus-kaynnissa", alt: "Puutalon seinien maalaus käynnissä telineiltä" },
   },
   {
     title: "Lopputarkastus ja takuu",
     text: "Kierrämme talon yhdessä sinun kanssasi ja katsomme työn jäljen. Saat työlle 2 vuoden kirjallisen takuun.",
-    kuva: { base: "talon-maalaus-tampere-koristeikkunat-puutalo-jalkeen", alt: "Koristeikkunainen puutalo maalauksen jälkeen, Tampere" },
+    kuva: { base: "talon-maalaus-tampere-koristeikkunat-puutalo-jalkeen", alt: "Koristeikkunainen puutalo maalauksen jälkeen" },
   },
 ];
 

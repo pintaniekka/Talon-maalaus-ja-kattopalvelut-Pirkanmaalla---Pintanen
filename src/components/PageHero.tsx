@@ -129,18 +129,20 @@ const PageHero = ({
           <p className="hero-lead text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl leading-relaxed font-sans">{lead}</p>
           {beforeActions}
 
-          <div className="flex flex-col sm:flex-row sm:flex-nowrap gap-4 sm:gap-6 mb-8 md:mb-10">
+          {/* Napit samankokoisia (Eki 31.10.2026): sama korkeus, fontti, pyöristys ja reunus; puhelimessa koko leveys, isommalla
+              näytöllä sarakkeet saman levyisiä (auto-cols-fr). */}
+          <div className="flex flex-col gap-3 sm:inline-grid sm:grid-flow-col sm:auto-cols-fr sm:gap-5 mb-8 md:mb-10">
             <Link
               to={primary.to}
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-paint-yellow hover:bg-paint-yellow-hover text-paint-yellow-foreground font-heading font-extrabold rounded-2xl transition-all hover:scale-[1.03] shadow-xl shadow-paint-yellow/40 text-lg group"
+              className="inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl border-2 border-transparent bg-paint-yellow px-4 py-3 text-center font-heading text-[14px] min-[380px]:text-[15px] font-extrabold leading-tight text-paint-yellow-foreground shadow-xl shadow-paint-yellow/40 transition-all hover:scale-[1.03] hover:bg-paint-yellow-hover sm:px-6 sm:text-lg lg:text-base xl:text-lg group"
             >
               {primary.label}
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" />
             </Link>
             {secondary && (
               <Link
                 to={secondary.to}
-                className="inline-flex items-center justify-center px-8 py-4 bg-card border-2 border-accent text-accent-ink font-heading font-extrabold rounded-2xl hover:bg-accent-strong hover:text-accent-foreground transition-all text-lg"
+                className="inline-flex min-h-14 items-center justify-center rounded-2xl border-2 border-accent bg-card px-4 py-3 text-center font-heading text-[14px] min-[380px]:text-[15px] font-extrabold leading-tight text-accent-ink transition-all hover:bg-accent-strong hover:text-accent-foreground sm:px-6 sm:text-lg lg:text-base xl:text-lg"
               >
                 {secondary.label}
               </Link>

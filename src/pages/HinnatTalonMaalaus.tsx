@@ -15,7 +15,6 @@ import ServiceContactSection from "@/components/ServiceContactSection";
 import FAQSection from "@/components/FAQSection";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausComparison from "@/components/maalaus/MaalausComparison";
-import Vaarinymmarrykset from "@/components/Vaarinymmarrykset";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import HintaKohteet from "@/components/hinnat/HintaKohteet";
 import { Checklist, HintaTekijatLohko, PriceIncludes, PriceSectionHeading } from "@/components/hinnat/PriceSections";
@@ -23,7 +22,6 @@ import { PriceExamplesSection } from "@/components/hinnat/PriceExamples";
 import { maalausPrices, fmtRange } from "@/data/prices";
 import { HERO_BASE } from "@/data/seo";
 import { KOTITALOUSVAHENNYS } from "@/data/company";
-import { MAALAUS_PENSSELI_FAQ, MAALAUS_SADE_FAQ } from "@/data/faqData";
 
 const general = fmtRange(maalausPrices.general.min, maalausPrices.general.max);
 
@@ -39,38 +37,23 @@ const offerChecklist = [
   "Onko hinta kiinteä urakkahinta vai arvio?",
   "Kuuluvatko homepesu, kaavinta ja pohjamaalaus hintaan?",
   "Mitä maalia käytetään ja montako kerrosta maalataan?",
-  "Onko työn osuus eritelty laskussa kotitalousvähennystä varten?",
+  "Maalataanko seinät pensselillä vai ruiskulla?",
   "Kuinka pitkä takuu on, ja saatko sen kirjallisena?",
 ];
 
 const faqItems = [
   {
-    question: "Paljonko talon maalaus maksaa?",
-    answer: `Omakotitalon ulkomaalaus maksaa meillä yleensä ${general}. Hinta riippuu talon koosta, korkeudesta ja pohjatöiden määrästä. Laskurilla saat suuntaa antavan arvion. Tarkan hinnan saat ilmaisen arviokäynnin jälkeen.`,
-  },
-  {
     question: "Miksi hinta annetaan koko talolle eikä neliölle?",
     answer: "Hinta lasketaan talon mukaan: pinta-ala, kerrosluku, verhouksen kunto ja pesun tarve ratkaisevat. Siksi annamme hinnan arviokäynnin jälkeen kirjallisena, ja laskurista saat haarukan heti.",
-  },
-  { question: "Kuinka kauan talon maalaus kestää?", answer: "Yleensä 3–7 päivää talon koon ja pohjatöiden määrän mukaan." },
-  {
-    question: "Saanko karkean hinta-arvion ennen käyntiä?",
-    answer: "Kyllä. Hintalaskuri antaa suuntaa antavan arvion heti seinäpinta-alan, kerrosten ja hilseilyn mukaan. Tarkan, kiinteän hinnan saat kirjallisessa tarjouksessa ilmaisen arviokäynnin jälkeen.",
   },
   {
     question: "Milloin pääsette katsomaan talon?",
     answer: "Arviokäynti onnistuu yleensä samalla viikolla, tarvittaessa myös iltaisin tai viikonloppuisin. Maalaukset teemme huhti–toukokuusta elo–syyskuuhun, ja työn ajankohta sovitaan kirjallisesti tarjouksen hyväksymisen jälkeen.",
   },
-  { question: "Pitääkö olla kotona?", answer: "Arviokäynnillä kyllä, koska käymme seinät ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko, kunhan sovitut asiat ovat kunnossa." },
-  { question: "Kuinka usein talo pitää maalata?", answer: "Yleensä 10–15 vuoden välein. Väli riippuu maalista ja säästä. Eteläseinä kuluu ensin." },
   {
     question: "Saako talon maalauksesta kotitalousvähennyksen?",
     answer: `Kyllä. ${KOTITALOUSVAHENNYS} Erittelemme työn ja materiaalit laskulle valmiiksi. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`,
   },
-  { question: "Kuinka pitkä takuu maalauksella on?", answer: "Saat talon maalaukselle meiltä 2 vuoden takuun." },
-  // Brief 10 (26.10.2026): samat kysymykset kuin palvelusivulla (faqData.ts).
-  MAALAUS_PENSSELI_FAQ,
-  MAALAUS_SADE_FAQ,
   { question: "Miten maksu tapahtuu?", answer: "Kun hyväksyt tarjouksen, lähetämme ennakkolaskun, joka on 10 % hinnasta. Loput laskutamme, kun työ on valmis ja olemme käyneet sen yhdessä läpi." },
 ];
 
@@ -111,9 +94,8 @@ const HinnatTalonMaalaus = () => {
         }
         lead={
           <>
-            Omakotitalon ulkomaalaus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Hinta riippuu talon
-            koosta, korkeudesta ja pohjatöiden määrästä. Työ kestää 3–7 päivää, ja takuu on 2 vuotta. Tarkan hinnan saat, kun käymme
-            katsomassa talon. Arviokäynti on ilmainen.
+            Omakotitalon ulkomaalaus maksaa meillä yleensä <strong className="text-foreground">{general}</strong>. Tarkan hinnan saat,
+            kun käymme katsomassa talon. Arviokäynti on ilmainen.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta laskurilla" }}
@@ -143,7 +125,7 @@ const HinnatTalonMaalaus = () => {
             <PriceIncludes
               title="Mitä hintaan kuuluu?"
               items={maalausPrices.includes}
-              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Maalaamme seinät pensselillä, ja saat työlle 2 vuoden kirjallisen takuun. Hinnat sisältävät arvonlisäveron 25,5 %."
+              note="Hintaan kuuluu koko työ alusta loppuun. Ylimääräisiä kuluja ei tule. Maalaamme seinät pensselillä, ja saat työlle 2 vuoden kirjallisen takuun."
             />
           </div>
         </div>
@@ -174,11 +156,8 @@ const HinnatTalonMaalaus = () => {
           </p>
         </div>
       </section>
-      <Vaarinymmarrykset service="maalaus" />
       <ToimintaKutsu palvelu="maalaus" nappi="laskuri" n={1} />
-
-
-      <ArtikkeliRivit categories={["maalaus", "raha"]} />
+      <ArtikkeliRivit categories={["raha"]} />
       <FAQSection items={faqItems} />
       <ServiceContactSection variant="maalaus" />
       <ToimintaAlueetBanner service="maalaus" />

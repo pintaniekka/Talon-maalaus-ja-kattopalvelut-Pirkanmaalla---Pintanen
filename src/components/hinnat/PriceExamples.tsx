@@ -124,7 +124,7 @@ export const PriceExampleGrid = ({ service }: { service: ExampleService }) => {
         </ul>
         <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
           Hinnat ovat tavallisen jyrkkyyden kattoja, ja ne johdetaan hintakorteistamme. Jyrkkä katto, monta jiiriä tai paljon rikkinäisiä
-          tiiliä nostaa hintaa. {s.kuuluu} {VAHENNYS_LAUSE}
+          tiiliä nostaa hintaa. Hinnat ovat ennen kotitalousvähennystä.
         </p>
       </div>
     );
@@ -150,8 +150,7 @@ export const PriceExampleGrid = ({ service }: { service: ExampleService }) => {
         ))}
       </ul>
       <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-        Luvut johdetaan hintakorteistamme: hyväkuntoinen seinä on haarukan alapäässä ja paljon hilseilevä yläpäässä. {s.kuuluu}{" "}
-        {VAHENNYS_LAUSE}
+        Luvut johdetaan hintakorteistamme: hyväkuntoinen seinä on haarukan alapäässä ja paljon hilseilevä yläpäässä. Hinnat ovat ennen kotitalousvähennystä.
       </p>
     </div>
   );

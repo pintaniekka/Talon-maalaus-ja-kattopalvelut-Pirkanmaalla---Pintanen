@@ -230,9 +230,10 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     // click, ei pointerdown: sormella vieritys ei tuota clickiä, joten se ei pysäytä. Kopiokortit ovat inert,
     // joten osuma voi tulla vain rivin säiliöön (.marquee-viewport); se lasketaan arvosteluksi.
     const onDown = (e: MouseEvent) => {
-      // Pysähtyy vain arvostelukorttia painamalla; painallus muualle (myös lohkon sisällä) jatkaa.
       const kortti = (e.target as Element | null)?.closest?.(".kortti, .marquee-viewport");
-      setPysaytetty(Boolean(kortti && sectionRef.current?.contains(kortti)));
+      const osuiKorttiin = Boolean(kortti && sectionRef.current?.contains(kortti));
+      // Toggle: klikkaus arvosteluun pysäyttää, uusi klikkaus arvosteluun jatkaa; klikkaus muualle jatkaa aina.
+      setPysaytetty((nyt) => (osuiKorttiin ? !nyt : false));
     };
     document.addEventListener("click", onDown);
     return () => document.removeEventListener("click", onDown);

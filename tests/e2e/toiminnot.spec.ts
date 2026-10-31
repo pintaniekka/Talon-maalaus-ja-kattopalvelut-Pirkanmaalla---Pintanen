@@ -99,13 +99,15 @@ test.describe("Hintalaskuri", () => {
     await wizard.getByRole("textbox", { name: "Nimi" }).fill("Testi Testaaja");
     await wizard.getByRole("textbox", { name: "Puhelinnumero" }).fill("123");
     await wizard.getByRole("button", { name: "Näytä hinta-arvio" }).click();
+    // Varmasti väärä numero: 2 s "tarkistus", sitten "Numero ei käytössä." (Eki 31.10.2026).
+    await expect(wizard.getByRole("button", { name: /Tarkistetaan puhelinnumeroa/ })).toBeVisible();
     const puhelin = wizard.getByRole("textbox", { name: "Puhelinnumero" });
     await expect(puhelin).toHaveAttribute("aria-invalid", "true");
+    await expect(wizard.getByText("Numero ei käytössä.")).toBeVisible();
     await expect(puhelin).toBeFocused();
-    await expect(wizard.getByText(/Numerosta puuttuu numeroita/)).toBeVisible();
     // Viesti katoaa heti, kun numero on kunnossa.
     await puhelin.fill("040 123 4567");
-    await expect(wizard.getByText(/Numerosta puuttuu numeroita/)).toBeHidden();
+    await expect(wizard.getByText("Numero ei käytössä.")).toBeHidden();
     expect(contact.requests).toHaveLength(0);
   });
 

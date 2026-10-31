@@ -31,6 +31,19 @@ export const VAHENNYS_TYON_OSUUS = 0.8;
  * (src/data/prices.ts): työn osuus 80 % hinnasta, siitä 40 %, enintään 2 100 €. Omavastuuta ei vähennetä, koska se on
  * henkilökohtainen ja vähennetään kerran vuodessa, ei joka työstä (Eerik 26.10.2026). Omavastuu kerrotaan rivin alla.
  */
+/**
+ * Hinta-arvion vähennys "alennuksena" (Eki 31.10.2026): vähennys hintavälin keskikohdasta, sama kaava kuin
+ * hintaVahennyksenJalkeen, pyöristettynä kymmeneen euroon. Näytetään muodossa "~1 240 €".
+ */
+export const vahennysArvio = (min: number, max: number): number => {
+  const keski = (min + max) / 2;
+  const vahennys = Math.min(keski * VAHENNYS_TYON_OSUUS * VAHENNYS_SAANTO.osuus, VAHENNYS_SAANTO.enimmaismaara);
+  return Math.round(vahennys / 10) * 10;
+};
+
+/** "~1 240 €". */
+export const vahennysTeksti = (min: number, max: number) => `~${vahennysArvio(min, max).toLocaleString("fi-FI")} €`;
+
 export const hintaVahennyksenJalkeen = (hinta: number): number => {
   const tyo = hinta * VAHENNYS_TYON_OSUUS;
   const vahennys = Math.min(Math.round(tyo * VAHENNYS_SAANTO.osuus), VAHENNYS_SAANTO.enimmaismaara);

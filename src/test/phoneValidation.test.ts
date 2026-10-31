@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { formatToInternational, isValidFinnishMobile, phoneErrorMessage, phoneProblem } from "@/lib/phoneValidation";
+import { formatToInternational, isValidFinnishMobile, laskurinPuhelinVirhe, phoneErrorMessage, phoneProblem } from "@/lib/phoneValidation";
 
 describe("puhelinnumeron tarkistus (31.10.2026)", () => {
   it("hyväksyy tavalliset muodot, myös +358 ja 00358", () => {
@@ -21,5 +21,15 @@ describe("puhelinnumeron tarkistus (31.10.2026)", () => {
     expect(phoneProblem("987654321")).toBe("epaily");
     expect(phoneErrorMessage("123")).toMatch(/puuttuu numeroita/);
     expect(phoneErrorMessage("040 123 4567")).toBeNull();
+  });
+
+  it("hintalaskuri: tyhjä kenttä kerrotaan, varmasti väärä numero on aina 'Numero ei käytössä.' (Eki 31.10.2026)", () => {
+    expect(laskurinPuhelinVirhe("")).toMatch(/Kirjoita puhelinnumero/);
+    for (const n of ["123", "040 abc 4567", "0401234567890", "0000000000", "12345678", "0041234567"]) {
+      expect(laskurinPuhelinVirhe(n), n).toBe("Numero ei käytössä.");
+    }
+    for (const n of ["040 123 4567", "+358 40 123 4567", "050 12345", "09 1234567", "020 123 4567"]) {
+      expect(laskurinPuhelinVirhe(n), n).toBeNull();
+    }
   });
 });

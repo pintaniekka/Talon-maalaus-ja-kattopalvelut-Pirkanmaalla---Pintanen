@@ -7,8 +7,8 @@ import { HelmetProvider } from "react-helmet-async";
 import ChatPriceCalculator from "@/components/ChatPriceCalculator";
 import Hintalaskuri from "@/pages/Hintalaskuri";
 import { calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
-import { PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
-import { hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
+import { LASKURI_NUMERO_VIRHE } from "@/lib/phoneValidation";
+import { hintaVahennyksenJalkeen, vahennysArvio } from "@/components/vahennys/vahennysData";
 
 /*
  * Laskurit testataan ilman oikeaa lähetystä: fetch korvataan, joten mitään ei mene myynnin
@@ -153,20 +153,20 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     expect(sentBody().calculatorDetails).toContain("Jyrkkyys: Normaali");
     expect(sentBody().calculatorDetails).toContain("Kaupunki: Tampere");
 
-    // Tulos on navy-kortti (29.10.2026); tekstit ovat samat kuin aiemmin botin viesteinä.
+    // Tulos on navy-kortti: hinta isolla, vähennys alennuksena, vähän tekstiä (Eki 31.10.2026).
     const tulos = document.querySelector("[data-tulos]")!;
     expect(tulos).not.toBeNull();
     const reply = shown(tulos.textContent ?? "");
     expect(reply).toContain("Kiitos Testi!");
     expect(reply).toContain(shown(expected));
-    expect(reply).toContain("Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.");
+    expect(reply).toContain("Soitamme sinulle viimeistään seuraavana arkipäivänä.");
+    expect(reply).not.toContain("Tarkan hinnan saat");
+    expect(reply).not.toContain("Omavastuu");
     expect(screen.queryByRole("button", { name: "Lähetä ja näytä hinta-arvio" })).not.toBeInTheDocument();
-    // Sama vähennysrivi kuin /hintalaskuri-sivulla (Eerik 26.10.2026, yöajon kysymys 20), kortin tummemmalla rivillä.
+    // Sama vähennys kuin /hintalaskuri-sivulla: alennuksena hintavälin keskikohdasta, "~X €".
     const price = calculateRoofPrice(200, "normaali");
-    const after = formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) });
-    const deduction = screen.getByText(/Kotitalousvähennyksen jälkeen:/);
-    expect(shown(deduction.textContent ?? "")).toContain(shown(after));
-    expect(shown(deduction.textContent ?? "")).toContain("Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.");
+    expect(reply).toContain("Kotitalousvähennys");
+    expect(reply).toContain(shown(`~${vahennysArvio(price.min, price.max).toLocaleString("fi-FI")} €`));
     expect(screen.getByRole("link", { name: "Pyydä ilmainen kuntotarkastus" })).toHaveAttribute("href", "/ilmainen-katon-kuntotarkastus/");
   });
 
@@ -207,7 +207,7 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     showPrice();
     await tick(2500); // puhelinnumeron tarkistus kestää 2 s
     expect(fetchMock).not.toHaveBeenCalled();
-    expect(screen.getByText(PHONE_ERROR_MESSAGE)).toBeInTheDocument();
+    expect(screen.getByText(LASKURI_NUMERO_VIRHE)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Lähetä ja näytä hinta-arvio" })).toBeInTheDocument();
   });
 
@@ -396,10 +396,13 @@ describe("/hintalaskuri-sivu", () => {
     const price = calculateRoofPrice(200, "normaali");
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(screen.getByText(shown(formatPriceRange(price)))).toBeInTheDocument();
-    const after = formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) });
-    expect(screen.getByText(shown(after))).toBeInTheDocument();
-    expect(screen.getByText(/Kotitalousvähennyksen jälkeen:/)).toBeInTheDocument();
-    expect(screen.getByText("Omavastuu 150 € vuodessa, jos et ole käyttänyt sitä muihin töihin.")).toBeInTheDocument();
+    // Vähennys alennuksena keskikohdasta (Eki 31.10.2026): 200 m² normaali = 3 600–4 200 €, keskikohta 3 900 €,
+    // työn osuus 80 % ja siitä 40 % = 1 248 € → ~1 250 €.
+    expect(vahennysArvio(price.min, price.max)).toBe(1250);
+    expect(screen.getByText("Kotitalousvähennys")).toBeInTheDocument();
+    expect(screen.getByText(shown("~" + (1250).toLocaleString("fi-FI") + " €"))).toBeInTheDocument();
+    expect(document.querySelector("[data-tulos]")?.textContent).not.toMatch(/Omavastuu/);
+    expect(vahennysArvio(9000, 11000)).toBe(2100); // enimmäismäärä
     // 40 % työn osuudesta (80 % hinnasta), enintään 2 100 €; omavastuuta ei vähennetä (Eerik 26.10.2026).
     expect(hintaVahennyksenJalkeen(2850)).toBe(1940);
     expect(hintaVahennyksenJalkeen(3500)).toBe(2380);

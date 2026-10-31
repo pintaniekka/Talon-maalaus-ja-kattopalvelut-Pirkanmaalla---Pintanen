@@ -29,6 +29,8 @@ export const phoneProblem = (raw: string): PhoneProblem | null => {
   if (!/^\d+$/.test(digits)) return 'merkit';
   if (digits.length < 8) return 'lyhyt';
   if (digits.length > 10) return 'pitka';
+  // "00" on ulkomaanpuhelun etuliite: suomalainen numero ei voi alkaa sillä.
+  if (digits.startsWith('00')) return 'epaily';
   if (/^(\d)\1+$/.test(digits)) return 'epaily';
   if (ASCENDING.includes(digits) || DESCENDING.includes(digits)) return 'epaily';
   return null;
@@ -58,6 +60,20 @@ export const phoneErrorMessage = (raw: string): string | null => {
 };
 
 export const PHONE_ERROR_MESSAGE = PHONE_MESSAGES.epaily;
+
+/**
+ * Hintalaskurien viesti (Eki 31.10.2026): vain varmasti väärät numerot estetään (yllä olevat säännöt, ei muita
+ * suodattimia), "tarkistus" kestää 2 s (PHONE_CHECK_MS) ja viesti on aina sama, jotta kokeilija ei opi sääntöjä.
+ */
+export const LASKURI_NUMERO_VIRHE = 'Numero ei käytössä.';
+export const PHONE_CHECK_MS = 2000;
+
+/** Laskurin puhelinkentän viesti: tyhjä kenttä kerrotaan heti, muut virheet yhdellä viestillä. */
+export const laskurinPuhelinVirhe = (raw: string): string | null => {
+  const problem = phoneProblem(raw);
+  if (!problem) return null;
+  return problem === 'tyhja' ? PHONE_MESSAGES.tyhja : LASKURI_NUMERO_VIRHE;
+};
 
 export const PHONE_CHECKING_LABEL = 'Tarkistetaan puhelinnumeroa...';
 

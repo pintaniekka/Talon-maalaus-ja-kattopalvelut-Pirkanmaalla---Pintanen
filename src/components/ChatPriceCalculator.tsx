@@ -12,10 +12,11 @@ import CityCombobox from '@/components/CityCombobox';
 import PhoneInput from '@/components/PhoneInput';
 import { YHTEYSTIEDOT } from '@/data/company';
 import { calculateWallPrice, calculateRoofPrice, calculateRidgeSealPrice, formatPriceRange } from '@/lib/priceCalc';
-import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from '@/components/vahennys/vahennysData';
+import { vahennysTeksti } from '@/components/vahennys/vahennysData';
 import {
   formatToInternational,
-  phoneErrorMessage,
+  laskurinPuhelinVirhe,
+  PHONE_CHECK_MS,
   PHONE_CHECKING_LABEL,
 } from '@/lib/phoneValidation';
 
@@ -129,38 +130,35 @@ const UserBubble = ({ text, imageBase }: { text: string; imageBase?: string }) =
 
 // ── Tuloskortti ───────────────────────────────────────────────────────────
 interface Tulos {
-  /** Botin viestit sanasta sanaan: kiitos ja hinta, mahdollinen harjatiivisterivi, vähennysrivi. */
+  /** "Kiitos Testi! 🎉 Hinta-arvio pinnoitukselle" */
   kiitos: string;
-  harja?: string;
-  vahennys: string;
-  /** Hintahaarukka, joka korostetaan keltaisella kiitosviestistä. */
+  /** Hintahaarukka isolla. */
   hinta: string;
+  /** Harjatiivisteen euromäärä, jos se on hinnassa. */
+  harja?: number;
+  /** Kotitalousvähennys alennuksena: "noin −1 240 €". */
+  vahennys: string;
   cta: { to: string; label: string };
 }
 
-/** Korostaa hintahaarukan keltaisella muuttamatta tekstiä. */
-const korostaHinta = (text: string, hinta: string) => {
-  const i = text.indexOf(hinta);
-  if (i < 0) return text;
-  return (
-    <>
-      {text.slice(0, i)}
-      <strong className="font-heading text-xl font-extrabold text-[#ffd23f]">{hinta}</strong>
-      {text.slice(i + hinta.length)}
-    </>
-  );
-};
-
+/** Tuloskortti (Eki 31.10.2026): hinta isolla, vähennys alennuksena, harjatiiviste pelkkänä hintana, vähän tekstiä. */
 const TulosKortti = ({ tulos }: { tulos: Tulos }) => (
   <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-3 overflow-hidden rounded-2xl bg-navy text-white shadow-[0_10px_24px_-8px_rgba(11,26,51,0.45)]" data-tulos>
-    <div className="px-4 py-4">
-      <p className="text-sm leading-relaxed">{korostaHinta(tulos.kiitos, tulos.hinta)}</p>
-      {tulos.harja && <p className="mt-2 text-sm leading-relaxed text-white/90">{tulos.harja}</p>}
+    <div className="px-4 pb-3 pt-4">
+      <p className="text-sm text-white/85">{tulos.kiitos}</p>
+      <p className="mt-1 font-heading text-3xl font-extrabold leading-tight text-[#ffd23f]">{tulos.hinta}</p>
+      {tulos.harja !== undefined && (
+        <p className="mt-1 text-sm text-white/85">
+          Sisältää harjatiivisteen <strong className="text-white">{tulos.harja.toLocaleString('fi-FI')} €</strong>
+        </p>
+      )}
     </div>
-    <div className="bg-[#13294d] px-4 py-3">
-      <p className="text-sm leading-relaxed text-white">{tulos.vahennys}</p>
+    <div className="flex flex-wrap items-baseline justify-between gap-x-3 bg-[#13294d] px-4 py-3">
+      <span className="text-sm text-white/85">Kotitalousvähennys</span>
+      <span className="font-heading text-2xl font-extrabold text-white">{tulos.vahennys}</span>
     </div>
     <div className="px-4 pb-4 pt-3">
+      <p className="mb-3 text-sm text-white/85">Soitamme sinulle viimeistään seuraavana arkipäivänä.</p>
       <Link to={tulos.cta.to} className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#ffd23f] px-5 font-heading text-sm font-extrabold text-navy transition-colors hover:bg-[#f2c62e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
         {tulos.cta.label}
       </Link>
@@ -474,7 +472,7 @@ const ChatPriceCalculator = () => {
   const handleContactSubmit = useCallback(async () => {
     if (isSubmitting || isCheckingPhone) return;
     const nimi = nimiVirhe(contactName);
-    const puhelin = phoneErrorMessage(contactPhone);
+    const puhelin = laskurinPuhelinVirhe(contactPhone);
     // Tyhjät kentät kerrotaan heti.
     if (nimi || !contactPhone.trim()) {
       setVirheet({ nimi, puhelin });
@@ -482,7 +480,7 @@ const ChatPriceCalculator = () => {
       return;
     }
 
-    // Kirjoitettu mutta virheellinen numero: 2 s "tarkistus" ennen virhettä (Eerik, ennallaan).
+    // Varmasti väärä numero: 2 s "tarkistus", sitten "Numero ei käytössä" (Eki 31.10.2026).
     if (puhelin) {
       setVirheet({});
       setIsCheckingPhone(true);
@@ -491,7 +489,7 @@ const ChatPriceCalculator = () => {
         setIsCheckingPhone(false);
         setVirheet({ puhelin });
         fokus(kenttaId.puhelin);
-      }, 2000);
+      }, PHONE_CHECK_MS);
       return;
     }
 
@@ -505,13 +503,13 @@ const ChatPriceCalculator = () => {
 
     const d = dataRef.current;
     let priceStr = '';
-    let afterStr = '';
+    let vahennysStr = '';
     let details = '';
     let harjaHinta = 0;
-    // Sama rivi kuin /hintalaskuri-sivulla: hinta kotitalousvähennyksen jälkeen (Eerik 26.10.2026, yöajon kysymys 20).
+    // Sama kuin /hintalaskuri-sivulla: kotitalousvähennys alennuksena hintavälin keskikohdasta (Eki 31.10.2026).
     const withAfter = (p: { min: number; max: number }) => {
       priceStr = formatPriceRange(p);
-      afterStr = formatPriceRange({ min: hintaVahennyksenJalkeen(p.min), max: hintaVahennyksenJalkeen(p.max) });
+      vahennysStr = vahennysTeksti(p.min, p.max);
     };
 
     if (path === 'maalaus') {
@@ -556,9 +554,9 @@ const ChatPriceCalculator = () => {
       if (run !== runIdRef.current) return;
       setIsTyping(false);
       setTulos({
-        kiitos: `Kiitos ${firstName}! 🎉 Alustava hinta-arvio ${tyo} on ${priceStr}. Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.`,
-        harja: harjaHinta > 0 ? `Hinta sisältää harjatiivisteen: ${harjaHinta.toLocaleString('fi-FI')} €. Ilman pinnoitusta harjatiivisteen asennus maksaisi ${calculateRidgeSealPrice(Number(d.ridgeMeters), true).toLocaleString('fi-FI')} €.` : undefined,
-        vahennys: `Kotitalousvähennyksen jälkeen: ${afterStr}. ${VAHENNYS_OMAVASTUU_HUOMAUTUS}`,
+        kiitos: `Kiitos ${firstName}! 🎉 Hinta-arvio ${tyo}`,
+        harja: harjaHinta > 0 ? harjaHinta : undefined,
+        vahennys: vahennysStr,
         hinta: priceStr,
         cta: path === 'maalaus'
           ? { to: '/ilmainen-julkisivun-kuntoarvio/', label: 'Pyydä ilmainen arviokäynti' }
@@ -895,7 +893,7 @@ const ChatPriceCalculator = () => {
                       value={contactPhone}
                       onChange={(v) => {
                         setContactPhone(v);
-                        if (virheet.puhelin) setVirheet(e => ({ ...e, puhelin: phoneErrorMessage(v) }));
+                        if (virheet.puhelin && !laskurinPuhelinVirhe(v)) setVirheet(e => ({ ...e, puhelin: null }));
                       }}
                       disabled={isCheckingPhone || isSubmitting}
                       error={virheet.puhelin}

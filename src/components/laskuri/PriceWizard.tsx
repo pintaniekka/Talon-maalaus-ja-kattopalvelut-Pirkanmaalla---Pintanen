@@ -11,8 +11,8 @@ import { VIESTI, lukuViesti, nimiVirhe, fokusoiEnsimmainen } from "@/lib/lomakeV
 import { submitContactForm } from "@/lib/contactForm";
 import { trackEvent } from "@/lib/analytics";
 import { calculateRidgeSealPrice, calculateRoofPrice, calculateWallPrice, formatPriceRange } from "@/lib/priceCalc";
-import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from "@/components/vahennys/vahennysData";
-import { formatToInternational, phoneErrorMessage } from "@/lib/phoneValidation";
+import { vahennysTeksti } from "@/components/vahennys/vahennysData";
+import { formatToInternational, laskurinPuhelinVirhe, PHONE_CHECK_MS, PHONE_CHECKING_LABEL } from "@/lib/phoneValidation";
 
 export type WizardService = "pinnoitus" | "maalaus";
 
@@ -181,9 +181,14 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   const [lahetysVirhe, setLahetysVirhe] = useState<unknown>(null);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<string | null>(null);
-  const [resultAfterDeduction, setResultAfterDeduction] = useState<string | null>(null);
+  const [resultVahennys, setResultVahennys] = useState<string | null>(null);
   const [resultHarja, setResultHarja] = useState(0);
-  const [resultHarjaErikseen, setResultHarjaErikseen] = useState(0);
+  /** Puhelinnumeron "tarkistus" (2 s) ennen virhettä, kuten etusivun chat-laskurissa (Eki 31.10.2026). */
+  const [tarkistetaan, setTarkistetaan] = useState(false);
+  const tarkistusAjastin = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (tarkistusAjastin.current) clearTimeout(tarkistusAjastin.current);
+  }, []);
   const topRef = useRef<HTMLDivElement>(null);
 
   const qs = service ? calculatorQuestions[service].filter((q) => !q.showIf || q.showIf(answers)) : [];
@@ -214,8 +219,7 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
     const base = service === "pinnoitus" ? calculateRoofPrice(m2, answers.slope) : calculateWallPrice(m2, answers.stories, answers.peeling);
     // Harjatiiviste lisätään loppuhintaan eriteltynä (Eerik 29.10.2026).
     const harja = service === "pinnoitus" && answers.ridgeSeal === "kylla" && Number(answers.ridgeMeters) > 0 ? calculateRidgeSealPrice(Number(answers.ridgeMeters)) : 0;
-    const harjaErikseen = harja > 0 ? calculateRidgeSealPrice(Number(answers.ridgeMeters), true) : 0;
-    return { min: base.min + harja, max: base.max + harja, harja, harjaErikseen };
+    return { min: base.min + harja, max: base.max + harja, harja };
   }, [service, answers]);
 
   // GA4: laskurin aloitus, jokainen askel ja valmistuminen, jotta liidiportin (nimi ja
@@ -278,10 +282,23 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   };
 
   const submit = async () => {
-    if (!service || !price || submitting) return;
-    const uudet = { nimi: nimiVirhe(name), puhelin: phoneErrorMessage(phone) };
-    if (uudet.nimi || uudet.puhelin) {
-      nayta(uudet, ["nimi", "puhelin"]);
+    if (!service || !price || submitting || tarkistetaan) return;
+    const nimi = nimiVirhe(name);
+    const puhelin = laskurinPuhelinVirhe(phone);
+    // Tyhjät kentät kerrotaan heti.
+    if (nimi || !phone.trim()) {
+      nayta({ nimi, puhelin }, ["nimi", "puhelin"]);
+      return;
+    }
+    // Varmasti väärä numero: 2 s "tarkistus", sitten "Numero ei käytössä".
+    if (puhelin) {
+      setVirheet({});
+      setTarkistetaan(true);
+      if (tarkistusAjastin.current) clearTimeout(tarkistusAjastin.current);
+      tarkistusAjastin.current = setTimeout(() => {
+        setTarkistetaan(false);
+        nayta({ puhelin }, ["puhelin"]);
+      }, PHONE_CHECK_MS);
       return;
     }
     setVirheet({});
@@ -304,9 +321,8 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
       );
       setResult(priceStr);
       setResultHarja(price.harja);
-      setResultHarjaErikseen(price.harjaErikseen);
-      // Eerik 26.10.2026 (yöajon kysymys 13): hinta myös kotitalousvähennyksen jälkeen.
-      setResultAfterDeduction(formatPriceRange({ min: hintaVahennyksenJalkeen(price.min), max: hintaVahennyksenJalkeen(price.max) }));
+      // Kotitalousvähennys alennuksena, hintavälin keskikohdasta (Eki 31.10.2026).
+      setResultVahennys(vahennysTeksti(price.min, price.max));
       trackEvent("laskuri_valmis", { palvelu: service });
     } catch (err) {
       setLahetysVirhe(err ?? new Error());
@@ -320,31 +336,25 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
   return (
     <div ref={topRef} className="bg-card rounded-3xl shadow-2xl border border-border/60 p-6 md:p-10 max-w-2xl mx-auto scroll-mt-28">
       {result ? (
-        <div className="text-center py-4">
-          <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-5">
-            <Check className="w-7 h-7 text-accent-ink" />
+        // Tulos (Eki 31.10.2026): hinta isolla, vähennys alennuksena, harjatiiviste pelkkänä hintana, vähän tekstiä.
+        <div className="text-center py-2" data-tulos>
+          <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
+            <Check className="w-6 h-6 text-accent-ink" />
           </div>
-          <p className="text-muted-foreground mb-2">Hinta-arvio</p>
-          <p className="text-4xl md:text-5xl font-bold text-foreground font-heading mb-4">{result}</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Hinta-arvio</p>
+          <p className="mt-1 font-heading text-4xl font-extrabold leading-tight text-foreground sm:text-5xl md:text-6xl">{result}</p>
           {resultHarja > 0 && (
-            <div className="mb-4 text-muted-foreground">
-              <p>
-                Sisältää harjatiivisteen: <strong className="text-foreground">{resultHarja.toLocaleString("fi-FI")} €</strong>
-              </p>
-              <p className="text-sm mt-1">Harjatiivisteen asennus ilman pinnoitusta: {resultHarjaErikseen.toLocaleString("fi-FI")} €</p>
+            <p className="mt-2 text-muted-foreground">
+              Sisältää harjatiivisteen <strong className="text-foreground">{resultHarja.toLocaleString("fi-FI")} €</strong>
+            </p>
+          )}
+          {resultVahennys && (
+            <div className="mx-auto mt-6 inline-flex flex-col items-center rounded-2xl bg-[#ffd23f] px-6 py-3 text-navy shadow-sm sm:flex-row sm:gap-3">
+              <span className="text-sm font-semibold">Kotitalousvähennys</span>
+              <span className="font-heading text-2xl font-extrabold sm:text-3xl">{resultVahennys}</span>
             </div>
           )}
-          {resultAfterDeduction && (
-            <div className="mb-4">
-              <p className="text-muted-foreground">
-                Kotitalousvähennyksen jälkeen: <strong className="text-foreground">{resultAfterDeduction}</strong>
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">{VAHENNYS_OMAVASTUU_HUOMAUTUS}</p>
-            </div>
-          )}
-          <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
-            Soitamme sinulle viimeistään seuraavana arkipäivänä. Tarkan hinnan saat, kun olemme käyneet paikalla.
-          </p>
+          <p className="mt-6 text-muted-foreground">Soitamme sinulle viimeistään seuraavana arkipäivänä.</p>
         </div>
       ) : !service ? (
         <div>
@@ -556,15 +566,25 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
                       value={phone}
                       onChange={(v) => {
                         setPhone(v);
-                        if (virheet.puhelin) setVirheet((e) => ({ ...e, puhelin: phoneErrorMessage(v) }));
+                        // Virhe katoaa, kun numero on kunnossa; sääntöä ei paljasteta kirjoittaessa.
+                        if (virheet.puhelin && !laskurinPuhelinVirhe(v)) setVirheet((e) => ({ ...e, puhelin: null }));
                       }}
                       error={virheet.puhelin}
+                      disabled={tarkistetaan}
                       ariaLabel="Puhelinnumero"
                     />
                     <HoneypotField value={website} onChange={setWebsite} />
                     {lahetysVirhe !== null && <LahetysVirhe virhe={lahetysVirhe} />}
-                    <button type="submit" disabled={submitting} className="btn-hero !py-4 !text-base w-full disabled:opacity-60">
-                      {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Näytä hinta-arvio"}
+                    <button type="submit" disabled={submitting || tarkistetaan} className="btn-hero !py-4 !text-base w-full disabled:opacity-60">
+                      {submitting ? (
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                      ) : tarkistetaan ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" /> {PHONE_CHECKING_LABEL}
+                        </>
+                      ) : (
+                        "Näytä hinta-arvio"
+                      )}
                     </button>
                     <FormPrivacyNote />
                   </form>

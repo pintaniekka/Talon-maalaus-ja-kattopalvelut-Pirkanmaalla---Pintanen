@@ -27,9 +27,9 @@ const general = fmtRange(pinnoitusPrices.general.min, pinnoitusPrices.general.ma
 const priceFactors = [
   { title: "Katon koko", description: "Isoon kattoon kuluu enemmän maalia ja työtä. Neliöhinta kuitenkin laskee, kun katto kasvaa." },
   { title: "Katon jyrkkyys", description: "Jyrkällä katolla työ on hitaampaa ja turvavälineitä tarvitaan enemmän." },
-  { title: "Katon muoto", description: "Harjat, jiirit ja läpiviennit lisäävät työtä." },
-  { title: "Talon korkeus", description: "Jyrkällä tai korkealla katolla työ on hitaampaa." },
-  { title: "Tiilien kunto", description: "Jos tiiliä on paljon rikki, niiden vaihtamiseen menee aikaa." },
+  { title: "Katon muoto", description: "Mitä useammasta osasta katto koostuu, sitä enemmän on harjoja, jiirejä ja läpivientejä ja sitä enemmän työtä." },
+  { title: "Sammaleen määrä", description: "Paksu sammalkerros vie pesussa enemmän aikaa kuin ohut." },
+  { title: "Tiilen kunto", description: "Huokoinen tiili imee paljon enemmän maalia. Jos tiiliä on paljon rikki, niiden vaihtamiseen menee myös aikaa." },
 ];
 
 const offerChecklist = [

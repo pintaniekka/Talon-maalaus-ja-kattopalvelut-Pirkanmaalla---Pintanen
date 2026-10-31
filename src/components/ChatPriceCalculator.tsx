@@ -136,7 +136,7 @@ interface Tulos {
   hinta: string;
   /** Harjatiivisteen euromäärä, jos se on hinnassa. */
   harja?: number;
-  /** Kotitalousvähennys alennuksena: "noin −1 240 €". */
+  /** Kotitalousvähennys alennuksena: "~1 240 €". */
   vahennys: string;
   cta: { to: string; label: string };
 }
@@ -153,9 +153,9 @@ const TulosKortti = ({ tulos }: { tulos: Tulos }) => (
         </p>
       )}
     </div>
-    <div className="flex flex-wrap items-baseline justify-between gap-x-3 bg-[#13294d] px-4 py-3">
-      <span className="text-sm text-white/85">Kotitalousvähennys</span>
-      <span className="font-heading text-2xl font-extrabold text-white">{tulos.vahennys}</span>
+    <div className="bg-[#13294d] px-4 py-3">
+      <p className="text-sm text-white/85">Kotitalousvähennys</p>
+      <p className="mt-1 font-heading text-3xl font-extrabold leading-tight text-white">{tulos.vahennys}</p>
     </div>
     <div className="px-4 pb-4 pt-3">
       <p className="mb-3 text-sm text-white/85">Soitamme sinulle viimeistään seuraavana arkipäivänä.</p>

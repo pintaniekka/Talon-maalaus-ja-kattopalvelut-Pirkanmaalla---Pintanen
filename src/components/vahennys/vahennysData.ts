@@ -33,7 +33,7 @@ export const VAHENNYS_TYON_OSUUS = 0.8;
  */
 /**
  * Hinta-arvion vähennys "alennuksena" (Eki 31.10.2026): vähennys hintavälin keskikohdasta, sama kaava kuin
- * hintaVahennyksenJalkeen, pyöristettynä kymmeneen euroon. Näytetään muodossa "noin −1 240 €".
+ * hintaVahennyksenJalkeen, pyöristettynä kymmeneen euroon. Näytetään muodossa "~1 240 €".
  */
 export const vahennysArvio = (min: number, max: number): number => {
   const keski = (min + max) / 2;
@@ -41,8 +41,8 @@ export const vahennysArvio = (min: number, max: number): number => {
   return Math.round(vahennys / 10) * 10;
 };
 
-/** "noin −1 240 €" (miinusmerkki U+2212). */
-export const vahennysTeksti = (min: number, max: number) => `noin \u2212${vahennysArvio(min, max).toLocaleString("fi-FI")} €`;
+/** "~1 240 €". */
+export const vahennysTeksti = (min: number, max: number) => `~${vahennysArvio(min, max).toLocaleString("fi-FI")} €`;
 
 export const hintaVahennyksenJalkeen = (hinta: number): number => {
   const tyo = hinta * VAHENNYS_TYON_OSUUS;

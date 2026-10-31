@@ -349,9 +349,9 @@ const PriceWizard = ({ initialService = null }: PriceWizardProps) => {
             </p>
           )}
           {resultVahennys && (
-            <div className="mx-auto mt-6 inline-flex flex-col items-center rounded-2xl bg-[#ffd23f] px-6 py-3 text-navy shadow-sm sm:flex-row sm:gap-3">
-              <span className="text-sm font-semibold">Kotitalousvähennys</span>
-              <span className="font-heading text-2xl font-extrabold sm:text-3xl">{resultVahennys}</span>
+            <div className="mx-auto mt-6 inline-flex flex-col items-center rounded-2xl bg-[#ffd23f] px-6 py-3 text-navy shadow-sm">
+              <span className="text-sm font-semibold uppercase tracking-wide">Kotitalousvähennys</span>
+              <span className="font-heading text-4xl font-extrabold leading-tight sm:text-5xl md:text-6xl">{resultVahennys}</span>
             </div>
           )}
           <p className="mt-6 text-muted-foreground">Soitamme sinulle viimeistään seuraavana arkipäivänä.</p>

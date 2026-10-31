@@ -163,10 +163,10 @@ describe("etusivun chat-hintalaskuri (ChatPriceCalculator)", () => {
     expect(reply).not.toContain("Tarkan hinnan saat");
     expect(reply).not.toContain("Omavastuu");
     expect(screen.queryByRole("button", { name: "Lähetä ja näytä hinta-arvio" })).not.toBeInTheDocument();
-    // Sama vähennys kuin /hintalaskuri-sivulla: alennuksena hintavälin keskikohdasta, "noin −X €".
+    // Sama vähennys kuin /hintalaskuri-sivulla: alennuksena hintavälin keskikohdasta, "~X €".
     const price = calculateRoofPrice(200, "normaali");
     expect(reply).toContain("Kotitalousvähennys");
-    expect(reply).toContain(shown(`noin \u2212${vahennysArvio(price.min, price.max).toLocaleString("fi-FI")} €`));
+    expect(reply).toContain(shown(`~${vahennysArvio(price.min, price.max).toLocaleString("fi-FI")} €`));
     expect(screen.getByRole("link", { name: "Pyydä ilmainen kuntotarkastus" })).toHaveAttribute("href", "/ilmainen-katon-kuntotarkastus/");
   });
 
@@ -397,10 +397,10 @@ describe("/hintalaskuri-sivu", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(screen.getByText(shown(formatPriceRange(price)))).toBeInTheDocument();
     // Vähennys alennuksena keskikohdasta (Eki 31.10.2026): 200 m² normaali = 3 600–4 200 €, keskikohta 3 900 €,
-    // työn osuus 80 % ja siitä 40 % = 1 248 € → noin −1 250 €.
+    // työn osuus 80 % ja siitä 40 % = 1 248 € → ~1 250 €.
     expect(vahennysArvio(price.min, price.max)).toBe(1250);
     expect(screen.getByText("Kotitalousvähennys")).toBeInTheDocument();
-    expect(screen.getByText(shown("noin \u2212" + (1250).toLocaleString("fi-FI") + " €"))).toBeInTheDocument();
+    expect(screen.getByText(shown("~" + (1250).toLocaleString("fi-FI") + " €"))).toBeInTheDocument();
     expect(document.querySelector("[data-tulos]")?.textContent).not.toMatch(/Omavastuu/);
     expect(vahennysArvio(9000, 11000)).toBe(2100); // enimmäismäärä
     // 40 % työn osuudesta (80 % hinnasta), enintään 2 100 €; omavastuuta ei vähennetä (Eerik 26.10.2026).

@@ -58,7 +58,7 @@ const LIMITS: ReadonlyArray<[keyof ContactFormPayload, number, string]> = [
 ];
 
 // Sama tarkistus kuin aiemmin käytetyssä zod-kirjastossa (z.string().email()).
-const EMAIL_RE = /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9-]*\.)+[A-Z]{2,}$/i;
+export const EMAIL_RE = /^(?!\.)(?!.*\.\.)([A-Z0-9_'+\-.]*)[A-Z0-9_+-]@([A-Z0-9][A-Z0-9-]*\.)+[A-Z]{2,}$/i;
 
 /**
  * Tarkistaa lomakkeen tiedot ja palauttaa siistityn kopion. Ensimmäisestä virheestä heitetään

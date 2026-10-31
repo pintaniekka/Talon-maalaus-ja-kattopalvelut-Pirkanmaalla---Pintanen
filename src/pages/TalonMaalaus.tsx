@@ -26,7 +26,7 @@ import { wallTestimonials } from "@/data/testimonialsData";
 import { maalausFAQ } from "@/data/faqData";
 import { HERO_BASE, staticSeo } from "@/data/seo";
 import { maalausPrices } from "@/data/prices";
-import { maalausTyovaiheet, maalausLyhyesti, MAALAUS_HINTA } from "@/data/tyovaiheet";
+import { maalausTyovaiheet, maalausLyhyesti } from "@/data/tyovaiheet";
 
 
 /** /talon-maalaus-pirkanmaa: päätehtävä "talon maalaus Pirkanmaa", rinnakkaissanat ulkomaalaus ja julkisivumaalaus (korjaus 2). */
@@ -39,7 +39,7 @@ const TalonMaalaus = () => {
       <ServiceSchema name="Talon ulkomaalaus" alternateNames={["Talon maalaus", "Julkisivumaalaus", "Huoltomaalaus", "Puutalon maalaus"]} area="Pirkanmaa" areaType="AdministrativeArea" description={seo.description} priceRange={maalausPrices.general} />
 
       <PageHero
-        eyebrow="Talon maalaus · Pirkanmaa"
+        eyebrow="Julkisivumaalaus · Pirkanmaa"
         title={
           <>
             Talon maalaus <span className="text-accent-ink">Pirkanmaalla</span>
@@ -47,8 +47,8 @@ const TalonMaalaus = () => {
         }
         lead={
           <>
-            Maalaamme puutalojen ulkoseinät. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Hinta on yleensä{" "}
-            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, työ kestää 3–7 päivää ja takuu on 2 vuotta. Arviokäynti on ilmainen.
+            Maalaamme talojen julkisivut Pirkanmaalla. Seinät pestään homepesuaineella, irtoava maali kaavitaan, paljaat kohdat
+            pohjamaalataan ja pintamaali maalataan pensselillä. Talon maalaus ja julkisivumaalaus tarkoittavat samaa työtä.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}

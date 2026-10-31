@@ -221,14 +221,14 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Kosketuksella napautus pysäyttää molemmat rivit ja napautus muualle jatkaa (hiiri hoverilla CSS:llä).
+  // Arvostelun painaminen pysäyttää molemmat rivit ja painallus muualle jatkaa (hiiri myös kortin päällä CSS:llä).
   const [pysaytetty, setPysaytetty] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   useEffect(() => {
     const onDown = (e: PointerEvent) => {
-      if (e.pointerType === "mouse") return;
-      const inside = sectionRef.current?.contains(e.target as Node);
-      setPysaytetty(Boolean(inside));
+      // Pysähtyy vain arvostelukorttia painamalla; painallus muualle (myös lohkon sisällä) jatkaa.
+      const kortti = (e.target as Element | null)?.closest?.(".kortti");
+      setPysaytetty(Boolean(kortti && sectionRef.current?.contains(kortti)));
     };
     document.addEventListener("pointerdown", onDown);
     return () => document.removeEventListener("pointerdown", onDown);

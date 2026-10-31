@@ -36,7 +36,7 @@ export const Stars = ({ stars }: { stars: number }) => (
  * Pitkä arvostelu leikataan viiteen riviin ja avataan kokonaisena ikkunaan (Eerik 28.10.2026: kortit
  * samankorkuisia kahdella rivillä, pitkät arvostelut silti luettavissa sanasta sanaan).
  */
-export const TestimonialCard = ({ name, stars, text }: { name: string; stars: number; text: string }) => {
+export const TestimonialCard = ({ name, stars, text, kopio = false }: { name: string; stars: number; text: string; kopio?: boolean }) => {
   const isLong = text.length > LONG_TEXT_THRESHOLD;
   const [open, setOpen] = useState(false);
   // Ikkuna pysyy mukana ensimmäisen avauksen jälkeen, jotta sulkemisanimaatio ja fokuksen palautus toimivat.
@@ -58,6 +58,7 @@ export const TestimonialCard = ({ name, stars, text }: { name: string; stars: nu
         <>
           <button
             type="button"
+            tabIndex={kopio ? -1 : undefined}
             onClick={() => {
               setAvattu(true);
               setOpen(true);
@@ -173,9 +174,10 @@ const MarqueeRow = ({ data, reverse = false, reducedMotion, mounted, durationSec
       >
         {items.map(({ t, hidden }, i) =>
           hidden ? (
-            // inert: kopioiden napit eivät saa fokusta (axe: fokusoitava sisältö aria-hidden-säiliössä).
-            <div key={i} className="flex" aria-hidden="true" {...({ inert: "" } as Record<string, string>)}>
-              <TestimonialCard {...t} />
+            // Kopioiden napit ovat tabIndex -1 (axe: ei tabulaattoria aria-hidden-säiliössä), mutta ne toimivat
+            // hiirellä ja kosketuksella; inert esti "Lue koko arvostelu" -napin toiminnan (31.10.2026).
+            <div key={i} className="flex" aria-hidden="true">
+              <TestimonialCard {...t} kopio />
             </div>
           ) : (
             <TestimonialCard key={i} {...t} />
@@ -212,7 +214,8 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
     [data]
   );
 
-  const reducedMotion = useReducedMotion();
+  // Kokeilu (31.10.2026): "Vähennä liikettä" ohitetaan, karuselli liikkuu aina ja pysähtyy hoverilla/kosketuksella/fokuksella.
+  const reducedMotion = false;
 
   // Esirenderöintiin ja ensimmäiseen renderöintiin vain yksi sarja arvosteluja (V13: kopiot
   // paisuttivat HTML:ää ja toistivat saman tekstin neljästi). Saumattoman loopin kopiot
@@ -220,10 +223,27 @@ const TestimonialsMarquee = ({ testimonials, title, durationSec }: TestimonialsM
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
+  // Arvostelun painaminen pysäyttää molemmat rivit ja painallus muualle jatkaa (hiiri myös kortin päällä CSS:llä).
+  const [pysaytetty, setPysaytetty] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    // click, ei pointerdown: sormella vieritys ei tuota clickiä, joten se ei pysäytä. Kopiokortit ovat inert,
+    // joten osuma voi tulla vain rivin säiliöön (.marquee-viewport); se lasketaan arvosteluksi.
+    const onDown = (e: MouseEvent) => {
+      // Pysähtyy vain arvostelukorttia painamalla; painallus muualle (myös lohkon sisällä) jatkaa.
+      const kortti = (e.target as Element | null)?.closest?.(".kortti, .marquee-viewport");
+      setPysaytetty(Boolean(kortti && sectionRef.current?.contains(kortti)));
+    };
+    document.addEventListener("click", onDown);
+    return () => document.removeEventListener("click", onDown);
+  }, []);
+
   const headingText = title === undefined ? "Mitä asiakkaat sanovat meistä?" : title;
 
   return (
     <section
+      ref={sectionRef}
+      data-pysaytetty={pysaytetty}
       data-arvostelu="karuselli"
       className={`overflow-hidden osio ${headingText ? "section-padding pt-28 md:pt-16" : "py-8"}`}
       aria-label="Asiakasarvostelut"

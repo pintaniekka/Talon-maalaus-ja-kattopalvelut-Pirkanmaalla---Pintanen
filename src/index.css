@@ -445,15 +445,13 @@
   will-change: transform;
 }
 
-.animate-marquee:hover,
-.animate-marquee:focus-within {
-  animation-play-state: paused;
+/* Molemmat rivit pysähtyvät yhdessä: kortin päällä, fokuksella tai kortin painalluksella (data-pysaytetty, Eerik 31.10.2026). */
+@media (hover: hover) {
+  [data-arvostelu="karuselli"]:has(.marquee-viewport:hover) .animate-marquee { animation-play-state: paused; }
 }
-
-/* Reduced motion: pysäytetään animaatio mutta sallitaan käyttäjän selata vaakasuunnassa */
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; transform: none; }
-  .marquee-viewport { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+[data-arvostelu="karuselli"]:focus-within .animate-marquee,
+[data-arvostelu="karuselli"][data-pysaytetty="true"] .animate-marquee {
+  animation-play-state: paused;
 }
 
 .marquee-viewport::-webkit-scrollbar { display: none; }

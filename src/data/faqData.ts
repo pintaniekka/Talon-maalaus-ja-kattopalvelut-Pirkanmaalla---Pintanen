@@ -20,6 +20,10 @@ interface FAQItem {
 /** Kotitalousvähennyksen vastaus samassa muodossa joka sarjassa. */
 export const KOTITALOUSVAHENNYS_VASTAUS = `Kyllä. ${KOTITALOUSVAHENNYS_LAUSE} Työn osuus on laskussa eriteltynä. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.`;
 
+/** Pääsivuilla vähennyksen sääntö on jo omassa lohkossaan, joten UKK vastaa lyhyesti (auditointi 31.10.2026, T2). */
+export const KOTITALOUSVAHENNYS_LYHYT_VASTAUS =
+  'Kyllä. Saat vähennyksen työn osuudesta, ja työn osuus on laskussa eriteltynä. Lue lisää sivulta <a href="/kotitalousvahennys/">kotitalousvähennys</a>.';
+
 /** Ydinvastaukset, jotka ovat sekä palvelun pääsivulla että kaupunkisivuilla (UKK-uudistus 30.10.2026). */
 export const PINNOITUS_KESTO_VASTAUS =
   'Peruskohteen katto valmistuu yleensä <strong>2–3 työpäivässä</strong>, suuri tai jyrkkä katto 2–4. Pesun jälkeen katto saa kuivua ennen maalausta.';
@@ -106,7 +110,7 @@ export const pinnoitusFAQ: FAQItem[] = [
   { question: 'Kuinka kauan työ kestää?', answer: PINNOITUS_KESTO_VASTAUS },
   {
     question: 'Saako tiilikaton pinnoituksesta kotitalousvähennystä?',
-    answer: KOTITALOUSVAHENNYS_VASTAUS,
+    answer: KOTITALOUSVAHENNYS_LYHYT_VASTAUS,
   },
   PINNOITUS_TAKUU_FAQ,
   {
@@ -179,7 +183,7 @@ export const maalausFAQ: FAQItem[] = [
   { question: 'Kuinka kauan talon maalaus kestää?', answer: MAALAUS_KESTO_VASTAUS },
   {
     question: 'Saako talon maalauksesta kotitalousvähennystä?',
-    answer: KOTITALOUSVAHENNYS_VASTAUS,
+    answer: KOTITALOUSVAHENNYS_LYHYT_VASTAUS,
   },
   MAALAUS_TAKUU_FAQ,
   {
@@ -200,11 +204,11 @@ export const maalausFAQ: FAQItem[] = [
   MAALAUS_PENSSELI_FAQ,
   {
     question: 'Maalaatteko hirsitaloja ja rintamamiestaloja?',
-    answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Työvaiheet ovat samat: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
+    answer: 'Kyllä. Maalaamme puuverhotut talot, rintamamiestalot ja hirsitalot. Hirsitaloihin teemme kuullotteen tai peittomaalin. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.',
   },
   {
     question: 'Maalaatteko myös mökkejä ja piharakennuksia?',
-    answer: 'Kyllä. Mökissä ja piharakennuksessa työvaiheet ovat samat kuin talossa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Hinta riippuu koosta.',
+    answer: 'Kyllä. Maalaamme myös mökit, autotallit ja autokatokset samoilla työvaiheilla kuin talon. Hinta riippuu koosta.',
   },
   MAALAUS_SADE_FAQ,
   { question: 'Milloin pääsette maalaamaan?', answer: MAALAUS_KAYNTI_VASTAUS },

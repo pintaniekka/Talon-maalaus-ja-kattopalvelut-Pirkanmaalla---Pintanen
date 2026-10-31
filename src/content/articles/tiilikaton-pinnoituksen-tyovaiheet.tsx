@@ -9,7 +9,7 @@ const faq = [
   },
   {
     question: "Pitääkö työn aikana olla kotona?",
-    answer: "Arviokäynnillä kyllä, koska käymme katon ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko. Riittää, että saamme käyttää sähköä ja vettä.",
+    answer: "Kuntotarkastuksessa kyllä, koska käymme katon ja tarjouksen läpi yhdessä. Työn aikana ei ole pakko. Riittää, että saamme käyttää sähköä ja vettä.",
   },
   {
     question: "Mitä tapahtuu, jos sovittuna päivänä sataa?",

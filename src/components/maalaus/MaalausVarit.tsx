@@ -42,7 +42,7 @@ const MaalausVarit = ({ cityName, citySlug }: { cityName: string; citySlug: stri
               to="/talon-maalaus-pirkanmaa/#varin-vaihto"
               className="mt-5 inline-flex items-center gap-1.5 font-semibold text-accent-ink hover:underline"
             >
-              Lue lisää
+              Lue lisää talon värin vaihdosta
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

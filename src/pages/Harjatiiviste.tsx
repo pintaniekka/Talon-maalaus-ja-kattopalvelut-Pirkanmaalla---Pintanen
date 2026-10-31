@@ -48,12 +48,12 @@ const vaiheet: Tyovaihe[] = [
 ];
 
 const faq = [
-  { question: "Mikä harjatiiviste on?", answer: "Harjatiiviste on tiiviste, joka asennetaan harjapuun yli ja harjatiilen alle. Se vähentää tuiskulumen, veden ja roskien pääsyä aluskatteelle, mutta päästää ilman läpi." },
+  { question: "Mikä harjatiiviste on?", answer: "Tiiviste harjapuun yli ja harjatiilen alle. Se suojaa aluskatetta ja päästää ilman läpi." },
   { question: "Mitä harjatiivisteen asennus maksaa?", answer: `Pinnoituksen yhteydessä ${hinta.pinnoituksenYhteydessa} euroa metriltä ja erikseen tilattuna ${hinta.erikseen} euroa metriltä. Hinta lasketaan harjan pituuden mukaan, ja se näkyy tarjouksessa eriteltynä.` },
   { question: "Asennatteko harjatiivisteen pinnoituksen yhteydessä?", answer: "Kyllä, jos se puuttuu tai on rikki. Olemme asentaneet harjatiivisteitä pinnoituksen yhteydessä esimerkiksi Kangasalla. Tarve katsotaan kuntotarkastuksessa, ja se kirjataan tarjoukseen." },
   { question: "Voiko harjatiivisteen tilata ilman pinnoitusta?", answer: `Voi. Erikseen tilattuna hinta on ${hinta.erikseen} euroa metriltä. Kysy tarjous, niin katsomme harjan samalla käynnillä.` },
-  { question: "Mistä tiedän, puuttuuko harjatiiviste?", answer: "Harjatiilen alta näkyy rako. Jos ullakolla on talven jälkeen lunta tai vesijälkiä harjan alla, aluskate on jo rikki. Varmin tapa on antaa meidän katsoa harja ja aluskate kuntotarkastuksessa." },
-  { question: "Millainen tiiviste asennetaan?", answer: "Hengittävä harjatiiviste, jonka alumiinireunat kiinnittyvät tiiliin butyyliliimalla. Väri valitaan katon mukaan: musta, ruskea tai tiilenpunainen." },
+  { question: "Mistä tiedän, puuttuuko harjatiiviste?", answer: "Harjatiilen alta näkyy rako. Varmin tapa on antaa meidän katsoa harja kuntotarkastuksessa." },
+  { question: "Millainen tiiviste asennetaan?", answer: "Hengittävä harjatiiviste alumiinireunoilla. Värit ovat musta, ruskea ja tiilenpunainen." },
   { question: "Menevätkö harjatiilet rikki asennuksessa?", answer: "Eivät. Harjatiilet säilyvät ehjinä harjatiivisteen asennuksessa. Jos jokin harjatiili on jo valmiiksi rikki, vaihdamme sen samalla." },
 ];
 

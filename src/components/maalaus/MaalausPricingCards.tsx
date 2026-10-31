@@ -11,7 +11,7 @@ const FEATURED_RIBBON = 'Yleisin talon koko';
 /** Hintakortit säilyvät sellaisinaan (sääntö). Sisältölista noudattaa sovittua sanastoa. */
 const pricingIncludes = ['Homepesu', 'Irtoavan maalin kaavinta', 'Pohjamaali paljaisiin kohtiin', 'Pintamaali pensselillä'];
 
-const MaalausPricingCards = ({ cityName = 'Pirkanmaa', cityIn, calculatorHref = '/hintalaskuri/?palvelu=maalaus', calculatorLabel, otsikko }: { cityName?: string; cityIn?: string; calculatorHref?: string; calculatorLabel?: string; otsikko?: string }) => {
+const MaalausPricingCards = ({ cityName = 'Pirkanmaa', cityIn, calculatorHref = '/hintalaskuri/?palvelu=maalaus', calculatorLabel, otsikko, hintasivulle }: { cityName?: string; cityIn?: string; calculatorHref?: string; calculatorLabel?: string; otsikko?: string; hintasivulle?: boolean }) => {
   return (
     <section className="section-padding osio">
       <div className="section-container max-w-5xl mx-auto">
@@ -81,6 +81,15 @@ const MaalausPricingCards = ({ cityName = 'Pirkanmaa', cityIn, calculatorHref = 
 
         <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto">
           Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan kerromme arviokäynnin jälkeen kirjallisessa tarjouksessa.
+          {hintasivulle && (
+            <>
+              {" "}
+              <Link to="/talon-maalaus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
+                Katso toteutuneet hinnat ja hintaesimerkit
+              </Link>
+              .
+            </>
+          )}
         </p>
 
         <div className="text-center mt-6">

@@ -19,9 +19,11 @@ interface PinnoitusPricingCardsProps {
   calculatorLabel?: string;
   /** Oma otsikko (kaupunkisivulla hinta-H2 synonyymeillä, Eki 31.10.2026). */
   otsikko?: string;
+  /** Kaupunkisivulla linkki hintasivun toteutuneisiin hintoihin (auditointi 31.10.2026, L3). */
+  hintasivulle?: boolean;
 }
 
-const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvelu=pinnoitus", calculatorLabel, otsikko }: PinnoitusPricingCardsProps) => {
+const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvelu=pinnoitus", calculatorLabel, otsikko, hintasivulle }: PinnoitusPricingCardsProps) => {
   return (
     <section className="section-padding osio">
       <div className="section-container max-w-5xl mx-auto">
@@ -85,6 +87,15 @@ const PinnoitusPricingCards = ({ cityIn, calculatorHref = "/hintalaskuri/?palvel
 
         <p className="text-center text-muted-foreground mt-8 max-w-2xl mx-auto">
           Työn osuudesta saat kotitalousvähennyksen. Tarkan hinnan kerromme kuntotarkastuksen jälkeen kirjallisessa tarjouksessa.
+          {hintasivulle && (
+            <>
+              {" "}
+              <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/" className="text-primary font-semibold hover:underline">
+                Katso toteutuneet hinnat ja hintaesimerkit
+              </Link>
+              .
+            </>
+          )}
         </p>
 
         <div className="text-center mt-6">

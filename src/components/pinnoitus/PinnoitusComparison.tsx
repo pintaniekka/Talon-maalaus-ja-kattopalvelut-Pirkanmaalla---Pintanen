@@ -27,7 +27,7 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
                   Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rapautuneet. Pinnoitus maksaa yleensä {PINNOITUS_HINTA}.
                   Uusi katto maksaa yleensä 15 000–30 000 €.
                 </p>
-                <p>Katsomme katon, aluskatteen ja ympäristön arviokäynnillä. Jos pinnoitus ei riitä, sanomme sen.</p>
+                <p>Katsomme katon, aluskatteen ja ympäristön kuntotarkastuksessa. Jos pinnoitus ei riitä, sanomme sen.</p>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-4">
@@ -36,7 +36,7 @@ const PinnoitusComparison = ({ cityIn }: { cityIn?: string }) => {
                   className="inline-flex items-center justify-center px-8 py-4 rounded-xl font-semibold text-accent-foreground transition-colors hover:brightness-110"
                   style={{ backgroundColor: 'hsl(var(--accent-strong))' }}
                 >
-                  Pyydä ilmainen arviokäynti
+                  Pyydä ilmainen kuntotarkastus
                 </Link>
                 {/* Linkki artikkeliin vasta julkaisupäivästä: jonossa oleva artikkeli on noindex-kuori (osa 2, luku 6). */}
                 <JulkaistuArtikkeli slug={ARTIKKELI_SLUG}>

@@ -43,7 +43,7 @@ const sisalto: Record<ProjectService, Sisalto> = {
   maalaus: {
     otsikko: (cityIn) => `Talon värin voi vaihtaa maalauksessa${cityIn ? ` ${cityIn}` : ""}`,
     kappaleet: [
-      "Peittävä maali peittää vanhan värin. Työvaiheet ovat samat kuin muussa maalauksessa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
+      "Peittävä maali peittää vanhan värin. Työvaiheet ovat samat kuin muussa maalauksessa.",
       "Vaalea maali peittää tumman pohjan heikommin kuin tumma vaalean. Arviokäynnillä katsomme, riittääkö peittävyys, ja kirjaamme värin ja maalin tarjoukseen. Värikartat ovat Tikkurilan sivuilla ja rautakaupoissa.",
     ],
     varit: [],

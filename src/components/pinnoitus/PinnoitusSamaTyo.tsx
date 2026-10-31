@@ -25,8 +25,7 @@ const PinnoitusSamaTyo = ({ cityIn }: { cityIn?: string }) => (
         />
         <p>
           Asiakkaat kysyvät meiltä katon maalausta, katon pinnoitusta, tiilikaton maalausta ja kattomaalausta{cityIn ? ` ${cityIn}` : ""}. Kaikki
-          tarkoittavat samaa työtä. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin
-          kattomaalilla.
+          tarkoittavat samaa työtä.
         </p>
         <p>
           Tiilikaton pesu ja pinnoitus kuuluvat yhteen. Teemme pesun aina pinnoituksen yhteydessä, ja se on työn ensimmäinen vaihe. Jos tiilen pinta on kulunut,

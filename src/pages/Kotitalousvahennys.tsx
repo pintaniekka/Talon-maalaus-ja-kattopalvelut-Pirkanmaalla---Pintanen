@@ -28,7 +28,7 @@ const faqItems = [
   {
     // Ei samaa kysymystä kuin sivun H2 (laaja auditointi 30.10.2026, luku 5).
     question: "Muuttuuko kotitalousvähennys vuonna 2027?",
-    answer: `Ei. ${KOTITALOUSVAHENNYS} Verohallinnon mukaan määrä ja omavastuu ovat samat molempina vuosina.`,
+    answer: "Ei. Verohallinnon mukaan määrä ja omavastuu ovat samat vuosina 2026 ja 2027.",
   },
   {
     question: "Saako tiilikaton pinnoituksesta kotitalousvähennyksen?",

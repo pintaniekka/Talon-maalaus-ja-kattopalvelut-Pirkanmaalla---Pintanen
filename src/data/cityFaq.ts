@@ -1,4 +1,4 @@
-import { type CityData, allCities, getCityBySlug, hasMaalausPage, hasPinnoitusPage } from "./cityData";
+import { type CityData, allCities, getCityBySlug } from "./cityData";
 import { getProjectItems, type ProjectService } from "./projects";
 import { getCityLocalFacts } from "./cityLocalFacts";
 import { cityNeighborhoods } from "./cityNeighborhoods";
@@ -155,16 +155,12 @@ const varinVaihto = (city: CityData, service: ProjectService): FAQItem[] => {
  */
 const naapurikunnat = (city: CityData, service: ProjectService): FAQItem[] => {
   const katto = service === "pinnoitus";
+  // Nimet ilman linkkejä (auditointi 31.10.2026, L4): samat kunnat linkitetään sivulla jo NaapuriKunnat-palkissa.
   const linkit = (cityNeighbors[city.slug] ?? [])
     .filter((slug) => slug !== "tampere")
     .map((slug) => getCityBySlug(slug))
     .filter((c): c is CityData => !!c)
-    .map((c) => {
-      const href = katto
-        ? hasPinnoitusPage(c.slug) ? `/tiilikaton-pinnoitus-${c.slug}/` : `/maalauspalvelut-${c.slug}/`
-        : hasMaalausPage(c.slug) ? `/talon-maalaus-${c.slug}/` : `/maalauspalvelut-${c.slug}/`;
-      return `<a href="${href}">${c.name}</a>`;
-    });
+    .map((c) => c.name);
   if (linkit.length === 0) return [];
   return [
     {

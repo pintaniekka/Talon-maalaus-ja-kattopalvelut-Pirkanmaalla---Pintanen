@@ -148,7 +148,7 @@ const HinnatTalonMaalaus = () => {
         </div>
       </section>
 
-      <HintaTekijatLohko title="Mistä talon maalauksen hinta syntyy?" intro="Hintaan vaikuttaa viisi asiaa." factors={priceFactors} />
+      <HintaTekijatLohko title="Mistä talon maalauksen hinta syntyy?" intro="Hintaan vaikuttaa neljä asiaa." factors={priceFactors} />
 
       <MaalausComparison />
 

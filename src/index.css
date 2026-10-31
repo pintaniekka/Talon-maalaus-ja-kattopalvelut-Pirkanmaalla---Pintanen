@@ -443,11 +443,8 @@
   will-change: transform;
 }
 
-/* Molemmat rivit pysähtyvät yhdessä: kortin päällä, fokuksella tai kortin painalluksella (data-pysaytetty, Eerik 31.10.2026). */
-@media (hover: hover) {
-  [data-arvostelu="karuselli"]:has(.marquee-viewport:hover) .animate-marquee { animation-play-state: paused; }
-}
-[data-arvostelu="karuselli"]:focus-within .animate-marquee,
+/* Molemmat rivit pysähtyvät yhdessä: näppäimistöfokuksella tai arvostelun klikkauksella (toggle) (data-pysaytetty, Eerik 31.10.2026). */
+[data-arvostelu="karuselli"]:has(:focus-visible) .animate-marquee,
 [data-arvostelu="karuselli"][data-pysaytetty="true"] .animate-marquee {
   animation-play-state: paused;
 }

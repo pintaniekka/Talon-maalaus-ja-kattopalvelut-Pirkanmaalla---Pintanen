@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { Send, Check, Loader2 } from "lucide-react";
 import { Phone, Mail, User } from "@/components/icons/BrandIcons";
-import { toast } from '@/hooks/use-toast';
 import { getStorageUrl } from '@/lib/storage';
 import { VASTAUSLUPAUS } from '@/data/company';
-import { submitContactForm, formErrorMessage } from '@/lib/contactForm';
-import { isValidFinnishMobile, PHONE_ERROR_MESSAGE } from '@/lib/phoneValidation';
+import { submitContactForm } from '@/lib/contactForm';
+import { formatToInternational, phoneErrorMessage } from '@/lib/phoneValidation';
+import { VIESTI, nimiVirhe, sahkopostiVirhe, fokusoiEnsimmainen } from '@/lib/lomakeViestit';
+import KenttaVirhe from '@/components/lomake/KenttaVirhe';
+import LomakeIlmoitus, { LahetysVirhe } from '@/components/lomake/LomakeIlmoitus';
 import FormPrivacyNote, { HoneypotField } from '@/components/FormPrivacyNote';
 import WhatsAppIcon from './WhatsAppIcon';
 
@@ -44,6 +46,9 @@ const contactPersons = {
     whatsapp: 'https://wa.me/358401642233',
   },
 };
+
+type Kentta = 'nimi' | 'puhelin' | 'sahkoposti' | 'palvelu';
+const JARJESTYS: Kentta[] = ['nimi', 'puhelin', 'sahkoposti', 'palvelu'];
 
 const PersonCard = ({ person }: { person: typeof contactPersons.katto }) => (
   <div className="kortti p-6 flex flex-col items-center text-center">
@@ -110,54 +115,65 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
     website: '', // honeypot – oikea käyttäjä ei täytä tätä
   });
 
-  const toggleService = (value: string) => {
-    setFormState((s) => ({
-      ...s,
-      services: s.services.includes(value)
-        ? s.services.filter((v) => v !== value)
-        : [...s.services, value],
-    }));
-  };
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  /** Virhe näytetään lomakkeessa kentän vieressä, ei vain toastina: kävijä näkee, mitä korjata. */
-  const [error, setError] = useState<string | null>(null);
-  const [phoneInvalid, setPhoneInvalid] = useState(false);
+  /** Virheet näkyvät kentän alla (31.10.2026). Pakollisia: nimi, puhelin ja palvelu; sähköposti tarkistetaan, jos se annetaan. */
+  const [virheet, setVirheet] = useState<Partial<Record<Kentta, string | null>>>({});
+  const [lahetysVirhe, setLahetysVirhe] = useState<unknown>(null);
+  const uid = useId();
+  const ID: Record<Kentta, string> = { nimi: `${uid}-nimi`, puhelin: `${uid}-puhelin`, sahkoposti: `${uid}-sahkoposti`, palvelu: `${uid}-palvelu` };
+  const vId = (k: Kentta) => `${ID[k]}-virhe`;
+
+  const tarkista = (f: typeof formState): Partial<Record<Kentta, string | null>> => ({
+    nimi: nimiVirhe(f.name),
+    puhelin: phoneErrorMessage(f.phone),
+    sahkoposti: sahkopostiVirhe(f.email),
+    palvelu: f.services.length ? null : VIESTI.palvelu,
+  });
+
+  /** Päivittää lomakkeen ja korjaa näkyvän virheen heti, kun kenttä on kunnossa. */
+  const paivita = (muutos: Partial<typeof formState>, kentta?: Kentta) => {
+    const uusi = { ...formState, ...muutos };
+    setFormState(uusi);
+    if (isSubmitted) setIsSubmitted(false);
+    if (kentta && virheet[kentta]) setVirheet((v) => ({ ...v, [kentta]: tarkista(uusi)[kentta] }));
+  };
+
+  const toggleService = (value: string) => {
+    const services = formState.services.includes(value)
+      ? formState.services.filter((v) => v !== value)
+      : [...formState.services, value];
+    paivita({ services }, 'palvelu');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isLoading) return;
-    const phone = formState.phone.trim();
-    const email = formState.email.trim();
-    if (!phone && !email) {
-      setError('Anna puhelinnumero tai sähköposti, niin voimme vastata sinulle.');
-      setPhoneInvalid(true);
+    const uudet = tarkista(formState);
+    if (Object.values(uudet).some(Boolean)) {
+      setVirheet(uudet);
+      fokusoiEnsimmainen(uudet, JARJESTYS, ID);
       return;
     }
-    if (phone && !isValidFinnishMobile(phone)) {
-      setError(PHONE_ERROR_MESSAGE);
-      setPhoneInvalid(true);
-      return;
-    }
-    setError(null);
-    setPhoneInvalid(false);
+    setVirheet({});
+    setLahetysVirhe(null);
     setIsLoading(true);
     try {
       const { services, ...rest } = formState;
-      await submitContactForm({ ...rest, service: services.join(', ') }, "sivun lopun lomake");
+      await submitContactForm({ ...rest, phone: formatToInternational(rest.phone), service: services.join(', ') }, "sivun lopun lomake");
       setIsSubmitted(true);
       setFormState({ name: '', email: '', phone: '', services: [], message: '', website: '' });
-      toast({ title: 'Kiitos, viesti lähetetty', description: VASTAUSLUPAUS });
-      setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err: unknown) {
       console.error('Form submission error:', err);
-      const message = formErrorMessage(err);
-      setError(message);
-      toast({ title: 'Lähetys ei onnistunut', description: message, variant: 'destructive' });
+      setLahetysVirhe(err ?? new Error());
     } finally {
       setIsLoading(false);
     }
   };
+  const kuvaus = (k: Kentta) => ({
+    'aria-invalid': virheet[k] ? true : undefined,
+    'aria-describedby': virheet[k] ? vId(k) : undefined,
+  });
 
   const title = cityIn
     ? `Ota yhteyttä ${cityIn}`
@@ -188,50 +204,74 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
           <div className="h-full">
             <form
               onSubmit={handleSubmit}
+              noValidate
               className="kortti p-7 md:p-9 w-full h-full flex flex-col"
             >
               <h3 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-6">{formHeading}</h3>
 
               <div className="space-y-4 flex flex-col flex-1">
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-                  <input
-                    type="text"
-                    required
-                    value={formState.name}
-                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    className={`${inputClass} pl-10`}
-                    placeholder="Nimi" aria-label="Nimi"
-                  />
-                </div>
-
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-                  <input
-                    type="tel"
-                    value={formState.phone}
-                    onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                    className={`${inputClass} pl-10 ${phoneInvalid ? 'ring-2 ring-destructive' : ''}`}
-                    placeholder="Puhelinnumero" aria-label="Puhelinnumero"
-                    aria-invalid={phoneInvalid || undefined}
-                    aria-describedby={error ? 'contact-form-error' : undefined}
-                  />
-                </div>
-
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-                  <input
-                    type="email"
-                    value={formState.email}
-                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    className={`${inputClass} pl-10`}
-                    placeholder="Sähköposti" aria-label="Sähköposti"
-                  />
+                <div>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                    <input
+                      id={ID.nimi}
+                      type="text"
+                      value={formState.name}
+                      onChange={(e) => paivita({ name: e.target.value }, 'nimi')}
+                      className={`${inputClass} pl-10`}
+                      placeholder="Nimi" aria-label="Nimi"
+                      autoComplete="name"
+                      {...kuvaus('nimi')}
+                    />
+                  </div>
+                  <KenttaVirhe id={vId('nimi')} viesti={virheet.nimi} />
                 </div>
 
                 <div>
-                  <p className="block text-sm font-semibold text-foreground mb-2 mt-2">Mihin haluat tarjouksen?</p>
-                  <div className="space-y-2">
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                    <input
+                      id={ID.puhelin}
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      value={formState.phone}
+                      onChange={(e) => paivita({ phone: e.target.value }, 'puhelin')}
+                      className={`${inputClass} pl-10`}
+                      placeholder="Puhelinnumero" aria-label="Puhelinnumero"
+                      {...kuvaus('puhelin')}
+                    />
+                  </div>
+                  <KenttaVirhe id={vId('puhelin')} viesti={virheet.puhelin} />
+                </div>
+
+                <div>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                    <input
+                      id={ID.sahkoposti}
+                      type="email"
+                      autoComplete="email"
+                      value={formState.email}
+                      onChange={(e) => paivita({ email: e.target.value }, 'sahkoposti')}
+                      className={`${inputClass} pl-10`}
+                      placeholder="Sähköposti (vapaaehtoinen)" aria-label="Sähköposti"
+                      {...kuvaus('sahkoposti')}
+                    />
+                  </div>
+                  <KenttaVirhe id={vId('sahkoposti')} viesti={virheet.sahkoposti} />
+                </div>
+
+                <div>
+                  <p id={`${ID.palvelu}-otsikko`} className="block text-sm font-semibold text-foreground mb-2 mt-2">Mihin haluat tarjouksen?</p>
+                  <div
+                    id={ID.palvelu}
+                    role="group"
+                    tabIndex={-1}
+                    aria-labelledby={`${ID.palvelu}-otsikko`}
+                    {...kuvaus('palvelu')}
+                    className="valintaryhma space-y-2"
+                  >
                     {[
                       { value: 'tiilikatto', label: 'Tiilikaton pinnoitus' },
                       { value: 'ulkomaalaus', label: 'Talon maalaus' },
@@ -247,11 +287,12 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                       </label>
                     ))}
                   </div>
+                  <KenttaVirhe id={vId('palvelu')} viesti={virheet.palvelu} />
                 </div>
 
                 <textarea
                   value={formState.message}
-                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  onChange={(e) => paivita({ message: e.target.value })}
                   rows={3}
                   className={`${inputClass} resize-none`}
                   placeholder="Lisätiedot (vapaaehtoinen)" aria-label="Lisätiedot"
@@ -260,10 +301,11 @@ const ServiceContactSection = ({ variant = 'general', cityName, cityGenitive, ci
                 <HoneypotField value={formState.website} onChange={(v) => setFormState({ ...formState, website: v })} />
                 <FormPrivacyNote />
 
-                {error && (
-                  <p id="contact-form-error" role="alert" className="rounded-xl bg-destructive/10 px-4 py-3 text-sm font-semibold text-destructive">
-                    {error}
-                  </p>
+                {lahetysVirhe !== null && <LahetysVirhe virhe={lahetysVirhe} puhelin={variant === 'maalaus' ? contactPersons.maalaus : contactPersons.katto} />}
+                {isSubmitted && (
+                  <LomakeIlmoitus tyyppi="onnistui" otsikko="Kiitos, viesti lähetetty">
+                    {VASTAUSLUPAUS}
+                  </LomakeIlmoitus>
                 )}
 
                 <button

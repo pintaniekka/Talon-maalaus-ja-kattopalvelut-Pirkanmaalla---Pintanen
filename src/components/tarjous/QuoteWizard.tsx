@@ -4,9 +4,11 @@ import { ArrowLeft, Check, Loader2 } from "lucide-react";
 import CityCombobox from "@/components/CityCombobox";
 import PhoneInput from "@/components/PhoneInput";
 import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
-import { useToast } from "@/hooks/use-toast";
+import KenttaVirhe from "@/components/lomake/KenttaVirhe";
+import { LahetysVirhe } from "@/components/lomake/LomakeIlmoitus";
+import { VIESTI, nimiVirhe, sahkopostiVirhe, fokusoiEnsimmainen } from "@/lib/lomakeViestit";
 import { submitContactForm } from "@/lib/contactForm";
-import { isValidFinnishMobile, formatToInternational, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
+import { formatToInternational, phoneErrorMessage } from "@/lib/phoneValidation";
 
 export type QuoteService = "tiilikatto" | "ulkomaalaus" | "muu";
 
@@ -27,9 +29,15 @@ interface QuoteWizardProps {
 
 const TOTAL_STEPS = 3;
 
-/** Kolmivaiheinen tarjouspyyntö: palvelu → kohde → yhteystiedot. Pakollista on vain nimi ja puhelinnumero. */
+const ID = { palvelu: "tarjous-palvelu", kunta: "tarjous-kunta", nimi: "tarjous-nimi", puhelin: "tarjous-puhelin", sahkoposti: "tarjous-sahkoposti" } as const;
+type Kentta = keyof typeof ID;
+const virheId = (k: Kentta) => `${ID[k]}-virhe`;
+
+/**
+ * Kolmivaiheinen tarjouspyyntö: palvelu → kohde → yhteystiedot. Pakollisia ovat palvelu, kunta, nimi ja
+ * puhelinnumero (Eki 31.10.2026); lisätiedot ja sähköposti ovat vapaaehtoisia, mutta sähköposti tarkistetaan, jos se annetaan.
+ */
 const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: QuoteWizardProps) => {
-  const { toast } = useToast();
   const [step, setStep] = useState(1);
   const [services, setServices] = useState<QuoteService[]>(initialServices);
   const [city, setCity] = useState("");
@@ -38,7 +46,8 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
-  const [phoneError, setPhoneError] = useState(false);
+  const [virheet, setVirheet] = useState<Partial<Record<Kentta, string | null>>>({});
+  const [lahetysVirhe, setLahetysVirhe] = useState<unknown>(null);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -46,28 +55,38 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
     onServicesChange?.(services);
   }, [services, onServicesChange]);
 
-  const toggle = (value: QuoteService) =>
+  const toggle = (value: QuoteService) => {
     setServices((s) => (s.includes(value) ? s.filter((v) => v !== value) : [...s, value]));
+    setVirheet((v) => ({ ...v, palvelu: null }));
+  };
+
+  const nayta = (uudet: Partial<Record<Kentta, string | null>>, jarjestys: Kentta[]) => {
+    setVirheet(uudet);
+    fokusoiEnsimmainen(uudet, jarjestys, ID);
+  };
 
   const next = () => {
     if (step === 1 && services.length === 0) {
-      toast({ title: "Valitse palvelu", description: "Valitse vähintään yksi vaihtoehto.", variant: "destructive" });
+      nayta({ palvelu: VIESTI.palvelu }, ["palvelu"]);
       return;
     }
+    if (step === 2 && !city) {
+      nayta({ kunta: VIESTI.kunta }, ["kunta"]);
+      return;
+    }
+    setVirheet({});
     setStep((s) => Math.min(TOTAL_STEPS, s + 1));
   };
 
   const submit = async () => {
     if (submitting) return;
-    if (!name.trim() || !phone.trim()) {
-      toast({ title: "Täytä tiedot", description: "Nimi ja puhelinnumero ovat pakollisia.", variant: "destructive" });
+    const uudet = { nimi: nimiVirhe(name), puhelin: phoneErrorMessage(phone), sahkoposti: sahkopostiVirhe(email) };
+    if (uudet.nimi || uudet.puhelin || uudet.sahkoposti) {
+      nayta(uudet, ["nimi", "puhelin", "sahkoposti"]);
       return;
     }
-    if (!isValidFinnishMobile(phone)) {
-      setPhoneError(true);
-      return;
-    }
-    setPhoneError(false);
+    setVirheet({});
+    setLahetysVirhe(null);
     setSubmitting(true);
     try {
       await submitContactForm(
@@ -83,8 +102,8 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
         "tarjouspyyntösivu",
       );
       setDone(true);
-    } catch {
-      toast({ title: "Virhe lähetyksessä", description: "Yritä uudelleen tai soita meille.", variant: "destructive" });
+    } catch (err) {
+      setLahetysVirhe(err ?? new Error());
     } finally {
       setSubmitting(false);
     }
@@ -111,7 +130,7 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
     <div className="bg-card rounded-3xl shadow-2xl border border-border/60 p-6 md:p-10">
       <div className="flex items-center justify-between mb-6">
         {step > 1 ? (
-          <button type="button" onClick={() => setStep((s) => s - 1)} className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+          <button type="button" onClick={() => { setVirheet({}); setStep((s) => s - 1); }} className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="w-4 h-4" /> Takaisin
           </button>
         ) : (
@@ -130,7 +149,15 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
           {step === 1 && (
             <>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-6">Mihin haluat tarjouksen?</h2>
-              <div className="flex flex-col gap-3">
+              <div
+                id={ID.palvelu}
+                role="group"
+                tabIndex={-1}
+                aria-label="Palvelut"
+                aria-invalid={virheet.palvelu ? true : undefined}
+                aria-describedby={virheet.palvelu ? virheId("palvelu") : undefined}
+                className="valintaryhma flex flex-col gap-3"
+              >
                 {serviceOptions.map((o) => {
                   const on = services.includes(o.value);
                   return (
@@ -152,6 +179,7 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
                   );
                 })}
               </div>
+              <KenttaVirhe id={virheId("palvelu")} viesti={virheet.palvelu} className="mt-3" />
               <button type="button" onClick={next} className="btn-hero !py-4 !text-base w-full mt-6">
                 Jatka
               </button>
@@ -162,7 +190,17 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
             <>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground font-heading mb-2">Missä kohde sijaitsee?</h2>
               <p className="text-muted-foreground mb-6">Toimimme Pirkanmaalla ja Kanta-Hämeessä.</p>
-              <CityCombobox value={city} onChange={setCity} placeholder="Valitse kunta" />
+              <CityCombobox
+                id={ID.kunta}
+                value={city}
+                onChange={(v) => {
+                  setCity(v);
+                  setVirheet({});
+                }}
+                placeholder="Valitse kunta"
+                errorId={virheet.kunta ? virheId("kunta") : null}
+              />
+              <KenttaVirhe id={virheId("kunta")} viesti={virheet.kunta} />
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -186,12 +224,57 @@ const QuoteWizard = ({ initialServices = [], onServicesChange, callerName }: Quo
                   e.preventDefault();
                   submit();
                 }}
+                noValidate
                 className="flex flex-col gap-4"
               >
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nimi" aria-label="Nimi" autoComplete="name" className={input} />
-                <PhoneInput value={phone} onChange={setPhone} hasError={phoneError} errorMessage={PHONE_ERROR_MESSAGE} ariaLabel="Puhelinnumero" />
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Sähköposti (vapaaehtoinen)" aria-label="Sähköposti" autoComplete="email" className={input} />
+                <div>
+                  <input
+                    id={ID.nimi}
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (virheet.nimi) setVirheet((v) => ({ ...v, nimi: nimiVirhe(e.target.value) }));
+                    }}
+                    placeholder="Nimi"
+                    aria-label="Nimi"
+                    autoComplete="name"
+                    aria-invalid={virheet.nimi ? true : undefined}
+                    aria-describedby={virheet.nimi ? virheId("nimi") : undefined}
+                    className={input}
+                  />
+                  <KenttaVirhe id={virheId("nimi")} viesti={virheet.nimi} />
+                </div>
+                <PhoneInput
+                  id={ID.puhelin}
+                  value={phone}
+                  onChange={(v) => {
+                    setPhone(v);
+                    if (virheet.puhelin) setVirheet((e) => ({ ...e, puhelin: phoneErrorMessage(v) }));
+                  }}
+                  error={virheet.puhelin}
+                  ariaLabel="Puhelinnumero"
+                />
+                <div>
+                  <input
+                    id={ID.sahkoposti}
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (virheet.sahkoposti) setVirheet((v) => ({ ...v, sahkoposti: sahkopostiVirhe(e.target.value) }));
+                    }}
+                    placeholder="Sähköposti (vapaaehtoinen)"
+                    aria-label="Sähköposti"
+                    autoComplete="email"
+                    aria-invalid={virheet.sahkoposti ? true : undefined}
+                    aria-describedby={virheet.sahkoposti ? virheId("sahkoposti") : undefined}
+                    className={input}
+                  />
+                  <KenttaVirhe id={virheId("sahkoposti")} viesti={virheet.sahkoposti} />
+                </div>
                 <HoneypotField value={website} onChange={setWebsite} />
+                {lahetysVirhe !== null && <LahetysVirhe virhe={lahetysVirhe} />}
                 <button type="submit" disabled={submitting} className="btn-hero !py-4 !text-base w-full disabled:opacity-60">
                   {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Lähetä tarjouspyyntö"}
                 </button>

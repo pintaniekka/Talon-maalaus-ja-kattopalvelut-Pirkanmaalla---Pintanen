@@ -1,12 +1,14 @@
-import { forwardRef } from 'react';
+import { forwardRef, useId } from 'react';
 import { PHONE_PLACEHOLDER } from '@/lib/phoneValidation';
+import KenttaVirhe from '@/components/lomake/KenttaVirhe';
 
 interface PhoneInputProps {
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
   disabled?: boolean;
-  hasError?: boolean;
-  errorMessage?: string;
+  /** Virheviesti kentän alle; tyhjä = ei virhettä. */
+  error?: string | null;
   className?: string;
   inputClassName?: string;
   ariaLabel?: string;
@@ -15,33 +17,21 @@ interface PhoneInputProps {
 }
 
 /**
- * Phone input with fixed FI +358 prefix. The user types only the local part.
- * The visual prefix is uneditable.
+ * Puhelinnumerokenttä, jonka edessä on kiinteä FI +358. Kävijä kirjoittaa vain oman osansa;
+ * myös +358-alkuinen numero kelpaa (selaimen automaattinen täyttö). Virhe näkyy kentän alla.
  */
 const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
   (
-    {
-      value,
-      onChange,
-      disabled,
-      hasError,
-      errorMessage,
-      className = '',
-      inputClassName = '',
-      ariaLabel = 'Puhelinnumero',
-      autoFocus,
-      id,
-    },
+    { value, onChange, onBlur, disabled, error, className = '', inputClassName = '', ariaLabel = 'Puhelinnumero', autoFocus, id },
     ref,
   ) => {
+    const oma = useId();
+    const kenttaId = id ?? `puhelin-${oma}`;
+    const virheId = `${kenttaId}-virhe`;
     return (
       <div className={className}>
         <div
-          className={`flex items-stretch w-full rounded-xl border bg-white overflow-hidden transition-colors ${
-            hasError
-              ? 'border-destructive focus-within:border-destructive'
-              : 'border-border/60 focus-within:border-primary'
-          } ${disabled ? 'opacity-70' : ''}`}
+          className={`puhelin-kehys flex items-stretch w-full rounded-xl border border-border/60 bg-white overflow-hidden transition-colors focus-within:border-primary ${disabled ? 'opacity-70' : ''}`}
         >
           <span
             aria-hidden="true"
@@ -51,28 +41,23 @@ const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           </span>
           <input
             ref={ref}
-            id={id}
+            id={kenttaId}
             type="tel"
             inputMode="tel"
             autoComplete="tel-national"
             aria-label={ariaLabel}
-            aria-invalid={hasError || undefined}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error ? virheId : undefined}
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            onBlur={onBlur}
             placeholder={PHONE_PLACEHOLDER}
             disabled={disabled}
             autoFocus={autoFocus}
-            className={`flex-1 min-w-0 px-3 py-2.5 bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed ${inputClassName}`}
+            className={`puhelin-kentta flex-1 min-w-0 px-3 py-2.5 bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed ${inputClassName}`}
           />
         </div>
-        {hasError && errorMessage && (
-          <p
-            role="alert"
-            className="mt-2 text-sm text-destructive font-medium"
-          >
-            {errorMessage}
-          </p>
-        )}
+        <KenttaVirhe id={virheId} viesti={error} />
       </div>
     );
   },

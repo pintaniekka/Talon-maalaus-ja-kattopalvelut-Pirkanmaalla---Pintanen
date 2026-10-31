@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom';
 import { getStorageUrl, getResponsiveSrc, getResponsiveSrcSet } from '@/lib/storage';
 import { submitContactForm, formErrorMessage } from '@/lib/contactForm';
 import FormPrivacyNote, { HoneypotField } from '@/components/FormPrivacyNote';
-import { useToast } from '@/hooks/use-toast';
+import KenttaVirhe from '@/components/lomake/KenttaVirhe';
+import { VIESTI, nimiVirhe } from '@/lib/lomakeViestit';
 import CityCombobox from '@/components/CityCombobox';
 import PhoneInput from '@/components/PhoneInput';
 import { YHTEYSTIEDOT } from '@/data/company';
 import { calculateWallPrice, calculateRoofPrice, calculateRidgeSealPrice, formatPriceRange } from '@/lib/priceCalc';
 import { VAHENNYS_OMAVASTUU_HUOMAUTUS, hintaVahennyksenJalkeen } from '@/components/vahennys/vahennysData';
 import {
-  isValidFinnishMobile,
   formatToInternational,
-  PHONE_ERROR_MESSAGE,
+  phoneErrorMessage,
   PHONE_CHECKING_LABEL,
 } from '@/lib/phoneValidation';
 
@@ -182,7 +182,8 @@ const ChatPriceCalculator = () => {
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [website, setWebsite] = useState(''); // honeypot – oikea käyttäjä ei täytä tätä
-  const [phoneError, setPhoneError] = useState(false);
+  /** Yhteystieto- ja kuntakenttien virheet kentän alla (31.10.2026, ennen toast tai harmaa nappi). */
+  const [virheet, setVirheet] = useState<{ nimi?: string | null; puhelin?: string | null; kunta?: string | null }>({});
   const [isCheckingPhone, setIsCheckingPhone] = useState(false);
   const phoneCheckTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [chatStarted, setChatStarted] = useState(false);
@@ -196,8 +197,9 @@ const ChatPriceCalculator = () => {
   // vaihtoehdot) on juuri chat-kuplan yläpuolella. Lippu nousee vastauksesta ja laukeaa, kun botin vuoro on ohi.
   const seuraaVastausta = useRef(false);
   const hasAutoStarted = useRef(false);
-  const { toast } = useToast();
   const headingId = useId();
+  const kenttaId = { nimi: `${headingId}-nimi`, puhelin: `${headingId}-puhelin`, kunta: `${headingId}-kunta` };
+  const fokus = (id: string) => requestAnimationFrame(() => document.getElementById(id)?.focus());
 
   // Collected data
   const dataRef = useRef<Record<string, string>>({});
@@ -470,24 +472,30 @@ const ChatPriceCalculator = () => {
 
 
   const handleContactSubmit = useCallback(async () => {
-    if (!contactName.trim() || !contactPhone.trim()) {
-      toast({ title: 'Täytä tiedot', description: 'Nimi ja puhelinnumero tarvitaan, jotta voimme näyttää arvion.', variant: 'destructive' });
+    if (isSubmitting || isCheckingPhone) return;
+    const nimi = nimiVirhe(contactName);
+    const puhelin = phoneErrorMessage(contactPhone);
+    // Tyhjät kentät kerrotaan heti.
+    if (nimi || !contactPhone.trim()) {
+      setVirheet({ nimi, puhelin });
+      fokus(nimi ? kenttaId.nimi : kenttaId.puhelin);
       return;
     }
 
-    // Strict phone validation with a 2s "checking" delay on failure.
-    if (!isValidFinnishMobile(contactPhone)) {
-      setPhoneError(false);
+    // Kirjoitettu mutta virheellinen numero: 2 s "tarkistus" ennen virhettä (Eerik, ennallaan).
+    if (puhelin) {
+      setVirheet({});
       setIsCheckingPhone(true);
       if (phoneCheckTimer.current) clearTimeout(phoneCheckTimer.current);
       phoneCheckTimer.current = setTimeout(() => {
         setIsCheckingPhone(false);
-        setPhoneError(true);
+        setVirheet({ puhelin });
+        fokus(kenttaId.puhelin);
       }, 2000);
       return;
     }
 
-    setPhoneError(false);
+    setVirheet({});
     const internationalPhone = formatToInternational(contactPhone);
 
     const run = runIdRef.current;
@@ -566,7 +574,7 @@ const ChatPriceCalculator = () => {
     } finally {
       if (run === runIdRef.current) setIsSubmitting(false);
     }
-  }, [contactName, contactPhone, website, path, addBotMessage, toast, addUserMessage, scrollToBottom]);
+  }, [contactName, contactPhone, website, path, addBotMessage, addUserMessage, scrollToBottom, isSubmitting, isCheckingPhone, kenttaId.nimi, kenttaId.puhelin]);
 
   // Reset: tyhjentää kaiken tilan ja aloittaa alusta. Ei lähetä eikä peru liidiä. Kevyt toiminto, ei vahvistusta.
   const handleReset = useCallback(() => {
@@ -587,7 +595,7 @@ const ChatPriceCalculator = () => {
     setContactName('');
     setContactPhone('');
     setWebsite('');
-    setPhoneError(false);
+    setVirheet({});
     setIsCheckingPhone(false);
     setTulos(null);
     dataRef.current = {};
@@ -826,56 +834,75 @@ const ChatPriceCalculator = () => {
                 )}
 
                 {stepUI.kind === 'city' && (
-                  <div className="flex gap-2">
-                    <div className="flex-1">
-                      <CityCombobox
-                        value={cityInput}
-                        onChange={(v) => {
-                          setCityInput(v);
-                        }}
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      aria-label="Lähetä"
-                      onClick={() => {
-                        if (cityInput.trim()) {
+                  <div>
+                    <div className="flex gap-2">
+                      <div className="flex-1">
+                        <CityCombobox
+                          id={kenttaId.kunta}
+                          value={cityInput}
+                          onChange={(v) => {
+                            setCityInput(v);
+                            setVirheet({});
+                          }}
+                          errorId={virheet.kunta ? `${kenttaId.kunta}-virhe` : null}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        aria-label="Lähetä"
+                        onClick={() => {
+                          if (!cityInput.trim()) {
+                            setVirheet({ kunta: VIESTI.kunta });
+                            fokus(kenttaId.kunta);
+                            return;
+                          }
+                          setVirheet({});
                           handleCitySubmit(cityInput.trim());
                           setCityInput('');
-                        }
-                      }}
-                      disabled={!cityInput.trim()}
-                      className="px-4 py-2.5 bg-[#ffd23f] text-navy rounded-xl hover:bg-[#f2c62e] disabled:bg-[#f6e9a8] disabled:text-navy/60 transition-colors"
-                    >
-                      <Send className="w-4 h-4" />
-                    </button>
+                        }}
+                        className="px-4 py-2.5 bg-[#ffd23f] text-navy rounded-xl hover:bg-[#f2c62e] transition-colors"
+                      >
+                        <Send className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <KenttaVirhe id={`${kenttaId.kunta}-virhe`} viesti={virheet.kunta} />
                   </div>
                 )}
 
                 {stepUI.kind === 'contact' && (
                   <div className="relative space-y-2">
                     <HoneypotField value={website} onChange={setWebsite} />
-                    <input
-                      type="text"
-                      value={contactName}
-                      onChange={e => setContactName(e.target.value)}
-                      placeholder="Nimi *" aria-label="Nimi"
-                      className="w-full px-4 py-2.5 rounded-xl border border-[#c7d1de] bg-white text-base text-navy focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors"
-                      autoFocus
-                    />
+                    <div>
+                      <input
+                        id={kenttaId.nimi}
+                        type="text"
+                        value={contactName}
+                        onChange={e => {
+                          setContactName(e.target.value);
+                          if (virheet.nimi) setVirheet(v => ({ ...v, nimi: nimiVirhe(e.target.value) }));
+                        }}
+                        placeholder="Nimi" aria-label="Nimi"
+                        autoComplete="name"
+                        aria-invalid={virheet.nimi ? true : undefined}
+                        aria-describedby={virheet.nimi ? `${kenttaId.nimi}-virhe` : undefined}
+                        className="w-full px-4 py-2.5 rounded-xl border border-[#c7d1de] bg-white text-base text-navy focus:outline-none focus:border-navy focus:ring-1 focus:ring-navy transition-colors"
+                        autoFocus
+                      />
+                      <KenttaVirhe id={`${kenttaId.nimi}-virhe`} viesti={virheet.nimi} />
+                    </div>
                     <PhoneInput
+                      id={kenttaId.puhelin}
                       value={contactPhone}
                       onChange={(v) => {
                         setContactPhone(v);
-                        if (phoneError) setPhoneError(false);
+                        if (virheet.puhelin) setVirheet(e => ({ ...e, puhelin: phoneErrorMessage(v) }));
                       }}
                       disabled={isCheckingPhone || isSubmitting}
-                      hasError={phoneError}
-                      errorMessage={PHONE_ERROR_MESSAGE}
+                      error={virheet.puhelin}
                     />
                     <button
                       onClick={handleContactSubmit}
-                      disabled={isSubmitting || isCheckingPhone || !contactName.trim() || !contactPhone.trim()}
+                      disabled={isSubmitting || isCheckingPhone}
                       className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#ffd23f] text-navy font-semibold rounded-xl hover:bg-[#f2c62e] disabled:bg-[#f6e9a8] disabled:text-navy/60 transition-colors text-sm"
                     >
                       {isSubmitting ? (

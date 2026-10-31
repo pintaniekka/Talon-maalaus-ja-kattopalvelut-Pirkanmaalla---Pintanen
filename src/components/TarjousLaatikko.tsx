@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { X } from "lucide-react";
 import { UserRound, Phone, MapPin, Mail, Building, MessageSquare } from "@/components/icons/BrandIcons";
-import { useToast } from "@/hooks/use-toast";
-import { submitContactForm, formErrorMessage } from "@/lib/contactForm";
-import { isValidFinnishMobile, PHONE_ERROR_MESSAGE } from "@/lib/phoneValidation";
+import { submitContactForm } from "@/lib/contactForm";
+import { formatToInternational, phoneErrorMessage } from "@/lib/phoneValidation";
+import { nimiVirhe, postinumeroVirhe, fokusoiEnsimmainen } from "@/lib/lomakeViestit";
+import KenttaVirhe from "@/components/lomake/KenttaVirhe";
+import LomakeIlmoitus, { LahetysVirhe } from "@/components/lomake/LomakeIlmoitus";
 import FormPrivacyNote, { HoneypotField } from "@/components/FormPrivacyNote";
 import { VASTAUSLUPAUS } from "@/data/company";
 
@@ -18,12 +20,26 @@ interface TarjousLaatikkoProps {
   ctaLabel: string;
 }
 
+type Kentta = "name" | "phone" | "address" | "postalCode" | "city";
+const ID: Record<Kentta, string> = { name: "laatikko-nimi", phone: "laatikko-puhelin", address: "laatikko-osoite", postalCode: "laatikko-postinumero", city: "laatikko-kaupunki" };
+const JARJESTYS: Kentta[] = ["name", "phone", "address", "postalCode", "city"];
+
+/** Pakolliset: nimi, puhelin, osoite ja kaupunki (Eki 31.10.2026: kaikkeen pitää vastata). Postinumero ja viesti vapaaehtoisia. */
+const tarkista = (f: Record<Kentta, string>): Partial<Record<Kentta, string | null>> => ({
+  name: nimiVirhe(f.name),
+  phone: phoneErrorMessage(f.phone),
+  address: f.address.trim() ? null : "Kirjoita kohteen osoite.",
+  postalCode: postinumeroVirhe(f.postalCode),
+  city: f.city.trim() ? null : "Kirjoita paikkakunta.",
+});
+
 const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatikkoProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const { toast } = useToast();
+  const [virheet, setVirheet] = useState<Partial<Record<Kentta, string | null>>>({});
+  const [lahetysVirhe, setLahetysVirhe] = useState<unknown>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -36,12 +52,20 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    const uusi = { ...form, [name]: value };
+    setForm(uusi);
+    // Näkyvä virhe päivittyy kirjoittaessa, jotta se katoaa heti, kun kenttä on kunnossa.
+    if (name in ID && virheet[name as Kentta]) setVirheet((v) => ({ ...v, [name]: tarkista(uusi)[name as Kentta] }));
   };
 
   // Uusi avaus aloittaa lähettämättömänä (aiemmin handleOpen).
   useEffect(() => {
-    if (open) setIsSubmitted(false);
+    if (open) {
+      setIsSubmitted(false);
+      setVirheet({});
+      setLahetysVirhe(null);
+    }
   }, [open]);
 
   useEffect(() => {
@@ -56,21 +80,22 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      toast({ title: "Täytä vähintään nimi ja puhelinnumero", variant: "destructive" });
-      return;
-    }
+    if (isSubmitting) return;
     // Sama puhelinnumeron tarkistus kuin tarjouspyynnössä ja hintalaskurissa.
-    if (!isValidFinnishMobile(form.phone)) {
-      toast({ title: PHONE_ERROR_MESSAGE, variant: "destructive" });
+    const uudet = tarkista(form);
+    if (Object.values(uudet).some(Boolean)) {
+      setVirheet(uudet);
+      fokusoiEnsimmainen(uudet, JARJESTYS, ID);
       return;
     }
+    setVirheet({});
+    setLahetysVirhe(null);
     setIsSubmitting(true);
     try {
       await submitContactForm({
         name: form.name,
         email: "",
-        phone: form.phone,
+        phone: formatToInternational(form.phone),
         service: "Arviokäynti",
         address: [form.address, form.postalCode].filter(Boolean).join(", "),
         city: form.city,
@@ -81,9 +106,8 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
       );
       setIsSubmitted(true);
       setForm({ name: "", phone: "", address: "", postalCode: "", city: "", message: "", website: "" });
-      toast({ title: "Kiitos, viesti lähetetty", description: VASTAUSLUPAUS });
     } catch (err: unknown) {
-      toast({ title: "Lähetys ei onnistunut", description: formErrorMessage(err), variant: "destructive" });
+      setLahetysVirhe(err ?? new Error());
     } finally {
       setIsSubmitting(false);
     }
@@ -93,7 +117,7 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
     "w-full rounded-lg border border-border bg-white px-3 py-2.5 pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/40 transition";
 
   const fields: {
-    name: keyof typeof form;
+    name: Kentta;
     placeholder: string;
     icon: React.ReactNode;
     type?: string;
@@ -101,7 +125,7 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
     { name: "name", placeholder: "Nimi", icon: <UserRound className="w-4 h-4" /> },
     { name: "phone", placeholder: "Puhelinnumero", icon: <Phone className="w-4 h-4" />, type: "tel" },
     { name: "address", placeholder: "Osoite", icon: <MapPin className="w-4 h-4" /> },
-    { name: "postalCode", placeholder: "Postinumero", icon: <Mail className="w-4 h-4" /> },
+    { name: "postalCode", placeholder: "Postinumero (vapaaehtoinen)", icon: <Mail className="w-4 h-4" /> },
     { name: "city", placeholder: "Kaupunki", icon: <Building className="w-4 h-4" /> },
   ];
 
@@ -154,21 +178,35 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-3 lg:px-6">
+            {isSubmitted ? (
+              <div className="px-5 py-4 lg:px-6">
+                <LomakeIlmoitus tyyppi="onnistui" otsikko="Kiitos, viesti lähetetty">
+                  {VASTAUSLUPAUS}
+                </LomakeIlmoitus>
+              </div>
+            ) : (
+            <form onSubmit={handleSubmit} noValidate className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-3 lg:px-6">
               {fields.map((f) => (
-                <div key={f.name} className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                    {f.icon}
-                  </span>
-                  <input
-                    name={f.name}
-                    type={f.type || "text"}
-                    placeholder={f.placeholder}
-                    aria-label={f.placeholder}
-                    value={form[f.name]}
-                    onChange={handleChange}
-                    className={inputClasses}
-                  />
+                <div key={f.name}>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                      {f.icon}
+                    </span>
+                    <input
+                      id={ID[f.name]}
+                      name={f.name}
+                      type={f.type || "text"}
+                      inputMode={f.name === "postalCode" ? "numeric" : f.type === "tel" ? "tel" : undefined}
+                      placeholder={f.placeholder}
+                      aria-label={f.placeholder}
+                      aria-invalid={virheet[f.name] ? true : undefined}
+                      aria-describedby={virheet[f.name] ? `${ID[f.name]}-virhe` : undefined}
+                      value={form[f.name]}
+                      onChange={handleChange}
+                      className={inputClasses}
+                    />
+                  </div>
+                  <KenttaVirhe id={`${ID[f.name]}-virhe`} viesti={virheet[f.name]} />
                 </div>
               ))}
 
@@ -179,7 +217,7 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
                 </span>
                 <textarea
                   name="message"
-                  placeholder="Viestisi"
+                  placeholder="Viestisi (vapaaehtoinen)"
                   aria-label="Viestisi"
                   value={form.message}
                   onChange={handleChange}
@@ -190,6 +228,7 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
 
               <HoneypotField value={form.website} onChange={(v) => setForm((prev) => ({ ...prev, website: v }))} />
               <FormPrivacyNote />
+              {lahetysVirhe !== null && <LahetysVirhe virhe={lahetysVirhe} />}
 
               <button
                 type="submit"
@@ -197,9 +236,10 @@ const TarjousLaatikko = ({ open, onClose: handleClose, ctaLabel }: TarjousLaatik
                 className="mt-2 mb-4 w-full rounded-xl py-3 font-semibold text-accent-foreground text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 disabled:opacity-60"
                 style={{ backgroundColor: "hsl(var(--accent-strong))" }}
               >
-                {isSubmitted ? "Lähetetty ✓" : isSubmitting ? "Lähetetään..." : "Lähetä"}
+                {isSubmitting ? "Lähetetään..." : "Lähetä"}
               </button>
             </form>
+            )}
           </m.div>
         </>
       )}

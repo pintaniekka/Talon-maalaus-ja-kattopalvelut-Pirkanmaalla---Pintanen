@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useId } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
 import { X, Send, Loader2, RotateCcw } from 'lucide-react';
 import { submitContactForm } from '@/lib/contactForm';
-import { useToast } from '@/hooks/use-toast';
+import { formatToInternational, phoneErrorMessage } from '@/lib/phoneValidation';
+import { nimiVirhe, sahkopostiVirhe } from '@/lib/lomakeViestit';
+import KenttaVirhe from '@/components/lomake/KenttaVirhe';
+import { LahetysVirhe } from '@/components/lomake/LomakeIlmoitus';
 import { VASTAUSLUPAUS } from '@/data/company';
 import FormPrivacyNote from '@/components/FormPrivacyNote';
 
@@ -69,7 +72,12 @@ interface ChatIkkunaProps {
 }
 
 const ChatIkkuna = ({ open, onClose, tekija }: ChatIkkunaProps) => {
-  const { toast } = useToast();
+  const uid = useId();
+  const kId = { nimi: `${uid}-nimi`, puhelin: `${uid}-puhelin`, sahkoposti: `${uid}-sahkoposti` };
+  type Kentta = keyof typeof kId;
+  /** Yhteystietojen virheet kentän alla (31.10.2026); ennen chatin numeroa ei tarkistettu lainkaan. */
+  const [virheet, setVirheet] = useState<Partial<Record<Kentta, string | null>>>({});
+  const [lahetysVirhe, setLahetysVirhe] = useState<unknown>(null);
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([{ from: 'bot', text: GREETING }]);
   const [currentStep, setCurrentStep] = useState<Step>(INITIAL_STEP);
@@ -112,6 +120,8 @@ const ChatIkkuna = ({ open, onClose, tekija }: ChatIkkunaProps) => {
     setContactEmail('');
     setQuestionText('');
     setTyping(false);
+    setVirheet({});
+    setLahetysVirhe(null);
   };
 
   // ── Checkbox + Contact shared step builders ──
@@ -207,7 +217,21 @@ const ChatIkkuna = ({ open, onClose, tekija }: ChatIkkunaProps) => {
 
   // ── Submit ───────────────────────────────────────────────────────────────
   const handleFinalSubmit = async () => {
-    if (!contactName.trim() || (!contactPhone.trim() && !contactEmail.trim())) return;
+    if (isSubmitting || currentStep?.kind !== 'contact') return;
+    const kentat = currentStep.fields;
+    const uudet: Partial<Record<Kentta, string | null>> = {
+      nimi: nimiVirhe(contactName),
+      puhelin: kentat.includes('phone') ? phoneErrorMessage(contactPhone) : null,
+      sahkoposti: kentat.includes('email') ? sahkopostiVirhe(contactEmail, true) : null,
+    };
+    if (Object.values(uudet).some(Boolean)) {
+      setVirheet(uudet);
+      const eka = (['nimi', 'puhelin', 'sahkoposti'] as Kentta[]).find((k) => uudet[k]);
+      if (eka) requestAnimationFrame(() => document.getElementById(kId[eka])?.focus());
+      return;
+    }
+    setVirheet({});
+    setLahetysVirhe(null);
     setIsSubmitting(true);
 
     const pathLabels: Record<string, string> = {
@@ -228,7 +252,7 @@ const ChatIkkuna = ({ open, onClose, tekija }: ChatIkkunaProps) => {
     try {
       await submitContactForm({
         name: contactName.trim(),
-        phone: contactPhone.trim() || undefined,
+        phone: contactPhone.trim() ? formatToInternational(contactPhone) : undefined,
         email: contactEmail.trim() || undefined,
         service: selectedServices.join(', ') || 'Chat-yhteydenotto',
         message: details,
@@ -239,8 +263,8 @@ const ChatIkkuna = ({ open, onClose, tekija }: ChatIkkunaProps) => {
       setCurrentStep({ kind: 'done' });
       const firstName = contactName.trim().split(/\s+/)[0];
       botSay(`Kiitos ${firstName}! 🙌 Tiedot tulivat perille. ${VASTAUSLUPAUS}`, { kind: 'done' });
-    } catch {
-      toast({ title: 'Lähetys ei onnistunut', description: 'Yritä uudelleen tai soita meille.', variant: 'destructive' });
+    } catch (err) {
+      setLahetysVirhe(err ?? new Error());
     } finally {
       setIsSubmitting(false);
     }
@@ -374,35 +398,67 @@ const ChatIkkuna = ({ open, onClose, tekija }: ChatIkkunaProps) => {
                   {currentStep.kind === 'contact' && (
                     <div className="pl-10 space-y-2">
                       {currentStep.fields.includes('name') && (
-                        <input
-                          type="text"
-                          value={contactName}
-                          onChange={e => setContactName(e.target.value)}
-                          placeholder="Nimi" aria-label="Nimi"
-                          className={inputClass}
-                        />
+                        <div>
+                          <input
+                            id={kId.nimi}
+                            type="text"
+                            value={contactName}
+                            onChange={e => {
+                              setContactName(e.target.value);
+                              if (virheet.nimi) setVirheet(v => ({ ...v, nimi: nimiVirhe(e.target.value) }));
+                            }}
+                            placeholder="Nimi" aria-label="Nimi"
+                            autoComplete="name"
+                            aria-invalid={virheet.nimi ? true : undefined}
+                            aria-describedby={virheet.nimi ? `${kId.nimi}-virhe` : undefined}
+                            className={inputClass}
+                          />
+                          <KenttaVirhe id={`${kId.nimi}-virhe`} viesti={virheet.nimi} className="!text-[13px]" />
+                        </div>
                       )}
                       {currentStep.fields.includes('phone') && (
-                        <input
-                          type="tel"
-                          value={contactPhone}
-                          onChange={e => setContactPhone(e.target.value)}
-                          placeholder="Puhelinnumero" aria-label="Puhelinnumero"
-                          className={inputClass}
-                        />
+                        <div>
+                          <input
+                            id={kId.puhelin}
+                            type="tel"
+                            inputMode="tel"
+                            autoComplete="tel"
+                            value={contactPhone}
+                            onChange={e => {
+                              setContactPhone(e.target.value);
+                              if (virheet.puhelin) setVirheet(v => ({ ...v, puhelin: phoneErrorMessage(e.target.value) }));
+                            }}
+                            placeholder="Puhelinnumero" aria-label="Puhelinnumero"
+                            aria-invalid={virheet.puhelin ? true : undefined}
+                            aria-describedby={virheet.puhelin ? `${kId.puhelin}-virhe` : undefined}
+                            className={inputClass}
+                          />
+                          <KenttaVirhe id={`${kId.puhelin}-virhe`} viesti={virheet.puhelin} className="!text-[13px]" />
+                        </div>
                       )}
                       {currentStep.fields.includes('email') && (
-                        <input
-                          type="email"
-                          value={contactEmail}
-                          onChange={e => setContactEmail(e.target.value)}
-                          placeholder="Sähköposti" aria-label="Sähköposti"
-                          className={inputClass}
-                        />
+                        <div>
+                          <input
+                            id={kId.sahkoposti}
+                            type="email"
+                            autoComplete="email"
+                            value={contactEmail}
+                            onChange={e => {
+                              setContactEmail(e.target.value);
+                              if (virheet.sahkoposti) setVirheet(v => ({ ...v, sahkoposti: sahkopostiVirhe(e.target.value, true) }));
+                            }}
+                            placeholder="Sähköposti" aria-label="Sähköposti"
+                            aria-invalid={virheet.sahkoposti ? true : undefined}
+                            aria-describedby={virheet.sahkoposti ? `${kId.sahkoposti}-virhe` : undefined}
+                            className={inputClass}
+                          />
+                          <KenttaVirhe id={`${kId.sahkoposti}-virhe`} viesti={virheet.sahkoposti} className="!text-[13px]" />
+                        </div>
                       )}
+                      {lahetysVirhe !== null && <LahetysVirhe virhe={lahetysVirhe} />}
                       <button
                         onClick={handleFinalSubmit}
-                        disabled={isSubmitting || !contactName.trim() || (!contactPhone.trim() && !contactEmail.trim())}
+                        disabled={isSubmitting}
                         className="bg-accent-strong text-accent-foreground text-[13px] font-medium rounded-2xl px-5 py-2 shadow-md hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                       >
                         {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}

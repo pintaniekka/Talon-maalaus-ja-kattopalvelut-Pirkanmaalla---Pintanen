@@ -32,7 +32,6 @@ const priceFactors = [
   { title: "Talon pinta-ala", description: "Isoon taloon kuluu enemmän maalia ja työtä." },
   { title: "Talon korkeus", description: "Korkea talo vaatii enemmän telineitä tai nostimen." },
   { title: "Käytettävä maali", description: "Eri maalit eroavat hinnaltaan ja kestoltaan." },
-  { title: "Kuivuminen", description: "Pesun ja maalikerrosten välissä seinän pitää kuivua. Sää vaikuttaa aikatauluun." },
 ];
 
 const offerChecklist = [

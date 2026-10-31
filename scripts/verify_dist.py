@@ -69,14 +69,14 @@ for r in routes:
         except Exception as e: problems.append(f"{r}: JSON-LD ei jäsenny ({e})"); continue
         if j.get("@type")=="FAQPage":
             # UKK-uudistus 30.10.2026: ei samaa kysymystä kahdesti, jokainen kysymys näkyy sivulla, ja määrä
-            # sivutyypin mukaan (kaupunkien palvelusivut 8, palvelun pääsivut enintään 15).
+            # sivutyypin mukaan (kaupunkien palvelusivut 9, palvelun pääsivut enintään 15).
             qs=[q["name"] for q in j["mainEntity"]]
             for q in sorted({q for q in qs if qs.count(q)>1}): problems.append(f"{r}: UKK-kysymys kahdesti: {q}")
             nakyva=html.unescape(re.sub(r"<[^>]+>","",h))
             for q in qs:
                 if q not in nakyva: problems.append(f"{r}: UKK-kysymys vain schemassa: {q}")
-            if re.fullmatch(r"/(tiilikaton-pinnoitus|talon-maalaus)-(?!pirkanmaa/|hinta-)[a-z-]+/", r) and len(qs)!=8:
-                problems.append(f"{r}: kaupunkisivun UKK:ssa {len(qs)} kysymystä, pitää olla 8")
+            if re.fullmatch(r"/(tiilikaton-pinnoitus|talon-maalaus)-(?!pirkanmaa/|hinta-)[a-z-]+/", r) and len(qs)!=9:
+                problems.append(f"{r}: kaupunkisivun UKK:ssa {len(qs)} kysymystä, pitää olla 9")
             if r in ("/tiilikaton-pinnoitus-pirkanmaa/","/talon-maalaus-pirkanmaa/") and len(qs)>15:
                 problems.append(f"{r}: pääsivun UKK:ssa {len(qs)} kysymystä, enintään 15")
     rows.append((r, len(t[0]) if t else 0, len(d[0]) if d else 0, p.h1text.strip()[:45], p.p, len(p.links), p.words, round(100*p.hidden_words/max(1,p.words)), ",".join(types)))

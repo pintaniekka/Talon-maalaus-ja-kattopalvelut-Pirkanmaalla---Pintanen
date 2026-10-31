@@ -4,7 +4,7 @@ import { getCityFaq } from "@/data/cityFaq";
 import { maalausFAQ, pinnoitusFAQ } from "@/data/faqData";
 
 /*
- * UKK-uudistus 30.10.2026 (laaja auditointi, luku 4): kaupunkisivulla kahdeksan kysymystä, joista neljä on paikallisia,
+ * UKK-uudistus 30.10.2026 (laaja auditointi, luku 4): kaupunkisivulla yhdeksän kysymystä (31.10.2026 lisättiin synonyymikysymys), joista neljä on paikallisia,
  * palvelun pääsivulla enintään 15, eikä mikään kysymys ole samalla sivulla kahdesti. verify_dist.py tarkistaa saman
  * valmiista sivuista (myös että schema ja näkyvä lista vastaavat toisiaan).
  */
@@ -14,11 +14,11 @@ const sarjat = [
 ];
 
 describe("kaupunkisivujen UKK", () => {
-  it("jokaisella kaupunkisivulla on kahdeksan eri kysymystä, ja ainakin neljä mainitsee paikkakunnan", () => {
+  it("jokaisella kaupunkisivulla on yhdeksän eri kysymystä, ja ainakin neljä mainitsee paikkakunnan", () => {
     for (const { c, service } of sarjat) {
       const faq = getCityFaq(c, service);
-      expect(faq.length, `${service} ${c.slug}`).toBe(8);
-      expect(new Set(faq.map((f) => f.question)).size, `${service} ${c.slug}`).toBe(8);
+      expect(faq.length, `${service} ${c.slug}`).toBe(9);
+      expect(new Set(faq.map((f) => f.question)).size, `${service} ${c.slug}`).toBe(9);
       const paikalliset = faq.filter((f) => f.question.includes(c.cityIn) || f.question.includes(c.cityGenitive));
       expect(paikalliset.length, `${service} ${c.slug}`).toBeGreaterThanOrEqual(4);
     }

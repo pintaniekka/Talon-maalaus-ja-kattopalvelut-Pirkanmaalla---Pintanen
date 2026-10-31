@@ -8,11 +8,11 @@ import CityMap from "@/components/CityMap";
 import Kaupunginosat from "@/components/Kaupunginosat";
 import CityProjects from "@/components/CityProjects";
 import CityHousingFacts from "@/components/CityHousingFacts";
-import VarinVaihto from "@/components/VarinVaihto";
+import MaalausVarit from "@/components/maalaus/MaalausVarit";
+import NaapuriKunnat from "@/components/NaapuriKunnat";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import { MaalausCitySigns } from "@/components/maalaus/MaalausCitySections";
-import MaalausSanasto from "@/components/maalaus/MaalausSanasto";
 import MaalausPricingCards from "@/components/maalaus/MaalausPricingCards";
 import MaalausEntrepreneur from "@/components/maalaus/MaalausEntrepreneur";
 import FAQSection from "@/components/FAQSection";
@@ -29,13 +29,13 @@ import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { hasKuntakartta } from "@/data/kartat";
 import { getCityFaq } from "@/data/cityFaq";
 import { maalausPrices } from "@/data/prices";
-import { maalausLyhyesti, maalausTyovaiheet, MAALAUS_HINTA } from "@/data/tyovaiheet";
+import { maalausLyhyesti, maalausTyovaiheet } from "@/data/tyovaiheet";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 
 /**
  * Talon maalauksen kaupunkisivu (SEO-suunnitelma 25.10.2026, vaihe 2). Sama runko kuin pinnoituksen
  * kaupunkisivulla: hero → Lyhyesti → paikallisosio ja kartta → merkit → hintakortit → työvaiheet →
- * rinnakkaissanat → kohteet → miksi Pintanen → talokanta → Eemil → UKK →
+ * kohteet → miksi Pintanen → talokanta → Eemil → UKK →
  * yhteydenotto → naapurikunnat.
  */
 const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
@@ -66,7 +66,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       />
 
       <PageHero
-        eyebrow={`Talon maalaus · ${cityName}`}
+        eyebrow={`Julkisivumaalaus · ${cityName}`}
         title={
           <>
             Talon maalaus <span className="text-accent-ink">{cityName}</span>
@@ -74,8 +74,8 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
         }
         lead={
           <>
-            Maalaamme puutaloja {cityData.cityIn}. Pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Hinta on yleensä{" "}
-            <strong className="text-foreground">{MAALAUS_HINTA}</strong>, työ kestää 3–7 päivää ja takuu on 2 vuotta. Arviokäynti on ilmainen.
+            Maalaamme talojen julkisivut {cityData.cityIn}. Seinät pestään homepesuaineella, irtoava maali kaavitaan, paljaat kohdat
+            pohjamaalataan ja pintamaali maalataan pensselillä. Talon maalaus ja julkisivumaalaus tarkoittavat samaa työtä.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=maalaus", label: "Laske hinta" }}
@@ -105,7 +105,7 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       </section>
 
       <MaalausCitySigns cityName={cityName} cityIn={cityData.cityIn} />
-      <MaalausPricingCards cityName={cityName} cityIn={cityData.cityIn} />
+      <MaalausPricingCards cityName={cityName} cityIn={cityData.cityIn} otsikko={`Julkisivumaalaus ja talon maalaus hinta ${cityName}`} />
 
       <ProcessList
         title={`Näin talon maalaus etenee ${cityData.cityIn}`}
@@ -117,13 +117,12 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
       <ArvosteluNosto polku={`/talon-maalaus-${cityData.slug}`} />
 
-      <MaalausSanasto cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" featureFirst />
       <ToimintaKutsu palvelu="maalaus" nappi="laskuri" n={0} />
       <MiksiValitaPintanen service="maalaus" cityIn={cityData.cityIn} />
       <KayntiPalkki palvelu="maalaus" />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" hideMap={kartta} />
-      <VarinVaihto service="maalaus" citySlug={cityData.slug} cityIn={cityData.cityIn} />
+      <MaalausVarit cityName={cityName} citySlug={cityData.slug} />
       <ToimintaKutsu palvelu="maalaus" nappi="kaynti" n={1} />
       <MaalausEntrepreneur cityIn={cityData.cityIn} />
       <LaskuriPalkki palvelu="maalaus" />
@@ -134,7 +133,8 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       />
       {getTestimonialsByCity(cityData.slug, "seina").length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="seina" />}
       <ServiceContactSection variant="maalaus" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
-      <ToimintaAlueetBanner activeCity={cityData.slug} service="maalaus" showNeighbors />
+      <NaapuriKunnat citySlug={cityData.slug} service="maalaus" />
+      <ToimintaAlueetBanner activeCity={cityData.slug} service="maalaus" />
       </Rytmi>
     </div>
   );

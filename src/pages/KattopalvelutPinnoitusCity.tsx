@@ -60,7 +60,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} areaSameAs={getCityWikipediaUrl(cityData)} description={seo.description} priceRange={pinnoitusPrices.general} />
 
       <PageHero
-        eyebrow={`Katon maalaus ja pinnoitus · ${cityData.name}`}
+        eyebrow={`Katon maalaus · ${cityData.name}`}
         title={
           <>
             Tiilikaton pinnoitus <span className="text-accent-ink">{cityData.name}</span>
@@ -69,8 +69,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         lead={
           <>
             Pinnoitamme tiilikattoja {cityData.cityIn}. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin
-            kattomaalilla. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Katon maalaus, tiilikaton maalaus ja pinnoitus tarkoittavat samaa
-            työtä.
+            kattomaalilla. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Tiilikaton pinnoitus ja katon maalaus tarkoittavat samaa työtä.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}
@@ -102,7 +101,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       )}
 
       <PinnoitusWhyNow cityIn={cityData.cityIn} />
-      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} />
+      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} otsikko={`Katon maalaus ja tiilikaton pinnoitus hinta ${cityData.name}`} />
 
       <ProcessList
         title={`Tiilikaton pesu ja pinnoitus ${cityData.cityIn}: näin työ etenee`}
@@ -130,7 +129,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       />
       {getTestimonialsByCity(cityData.slug, "katto").length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
       <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
-      <NaapuriKunnat citySlug={cityData.slug} />
+      <NaapuriKunnat citySlug={cityData.slug} service="pinnoitus" />
       <ToimintaAlueetBanner activeCity={cityData.slug} service="pinnoitus" />
       </Rytmi>
     </div>

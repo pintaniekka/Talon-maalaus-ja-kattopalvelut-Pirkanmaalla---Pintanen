@@ -29,7 +29,7 @@ import { cityHeroBase } from "@/data/kaupunkiHero";
 import { getCityBySlug, hasPinnoitusPage } from "@/data/cityData";
 import { getCityWikipediaUrl } from "@/data/cityWikipedia";
 import { pinnoitusPrices } from "@/data/prices";
-import { pinnoitusLyhyesti, pinnoitusTyovaiheet, PINNOITUS_HINTA } from "@/data/tyovaiheet";
+import { pinnoitusLyhyesti, pinnoitusTyovaiheet } from "@/data/tyovaiheet";
 import { getTestimonialsByCity } from "@/data/testimonialsData";
 
 /**
@@ -60,7 +60,7 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       <ServiceSchema name="Tiilikaton pinnoitus" alternateNames={["Katon pinnoitus", "Tiilikaton maalaus", "Kattomaalaus", "Tiilikaton pesu ja pinnoitus"]} area={cityData.name} areaSameAs={getCityWikipediaUrl(cityData)} description={seo.description} priceRange={pinnoitusPrices.general} />
 
       <PageHero
-        eyebrow={`Tiilikaton pinnoitus · ${cityData.name}`}
+        eyebrow={`Katon maalaus ja pinnoitus · ${cityData.name}`}
         title={
           <>
             Tiilikaton pinnoitus <span className="text-accent-ink">{cityData.name}</span>
@@ -68,8 +68,9 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
         }
         lead={
           <>
-            Pinnoitamme tiilikattoja {cityData.cityIn}. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Hinta on yleensä{" "}
-            <strong className="text-foreground">{PINNOITUS_HINTA}</strong>, työ kestää 2–3 päivää ja takuu on 5 vuotta. Kuntotarkastus on ilmainen.
+            Pinnoitamme tiilikattoja {cityData.cityIn}. Katto pestään, rikkinäiset tiilet vaihdetaan ja katto maalataan kahteen kertaan Nowocoatin
+            kattomaalilla. Pinnoitettu katto kestää jopa 15 vuotta pidempään. Katon maalaus, tiilikaton maalaus ja pinnoitus tarkoittavat samaa
+            työtä.
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta" }}

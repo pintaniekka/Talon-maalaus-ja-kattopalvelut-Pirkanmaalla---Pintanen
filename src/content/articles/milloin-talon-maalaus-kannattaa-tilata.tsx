@@ -3,7 +3,7 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/
 
 /**
  * Yrityksen faktat sivuston omia: faqData.ts (maalauskausi huhti–toukokuusta elo–syyskuuhun; arviokäynti samalla viikolla,
- * asiakas paikalla; sopimus ja aikataulu; yhteydenotto ennen aloituspäivää), hinta-artikkeli ("Kesän työt täyttyvät pitkälti
+ * asiakas paikalla; sopimus ja aikataulu; yhteydenotto ennen aloituspäivää; "kesän työt täyttyvät pitkälti
  * jo keväällä"), docs/asiakaskysymykset-2026.md (kysymys 28). Ei ulkoisia faktoja.
  */
 const faq = [

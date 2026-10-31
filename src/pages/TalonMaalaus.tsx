@@ -92,7 +92,15 @@ const TalonMaalaus = () => {
 
       <ProcessList
         title="Näin talon maalaus etenee"
-        intro="Omakotitalon ulkomaalaus kestää meillä yleensä 3–7 päivää. Aika riippuu talon koosta ja pohjatöiden määrästä."
+        intro={
+          <>
+            Omakotitalon ulkomaalaus kestää meillä yleensä 3–7 päivää. Aika riippuu talon koosta ja pohjatöiden määrästä. Työ alkaa{" "}
+            <Link to="/ilmainen-julkisivun-kuntoarvio/" className="text-primary font-semibold hover:underline">
+              ilmaisella arviokäynnillä
+            </Link>
+            .
+          </>
+        }
         steps={maalausTyovaiheet}
         cta={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
       />

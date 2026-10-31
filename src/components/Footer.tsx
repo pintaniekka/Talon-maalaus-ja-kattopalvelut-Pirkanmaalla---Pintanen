@@ -26,6 +26,7 @@ const palstat = [
       { to: "/tiilikaton-pinnoitus-pirkanmaa/", label: "Tiilikaton pinnoitus" },
       { to: "/tiilikaton-pinnoitus-hinta-pirkanmaa/", label: "Hinta ja hintalaskuri" },
       { to: "/ilmainen-katon-kuntotarkastus/", label: "Ilmainen kuntotarkastus" },
+      { to: "/harjatiivisteen-asennus/", label: "Harjatiiviste" },
     ],
   },
   {

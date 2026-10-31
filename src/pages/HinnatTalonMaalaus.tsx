@@ -151,7 +151,11 @@ const HinnatTalonMaalaus = () => {
             <Link to="/talon-maalaus-pirkanmaa/" className="text-primary font-semibold hover:underline">
               talon maalaus Pirkanmaalla
             </Link>
-            .
+            . Kiinteän hinnan saat{" "}
+            <Link to="/ilmainen-julkisivun-kuntoarvio/" className="text-primary font-semibold hover:underline">
+              ilmaisen arviokäynnin
+            </Link>{" "}
+            jälkeen.
           </p>
         </div>
       </section>

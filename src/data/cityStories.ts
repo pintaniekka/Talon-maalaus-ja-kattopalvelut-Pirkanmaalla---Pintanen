@@ -88,7 +88,11 @@ export const cityStories: Record<string, CityStory[]> = {
   ],
 };
 
+/**
+ * Palvelusivulla vain saman palvelun tarina: talon maalaus -sivu ei saa kattotarinaa (auditointi 31.10.2026,
+ * kymmenellä maalaussivulla näkyi kattokohteen teksti seinäkuvien yllä). Aluesivulla (ei palvelua) ensimmäinen tarina.
+ */
 export const getCityStory = (slug: string, service?: ProjectService): CityStory | undefined => {
   const list = cityStories[slug] ?? [];
-  return (service ? list.find((s) => s.service === service) : undefined) ?? list[0];
+  return service ? list.find((s) => s.service === service) : list[0];
 };

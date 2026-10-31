@@ -14,11 +14,12 @@ const sarjat = [
 ];
 
 describe("kaupunkisivujen UKK", () => {
-  it("jokaisella kaupunkisivulla on yhdeksän eri kysymystä, ja ainakin neljä mainitsee paikkakunnan", () => {
+  it("jokaisella kaupunkisivulla on yhdeksän (maalauksessa kymmenen) eri kysymystä, ja ainakin neljä mainitsee paikkakunnan", () => {
     for (const { c, service } of sarjat) {
       const faq = getCityFaq(c, service);
-      expect(faq.length, `${service} ${c.slug}`).toBe(9);
-      expect(new Set(faq.map((f) => f.question)).size, `${service} ${c.slug}`).toBe(9);
+      const maara = service === "maalaus" ? 10 : 9;
+      expect(faq.length, `${service} ${c.slug}`).toBe(maara);
+      expect(new Set(faq.map((f) => f.question)).size, `${service} ${c.slug}`).toBe(maara);
       const paikalliset = faq.filter((f) => f.question.includes(c.cityIn) || f.question.includes(c.cityGenitive));
       expect(paikalliset.length, `${service} ${c.slug}`).toBeGreaterThanOrEqual(4);
     }

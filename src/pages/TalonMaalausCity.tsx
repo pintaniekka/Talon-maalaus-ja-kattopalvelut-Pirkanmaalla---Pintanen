@@ -7,7 +7,6 @@ import ProcessList from "@/components/ProcessList";
 import CityMap from "@/components/CityMap";
 import Kaupunginosat from "@/components/Kaupunginosat";
 import CityProjects from "@/components/CityProjects";
-import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
 import VarinVaihto from "@/components/VarinVaihto";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
@@ -36,7 +35,7 @@ import { getTestimonialsByCity } from "@/data/testimonialsData";
 /**
  * Talon maalauksen kaupunkisivu (SEO-suunnitelma 25.10.2026, vaihe 2). Sama runko kuin pinnoituksen
  * kaupunkisivulla: hero → Lyhyesti → paikallisosio ja kartta → merkit → hintakortit → työvaiheet →
- * rinnakkaissanat → kohteet → mitä hintaan kuuluu → miksi Pintanen → talokanta → Eemil → UKK →
+ * rinnakkaissanat → kohteet → miksi Pintanen → talokanta → Eemil → UKK →
  * yhteydenotto → naapurikunnat.
  */
 const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
@@ -121,7 +120,6 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       <MaalausSanasto cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" featureFirst />
       <ToimintaKutsu palvelu="maalaus" nappi="laskuri" n={0} />
-      <CityServiceSummary service="maalaus" cityIn={cityData.cityIn} />
       <MiksiValitaPintanen service="maalaus" cityIn={cityData.cityIn} />
       <KayntiPalkki palvelu="maalaus" />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="maalaus" hideMap={kartta} />

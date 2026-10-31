@@ -8,13 +8,12 @@ import CityProjects from "@/components/CityProjects";
 import CityMap from "@/components/CityMap";
 import Kaupunginosat from "@/components/Kaupunginosat";
 import { hasKuntakartta } from "@/data/kartat";
-import CityServiceSummary from "@/components/CityServiceSummary";
 import CityHousingFacts from "@/components/CityHousingFacts";
-import VarinVaihto from "@/components/VarinVaihto";
+import PinnoitusVarit from "@/components/pinnoitus/PinnoitusVarit";
+import NaapuriKunnat from "@/components/NaapuriKunnat";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import PinnoitusEntrepreneur from "@/components/pinnoitus/PinnoitusEntrepreneur";
 import PinnoitusWhyNow from "@/components/pinnoitus/PinnoitusWhyNow";
-import PinnoitusSamaTyo from "@/components/pinnoitus/PinnoitusSamaTyo";
 import PinnoitusPricingCards from "@/components/pinnoitus/PinnoitusPricingCards";
 import MiksiValitaPintanen from "@/components/MiksiValitaPintanen";
 import ServiceContactSection from "@/components/ServiceContactSection";
@@ -37,9 +36,9 @@ import { getTestimonialsByCity } from "@/data/testimonialsData";
  * Tiilikaton pinnoituksen kaupunkisivu (SEO-suunnitelma 25.10.2026, vaihe 1). Järjestys: hero → Lyhyesti →
  * paikallinen teksti (lyhyt erottaja) ja kartta → miksi ajoissa + merkit → hintakortit katon koon mukaan
  * (yöajo 26.10.2026: "paljonko maksaa" on asiakasviestien yleisin kysymys, joten hinta heti syyn jälkeen) →
- * pesu ja pinnoitus työvaiheina → maalaus = pinnoitus (rinnakkaissanat) → kohteet → mitä hintaan kuuluu ja
- * remontti vai pinnoitus → miksi Pintanen → talokanta → yrittäjä → FAQ → arvostelut → yhteydenotto →
- * naapurikunnat ja kaikki kunnat. Pois jätetty: arvostelukaruselli ja Toiminta-alueet-palkki (korjaus 6).
+ * pesu ja pinnoitus työvaiheina → kohteet → miksi Pintanen → talokanta → lyhyt värilohko → yrittäjä → FAQ →
+ * arvostelut → yhteydenotto → naapurikunnat (oma kevyt palkki) → Toiminta-alueet. Eki 31.10.2026: pois
+ * rinnakkaissanalohko (samaa työtä), "Mitä hintaan kuuluu" -lohko ja pitkä värin vaihto (korvattu PinnoitusVarit).
  */
 const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string }) => {
   const { city: paramCity } = useParams<{ city: string }>();
@@ -114,14 +113,12 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}
       <ArvosteluNosto polku={`/tiilikaton-pinnoitus-${cityData.slug}`} />
 
-      <PinnoitusSamaTyo cityIn={cityData.cityIn} />
       <CityProjects citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" featureFirst />
-      <CityServiceSummary service="pinnoitus" cityIn={cityData.cityIn} />
       <ToimintaKutsu palvelu="pinnoitus" nappi="laskuri" n={0} />
       <MiksiValitaPintanen service="pinnoitus" cityIn={cityData.cityIn} />
       <CityHousingFacts citySlug={cityData.slug} cityIn={cityData.cityIn} service="pinnoitus" hideMap={kartta} />
       <KayntiPalkki palvelu="pinnoitus" />
-      <VarinVaihto service="pinnoitus" citySlug={cityData.slug} cityIn={cityData.cityIn} />
+      <PinnoitusVarit cityName={cityData.name} citySlug={cityData.slug} />
       <PinnoitusEntrepreneur cityIn={cityData.cityIn} />
       <LaskuriPalkki palvelu="pinnoitus" />
 
@@ -132,7 +129,8 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       />
       {getTestimonialsByCity(cityData.slug, "katto").length === 0 && <ReviewsTeaser citySlug={cityData.slug} category="katto" />}
       <ServiceContactSection variant="katto" cityName={cityData.name} cityGenitive={cityData.cityGenitive} />
-      <ToimintaAlueetBanner activeCity={cityData.slug} service="pinnoitus" showNeighbors />
+      <NaapuriKunnat citySlug={cityData.slug} />
+      <ToimintaAlueetBanner activeCity={cityData.slug} service="pinnoitus" />
       </Rytmi>
     </div>
   );

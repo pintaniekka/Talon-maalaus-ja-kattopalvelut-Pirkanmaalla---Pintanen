@@ -26,7 +26,7 @@ const Hero = () => {
             </span>
           </div>
 
-          <h1 className="heading-style max-w-3xl text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-6 md:mb-8">
+          <h1 className="font-heading font-black max-w-3xl text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-6 md:mb-8">
             Tiilikaton pinnoitus ja talon maalaus{" "}
             <span className="text-accent-ink">Pirkanmaalla</span>
           </h1>

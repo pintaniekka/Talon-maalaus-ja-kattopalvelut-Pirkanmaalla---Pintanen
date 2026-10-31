@@ -78,7 +78,7 @@ const Hintalaskuri = () => {
         <div className="relative z-[2] section-container w-full pt-28 pb-28 md:pt-32 lg:pb-20">
           <div className="max-w-2xl mx-auto text-center text-primary-foreground mb-8">
             {/* Brief 5 (26.10.2026): H1 nimeää molemmat palvelut, kuten sivun title. */}
-            <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary-foreground">
+            <h1 className="text-4xl md:text-5xl font-black font-heading mb-4 text-primary-foreground">
               Hintalaskuri: tiilikaton pinnoitus ja talon maalaus
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 leading-relaxed">

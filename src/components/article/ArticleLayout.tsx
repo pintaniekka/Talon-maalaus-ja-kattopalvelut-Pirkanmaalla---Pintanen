@@ -174,7 +174,7 @@ const ArticleLayout = ({ meta, children, preview = false }: ArticleLayoutProps) 
           <p className="text-xs md:text-sm font-heading font-bold uppercase tracking-[0.18em] text-[#006ead] mb-3">
             {categoryLabels[meta.category]}
           </p>
-          <h1 className="font-heading font-extrabold text-3xl md:text-[2.75rem] leading-[1.15] text-foreground mb-5">
+          <h1 className="font-heading font-black text-3xl md:text-[2.75rem] leading-[1.15] text-foreground mb-5">
             {meta.title}
           </h1>
           <p className="text-lg md:text-xl leading-relaxed text-muted-foreground mb-8">{meta.lead}</p>

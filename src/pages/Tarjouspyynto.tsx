@@ -72,7 +72,7 @@ const Tarjouspyynto = () => {
 
         <div className="relative z-[2] section-container w-full pt-28 pb-28 md:pt-32 lg:pb-20">
           <div className="max-w-2xl mx-auto text-center text-primary-foreground mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-primary-foreground">Pyydä tarjous</h1>
+            <h1 className="text-4xl md:text-5xl font-black font-heading mb-4 text-primary-foreground">Pyydä tarjous</h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 leading-relaxed">
               Kerro, mitä tarvitset. Soitamme sinulle ja tulemme ilmaiselle arviokäynnille.
             </p>

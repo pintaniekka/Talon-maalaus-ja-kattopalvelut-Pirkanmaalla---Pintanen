@@ -41,7 +41,7 @@ const ServicePageHero = ({ title, subtitle, backgroundImage, backgroundSrcSet, c
       {/* Content */}
       <div className={`relative z-[2] section-container text-center text-primary-foreground ${compact ? "pt-28 pb-10" : "pt-28 xl:pt-36 pb-16"}`}>
         {title && (
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-5xl mx-auto">{title}</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 max-w-5xl mx-auto">{title}</h1>
         )}
         {subtitle && (
           <p className="text-xl md:text-2xl text-primary-foreground/80 max-w-3xl mx-auto italic">{subtitle}</p>

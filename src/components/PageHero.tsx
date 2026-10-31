@@ -121,7 +121,7 @@ const PageHero = ({
             </span>
           </div>
 
-          <h1 className="heading-style max-w-3xl text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-5 md:mb-6">
+          <h1 className="font-heading font-black max-w-3xl text-4xl md:text-5xl lg:text-6xl text-foreground leading-[1.1] mb-5 md:mb-6">
             {title}
           </h1>
 

@@ -182,7 +182,7 @@ export const ArtikkelitListaus = ({ artikkelit }: ListausProps) => {
               <span className="h-1 w-10 rounded-full bg-accent" aria-hidden="true" />
               <span className="font-heading text-xs font-extrabold uppercase tracking-[0.2em] text-accent-ink md:text-[13px]">Tiilikatto ja talon maalaus</span>
             </div>
-            <h1 id="artikkelit-otsikko" className="heading-style mb-3 text-4xl leading-[1.1] text-foreground md:text-[2.75rem]">
+            <h1 id="artikkelit-otsikko" className="font-heading font-black mb-3 text-4xl leading-[1.1] text-foreground md:text-[2.75rem]">
               Artikkelit ja{" "}
               <span className="rounded-md bg-[#ffd23f] px-2 py-0.5 text-[#0b1a33]" style={{ boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>
                 oppaat

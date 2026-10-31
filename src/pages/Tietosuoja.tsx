@@ -25,7 +25,7 @@ const Tietosuoja = () => (
       <p className="text-accent-ink font-heading font-extrabold uppercase tracking-[0.2em] text-xs md:text-sm mb-3">
         Pintanen Oy
       </p>
-      <h1 className="text-3xl md:text-5xl font-bold font-heading mb-3">Tietosuojaseloste</h1>
+      <h1 className="text-3xl md:text-5xl font-black font-heading mb-3">Tietosuojaseloste</h1>
       <p className="text-sm text-muted-foreground mb-10">Päivitetty {UPDATED}</p>
 
       <Section title="1. Rekisterinpitäjä">

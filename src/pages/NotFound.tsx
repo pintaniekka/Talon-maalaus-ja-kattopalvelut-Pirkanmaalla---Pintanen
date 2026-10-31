@@ -6,7 +6,7 @@ const NotFound = () => (
     <SEO title="Sivua ei löytynyt" description="Etsimääsi sivua ei löytynyt." noindex />
     <div className="text-center max-w-xl px-4">
       <p className="text-accent-ink font-heading font-extrabold uppercase tracking-[0.2em] text-sm mb-3">Virhe 404</p>
-      <h1 className="text-3xl md:text-5xl font-bold mb-4 font-heading">Sivua ei löytynyt</h1>
+      <h1 className="text-3xl md:text-5xl font-black mb-4 font-heading">Sivua ei löytynyt</h1>
       <p className="text-lg text-muted-foreground mb-8">
         Osoite on saattanut muuttua tai sivu on poistettu. Löydät palvelumme ja hinnat etusivulta.
       </p>

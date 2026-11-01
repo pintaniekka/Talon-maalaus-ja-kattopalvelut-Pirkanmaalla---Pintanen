@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence, m } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, MessageCircle } from 'lucide-react';
 import { getStorageUrl } from '@/lib/storage';
 import { lazyWithRetry } from '@/lib/lazyWithRetry';
 
@@ -107,11 +107,18 @@ const ChatLeadForm = () => {
             onClick={handleOpen}
             onPointerEnter={() => void lataaIkkuna()}
             onFocus={() => void lataaIkkuna()}
-            className="relative w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg bg-white border-2 border-accent-strong hover:scale-105 transition-transform"
-            aria-label="Avaa chat"
+            className="relative flex items-center w-14 h-14 lg:w-auto lg:h-[60px] lg:gap-2.5 lg:pr-5 rounded-full shadow-lg bg-white border-2 border-[#ffd23f] hover:scale-105 transition-transform"
           >
-            <img src={tekija.image} alt={`${tekija.nimi} – Pintanen`} className="w-full h-full rounded-full object-cover" />
-            <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white z-10" />
+            <img src={tekija.image} alt="" className="w-full h-full lg:w-[50px] lg:h-[50px] lg:shrink-0 rounded-full object-cover" />
+            <span className="sr-only">Avaa chat: </span>
+            <span className="hidden lg:flex flex-col text-left leading-tight">
+              <span className="font-heading font-bold text-sm text-navy">{tekija.nimi}</span>
+              <span className="text-xs text-accent-strong">Kysy hintaa chatissa</span>
+            </span>
+            <span className="absolute -top-0.5 -left-0.5 lg:left-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white z-10" />
+            <span className="lg:hidden absolute -bottom-1 -right-1 w-[22px] h-[22px] rounded-full bg-[#ffd23f] border-2 border-white flex items-center justify-center z-10" aria-hidden="true">
+              <MessageCircle className="w-3 h-3 text-navy" fill="currentColor" />
+            </span>
           </button>
         )}
       </div>

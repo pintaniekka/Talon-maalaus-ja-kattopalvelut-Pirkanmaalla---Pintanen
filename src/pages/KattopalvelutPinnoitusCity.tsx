@@ -101,13 +101,13 @@ const KattopalvelutPinnoitusCity = ({ citySlug: propSlug }: { citySlug?: string 
       )}
 
       <PinnoitusWhyNow cityIn={cityData.cityIn} />
-      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} otsikko={`Katon maalaus ja tiilikaton pinnoitus hinta ${cityData.name}`} />
+      <PinnoitusPricingCards cityName={cityData.name} cityIn={cityData.cityIn} otsikko={`Katon maalaus ja tiilikaton pinnoitus hinta ${cityData.name}`} hintasivulle />
 
       <ProcessList
         title={`Tiilikaton pesu ja pinnoitus ${cityData.cityIn}: näin työ etenee`}
         intro="Peruskohteen katto valmistuu 2–3 työpäivässä. Pesun ja maalauksen välissä katto saa kuivua."
         steps={pinnoitusTyovaiheet}
-        cta={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
+        cta={{ to: "/ilmainen-katon-kuntotarkastus/", label: "Näin ilmainen kuntotarkastus toimii" }}
       />
 
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}

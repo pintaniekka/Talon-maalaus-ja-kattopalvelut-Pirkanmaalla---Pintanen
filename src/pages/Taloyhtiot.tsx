@@ -56,7 +56,7 @@ const vaiheet: Tyovaihe[] = [
   },
   {
     title: "Taloyhtiön päätös",
-    text: "Pienessä ja keskikokoisessa yhtiössä riittää usein yhtiökokouksen päätös ja kirjallinen tarjous. Isommassa yhtiössä toimimme hallituksen ja isännöitsijän ohjeiden mukaan.",
+    text: "Taloyhtiö päättää urakasta tarjouksen pohjalta. Isommassa yhtiössä toimimme hallituksen ja isännöitsijän ohjeiden mukaan.",
   },
   {
     title: "Sopimus ja aikataulu",
@@ -68,11 +68,11 @@ const vaiheet: Tyovaihe[] = [
   },
   {
     title: "Työ rakennus kerrallaan",
-    text: "Teemme yhden rakennuksen valmiiksi ennen seuraavaa, jotta haitta asukkaille on lyhyt. Samat tekijät ovat paikalla alusta loppuun.",
+    text: "Teemme yhden rakennuksen valmiiksi ennen seuraavaa, jotta haitta asukkaille on lyhyt.",
   },
   {
     title: "Lopputarkastus ja takuu",
-    text: `Käymme työn läpi taloyhtiön valitseman henkilön kanssa, valvojan tai hallituksen jäsenen. Takuu on katolle ${TAKUU.pinnoitus} ja seinille ${TAKUU.maalaus}.`,
+    text: "Käymme työn läpi taloyhtiön valitseman henkilön kanssa, valvojan tai hallituksen jäsenen. Takuu on kirjallinen.",
   },
 ];
 
@@ -83,7 +83,7 @@ const faq = [
   },
   {
     question: "Kuka tekee työn ja kuka hoitaa yhteydenpidon?",
-    answer: "Eerik vastaa katoista ja Eemil seinistä. Samat tekijät ovat paikalla alusta loppuun, ja isännöitsijä tai hallitus asioi suoraan heidän kanssaan.",
+    answer: "Eerik vastaa katoista ja Eemil seinistä. Isännöitsijä tai hallitus asioi suoraan heidän kanssaan.",
   },
   {
     question: "Mitä taloyhtiön katon pinnoitus tai maalaus maksaa?",
@@ -184,8 +184,7 @@ const Taloyhtiot = () => {
               </p>
               <p>
                 Meillä ei ole välikäsiä. Isännöitsijä ja hallitus asioivat suoraan tekijöiden kanssa, ja sama ihminen, joka antaa
-                tarjouksen, on katolla ja seinällä. Pienessä ja keskikokoisessa yhtiössä päätös syntyy usein yhtiökokouksessa
-                kirjallisen tarjouksen pohjalta, eikä urakkaan tarvita raskasta koneistoa.
+                tarjouksen, on katolla ja seinällä. Urakkaan ei tarvita raskasta koneistoa.
               </p>
               <p>
                 Katso, miten{" "}

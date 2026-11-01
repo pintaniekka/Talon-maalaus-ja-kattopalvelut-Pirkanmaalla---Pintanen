@@ -92,7 +92,7 @@ const Body = () => (
     <h2>Kuinka kauan pensselillä maalaus kestää?</h2>
     <p>
       Omakotitalo valmistuu yleensä 3–7 päivässä. Yksikerroksinen talo 2–4 päivässä, puolitoistakerroksinen 3–5
-      ja kaksikerroksinen 4–8 päivässä. Pohjatyöt vievät usein enemmän aikaa kuin maalaus. Hinta on yleensä
+      ja kaksikerroksinen 4–7 päivässä. Pohjatyöt vievät usein enemmän aikaa kuin maalaus. Hinta on yleensä
       3 500–11 000 euroa, ja hintaesimerkit talon koon mukaan ovat sivulla{" "}
       <Link to="/talon-maalaus-hinta-pirkanmaa/">talon maalauksen hinta</Link>. Palvelun esittelemme sivulla{" "}
       <Link to="/talon-maalaus-pirkanmaa/">talon maalaus Pirkanmaalla</Link>.

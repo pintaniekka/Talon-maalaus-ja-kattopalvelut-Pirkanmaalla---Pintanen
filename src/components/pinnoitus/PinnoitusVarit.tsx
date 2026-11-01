@@ -38,7 +38,7 @@ const PinnoitusVarit = ({ cityName, citySlug }: { cityName: string; citySlug: st
               to="/tiilikaton-pinnoitus-pirkanmaa/#varin-vaihto"
               className="mt-5 inline-flex items-center gap-1.5 font-semibold text-accent-ink hover:underline"
             >
-              Lue lisää
+              Lue lisää tiilikaton värin vaihdosta
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

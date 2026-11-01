@@ -95,7 +95,7 @@ const Body = () => (
       rows={[
         ["1-kerroksinen omakotitalo", "3 500 – 5 000 €", "2–4 työpäivää"],
         ["1,5-kerroksinen talo", "5 000 – 7 000 €", "3–5 työpäivää"],
-        ["2-kerroksinen talo", "7 000 – 11 000 €", "4–8 työpäivää"],
+        ["2-kerroksinen talo", "7 000 – 11 000 €", "4–7 työpäivää"],
       ]}
       caption="Hintaesimerkit talon koon mukaan. Rintamamiestalo on yleensä puolitoistakerroksinen."
     />

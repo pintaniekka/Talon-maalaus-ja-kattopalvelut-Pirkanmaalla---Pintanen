@@ -30,7 +30,8 @@ const slugify = (text: string) =>
 const closingNotes: Record<ArticleMeta["category"], ReactNode> = {
   katto: (
     <>
-      Haluatko tietää oman kattosi kunnon? Teemme Pirkanmaalla ilmaisen arviokäynnin ja sanomme,
+      Haluatko tietää oman kattosi kunnon? Teemme Pirkanmaalla{" "}
+      <Link to="/ilmainen-katon-kuntotarkastus/">ilmaisen kuntotarkastuksen</Link> ja sanomme,
       kannattaako työ tehdä nyt vai vasta myöhemmin. Lue lisää{" "}
       <Link to="/tiilikaton-pinnoitus-pirkanmaa/">tiilikaton pinnoituksesta</Link>, katso{" "}
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">hintaesimerkit</Link> tai soita{" "}

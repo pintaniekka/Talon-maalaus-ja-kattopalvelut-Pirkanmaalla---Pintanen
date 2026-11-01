@@ -8,14 +8,18 @@ import { KayntiPalkki, LaskuriPalkki } from "@/components/KutsuPalkit";
 import ToimintaAlueetBanner from "@/components/ToimintaAlueetBanner";
 import SEO from "@/components/SEO";
 import { HERO_BASE, staticSeo } from "@/data/seo";
-import { allTestimonials, matchesCategory, REVIEW_COUNT, type TestimonialCategory } from "@/data/testimonialsData";
+import { allTestimonials, REVIEW_COUNT, type TestimonialCategory } from "@/data/testimonialsData";
 import { arvosteluAnkkuri } from "@/data/arvostelusijoitus";
 import { GOOGLE_PROFILE_URL, LUVUT } from "@/data/company";
 
-/** Kaksi ryhmää Eerikin luokittelulla (12.10.2026). Ei "muut"-ryhmää: jokainen arvostelu kuuluu kattoon, seiniin tai molempiin. */
+/**
+ * Ryhmät Eerikin luokittelulla (12.10.2026). Ei "muut"-ryhmää: jokainen arvostelu kuuluu kattoon, seiniin tai molempiin.
+ * "Molemmat"-arvostelut omassa osiossaan (auditointi 31.10.2026, T4): aiemmin ne näkyivät sekä katto- että seinäosiossa.
+ */
 const groups: { category: TestimonialCategory; title: string; intro: string }[] = [
-  { category: "katto", title: "Kokemuksia tiilikaton pinnoituksesta", intro: "Nämä asiakkaat teettivät meillä tiilikaton pinnoituksen. Osalla maalasimme samalla myös seinät." },
-  { category: "seina", title: "Kokemuksia talon maalauksesta", intro: "Nämä asiakkaat teettivät meillä talon ulkomaalauksen. Osalla pinnoitimme samalla myös katon." },
+  { category: "katto", title: "Kokemuksia tiilikaton pinnoituksesta", intro: "Nämä asiakkaat teettivät meillä tiilikaton pinnoituksen." },
+  { category: "seina", title: "Kokemuksia talon maalauksesta", intro: "Nämä asiakkaat teettivät meillä talon ulkomaalauksen." },
+  { category: "molemmat", title: "Kokemuksia katosta ja seinistä", intro: "Näille asiakkaille pinnoitimme katon ja maalasimme seinät." },
 ];
 
 const crumbs = [{ name: "Kokemuksia" }];
@@ -23,7 +27,7 @@ const crumbs = [{ name: "Kokemuksia" }];
 /** /kokemuksia: kaikki Google-arvostelut yhdellä sivulla, sanasta sanaan (Eerik 12.10.2026). */
 const Kokemuksia = () => {
   const seo = staticSeo["/kokemuksia"];
-  // Ankkuri-id vain arvostelun ensimmäiseen korttiin: "molemmat"-arvostelut ja Tampereen osio toistavat kortteja.
+  // Ankkuri-id vain arvostelun ensimmäiseen korttiin: Tampereen osio toistaa kortteja.
   const annetut = new Set<string>();
   const ankkuri = (t: (typeof allTestimonials)[number]) => {
     const id = arvosteluAnkkuri(t);
@@ -65,7 +69,7 @@ const Kokemuksia = () => {
       <LaskuriPalkki />
 
       {groups.map((g, gi) => {
-        const reviews = allTestimonials.filter((t) => matchesCategory(t, g.category));
+        const reviews = allTestimonials.filter((t) => t.category === g.category);
         if (reviews.length === 0) return null;
         return (
           <section key={g.category} className="section-padding osio">

@@ -105,13 +105,13 @@ const TalonMaalausCity = ({ citySlug }: { citySlug: string }) => {
       </section>
 
       <MaalausCitySigns cityName={cityName} cityIn={cityData.cityIn} />
-      <MaalausPricingCards cityName={cityName} cityIn={cityData.cityIn} otsikko={`Julkisivumaalaus ja talon maalaus hinta ${cityName}`} />
+      <MaalausPricingCards cityName={cityName} cityIn={cityData.cityIn} otsikko={`Julkisivumaalaus ja talon maalaus hinta ${cityName}`} hintasivulle />
 
       <ProcessList
         title={`Näin talon maalaus etenee ${cityData.cityIn}`}
         intro="Omakotitalon ulkomaalaus kestää 3–7 päivää. Aika riippuu talon koosta ja pohjatöiden määrästä."
         steps={maalausTyovaiheet}
-        cta={{ to: "/tarjouspyynto/?palvelu=maalaus", label: "Pyydä ilmainen arviokäynti" }}
+        cta={{ to: "/ilmainen-julkisivun-kuntoarvio/", label: "Näin ilmainen arviokäynti toimii" }}
       />
 
       {/* Arvostelunosto: sijoitus ja valinta src/data/arvostelusijoitus.ts */}

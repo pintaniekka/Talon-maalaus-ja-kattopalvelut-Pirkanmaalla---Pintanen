@@ -34,7 +34,8 @@ export const trustFor = (variant: TrustVariant): TrustItem[] => {
         google,
         { value: LUVUT.pinnoitetutKatot, label: "Pinnoitettua kattoa" },
         { value: "5 v", label: "Takuu työlle" },
-        { value: "0 €", label: "Arviokäynti", tone: "blue" },
+        // Katossa sana on "kuntotarkastus", maalauksessa "arviokäynti" (auditointi 31.10.2026, F3).
+        { value: "0 €", label: "Kuntotarkastus", tone: "blue" },
       ];
     case "maalaus":
       return [

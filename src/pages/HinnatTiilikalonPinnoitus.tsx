@@ -102,7 +102,7 @@ const HinnatTiilikalonPinnoitus = () => {
           </>
         }
         primary={{ to: "/hintalaskuri/?palvelu=pinnoitus", label: "Laske hinta laskurilla" }}
-        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen arviokäynti" }}
+        secondary={{ to: "/tarjouspyynto/?palvelu=pinnoitus", label: "Pyydä ilmainen kuntotarkastus" }}
         trust="pinnoitus"
         image={{ base: HERO_BASE.pinnoitusHinta, alt: "Tiilikaton pesu ja sammaleenpoisto käynnissä" }}
         badge={null}

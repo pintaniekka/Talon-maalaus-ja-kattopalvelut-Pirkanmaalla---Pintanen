@@ -580,7 +580,7 @@ export const articles: ArticleMeta[] = [
     seoTitle: "Kuinka kauan talon maalaus kestää: 3–7 päivää",
     description:
       "Omakotitalon maalaus kestää yleensä 3–7 päivää, ja pohjatyöt vievät siitä lähes puolet. Lue päivä päivältä, mitä maalausviikolla tapahtuu ja mikä venyttää sitä.",
-    lead: "Omakotitalon maalaus kestää yleensä 3–7 päivää: yksikerroksinen talo 2–4, puolitoistakerroksinen 3–5 ja kaksikerroksinen 4–8 päivää. Pohjatyöt ja kuivuminen vievät lähes puolet ajasta. Työ ei estä asumista, ja sade siirtää päivää ilman lisäkuluja.",
+    lead: "Omakotitalon maalaus kestää yleensä 3–7 päivää: yksikerroksinen talo 2–4, puolitoistakerroksinen 3–5 ja kaksikerroksinen 4–7 päivää. Pohjatyöt ja kuivuminen vievät lähes puolet ajasta. Työ ei estä asumista, ja sade siirtää päivää ilman lisäkuluja.",
     category: "maalaus",
     author: "eemil",
     publishedAt: "2027-03-04",

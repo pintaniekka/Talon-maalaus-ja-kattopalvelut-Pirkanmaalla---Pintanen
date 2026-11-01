@@ -13,11 +13,6 @@ const faq = [
       "Katto pitää uusia, kun aluskate on pahasti vaurioitunut, rakenteissa on vuotoja tai lahoa tai tiiliä on rikki niin paljon, ettei niitä kannata vaihtaa. Pinnoitus ei korjaa rakenteiden vaurioita.",
   },
   {
-    question: "Paljonko pinnoitus maksaa uuteen kattoon verrattuna?",
-    answer:
-      "Omakotitalon tiilikaton pinnoitus maksaa meillä yleensä 2 850–7 000 euroa. Kattoremontti maksaa kattourakoitsijoiden hintasivujen mukaan yleensä 15 000–30 000 euroa.",
-  },
-  {
     question: "Kuinka monta vuotta pinnoitus antaa katolle lisää?",
     answer: "Pinnoitus pidentää katon käyttöikää jopa 15 vuotta. Kesto riippuu säästä ja katon kunnosta.",
   },
@@ -103,17 +98,16 @@ const Body = () => (
       caption="Pinnoituksen hinnat ovat omiamme. Kattoremontin hinnat ovat kattourakoitsijoiden omilta hintasivuilta; isot rakenteiden korjaukset nostavat hintaa."
     />
     <p>
-      Omakotitalon kattoremontti maksaa yleensä 15 000–30 000 euroa. Kattourakoitsijoiden omilla hintasivuilla tiilikaton
-      uusimisen hinta on 18 000–30 000 euroa, ja isot rakenteiden korjaukset nostavat hintaa siitä. Hintaan vaikuttavat katon
-      koko, kaltevuus, materiaali ja rakenteiden kunto.
+      Kattourakoitsijoiden omilla hintasivuilla tiilikaton uusimisen hinta on 18 000–30 000 euroa, ja isot rakenteiden
+      korjaukset nostavat hintaa siitä. Hintaan vaikuttavat katon koko, kaltevuus, materiaali ja rakenteiden kunto.
     </p>
     <p>
-      Pinnoitus maksaa yleensä selvästi vähemmän kuin uusi katto. Omakotitalon tiilikaton pinnoitus maksaa meillä
-      yleensä 2 850–7 000 euroa, ja työn osuudesta saat kotitalousvähennyksen. Lue lisää artikkelista{" "}
+      Pinnoitus kannattaa, jos aluskate ja rakenteet ovat kunnossa. Silloin uusi katto maksaisi moninkertaisesti, eikä se
+      toisi rakenteille mitään lisää. Hintaesimerkit katon koon mukaan ovat sivulla{" "}
       <Link to="/tiilikaton-pinnoitus-hinta-pirkanmaa/">tiilikaton pinnoituksen hinta</Link>.
     </p>
 
-    <Avainhuomio>Pinnoitus maksaa yleensä 2 850–7 000 €, kattoremontti yleensä 15 000–30 000 €.</Avainhuomio>
+    <Avainhuomio>Jos aluskate ja rakenteet ovat kunnossa, pinnoitus riittää.</Avainhuomio>
     <h2>Miten kotitalousvähennys vaikuttaa vertailuun?</h2>
     <p>
       Molemmista töistä saa kotitalousvähennyksen työn osuudesta. Vuosina 2026 ja 2027 vähennys on 40 % työn

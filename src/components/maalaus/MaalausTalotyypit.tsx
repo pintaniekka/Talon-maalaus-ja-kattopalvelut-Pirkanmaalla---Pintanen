@@ -16,7 +16,7 @@ const talotyypit: { title: string; kuva?: { base: string; alt: string }; paragra
     kuva: { base: "talon-maalaus-orivesi-rintamamiestalo-paaty-jalkeen", alt: "Rintamamiestalon pääty maalauksen jälkeen, Orivesi" },
     paragraphs: [
       "Rintamamiestalot rakennettiin 1940- ja 1950-luvuilla. Ne ovat 1,5-kerroksisia harjakattoisia taloja, ja seinissä on usein pystylaudoitus. Korkea pääty vaatii telineet tai nostimen, ja ne kuuluvat hintaan.",
-      "Vanhassa talossa pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Pesemme seinät homepesuaineella ja harjoilla, kaavimme irtoavan maalin ja pohjamaalaamme paljaat kohdat. Pintamaalin maalaamme pensselillä, pääsääntöisesti Tikkurilan ulkomaalilla.",
+      "Vanhassa talossa pohjatyöt ratkaisevat, kuinka pitkään maali kestää. Siksi pesu ja kaavinta tehdään huolella. Pintamaali on pääsääntöisesti Tikkurilan ulkomaali.",
       "Arviokäynnillä katsomme, mitä maalia seinässä on, ja valitsemme uuden maalin sen mukaan.",
     ],
   },
@@ -25,7 +25,7 @@ const talotyypit: { title: string; kuva?: { base: string; alt: string }; paragra
     kuva: { base: "talon-maalaus-virrat-hirsimokki-paaty-jalkeen", alt: "Hirsitalon pääty maalauksen jälkeen, Virrat" },
     paragraphs: [
       "Hirsi elää kosteuden mukana enemmän kuin paneeli. Siksi hirsipintaan suositellaan talomaalin sijasta kuullotetta tai peittosuojaa, jotka ovat ohuempia ja hengittävämpiä. Kuullotteen väripigmentit suojaavat auringolta ja estävät puun harmaantumisen, joten väritöntä kuullotetta ei suositella ulos.",
-      "Teemme hirsitaloihin sekä kuullotteen että peittomaalin. Työvaiheet ovat samat kuin muissa puutaloissa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintakäsittely pensselillä. Vanhaan pintaan kannattaa valita sama tuotetyyppi kuin ennen. Katsomme sen arviokäynnillä.",
+      "Teemme hirsitaloihin sekä kuullotteen että peittomaalin. Vanhaan pintaan kannattaa valita sama tuotetyyppi kuin ennen. Katsomme sen arviokäynnillä.",
     ],
   },
   {
@@ -40,7 +40,7 @@ const talotyypit: { title: string; kuva?: { base: string; alt: string }; paragra
     title: "Kivitalon puuosat",
     kuva: { base: "tiilikaton-pinnoitus-tampere-tiilitalo-jalkeen", alt: "Tiilitalo, jonka ruskeat puuosat maalattiin harmaiksi ja katto pinnoitettiin, Tampere" },
     paragraphs: [
-      "Kivitalossa maalattavaa ovat räystäät, ikkunat ja kuistit. Maalaamme ne samoilla työvaiheilla: pesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
+      "Kivitalossa maalattavaa ovat räystäät, ikkunat ja kuistit. Työvaiheet ovat samat kuin puutalossa.",
       "Hinta riippuu puuosien määrästä ja kunnosta. Arviokäynnillä katsomme, mitä maalia pinnassa on, ja annamme kirjallisen tarjouksen.",
     ],
   },

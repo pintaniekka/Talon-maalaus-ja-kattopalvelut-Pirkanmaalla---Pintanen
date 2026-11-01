@@ -19,7 +19,7 @@ export interface FAQItem {
 }
 
 /**
- * Kaupunkisivun usein kysytyt: yhdeksän kysymystä, maalauksessa kymmenen (kahdeksan UKK-uudistuksessa 30.10.2026, yhdeksäs synonyymikysymys ja maalauksen kymmenes talotyyppikysymys 31.10.2026, laaja auditointi luku 4).
+ * Kaupunkisivun usein kysytyt: kymmenen kysymystä (kahdeksan UKK-uudistuksessa 30.10.2026, yhdeksäs synonyymikysymys ja maalauksen kymmenes talotyyppikysymys 31.10.2026, laaja auditointi luku 4; pinnoituksen kymmenes kattoremonttikysymys 1.11.2026).
  * Ennen sivulla oli 14–17 kysymystä, joista 10–11 oli sanasta sanaan samoja kaikilla 24 paikkakunnalla.
  *
  * - Neljä ydinkysymystä: hinta ja kesto paikkakunnan nimellä, kotitalousvähennys ja takuu. Vastaukset ovat samat
@@ -32,8 +32,8 @@ export interface FAQItem {
  *
  * Ei keksittyä paikkakuntatietoa: kaikki paikalliset tiedot tulevat yllä mainituista tiedostoista, joiden
  * lähteet ovat docs/kaupunkisivut-lahteet.md:ssä. Kohdemääriä ei kerrota (CLAUDE.md).
- * Kysymykset, joihin sivun oma lohko jo vastaa otsikollaan (remontti vai pinnoitus, milloin talo pitää maalata,
- * minkä ikäisiä taloja), eivät ole UKK:ssa.
+ * Kysymykset, joihin sivun oma lohko jo vastaa otsikollaan (milloin talo pitää maalata, minkä ikäisiä taloja),
+ * eivät ole UKK:ssa. Remontti vai pinnoitus on UKK:ssa, koska lohko poistui kaupunkisivuilta PR #216:ssa.
  */
 export const getCityFaq = (city: CityData, service: ProjectService): FAQItem[] => {
   const katto = service === "pinnoitus";
@@ -71,9 +71,20 @@ export const getCityFaq = (city: CityData, service: ProjectService): FAQItem[] =
     },
     katto ? PINNOITUS_TAKUU_FAQ : MAALAUS_TAKUU_FAQ,
     synonyymiKysymys(katto),
-    ...(katto ? [] : [talotyypitKysymys]),
+    katto ? remonttiKysymys(paikka) : talotyypitKysymys,
   ];
 };
+
+/**
+ * Pinnoituksen kymmenes kysymys (Eki 1.11.2026): hakuperhe "tiilikattoremontti / kattoremontti <kunta>" toi
+ * 1 146 näyttöä 28 päivässä (auditointi 31.10.2026, luku 4.2), eikä kaupunkisivuilla ollut sanaa otsikoissa.
+ * Kattoremontin hinta 15 000–30 000 € on sallittu (lähteet docs/-kansiossa).
+ */
+const remonttiKysymys = (paikka: string): FAQItem => ({
+  question: `Tiilikattoremontti vai pinnoitus ${paikka}?`,
+  answer:
+    "Pinnoitus riittää, jos aluskate ja katon rakenteet ovat kunnossa ja vain tiilen pinta on kulunut. Aluskatteen pienet vauriot korjaamme pinnoituksen yhteydessä. Uusi katto tarvitaan, jos aluskate vuotaa tai tiilet ovat laajalti rikki. Pinnoitus maksaa yleensä <strong>2 850–7 000 €</strong>, kattoremontti yleensä 15 000–30 000 €. Ilmaisessa kuntotarkastuksessa sanomme suoraan, kumpi sinun katollesi sopii.",
+});
 
 /**
  * Maalauksen kymmenes kysymys (Eki 31.10.2026): talotyypit, jotka luettelo oli ennen ulkomaalauslohkossa

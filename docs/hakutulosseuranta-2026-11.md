@@ -10,7 +10,7 @@ Kuukausittainen seuranta samoilla 60 haulla kuin [hakutulosanalyysi 26.10.2026](
 - **Vertailukelpoisuus:** 26.10. yhdeksän ensimmäistä hakua tehtiin OpenRushilla, loput OpenSEOlla. Nyt kaikki 60 OpenSEOlla.
 - **Tärkeä rajoite: Googlen ohjauslinkit.** Tällä kertaa 581 tulosta 954:stä (61 %) tuli muodossa `google.com/goto?url=…`, josta kohdesivu ei näy. Verkkotunnus pääteltiin otsikosta (sama otsikko suorana linkkinä tässä tai 26.10. ajossa), kuvauksen yrityksen nimestä tai pintanen.fi:n omista kuvausteksteistä (esim. "Eerik tekee työn itse", "Pinnoitamme tiilikattoja ja maalaamme taloja"). Päätellyt on merkitty tähdellä (*). Tunnistamatta jäi 211 tulosta (22 %), kymmenen parhaan joukossa 125 / 600 (21 %). pintanen.fi:n osumat on tarkistettu kuvauksesta yksitellen; yleisotsikoita kuten "Talon maalaus Tampere" ei laskettu Pintaselle, jos kuvauksessa oli toisen yrityksen nimi. On mahdollista, että jokin Pintasen sivu on tunnistamattomien joukossa, mutta niiden kuvauksissa ei ollut Pintasen tekstejä.
 - **Yksi haku ("tiilikaton pinnoitus vai uusi katto")** palautti ensin palvelinvirheen ja haettiin uudelleen; kaikki 60 hakua saatiin.
-- **Krediitit:** 5 123 ennen, katso PR:n kuvaus ja loppu.
+- **Krediitit:** OpenSEO 5 123 ennen ja 4 817 jälkeen, eli 306 käytetty (61 hakua, joista yksi uusinta).
 
 ## Tulokset haku kerrallaan
 

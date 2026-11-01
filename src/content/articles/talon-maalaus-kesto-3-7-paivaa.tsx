@@ -4,13 +4,13 @@ import { ArticleFaq, Avainhuomio, Figure, KeyPoints, Table } from "@/components/
 /**
  * Yrityksen faktat sivuston omia: faqData.ts (omakotitalo valmistuu yleensä 3–7 päivässä; aika riippuu talon koosta ja
  * pohjatöiden määrästä; työ ei estä normaalia asumista; sateella ei maalata), prices.ts (1-krs 2–4 pv, 1,5-krs 3–5 pv, 2-krs
- * 4–8 pv), tyovaiheet.ts. Päiväkohtainen jako on esimerkki, joka seuraa työvaiheiden järjestystä.
+ * 4–7 pv, Eki 1.11.2026), tyovaiheet.ts. Päiväkohtainen jako on esimerkki, joka seuraa työvaiheiden järjestystä.
  */
 const faq = [
   {
     question: "Kuinka kauan talon maalaus kestää?",
     answer:
-      "Omakotitalo valmistuu yleensä 3–7 päivässä. Yksikerroksinen talo 2–4 päivässä, puolitoistakerroksinen 3–5 ja kaksikerroksinen 4–8 päivässä.",
+      "Omakotitalo valmistuu yleensä 3–7 päivässä. Yksikerroksinen talo 2–4 päivässä, puolitoistakerroksinen 3–5 ja kaksikerroksinen 4–7 päivässä.",
   },
   {
     question: "Mikä vie eniten aikaa?",
@@ -48,7 +48,7 @@ const Body = () => (
       rows={[
         ["1-kerroksinen omakotitalo", "2–4 työpäivää", "3 500 – 5 000 €"],
         ["1,5-kerroksinen talo", "3–5 työpäivää", "5 000 – 7 000 €"],
-        ["2-kerroksinen talo", "4–8 työpäivää", "7 000 – 11 000 €"],
+        ["2-kerroksinen talo", "4–7 työpäivää", "7 000 – 11 000 €"],
       ]}
       caption="Kesto ja hinta talon koon mukaan. Pohjatöiden määrä siirtää molempia."
     />

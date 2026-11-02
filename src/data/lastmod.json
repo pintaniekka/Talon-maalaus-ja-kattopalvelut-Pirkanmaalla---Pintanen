@@ -1,39 +1,43 @@
 {
   "/": {
-    "hash": "62b22a649d88791d",
-    "lastmod": "2026-10-31"
+    "hash": "09738c61fdcc3862",
+    "lastmod": "2026-11-02"
   },
   "/artikkelit": {
-    "hash": "aaae0a0c7a77d766",
-    "lastmod": "2026-10-30"
+    "hash": "4b9fe4baffa8f830",
+    "lastmod": "2026-11-02"
   },
   "/artikkelit/huoltomaalaus-vai-uusi-ulkoverhous": {
-    "hash": "83dd7e21a748d03b",
-    "lastmod": "2026-10-30"
+    "hash": "ae81950b64d9383a",
+    "lastmod": "2026-11-02"
   },
   "/artikkelit/kotitalousvahennys-katto-ja-maalaustyot": {
-    "hash": "acb1a8593fd6d36c",
-    "lastmod": "2026-10-31"
+    "hash": "0ef008b8258fa462",
+    "lastmod": "2026-11-02"
   },
   "/artikkelit/kuinka-usein-puutalo-maalataan": {
-    "hash": "d063b37b583c5a89",
-    "lastmod": "2026-10-30"
+    "hash": "962e3269e94314e6",
+    "lastmod": "2026-11-02"
   },
   "/artikkelit/milloin-pinnoittaa-tiilikatto": {
-    "hash": "4ff99d10d278e839",
-    "lastmod": "2026-11-01"
+    "hash": "dbdca0d99919255f",
+    "lastmod": "2026-11-02"
   },
   "/artikkelit/pinnoitus-vai-uusi-katto": {
-    "hash": "dcd828e378c58a96",
-    "lastmod": "2026-11-01"
+    "hash": "6df60ad0804c5d7d",
+    "lastmod": "2026-11-02"
   },
   "/artikkelit/tiilikaton-pinnoituksen-tyovaiheet": {
-    "hash": "31b76d51b8fbab08",
-    "lastmod": "2026-11-01"
+    "hash": "60b487d5a67152e0",
+    "lastmod": "2026-11-02"
+  },
+  "/artikkelit/voiko-tiilikaton-pinnoittaa-itse": {
+    "hash": "35337f5fac7e227f",
+    "lastmod": "2026-11-02"
   },
   "/harjatiivisteen-asennus": {
-    "hash": "eb8abc77149d425a",
-    "lastmod": "2026-11-01"
+    "hash": "7a8f41a0ce815ec7",
+    "lastmod": "2026-11-02"
   },
   "/hintalaskuri": {
     "hash": "bc407dba7fbefeaf",
@@ -44,8 +48,8 @@
     "lastmod": "2026-10-31"
   },
   "/ilmainen-katon-kuntotarkastus": {
-    "hash": "0e2b8cc5396b9c3c",
-    "lastmod": "2026-11-01"
+    "hash": "15bb588827c452f2",
+    "lastmod": "2026-11-02"
   },
   "/kokemuksia": {
     "hash": "dd598ecb9f25e9d9",
@@ -264,8 +268,8 @@
     "lastmod": "2026-11-01"
   },
   "/taloyhtiot": {
-    "hash": "490ade662f1a1192",
-    "lastmod": "2026-11-01"
+    "hash": "75159a4c87d56830",
+    "lastmod": "2026-11-02"
   },
   "/tarjouspyynto": {
     "hash": "b64766d957f5369b",
@@ -340,8 +344,8 @@
     "lastmod": "2026-11-01"
   },
   "/tiilikaton-pinnoitus-pirkanmaa": {
-    "hash": "8673661cc7160548",
-    "lastmod": "2026-11-01"
+    "hash": "442d3e79892df8de",
+    "lastmod": "2026-11-02"
   },
   "/tiilikaton-pinnoitus-pirkkala": {
     "hash": "480d6df7f7228a7d",

@@ -13,7 +13,7 @@ const faq = [
   {
     question: "Maalaatteko rintamamiestaloja?",
     answer:
-      "Kyllä. Työvaiheet ovat samat kuin muissa puutaloissa: homepesu harjoilla, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
+      "Kyllä. Työvaiheet ovat samat kuin muissa puutaloissa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä.",
   },
   {
     question: "Mitä rintamamiestalon maalaus maksaa?",

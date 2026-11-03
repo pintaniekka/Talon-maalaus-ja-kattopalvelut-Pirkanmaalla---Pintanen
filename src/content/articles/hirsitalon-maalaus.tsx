@@ -13,7 +13,7 @@ const faq = [
   {
     question: "Maalaatteko hirsitaloja?",
     answer:
-      "Kyllä. Työvaiheet ovat samat kuin muissa puutaloissa: homepesu harjoilla, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.",
+      "Kyllä. Työvaiheet ovat samat kuin muissa puutaloissa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Arviokäynnillä katsomme, mitä juuri sinun seinäsi tarvitsee.",
   },
   {
     question: "Mikä maali hirsitaloon sopii?",

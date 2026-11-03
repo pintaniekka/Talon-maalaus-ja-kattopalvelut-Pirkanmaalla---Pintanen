@@ -328,7 +328,7 @@ export const articles: ArticleMeta[] = [
     seoTitle: "Rintamamiestalon maalaus: työvaiheet ja hinta",
     description:
       "Rintamamiestalo on puolitoistakerroksinen puutalo, usein peiterimoitetulla pystylaudoituksella. Lue, miten maalaamme sen pensselillä ja mitä se maksaa.",
-    lead: "Maalaamme rintamamiestalot samoilla työvaiheilla kuin muut puutalot: homepesu harjoilla, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Puolitoistakerroksisen talon maalaus maksaa yleensä 5 000–7 000 euroa ja kestää 3–5 päivää.",
+    lead: "Maalaamme rintamamiestalot samoilla työvaiheilla kuin muut puutalot: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali pensselillä. Puolitoistakerroksisen talon maalaus maksaa yleensä 5 000–7 000 euroa ja kestää 3–5 päivää.",
     category: "maalaus",
     author: "eemil",
     publishedAt: "2026-12-28",

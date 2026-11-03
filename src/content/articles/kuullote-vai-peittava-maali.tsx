@@ -84,7 +84,7 @@ const Body = () => (
     <p>
       Voi, ja se on tavallinen valinta, kun kuullotettu seinä on huoltomaalattu vuosien varrella eri sävyillä ja
       pinta on kirjava. Oppaan mukaan peittävä tuote tasoittaa silloin pinnan. Pohjatyöt ovat samat kuin
-      muussakin maalauksessa: homepesu harjoilla, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali
+      muussakin maalauksessa: homepesu, kaavinta, pohjamaali paljaisiin kohtiin ja pintamaali
       pensselillä. Toiseen suuntaan vaihto on työläs: jos peittävän maalin päälle halutaan kuullote, vanha maali
       pitää poistaa kokonaan. Hirsitalon maalauksesta kerromme artikkelissa{" "}
       <Link to="/artikkelit/hirsitalon-maalaus/">hirsitalon maalaus</Link>.

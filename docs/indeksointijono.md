@@ -1,6 +1,6 @@
 # Indeksointijono (Search Console)
 
-Päivitetty 2.11.2026. Lähde: Search Consolen URL-tarkastus kaikille sivustokartan 97 sivulle (OpenSEO `inspect_urls`,
+Päivitetty 3.11.2026. Lähde: Search Consolen URL-tarkastus kaikille sivustokartan 97 sivulle (OpenSEO `inspect_urls`,
 ei krediittejä). Google indeksoi jokaisen sivun uudelleen omaan tahtiinsa; pyyntö vain nopeuttaa. Search Consolen
 kiintiö on noin 10 pyyntöä päivässä, joten jono etenee päivä kerrallaan, ylhäältä alas. Pyynnöt tehdään Eerikin
 Chromessa (Search Console → URL-tarkastus → Pyydä indeksointia). **Kun pyyntö on tehty, merkitse se luvun 3 taulukkoon
@@ -15,21 +15,13 @@ Viimeinen joka sivua koskenut muutos oli PR #228 (1.11.2026 klo 09:31 Suomen aik
 tekstimuutoksen jälkeen jono alkaa alusta: kaikki ennen muutosta indeksoidut sivut vanhenevat taas, joten päivän
 pyynnöt kannattaa tehdä vasta, kun päivän muutokset on julkaistu.
 
-## 1. Jäljellä, tärkeysjärjestyksessä (36 sivua)
+## 1. Jäljellä, tärkeysjärjestyksessä (28 sivua)
 
 Kaikki nämä Google on indeksoinut ennen 1.11. klo 09:31, joten ne ovat vanhentuneet. Ajat Suomen aikaa.
-Pyydä ylhäältä alas, 10 päivässä.
+Pyydä ylhäältä alas, noin 8 päivässä (kiintiö).
 
 | # | Tärkeys | Sivu | Googlen viimeinen indeksointi |
 |---|---|---|---|
-| 1 | 1 | `/tiilikaton-pinnoitus-hinta-pirkanmaa/` | 30.10. 17:44 |
-| 2 | 2 | `/kotitalousvahennys/` | 29.10. |
-| 3 | 2 | `/tarjouspyynto/` | 27.10. |
-| 4 | 2 | `/meista/` | 1.11. 06:37 |
-| 5 | 2 | `/ilmainen-julkisivun-kuntoarvio/` | 30.10. 14:13 |
-| 6 | 2 | `/harjatiivisteen-asennus/` | 30.10. 20:43 |
-| 7 | 2 | `/artikkelit/` | 30.10. 14:14 |
-| 8 | 2 | `/artikkelit/kotitalousvahennys-katto-ja-maalaustyot/` | 1.11. 03:11 |
 | 9 | 2 | `/artikkelit/tiilikaton-pinnoituksen-tyovaiheet/` | 1.11. 07:52 |
 | 10 | 2 | `/tietosuoja/` | 31.10. |
 | 11 | 3 | `/talon-maalaus-ylojarvi/` | 1.11. 01:18 |
@@ -83,11 +75,12 @@ Orivesi, Vesilahti; artikkelit milloin-pinnoittaa-tiilikatto, pinnoitus-vai-uusi
 | 29.10.2026 | yhteystiedot, talon maalaus Tampere ja Nokia, tiilikaton pinnoitus Tampere, Nokia ja Kangasala, kokemuksia, referenssit, molemmat hintasivut | kaikki indeksoitu 29.–30.10., sisältö muuttui sen jälkeen |
 | 30.10.2026 | taloyhtiot, harjatiivisteen-asennus, molemmat kuntotarkastussivut, artikkelit, huoltomaalaus-artikkeli, työvaiheet-artikkeli, etusivu, meista, hintalaskuri | 8 indeksoitu samana päivänä; `/artikkelit/` ja huoltomaalaus-artikkeli ensimmäistä kertaa indeksissä |
 | 2.11.2026 | talon-maalaus-pirkkala (ei ollut indeksissä), artikkeli kuinka-usein-puutalo-maalataan (ei ollut), tiilikaton-pinnoitus-kihnio (ei ollut), talon-maalaus-tampere, yhteystiedot, kokemuksia, referenssit, tiilikaton-pinnoitus-kangasala, talon-maalaus-nokia, taloyhtiot | kaikki 10 pyyntöä lähetetty ("Indeksointipyyntö lähetetty"); tarkista tila 3.11. |
+| 3.11.2026 | tiilikaton-pinnoitus-hinta-pirkanmaa, kotitalousvahennys, tarjouspyynto, meista, ilmainen-julkisivun-kuntoarvio, harjatiivisteen-asennus, artikkelit, artikkeli kotitalousvahennys-katto-ja-maalaustyot | 8 pyyntöä lähetetty ("Indeksointipyyntö lähetetty"); artikkeli tiilikaton-pinnoituksen-tyovaiheet ja tietosuoja eivät menneet läpi: "Kiintiö ylitetty" 8 pyynnön jälkeen, pyydä huomenna ensin nämä |
 | 11.10.2026 (suunnitelma, Eerik) | 10 sivua `docs/korjaussuunnitelma-2026-10-11.md`, vaihe 2 | ei kirjattu, tekikö Eerik pyynnöt |
 
 ## 4. Päiväsuunnitelma
 
-- **3.11.**: luvun 1 rivit 1–10. **4.11.**: rivit 11–20. **5.11.**: rivit 21–30. **6.11.**: rivit 31–36 ja vanhat puhdistusosoitteet.
+- **3.11.**: 8 pyyntöä tehty (kiintiö täyttyi). **4.11.**: työvaiheet-artikkeli ja tietosuoja sekä seuraavat 8 (kuntasivut). Päiväkiintiö on käytännössä 8 pyyntöä, ei 10. Sen jälkeen jono etenee ylhäältä alas, ja vanhat puhdistusosoitteet ovat viimeisenä.
 - **19.11.**: harjatiivisteartikkeli julkaisupäivän tuotantobuildin jälkeen.
 - Joka pyyntöpäivä: tarkista ensin, onko päivän aikana julkaistu sisältömuutoksia; jos on, pyydä vasta niiden jälkeen,
   ja tarkista OpenSEO:n `inspect_urls`-työkalulla, mitkä ajan tasalla olleet sivut vanhenivat.

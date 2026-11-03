@@ -45,7 +45,7 @@ const Body = () => (
 
     <h2>Miten värin vaihto eroaa tavallisesta maalauksesta?</h2>
     <p>
-      Ei juuri mitenkään. Pohjatyöt ovat samat: homepesu harjoilla, kaavinta ja pohjamaali paljaisiin
+      Ei juuri mitenkään. Pohjatyöt ovat samat: homepesu, kaavinta ja pohjamaali paljaisiin
       puukohtiin. Pintamaali vedetään pensselillä kuten aina. Ero on peittävyydessä: vaalea maali peittää tumman
       pohjan heikommin kuin tumma vaalean. Arviokäynnillä Eemil katsoo vanhan värin ja kirjaa tarjoukseen, mitä
       tarvitaan. Työvaiheet kerromme artikkelissa{" "}

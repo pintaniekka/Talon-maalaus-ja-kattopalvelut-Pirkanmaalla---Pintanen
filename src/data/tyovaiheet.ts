@@ -124,7 +124,7 @@ export const maalausLyhyesti: LyhyestiSisalto = {
     { label: "Hinta yleensä", value: MAALAUS_HINTA },
     { label: "Kesto", value: "3–7 päivää" },
     // Eerik 15.10.2026: pohjatyöt kahdella rivillä; pohjamaali vain paljaisiin kohtiin selviää työvaiheissa.
-    { label: "Pohjatyöt", value: "Homepesu harjoilla\nKaavinta" },
+    { label: "Pohjatyöt", value: "Homepesu\nHomepesu + kaavinta" },
     { label: "Maalaus", value: "Pohjamaali\nja pintamaali" },
   ],
   note: "Maali on pääsääntöisesti Tikkurila.",

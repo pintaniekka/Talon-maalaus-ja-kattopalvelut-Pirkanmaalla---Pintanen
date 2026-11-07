@@ -17,8 +17,11 @@ libaom-koodaus) ja päivittää luettelon src/data/avifkuvat.ts. Selain valitsee
 laatu–koko-käyrän taitekohta (30.10.2026, docs/kuvien-uudelleennimeys-2026-10-30.md).
 --vain-avif tekee AVIF-koot olemassa olevalle kuvalle koskematta WebP-tiedostoihin.
 
---alkuperainen tallentaa täysikokoisen version (pidempi sivu enintään 2400 px, JPEG) kansioon
-alkuperaiset/ repon juureen. Sitä ei julkaista; se on lähde, josta koot voi tehdä uudelleen.
+--alkuperainen kopioi lähdekuvan sellaisenaan (täysikokoisena, alkuperäisessä muodossa) kuvarepoon
+~/GitHub/pintanen-kuvat/alkuperaiset/<perusnimi>.<pääte> (yksityinen GitHub-repo Pintaniekka/pintanen-kuvat;
+polun voi vaihtaa ympäristömuuttujalla PINTANEN_KUVAT). Sama perusnimi kuin sivustolla, joten alkuperäinen
+löytyy nimellä, kun kuva pitää optimoida uudelleen tai vaihtaa. Jos lähde on kuvarepon julkaisemattomat/-kansiossa,
+se siirretään. Commit ja push kuvarepossa tehdään erikseen (skripti muistuttaa).
 
 Sijainti- ja muut metatiedot (EXIF) eivät siirry tuloskuviin. iPhonen Display P3
 -värit muunnetaan sRGB:ksi, muuten värit haalistuvat. Olemassa olevaa tiedostoa
@@ -26,7 +29,9 @@ ei korvata ilman valitsinta --korvaa.
 """
 import argparse
 import io
+import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -39,10 +44,10 @@ VALINNAINEN = 1500
 LAATU = 70
 AVIF_LAATU = 56
 AVIF_NOPEUS = 2
-ALKUPERAINEN_PITKA_SIVU = 2400
-ALKUPERAINEN_LAATU = 88
 JUURI = Path(__file__).resolve().parent.parent
-ALKUPERAISET = JUURI / "alkuperaiset"
+KUVAREPO = Path(os.environ.get("PINTANEN_KUVAT", Path.home() / "GitHub" / "pintanen-kuvat"))
+ALKUPERAISET = KUVAREPO / "alkuperaiset"
+JULKAISEMATTOMAT = KUVAREPO / "julkaisemattomat"
 AVIF_LUETTELO = JUURI / "src" / "data" / "avifkuvat.ts"
 
 
@@ -101,7 +106,7 @@ def main() -> int:
         "--alkuperainen",
         dest="tallenna_alkuperainen",
         action="store_true",
-        help="tallenna täysikokoinen lähdekuva kansioon alkuperaiset/ (ei julkaista)",
+        help="kopioi täysikokoinen lähdekuva kuvarepoon (~/GitHub/pintanen-kuvat/alkuperaiset/)",
     )
     parser.add_argument("--laatu", type=int, default=LAATU, help=f"WebP-laatu (oletus {LAATU})")
     parser.add_argument(
@@ -134,10 +139,14 @@ def main() -> int:
         kohteet += [(w, args.kohde / f"Pictures-{w}" / f"{nimi}-{w}.webp") for w in leveydet]
     if tee_avif:
         kohteet += [(w, args.kohde / f"Pictures-{w}" / f"{nimi}-{w}.avif") for w in leveydet]
-    alkuperainen = ALKUPERAISET / f"{nimi}.jpg"
+    paate = args.alkuperainen.suffix.lower().replace(".jpeg", ".jpg").replace(".heif", ".heic")
+    alkuperainen = ALKUPERAISET / f"{nimi}{paate}"
     olemassa = [p for _, p in kohteet if p.exists()]
-    if args.tallenna_alkuperainen and alkuperainen.exists():
-        olemassa.append(alkuperainen)
+    if args.tallenna_alkuperainen:
+        if not KUVAREPO.is_dir():
+            print(f"Kuvarepoa ei löydy: {KUVAREPO}. Kloonaa Pintaniekka/pintanen-kuvat tai aseta PINTANEN_KUVAT.")
+            return 1
+        olemassa += [p for p in ALKUPERAISET.glob(f"{nimi}.*") if p.resolve() != args.alkuperainen.resolve()]
     if olemassa and not args.korvaa:
         print("Samanniminen kuva on jo olemassa, valitse toinen nimi tai käytä valitsinta --korvaa:")
         for p in olemassa:
@@ -157,13 +166,17 @@ def main() -> int:
         kirjoita_avif_luettelo(args.kohde)
 
     if args.tallenna_alkuperainen:
-        k = min(1.0, ALKUPERAINEN_PITKA_SIVU / max(leveys, korkeus))
-        koko = (round(leveys * k), round(korkeus * k))
+        lahde = args.alkuperainen.resolve()
         alkuperainen.parent.mkdir(parents=True, exist_ok=True)
-        kuva.resize(koko, Image.LANCZOS).save(
-            alkuperainen, "JPEG", quality=ALKUPERAINEN_LAATU, optimize=True, progressive=True
-        )
-        print(f"{alkuperainen.relative_to(JUURI)}  {koko[0]}x{koko[1]}  {alkuperainen.stat().st_size // 1024} kt")
+        if lahde != alkuperainen.resolve():
+            for vanha in ALKUPERAISET.glob(f"{nimi}.*"):
+                vanha.unlink()
+            if JULKAISEMATTOMAT.resolve() in lahde.parents:
+                shutil.move(str(lahde), alkuperainen)
+            else:
+                shutil.copy2(lahde, alkuperainen)
+        print(f"{alkuperainen}  {leveys}x{korkeus}  {alkuperainen.stat().st_size // 1024} kt")
+        print(f"Muista commit ja push kuvarepossa: cd {KUVAREPO} && git add -A && git commit -m 'Lisää {nimi}' && git push")
 
     print(f"\nValmis. Perusnimi koodissa: {nimi}")
     if VALINNAINEN not in leveydet:

@@ -61,3 +61,11 @@ Cloudflaren kuvamuunnos (`/cdn-cgi/image/`) oli käytössä 30.10. PR #202:sta j
 **Eemilin kohteet 1–9 (sama päivä):** kansiossa `~/GitHub/uudet-kuvat/eemil-2026-10/` on 61 täysikokoista alkuperäistä 28.10. lisätyistä kuvista. 50 niistä tunnistettiin sivuston kuviksi sisällön perusteella (dHash-etäisyys 0–11, seuraavaksi paras yli 70), ja jokaisen kuvasuhde vastaa sivuston kuvaa (ei rajausta, joten liukusäädinparit pysyvät kohdallaan). Niille tehtiin AVIF-koot `--vain-avif`:llä; WebP-tiedostot jäivät ennalleen. AVIF on 22 % (600 px) ja 23 % (1200 px) kevyempi kuin nykyinen WebP (laatu 70). Loput 11 kuvaa eivät ole sivustolla käytössä. Alkuperäisissä ei ollut GPS-tietoja, eikä AVIF-tiedostoihin päätynyt metatietoja. Näiden 50:n täysikokoisia lähteitä ei kopioitu repoon (noin 45 Mt); ne ovat kansiossa `uudet-kuvat`. AVIF-kuvia on nyt 68.
 
 **Lähteet:** Lighthouse ei aseta kilotavurajaa, vaan huomauttaa kuvista, joiden uudelleenpakkaus laatuun 85 säästäisi yli 4 KiB, ja näyttökokoonsa nähden liian suurista kuvista ([Chrome for Developers](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images)). Chrome ohittaa LCP:ssä vain alle 0,05 bittiä/pikseli -kuvat ([Chromium](https://chromium.googlesource.com/chromium/src/+/main/docs/speed/metrics_changelog/2023_04_lcp.md)).
+
+## Jälkikirjaus 7.11.2026: alkuperäiset siirretty kuvarepoon
+
+Kansio `alkuperaiset/` (18 seinäkuvaa, 2400 px) siirrettiin yksityiseen repoon `Pintaniekka/pintanen-kuvat`
+(`alkuperaiset/<perusnimi>.jpg`). Kansio `~/GitHub/uudet-kuvat/eemil-2026-10/` (61 täysikokoista, joista 50 sivustolla
+ja 11 julkaisematta) ei ole enää olemassa: se oli vain pilvi-istunnon tiedostoissa, eikä zip-tiedostoja ole Macilla.
+Jos kuvat löytyvät vielä puhelimesta, ne tuodaan kuvarepoon. Jatkossa `lisaa_kuva.py --alkuperainen` kopioi lähteen
+täysikokoisena kuvarepoon, ja `scripts/puuttuvat_alkuperaiset.py` listaa sivuston kuvat, joilta alkuperäinen puuttuu (133).

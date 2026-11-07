@@ -30,3 +30,8 @@
 
 /llms-full.txt
   Content-Type: text/plain; charset=utf-8
+
+# Cloudflaren projektiosoite näyttää tuotannon kopion ilman noindexia (haaraesikatselut saavat sen
+# Cloudflarelta itsestään). Kerrotaan hakukoneille, että vain pintanen.fi indeksoidaan.
+https://talon-maalaus-ja-kattopalvelut-pirkanmaalla---pintanen.pages.dev/*
+  X-Robots-Tag: noindex
